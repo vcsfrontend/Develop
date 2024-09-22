@@ -18,6 +18,14 @@
                             <input type="text" class="form-control form-control-lg" id="signup-firstname" placeholder="full name">
                         </div>
                         <div class="col-xl-12">
+                            <label for="signup-username" class="form-label text-default">User Name<sup>*</sup></label>
+                            <input type="text" class="form-control form-control-lg" id="signup-username" placeholder="username">
+                        </div>
+                        <div class="col-xl-12">
+                            <label for="signup-email" class="form-label text-default">Email<sup>*</sup></label>
+                            <input type="text" class="form-control form-control-lg" id="signup-email" placeholder="email">
+                        </div>
+                        <div class="col-xl-12">
                             <label for="signup-password" class="form-label text-default">Password<sup>*</sup></label>
                             <div class="position-relative">
                                 <input type="password" class="form-control form-control-lg" id="signup-password" placeholder="password" [type]="showPassword ? 'text' : 'password'" autocomplete>
@@ -37,6 +45,11 @@
                                 </label>
                             </div>
                         </div>
+                        <div class="col-xl-12">
+                            <label for="signup-mobile" class="form-label text-default">Phone Number<sup>*</sup></label>
+                            <input type="text" class="form-control form-control-lg" id="signup-mobile" placeholder="mobile">
+                        </div>
+
                     </div>
                     <div class="text-center my-3 authentication-barrier">
                         <span>OR</span>
