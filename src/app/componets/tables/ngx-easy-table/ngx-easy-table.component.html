@@ -1,0 +1,155 @@
+<app-page-header title="Ngx-Easy-Tables" title1="Tables" activeTitle="Ngx-Easy-Tables"></app-page-header>
+<!-- Start::row-1 -->
+<div class="row">
+    <div class="col-xl-12">
+      <div class="card custom-card">
+        <div class="card-header">
+          <div class="card-title">Basic Datatable</div>
+        </div>
+        <div class="card-body basic-datatable">
+          <input
+            type="text"
+            style="padding: 8px; margin: 15px auto; width: 30%"
+            placeholder="Type to filter the name column..."
+            (keyup)="updateFilter($event)"
+          />
+          <ngx-datatable
+            #table
+            class="material border"
+            [columns]="columns"
+            [columnMode]="ColumnMode.force"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            rowHeight="auto"
+            [limit]="10"
+            [rows]="row"
+          >
+          </ngx-datatable>
+          <!-- </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!--End::row-1 -->
+  
+  <!-- Start:: row-2 -->
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="card custom-card">
+        <div class="card-header">
+          <div class="card-title">Responsive Datatable</div>
+        </div>
+        <div class="card-body">
+          <ngx-datatable
+          #mydatatable
+          class="material border"
+          [headerHeight]="50"
+          [limit]="5"
+          [columnMode]="ColumnMode.force"
+          [footerHeight]="50"
+          rowHeight="auto"
+          [rows]="rows"
+        >
+          <ngx-datatable-column name="Name">
+            <ng-template
+              ngx-datatable-cell-template
+              let-rowIndex="rowIndex"
+              let-value="value"
+              let-row="row"
+            >
+            @if(!editing[rowIndex + '-name']){
+              <span
+                title="Double click to edit"
+                (dblclick)="editing[rowIndex + '-name'] = true"
+               
+              >
+                {{ value }}
+              </span>
+            }
+            @if(editing[rowIndex + '-name']){
+              <input
+                autofocus
+                (blur)="updateValue($event, 'name', rowIndex)"
+                type="text"
+                [value]="value"
+              />
+            }
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Gender">
+            <ng-template
+              ngx-datatable-cell-template
+              let-rowIndex="rowIndex"
+              let-row="row"
+              let-value="value"
+            >
+            @if(!editing[rowIndex + '-gender']){
+              <span
+                title="Double click to edit"
+                (dblclick)="editing[rowIndex + '-gender'] = true"
+              >
+                {{ value }}
+              </span>
+            }
+            @if(!editing[rowIndex + '-gender']){
+              <select
+                (blur)="editing[rowIndex + '-gender'] = false"
+                (change)="updateValue($event, 'gender', rowIndex)"
+                [value]="value"
+              >
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+            }
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Age">
+            <ng-template ngx-datatable-cell-template let-value="value">
+              {{ value }}
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End:: row-2 -->
+  
+  <!-- Start:: row-3 -->
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="card custom-card">
+        <div class="card-header">
+          <div class="card-title">Live Data Data Table</div>
+        </div>
+        <div class="card-body">
+          <small>
+            <a href="javascript:void(0)" (click)="start()">Start</a> |
+            <a href="javascript:void(0)" (click)="stop()">Stop</a> |
+            <a href="javascript:void(0)" (click)="add()">Add</a> |
+            <a href="javascript:void(0)" (click)="remove()">Remove</a>
+          </small>
+  
+          <ngx-datatable
+            #mydatatable
+            class="material border"
+            [headerHeight]="50"
+            [limit]="5"
+            [columnMode]="ColumnMode.force"
+            [footerHeight]="50"
+            rowHeight="auto"
+            [trackByProp]="'updated'"
+            [rows]="rows1"
+          >
+            <ngx-datatable-column name="Name"></ngx-datatable-column>
+            <ngx-datatable-column name="Gender"></ngx-datatable-column>
+            <ngx-datatable-column name="Company"></ngx-datatable-column>
+          </ngx-datatable>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End:: row-3 -->
+
+  

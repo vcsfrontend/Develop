@@ -1,0 +1,219 @@
+<app-page-header title="Leads" title1="CRM" activeTitle="Leads" ></app-page-header>
+<!-- Start::row-1 -->
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card custom-card">
+            <div class="card-header d-flex align-items-center justify-content-between flex-wrap gap-3">
+                <div class="card-title">
+                    Leads<span class="badge bg-light text-default rounded ms-1 fs-12 align-middle">30</span>
+                </div>
+                <div class="d-flex flex-wrap gap-2">
+                    <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#create-contact" (click)="openModal(content)"><i class="ri-add-line me-1 fw-medium align-middle"></i>Create Lead</button>
+                    <button class="btn btn-success-light btn-sm">Export As CSV</button>
+                    <div ngbDropdown  class="dropdown">
+                        <a ngbDropdownToggle href="javascript:void(0);" class="btn btn-light btn-sm btn-wave waves-effect waves-light" data-bs-toggle="dropdown" aria-expanded="false">
+                            Sort By
+                        </a>
+                        <ul ngbDropdownMenu  class="dropdown-menu" role="menu">
+                            <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">Newest</a></li>
+                            <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">Date Added</a></li>
+                            <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">A - Z</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table text-nowrap">
+                        <thead>
+                            <tr>
+                                <th scope="col">
+                                    <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+                                </th>
+                                <th scope="col">Contact Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Phone</th>
+                                <th scope="col">Lead Status</th>
+                                <th scope="col">Company</th>
+                                <th scope="col">Lead Source</th>
+                                <th scope="col">Tags</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (Lead of Leads; track Lead) {
+                                <tr class="crm-contact">
+                                    <td>
+                                        <input class="form-check-input" type="checkbox" id="checkboxNoLabel1" value="" aria-label="...">
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <div class="lh-1">
+                                                <span class="avatar avatar-rounded avatar-sm">
+                                                    <img [src]="Lead.img" alt="">
+                                                </span>
+                                            </div>
+                                            <div>
+                                                <span class="d-block fw-medium">{{Lead.name}}</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <span class="d-block mb-1"><i class="ri-mail-line me-2 align-middle fs-14 text-muted d-inline-block"></i>{{Lead.Email}}</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <span class="d-block"><i class="ri-phone-line me-2 align-middle fs-14 text-muted"></i>{{Lead.phnNo}}</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-light text-default">{{Lead.Status}}</span>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <div class="lh-1">
+                                                <span class="avatar avatar-sm p-1 bg-light avatar-rounded">
+                                                    <img [src]="Lead.logo" alt="">
+                                                </span>
+                                            </div>
+                                            <div>{{Lead.company}}</div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        {{Lead.Source}}
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center flex-wrap gap-1">
+                                            <span class="badge bg-{{Lead.bg}} text-{{Lead.text}}">{{Lead.Lead}}</span>
+                                            <span class="badge bg-{{Lead.bg1}} text-{{Lead.text1}}">{{Lead.Tags}}</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="btn-list">
+                                            <a class="btn btn-sm btn-warning-light btn-icon"><i class="ri-eye-line"></i></a>
+                                            <button class="btn btn-sm btn-info-light btn-icon"><i class="ri-pencil-line"></i></button>
+                                            <button class="btn btn-sm btn-danger-light btn-icon contact-delete" (click)="click(Lead.Source)"><i class="ri-delete-bin-line"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                              </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer border-top-0">
+                <div class="d-flex align-items-center">
+                    <div>
+                        Showing 10 Entries <i class="bi bi-arrow-right ms-2 fw-medium"></i>
+                    </div>
+                    <div class="ms-auto">
+                        <nav aria-label="Page navigation" class="pagination-style-4">
+                            <ul class="pagination mb-0">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="javascript:void(0);">
+                                        Prev
+                                    </a>
+                                </li>
+                                <li class="page-item active"><a class="page-link" href="javascript:void(0);">1</a></li>
+                                <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
+                                <li class="page-item">
+                                    <a class="page-link text-primary" href="javascript:void(0);">
+                                        next
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End::row-1 -->
+<!-- Start:: Create Contact -->
+<div class="modal fade" id="create-contact" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <ng-template #content let-modal>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title">Create Lead</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                (click)="modal.dismiss('Cross click')"  aria-label="Close"></button>
+            </div>
+            <div class="modal-body px-4">
+                <div class="row gy-3">
+                    <div class="col-xl-12">
+                        <div class="mb-0 text-center">
+                            <span class="avatar avatar-xxl avatar-rounded">
+                                <img [src]="url1 ? url1 :'./assets/images/faces/9.jpg'" alt="" id="profile-img">
+                                <span class="badge rounded-pill bg-primary avatar-badge">
+                                    <input type="file" name="photo" class="position-absolute w-100 h-100 op-0" id="profile-change" (change)="handleFileInput($event)">
+                                    <i class="fe fe-camera"></i>
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-xl-12">
+                        <label for="contact-name" class="form-label">Contact Name</label>
+                        <input type="text" class="form-control" id="contact-name" placeholder="Contact Name">
+                    </div>
+                    <div class="col-xl-12">
+                        <label for="contact-mail" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="contact-mail" placeholder="Enter Email">
+                    </div>
+                    <div class="col-xl-12">
+                        <label for="contact-phone" class="form-label">Phone No</label>
+                        <input type="tel" class="form-control" id="contact-phone" placeholder="Enter Phone Number">
+                    </div>
+                    <div class="col-xl-12">
+                        <label for="company-name" class="form-label">Company Name</label>
+                        <input type="text" class="form-control" id="company-name" placeholder="Company Name">
+                    </div>
+                    <div class="col-xl-12">
+                        <label class="form-label">Lead Status</label>
+                        <ng-select name="choices-multiple-remove-button3" placeholder="Select" id="choices-multiple-remove-button3" class="border rounded">
+                            <ng-option value="Choice 1">New</ng-option>
+                            <ng-option value="Choice 2">Follow-up</ng-option>
+                            <ng-option value="Choice 3">Closed</ng-option>
+                            <ng-option value="Choice 4">Contacted</ng-option>
+                            <ng-option value="Choice 5">Disqualified</ng-option>
+                            <ng-option value="Choice 6">Qualified</ng-option>
+                        </ng-select>
+                    </div>
+                    <div class="col-xl-12">
+                        <label class="form-label">Lead Source</label>
+                        <ng-select  name="choices-multiple-remove-button1" placeholder="Select"  id="choices-multiple-remove-button1" class="border rounded">
+                            <ng-option value="Choice 1">Social Media</ng-option>
+                            <ng-option value="Choice 2">Direct mail</ng-option>
+                            <ng-option value="Choice 3">Blog Articles</ng-option>
+                            <ng-option value="Choice 4">Affiliates</ng-option>
+                            <ng-option value="Choice 5">Organic search</ng-option>
+                        </ng-select>
+                    </div>
+                    <div class="col-xl-12">
+                        <label class="form-label">Tags</label>
+                        <ng-select  name="choices-multiple-remove-button2" placeholder="Select"  id="choices-multiple-remove-button2" [multiple]="true" class="border rounded">
+                            <ng-option value="Choice 1">New Lead</ng-option>
+                            <ng-option value="Choice 2">Prospect</ng-option>
+                            <ng-option value="Choice 3">Customer</ng-option>
+                            <ng-option value="Choice 4">Hot Lead</ng-option>
+                            <ng-option value="Choice 5">Partner</ng-option>
+                            <ng-option value="Choice 6">LostCustomer</ng-option>
+                            <ng-option value="Choice 7">Influencer</ng-option>
+                            <ng-option value="Choice 8">Subscriber</ng-option>
+                        </ng-select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light"
+                    data-bs-dismiss="modal" (click)="modal.close('Cancel click')">Cancel</button>
+                <button type="button" class="btn btn-primary">Create Contact</button>
+            </div>
+        </div>
+    </ng-template>
+    </div>
+</div>
+<!-- End:: Create Contact -->

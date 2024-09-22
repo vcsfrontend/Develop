@@ -1,0 +1,880 @@
+<app-page-header title="Stocks" title1="Dashboards" activeTitle="Stocks" ></app-page-header>
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card custom-card">
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div class="swiper swiper-basic">
+                        <div class="swiper-wrapper">
+                            <swiper [config]="swiperConfig" [slidesPerView]="5" (swiper)="setThumbsSwiper($event)" [zoom]="true"
+                            [spaceBetween]="10" [loop]="true" [autoplay]="true">
+                            <ng-template class="swiper-slide" swiperSlide>
+                                <div class="d-flex gap-2 flex-wrap align-items-center justify-content-between p-3 border rounded">
+                                    <div class="d-flex flex-fill align-items-center">
+                                        <div class="me-2">
+                                            <span class="avatar avatar-rounded bg-light p-2">
+                                                <i class="bi bi-apple text-muted fs-18"></i>
+                                            </span>
+                                        </div>
+                                        <div class="lh-1">
+                                            <span class="d-block mb-2 text-default">Apple</span>
+                                            <span class="d-block text-muted fs-12">$12,289.44</span>
+                                        </div>
+                                    </div>
+                                    <div class="text-success fs-12 text-end">
+                                        <span class="d-block">0.14%<i class="ti ti-arrow-bear-right"></i></span>
+                                        <span class="d-block">+$1,780.80</span>
+                                    </div>
+                                </div>
+                            </ng-template>
+                            <ng-template class="swiper-slide" swiperSlide>
+                                <div class="d-flex gap-2 flex-wrap align-items-center justify-content-between p-3 border rounded">
+                                    <div class="d-flex flex-fill align-items-center">
+                                        <div class="me-2">
+                                            <span class="avatar avatar-rounded bg-light p-2">
+                                                <i class="bi bi-currency-bitcoin text-warning fs-18"></i>
+                                            </span>
+                                        </div>
+                                        <div class="lh-1">
+                                            <span class="d-block mb-2 text-default">Bitcoin</span>
+                                            <span class="d-block text-muted fs-12">$58,151.02</span>
+                                        </div>
+                                    </div>
+                                    <div class="text-success fs-12 text-end">
+                                        <span class="d-block">2.14%<i class="ti ti-arrow-bear-right"></i></span>
+                                        <span class="d-block">+$5,745.62</span>
+                                    </div>
+                                </div>
+                            </ng-template>
+                            <ng-template class="swiper-slide" swiperSlide>
+                                <div class="d-flex gap-2 flex-wrap align-items-center justify-content-between p-3 border rounded">
+                                    <div class="d-flex flex-fill align-items-center">
+                                        <div class="me-2">
+                                            <span class="avatar avatar-rounded bg-light p-2">
+                                                <i class="bi bi-card-list text-success fs-18"></i>
+                                            </span>
+                                        </div>
+                                        <div class="lh-1">
+                                            <span class="d-block mb-2 text-default">Tesla</span>
+                                            <span class="d-block text-muted fs-12">$14,452.36</span>
+                                        </div>
+                                    </div>
+                                    <div class="text-success fs-12 text-end">
+                                        <span class="d-block">4.02%<i class="ti ti-arrow-bear-right"></i></span>
+                                        <span class="d-block">+$4,125.63</span>
+                                    </div>
+                                </div>
+                            </ng-template>
+                            <ng-template class="swiper-slide" swiperSlide>
+                                <div class="d-flex gap-2 flex-wrap align-items-center justify-content-between p-3 border rounded">
+                                    <div class="d-flex flex-fill align-items-center">
+                                        <div class="me-2">
+                                            <span class="avatar avatar-rounded bg-light p-2">
+                                                <i class="bi bi-gift text-primary fs-18"></i>
+                                            </span>
+                                        </div>
+                                        <div class="lh-1">
+                                            <span class="d-block mb-2 text-default">Amazon</span>
+                                            <span class="d-block text-muted fs-12">$63,251.11</span>
+                                        </div>
+                                    </div>
+                                    <div class="text-success fs-12 text-end">
+                                        <span class="d-block">5.14%<i class="ti ti-arrow-bear-right"></i></span>
+                                        <span class="d-block">+$936.30</span>
+                                    </div>
+                                </div>
+                            </ng-template>
+                            <ng-template class="swiper-slide" swiperSlide>
+                                <div class="d-flex flex-wrap align-items-center justify-content-between p-3 border rounded">
+                                    <div class="d-flex flex-fill align-items-center">
+                                        <div class="me-2">
+                                            <span class="avatar avatar-rounded bg-light p-2">
+                                                <i class="bi bi-truck text-danger fs-18"></i>
+                                            </span>
+                                        </div>
+                                        <div class="lh-1">
+                                            <span class="d-block mb-2 text-default">Aliexpress</span>
+                                            <span class="d-block text-muted fs-12">$5,401.50</span>
+                                        </div>
+                                    </div>
+                                    <div class="text-success fs-12 text-end">
+                                        <span class="d-block">3.32%<i class="ti ti-arrow-bear-right"></i></span>
+                                        <span class="d-block">+$4,360.65</span>
+                                    </div>
+                                </div>
+                            </ng-template>
+                            <ng-template class="swiper-slide" swiperSlide>
+                                <div class="d-flex flex-wrap align-items-center justify-content-between p-3 border rounded">
+                                    <div class="d-flex flex-fill align-items-center">
+                                        <div class="me-2">
+                                            <span class="avatar avatar-rounded bg-light p-2">
+                                                <i class="bi bi-phone text-secondary fs-18"></i>
+                                            </span>
+                                        </div>
+                                        <div class="lh-1">
+                                            <span class="d-block mb-2 text-default">Samsung</span>
+                                            <span class="d-block text-muted fs-12">$10,732.12</span>
+                                        </div>
+                                    </div>
+                                    <div class="text-success fs-12 text-end">
+                                        <span class="d-block">1.24%<i class="ti ti-arrow-bear-right"></i></span>
+                                        <span class="d-block">+$3,221.29</span>
+                                    </div>
+                                </div>
+                            </ng-template>
+                            <ng-template class="swiper-slide" swiperSlide>
+                                <div class="d-flex gap-2 flex-wrap align-items-center justify-content-between p-3 border rounded">
+                                    <div class="d-flex flex-fill align-items-center">
+                                        <div class="me-2">
+                                            <span class="avatar avatar-rounded bg-light p-2">
+                                                <i class="bi bi-nvidia text-green fs-18"></i>
+                                            </span>
+                                        </div>
+                                        <div class="lh-1">
+                                            <span class="d-block mb-2 text-default">Nvidia</span>
+                                            <span class="d-block text-muted fs-12">$23,235.25</span>
+                                        </div>
+                                    </div>
+                                    <div class="text-success fs-12 text-end">
+                                        <span class="d-block">1.14%<i class="ti ti-arrow-bear-right"></i></span>
+                                        <span class="d-block">+$5,745.62</span>
+                                    </div>
+                                </div>
+                            </ng-template>
+                            </swiper>
+                          
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Start:: row-1 -->
+<div class="row">
+    <div class="col-xxl-9">
+        <div class="row">
+            <div class="col-xxl-3 col-xl-6">
+                <div class="card custom-card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center gap-3 mb-3 flex-wrap">
+                            <div class="lh-1">
+                                <span class="avatar bg-primary-transparent">
+                                    <i class="bi bi-apple fs-18"></i>
+                                </span>
+                            </div>
+                            <div class="flex-fill">
+                                <span class="d-block fs-14">Apple</span>
+                                <span class="d-block text-muted fs-12">Apple Inc</span>
+                            </div>
+                            <div class="text-end">
+                                <span class="fs-12 text-muted">Apple</span>
+                                <span class="text-success fs-12 d-block">+0.28%</span>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between flex-wrap">
+                            <div>
+                                <span class="fs-11 text-muted">CURRENT VALUE</span>
+                                <span class="fs-20 d-block">$170.77</span>
+                            </div>
+                            <div id="apple-stock">
+                                <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart"
+                                [xaxis]="chartOptions.xaxis" [colors]="chartOptions.colors"
+                                [stroke]="chartOptions.stroke" [tooltip]="chartOptions.tooltip"
+                                [dataLabels]="chartOptions.dataLabels" [grid]="chartOptions.grid"
+                                [yaxis]="chartOptions.yaxis">
+                            </apx-chart>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xxl-3 col-xl-6">
+                <div class="card custom-card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center gap-3 mb-3 flex-wrap">
+                            <div class="lh-1">
+                                <span class="avatar bg-secondary-transparent">
+                                    <i class="bi bi-nvidia fs-18"></i>
+                                </span>
+                            </div>
+                            <div class="flex-fill">
+                                <span class="d-block fs-14">Nvidia</span>
+                                <span class="d-block text-muted fs-12">NVIDIA Corp</span>
+                            </div>
+                            <div class="text-end">
+                                <span class="fs-12 text-muted">Nvidia</span>
+                                <span class="text-danger fs-12 d-block">-0.93%</span>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between flex-wrap">
+                            <div>
+                                <span class="fs-11 text-muted">CURRENT VALUE</span>
+                                <span class="fs-20 d-block">$170.77</span>
+                            </div>
+                            <div id="nvidia-stock">
+                                <apx-chart [series]="chartOptions1.series" [chart]="chartOptions1.chart"
+                                [xaxis]="chartOptions1.xaxis" [colors]="chartOptions1.colors"
+                                [stroke]="chartOptions1.stroke" [tooltip]="chartOptions1.tooltip"
+                                [dataLabels]="chartOptions1.dataLabels" [grid]="chartOptions1.grid"
+                                [yaxis]="chartOptions1.yaxis"></apx-chart>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xxl-3 col-xl-6">
+                <div class="card custom-card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center gap-3 mb-3 flex-wrap">
+                            <div class="lh-1">
+                                <span class="avatar bg-info-transparent">
+                                    <i class="bi bi-amazon fs-18"></i>
+                                </span>
+                            </div>
+                            <div class="flex-fill">
+                                <span class="d-block fs-14">Amazon</span>
+                                <span class="d-block text-muted fs-12">Amazon.com, Inc.</span>
+                            </div>
+                            <div class="text-end">
+                                <span class="fs-12 text-muted">Amazon</span>
+                                <span class="text-success fs-12 d-block">+0.29%</span>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between flex-wrap">
+                            <div>
+                                <span class="fs-11 text-muted">CURRENT VALUE</span>
+                                <span class="fs-20 d-block">133.09</span>
+                            </div>
+                            <div id="amazon-stock">
+                                <apx-chart [series]="chartOptions2.series" [chart]="chartOptions2.chart"
+                                [xaxis]="chartOptions2.xaxis" [colors]="chartOptions2.colors"
+                                [stroke]="chartOptions2.stroke" [tooltip]="chartOptions2.tooltip"
+                                [dataLabels]="chartOptions2.dataLabels" [grid]="chartOptions2.grid"
+                                [yaxis]="chartOptions2.yaxis">
+                            </apx-chart>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xxl-3 col-xl-6">
+                <div class="card custom-card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center gap-3 mb-3 flex-wrap">
+                            <div class="lh-1">
+                                <span class="avatar bg-success-transparent">
+                                    <i class="bi bi-microsoft fs-18"></i>
+                                </span>
+                            </div>
+                            <div class="flex-fill">
+                                <span class="d-block fs-14">Microsoft</span>
+                                <span class="d-block text-muted fs-12">Microsoft Corp</span>
+                            </div>
+                            <div class="text-end">
+                                <span class="fs-12 text-muted">Microsoft</span>
+                                <span class="text-success fs-12 d-block">+0.24%</span>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between flex-wrap">
+                            <div>
+                                <span class="fs-11 text-muted">CURRENT VALUE</span>
+                                <span class="fs-20 d-block">$338.11</span>
+                            </div>
+                            <div id="microsoft-stock">
+                                <apx-chart [series]="chartOptions3.series" [chart]="chartOptions3.chart"
+                                [xaxis]="chartOptions3.xaxis" [colors]="chartOptions3.colors"
+                                [stroke]="chartOptions3.stroke" [tooltip]="chartOptions3.tooltip"
+                                [dataLabels]="chartOptions3.dataLabels" [grid]="chartOptions3.grid"
+                                [yaxis]="chartOptions3.yaxis">
+                            </apx-chart>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6">
+                <div class="card custom-card">
+                    <div class="card-header justify-content-between">
+                        <div class="d-flex align-items-center gap-3">
+                            <div>
+                                <span class="avatar avatar-rounded bg-light">
+                                    <i class="bi bi-apple fs-18 text-default"></i>
+                                </span>
+                            </div>
+                            <div>
+                                <span class="d-block fs-14">AAPL</span>
+                                <span class="d-block fs-12 text-muted">Apple Inc</span>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="text-muted">Year - </span>
+                            <div ngbDropdown  class="dropdown">
+                                <a ngbDropdownToggle href="javascript:void(0);" class="btn btn-light btn-sm border" data-bs-toggle="dropdown">
+                                    2023
+                                </a>
+                                <ul ngbDropdownMenu class="dropdown-menu" role="menu">
+                                    <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">2022</a></li>
+                                    <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">2021</a></li>
+                                    <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">2020</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="d-flex flex-wrap alilgn-items-center justify-content-between p-3 bg-light">
+                            <div class="d-flex flex-fill gap-3">
+                                <div>
+                                    <h5 class="text-primary">$12,390.02<span class="fs-12 ms-1 text-danger">0.14%<i class="ti ti-trending-down ms-1"></i></span></h5>
+                                    <span class="d-block text-muted mb-1 fs-12"><span class="text-danger me-1">-89.75</span>. Today</span>
+                                    <span class="d-block text-muted fs-11">Jun 17, 2023  11:25 AM  UTC +5:30</span>
+                                </div>
+                            </div>
+                            <div class="d-flex text-end">
+                                <div>
+                                    <h6>AAPL</h6>
+                                    <span class="d-block text-muted fs-11 mb-1">Apple Inc</span>
+                                    <span class="d-block"><a href="javascript:void(0);" class="text-primary">+ Compare</a></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="apple-stocks-marketcap" class="p-3">
+                            <apx-chart [series]="chartOptions4.series" [chart]="chartOptions4.chart"
+                                [xaxis]="chartOptions4.xaxis" [colors]="chartOptions4.colors" [plotOptions]="chartOptions4.plotOptions"
+                                [stroke]="chartOptions4.stroke" [tooltip]="chartOptions4.tooltip"
+                                [dataLabels]="chartOptions4.dataLabels" [grid]="chartOptions4.grid"
+                                [yaxis]="chartOptions4.yaxis">
+                            </apx-chart>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6">
+                <div class="card custom-card">
+                    <div class="card-header justify-content-between">
+                        <div class="card-title mb-2 mb-sm-0">
+                            Total Investments
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-primary btn-sm btn-wave waves-effect waves-light">1D</button>
+                            <button type="button" class="btn btn-primary-light btn-sm btn-wave waves-effect waves-light">1W</button>
+                            <button type="button" class="btn btn-primary-light btn-sm btn-wave waves-effect waves-light">1M</button>
+                            <button type="button" class="btn btn-primary-light btn-sm btn-wave waves-effect waves-light">3M</button>
+                            <button type="button" class="btn btn-primary-light btn-sm btn-wave waves-effect waves-light">6M</button>
+                            <button type="button" class="btn btn-primary-light btn-sm btn-wave waves-effect waves-light">1Y</button>
+                        </div>
+                    </div>
+                    <div class="card-body px-0 pt-0 pb-2">
+                        <div class="d-flex alilgn-items-center justify-content-between gap-3 p-3 bg-light flex-wrap">
+                            <div class="d-flex flex-wrap flex-fill gap-3">
+                                <div>
+                                    <span class="d-block text-muted mb-1">Invested Value</span>
+                                    <span class="d-block">$1,290.94<span class="text-success ms-1 fs-12"><i class="ti ti-chevron-up"></i>1.22%</span></span>
+                                    <div class="d-block text-muted fs-11 mt-3">Jun 17, 2023 11:25 AM UTC +5:30</div>
+                                </div>
+                                <div>
+                                    <span class="d-block text-muted mb-1">Total Returns</span>
+                                    <span class="d-block">$25,458.20<span class="text-success ms-1 fs-12"><i class="ti ti-chevron-up"></i>10.14%</span></span>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-wrap gap-3 text-end">
+                                <div>
+                                    <span class="d-block text-muted mb-1">Today Change</span>
+                                    <span class="d-block">$112.09</span>
+                                </div>
+                                <div>
+                                    <span class="d-block text-muted mb-1">Change In %</span>
+                                    <span class="d-block">+0.01%<span class="text-success ms-1 fs-12"><i class="ti ti-chevron-up"></i>0.21%</span></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="totalInvestmentsStats">
+                            <apx-chart [series]="chartOptions5.series" [chart]="chartOptions5.chart"
+                                [xaxis]="chartOptions5.xaxis" [colors]="chartOptions5.colors"
+                                [stroke]="chartOptions5.stroke" [tooltip]="chartOptions5.tooltip"
+                                [dataLabels]="chartOptions5.dataLabels" [grid]="chartOptions5.grid"
+                                [yaxis]="chartOptions5.yaxis">
+                            </apx-chart>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xxl-3">
+        <div class="row">
+            <div class="col-xxl-12 col-xl-6">
+                <div class="card custom-card">
+                    <div class="card-header justify-content-between">
+                        <div class="card-title">My Watchlist</div>
+                        <button class="btn btn-sm btn-icon btn-light">
+                            <i class="ri-add-line"></i>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled watchlist-list">
+                            <li>
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="lh-1">
+                                        <span class="avatar avatar-sm bg-info-transparent">
+                                            <i class="ri ri-twitter-x-line fs-15"></i>
+                                        </span>
+                                    </div>
+                                    <div class="flex-fill">
+                                        <span class="d-block fs-14">TTR</span>
+                                        <span class="d-block text-muted fs-12">Twiter.com, Inc</span>
+                                    </div>
+                                    <div class="text-end">
+                                        <span class="d-block fs-15">$234.24</span>
+                                        <span class="text-danger fs-12">-0.28%</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="lh-1">
+                                        <span class="avatar avatar-sm bg-dark-transparent">
+                                            <i class="bi bi-github fs-15"></i>
+                                        </span>
+                                    </div>
+                                    <div class="flex-fill">
+                                        <span class="d-block fs-14">GTHB</span>
+                                        <span class="d-block text-muted fs-12">Gituhb, Demo Inc</span>
+                                    </div>
+                                    <div class="text-end">
+                                        <span class="d-block fs-15">$345.53</span>
+                                        <span class="text-success fs-12">+0.56%</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="lh-1">
+                                        <span class="avatar avatar-sm bg-warning-transparent">
+                                            <i class="bi bi-windows fs-15"></i>
+                                        </span>
+                                    </div>
+                                    <div class="flex-fill">
+                                        <span class="d-block fs-14">
+                                            MS</span>
+                                        <span class="d-block text-muted fs-12">Micorsoft, Inc</span>
+                                    </div>
+                                    <div class="text-end">
+                                        <span class="d-block fs-15">$1,233.67</span>
+                                        <span class="text-success fs-12">+1.98%</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="lh-1">
+                                        <span class="avatar avatar-sm bg-danger-transparent">
+                                            <i class="bi bi-currency-bitcoin fs-15"></i>
+                                        </span>
+                                    </div>
+                                    <div class="flex-fill">
+                                        <span class="d-block fs-14">
+                                            Bitcoin</span>
+                                        <span class="d-block text-muted fs-12">Bioset Coin, Inc</span>
+                                    </div>
+                                    <div class="text-end">
+                                        <span class="d-block fs-15">$1,743.18</span>
+                                        <span class="text-success fs-12">+0.51%</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="lh-1">
+                                        <span class="avatar avatar-sm bg-primary-transparent">
+                                            <i class="bi bi-bootstrap-fill fs-15"></i>
+                                        </span>
+                                    </div>
+                                    <div class="flex-fill">
+                                        <span class="d-block fs-14">
+                                            BS</span>
+                                        <span class="d-block text-muted fs-12">Boostrap, Inc</span>
+                                    </div>
+                                    <div class="text-end">
+                                        <span class="d-block fs-15">$162.63</span>
+                                        <span class="text-danger fs-12">-0.15%</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="lh-1">
+                                        <span class="avatar avatar-sm bg-secondary-transparent">
+                                            <i class="bi bi-apple fs-15"></i>
+                                        </span>
+                                    </div>
+                                    <div class="flex-fill">
+                                        <span class="d-block fs-14">
+                                            AAPL</span>
+                                        <span class="d-block text-muted fs-12">Apple, Inc</span>
+                                    </div>
+                                    <div class="text-end">
+                                        <span class="d-block fs-15">$327.22</span>
+                                        <span class="text-success fs-12">+0.60%</span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xxl-12 col-xl-6">
+                <div class="card custom-card">
+                    <div class="card-body">
+                        <div class="d-flex gap-3 flex-wrap align-items-top justify-content-between">
+                            <div class="flex-fill d-flex align-items-top mb-4 mb-sm-0">
+                                <div class="me-3">
+                                    <span class="avatar avatar-rounded bg-outline-primary">
+                                        <i class="ti ti-wallet fs-16"></i>
+                                    </span>
+                                </div>
+                                <div>
+                                    <span class="d-block text-muted">Total amount Invested</span>
+                                    <span class="fs-16">$23,8998.99</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div id="total-invested">
+                                    <apx-chart [series]="chartOptions6.series" [chart]="chartOptions6.chart"
+                                [xaxis]="chartOptions6.xaxis" [colors]="chartOptions6.colors"
+                                [stroke]="chartOptions6.stroke" [tooltip]="chartOptions6.tooltip"
+                                [dataLabels]="chartOptions6.dataLabels" [grid]="chartOptions6.grid"
+                                [yaxis]="chartOptions6.yaxis">
+                            </apx-chart>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card custom-card">
+                    <div class="card-body">
+                        <div class="d-flex gap-3 flex-wrap align-items-top justify-content-between">
+                            <div class="flex-fill d-flex align-items-top mb-4 mb-sm-0">
+                                <div class="me-3">
+                                    <span class="avatar avatar-rounded bg-outline-warning">
+                                        <i class="ti ti-wallet fs-16"></i>
+                                    </span>
+                                </div>
+                                <div>
+                                    <span class="d-block text-muted">Portfolio Value</span>
+                                    <span class="fs-16">$12,920.20<span class="text-success ms-1 fs-12 fw-normal"><i class="ti ti-arrow-narrow-up me-1"></i>0.89%</span></span>
+                                </div>
+                            </div>
+                            <div>
+                                <div id="portfolio-value">
+                                    <apx-chart [series]="chartOptions7.series" [chart]="chartOptions7.chart"
+                                [xaxis]="chartOptions7.xaxis" [colors]="chartOptions7.colors"
+                                [stroke]="chartOptions7.stroke" [tooltip]="chartOptions7.tooltip"
+                                [dataLabels]="chartOptions7.dataLabels" [grid]="chartOptions7.grid"
+                                [yaxis]="chartOptions7.yaxis">
+                            </apx-chart>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card custom-card">
+                    <div class="card-body">
+                        <div class="d-flex gap-3 flex-wrap align-items-top justify-content-between">
+                            <div class="flex-fill d-flex align-items-top mb-4 mb-sm-0">
+                                <div class="me-3">
+                                    <span class="avatar avatar-rounded bg-outline-success">
+                                        <i class="ti ti-wallet fs-16"></i>
+                                    </span>
+                                </div>
+                                <div>
+                                    <span class="d-block text-muted">Returns Rate</span>
+                                    <span class="fs-16">+12.08%<span class="text-danger ms-1 fs-12 fw-normal"><i class="ti ti-arrow-narrow-down me-1"></i>1.73%</span></span>
+                                </div>
+                            </div>
+                            <div>
+                                <div id="returns-rate">
+                                    <apx-chart [series]="chartOptions8.series" [chart]="chartOptions8.chart"
+                                [xaxis]="chartOptions8.xaxis" [colors]="chartOptions8.colors"
+                                [stroke]="chartOptions8.stroke" [tooltip]="chartOptions8.tooltip"
+                                [dataLabels]="chartOptions8.dataLabels" [grid]="chartOptions8.grid"
+                                [yaxis]="chartOptions8.yaxis">
+                            </apx-chart>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End:: row-1 -->
+
+<!-- Start:: row-2 -->
+<div class="row">
+    <div class="col-xl-7">
+        <div class="card custom-card">
+            <div class="card-header justify-content-between">
+                <div class="card-title">
+                    Market Movers
+                </div>
+                <div class="d-flex flex-wrap gap-2">
+                    <div class="me-2">
+                        <input class="form-control form-control-sm" type="text" placeholder="Search Any Stock" aria-label=".form-control-sm example">
+                    </div>
+                    <div ngbDropdown  class="dropdown">
+                        <a ngbDropdownToggle href="javascript:void(0);" class="btn btn-primary-light btn-sm btn-wave waves-effect waves-light" data-bs-toggle="dropdown" aria-expanded="false">
+                            Sort By
+                        </a>
+                        <ul ngbDropdownMenu  class="dropdown-menu" role="menu">
+                            <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">New</a></li>
+                            <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">Popular</a></li>
+                            <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">Relevant</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table text-nowrap table-bordered border-primary">
+                        <thead>
+                            <tr>
+                                <th scope="col">Symbol</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">1D Change</th>
+                                <th scope="col">1D Return %</th>
+                                <th scope="col">Volume</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">
+                                    APPL
+                                </th>
+                                <td>
+                                    App1e Inc.<span class="fw-normal text-primary fs-10 ms-1">NASDAQ</span>
+                                </td>
+                                <td>
+                                    <span>$1,116.90</span>
+                                </td>
+                                <td>
+                                    <span class="text-success">$28.9<i class="ti ti-arrow-bear-right"></i></span>
+                                </td>
+                                <td>
+                                    <span class="text-success">6.8%</span>
+                                </td>
+                                <td>
+                                    12,389.30
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    TTR
+                                </th>
+                                <td>
+                                    Twiter.com Inc.<span class="fw-normal text-primary fs-10 ms-1">NYSE</span>
+                                </td>
+                                <td>
+                                    <span>$993.21</span>
+                                </td>
+                                <td>
+                                    <span class="text-success">$11.6<i class="ti ti-arrow-bear-right"></i></span>
+                                </td>
+                                <td>
+                                    <span class="text-success">10.25%</span>
+                                </td>
+                                <td>
+                                    32,125.03
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    BS
+                                </th>
+                                <td>
+                                    Boostrap.com.<span class="fw-normal text-primary fs-10 ms-1">NSE</span>
+                                </td>
+                                <td>
+                                    <span>$11.00</span>
+                                </td>
+                                <td>
+                                    <span class="text-danger">$16.0<i class="ti ti-arrow-narrow-down"></i></span>
+                                </td>
+                                <td>
+                                    <span class="text-danger">9.0%</span>
+                                </td>
+                                <td>
+                                    27,911.16
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    NFLX
+                                </th>
+                                <td>
+                                    Netfilx.com Inc.<span class="fw-normal text-primary fs-10 ms-1">LSE</span>
+                                </td>
+                                <td>
+                                    <span>$161.72</span>
+                                </td>
+                                <td>
+                                    <span class="text-danger">$9.8<i class="ti ti-arrow-narrow-down"></i></span>
+                                </td>
+                                <td>
+                                    <span class="text-danger">17.8%</span>
+                                </td>
+                                <td>
+                                    27,161.89
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    ION
+                                </th>
+                                <td>
+                                    Ion.com Corp.<span class="fw-normal text-primary fs-10 ms-1">FSX</span>
+                                </td>
+                                <td>
+                                    <span>$52.65</span>
+                                </td>
+                                <td>
+                                    <span class="text-success">$14.2<i class="ti ti-arrow-bear-right"></i></span>
+                                </td>
+                                <td>
+                                    <span class="text-success">30.2%</span>
+                                </td>
+                                <td>
+                                    65,785.01
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-5">
+        <div class="card custom-card">
+            <div class="card-header justify-content-between">
+                <div class="card-title">
+                    Transaction History
+                </div>
+                <div ngbDropdown  class="dropdown">
+                    <a ngbDropdownToggle href="javascript:void(0);" class="btn btn-primary-light btn-sm btn-wave waves-effect waves-light" data-bs-toggle="dropdown" aria-expanded="false">
+                        All
+                    </a>
+                    <ul ngbDropdownMenu  class="dropdown-menu" role="menu">
+                        <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">Buy</a></li>
+                        <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">Sell</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table text-nowrap table-bordered border-primary">
+                        <thead>
+                            <tr>
+                                <th scope="col">Symbol</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Shares</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">
+                                    EPA:THI
+                                </th>
+                                <td>
+                                    12-06-2023
+                                </td>
+                                <td>
+                                    <span class="badge bg-primary">Buy</span>
+                                </td>
+                                <td>
+                                    <span class="text-danger">-$1,290</span>
+                                </td>
+                                <td>
+                                    <span class="text-success">+20</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    EPA:SCB
+                                </th>
+                                <td>
+                                    11-06-2023
+                                </td>
+                                <td>
+                                    <span class="badge bg-primary">Buy</span>
+                                </td>
+                                <td>
+                                    <span class="text-danger">-$2,150</span>
+                                </td>
+                                <td>
+                                    <span class="text-success">+15</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    EPA:CGIO
+                                </th>
+                                <td>
+                                    11-06-2023
+                                </td>
+                                <td>
+                                    <span class="badge bg-warning">Sell</span>
+                                </td>
+                                <td>
+                                    <span class="text-success">+$22,625</span>
+                                </td>
+                                <td>
+                                    <span class="text-danger">-12</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    EPA:NTIX
+                                </th>
+                                <td>
+                                    05-06-2023
+                                </td>
+                                <td>
+                                    <span class="badge bg-primary">Buy</span>
+                                </td>
+                                <td>
+                                    <span class="text-danger">-$3,680</span>
+                                </td>
+                                <td>
+                                    <span class="text-success">+36</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    EPA:MOD
+                                </th>
+                                <td>
+                                    20-05-2023
+                                </td>
+                                <td>
+                                    <span class="badge bg-warning">Sell</span>
+                                </td>
+                                <td>
+                                    <span class="text-success">+$30,750</span>
+                                </td>
+                                <td>
+                                    <span class="text-danger">-25</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End:: row-2 -->

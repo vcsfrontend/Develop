@@ -1,0 +1,81 @@
+<div class="row authentication mx-0">
+
+    <div class="col-xxl-5 col-xl-5 col-lg-12">
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="col-xxl-6 col-xl-9 col-lg-6 col-md-6 col-sm-8 col-12">
+                <div class="card custom-card shadow-none my-4">
+                    <div class="card-body p-4">
+                        <div class="mb-3 d-flex justify-content-center">
+                            <a routerLink="/dashboard/sales">
+                                <img src="./assets/images/brand-logos/desktop-logo.png" alt="logo" class="authentication-brand desktop-logo">
+                                <img src="./assets/images/brand-logos/desktop-dark.png" alt="logo" class="authentication-brand desktop-dark">
+                            </a>
+                        </div>
+                        <p class="h5 mb-2 text-center">Verify Your Account</p>
+                        <p class="mb-4 text-muted op-7 fw-normal text-center">Enter the 4 digit code sent to the registered email Id.</p>
+                        <div class="row gy-3">
+                            <div class="col-xl-12 mb-2">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <input type="text" class="form-control form-control-lg text-center" id="one" maxlength="1" (keyup)="onDigitInput($event, twoInput)">
+                                    </div>
+                                    <div class="col-3">
+                                        <input  #twoInput type="text" class="form-control form-control-lg text-center" id="two" maxlength="1" (keyup)="onDigitInput($event, threeInput)"/>
+                                    </div>
+                                    <div class="col-3">
+                                        <input #threeInput type="text" class="form-control form-control-lg text-center" id="three" maxlength="1" (keyup)="onDigitInput($event, fourInput)"/>
+                                    </div>
+                                    <div class="col-3">
+                                        <input #fourInput type="text" class="form-control form-control-lg text-center" id="four" maxlength="1">
+                                    </div>
+                                </div>
+                                <div class="form-check mt-2">
+                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        Did not recieve a code ?<a routerLink="/pages/email/mailapp" class="text-primary ms-2 d-inline-block">Resend</a>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-xl-12 d-grid mt-2">
+                                <a routerLink="/dashboard/sales" class="btn btn-lg btn-primary">Verify</a>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <p class="fs-12 text-danger mt-3 mb-0"><sup><i class="ri-asterisk"></i></sup>Don't share the verification code with anyone !</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xxl-7 col-xl-7 col-lg-7 d-xl-block d-none px-0">
+        <div class="authentication-cover bg-primary">
+            <div>
+                <div class="authentication-cover-image">
+                    <img src="./assets/images/media/media-67.png" alt="">
+                </div>
+                <div class="text-center mb-4">
+                    <h1 class="text-fixed-white">Two Step Verification</h1>
+                </div>
+                <div class="btn-list text-center">
+                    <a href="javascript:void(0);" class="btn btn-icon authentication-cover-icon btn-wave">
+                        <i class="ri-facebook-line fw-bold"></i>
+                    </a>
+                    <a href="javascript:void(0);" class="btn btn-icon authentication-cover-icon btn-wave">
+                        <i class="ri-twitter-x-line fw-bold"></i>
+                    </a>
+                    <a href="javascript:void(0);" class="btn btn-icon authentication-cover-icon btn-wave">
+                        <i class="ri-instagram-line fw-bold"></i>
+                    </a>
+                    <a href="javascript:void(0);" class="btn btn-icon authentication-cover-icon btn-wave">
+                        <i class="ri-github-line fw-bold"></i>
+                    </a>
+                    <a href="javascript:void(0);" class="btn btn-icon authentication-cover-icon btn-wave">
+                        <i class="ri-youtube-line fw-bold"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

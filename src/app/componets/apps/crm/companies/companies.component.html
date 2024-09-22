@@ -1,0 +1,344 @@
+<app-page-header title="Companies" title1="CRM" activeTitle="Companies" ></app-page-header>
+  <!-- Start::row-1 -->
+  <div class="row">
+    <div class="col-xl-12">
+        <div class="card custom-card">
+            <div class="card-header justify-content-between">
+                <div class="card-title">
+                    Companies <span class="badge bg-light text-default rounded ms-1 fs-12 align-middle">14</span>
+                </div>
+                <div class="d-flex flex-wrap gap-2">
+                    <button class="btn btn-primary btn-sm btn-wave" data-bs-toggle="modal" data-bs-target="#create-contact"  (click)="openModal(content1)"><i class="ri-add-line me-1 fw-medium align-middle"></i>Add Company</button>
+                    <button class="btn btn-success-light btn-sm btn-wave">Export As CSV</button>
+                    <div ngbDropdown  class="dropdown">
+                        <a ngbDropdownToggle href="javascript:void(0);" class="btn btn-light btn-sm btn-wave" data-bs-toggle="dropdown" aria-expanded="false">
+                            Sort By
+                        </a>
+                        <ul ngbDropdownMenu  class="dropdown-menu" role="menu">
+                            <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">Newest</a></li>
+                            <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">Date Added</a></li>
+                            <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">A - Z</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table text-nowrap">
+                        <thead>
+                            <tr>
+                                <th scope="col">
+                                    <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+                                </th>
+                                <th scope="col">Company Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Phone</th>
+                                <th scope="col">Company Size</th>
+                                <th scope="col">Industry</th>
+                                <th scope="col">Key Contact</th>
+                                <th scope="col">Total Deals</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (Companie of Companies; track Companie) {
+                                <tr class="crm-contact">
+                                    <td>
+                                        <input class="form-check-input" type="checkbox" id="checkboxNoLabel1" value="" aria-label="...">
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <div class="lh-1">
+                                                <span class="avatar avatar-sm p-1 bg-light avatar-rounded">
+                                                    <img [src]="Companie.logo" alt="">
+                                                </span>
+                                            </div>
+                                            <div>
+                                                <a  data-bs-toggle="offcanvas" (click)="open(content)"
+                                                role="button" aria-controls="offcanvasExample">{{Companie.name}}</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <span class="d-block mb-1"><i class="ri-mail-line me-2 align-middle fs-14 text-muted d-inline-block"></i>{{Companie.Email}}</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <span class="d-block"><i class="ri-phone-line me-2 align-middle fs-14 text-muted d-inline-block"></i>{{Companie.phnNo}}</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center flex-wrap gap-1">
+                                            <span class="badge bg-{{Companie.bg}} text-{{Companie.text}}">{{Companie.Size}} </span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        {{Companie.Industry}}
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <div class="lh-1">
+                                                <span class="avatar avatar-rounded avatar-sm">
+                                                    <img [src]="Companie.img" alt="">
+                                                </span>
+                                            </div>
+                                            <div>
+                                                <span class="d-block fw-medium">{{Companie.Contact}}</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        {{Companie.Deals}}
+                                    </td>
+                                    <td>
+                                        <div class="btn-list">
+                                            <a data-bs-toggle="offcanvas" 
+                                            role="button" aria-controls="offcanvasExample" class="btn btn-sm btn-warning-light btn-icon" (click)="open(content)"><i class="ri-eye-line"></i></a>
+                                            <button class="btn btn-sm btn-info-light btn-icon"><i class="ri-pencil-line"></i></button>
+                                            <button class="btn btn-sm btn-danger-light btn-icon contact-delete" (click)="click(Companie.Size)"><i class="ri-delete-bin-line"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            }
+                         </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer border-top-0">
+                <div class="d-flex align-items-center">
+                    <div>
+                        Showing 10 Entries <i class="bi bi-arrow-right ms-2 fw-medium"></i>
+                    </div>
+                    <div class="ms-auto">
+                        <nav aria-label="Page navigation" class="pagination-style-4">
+                            <ul class="pagination mb-0">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="javascript:void(0);">
+                                        Prev
+                                    </a>
+                                </li>
+                                <li class="page-item active"><a class="page-link" href="javascript:void(0);">1</a></li>
+                                <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
+                                <li class="page-item">
+                                    <a class="page-link text-primary" href="javascript:void(0);">
+                                        next
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End::row-1 -->
+
+                <!-- Start:: Company Details Offcanvas -->
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample"
+                aria-labelledby="offcanvasExample">
+                <ng-template #content let-offcanvas>
+                    <div class="offcanvas-body p-0">
+                        <div class="d-sm-flex align-items-top p-4 border-bottom border-block-end-dashed main-profile-cover bg-primary">
+                            <div>
+                                <span class="avatar avatar-xxl avatar-rounded me-3 bg-light-transparent p-2">
+                                    <img src="./assets/images/company-logos/1.png" alt="">
+                                </span>
+                            </div>
+                            <div class="flex-fill main-profile-info">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <h6 class="fw-medium mb-1 text-fixed-white">Spruko Technologies</h6>
+                                    <button type="button" class="btn-close crm-contact-close-btn" (click)="offcanvas.dismiss('Cross click')" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                </div>
+                                <p class="mb-1 text-muted text-fixed-white op-7">Telecommunications</p>
+                                <p class="fs-12 text-fixed-white mb-4 op-5">  
+                                    <span class="me-3"><i class="ri-building-line me-1 align-middle"></i>Georgia</span> 
+                                    <span><i class="ri-map-pin-line me-1 align-middle"></i>Washington D.C</span> 
+                                </p>
+                                <div class="d-flex mb-0">
+                                    <div class="me-4">
+                                        <p class="fw-medium fs-20 text-fixed-white text-shadow mb-0">113</p>
+                                        <p class="mb-0 fs-11 op-5 text-fixed-white">Deals</p>
+                                    </div>
+                                    <div class="me-4">
+                                        <p class="fw-medium fs-20 text-fixed-white text-shadow mb-0">$12.2k</p>
+                                        <p class="mb-0 fs-11 op-5 text-fixed-white">Contributions</p>
+                                    </div>
+                                    <div class="me-4">
+                                        <p class="fw-medium fs-20 text-fixed-white text-shadow mb-0">$10.67k</p>
+                                        <p class="mb-0 fs-11 op-5 text-fixed-white">Comitted</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>  
+                        <div class="p-4 border-bottom border-block-end-dashed">
+                            <div class="mb-0">
+                                <p class="fs-15 mb-2 fw-medium">Professional Bio :</p>
+                                <p class="text-muted op-8 mb-0">
+                                    <b class="text-default">Spruko</b> Technologies is a leading technology company specializing in innovative software solutions for businesses worldwide. With a strong focus on cutting-edge technologies and a team of skilled professionals.
+                                </p>
+                            </div>   
+                        </div>  
+                        <div class="p-4 border-bottom border-block-end-dashed">
+                            <p class="fs-14 mb-2 me-4 fw-medium">Contact Information :</p>
+                            <div class="">
+                                <div class="d-flex align-items-center mb-2">
+                                    <div class="me-2">
+                                        <span class="avatar avatar-sm avatar-rounded bg-light text-muted">
+                                            <i class="ri-mail-line align-middle fs-14"></i>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        sprukotechnologies2981&#64;gmail.com
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <div class="me-2">
+                                        <span class="avatar avatar-sm avatar-rounded bg-light text-muted">
+                                            <i class="ri-phone-line align-middle fs-14"></i>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        1678-28993-223
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center mb-0">
+                                    <div class="me-2">
+                                        <span class="avatar avatar-sm avatar-rounded bg-light text-muted">
+                                            <i class="ri-map-pin-line align-middle fs-14"></i>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        MIG-1-11, Monroe Street, Georgetown, Washington D.C, USA,20071
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 border-bottom border-block-end-dashed d-flex align-items-center">
+                            <p class="fs-14 mb-0 me-4 fw-medium">Social Networks :</p>
+                            <div class="btn-list mb-0">
+                                <button class="btn btn-sm btn-icon btn-primary-light btn-wave waves-effect waves-light mb-1">
+                                    <i class="ri-facebook-line fw-medium"></i>
+                                </button>
+                                <button class="btn btn-sm btn-icon btn-secondary-light btn-wave waves-effect waves-light mb-1">
+                                    <i class="ri-twitter-x-line fw-medium"></i>
+                                </button>
+                                <button class="btn btn-sm btn-icon btn-warning-light btn-wave waves-effect waves-light mb-1">
+                                    <i class="ri-instagram-line fw-medium"></i>
+                                </button>
+                                <button class="btn btn-sm btn-icon btn-success-light btn-wave waves-effect waves-light mb-1">
+                                    <i class="ri-github-line fw-medium"></i>
+                                </button>
+                                <button class="btn btn-sm btn-icon btn-danger-light btn-wave waves-effect waves-light mb-1">
+                                    <i class="ri-youtube-line fw-medium"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-4 border-bottom border-block-end-dashed d-flex align-items-center gap-3">
+                            <div class="fs-14 fw-medium">Company Size:</div>
+                            <div>
+                                <span class="badge bg-primary-transparent m-1">Corporate</span> - 1001+ Employees
+                            </div>
+                        </div>
+                        <div class="p-4 d-flex align-items-center gap-3">
+                            <div class="fs-14 fw-medium">
+                                Key Contact :
+                            </div>
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="lh-1">
+                                    <span class="avatar avatar-rounded avatar-sm">
+                                        <img src="./assets/images/faces/2.jpg" alt="img">
+                                    </span>
+                                </div>    
+                                <div class="fw-medium">Lisa Convay</div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+                </div>
+                <!-- End:: Company Details Offcanvas -->
+
+                <!-- Start:: Add Company -->
+                <div class="modal fade" id="create-contact" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <ng-template #content1 let-c="close" let-d="dismiss">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h6 class="modal-title">Add Company</h6>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                (click)="d('Cross click')"  aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body px-4">
+                                <div class="row gy-3">
+                                    <div class="col-xl-12">
+                                        <div class="mb-0 text-center">
+                                            <span class="avatar avatar-xxl avatar-rounded p-2 bg-light">
+                                                <img [src]="url1 ? url1 :'./assets/images/company-logos/11.png'" alt="" id="profile-img">
+                                                <span class="badge rounded-pill bg-primary avatar-badge">
+                                                    <input type="file" name="photo" class="position-absolute w-100 h-100 op-0" id="profile-change"  (change)="handleFileInput($event)">
+                                                    <i class="fe fe-camera"></i>
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <label for="company-name" class="form-label">Company Name</label>
+                                        <input type="text" class="form-control" id="company-name" placeholder="Contact Name">
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <label for="company-lead-score" class="form-label">Total Deals</label>
+                                        <input type="number" class="form-control" id="company-lead-score" placeholder="Total Deals">
+                                    </div>
+                                    <div class="col-xl-12">
+                                        <label for="company-mail" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="company-mail" placeholder="Enter Email">
+                                    </div>
+                                    <div class="col-xl-12">
+                                        <label for="company-phone" class="form-label">Phone No</label>
+                                        <input type="tel" class="form-control" id="company-phone" placeholder="Enter Phone Number">
+                                    </div>
+                                    <div class="col-xl-12">
+                                        <label for="key-contact" class="form-label">Key Contact</label>
+                                        <input type="text" class="form-control" id="key-contact" placeholder="Contact Name">
+                                    </div>
+                                    <div class="col-xl-12">
+                                        <label class="form-label">Industry</label>
+                                        <ng-select  data-trigger id="choices-single-default1" placeholder="Select" name="choices-multiple-remove-button2">
+                                            <ng-option value="">Select Insustry</ng-option>
+                                            <ng-option value="Choice 1">Information Technology</ng-option>
+                                            <ng-option value="Choice 2">Telecommunications</ng-option>
+                                            <ng-option value="Choice 3">Logistics</ng-option>
+                                            <ng-option value="Choice 4">Professional Services</ng-option>
+                                            <ng-option value="Choice 5">Education</ng-option>
+                                            <ng-option value="Choice 6">Education</ng-option>
+                                            <ng-option value="Choice 7">Manufacturing</ng-option>
+                                            <ng-option value="Choice 8">Healthcare</ng-option>
+                                        </ng-select>
+                                    </div>
+                                    <div class="col-xl-12">
+                                        <label class="form-label">Company Size</label>
+                                        <ng-select  data-trigger id="choices-single-default2" placeholder="Select"  name="choices-multiple-remove-button3">
+                                            <ng-option value="">Company Size</ng-option>
+                                            <ng-option value="Choice 1">Corporate</ng-option>
+                                            <ng-option value="Choice 2">Small Business</ng-option>
+                                            <ng-option value="Choice 3">Micro Business</ng-option>
+                                            <ng-option value="Choice 4">Startup</ng-option>
+                                            <ng-option value="Choice 5">Large Enterprise</ng-option>
+                                            <ng-option value="Choice 6">Medium Size</ng-option>
+                                        </ng-select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-light"
+                                    data-bs-dismiss="modal" (click)="c('Cancel click')">Cancel</button>
+                                <button type="button" class="btn btn-primary">Create Contact</button>
+                            </div>
+                        </div>
+                    </ng-template>
+                    </div>
+                </div>
+                <!-- End:: Add Company -->

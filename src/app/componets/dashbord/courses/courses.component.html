@@ -1,0 +1,942 @@
+<app-page-header title="Courses" title1="Dashboards" activeTitle="Courses" ></app-page-header>
+<!-- Start::Row-1 -->
+<div class="row">
+    <div class="col-xxl-8">
+        <div class="row">
+            <div class="col-xl-3">
+                <div class="card custom-card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center gap-3 mb-2">
+                            <span class="avatar avatar-rounded bg-primary-transparent text-primary">
+                                <i class="ri-article-line fs-18"></i>
+                            </span>
+                            <p class="mb-0">Total Courses</p>
+                        </div>
+                        <span class="fs-5">231</span>
+                        <span class="fs-12 text-success ms-1 d-inline-flex align-items-center"><i class="ti ti-trending-up align-middle me-1"></i>0.5%</span>
+                    </div>
+                </div>
+                <div class="card custom-card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center gap-3 mb-2">
+                            <span class="avatar avatar-rounded bg-secondary-transparent text-secondary">
+                                <i class="ri-video-line fs-18"></i>
+                            </span>
+                            <p class="mb-0">Total Videos</p>
+                        </div>
+                        <span class="fs-5">1,986</span>
+                        <span class="fs-12 text-success ms-1 d-inline-flex align-items-center"><i class="ti ti-trending-up align-middle me-1"></i>3.4%</span>
+                    </div>
+                </div>
+                <div class="card custom-card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center gap-3 mb-2">
+                            <span class="avatar avatar-rounded bg-success-transparent text-success">
+                                <i class="ri-exchange-dollar-line fs-18"></i>
+                            </span>
+                            <p class="mb-0">Total Earnings</p>
+                        </div>
+                        <span class="fs-5">$1,116</span>
+                        <span class="fs-12 text-danger ms-1 d-inline-flex align-items-center"><i class="ti ti-trending-down align-middle me-1"></i>5.1%</span>
+                    </div>
+                </div>
+                <div class="card custom-card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center gap-3 mb-2">
+                            <span class="avatar avatar-rounded bg-info-transparent text-info">
+                                <i class="ri-service-line fs-18"></i>
+                            </span>
+                            <p class="mb-0">Engagement ratio</p>
+                        </div>
+                        <span class="fs-5">45%</span>
+                        <span class="fs-12 text-success ms-1 d-inline-flex align-items-center"><i class="ti ti-trending-up me-1 align-middle"></i>3.5%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-9">
+                <div class="card custom-card">
+                    <div class="card-header justify-content-between">
+                        <div class="card-title flex-grow-1 me-3">Courses Completed</div>
+                        <div class="btn-list">
+                            <button class="btn btn-sm btn-outline-light border">All</button>
+                            <button class="btn btn-sm btn-outline-light border">Completed</button>
+                            <button class="btn btn-sm btn-outline-light border">In Progress</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-sm-flex align-items-center mb-3">
+                            <div class="d-flex align-items-center me-5">
+                                <span class="fs-8 text-primary">
+                                    <i class="mdi mdi-circle"></i>
+                                </span>
+                                <div class="ms-2">
+                                    <p class="mb-0 fs-15">742</p>
+                                    <div class="d-flex align-items-center">
+                                        <p class="mb-0 me-2 fs-13 text-muted">Year</p>
+                                        <span class="fs-12 text-success d-inline-flex align-items-center"><i class="ti ti-trending-up me-1"></i>2.5%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center me-5">
+                                <span class="fs-8 text-secondary">
+                                    <i class="mdi mdi-circle"></i>
+                                </span>
+                                <div class="ms-2">
+                                    <p class="mb-0 fs-15">125</p>
+                                    <div class="d-flex align-items-center">
+                                        <p class="mb-0 me-2 fs-13 text-muted">Week</p>
+                                        <span class="fs-12 text-danger d-inline-flex align-items-center"><i class="ti ti-trending-down me-1"></i>0.2%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center me-5">
+                                <span class="fs-8 text-success">
+                                    <i class="mdi mdi-circle"></i>
+                                </span>
+                                <div class="ms-2">
+                                    <p class="mb-0 fs-15">369</p>
+                                    <div class="d-flex align-items-center">
+                                        <p class="mb-0 me-2 fs-13 text-muted">Month</p>
+                                        <span class="fs-12 text-success d-inline-flex align-items-center"><i class="ti ti-trending-up me-1"></i>1.7%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="courses-completed">
+                            <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart"
+                            [xaxis]="chartOptions.xaxis" [colors]="chartOptions.colors"  [plotOptions]="chartOptions.plotOptions"
+                            [stroke]="chartOptions.stroke" [tooltip]="chartOptions.tooltip" [responsive]="chartOptions.responsive"
+                            [dataLabels]="chartOptions.dataLabels" [grid]="chartOptions.grid"
+                            [yaxis]="chartOptions.yaxis"  [fill]="chartOptions.fill"  [labels]="chartOptions.labels"></apx-chart>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-7">
+                <div class="card custom-card overflow-hidden">
+                    <div class="card-header justify-content-between">
+                        <div class="card-title flex-grow-1 me-3">Top Courses</div>
+                        <div ngbDropdown  class="dropdown">
+                            <a ngbDropdownToggle href="javascript:void(0);" class="btn btn-sm btn-outline-light border btn-wave" data-bs-toggle="dropdown" aria-expanded="false">
+                                Sort By
+                            </a>
+                            <ul ngbDropdownMenu  class="dropdown-menu" role="menu">
+                                <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">This Week</a></li>
+                                <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">This Month</a></li>
+                                <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">This Year</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover card-table mb-0">
+                                <thead>
+                                    <tr>
+                                        <th class="ps-3">Tutor</th>
+                                        <th>Category</th>
+                                        <th>Vacancies</th>
+                                        <th>Filled</th>
+                                        <th class="pe-3">Subscription</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="ps-3">
+                                            <div class="d-flex align-items-center position-relative">
+                                                <a href="javascript:void(0);" class="stretched-link" title="recruiter"></a>
+                                                <span class="me-2 min-w-fit-content">
+                                                    <img src="./assets/images/faces/7.jpg" alt="applicant" title="applicant" class="rounded-circle avatar avatar-sm">
+                                                </span>
+                                                <div class="flex-grow-1">
+                                                    <p class="mb-0">Miss X Matched</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <a href="javascript:void(0);">Deil Sata</a>
+                                        </td>
+                                        <td>
+                                            <span>116</span>
+                                        </td>
+                                        <td>
+                                            <span>25</span>
+                                        </td>
+                                        <td class="pe-3">
+                                            <span>-</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="ps-3">
+                                            <div class="d-flex align-items-center position-relative">
+                                                <a href="javascript:void(0);" class="stretched-link" title="recruiter"></a>
+                                                <span class="me-2 min-w-fit-content">
+                                                    <img src="./assets/images/faces/15.jpg" alt="applicant" title="applicant" class="rounded-circle avatar avatar-sm">
+                                                </span>
+                                                <div class="flex-grow-1">
+                                                    <p class="mb-0">Phanmanthu</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <a href="javascript:void(0);">Nucleus OP</a>
+                                        </td>
+                                        <td>
+                                            <span>0</span>
+                                        </td>
+                                        <td>
+                                            <span>235</span>
+                                        </td>
+                                        <td class="pe-3">
+                                            <span class="badge rounded-pill bg-primary">Starter</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="ps-3">
+                                            <div class="d-flex align-items-center position-relative">
+                                                <a href="javascript:void(0);" class="stretched-link" title="recruiter"></a>
+                                                <span class="me-2 min-w-fit-content">
+                                                    <img src="./assets/images/faces/14.jpg" alt="applicant" title="applicant" class="rounded-circle avatar avatar-sm">
+                                                </span>
+                                                <div class="flex-grow-1">
+                                                    <p class="mb-0">Barbell PM</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <a href="javascript:void(0);">Data SC</a>
+                                        </td>
+                                        <td>
+                                            <span>15</span>
+                                        </td>
+                                        <td>
+                                            <span>2</span>
+                                        </td>
+                                        <td class="pe-3">
+                                            <span class="badge rounded-pill bg-info">Pro</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="ps-3">
+                                            <div class="d-flex align-items-center position-relative">
+                                                <a href="javascript:void(0);" class="stretched-link" title="recruiter"></a>
+                                                <span class="me-2 min-w-fit-content">
+                                                    <img src="./assets/images/faces/10.jpg" alt="applicant" title="applicant" class="rounded-circle avatar avatar-sm">
+                                                </span>
+                                                <div class="flex-grow-1">
+                                                    <p class="mb-0">Bean Bag</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <a href="javascript:void(0);">Delooit XP</a>
+                                        </td>
+                                        <td>
+                                            <span>773</span>
+                                        </td>
+                                        <td>
+                                            <span>114</span>
+                                        </td>
+                                        <td class="pe-3">
+                                            <span>-</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="ps-3">
+                                            <div class="d-flex align-items-center position-relative">
+                                                <a href="javascript:void(0);" class="stretched-link" title="recruiter"></a>
+                                                <span class="me-2 min-w-fit-content">
+                                                    <img src="./assets/images/faces/13.jpg" alt="applicant" title="applicant" class="rounded-circle avatar avatar-sm">
+                                                </span>
+                                                <div class="flex-grow-1">
+                                                    <p class="mb-0">Techmortom</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <a href="javascript:void(0);">Tech IP</a>
+                                        </td>
+                                        <td>
+                                            <span>23</span>
+                                        </td>
+                                        <td>
+                                            <span>14</span>
+                                        </td>
+                                        <td class="pe-3">
+                                            <span class="badge rounded-pill bg-danger">Premium</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-5">
+                <div class="card custom-card overflow-hidden">
+                    <div class="card-header justify-content-between">
+                        <div class="card-title">Top Instructors</div>
+                        <a href="javascript:void(0);" class="btn btn-sm btn-primary-light">View All</a>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover card-table mb-0">
+                                <thead>
+                                    <tr>
+                                        <th class="ps-3">Recruiter</th>
+                                        <th>Category</th>
+                                        <th class="pe-3">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="ps-3">
+                                            <div class="d-flex align-items-center position-relative">
+                                                <a href="javascript:void(0);" class="stretched-link" title="recruiter"></a>
+                                                <span class="me-2 min-w-fit-content">
+                                                    <span class="avatar avatar-sm rounded-circle bg-secondary">T</span>
+                                                </span>
+                                                <div class="flex-grow-1">
+                                                    <p class="mb-0">Athlean Y</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span>Arts and Crafts</span>
+                                        </td>
+                                        <td ngbDropdown  class="pe-3 no-caret">
+                                            <a ngbDropdownToggle href="javascript:void(0);" class="ms-3 pe-4 text-primary" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                                            <ul ngbDropdownMenu  class="dropdown-menu">
+                                                <li><a ngbDropdownItem href="javascript:void(0);" class="dropdown-item">Follow</a></li>
+                                                <li><a ngbDropdownItem href="javascript:void(0);" class="dropdown-item">like</a></li>
+                                                <li><a ngbDropdownItem href="javascript:void(0);" class="dropdown-item">Share</a></li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="ps-3">
+                                            <div class="d-flex align-items-center position-relative">
+                                                <a href="javascript:void(0);" class="stretched-link" title="recruiter"></a>
+                                                <span class="me-2 min-w-fit-content">
+                                                    <img src="./assets/images/faces/13.jpg" alt="logo" class="avatar avatar-sm rounded-circle">
+                                                </span>
+                                                <div class="flex-grow-1">
+                                                    <p class="mb-0">Dia Xclose</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span>History</span>
+                                        </td>
+                                        <td ngbDropdown  class="pe-3 no-caret">
+                                            <a ngbDropdownToggle href="javascript:void(0);" class="ms-3 pe-4 text-primary" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                                            <ul ngbDropdownMenu  class="dropdown-menu">
+                                                <li><a ngbDropdownItem href="javascript:void(0);" class="dropdown-item">Follow</a></li>
+                                                <li><a ngbDropdownItem href="javascript:void(0);" class="dropdown-item">like</a></li>
+                                                <li><a ngbDropdownItem href="javascript:void(0);" class="dropdown-item">Share</a></li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="ps-3">
+                                            <div class="d-flex align-items-center position-relative">
+                                                <a href="javascript:void(0);" class="stretched-link" title="recruiter"></a>
+                                                <span class="me-2 min-w-fit-content">
+                                                    <span class="avatar avatar-sm rounded-circle bg-success"><i class="bi bi-lightning-fill"></i></span>
+                                                </span>
+                                                <div class="flex-grow-1">
+                                                    <p class="mb-0">Geroge P</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span>Science and Nature</span>
+                                        </td>
+                                        <td ngbDropdown  class="pe-3 no-caret">
+                                            <a ngbDropdownToggle href="javascript:void(0);" class="ms-3 pe-4 text-primary" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                                            <ul ngbDropdownMenu  class="dropdown-menu">
+                                                <li><a ngbDropdownItem href="javascript:void(0);" class="dropdown-item">Follow</a></li>
+                                                <li><a ngbDropdownItem href="javascript:void(0);" class="dropdown-item">like</a></li>
+                                                <li><a ngbDropdownItem href="javascript:void(0);" class="dropdown-item">Share</a></li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="ps-3">
+                                            <div class="d-flex align-items-center position-relative">
+                                                <a href="javascript:void(0);" class="stretched-link" title="recruiter"></a>
+                                                <span class="me-2 min-w-fit-content">
+                                                    <img src="./assets/images/faces/16.jpg" alt="logo" class="avatar avatar-sm rounded-circle">
+                                                </span>
+                                                <div class="flex-grow-1">
+                                                    <p class="mb-0">TLV James</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span>Design and Creativity</span>
+                                        </td>
+                                        <td ngbDropdown  class="pe-3 no-caret">
+                                            <a ngbDropdownToggle href="javascript:void(0);" class="ms-3 pe-4 text-primary" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                                            <ul ngbDropdownMenu  class="dropdown-menu">
+                                                <li><a ngbDropdownItem href="javascript:void(0);" class="dropdown-item">Follow</a></li>
+                                                <li><a ngbDropdownItem href="javascript:void(0);" class="dropdown-item">like</a></li>
+                                                <li><a ngbDropdownItem href="javascript:void(0);" class="dropdown-item">Share</a></li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="ps-3">
+                                            <div class="d-flex align-items-center position-relative">
+                                                <a href="javascript:void(0);" class="stretched-link" title="recruiter"></a>
+                                                <span class="me-2 min-w-fit-content">
+                                                    <img src="./assets/images/faces/15.jpg" alt="logo" class="avatar avatar-sm rounded-circle">
+                                                </span>
+                                                <div class="flex-grow-1">
+                                                    <p class="mb-0">Techmortom</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span>Math and Statistics</span>
+                                        </td>
+                                        <td ngbDropdown  class="pe-3 no-caret">
+                                            <a ngbDropdownToggle href="javascript:void(0);" class="ms-3 pe-4 text-primary" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                                            <ul ngbDropdownMenu  class="dropdown-menu">
+                                                <li><a ngbDropdownItem href="javascript:void(0);" class="dropdown-item">Follow</a></li>
+                                                <li><a ngbDropdownItem href="javascript:void(0);" class="dropdown-item">like</a></li>
+                                                <li><a ngbDropdownItem href="javascript:void(0);" class="dropdown-item">Share</a></li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xxl-4">
+        <div class="row">
+            <div class="col-xl-6">
+                <div class="card custom-card card-bg-primary border-0 shadow-none card-pattern-1">
+                    <div class="card-body p-0">
+                        <div class="p-3">
+                            <div class="d-flex align-items-center mb-2 position-relative">
+                                <a href="javascript:void(0);" class="stretched-link"></a>
+                                <div class="lh-1 me-2">
+                                    <span class="avatar avatar-rounded bg-light-transparent text-fixed-white">
+                                        <i class="ri-group-line fs-5"></i>
+                                    </span>
+                                </div>
+                                <p class="mb-0 flex-grow-1 overflow-hidden text-truncate">Total Users</p>
+                                <a href="javascript:void(0);" class="ms-2 text-green fs-15" data-bs-toggle="tooltip" title="open"><i class="bi bi-box-arrow-up-right"></i></a>
+                            </div>
+                            <span class="fs-5">630</span>
+                            <span class="fs-12 text-green ms-1 d-inline-flex"><i class="ti ti-trending-up me-1"></i>2.1%</span>
+                        </div>
+                        <div class="p-3">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-grow-1">
+                                    <span class="fs-6">120</span>
+                                    <p class="mb-0 text-fixed-white op-8">Pro Subscription</p>
+                                </div>
+                                <div class="ms-2 min-w-fit-content">
+                                    <span class="avatar avatar-rounded bg-dark-transparent">
+                                        <i class="bi bi-patch-check text-fixed-white fs-5"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="border-white op-2 my-0">
+                        <div class="p-3">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-grow-1">
+                                    <span class="fs-6">116</span>
+                                    <p class="mb-0 text-fixed-white op-8">Premium Subscription</p>
+                                </div>
+                                <div class="ms-2 min-w-fit-content">
+                                    <span class="avatar avatar-rounded bg-dark-transparent">
+                                        <i class="bi bi-gem fs-5 text-fixed-white"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6">
+                <div class="card custom-card card-bg-secondary border-0 shadow-none card-pattern-2">
+                    <div class="card-body p-0">
+                        <div class="p-3">
+                            <div class="d-flex align-items-center mb-2 position-relative">
+                                <a href="javascript:void(0);" class="stretched-link"></a>
+                                <div class="me-2">
+                                    <span class="avatar avatar-rounded bg-light-transparent">
+                                        <i class="ri-time-line text-fixed-white fs-5"></i>
+                                    </span>
+                                </div>
+                                <p class="mb-0 flex-grow-1 overflow-hidden text-truncate">Average Access Time</p>
+                                <a href="javascript:void(0);" class="ms-2 text-green fs-15" data-bs-toggle="tooltip" title="open"><i class="bi bi-box-arrow-up-right"></i></a>
+                            </div>
+                            <span class="fs-5">42 hrs</span>
+                            <span class="fs-12 text-danger ms-1 d-inline-flex"><i class="ti ti-trending-down me-1"></i>1.4%</span>
+                        </div>
+                        <div class="p-3">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-grow-1">
+                                    <span class="fs-6">1,109</span>
+                                    <p class="mb-0 text-fixed-white op-8">Candidates</p>
+                                </div>
+                                <div class="ms-2 min-w-fit-content">
+                                    <span class="avatar avatar-rounded bg-dark-transparent">
+                                        <i class="bi bi-people fs-5 text-fixed-white"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="border-white op-2 my-0">
+                        <div class="p-3">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-grow-1">
+                                    <span class="fs-6">125</span>
+                                    <p class="mb-0 text-fixed-white op-8">Recruiters</p>
+                                </div>
+                                <div class="ms-2 min-w-fit-content">
+                                    <span class="avatar avatar-rounded bg-dark-transparent">
+                                        <i class="bi bi-person-plus fs-5 text-fixed-white"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-12">
+                <div class="card custom-card overflow-hidden">
+                    <div class="card-header justify-content-between">
+                        <div class="card-title">Your Courses</div>
+                        <a href="javascript:void(0);" class="btn btn-primary-light ms-2">View All</a>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="border-bottom mb-3">
+                            <div class="row g-0">
+                                <div class="col-xl-6">
+                                    <div class="d-flex align-items-center px-3 py-2 position-relative border-end">
+                                        <div class="flex-grow-1">
+                                            <span class="fs-5">11</span>
+                                            <p class="mb-0 text-muted fs-14">Total</p>
+                                        </div>
+                                        <div class="ms-2 min-w-fit-content">
+                                            <span class="text-primary fs-28"><i class="bi bi-megaphone"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6">
+                                    <div class="d-flex align-items-center px-3 py-2 position-relative">
+                                        <div class="flex-grow-1">
+                                            <span class="fs-5">4.56 hrs</span>
+                                            <p class="mb-0 text-muted fs-14">Avg Time Spent</p>
+                                        </div>
+                                        <div class="ms-2 min-w-fit-content">
+                                            <span class="text-primary fs-28"><i class="bi bi-eye"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h6 class="mb-0 mb-3 px-3">Recent Courses</h6>
+                        <ul class="list-group list-group-flush fw-normal mb-0">
+                            <li class="list-group-item list-group-item-action px-3 py-2">
+                                <a href="javascript:void(0);" class="stretched-link" title="recent-post"></a>
+                                <div class="d-flex align-items-center">
+                                    <span class="me-2 fs-16 text-primary min-w-fit-content"><i class="bi bi-list-ul"></i></span>
+                                    <p class="mb-0 flex-grow-1 overflow-hidden text-truncate">Rebum et voluptua no ipsum elitr nonumy.</p>
+                                    <span class="text-muted text-end ms-2">03-10-23</span>
+                                </div>
+                            </li>
+                            <li class="list-group-item list-group-item-action px-3 py-2">
+                                <a href="javascript:void(0);" class="stretched-link" title="recent-post"></a>
+                                <div class="d-flex align-items-center">
+                                    <span class="me-2 fs-16 text-primary min-w-fit-content"><i class="bi bi-list-ul"></i></span>
+                                    <p class="mb-0 flex-grow-1 overflow-hidden text-truncate">Rebum et voluptua no ipsum elitr nonumy.</p>
+                                    <span class="text-muted text-end ms-2">03-10-23</span>
+                                </div>
+                            </li>
+                            <li class="list-group-item list-group-item-action px-3 py-2">
+                                <a href="javascript:void(0);" class="stretched-link" title="recent-post"></a>
+                                <div class="d-flex align-items-center">
+                                    <span class="me-2 fs-16 text-primary min-w-fit-content"><i class="bi bi-list-ul"></i></span>
+                                    <p class="mb-0 flex-grow-1 overflow-hidden text-truncate">Rebum et voluptua no ipsum elitr nonumy.</p>
+                                    <span class="text-muted text-end ms-2">03-10-23</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-12">
+                <div class="card custom-card">
+                    <div class="card-header justify-content-between">
+                        <div class="card-title">Top Course Categories</div>
+                        <div ngbDropdown  class="dropdown">
+                            <a ngbDropdownToggle href="javascript:void(0);" class="btn btn-sm btn-outline-light border btn-wave" data-bs-toggle="dropdown" aria-expanded="false">
+                                Sort By
+                            </a>
+                            <ul ngbDropdownMenu  class="dropdown-menu" role="menu">
+                                <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">By Industry</a></li>
+                                <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">By Size</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="row align-items-center">
+                            <div class="col-auto mx-auto">
+                                <div id="course-categories">
+                                    <apx-chart [series]="chartOptions1.series" [chart]="chartOptions1.chart"
+                                    [xaxis]="chartOptions1.xaxis" [colors]="chartOptions1.colors" [labels]="chartOptions1.labels"
+                                    [stroke]="chartOptions1.stroke" [tooltip]="chartOptions1.tooltip"
+                                    [dataLabels]="chartOptions1.dataLabels" [grid]="chartOptions1.grid"
+                                    [yaxis]="chartOptions1.yaxis"></apx-chart>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="row justify-content-between flex-nowrap mb-3">
+                                    <div class="col-auto">
+                                        <span><i class="bi bi-circle-fill me-2 fs-8 text-primary"></i>Sales</span>
+                                    </div>
+                                    <div class="col text-end">
+                                        <span class="text-primary">31%</span>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-between flex-nowrap mb-3">
+                                    <div class="col-auto">
+                                        <span><i class="bi bi-circle-fill me-2 fs-8 text-secondary"></i>Marketing</span>
+                                    </div>
+                                    <div class="col text-end">
+                                        <span class="text-secondary">21%</span>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-between flex-nowrap mb-3">
+                                    <div class="col-auto">
+                                        <span><i class="bi bi-circle-fill me-2 fs-8 text-danger"></i>IT</span>
+                                    </div>
+                                    <div class="col text-end">
+                                        <span class="text-danger">15%</span>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-between flex-nowrap mb-3">
+                                    <div class="col-auto">
+                                        <span><i class="bi bi-circle-fill me-2 fs-8 text-info"></i>Consultancy</span>
+                                    </div>
+                                    <div class="col text-end">
+                                        <span class="text-info">10%</span>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-between flex-nowrap">
+                                    <div class="col-auto">
+                                        <span><i class="bi bi-circle-fill me-2 fs-8 text-success"></i>Finance</span>
+                                    </div>
+                                    <div class="col text-end">
+                                        <span class="text-success">23%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End::Row-1 -->
+
+<!-- Start::Row-1 -->
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card custom-card">
+            <div class="card-header justify-content-between">
+                <div class="card-title">
+                    Courses List
+                </div>
+                <div class="d-flex flex-wrap">
+                    <div class="me-3 my-1">
+                        <input class="form-control form-control-sm" type="text" placeholder="Search Here" aria-label=".form-control-sm example">
+                    </div>
+                    <div ngbDropdown  class="dropdown m-1">
+                        <a ngbDropdownToggle href="javascript:void(0);" class="btn btn-primary btn-sm btn-wave waves-effect waves-light" data-bs-toggle="dropdown" aria-expanded="false">
+                            Sort By
+                        </a>
+                        <ul ngbDropdownMenu  class="dropdown-menu" role="menu">
+                            <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">New</a></li>
+                            <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">Popular</a></li>
+                            <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">Relevant</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table text-nowrap">
+                        <thead>
+                            <tr>
+                                <th scope="col">S.No</th>
+                                <th scope="col">Course</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">Classes</th>
+                                <th scope="col">Last Updated</th>
+                                <th scope="col">Instructor</th>
+                                <th scope="col">Students</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    <div class="d-flex align-items-center lh-1">
+                                        <div class="me-2">
+                                            <span class="avatar avatar-xs">
+                                                <img src="./assets/images/nft-images/1.png" alt="">
+                                            </span>
+                                        </div>
+                                        <div>Ray Optics &amp; Optical Fibre Master Class</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="badge bg-primary-transparent">Science</span>
+                                </td>
+                                <td>
+                                    20
+                                </td>
+                                <td>
+                                    29-05-2023
+                                </td>
+                                <td>
+                                    Shin Opran
+                                </td>
+                                <td>
+                                    25
+                                </td>
+                                <td>
+                                    <div class="hstack gap-2 fs-1">
+                                        <a aria-label="anchor" href="javascript:void(0);" class="btn btn-icon btn-sm btn-info-light btn-wave waves-effect waves-light"><i class="ri-edit-line"></i></a>
+                                        <a aria-label="anchor" href="javascript:void(0);" class="btn btn-icon btn-sm btn-danger-light btn-wave waves-effect waves-light"><i class="ri-delete-bin-line"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    2
+                                </td>
+                                <td>
+                                    <div class="d-flex align-items-center lh-1">
+                                        <div class="me-2">
+                                            <span class="avatar avatar-xs">
+                                                <img src="./assets/images/nft-images/2.png" alt="">
+                                            </span>
+                                        </div>
+                                        <div>Master Linear Alzebra Medium Level</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="badge bg-warning-transparent">Mathematics</span>
+                                </td>
+                                <td>
+                                    90
+                                </td>
+                                <td>
+                                    11-06-2023
+                                </td>
+                                <td>
+                                    Arya Neo
+                                </td>
+                                <td>
+                                   773
+                                </td>
+                                <td>
+                                    <div class="hstack gap-2 fs-1">
+                                        <a aria-label="anchor" href="javascript:void(0);" class="btn btn-icon btn-sm btn-info-light btn-wave waves-effect waves-light"><i class="ri-edit-line"></i></a>
+                                        <a aria-label="anchor" href="javascript:void(0);" class="btn btn-icon btn-sm btn-danger-light btn-wave waves-effect waves-light"><i class="ri-delete-bin-line"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    3
+                                </td>
+                                <td>
+                                    <div class="d-flex align-items-center lh-1">
+                                        <div class="me-2">
+                                            <span class="avatar avatar-xs">
+                                                <img src="./assets/images/nft-images/8.png" alt="">
+                                            </span>
+                                        </div>
+                                        <div>Learn How To Trade And Invest For-Absolute Beginners</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="badge bg-success-transparent">Stocks & Trading</span>
+                                </td>
+                                <td>
+                                    161
+                                </td>
+                                <td>
+                                    10-06-2023
+                                </td>
+                                <td>
+                                    Sia Niu
+                                </td>
+                                <td>
+                                   51
+                                </td>
+                                <td>
+                                    <div class="hstack gap-2 fs-1">
+                                        <a aria-label="anchor" href="javascript:void(0);" class="btn btn-icon btn-sm btn-info-light btn-wave waves-effect waves-light"><i class="ri-edit-line"></i></a>
+                                        <a aria-label="anchor" href="javascript:void(0);" class="btn btn-icon btn-sm btn-danger-light btn-wave waves-effect waves-light"><i class="ri-delete-bin-line"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    4
+                                </td>
+                                <td>
+                                    <div class="d-flex align-items-center lh-1">
+                                        <div class="me-2">
+                                            <span class="avatar avatar-xs">
+                                                <img src="./assets/images/nft-images/7.png" alt="">
+                                            </span>
+                                        </div>
+                                        <div>Digital Marketing Course from Scratch</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="badge bg-info-transparent">Marketing</span>
+                                </td>
+                                <td>
+                                    115
+                                </td>
+                                <td>
+                                    21-06-2023
+                                </td>
+                                <td>
+                                    Stuart George
+                                </td>
+                                <td>
+                                   1,189
+                                </td>
+                                <td>
+                                    <div class="hstack gap-2 fs-1">
+                                        <a aria-label="anchor" href="javascript:void(0);" class="btn btn-icon btn-sm btn-info-light btn-wave waves-effect waves-light"><i class="ri-edit-line"></i></a>
+                                        <a aria-label="anchor" href="javascript:void(0);" class="btn btn-icon btn-sm btn-danger-light btn-wave waves-effect waves-light"><i class="ri-delete-bin-line"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    5
+                                </td>
+                                <td>
+                                    <div class="d-flex align-items-center lh-1">
+                                        <div class="me-2">
+                                            <span class="avatar avatar-xs">
+                                                <img src="./assets/images/nft-images/5.png" alt="">
+                                            </span>
+                                        </div>
+                                        <div>Data Structures &amp; Algorithms For Beginners</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="badge bg-danger-transparent">Programming</span>
+                                </td>
+                                <td>
+                                    30
+                                </td>
+                                <td>
+                                    15-06-2023
+                                </td>
+                                <td>
+                                    Boran Ray
+                                </td>
+                                <td>
+                                   3,368
+                                </td>
+                                <td>
+                                    <div class="hstack gap-2 fs-1">
+                                        <a aria-label="anchor" href="javascript:void(0);" class="btn btn-icon btn-sm btn-info-light btn-wave waves-effect waves-light"><i class="ri-edit-line"></i></a>
+                                        <a aria-label="anchor" href="javascript:void(0);" class="btn btn-icon btn-sm btn-danger-light btn-wave waves-effect waves-light"><i class="ri-delete-bin-line"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    6
+                                </td>
+                                <td>
+                                    <div class="d-flex align-items-center lh-1">
+                                        <div class="me-2">
+                                            <span class="avatar avatar-xs">
+                                                <img src="./assets/images/nft-images/6.png" alt="">
+                                            </span>
+                                        </div>
+                                        <div>Css Zero to Hero Master Class</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="badge bg-teal-transparent">UI/UX</span>
+                                </td>
+                                <td>
+                                    51
+                                </td>
+                                <td>
+                                    22-06-2023
+                                </td>
+                                <td>
+                                    Burak Oin
+                                </td>
+                                <td>
+                                   252
+                                </td>
+                                <td>
+                                    <div class="hstack gap-2 fs-1">
+                                        <a aria-label="anchor" href="javascript:void(0);" class="btn btn-icon btn-sm btn-info-light btn-wave waves-effect waves-light"><i class="ri-edit-line"></i></a>
+                                        <a aria-label="anchor" href="javascript:void(0);" class="btn btn-icon btn-sm btn-danger-light btn-wave waves-effect waves-light"><i class="ri-delete-bin-line"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer border-top-0">
+                <div class="d-flex flex-wrap align-items-center">
+                    <div>
+                        Showing 6 Entries <i class="bi bi-arrow-right ms-2 fw-medium"></i>
+                    </div>
+                    <div class="ms-auto">
+                        <nav aria-label="Page navigation" class="pagination-style-4">
+                            <ul class="pagination mb-0">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="javascript:void(0);">
+                                        Prev
+                                    </a>
+                                </li>
+                                <li class="page-item active"><a class="page-link" href="javascript:void(0);">1</a></li>
+                                <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
+                                <li class="page-item">
+                                    <a class="page-link text-primary" href="javascript:void(0);">
+                                        next
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End::Row-1 -->
