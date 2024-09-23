@@ -11,16 +11,18 @@
                     </div>
                     <p class="h5 mb-2 text-center">Sign In</p>
                     <p class="mb-4 text-muted op-7 fw-normal text-center">Welcome back Jhon !</p>
-                    <form>
+                    <form [formGroup]="loginForm" (ngSubmit)="Submit()">
                     <div class="row gy-3">
                         <div class="col-xl-12">
                             <label for="signin-username" class="form-label text-default">User Name</label>
-                            <input type="text" class="form-control form-control-lg" id="signin-username" placeholder="user name">
+                            <input type="text" class="form-control form-control-lg" id="signin-username" 
+                            placeholder="user name" formControlName="email" [(ngModel)]="email">
                         </div>
                         <div class="col-xl-12 mb-2">
                             <label for="signin-password" class="form-label text-default d-block">Password<a  routerLink="/authentication/reset-password/basic" class="float-end text-danger">Forget password ?</a></label>
                             <div class="position-relative">
-                                <input type="password" class="form-control form-control-lg" id="signin-password" placeholder="password" [type]="showPassword ? 'text' : 'password'" autocomplete>
+                                <input type="password" class="form-control form-control-lg" id="signin-password" placeholder="password" [type]="showPassword ? 'text' : 'password'" autocomplete
+                                formControlName="password" [(ngModel)]="password" required>
                                 <a href="javascript:void(0);" class="show-password-button text-muted" (click)="createpassword()" id="button-addon2"><i class="ri-eye-{{toggleClass}} align-middle"></i></a>
                             </div>
                             <div class="mt-2">
@@ -53,7 +55,11 @@
                         </button>
                     </div> -->
                     <div class="d-grid mt-4">
-                        <a routerLink="/dashboard/sales" class="btn btn-lg btn-primary">Sign In</a>
+                        <!-- <a routerLink="/dashboard/sales" class="btn btn-lg btn-primary">Sign In</a> -->
+                        
+                        <button type="submit"  class="btn btn-lg btn-primary"
+                            autofocus >Sign In</button>
+                        
                     </div>
                 </form>
                     <div class="text-center">

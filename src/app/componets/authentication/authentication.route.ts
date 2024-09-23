@@ -1,4 +1,6 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 export const admin: Routes = [
   {
@@ -107,7 +109,11 @@ export const admin: Routes = [
   },
 ];
 @NgModule({
-  imports: [RouterModule.forChild(admin)],
+  imports: [RouterModule.forChild(admin),
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   exports: [RouterModule],
 })
 export class authenticationRoutingModule {

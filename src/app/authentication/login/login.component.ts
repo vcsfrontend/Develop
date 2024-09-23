@@ -113,27 +113,32 @@ login() {
     //     this.router.navigate(['/']);
     //   });
     this.authservice.login(this.email, this.password).subscribe({
-      next: () => {
+      next: (res) => {
         // Redirect on successful login
-      
+      if (res.status == true) {
         this.router.navigate(['/dashboard/sales']);
-        
-        
-        
-      //   this.toastr.success('login successful','Udon', {
-      //     timeOut: 3000,
-      //     positionClass: 'toast-top-right',
-      //   });
-      // }else {
-      //   this.toastr.error('Invalid details','Udon', {
-      //     timeOut: 3000,
-      //     positionClass: 'toast-top-right',
-      //   });
+        this.toastr.success('login successful','VCS', {
+          timeOut: 3000,
+          positionClass: 'toast-top-right',
+        });
+      }
+    else{
+      this.toastr.error('Invalid details','VCS', {
+            timeOut: 3000,
+            positionClass: 'toast-top-right',
+          });
+        }
+        // this.glblSvc.onTstr(this.tstrTyp.error, r?.message);
 
 
       },
       error: () => {
-        this.errorMessage = 'Invalid credentials';
+        // this.errorMessage = 'Invalid username or password. Please try again';
+        this.toastr.error('Invalid username or password. Please try again','VCS', {
+          timeOut: 3000,
+          positionClass: 'toast-top-right',
+        });
+      
       }
     });
    
@@ -161,7 +166,7 @@ validateForm(email: string, password: string) {
   //   this.errorMessage = 'password should be at least 6 char';
   //   return false;
   // }
-
+ 
   this.errorMessage = '';
   return true;
   
@@ -176,7 +181,16 @@ get form() {
 }
 
 Submit() {
-  if (
+  if(this.loginForm.controls['email'].value == ''){
+    this.errorMessage = 'please enter email id';
+    this.toastr.warning(`Please enter username`, 'udon',{
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
+    });
+  }else if(this.loginForm.controls['password'].value == ''){
+    this.toastr.warning(`Please enter password`);
+  }
+  else if (
     this.loginForm.controls['email'].value != '' &&
     this.loginForm.controls['password'].value != ''
   ) {

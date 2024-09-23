@@ -11,24 +11,38 @@
                     </div>
                     <p class="h5 mb-2 text-center">Sign Up</p>
                     <p class="mb-4 text-muted op-7 fw-normal text-center">Welcome & Join us by creating a free account !</p>
-                    <form>
-                    <div class="row gy-3">
+                    <form [formGroup]="signupFrm" (ngSubmit)="onSignup()">
+                    <div class="row gy-3" >
                         <div class="col-xl-12">
-                            <label for="signup-firstname" class="form-label text-default">Full Name<sup>*</sup></label>
-                            <input type="text" class="form-control form-control-lg" id="signup-firstname" placeholder="full name">
+                            <label for="signup-firstname" class="form-label text-default">First Name<sup>*</sup></label>
+                            <input type="text" class="form-control form-control-lg" id="signup-firstname" placeholder="First name"
+                            formControlName="firstName">
+                        </div>
+                        <div class="col-xl-12">
+                            <label for="signup-lastname" class="form-label text-default">Last Name<sup>*</sup></label>
+                            <input type="text" class="form-control form-control-lg" id="signup-lastname" 
+                            placeholder="Last name" formControlName="lastName">
                         </div>
                         <div class="col-xl-12">
                             <label for="signup-username" class="form-label text-default">User Name<sup>*</sup></label>
-                            <input type="text" class="form-control form-control-lg" id="signup-username" placeholder="username">
+                            <input type="text" class="form-control form-control-lg" id="signup-username" placeholder="username"
+                            formControlName="username">
+                        </div>
+                        <div class="col-xl-12">
+                            <label for="signup-dob" class="form-label text-default">Date of birth<sup>*</sup></label>
+                            <input type="text" class="form-control form-control-lg" id="signup-dob" placeholder="dob"
+                            formControlName="dob">
                         </div>
                         <div class="col-xl-12">
                             <label for="signup-email" class="form-label text-default">Email<sup>*</sup></label>
-                            <input type="text" class="form-control form-control-lg" id="signup-email" placeholder="email">
+                            <input type="text" class="form-control form-control-lg" id="signup-email" placeholder="email"
+                            formControlName="email">
                         </div>
                         <div class="col-xl-12">
                             <label for="signup-password" class="form-label text-default">Password<sup>*</sup></label>
                             <div class="position-relative">
-                                <input type="password" class="form-control form-control-lg" id="signup-password" placeholder="password" [type]="showPassword ? 'text' : 'password'" autocomplete>
+                                <input type="password" class="form-control form-control-lg" id="signup-password" placeholder="password" 
+                                [type]="showPassword ? 'text' : 'password'" autocomplete formControlName="password">
                                 <a href="javascript:void(0);" class="show-password-button text-muted" (click)="createpassword()"  id="button-addon2"><i class="ri-eye-{{toggleClass}} align-middle"></i></a>
                             </div>
                         </div>
@@ -42,20 +56,23 @@
                         </div>
                         <div class="col-xl-12">
                             <label for="signup-mobile" class="form-label text-default">Phone Number<sup>*</sup></label>
-                            <input type="text" class="form-control form-control-lg" id="signup-mobile" placeholder="mobile">
+                            <input type="text" class="form-control form-control-lg" id="signup-mobile" placeholder="mobile"
+                            formControlName="phoneNumber" maxlength="10">
                         </div>
                         <div class="col-xl-12">
                             <label for="signup-users" class="form-label text-default">No of Users<sup>*</sup></label>
-                            <input type="number" class="form-control form-control-lg" id="signup-users" placeholder="no of users">
+                            <input type="number" class="form-control form-control-lg" id="signup-users" placeholder="no of users"
+                            formControlName="noOfUsers">
                         </div>
                         <div class="col-xl-12">
                             <label for="signup-country" class="form-label text-default">Country<sup>*</sup></label>
-                            <input type="text" class="form-control form-control-lg" id="signup-country" placeholder="Country">
+                            <input type="text" class="form-control form-control-lg" id="signup-country" placeholder="Country"
+                            formControlName="country">
                         </div>
-                        <div class="col-xl-12">
+                        <!-- <div class="col-xl-12">
                             <label for="signup-company" class="form-label text-default">Company Name<sup>*</sup></label>
                             <input type="text" class="form-control form-control-lg" id="signup-company" placeholder="mobile">
-                        </div>
+                        </div> -->
 
                         
                         <div class="form-check mt-3">
@@ -68,8 +85,8 @@
 
                         <div class="col-xl-12">
                             <label for="role-id" class="form-label text-default">Role ID<sup>*</sup></label>
-                            <select class="form-select form-select-lg" id="role-id">
-                                <option value="" disabled selected>Select Role</option>
+                            <select class="form-select form-select-lg" id="role-id" formControlName="roleId">
+                                <option value="0" disabled selected>Select Role</option>
                                 <option value="1">Admin</option>
                                 <option value="2">User</option>
                                 <option value="3">Manager</option>
@@ -79,11 +96,11 @@
 
                         <div class="col-xl-12">
                             <label for="role-id" class="form-label text-default">Tool ID<sup>*</sup></label>
-                            <select class="form-select form-select-lg" id="role-id">
-                                <option value="" disabled selected>Select tool</option>
+                            <select class="form-select form-select-lg" id="role-id" formControlName="toolId">
+                                <option value="0" disabled selected>Select tool</option>
                                 <option value="1">CRM</option>
                                 <option value="2">Design Tool</option>
-                                <option value="2">CRM & Design Tool</option>
+                                <option value="3">CRM & Design Tool</option>
                             </select>
                         </div>
                         
@@ -108,7 +125,10 @@
                         </button>
                     </div> -->
                     <div class="d-grid mt-4">
-                        <a routerLink="/authentication/sign-up/basic" class="btn btn-lg btn-primary">Create Account</a>
+                        <!-- <button (click)="onSignup()"> -->
+                            <a routerLink="/authentication/sign-up/basic" class="btn btn-lg btn-primary" (click)="onSignup()">
+                                Create Account</a>
+                        <!-- </button> -->
                     </div>
                 </form>
                     <div class="text-center">

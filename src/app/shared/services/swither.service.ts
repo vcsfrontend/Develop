@@ -16,12 +16,15 @@ export class SwitherService {
   // private apiUrl = 'https://sasi-vcs-repo.onrender.com/auth/get_all_vcs_users';
   // GET request
   private apiUrl = environment.webURL;
-  getCall(): Observable<any> {
-    return this.http.get<any>(this.apiUrl);
+  getCall(url: string): Observable<any> {
+    return this.http.get<any>(url);
   }
   // POST request
-  postCall(data: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, data);
+  postCall(url: string, data: any): Observable<any> {
+    return this.http.post<any>(url, data);
   }
+
+  signupApi(data: any): Observable<any> { return this.http.post(`${this.apiUrl}auth/save_vcs_users`, data); }
+    
 
 }

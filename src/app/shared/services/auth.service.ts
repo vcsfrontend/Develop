@@ -161,7 +161,7 @@ ForgotPassword(passwordResetEmail:any) {
         tap((response: any) => {
           // Save the token in localStorage
           this.router.navigate(['/auth/login']);
-          localStorage.setItem('jwtToken', response.token);
+          // localStorage.setItem('jwtToken', response.token);
         })
       );
   }
