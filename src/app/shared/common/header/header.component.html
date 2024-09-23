@@ -11,8 +11,8 @@
       <div class="">
         <div class="horizontal-logo">
           <a routerLink="/dashboard/sales" class="header-logo">
-            <img src="./assets/images/brand-logos/desktop-logo.png" alt="logo" class="desktop-logo">
-            <img src="./assets/images/brand-logos/toggle-logo.png" alt="logo" class="toggle-logo">
+            <img src="./assets/images/brand-logos/logo.png" alt="logo" class="desktop-logo">
+            <img src="./assets/images/brand-logos/logo.png" alt="logo" class="toggle-logo">
             <img src="./assets/images/brand-logos/desktop-dark.png" alt="logo" class="desktop-dark">
             <img src="./assets/images/brand-logos/toggle-dark.png" alt="logo" class="toggle-dark">
           </a>
@@ -78,7 +78,7 @@
               data-bs-toggle="dropdown" aria-expanded="false">{{ selectedItem }}
               <i class="ri-arrow-down-s-line align-middle ms-1 d-inline-block"></i>
             </a>
-            <ul ngbDropdownMenu class="dropdown-menu dashboard-dropdown" role="menu">
+            <!-- <ul ngbDropdownMenu class="dropdown-menu dashboard-dropdown" role="menu">
               <li><a ngbDropdownItem class="dropdown-item dashboards-dropdown-item"
              [routerLink]="[ 'dashboard', 'sales']" (click)="handleItemClick('Sales Dashboard')" [class.active]="selectedItem === 'Sales Dashboard'">Sales Dashboard</a></li>
               <li><a ngbDropdownItem class="dropdown-item dashboards-dropdown-item"
@@ -105,7 +105,7 @@
                 [routerLink]="[ 'dashboard', 'personal']" (click)="handleItemClick('Personal Dashboard')" [class.active]="selectedItem === 'Personal Dashboard'">Personal Dashboard</a></li>
               <li><a ngbDropdownItem class="dropdown-item dashboards-dropdown-item"
                 [routerLink]="[ 'dashboard', 'customer']" (click)="handleItemClick('Customer Dashboard')" [class.active]="selectedItem === 'Customer Dashboard'">Customer Dashboard</a></li>
-            </ul>
+            </ul> -->
           </div>
           <!-- End::dashboards list -->
         </div>
@@ -134,7 +134,7 @@
           <!-- Start::header-link|dropdown-toggle -->
           <a ngbDropdownToggle href="javascript:void(0);" class="header-link dropdown-toggle"
             data-bs-auto-close="outside" data-bs-toggle="dropdown">
-            <img src="./assets/images/flags/us_flag.jpg" alt="img" class="rounded-circle">
+            <img src="./assets/images/flags/india_flag.jpg" alt="img" class="rounded-circle">
           </a>
           <!-- End::header-link|dropdown-toggle -->
           <ul ngbDropdownMenu class="main-header-dropdown dropdown-menu dropdown-menu-end full-width"
@@ -142,7 +142,7 @@
             <li>
               <a ngbDropdownItem class="dropdown-item d-flex align-items-center" href="javascript:void(0);">
                 <span class="avatar avatar-xs lh-1 me-2">
-                  <img src="./assets/images/flags/us_flag.jpg" alt="img">
+                  <img src="./assets/images/flags/india_flag.jpg" alt="img">
                 </span>
                 English
               </a>
@@ -582,10 +582,10 @@
     <!-- Start::header-element offcanvas -->
     <li class="header-element">
       <!-- Start::header-link|switcher-icon -->
-      <a  (click)="open()" href="javascript:void(0);" class="header-link switcher-icon" data-bs-toggle="offcanvas"
+      <!-- <a  (click)="open()" href="javascript:void(0);" class="header-link switcher-icon" data-bs-toggle="offcanvas"
         data-bs-target="#switcher-canvas">
         <i class="bi bi-gear header-link-icon border-0"></i>
-      </a>
+      </a> -->
 
       <!-- End::header-link|switcher-icon -->
     </li>
