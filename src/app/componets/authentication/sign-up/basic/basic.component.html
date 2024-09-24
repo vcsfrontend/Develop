@@ -60,6 +60,15 @@
                             formControlName="phoneNumber" maxlength="10">
                         </div>
                         <div class="col-xl-12">
+                            <label for="tool-id" class="form-label text-default">Tool ID<sup>*</sup></label>
+                            <select class="form-select form-select-lg" id="role-id" formControlName="toolId">
+                                <option value="0" disabled selected>Select tool</option>
+                                <option value="1">CRM</option>
+                                <option value="2">Design Tool</option>
+                                <option value="3">CRM & Design Tool</option>
+                            </select>
+                        </div>
+                        <div class="col-xl-12">
                             <label for="signup-users" class="form-label text-default">No of Users<sup>*</sup></label>
                             <input type="number" class="form-control form-control-lg" id="signup-users" placeholder="no of users"
                             formControlName="noOfUsers">
@@ -82,8 +91,7 @@
                             </label>
                         </div>
                         
-
-                        <div class="col-xl-12">
+                        <!-- <div class="col-xl-12">
                             <label for="role-id" class="form-label text-default">Role ID<sup>*</sup></label>
                             <select class="form-select form-select-lg" id="role-id" formControlName="roleId">
                                 <option value="0" disabled selected>Select Role</option>
@@ -92,17 +100,9 @@
                                 <option value="3">Manager</option>
                                 <option value="4">Viewer</option>
                             </select>
-                        </div>
+                        </div> -->
 
-                        <div class="col-xl-12">
-                            <label for="role-id" class="form-label text-default">Tool ID<sup>*</sup></label>
-                            <select class="form-select form-select-lg" id="role-id" formControlName="toolId">
-                                <option value="0" disabled selected>Select tool</option>
-                                <option value="1">CRM</option>
-                                <option value="2">Design Tool</option>
-                                <option value="3">CRM & Design Tool</option>
-                            </select>
-                        </div>
+                        
                         
                     </div>
                     <div class="text-center my-3 authentication-barrier">

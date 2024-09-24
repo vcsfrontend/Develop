@@ -218,9 +218,10 @@ export class NavService implements OnDestroy {
       title: 'Crm & Sales',
       icon: 'bi-file-earmark',
       type :'link',
-      // path:'',
       dirchange: false,
       active: false,
+      selected: false,
+      path: '/dashboard/crm',
       children: [
     //     {
     //       title: 'Blog',

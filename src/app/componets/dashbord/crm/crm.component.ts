@@ -18,6 +18,7 @@ import {
   NgApexchartsModule,
 } from 'ng-apexcharts';
 import { SharedModule } from '../../../shared/common/sharedmodule';
+import { Router } from '@angular/router';
 export type ChartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
@@ -49,8 +50,11 @@ options:any
   styleUrl: './crm.component.scss'
 })
 export class CrmComponent {
+    constructor(private router: Router){}
     ngOnInit(): void {
+        window.open('https://stag.solidperformers.com/new/auth/access_account/Y3JtYXBpcmVnNEBnbWFpbC5jb20=', '_blank');
         //leaflet maps 1
+        this.router.navigate(['/dashboard/sales']);
         const map = L.map('customers-countries').setView([51.505, -0.09], 13);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
           maxZoom: 18,

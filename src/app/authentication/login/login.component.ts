@@ -17,7 +17,12 @@ import { AppStateService } from '../../shared/services/app-state.service';
   standalone: true,
   imports: [RouterModule,NgbModule,FormsModule,ReactiveFormsModule ,AngularFireModule,
     AngularFireDatabaseModule,
-    AngularFirestoreModule,ToastrModule
+    AngularFirestoreModule,ToastrModule,
+    // ToastrModule.forRoot({    // Toastr global settings
+    //   timeOut: 3000,          // 3 seconds timeout
+    //   positionClass: 'toast-top-right', // Position
+    //   preventDuplicates: true // Prevent duplicate toasts
+    // })
 ],
   
     providers: [FirebaseService,{ provide: ToastrService, useClass: ToastrService }],
