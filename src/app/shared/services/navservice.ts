@@ -548,7 +548,7 @@ export class NavService implements OnDestroy {
       title: 'Accounts & Finace',
       icon: 'bi-key',
       dirchange: false,
-      type: 'sub',
+      type: 'link',
       active: false,
       selected: false,
       children: [
@@ -727,7 +727,7 @@ export class NavService implements OnDestroy {
       title: 'Reports & Controls',
       icon: 'bi- bi-exclamation-triangle',
       dirchange: false,
-      type: 'sub',
+      type: 'link',
       active: false,
       children: [
         // {
@@ -771,7 +771,7 @@ export class NavService implements OnDestroy {
       title: ' 3D Visualizer',
       icon: ' bi-grid side-menu__icon',
       dirchange: false,
-      type: 'sub',
+      type: 'link',
       active: false,
       children: [
         // {
