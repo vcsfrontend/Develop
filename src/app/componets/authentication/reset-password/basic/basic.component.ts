@@ -1,16 +1,33 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { SwitherService } from '../../../../shared/services/swither.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { FirebaseService } from '../../../../shared/services/firebase.service';
 
 @Component({
   selector: 'app-basic',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule,NgbModule,FormsModule,ReactiveFormsModule ,
+    // AngularFireModule,
+    // AngularFireDatabaseModule,
+    // AngularFirestoreModule,
+    ToastrModule
+],
+  
+    providers: [FirebaseService,{ provide: ToastrService, useClass: ToastrService }],
   templateUrl: './basic.component.html',
   styleUrl: './basic.component.scss'
 })
 export class BasicComponent {
-
-  constructor(){
+  // {
+  //   "email": "string",
+  //   "password": "string"
+  // }
+  confirmPassword:any = ''; newPassword:any = ''; email:any = '';
+  constructor(public fb: FormBuilder, public switchService: SwitherService, 
+    private toastr: ToastrService, private router: Router){
     document.body.classList.add('authentication-background');
   }
 
@@ -46,5 +63,41 @@ export class BasicComponent {
     } else {
       this.toggleClass2 = "off-line";
     }
+  }
+
+  onResetpPassword(){
+    let payload = {
+      email: this.email,
+      password: (this.newPassword == this.confirmPassword) ? this.newPassword : ''
+    };
+    if (this.email == ''){
+      this.toastr.warning('please enter email ','reset', { timeOut: 3000, positionClass: 'toast-top-right'})
+    } else if(this.newPassword == ''){
+      this.toastr.warning('please enter password ','reset', { timeOut: 3000, positionClass: 'toast-top-right'})
+    } else if(this.confirmPassword == ''){
+      this.toastr.warning('please enter confirmpassword ','reset', { timeOut: 3000, positionClass: 'toast-top-right'})
+    } else if(this.newPassword != this.confirmPassword){
+      this.toastr.warning('passwords not matched','reset', { timeOut: 3000,positionClass: 'toast-top-right' })
+      this.newPassword = ''; this.confirmPassword = '';
+      return;
+    } else {
+      this.switchService.onForgotPassword(payload).subscribe({
+        next: (res:any) => {
+          if(res.status == true){
+            this.router.navigate(['/authentication/sign-in/basic']);
+            this.toastr.success(res.message,'signup', {
+              timeOut: 3000,
+              positionClass: 'toast-top-right',
+            });
+          }else{
+            this.toastr.error(res.message,'signup', {
+              timeOut: 3000,
+              positionClass: 'toast-top-right',
+            });
+          }
+        }
+      })
+    }
+    
   }
 }

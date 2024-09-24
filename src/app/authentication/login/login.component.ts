@@ -97,7 +97,7 @@ clearErrorMessage() {
 login() {
   // this.disabled = "btn-loading"
   this.clearErrorMessage();
-  if (this.validateForm(this.email, this.password)) {
+  // if (this.validateForm(this.email, this.password)) {
     // this.authservice
     //   .loginWithEmail(this.email, this.password)
     //   .then(() => {
@@ -123,18 +123,16 @@ login() {
         });
       }
     else{
-      this.toastr.error('Invalid details','VCS', {
+      this.toastr.error(res.message,'VCS', {
             timeOut: 3000,
             positionClass: 'toast-top-right',
           });
         }
         // this.glblSvc.onTstr(this.tstrTyp.error, r?.message);
-
-
       },
       error: () => {
         // this.errorMessage = 'Invalid username or password. Please try again';
-        this.toastr.error('Invalid username or password. Please try again','VCS', {
+        this.toastr.error('Invalid username or password','VCS', {
           timeOut: 3000,
           positionClass: 'toast-top-right',
         });
@@ -142,13 +140,13 @@ login() {
       }
     });
    
-  }
-  else {
-    this.toastr.error('Invalid details','Udon', {
-      timeOut: 3000,
-      positionClass: 'toast-top-right',
-    });
-  }
+  // }
+  // else {
+  //   this.toastr.error('Invalid details','Udon', {
+  //     timeOut: 3000,
+  //     positionClass: 'toast-top-right',
+  //   });
+  // }
 }
 
 validateForm(email: string, password: string) {
@@ -183,12 +181,15 @@ get form() {
 Submit() {
   if(this.loginForm.controls['email'].value == ''){
     this.errorMessage = 'please enter email id';
-    this.toastr.warning(`Please enter username`, 'udon',{
+    this.toastr.warning(`Please enter username`, 'VCS',{
       timeOut: 3000,
       positionClass: 'toast-top-right',
     });
   }else if(this.loginForm.controls['password'].value == ''){
-    this.toastr.warning(`Please enter password`);
+    this.toastr.warning(`Please enter password`,'VCS',{
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
+    });
   }
   else if (
     this.loginForm.controls['email'].value != '' &&

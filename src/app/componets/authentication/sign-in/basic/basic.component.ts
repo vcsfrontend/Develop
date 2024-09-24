@@ -84,8 +84,12 @@ public loginForm!: FormGroup;
             timeOut: 3000,
             positionClass: 'toast-top-right',
           });
+        }else{
+          this.toastr.error(res.message,'VCS', {
+            timeOut: 3000,
+            positionClass: 'toast-top-right',
+          });
         }
-  
   
         },
         error: () => {
@@ -101,12 +105,15 @@ public loginForm!: FormGroup;
   Submit() {
     if(this.loginForm.controls['email'].value == ''){
       this.errorMessage = 'please enter email id';
-      this.toastr.warning(`Please enter username`, 'udon',{
+      this.toastr.warning(`Please enter username`, 'VCS',{
         timeOut: 3000,
         positionClass: 'toast-top-right',
       });
     }else if(this.loginForm.controls['password'].value == ''){
-      this.toastr.warning(`Please enter password`);
+      this.toastr.warning(`Please enter password`, 'VCS',{
+        timeOut: 3000,
+        positionClass: 'toast-top-right',
+      });
     }
     else if (
       this.loginForm.controls['email'].value != '' &&
