@@ -91,11 +91,11 @@ export class NavService implements OnDestroy {
     // Dashboard
     { headTitle: 'MAIN' },
     {
-      title: 'Dashboard',
-      icon: 'bi-house',
-      dirchange: false,
-      type: 'sub',
-      active: false,
+      // title: 'Dashboard',
+      // icon: 'bi-house',
+      // dirchange: false,
+      // type: 'sub',
+      // active: false,
       children: [
         // {
         //   title: 'Sales',
@@ -203,6 +203,14 @@ export class NavService implements OnDestroy {
         //   path: '/dashboard/customer',
         // },
       ],
+    },
+    {
+    title: 'Dashboard',
+      icon: 'bi-house',
+      dirchange: false,
+      active: false,
+      type: 'link',
+      path: '/dashboard/sales',
     },
     //PAGES
     { headTitle: 'PAGES' },
