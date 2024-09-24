@@ -217,8 +217,9 @@ export class NavService implements OnDestroy {
     {
       title: 'Crm & Sales',
       icon: 'bi-file-earmark',
+      type :'link',
+      // path:'',
       dirchange: false,
-      type: 'sub',
       active: false,
       children: [
     //     {
@@ -755,6 +756,15 @@ export class NavService implements OnDestroy {
         // },
       ],
     },
+    {
+        title: 'Projects',
+        dirchange: false,
+        type: 'link',
+        icon: ' bi-layers side-menu__icon',
+        active: false,
+        selected: false,
+        path: '/dashboard/projects',
+      },
     // APPS
     { headTitle: 'APPS' },
     {
