@@ -13,7 +13,7 @@
                                 </span>
                                 <span class="badge bg-success-transparent">+7.20%</span>
                             </div>
-                            <div class="text-muted mb-2">Completed Projects</div>
+                            <div class="text-muted mb-2">All Projects</div>
                             <h4 class="mb-0">122</h4>
                         </div>
                         <div id="completed-projects">
@@ -36,7 +36,7 @@
                                 </span>
                                 <span class="badge bg-success-transparent">+4.32%</span>
                             </div>
-                            <div class="text-muted mb-2">Overdue Projects</div>
+                            <div class="text-muted mb-2">Completed Projects</div>
                             <h4 class="mb-0">28</h4>
                         </div>
                         <div id="overdue-projects">
@@ -59,7 +59,7 @@
                                 </span>
                                 <span class="badge bg-danger-transparent">-2.73%</span>
                             </div>
-                            <div class="text-muted mb-2">Total Projects</div>
+                            <div class="text-muted mb-2">Pending Created</div>
                             <h4 class="mb-0">425</h4>
                         </div>
                         <div id="total-projects">
@@ -82,7 +82,7 @@
                                 </span>
                                 <span class="badge bg-success-transparent">+5.67%</span>
                             </div>
-                            <div class="text-muted mb-2">Pending Projects</div>
+                            <div class="text-muted mb-2">Project Created</div>
                             <h4 class="mb-0">17</h4>
                         </div>
                         <div id="pending-projects">
@@ -105,7 +105,7 @@
                                 </span>
                                 <span class="badge bg-success-transparent">+4.32%</span>
                             </div>
-                            <div class="text-muted mb-2">Overdue Projects</div>
+                            <div class="text-muted mb-2">Recce Pending</div>
                             <h4 class="mb-0">28</h4>
                         </div>
                         <div id="overdue-projects">
@@ -128,7 +128,7 @@
                                 </span>
                                 <span class="badge bg-success-transparent">+4.32%</span>
                             </div>
-                            <div class="text-muted mb-2">Overdue Projects</div>
+                            <div class="text-muted mb-2">Design Pending</div>
                             <h4 class="mb-0">28</h4>
                         </div>
                         <div id="overdue-projects">
@@ -151,7 +151,7 @@
                                 </span>
                                 <span class="badge bg-success-transparent">+4.32%</span>
                             </div>
-                            <div class="text-muted mb-2">Overdue Projects</div>
+                            <div class="text-muted mb-2">Design Freeze</div>
                             <h4 class="mb-0">28</h4>
                         </div>
                         <div id="overdue-projects">
@@ -658,7 +658,7 @@
     <div class="col-xl-12">
         <div class="card custom-card">
             <div class="card-header justify-content-between">
-                <div class="card-title">Projects Summary</div>
+                <div class="card-title">My Projects</div>
                 <div class="d-flex flex-wrap gap-3">
                     <div>
                         <input class="form-control form-control-sm" type="text" placeholder="Search Here"
@@ -676,8 +676,11 @@
                             <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">Relevant</a></li>
                         </ul>
                     </div>
-                    <a routerLink="apps/projects/create-project" class="btn btn-primary me-2" href="apps/projects/create-project"><i
-                        class="ri-add-line me-1 fw-medium align-middle"></i>New Project</a>
+                    <!-- <a routerLink="apps/projects/create-project" class="btn btn-primary me-2" href="apps/projects/create-project"><i
+                        class="ri-add-line me-1 fw-medium align-middle"></i>New Project</a> -->
+                        <div>
+                            <a routerLink="/apps/projects/create-project" class="btn btn-sm btn-secondary btn-wave" href="apps/projects/create-project"><i class="ri-add-line align-middle me-1 fw-medium"></i>Create Project</a>
+                        </div>
                 </div>
             </div>
             <div class="card-body p-0">
