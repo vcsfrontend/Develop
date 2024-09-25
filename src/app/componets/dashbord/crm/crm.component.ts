@@ -52,7 +52,7 @@ options:any
 export class CrmComponent {
     constructor(private router: Router){}
     ngOnInit(): void {
-        window.open('https://stag.solidperformers.com/new/auth/access_account/Y3JtYXBpcmVnNEBnbWFpbC5jb20=', '_blank');
+        window.open('https://crmexpert.vcs.plus/auth/access_account/Y3JtYXBpcmVnNEBnbWFpbC5jb20=', '_blank');
         //leaflet maps 1
         this.router.navigate(['/dashboard/sales']);
         const map = L.map('customers-countries').setView([51.505, -0.09], 13);
