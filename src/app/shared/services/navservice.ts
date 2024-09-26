@@ -775,6 +775,15 @@ export class NavService implements OnDestroy {
         selected: false,
         path: '/dashboard/projects',
       },
+      {
+        title: 'my-Tasks',
+        dirchange: false,
+        type: 'link',
+        icon: ' bi-layers side-menu__icon',
+        active: false,
+        selected: false,
+        path: '/dashboard/mytask',
+      },
     // APPS
     { headTitle: 'APPS' },
     {
