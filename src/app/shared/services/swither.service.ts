@@ -16,6 +16,7 @@ export class SwitherService {
   // private apiUrl = 'https://sasi-vcs-repo.onrender.com/auth/get_all_vcs_users';
   // GET request
   private apiUrl = environment.webURL;
+  private adonaiURL = environment.masterURL;
   getCall(url: string): Observable<any> {
     return this.http.get<any>(url);
   }
@@ -26,5 +27,6 @@ export class SwitherService {
 
   signupApi(data: any): Observable<any> { return this.http.post(`${this.apiUrl}auth/save_vcs_users`, data); }
   onForgotPassword(data:any): Observable<any> { return this.http.post(`${this.apiUrl}auth/password_reset`, data); }
-
+  onAdonai(data:any): Observable<any> { return this.http.get(`${this.adonaiURL}adonai/sso_login_user/${data}`); }
+  //https://adonai-microservice.onrender.com/adonai/sso_login_user/
 }

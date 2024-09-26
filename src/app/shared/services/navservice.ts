@@ -543,6 +543,15 @@ export class NavService implements OnDestroy {
     //     },
       ],
     },
+    // {
+    //   title: 'Adonai',
+    //   icon: 'bi-file-earmark',
+    //   type :'link',
+    //   dirchange: false,
+    //   active: false,
+    //   selected: false,
+    //   path: '/dashboard/adonai',
+    // },
     // authentication
     { headTitle: 'AUTHENTICATION' },
     {

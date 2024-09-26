@@ -28,6 +28,11 @@ export const admin: Routes = [
     import('./crm/crm.component').then((m) => m.CrmComponent),
 },
 {
+  path: 'adonai',
+  loadComponent: () =>
+    import('./adonai/adonai.component').then((m) => m.AdonaiComponent),
+},
+{
   path: 'hrm',
   loadComponent: () =>
     import('./hrm/hrm.component').then((m) => m.HrmComponent),
