@@ -27,6 +27,5 @@ export class SwitherService {
 
   signupApi(data: any): Observable<any> { return this.http.post(`${this.apiUrl}auth/save_vcs_users`, data); }
   onForgotPassword(data:any): Observable<any> { return this.http.post(`${this.apiUrl}auth/password_reset`, data); }
-  onAdonai(data:any): Observable<any> { return this.http.get(`${this.adonaiURL}adonai/sso_login_user/${data}`); }
-  //https://adonai-microservice.onrender.com/adonai/sso_login_user/
-}
+  onAdonai(data:any): Observable<any> { return this.http.post(`${this.adonaiURL}adonai/sso_login_user/${data}`,''); }
+  }

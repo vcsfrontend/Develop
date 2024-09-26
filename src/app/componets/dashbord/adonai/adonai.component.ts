@@ -33,9 +33,10 @@ export class AdonaiComponent {
   onclkAdonai(){
     this.userData = localStorage.getItem('userDetails')
     this.switchService.onAdonai(JSON.parse(this.userData).email).subscribe({
+      //this.switchService.onAdonai('vcs.fronetnd@gmail.com').subscribe({
       next: (res:any) => {
         if(res.status == true){
-          window.open('"https://www.coohom.com/api/saas/openapi/v2/redirect?url=https://www.coohom.com/pub/tool/yundesign/cloud?redirecturl=/pub/saas/apps/project/list&redirectbim=false&locale=en_US&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3VudHJ5IjoiVVMiLCJ0dSI6ZmFsc2UsImMiOjE3MjcyNDAwOTkzNjUsInV0YyI6MiwiYXZhdGFyIjoiaHR0cHM6Ly9xaHN0YXRpY3NzbC5rdWppYWxlLmNvbS9uZXd0LzMyL2ltYWdlL3BuZy8xNTQ1MTIwNTA3NDAxL0YzQzJBNEE0NzU4RjE3REM2QzJBMzU1NzZDOUI5N0Y2LnBuZyIsImxvY2FsZSI6ImVuX1VTIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9VU0VSIl0sInNfaWQiOm51bGwsInZhbGlkYXRlZCI6ZmFsc2UsImFfaWQiOm51bGwsImlkIjoiM0ZPNEtQVjdHWDdUIiwiZXhwIjoxNzI3ODQ0ODk5LCJrX2lkIjoiM0ZPNEtQVjdHWDdUIiwicl9pZCI6IjNGTzRLMEw3QTM1MiIsImVtYWlsIjoidHZPWktXMnFsVV92Y3MuZnJvbmV0bmRAZ21haWwuY29tIiwidXNlcm5hbWUiOiJza29ubGluZXRlc3QifQ.8xdYwXuxcFUo-KtO13WUd59l4zPfETXmSDUN-s6vNC4"', '_blank');
+          window.open(res.newDesign, '_blank');
           // this.router.navigate(['/dashboard/adonai']);
           this.toastr.success(res.message,'Adonai', {
             timeOut: 3000,
