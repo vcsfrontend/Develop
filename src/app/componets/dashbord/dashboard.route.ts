@@ -68,6 +68,11 @@ export const admin: Routes = [
     import('./my-tasks/my-tasks.component').then((m) => m.MyTasksComponent),
 },
 {
+  path: 'Order-Details',
+  loadComponent: () =>
+    import('./order-details/order-details.component').then((m) => m.OrderDetailsComponent),
+},
+{
   path: 'courses',
   loadComponent: () =>
     import('./courses/courses.component').then((m) => m.CoursesComponent),
