@@ -766,7 +766,7 @@ export class NavService implements OnDestroy {
         // },
       ],
     },
-    {
+     {
         title: 'Projects',
         dirchange: false,
         type: 'link',
@@ -776,10 +776,19 @@ export class NavService implements OnDestroy {
         path: '/dashboard/projects',
       },
       {
+        title: 'Project-Details',
+        dirchange: false,
+        type: 'link',
+        icon: ' bi-file-earmark-text side-menu__icon',
+        active: false,
+        selected: false,
+        path: '/dashboard/Project-Details',
+      },
+      {
         title: 'my-Tasks',
         dirchange: false,
         type: 'link',
-        icon: ' bi-layers side-menu__icon',
+        icon: 'bi-layout-text-window side-menu__icon',
         active: false,
         selected: false,
         path: '/dashboard/mytask',
