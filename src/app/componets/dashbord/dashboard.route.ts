@@ -83,6 +83,11 @@ export const admin: Routes = [
     import('./stocks/stocks.component').then((m) => m.StocksComponent),
 },
 {
+  path: 'settings',
+    loadComponent: () =>
+      import('./settings/settings.component').then((m) => m.SettingsComponent),
+  },
+{
   path: 'personal',
   loadComponent: () =>
     import('./personal/personal.component').then((m) => m.PersonalComponent),

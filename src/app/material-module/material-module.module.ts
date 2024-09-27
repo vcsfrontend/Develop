@@ -46,6 +46,7 @@ import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SettingsComponent } from '../componets/dashbord/settings/settings.component';
 
 @NgModule({
   declarations: [],

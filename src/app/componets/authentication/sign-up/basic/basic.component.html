@@ -14,6 +14,16 @@
                     <form [formGroup]="signupFrm" (ngSubmit)="onSignup()">
                     <div class="row gy-3" >
                         <div class="col-xl-12">
+                                <label for="role-id" class="form-label text-default">Type
+                                    <span class="text-danger"> *</span></label>
+                                <select class="form-select form-select-lg" id="role-id"
+                                    formControlName="type">
+                                    <option value="" disabled selected>Select type</option>
+                                    <option value="1">Enterprise</option>
+                                    <option value="2">Individual</option>
+                                </select>
+                            </div>
+                        <div class="col-xl-12">
                             <label for="signup-firstname" class="form-label text-default">First Name<sup>*</sup></label>
                             <input type="text" class="form-control form-control-lg" id="signup-firstname" placeholder="First name"
                             formControlName="firstName">
@@ -59,7 +69,7 @@
                             <input type="text" class="form-control form-control-lg" id="signup-mobile" placeholder="mobile"
                             formControlName="phoneNumber" maxlength="10">
                         </div>
-                        <div class="col-xl-12">
+                        <!-- <div class="col-xl-12">
                             <label for="tool-id" class="form-label text-default">Tool ID<sup>*</sup></label>
                             <select class="form-select form-select-lg" id="role-id" formControlName="toolId">
                                 <option value="0" disabled selected>Select tool</option>
@@ -67,12 +77,54 @@
                                 <option value="2">Design Tool</option>
                                 <option value="3">CRM & Design Tool</option>
                             </select>
-                        </div>
+                        </div> -->
                         <div class="col-xl-12">
+                            <label for="role-id" class="form-label text-default">Tool ID<sup>*</sup></label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="1" name="toolId1" 
+                                    id="flexCheckDefault" [(ngModel)]="adonai" [ngModelOptions]="{standalone: true}">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                  Adonai
+                                </label>
+                              </div>
+                              <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="2" name="toolId2" 
+                                    id="flexCheckChecked" [(ngModel)]="crm" [ngModelOptions]="{standalone: true}">
+                                <label class="form-check-label" for="flexCheckChecked">
+                                  CRM
+                                </label>
+                              </div>
+                        </div>
+                        <!-- @if (toolid1) {
+                            <div class="col-xl-12" >
+                                <label for="role-id" class="form-label text-default">Role ID for Adonai<sup>*</sup></label>
+                                <select class="form-select form-select-lg" id="role-id" name="adoanairole" 
+                                    [(ngModel)]="adoanAiRole">
+                                    <option value="" disabled selected>Select Role</option>
+                                    <option value="1">Super Admin</option>
+                                    <option value="2">Admin</option>
+                                    <option value="3">User</option>
+                                </select>
+                            </div>
+                        } -->
+                        <!-- @if (toolid2) {
+                            <div class="col-xl-12" >
+                                <label for="role-id" class="form-label text-default">Role ID for CRM<sup>*</sup></label>
+                                <select class="form-select form-select-lg" id="role-id" name="crmrole" 
+                                    [(ngModel)]="crmRole">
+                                    <option value="" disabled selected>Select Role</option>
+                                    <option value="1">Super Admin</option>
+                                    <option value="2">Admin</option>
+                                    <option value="3">User</option>
+                                </select>
+                            </div>
+                        } -->
+
+                        <!-- <div class="col-xl-12">
                             <label for="signup-users" class="form-label text-default">No of Users<sup>*</sup></label>
                             <input type="number" class="form-control form-control-lg" id="signup-users" placeholder="no of users"
                             formControlName="noOfUsers">
-                        </div>
+                        </div> -->
                         <div class="col-xl-12">
                             <label for="signup-country" class="form-label text-default">Country<sup>*</sup></label>
                             <input type="text" class="form-control form-control-lg" id="signup-country" placeholder="Country"

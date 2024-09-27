@@ -21,19 +21,25 @@ import { FirebaseService } from '../../../../shared/services/firebase.service';
   styleUrl: './basic.component.scss'
 })
 export class BasicComponent {
+  crm = false;
+  adonai = false;
+  adoanAiRole :any;
+  crmRole :any;
 
   signupFrm: FormGroup = this.fb.group({ 
-    "firstName": "",
-    "lastName": "",
-    "email": "",
-    "noOfUsers": 0,
-    "country": "",
-    "dob": "",
-    "toolId": 0,
-    "roleId": 0,
-    "phoneNumber": '',
-    "username": "",
-    "password": ""
+    type : '',
+    firstName: "",
+    lastName: "",
+    email: "",
+    country: "",
+    dob: "",
+    crm:false,
+    adonai:false,
+    phoneNumber: '',
+    username: "",
+    password: "",
+    //"toolId": 0,
+    //"roleId": 0,
   })
   
   constructor(public fb: FormBuilder, public switchService: SwitherService, 
@@ -49,9 +55,11 @@ export class BasicComponent {
   }
   onSignup(){
     let payload = this.signupFrm.getRawValue();
-    payload.toolId = +payload.toolId,
-    payload.roleId = +payload.roleId,
+    payload.type = +payload.type,
+    payload.crm = this.crm,
+    payload.adonai = this.adonai,
     payload.phoneNumber = +payload.phoneNumber,
+    console.log('payload -', payload);
     this.switchService.signupApi(payload).subscribe({
       next: (res:any) => {
         if(res.status == true){
@@ -87,5 +95,9 @@ export class BasicComponent {
     } else {
       this.toggleClass1 = "off-line";
     }
+  }
+  
+  toolId(tool:string) {
+    console.log("51",tool,this.adonai,this.crm);
   }
 }

@@ -1925,6 +1925,15 @@ export class NavService implements OnDestroy {
             selected: false,
             path: '/pages/pricing',
           },
+          {
+            title: 'Settings',
+            dirchange: false,
+            icon : 'bi bi-gear',
+            type: 'link',
+            active: false,
+            selected: false,
+            path: '/dashboard/settings',
+          },
   ];
   // Array
   items = new BehaviorSubject<Menu[]>(this.MENUITEMS);
