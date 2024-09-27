@@ -802,6 +802,15 @@ export class NavService implements OnDestroy {
         selected: false,
         path: '/dashboard/Order-Details',
       },
+      {
+        title: 'Quotation',
+        dirchange: false,
+        type: 'link',
+        icon: ' bi-file-earmark-text side-menu__icon',
+        active: false,
+        selected: false,
+        path: '/dashboard/quotation',
+      },
     // APPS
     { headTitle: 'APPS' },
     {
