@@ -10,13 +10,15 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { FirebaseService } from '../../../shared/services/firebase.service';
+import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-settings',
   standalone: true,
   
   imports: [RouterModule,NgbModule,FormsModule,ReactiveFormsModule ,AngularFireModule,
-    AngularFireDatabaseModule,
+    AngularFireDatabaseModule, CommonModule,
     AngularFirestoreModule,ToastrModule, SharedModule, ShowcodeCardComponent
 ],
   
@@ -26,19 +28,30 @@ import { FirebaseService } from '../../../shared/services/firebase.service';
   styleUrl: './settings.component.scss'
 })
 export class SettingsComponent {
-  userForm: FormGroup;
+  userForm: FormGroup; adonai= false; crm = false;
 
   constructor(private fb: FormBuilder) {
     this.userForm = this.fb.group({
+      type: 2,
+      companyName: "",
+      // vcsUsersList:
+
       users: this.fb.array([this.createUser()])
     });
   }
 
   createUser(): FormGroup {
     return this.fb.group({
-      name: ['', Validators.required],
+      firstName: ['', Validators.required],
+      lastName: [''],
+      userName: [''],
+      dob: [''],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required, Validators.minLength(6)]], 
+      phoneNo:[''],
+      country: [''],
+      crm: this.crm,
+      adonai: this.adonai
     });
   }
 
@@ -48,7 +61,6 @@ export class SettingsComponent {
 
   addUser(): void {
     this.users.push(this.createUser());
-    console.log(this.createUser)
   }
 
   removeUser(index: number): void {
@@ -56,9 +68,13 @@ export class SettingsComponent {
   }
 
   onSubmit(): void {
-    if (this.userForm.valid) {
+    let payload = this.userForm.getRawValue();
+    // if (this.userForm.valid) {
+      payload.vcsUsersList = this.userForm.value.users
       console.log('Submitted Users:', this.userForm.value.users);
+      console.log('pl-',payload)
       // Here you can handle the submission, e.g., send to an API
-    }
+    // }
   }
+  
 }

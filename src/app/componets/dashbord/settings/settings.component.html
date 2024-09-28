@@ -1,0 +1,63 @@
+<app-page-header title="settings" title1="dashboard" activeTitle="settings"></app-page-header>
+
+<div class="container mt-2 mb-2">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        <div formArrayName="users">
+            <div *ngFor="let user of users.controls; let i = index" [formGroupName]="i" class="row mb-2">
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                    <p class="mb-2 text-muted">First Name</p>
+                    <input type="text" class="form-control" id="firstName" formControlName="firstName">
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                    <p class="mb-2 text-muted">Last Name</p>
+                    <input type="text" class="form-control" id="lastName" formControlName="lastName">
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                    <p class="mb-2 text-muted">User Name</p>
+                    <input type="text" class="form-control" id="userName" formControlName="userName">
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                    <p class="mb-2 text-muted">Date of Birth</p>
+                    <input type="text" class="form-control" id="dob" formControlName="dob">
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                    <p class="mb-2 text-muted">Email</p>
+                    <input type="text" class="form-control" id="input" formControlName="email">
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                    <label for="input-label" class="form-label">Password</label>
+                    <input type="text" class="form-control" id="input-label"  formControlName="password">
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                    <label for="input-label" class="form-label">Confirm Password</label>
+                    <input type="password" class="form-control" formControlName="password" id="password" required>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                    <label for="input-label" class="form-label">Phone Number</label>
+                    <input type="phoneNo" class="form-control" formControlName="phoneNo" id="phoneNo">
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                    <label for="role-id" class="form-label text-default">Tool ID<sup>*</sup></label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="1" name="adonai" 
+                            id="flexCheckDefault" [(ngModel)]="adonai" [ngModelOptions]="{standalone: true}">
+                        <label class="form-check-label" for="flexCheckDefault">Adonai</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="2" name="crm" 
+                            id="flexCheckChecked" [(ngModel)]="crm" [ngModelOptions]="{standalone: true}">
+                        <label class="form-check-label" for="flexCheckChecked">CRM</label>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                    <label for="input-label" class="form-label">Country</label>
+                    <input type="country" class="form-control" formControlName="country" id="country">
+                </div>
+                <div class="mb-2"><hr></div>
+                <!-- <button type="button" class="btn btn-danger" (click)="removeUser(i)">Remove User</button> -->
+            </div>
+        </div> 
+        <button type="button" class="btn btn-primary" (click)="addUser()">Add User</button>
+        <button type="submit" class="btn btn-success" (click)="onSubmit()">Submit</button>
+    </form>
+</div>
