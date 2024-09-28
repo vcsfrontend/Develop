@@ -58,14 +58,24 @@ export const admin: Routes = [
     import('./projects/projects.component').then((m) => m.ProjectsComponent),
 },
 {
-  path: 'Project-Details',
+  path: 'Designers',
   loadComponent: () =>
-    import('./project-details/project-details.component').then((m) => m.ProjectDetailsComponent),
+    import('./Designers/designers.component').then((m) => m.DesignersComponent),
 },
 {
   path: 'mytask',
   loadComponent: () =>
     import('./my-tasks/my-tasks.component').then((m) => m.MyTasksComponent),
+},
+{
+  path: 'Project-details',
+  loadComponent: () =>
+    import('./project-details/project-details.component').then((m) => m.ProjectDetailsComponent),
+},
+{
+  path: 'recce',
+  loadComponent: () =>
+    import('./recce/recce.component').then((m) => m.RecceComponent),
 },
 {
   path: 'Order-Details',
