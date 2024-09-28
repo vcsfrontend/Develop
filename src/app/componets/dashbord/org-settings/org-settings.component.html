@@ -1,0 +1,202 @@
+<!-- <div class="container mt-5">
+    <h2>Dynamic Table with Input Fields</h2>
+    <form [formGroup]="dataForm" (ngSubmit)="onSubmit()">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Age</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody formArrayName="rows">
+          <tr *ngFor="let row of rows.controls; let i = index" [formGroupName]="i">
+            <td>
+              <input formControlName="name" class="form-control" />
+            </td>
+            <td>
+              <input formControlName="email" class="form-control" />
+            </td>
+            <td>
+              <input formControlName="age" class="form-control" type="number" />
+            </td>
+            <td>
+              <button type="button" class="btn btn-danger" (click)="removeRow(i)">Remove</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button type="button" class="btn btn-primary" (click)="addRow()">Add Row</button>
+      <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+  </div>   -->
+
+<!-- <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+    <div formArrayName="items">
+      <div *ngFor="let item of items.controls; let i = index" [formGroupName]="i">
+        <div formArrayName="preferences">
+          <label *ngFor="let pref of ['Preference 1', 'Preference 2', 'Preference 3']; let j = index">
+            <input type="checkbox" [formControlName]="j" (change)="addPreference(i)" />
+            {{ pref }}
+          </label>
+        </div>
+  
+        <button type="button" (click)="removeItem(i)">Remove Item</button>
+      </div>
+    </div>
+    <button type="button" (click)="addItem()">Add Item</button>
+    <button type="submit">Submit</button>
+  </form> -->
+<div class="my-4 page-header-breadcrumb d-flex align-items-center justify-content-between flex-wrap gap-2">
+    <div>
+        <h1 class="page-title fw-medium fs-18 mb-2">Settings</h1>
+        <div class="">
+            <nav>
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">dashboard</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">settings</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+<div class="card shadow" style="border-radius: 32px;">
+    <div class="card-header bg-white p-2 px-3">
+        <div class="row">
+            <div class="col-xl-6">
+                <h4>Signup Form</h4>
+            </div>
+            <div class="col-xl-6">
+                <div class="float-end" *ngIf="!isAddEdt">
+                    <button type="button" class="btn btn-sm btn-primary text-center"
+                        (click)="isAddEdt=!isAddEdt;aeTyp='a';onRst()">Add
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-2">
+        <div class="row">
+            <div *ngIf="!isAddEdt">
+                <div class="col-md-12">
+                    <div class="row mb-2">
+
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table text-nowrap">
+                            <thead>
+                                <tr>
+                                    <th>Sl.No</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>User Name</th>
+                                    <th>Email</th>
+                                    <th>Date of Birth</th>
+                                    <th>Mobile</th>
+                                    <th>Id</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of userLst; let i=index">
+                                    <td class="text-center">{{i+1}}</td>
+                                    <td>{{item.firstName}}</td>
+                                    <td>{{item.lastName}}</td>
+                                    <td>{{item.username}}</td>
+                                    <td>{{item.email}}</td>
+                                    <td>{{item.dob}}</td>
+                                    <td>{{item.phoneNumber}}</td>
+                                    <td>{{item.id}}</td>
+                                    <!-- <td>
+                                        <button type="button" class="btn btn-sm btn-primary text-center" title="Edit"
+                                            (click)="isAddEdt=!isAddEdt;aeTyp='e';onEdit(item._id);">Edit
+                                        </button>
+                                    </td> -->
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+            </div>
+            <div *ngIf="isAddEdt">
+
+
+                <div class="container mt-2 mb-2">
+                    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+                        <div class="row">
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                                <p class="mb-2 text-muted">First Name</p>
+                                <input type="text" class="form-control" id="firstName" formControlName="firstName">
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                                <p class="mb-2 text-muted">Last Name</p>
+                                <input type="text" class="form-control" id="lastName" formControlName="lastName">
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                                <p class="mb-2 text-muted">User Name</p>
+                                <input type="text" class="form-control" id="userName" formControlName="username">
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                                <p class="mb-2 text-muted">Date of Birth</p>
+                                <input type="text" class="form-control" id="dob" formControlName="dob">
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                                <p class="mb-2 text-muted">Email</p>
+                                <input type="text" class="form-control" id="input" formControlName="email">
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                                <label for="input-label" class="form-label">Password</label>
+                                <input type="text" class="form-control" id="input-label" formControlName="password">
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                                <label for="input-label" class="form-label">Confirm Password</label>
+                                <input type="password" class="form-control" formControlName="password" id="password"
+                                    required>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                                <label for="input-label" class="form-label">Phone Number</label>
+                                <input type="phoneNo" class="form-control" formControlName="phoneNumber" id="phoneNo">
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                                <label for="role-id" class="form-label text-default">Tool ID<sup>*</sup></label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1" name="adonai"
+                                        id="flexCheckDefault" [(ngModel)]="adonai"
+                                        [ngModelOptions]="{standalone: true}">
+                                    <label class="form-check-label" for="flexCheckDefault">Adonai</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="2" name="crm"
+                                        id="flexCheckChecked" [(ngModel)]="crm" [ngModelOptions]="{standalone: true}">
+                                    <label class="form-check-label" for="flexCheckChecked">CRM</label>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                                <label for="input-label" class="form-label">Country</label>
+                                <input type="country" class="form-control" formControlName="country" id="country">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="card-footer bg-white" *ngIf="isAddEdt">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="float-end">
+                            <button type="button" class="btn btn-sm btn-success text-center me-2"
+                                (click)="onSubmit();isAddEdt=!isAddEdt;" *ngIf="aeTyp == 'a'">Save
+                            </button>
+                            <button type="button" class="btn btn-sm btn-danger text-center"
+                                (click)="isAddEdt=!isAddEdt;onRst()">Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

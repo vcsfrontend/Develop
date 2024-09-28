@@ -1961,6 +1961,15 @@ export class NavService implements OnDestroy {
             selected: false,
             path: '/dashboard/settings',
           },
+          {
+            title: 'Organisation Settings',
+            dirchange: false,
+            icon : 'bi bi-gear',
+            type: 'link',
+            active: false,
+            selected: false,
+            path: '/dashboard/orgSettings',
+          },
   ];
   // Array
   items = new BehaviorSubject<Menu[]>(this.MENUITEMS);
