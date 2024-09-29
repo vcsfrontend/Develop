@@ -19,20 +19,31 @@
 
       <ul class="main-menu" [ngStyle]="{ display: 'block' }">
         @for (menuItem of menuItems; track menuItem) {
-        <li class="slide" [ngClass]="{'slide__category':menuItem.headTitle,
+        <li class="slide" *ngIf = "menuItem.isVisible" [ngClass]="{'slide__category':menuItem.headTitle,
                     'slide has-sub':menuItem.title,
                     'open': menuItem.active,
                     'active': menuItem.selected}">
           <!-- head title  -->
           <!-- has-Link -->
           @if (menuItem.type === 'link') {
-          <a class="side-menu__item" [routerLink]="!menuItem.type ? null : [menuItem.path]" routerLinkActive="active"
+            @if(menuItem.linkType === 'internal') {
+              <a class="side-menu__item" [routerLink]="!menuItem.type ? null : [menuItem.path]" routerLinkActive="active"
             (click)="setNavActive($event, menuItem.path ?? '')">
             @if (menuItem.icon) {
             <i class="side-menu__icon  bi {{menuItem.icon}}"></i>
             }
             <span class="side-menu__label">{{menuItem.title}}</span>
           </a>
+            } @else {
+              <a class="side-menu__item" target="_blank" [href]="!menuItem.type ? null : [menuItem.path]" routerLinkActive="active"
+            (click)="setNavActive($event, menuItem.path ?? '')">
+            @if (menuItem.icon) {
+            <i class="side-menu__icon  bi {{menuItem.icon}}"></i>
+            }
+            <span class="side-menu__label">{{menuItem.title}}</span>
+          </a>
+            }
+          
           }
           <!-- has-empty -->
           @if (menuItem.type === 'empty') {

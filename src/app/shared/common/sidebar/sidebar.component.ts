@@ -5,6 +5,7 @@ import {
   ElementRef,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
+  AfterViewInit,
 } from '@angular/core';
 import { Menu, NavService } from '../../services/navservice';
 import { Subscription, fromEvent } from 'rxjs';
@@ -16,7 +17,7 @@ import { checkHoriMenu } from './sidebar';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
 })
-export class SidebarComponent {
+export class SidebarComponent implements AfterViewInit {
   //////
   eventTriggered: boolean = false;
   screenWidth!: number;
@@ -48,15 +49,41 @@ export class SidebarComponent {
   }  
   ngOnInit() {
     this.menuitemsSubscribe$ = this.navServices.items.subscribe((items) => {
+      items.forEach((item)=>{
+        switch(item.title) {
+          case 'Adoani' :
+            this.navServices.isAdonaiApplicable$.subscribe(val=>{
+              item.isVisible = val
+            });
+            break;
+          case 'CRM' :
+            this.navServices.isCRMApplicable$.subscribe(val=>{
+              item.isVisible = val
+            });
+            break;
+          case 'Settings' :
+            let adonaiRole;
+            let crmRole;
+            this.navServices.adonaiRole$.subscribe(val=>{
+              adonaiRole = val
+            });
+            this.navServices.crmRole$.subscribe(val=>{
+              crmRole = val
+            });
+            if(adonaiRole === 'ADMIN' || crmRole === 'ADMIN') {
+              item.isVisible = true;
+            }
+            break;
+        }
+      })
       this.menuItems = items;
     });
-
-    
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.setNavActive(null, this.router.url);
       }
     });
+    
 
     const WindowResize = fromEvent(window, 'resize');
     // subscribing the Observable
@@ -73,6 +100,7 @@ export class SidebarComponent {
 
   // Start of Set menu Active event
   setNavActive(event:any, currentPath: string, menuData = this.menuItems) {
+    console.log("103",currentPath)
     if(event){
       if (event?.ctrlKey) {
         return;

@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 export interface User {
   uid: string;
   email: string;
@@ -21,7 +21,7 @@ export class AuthService {
   afAuth: any;
   afs: any;
   public showLoader:boolean=false;
-  private apiUrl = `${environment.webURL}auth/signin`; 
+  private apiUrl = `${environment.webURL}auth/signin`;
 
   constructor(private afu: AngularFireAuth, private router: Router,public ngZone: NgZone,
     private http: HttpClient

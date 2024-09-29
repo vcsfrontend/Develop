@@ -11,6 +11,8 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AppStateService } from '../../shared/services/app-state.service';
+import { BehaviorSubject } from 'rxjs';
+import { NavService } from '../../shared/services/navservice';
 
 @Component({
   selector: 'app-login',
@@ -56,6 +58,7 @@ constructor(
   private firebaseService: FirebaseService,
   private toastr: ToastrService ,
   private appStateService: AppStateService,
+  private navSvc : NavService
 ) {
   // AngularFireModule.initializeApp(environment.firebase);
 
@@ -63,7 +66,7 @@ constructor(
   const htmlElement =
   this.elementRef.nativeElement.ownerDocument.documentElement;
 // htmlElement.removeAttribute('style');
-
+  //User Tools
 
 }
 ngOnInit(): void {
@@ -119,13 +122,22 @@ login() {
     //   });
     this.authservice.login(this.email, this.password).subscribe({
       next: (res) => {
+        console.log("125",res)
         // Redirect on successful login
       if (res.status == true) {
-        this.router.navigate(['/dashboard/sales']);
         this.toastr.success('login successful','VCS', {
           timeOut: 3000,
           positionClass: 'toast-top-right',
         });
+        localStorage.setItem("username",res.username);
+        localStorage.setItem("email",res.email);
+          this.navSvc.isAdonaiApplicable$.next(res.adonai);
+          this.navSvc.isCRMApplicable$.next(res.crm);
+          this.navSvc.adonaiRole$.next(res.adonaiRole);
+          this.navSvc.crmRole$.next(res.crmRole)
+        this.router.navigate(['/dashboard/sales']);
+        
+
       }
     else{
       this.toastr.error(res.message,'VCS', {

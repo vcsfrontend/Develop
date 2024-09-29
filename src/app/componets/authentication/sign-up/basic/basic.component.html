@@ -80,7 +80,15 @@
                         </div> -->
                         <div class="col-xl-12">
                             <label for="role-id" class="form-label text-default">Tool ID<sup>*</sup></label>
-                            <div class="form-check">
+                            <mat-form-field>
+                                <!-- <mat-label>Toppings</mat-label> -->
+                                <mat-select formControlName="tools" multiple>
+                                  @for (topping of toolsList; track topping) {
+                                    <mat-option [value]="topping">{{topping}}</mat-option>
+                                  }
+                                </mat-select>
+                              </mat-form-field>
+                            <!-- <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="1" name="toolId1" 
                                     id="flexCheckDefault" [(ngModel)]="adonai" [ngModelOptions]="{standalone: true}">
                                 <label class="form-check-label" for="flexCheckDefault">
@@ -93,7 +101,7 @@
                                 <label class="form-check-label" for="flexCheckChecked">
                                   CRM
                                 </label>
-                              </div>
+                              </div> -->
                         </div>
                         <!-- @if (toolid1) {
                             <div class="col-xl-12" >
