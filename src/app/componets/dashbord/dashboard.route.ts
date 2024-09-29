@@ -102,6 +102,11 @@ export const admin: Routes = [
     loadComponent: () =>
       import('./settings/settings.component').then((m) => m.SettingsComponent),
   },
+  {
+    path: 'orgSettings',
+    loadComponent: () =>
+    import('./org-settings/org-settings.component').then((m) => m.OrgSettingsComponent),
+  },
 {
   path: 'personal',
   loadComponent: () =>
