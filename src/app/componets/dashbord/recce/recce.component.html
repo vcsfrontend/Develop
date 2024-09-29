@@ -11,11 +11,9 @@
             </nav>
         </div>
     </div>
-    
 </div>
-
  <div class="row">
-    <div class="col-xl-12">
+    <!-- <div class="col-xl-12">
         <div class="card custom-card">
             <div class="card-header">
                 <div class="card-title">
@@ -101,7 +99,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     
     <div class="col-xl-12">
@@ -119,17 +117,23 @@
                                 <a ngbNavLink class="nav-link" data-bs-toggle="tab" role="tab"
                                 aria-current="page"  aria-selected="false"><i
                                     class="ri-home-smile-line me-2 align-middle d-inline-block"></i>Home</a>
-                                    <ng-template ngbNavContent class="tab-content mt-2 mt-xl-0"> 
-                                        <div class=" text-muted" id="home-vertical-link"
-                                        role="tabpanel">
-                                        How hotel deals can help you live a better life. <b>How celebrity
-                                            cruises</b> aren't as bad as you think. How cultural solutions
-                                        can help you predict the future. How to cheat at dog friendly hotels
-                                        and get away with it. 17 problems with summer activities. How to
-                                        cheat at travel agents and get away with it. How not knowing family
-                                        trip ideas makes you a rookie. What everyone is saying about daily
-                                        deals.
-                                    </div>
+                                    <ng-template ngbNavContent class="tab-content mt-2 mt-xl-0">
+                                        <div class=" text-muted" id="home-vertical-link" role="tabpanel">
+                                            <img src="../../../../assets/images/ecommerce/jpg/19.jpeg" class="img-thumbnail" alt="Responsive image"
+                                            (click)="open(content)" data-bs-toggle="modal" data-bs-target="#addtask">
+                                        </div>
+                                        <div class=" text-muted" id="home-vertical-link" role="tabpanel">
+                                            <img src="../../../../assets/images/ecommerce/jpg/19.jpeg" class="img-thumbnail" alt="Responsive image"
+                                            (click)="open(content)" data-bs-toggle="modal1" data-bs-target="#addtask">
+                                        </div>
+                                        <div class=" text-muted" id="home-vertical-link" role="tabpanel">
+                                            <img src="../../../../assets/images/ecommerce/jpg/19.jpeg" class="img-thumbnail" alt="Responsive image"
+                                            (click)="open(content)" data-bs-toggle="modal" data-bs-target="#addtask">
+                                        </div>
+                                        <div class=" text-muted" id="home-vertical-link" role="tabpanel">
+                                            <img src="../../../../assets/images/ecommerce/jpg/19.jpeg" class="img-thumbnail" alt="Responsive image"
+                                            (click)="open(content)" data-bs-toggle="modal" data-bs-target="#addtask">
+                                        </div>
                                      </ng-template>
                             </ng-container>
                             <ng-container ngbNavItem="About">
@@ -191,3 +195,33 @@
         </div>
     </div>
 </div>
+
+    
+
+    <ng-template #content id="addtask" let-modal>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title" id="mail-ComposeLabel">Create Task</h6>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                    (click)="modal.close('Cross click')" aria-label="Close"></button>
+                </div>
+                <div class="modal-body px-4">
+                    <div class="row gy-2">
+                        <div class="col-xl-12">
+                            <label for="task-name" class="form-label">Task Name</label>
+                            <input type="text" class="form-control" id="task-name"
+                                placeholder="Task Name">
+                                <div>
+                                    <img src="../../../../assets/images/ecommerce/jpg/19.jpeg" class="img-fluid" alt="Responsive image"
+                                    (click)="open(content)" data-bs-toggle="modal" data-bs-target="#addtask">
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal"  (click)="modal.close('Cross click')">Cancel</button>
+                    <button type="button" class="btn btn-primary">Create</button>
+                </div>
+            </div>
+        </ng-template>
+       

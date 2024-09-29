@@ -29,7 +29,7 @@ export class HeaderComponent implements OnInit {
   public isCollapsed = true;
   collapse: any;
   closeResult = '';
-  themeType: string | undefined;
+  themeType: string | undefined; userName:any; userData:any;
 
   selectedItem: string  | null ='selectedItem'
   isOpen: boolean = false;
@@ -40,7 +40,10 @@ export class HeaderComponent implements OnInit {
     public renderer: Renderer2,
     public modalService:NgbModal,
     private router: Router, private activatedRoute: ActivatedRoute
-  ) {this.localStorageBackUp()}
+  ) {this.localStorageBackUp()
+    this.userData = localStorage.getItem('userDetails'),
+    this.userName = JSON.parse(this.userData).username
+  }
 
   private offcanvasService = inject(NgbOffcanvas);
 
