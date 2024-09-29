@@ -4,7 +4,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import flatpickr from 'flatpickr';
 import { FlatpickrDefaults, FlatpickrModule } from 'angularx-flatpickr';
 import { SharedModule } from '../../../../app/shared/common/sharedmodule';
-import { NgbDropdownModule,NgbNavModule,NgbModal, NgbModalConfig, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdownModule, NgbNavModule, NgbModal, NgbModalConfig, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-recce',
@@ -17,7 +17,7 @@ import { NgbDropdownModule,NgbNavModule,NgbModal, NgbModalConfig, NgbModule} fro
 })
 export class RecceComponent {
   modal: any; active5='Home';
-  active6='Services'
+  active6='Home'
   constructor(// config: NgbModalConfig,
     private modalService: NgbModal) {}
   
