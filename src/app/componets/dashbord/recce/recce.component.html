@@ -1,0 +1,193 @@
+<!-- <app-page-header title="Recce" title1="Dashboards" activeTitle="Recce"></app-page-header> -->
+<div class="my-4 page-header-breadcrumb d-flex align-items-center justify-content-between flex-wrap gap-2">
+    <div>
+        <h1 class="page-title fw-medium fs-18 mb-2">Recce</h1>
+        <div class="">
+            <nav>
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Dashboard</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Recce</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    
+</div>
+
+ <div class="row">
+    <div class="col-xl-12">
+        <div class="card custom-card">
+            <div class="card-header">
+                <div class="card-title">
+                    Vertical alignment with lists
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-xl-3">
+                        <ul ngbNav #nav5="ngbNav" [activeId]="active5" orientation="vertical" class="nav nav-pills nav-tabs flex-column nav-style-4" role="tablist">
+                            <li ngbNavItem="Home" class="nav-item">
+                                <a class="nav-link " data-bs-toggle="tab" role="tab"
+                                    aria-current="page" 
+                                    aria-selected="true" ngbNavLink >Home</a>
+                                    <ng-template ngbNavContent class="tab-content mt-2 mt-xl-0"> 
+                                        <div class=" show active text-muted mt-2" id="home-vertical"
+                                                    role="tabpanel">
+                                                    How hotel deals can help you live a better life. <b>How celebrity
+                                                        cruises</b> aren't as bad as you think. How cultural solutions
+                                                    can help you predict the future. How to cheat at dog friendly hotels
+                                                    and get away with it. 17 problems with summer activities. How to
+                                                    cheat at travel agents and get away with it. How not knowing family
+                                                    trip ideas makes you a rookie. What everyone is saying about daily
+                                                    deals.
+                                                </div>
+                                     </ng-template>
+                            </li>
+                            <li ngbNavItem="About" class="nav-item">
+                                <a class="nav-link" data-bs-toggle="tab" role="tab"
+                                    aria-current="page" 
+                                    aria-selected="true" ngbNavLink >About</a>
+                                    <ng-template ngbNavContent class="tab-content mt-2 mt-xl-0"> 
+                                        <div class=" text-muted mt-2" id="about-vertical"
+                                            role="tabpanel">
+                                            How travel coupons make you a better lover. Why cultural solutions
+                                            are the new black. Why mom was right about travel insurances. How
+                                            family trip ideas can help you predict the future. <b>How carnival
+                                                cruises make you a better lover</b>. Why you'll never succeed at
+                                            daily deals. 11 ways cheapest flights can find you the love of your
+                                            life. The complete beginner's guide to mission trips.
+                                        </div>
+                                        </ng-template>
+                            </li>
+                            <li ngbNavItem="Services"class="nav-item">
+                                <a class="nav-link" data-bs-toggle="tab" role="tab"
+                                    aria-current="page" 
+                                    aria-selected="true" ngbNavLink>Services</a>
+                                    <ng-template ngbNavContent class="tab-content mt-2 mt-xl-0"> 
+                                        <div class=" text-muted mt-2" id="services-vertical"
+                                        role="tabpanel">
+                                        Unbelievable healthy snack success stories. 12 facts about safe food
+                                        handling tips that will impress your friends. Restaurant weeks by
+                                        the numbers. Will mexican food ever rule the world? The 10 best thai
+                                        restaurant youtube videos. How restaurant weeks can make you sick.
+                                        The complete beginner's guide to cooking healthy food. Unbelievable
+                                        food stamp success stories.
+                                    </div>  
+                                    </ng-template>
+                            </li>
+                            <li ngbNavItem="Contacts" class="nav-item">
+                                <a class="nav-link" data-bs-toggle="tab" role="tab"
+                                    aria-current="page" 
+                                    aria-selected="true" ngbNavLink>Contacts</a>
+                                    <ng-template ngbNavContent class="tab-content mt-2 mt-xl-0"> 
+                                        <div class=" text-muted mt-2" id="contacts-vertical"
+                                                     role="tabpanel">
+                                                     Why delicious magazines are killing you. Why our world would end if
+                                                     restaurants disappeared. Why restaurants are on crack about
+                                                     restaurants. How restaurants are making the world a better place. 8
+                                                     great articles about minute meals. Why our world would end if
+                                                     healthy snacks disappeared. Why the world would end without mexican
+                                                     food. The evolution of chef uniforms.
+                                                 </div>
+                                        </ng-template>
+                            </li>
+                        </ul>
+                       
+                    </div>
+                    <div class="col-xl-9">
+                        <div [ngbNavOutlet]="nav5" class="ms-4"> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="col-xl-12">
+        <div class="card custom-card">
+            <div class="card-header">
+                <div class="card-title">
+                    Vertical alignment with links
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-xl-3">
+                        <nav ngbNav #nav6="ngbNav" [activeId]="active6" orientation="vertical" class="nav nav-tabs flex-column nav-style-5" role="tablist">
+                            <ng-container ngbNavItem="Home">
+                                <a ngbNavLink class="nav-link" data-bs-toggle="tab" role="tab"
+                                aria-current="page"  aria-selected="false"><i
+                                    class="ri-home-smile-line me-2 align-middle d-inline-block"></i>Home</a>
+                                    <ng-template ngbNavContent class="tab-content mt-2 mt-xl-0"> 
+                                        <div class=" text-muted" id="home-vertical-link"
+                                        role="tabpanel">
+                                        How hotel deals can help you live a better life. <b>How celebrity
+                                            cruises</b> aren't as bad as you think. How cultural solutions
+                                        can help you predict the future. How to cheat at dog friendly hotels
+                                        and get away with it. 17 problems with summer activities. How to
+                                        cheat at travel agents and get away with it. How not knowing family
+                                        trip ideas makes you a rookie. What everyone is saying about daily
+                                        deals.
+                                    </div>
+                                     </ng-template>
+                            </ng-container>
+                            <ng-container ngbNavItem="About">
+                                <a ngbNavLink class="nav-link" data-bs-toggle="tab" role="tab"
+                            aria-current="page"  aria-selected="false"><i
+                                    class="ri-archive-drawer-line me-2 align-middle d-inline-block"></i>About</a>
+                                    <ng-template ngbNavContent class="tab-content mt-2 mt-xl-0"> 
+                                        <div class=" text-muted mt-2" id="about-vertical-link"
+                                role="tabpanel">
+                                How travel coupons make you a better lover. Why cultural solutions
+                                are the new black. Why mom was right about travel insurances. How
+                                family trip ideas can help you predict the future. <b>How carnival
+                                    cruises make you a better lover</b>. Why you'll never succeed at
+                                daily deals. 11 ways cheapest flights can find you the love of your
+                                life. The complete beginner's guide to mission trips.
+                            </div>
+                                     </ng-template>
+                            </ng-container>
+                            <ng-container ngbNavItem="Services">
+                                <a ngbNavLink class="nav-link " data-bs-toggle="tab" role="tab"
+                            aria-current="page"  aria-selected="true"><i
+                                    class="ri-bank-line me-2 align-middle d-inline-block"></i>Services</a>
+                                    <ng-template ngbNavContent class="tab-content mt-2 mt-xl-0"> 
+                                        <div class=" show  text-muted mt-2" id="services-vertical-link"
+                                        role="tabpanel">
+                                        Unbelievable healthy snack success stories. 12 facts about safe food
+                                        handling tips that will impress your friends. Restaurant weeks by
+                                        the numbers. <b><i>Will mexican food ever rule the world? The 10 best thai
+                                        restaurant youtube videos</i></b>. How restaurant weeks can make you sick.
+                                        The complete beginner's guide to cooking healthy food. Unbelievable
+                                        food stamp success stories.
+                                    </div>
+                                     </ng-template>
+                            </ng-container>
+                            <ng-container ngbNavItem="Contacts">
+                                <a ngbNavLink class="nav-link" data-bs-toggle="tab" role="tab"
+                                aria-current="page"  aria-selected="false"><i
+                                        class="ri-contacts-book-2-line me-2 align-middle d-inline-block"></i>Contacts</a>
+                                        <ng-template ngbNavContent class="tab-content mt-2 mt-xl-0"> 
+                                            <div class=" text-muted mt-2" id="contacts-vertical-link"
+                                role="tabpanel">
+                                Why delicious magazines are killing you. Why our world would end if
+                                restaurants disappeared. Why restaurants are on crack about
+                                restaurants. How restaurants are making the world a better place. 8
+                                great articles about minute meals. Why our world would end if
+                                healthy snacks disappeared. Why the world would end without mexican
+                                food. The evolution of chef uniforms.
+                            </div>
+                                         </ng-template>
+                            </ng-container>
+                        </nav>
+                    </div>
+                    <div class="col-xl-9">
+                        <div [ngbNavOutlet]="nav6" class="ms-4"> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,4 +1,4 @@
-<app-page-header title="Order-Details" title1="Dashboards" activeTitle="Order-Details"></app-page-header>
+<app-page-header title="Designers" title1="Dashboards" activeTitle="Designers"></app-page-header>
 <div class="row">
     <div class="col-xl-12">
         <div class="card custom-card">
@@ -6,7 +6,7 @@
                 <div class="card-title">My Projects</div>
                 <div class="d-flex flex-wrap gap-3">
                     <div>
-                        <input class="form-control form-control-sm" type="text" placeholder="Search Customer Order"
+                        <input class="form-control form-control-sm" type="text" placeholder="Search Here"
                             aria-label=".form-control-sm example">
                     </div>
                     <!-- <div ngbDropdown class="dropdown">
@@ -23,60 +23,80 @@
                     </div> -->
                     <!-- <a routerLink="apps/projects/create-project" class="btn btn-primary me-2" href="apps/projects/create-project"><i
                         class="ri-add-line me-1 fw-medium align-middle"></i>New Project</a> -->
-                        <!-- <div>
-                            <a routerLink="/apps/projects/create-project" class="btn btn-sm btn-secondary btn-wave" href="apps/projects/create-project"><i class="ri-add-line align-middle me-1 fw-medium"></i>Create Customer Order</a>
-                        </div> -->
-                        <!-- <div>
-                            <a routerLink="/apps/projects/create-project" class="btn btn-sm btn-secondary btn-wave" href="apps/projects/create-project"><i class="ri-add-line align-middle me-1 fw-medium"></i>Associate Project Design</a>
-                        </div> -->
                         <div>
                             <div class="d-grid border-bottom border-block-end-dashed">
                                 <button class="btn btn-sm btn-secondary  d-flex"
                                 (click)="open(content)"    data-bs-toggle="modal" data-bs-target="#addtask">
-                                    <i class="ri-add-line fs-14 align-middle me-1"></i>Create Customer Order
+                                    <i class="ri-add-line fs-14 align-middle me-1"></i>Create Project
                                 </button>
                             
                             <ng-template #content id="addtask" let-modal>
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h6 class="modal-title" id="mail-ComposeLabel">Order Information Details</h6>
+                                        <h6 class="modal-title" id="mail-ComposeLabel">Create Project</h6>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         (click)="modal.close('Cross click')" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body px-4">
                                         <div class="row gy-2">
                                             <div class="col-md-6 mb-3">
-                                                <label class="form-label">Customer Order</label>
-                                                <input type="text" class="form-control" placeholder="First name" aria-label="First name">
+                                                <label class="form-label">S.NO</label>
+                                                <input type="text" class="form-control" placeholder="S.NO" aria-label="First name">
                                             </div>
                                             <div class="col-md-6 mb-3">
-                                                <label class="form-label">Customer Name</label>
-                                                <input type="text" class="form-control" placeholder="Last name" aria-label="Last name">
+                                                <label class="form-label">Project ID</label>
+                                                <input type="text" class="form-control" placeholder="project id" aria-label="Last name">
                                             </div>
                                             
                                             <div class="col-md-6 mb-3">
-                                                <label class="form-label">Email Address</label>
-                                                <input type="tel" class="form-control" placeholder="Phone number" aria-label="Phone number">
+                                                <label class="form-label">Project name</label>
+                                                <input type="tel" class="form-control" placeholder="Project name" aria-label="Phone number">
                                             </div>
                                             <div class="col-md-6 mb-3">
-                                                <label class="form-label">Telephone No</label>
-                                                <input type="tel" class="form-control" placeholder="Phone number" aria-label="Phone number">
-                                            </div>
-                                            <div class="col-md-6 mb-3">
-                                                <label class="form-label">Address</label>
-                                                <input type="text" class="form-control" placeholder="Phone number" aria-label="Phone number">
-                                            </div>
-                                            <div class="col-md-6 mb-3">
-                                                <label class="form-label">Stage</label>
-                                                <input type="text" class="form-control" placeholder="Phone number" aria-label="Phone number">
+                                                <label class="form-label">Client name</label>
+                                                <input type="tel" class="form-control" placeholder="Client name" aria-label="Phone number">
                                             </div>
                                             <div class="col-md-6 mb-3">
                                                 <label class="form-label">Business Category</label>
-                                                <input type="text" class="form-control" placeholder="Phone number" aria-label="Phone number">
+                                                <input type="text" class="form-control" placeholder="Business Category" aria-label="Phone number">
                                             </div>
                                             <div class="col-md-6 mb-3">
-                                                <label class="form-label">Project Estimate</label>
-                                                <input type="text" class="form-control" placeholder="Phone number" aria-label="Phone number">
+                                                <label class="form-label">Project Address</label>
+                                                <input type="text" class="form-control" placeholder="project Address" aria-label="Phone number">
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">State</label>
+                                                <input type="text" class="form-control" placeholder="State" aria-label="Phone number">
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">City</label>
+                                                <input type="text" class="form-control" placeholder="City" aria-label="Phone number">
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Project Stage</label>
+                                                <!-- <input type="text" class="form-control" placeholder="Project Stage" aria-label="Phone number"> -->
+                                                <select id="inputState1" class="form-select">
+                                                    <option selected>planned</option>
+                                                    <option>progress</option>
+                                                    <option>completed</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Project Estimation</label>
+                                                <input type="text" class="form-control" placeholder="Project Estimation" aria-label="Phone number">
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Project area (sft)
+                                                </label>
+                                                <input type="text" class="form-control" placeholder="Project area" aria-label="Phone number">
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Project start date</label>
+                                                <input type="date" class="form-control" placeholder="" aria-label="Phone number">
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Project End date</label>
+                                                <input type="date" class="form-control" placeholder="" aria-label="Phone number">
                                             </div>
                                             
                                         </div>
@@ -88,11 +108,9 @@
                                 </div>
                             </ng-template>
                             </div>
-                            </div>
-                            <div>
-                                <a routerLink="/apps/projects/create-project" class="btn btn-sm btn-secondary btn-wave" href="apps/projects/create-project"><i class="ri-add-line align-middle me-1 fw-medium"></i>Associate Project Design</a>
-                            </div>
-                            
+                        <!-- <div>
+                            <a routerLink="/apps/projects/create-project" class="btn btn-sm btn-secondary btn-wave" href="apps/projects/create-project"><i class="ri-add-line align-middle me-1 fw-medium"></i>Create Project</a>
+                        </div> -->
                 </div>
             </div>
             <div class="card-body p-0">
@@ -102,14 +120,21 @@
                             <tr>
                                 <th scope="col"><input class="form-check-input" type="checkbox" id="checkboxNoLabel"
                                         value="" aria-label="..."></th>
-                                <th scope="col">Customer Order</th>
-                                <th scope="col">Customer Name</th>
-                                <th scope="col">Email Address</th>
-                                <th scope="col">Telephone No</th>
-                                <th scope="col">Address</th>
-                                <th scope="col">Stage</th>
+                                <th scope="col">SI.No</th>
+                                <th scope="col">Action</th>
+                                <th scope="col">Project ID</th>
+                                <th scope="col">Project Name</th>
+                                <th scope="col">Client Name</th>
                                 <th scope="col">Business Category</th>
+                                <th scope="col">Project Address</th>
+                                <th scope="col">State</th>
+                                <th scope="col">City</th>
+                                <th scope="col">Project Stage</th>
                                 <th scope="col">Project Estimation(INR)</th>
+                                <th scope="col">Project area(SFT)</th>
+                                <th scope="col">Project start Date</th>
+                                <th scope="col">Project End Date</th>
+                                <!-- <th scope="col">Action</th> -->
                             </tr>
                         </thead>
                         <tbody>
@@ -119,7 +144,25 @@
                                         value="" aria-label="...">
                                 </th>
                                 <td>1 . </td>
+                                <td>
+                                    <div class="hstack gap-2 fs-15">
+                                        <a href="">Redirect to Design</a>
+                                        <!-- <a aria-label="anchor" href="javascript:void(0);"
+                                            class="btn btn-icon btn-sm btn-success"><i
+                                                class="ri-delete-2-line"></i></a>
+                                        <a aria-label="anchor" href="javascript:void(0);"
+                                            class="btn btn-icon btn-sm btn-info"><i class="ri-edit-line"></i></a> -->
+                                    </div>
+                                </td>
                                 <td>VA001 </td>
+                                <!-- <td>
+                                    <div class="d-flex align-items-center">
+                                        <span class="avatar avatar-xs me-2 online avatar-rounded">
+                                            <img src="./assets/images/faces/3.jpg" alt="img">
+                                        </span>
+                                        Mayor Kelly
+                                    </div>
+                                </td> -->
                                 <td>
                                     Standalone (SaiKrishna)</td>
                                 <td>Sai Krishna</td>
@@ -127,11 +170,11 @@
                                 <td>Telangana</td>
                                 <td>Hyderabad</td>
                                 <td><span class="badge bg-primary-transparent">Execution In Progress </span></td>
-                                <!-- <td>₹ 3,60,868</td>
+                                <td>₹ 3,60,868</td>
                                 <td>05 Aug, 2024</td>
                                 <td>02 Aug, 2024</td>
                                 <td>31 Aug, 2024</td>
-                                <td>-</td> -->
+                                <td>-</td>
                                 <!-- <td>CH TARUN, Varma Group</td>
                                 <td>-</td>
                                 <td>mayorkrlly&#64;gmail.com</td>
@@ -160,16 +203,74 @@
                                     </div>
                                 </td>
                                 <td>$10,984.29</td> -->
-                                <!-- <td>
+                                
+                            </tr>
+                            
+                            <tr>
+                                <th scope="row"><input class="form-check-input" type="checkbox" id="checkboxNoLabel1"
+                                    value="" aria-label="...">
+                                </th>
+                                <td>1 . </td>
+                                <td>
                                     <div class="hstack gap-2 fs-15">
                                         <a href="">Redirect to Design</a>
-                                        <a aria-label="anchor" href="javascript:void(0);"
+                                        <!-- <a aria-label="anchor" href="javascript:void(0);"
                                             class="btn btn-icon btn-sm btn-success"><i
                                                 class="ri-delete-2-line"></i></a>
                                         <a aria-label="anchor" href="javascript:void(0);"
-                                            class="btn btn-icon btn-sm btn-info"><i class="ri-edit-line"></i></a>
+                                            class="btn btn-icon btn-sm btn-info"><i class="ri-edit-line"></i></a> -->
+                                    </div>
+                                </td>
+                                <td>VA001 </td>
+                                <!-- <td>
+                                    <div class="d-flex align-items-center">
+                                        <span class="avatar avatar-xs me-2 online avatar-rounded">
+                                            <img src="./assets/images/faces/3.jpg" alt="img">
+                                        </span>
+                                        Mayor Kelly
                                     </div>
                                 </td> -->
+                                <td>
+                                    Standalone (SaiKrishna)</td>
+                                <td>Sai Krishna</td>
+                                <td>IR Residential</td>
+                                <td>Telangana</td>
+                                <td>Hyderabad</td>
+                                <td><span class="badge bg-primary-transparent">Execution In Progress </span></td>
+                                <td>₹ 3,60,868</td>
+                                <td>05 Aug, 2024</td>
+                                <td>02 Aug, 2024</td>
+                                <td>31 Aug, 2024</td>
+                                <td>-</td>
+                                <!-- <td>CH TARUN, Varma Group</td>
+                                <td>-</td>
+                                <td>mayorkrlly&#64;gmail.com</td>
+                                <td>
+                                    <div class="avatar-list-stacked">
+                                        <span class="avatar avatar-sm avatar-rounded">
+                                            <img src="./assets/images/faces/2.jpg" alt="img">
+                                        </span>
+                                        <span class="avatar avatar-sm avatar-rounded">
+                                            <img src="./assets/images/faces/8.jpg" alt="img">
+                                        </span>
+                                        <span class="avatar avatar-sm avatar-rounded">
+                                            <img src="./assets/images/faces/2.jpg" alt="img">
+                                        </span>
+                                        <a class="avatar avatar-sm bg-primary text-fixed-white avatar-rounded"
+                                            href="javascript:void(0);">
+                                            +4
+                                        </a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="progress progress-xs">
+                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 52%"
+                                            aria-valuenow="52" aria-valuemin="0" aria-valuemax="100">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>$10,984.29</td> -->
+                                
                             </tr>
                             
                             <tr>
@@ -177,7 +278,25 @@
                                     value="" aria-label="...">
                                 </th>
                                 <td>1 . </td>
+                                <td>
+                                    <div class="hstack gap-2 fs-15">
+                                        <a href="">Redirect to Design</a>
+                                        <!-- <a aria-label="anchor" href="javascript:void(0);"
+                                            class="btn btn-icon btn-sm btn-success"><i
+                                                class="ri-delete-2-line"></i></a>
+                                        <a aria-label="anchor" href="javascript:void(0);"
+                                            class="btn btn-icon btn-sm btn-info"><i class="ri-edit-line"></i></a> -->
+                                    </div>
+                                </td>
                                 <td>VA001 </td>
+                                <!-- <td>
+                                    <div class="d-flex align-items-center">
+                                        <span class="avatar avatar-xs me-2 online avatar-rounded">
+                                            <img src="./assets/images/faces/3.jpg" alt="img">
+                                        </span>
+                                        Mayor Kelly
+                                    </div>
+                                </td> -->
                                 <td>
                                     Standalone (SaiKrishna)</td>
                                 <td>Sai Krishna</td>
@@ -185,11 +304,11 @@
                                 <td>Telangana</td>
                                 <td>Hyderabad</td>
                                 <td><span class="badge bg-primary-transparent">Execution In Progress </span></td>
-                                <!-- <td>₹ 3,60,868</td>
+                                <td>₹ 3,60,868</td>
                                 <td>05 Aug, 2024</td>
                                 <td>02 Aug, 2024</td>
                                 <td>31 Aug, 2024</td>
-                                <td>-</td> -->
+                                <td>-</td>
                                 <!-- <td>CH TARUN, Varma Group</td>
                                 <td>-</td>
                                 <td>mayorkrlly&#64;gmail.com</td>
@@ -218,81 +337,32 @@
                                     </div>
                                 </td>
                                 <td>$10,984.29</td> -->
-                                <!-- <td>
-                                    <div class="hstack gap-2 fs-15">
-                                        <a href="">Redirect to Design</a>
-                                        <a aria-label="anchor" href="javascript:void(0);"
-                                            class="btn btn-icon btn-sm btn-success"><i
-                                                class="ri-download-2-line"></i></a>
-                                        <a aria-label="anchor" href="javascript:void(0);"
-                                            class="btn btn-icon btn-sm btn-info"><i class="ri-edit-line"></i></a>
-                                    </div>
-                                </td> -->
-                            </tr>
-                            
-                            <tr>
-                                <th scope="row"><input class="form-check-input" type="checkbox" id="checkboxNoLabel1"
-                                    value="" aria-label="...">
-                                </th>
-                                <td>1 . </td>
-                                <td>VA001 </td>
-                                <td>
-                                    Standalone (SaiKrishna)</td>
-                                <td>Sai Krishna</td>
-                                <td>IR Residential</td>
-                                <td>Telangana</td>
-                                <td>Hyderabad</td>
-                                <td><span class="badge bg-primary-transparent">Execution In Progress </span></td>
-                                <!-- <td>₹ 3,60,868</td>
-                                <td>05 Aug, 2024</td>
-                                <td>02 Aug, 2024</td>
-                                <td>31 Aug, 2024</td>
-                                <td>-</td> -->
-                                <!-- <td>CH TARUN, Varma Group</td>
-                                <td>-</td>
-                                <td>mayorkrlly&#64;gmail.com</td>
-                                <td>
-                                    <div class="avatar-list-stacked">
-                                        <span class="avatar avatar-sm avatar-rounded">
-                                            <img src="./assets/images/faces/2.jpg" alt="img">
-                                        </span>
-                                        <span class="avatar avatar-sm avatar-rounded">
-                                            <img src="./assets/images/faces/8.jpg" alt="img">
-                                        </span>
-                                        <span class="avatar avatar-sm avatar-rounded">
-                                            <img src="./assets/images/faces/2.jpg" alt="img">
-                                        </span>
-                                        <a class="avatar avatar-sm bg-primary text-fixed-white avatar-rounded"
-                                            href="javascript:void(0);">
-                                            +4
-                                        </a>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="progress progress-xs">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 52%"
-                                            aria-valuenow="52" aria-valuemin="0" aria-valuemax="100">
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>$10,984.29</td> -->
-                                <!-- <td>
-                                    <div class="hstack gap-2 fs-15">
-                                        <a href="">Redirect to Design</a>
-                                        <a aria-label="anchor" href="javascript:void(0);"
-                                            class="btn btn-icon btn-sm btn-success"><i
-                                                class="ri-download-2-line"></i></a>
-                                        <a aria-label="anchor" href="javascript:void(0);"
-                                            class="btn btn-icon btn-sm btn-info"><i class="ri-edit-line"></i></a>
-                                    </div>
-                                </td> -->
+                                
                             </tr>
                             <tr>
                                 <th scope="row"><input class="form-check-input" type="checkbox" id="checkboxNoLabel1"
                                     value="" aria-label="...">
                                 </th>
                                 <td>1 . </td>
+                                <td>
+                                    <div class="hstack gap-2 fs-15">
+                                        <a href="">Redirect to Design</a>
+                                        <!-- <a aria-label="anchor" href="javascript:void(0);"
+                                            class="btn btn-icon btn-sm btn-success"><i
+                                                class="ri-delete-2-line"></i></a>
+                                        <a aria-label="anchor" href="javascript:void(0);"
+                                            class="btn btn-icon btn-sm btn-info"><i class="ri-edit-line"></i></a> -->
+                                    </div>
+                                </td>
                                 <td>VA001 </td>
+                                <!-- <td>
+                                    <div class="d-flex align-items-center">
+                                        <span class="avatar avatar-xs me-2 online avatar-rounded">
+                                            <img src="./assets/images/faces/3.jpg" alt="img">
+                                        </span>
+                                        Mayor Kelly
+                                    </div>
+                                </td> -->
                                 <td>
                                     Standalone (SaiKrishna)</td>
                                 <td>Sai Krishna</td>
@@ -300,11 +370,11 @@
                                 <td>Telangana</td>
                                 <td>Hyderabad</td>
                                 <td><span class="badge bg-primary-transparent">Execution In Progress </span></td>
-                                <!-- <td>₹ 3,60,868</td>
+                                <td>₹ 3,60,868</td>
                                 <td>05 Aug, 2024</td>
                                 <td>02 Aug, 2024</td>
                                 <td>31 Aug, 2024</td>
-                                <td>-</td> -->
+                                <td>-</td>
                                 <!-- <td>CH TARUN, Varma Group</td>
                                 <td>-</td>
                                 <td>mayorkrlly&#64;gmail.com</td>
@@ -333,16 +403,139 @@
                                     </div>
                                 </td>
                                 <td>$10,984.29</td> -->
-                                <!-- <td>
+                                
+                            </tr>
+                            <tr>
+                                <th scope="row"><input class="form-check-input" type="checkbox" id="checkboxNoLabel1"
+                                    value="" aria-label="...">
+                                </th>
+                                <td>1 . </td>
+                                <td>
                                     <div class="hstack gap-2 fs-15">
                                         <a href="">Redirect to Design</a>
-                                        <a aria-label="anchor" href="javascript:void(0);"
+                                        <!-- <a aria-label="anchor" href="javascript:void(0);"
                                             class="btn btn-icon btn-sm btn-success"><i
-                                                class="ri-download-2-line"></i></a>
+                                                class="ri-delete-2-line"></i></a>
                                         <a aria-label="anchor" href="javascript:void(0);"
-                                            class="btn btn-icon btn-sm btn-info"><i class="ri-edit-line"></i></a>
+                                            class="btn btn-icon btn-sm btn-info"><i class="ri-edit-line"></i></a> -->
+                                    </div>
+                                </td>
+                                <td>VA001 </td>
+                                <!-- <td>
+                                    <div class="d-flex align-items-center">
+                                        <span class="avatar avatar-xs me-2 online avatar-rounded">
+                                            <img src="./assets/images/faces/3.jpg" alt="img">
+                                        </span>
+                                        Mayor Kelly
                                     </div>
                                 </td> -->
+                                <td>
+                                    Standalone (SaiKrishna)</td>
+                                <td>Sai Krishna</td>
+                                <td>IR Residential</td>
+                                <td>Telangana</td>
+                                <td>Hyderabad</td>
+                                <td><span class="badge bg-primary-transparent">Execution In Progress </span></td>
+                                <td>₹ 3,60,868</td>
+                                <td>05 Aug, 2024</td>
+                                <td>02 Aug, 2024</td>
+                                <td>31 Aug, 2024</td>
+                                <td>-</td>
+                                <!-- <td>CH TARUN, Varma Group</td>
+                                <td>-</td> -->
+                                <!-- <td>mayorkrlly&#64;gmail.com</td>
+                                <td>
+                                    <div class="avatar-list-stacked">
+                                        <span class="avatar avatar-sm avatar-rounded">
+                                            <img src="./assets/images/faces/2.jpg" alt="img">
+                                        </span>
+                                        <span class="avatar avatar-sm avatar-rounded">
+                                            <img src="./assets/images/faces/8.jpg" alt="img">
+                                        </span>
+                                        <span class="avatar avatar-sm avatar-rounded">
+                                            <img src="./assets/images/faces/2.jpg" alt="img">
+                                        </span>
+                                        <a class="avatar avatar-sm bg-primary text-fixed-white avatar-rounded"
+                                            href="javascript:void(0);">
+                                            +4
+                                        </a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="progress progress-xs">
+                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 52%"
+                                            aria-valuenow="52" aria-valuemin="0" aria-valuemax="100">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>$10,984.29</td> -->
+                                
+                            </tr>
+                            <tr>
+                                <th scope="row"><input class="form-check-input" type="checkbox" id="checkboxNoLabel1"
+                                    value="" aria-label="...">
+                                </th>
+                                <td>1 . </td>
+                                <td>
+                                    <div class="hstack gap-2 fs-15">
+                                        <a href="">Redirect to Design</a>
+                                        <!-- <a aria-label="anchor" href="javascript:void(0);"
+                                            class="btn btn-icon btn-sm btn-success"><i
+                                                class="ri-delete-2-line"></i></a>
+                                        <a aria-label="anchor" href="javascript:void(0);"
+                                            class="btn btn-icon btn-sm btn-info"><i class="ri-edit-line"></i></a> -->
+                                    </div>
+                                </td>
+                                <td>VA001 </td>
+                                <!-- <td>
+                                    <div class="d-flex align-items-center">
+                                        <span class="avatar avatar-xs me-2 online avatar-rounded">
+                                            <img src="./assets/images/faces/3.jpg" alt="img">
+                                        </span>
+                                        Mayor Kelly
+                                    </div>
+                                </td> -->
+                                <td>
+                                    Standalone (SaiKrishna)</td>
+                                <td>Sai Krishna</td>
+                                <td>IR Residential</td>
+                                <td>Telangana</td>
+                                <td>Hyderabad</td>
+                                <td><span class="badge bg-primary-transparent">Execution In Progress </span></td>
+                                <td>₹ 3,60,868</td>
+                                <td>05 Aug, 2024</td>
+                                <td>02 Aug, 2024</td>
+                                <td>31 Aug, 2024</td>
+                                <td>-</td>
+                                <!-- <td>CH TARUN, Varma Group</td>
+                                <td>-</td>
+                                <td>mayorkrlly&#64;gmail.com</td>
+                                <td>
+                                    <div class="avatar-list-stacked">
+                                        <span class="avatar avatar-sm avatar-rounded">
+                                            <img src="./assets/images/faces/2.jpg" alt="img">
+                                        </span>
+                                        <span class="avatar avatar-sm avatar-rounded">
+                                            <img src="./assets/images/faces/8.jpg" alt="img">
+                                        </span>
+                                        <span class="avatar avatar-sm avatar-rounded">
+                                            <img src="./assets/images/faces/2.jpg" alt="img">
+                                        </span>
+                                        <a class="avatar avatar-sm bg-primary text-fixed-white avatar-rounded"
+                                            href="javascript:void(0);">
+                                            +4
+                                        </a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="progress progress-xs">
+                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 52%"
+                                            aria-valuenow="52" aria-valuemin="0" aria-valuemax="100">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>$10,984.29</td> -->
+                                
                             </tr>
                         </tbody>
                     </table>
@@ -376,8 +569,3 @@
         </div>
     </div>
 </div>
-
-
-
-
-
