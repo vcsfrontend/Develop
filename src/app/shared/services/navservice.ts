@@ -1960,6 +1960,7 @@ export class NavService implements OnDestroy {
       type: 'link',
       linkType : 'internal',
       active: false,
+      path: '/dashboard/adonai'
     },
     {
       title: 'CRM',
@@ -1977,8 +1978,10 @@ export class NavService implements OnDestroy {
       type: 'link',
       linkType : 'internal',
       active: false,
-      path : "https://stag.solidperformers.com/new/auth/access_account/Y3JtYXBpcmVnNEBnbWFpbC5jb20="
+      path : "/dashboard/orgSettings"
     }
+    //orgSettings
+  
     // {
     //   title: 'Dashboards',
     //   icon: 'bi-house',
