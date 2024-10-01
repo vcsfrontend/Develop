@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SwitherService } from '../../../../shared/services/swither.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -8,11 +8,13 @@ import { FirebaseService } from '../../../../shared/services/firebase.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { Tools } from '../../../../shared/common/Enums/Tools';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-basic',
   standalone: true,
   // imports: [RouterModule],
-  imports: [RouterModule,NgbModule,FormsModule,ReactiveFormsModule ,ToastrModule,MatFormFieldModule, MatSelectModule],
+  imports: [RouterModule,NgbModule,FormsModule,ReactiveFormsModule ,ToastrModule,
+    MatFormFieldModule, MatSelectModule, CommonModule],
     // AngularFireModule,
     // AngularFireDatabaseModule,
     // AngularFirestoreModule,
@@ -23,31 +25,31 @@ import { Tools } from '../../../../shared/common/Enums/Tools';
   styleUrl: './basic.component.scss'
 })
 export class BasicComponent {
-  crm = false;
+  crm = false; submitted =false; cnfmPaswrd: any = ''; paswrd:any = '';
   adonai = false;
   adoanAiRole :any;
   crmRole :any;
   toolsList = [Tools.Adonai,Tools.Crm]
 
   signupFrm: FormGroup = this.fb.group({ 
-    type : '',
-    firstName: "",
-    lastName: "",
-    email: "",
+    type : ['', Validators.required],
+    firstName: ['', Validators.required],
+    lastName: ['', Validators.required],
+    email: ['', Validators.required],
     country: "",
     dob: "",
     crm:false,
     adonai:false,
     phoneNumber: '',
-    username: "",
-    password: "",
+    username: ['', Validators.required],
+    password: ['', Validators.required],
     tools : new FormControl('')
     //"toolId": 0,
     //"roleId": 0,
   })
   
   constructor(public fb: FormBuilder, public switchService: SwitherService, 
-    private toastr: ToastrService){
+    private toastr: ToastrService, private router: Router){
     document.body.classList.add('authentication-background');
   }
 
@@ -57,10 +59,14 @@ export class BasicComponent {
   ngOnDestroy(): void {
     document.body.classList.remove('authentication-background');    
   }
+  get f() {
+    return this.signupFrm.controls;
+  }
   // ngAfterViewChecked() {
   //   console.log("60",this.signupFrm.get('tools'))
   // }
   onSignup(){
+    this.submitted = true;
     const crm = this.signupFrm.get('tools')?.value.includes('crm');
     const adonai = this.signupFrm.get('tools')?.value.includes('adonai');
     let payload = this.signupFrm.getRawValue();
@@ -69,21 +75,30 @@ export class BasicComponent {
     payload.adonai = adonai,
     payload.phoneNumber = +payload.phoneNumber,
     console.log('payload -', payload);
-    this.switchService.signupApi(payload).subscribe({
+    if (this.signupFrm.invalid) {
+        return;
+    }
+    else if(this.paswrd != this.cnfmPaswrd){
+      this.toastr.error('password and confirm password not matched','signup', {
+        timeOut: 3000,
+        positionClass: 'toast-top-right',
+      });
+      return;
+    }
+    else{
+      this.switchService.signupApi(payload).subscribe({
       next: (res:any) => {
         if(res.status == true){
           this.toastr.success(res.message,'signup', {
-            timeOut: 3000,
-            positionClass: 'toast-top-right',
-          });
-        }else{
-          this.toastr.error(res.message,'signup', {
-            timeOut: 3000,
-            positionClass: 'toast-top-right',
-          });
+            timeOut: 3000, positionClass: 'toast-top-right' });
+          this.router.navigate(['authentication/sign-in/basic'])
+          } else {
+            this.toastr.error(res.message,'signup', {
+              timeOut: 3000, positionClass: 'toast-top-right' });
+          }
         }
-      }
-    })
+      })
+    }
   }
   showPassword = false;
   showPassword1 = false;

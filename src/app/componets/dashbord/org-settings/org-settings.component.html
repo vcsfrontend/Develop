@@ -130,15 +130,27 @@
                         <div class="row">
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
                                 <p class="mb-2 text-muted">First Name</p>
-                                <input type="text" class="form-control" id="firstName" formControlName="firstName">
+                                <input type="text" class="form-control" id="firstName" formControlName="firstName"
+                                [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }" >
+                                <div *ngIf="submitted && f['firstName'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['firstName'].errors['required']">First name is required</div>
+                                </div>
                             </div>
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
                                 <p class="mb-2 text-muted">Last Name</p>
-                                <input type="text" class="form-control" id="lastName" formControlName="lastName">
+                                <input type="text" class="form-control" id="lastName" formControlName="lastName"
+                                [ngClass]="{ 'is-invalid': submitted && f['lastName'].errors }" >
+                                <div *ngIf="submitted && f['lastName'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['lastName'].errors['required']">Last name is required</div>
+                                </div>
                             </div>
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
                                 <p class="mb-2 text-muted">User Name</p>
-                                <input type="text" class="form-control" id="userName" formControlName="username">
+                                <input type="text" class="form-control" id="userName" formControlName="username"
+                                    [ngClass]="{ 'is-invalid': submitted && f['username'].errors }">
+                                <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['username'].errors['required']">User name is required</div>
+                                </div>
                             </div>
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
                                 <p class="mb-2 text-muted">Date of Birth</p>
@@ -146,23 +158,52 @@
                             </div>
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
                                 <p class="mb-2 text-muted">Email</p>
-                                <input type="text" class="form-control" id="input" formControlName="email">
+                                <input type="text" class="form-control" id="input" formControlName="email"
+                                    [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" >
+                                <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['email'].errors['required']">Email is required</div>
+                                </div>
                             </div>
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
                                 <label for="input-label" class="form-label">Password</label>
-                                <input type="text" class="form-control" id="input-label" formControlName="password">
+                                <!-- <input type="password" class="form-control" id="input-label" formControlName="password"> -->
+                                <div class="position-relative">
+                                    <input type="password" class="form-control form-control-lg" id="signup-password" placeholder="password" 
+                                    [type]="showPassword ? 'text' : 'password'" autocomplete formControlName="password"
+                                    [ngClass]="{ 'is-invalid': submitted && f['password'].errors }" [(ngModel)]="paswrd">
+                                    <a href="javascript:void(0);" class="show-password-button text-muted" (click)="createpassword()" id="button-addon2"><i class="ri-eye-{{toggleClass}} align-middle"></i></a>
+                                    
+                                    <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['password'].errors['required']">Password is required</div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
                                 <label for="input-label" class="form-label">Confirm Password</label>
-                                <input type="password" class="form-control" formControlName="password" id="password"
-                                    required>
+                                <!-- <input type="password" class="form-control" formControlName="password" id="password" required> -->
+                                <div class="position-relative">
+                                    <input type="password" class="form-control form-control-lg" id="signup-confirmpassword" 
+                                    placeholder="confirm password" [type]="showPassword1 ? 'text' : 'password'" autocomplete 
+                                    [(ngModel)]="cnfmPaswrd" [ngModelOptions]="{standalone: true}">
+                                    <a href="javascript:void(0);" class="show-password-button text-muted" (click)="createpassword1()"  
+                                    id="button-addon21"><i class="ri-eye-{{toggleClass1}} align-middle"></i></a>
+                                </div>
                             </div>
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
                                 <label for="input-label" class="form-label">Phone Number</label>
                                 <input type="phoneNo" class="form-control" formControlName="phoneNumber" id="phoneNo">
                             </div>
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                                <label for="role-id" class="form-label text-default">Tool ID<sup>*</sup></label>
+                                <label for="role-id" class="form-label text-default">Tool ID<sup>*</sup></label><br>
+                                <mat-form-field>
+                                    <!-- <mat-label>Toppings</mat-label> -->
+                                    <mat-select formControlName="tools" multiple>
+                                    @for (topping of toolsList; track topping) {
+                                        <mat-option [value]="topping">{{topping}}</mat-option>
+                                    }
+                                    </mat-select>
+                                </mat-form-field>
+                                <!-- <label for="role-id" class="form-label text-default">Tool ID<sup>*</sup></label>
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="1" name="adonai"
                                         id="flexCheckDefault" [(ngModel)]="adonai"
@@ -173,7 +214,7 @@
                                     <input class="form-check-input" type="checkbox" value="2" name="crm"
                                         id="flexCheckChecked" [(ngModel)]="crm" [ngModelOptions]="{standalone: true}">
                                     <label class="form-check-label" for="flexCheckChecked">CRM</label>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
                                 <label for="input-label" class="form-label">Country</label>
@@ -188,7 +229,7 @@
                     <div class="col-xl-12">
                         <div class="float-end">
                             <button type="button" class="btn btn-sm btn-success text-center me-2"
-                                (click)="onSubmit();isAddEdt=!isAddEdt;" *ngIf="aeTyp == 'a'">Save
+                                (click)="onSubmit();" *ngIf="aeTyp == 'a'">Save
                             </button>
                             <button type="button" class="btn btn-sm btn-danger text-center"
                                 (click)="isAddEdt=!isAddEdt;onRst()">Cancel

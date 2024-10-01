@@ -5,6 +5,7 @@ import { SwitherService } from '../../../../shared/services/swither.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { FirebaseService } from '../../../../shared/services/firebase.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-basic',
@@ -13,7 +14,7 @@ import { FirebaseService } from '../../../../shared/services/firebase.service';
     // AngularFireModule,
     // AngularFireDatabaseModule,
     // AngularFirestoreModule,
-    ToastrModule
+    ToastrModule, CommonModule
 ],
   
     providers: [FirebaseService,{ provide: ToastrService, useClass: ToastrService }],
@@ -25,7 +26,7 @@ export class BasicComponent {
   //   "email": "string",
   //   "password": "string"
   // }
-  confirmPassword:any = ''; newPassword:any = ''; email:any = '';
+  confirmPassword:any = ''; newPassword:any = ''; email:any = ''; submt = true;
   constructor(public fb: FormBuilder, public switchService: SwitherService, 
     private toastr: ToastrService, private router: Router){
     document.body.classList.add('authentication-background');
@@ -65,14 +66,36 @@ export class BasicComponent {
     }
   }
 
+  onEmail(){
+    if (this.email == ''){
+      this.toastr.warning('please enter email ','reset', { timeOut: 3000, positionClass: 'toast-top-right'})
+    } else {
+    this.switchService.getValidEmail(this.email).subscribe({
+      next: (res:any) => {
+        if(res.status == true){
+          // this.router.navigate(['/authentication/sign-in/basic']);
+          this.submt = false;
+          this.toastr.success(res.message,'reset password', {
+            timeOut: 3000,
+            positionClass: 'toast-top-right',
+          });
+        } else {
+          this.toastr.error(res.message,'reset password', {
+            timeOut: 3000,
+            positionClass: 'toast-top-right',
+            });
+          }
+        }
+      })
+    }
+  }
+
   onResetpPassword(){
     let payload = {
       email: this.email,
       password: (this.newPassword == this.confirmPassword) ? this.newPassword : ''
     };
-    if (this.email == ''){
-      this.toastr.warning('please enter email ','reset', { timeOut: 3000, positionClass: 'toast-top-right'})
-    } else if(this.newPassword == ''){
+    if(this.newPassword == ''){
       this.toastr.warning('please enter password ','reset', { timeOut: 3000, positionClass: 'toast-top-right'})
     } else if(this.confirmPassword == ''){
       this.toastr.warning('please enter confirmpassword ','reset', { timeOut: 3000, positionClass: 'toast-top-right'})
@@ -85,12 +108,12 @@ export class BasicComponent {
         next: (res:any) => {
           if(res.status == true){
             this.router.navigate(['/authentication/sign-in/basic']);
-            this.toastr.success(res.message,'signup', {
+            this.toastr.success(res.message,'reset password', {
               timeOut: 3000,
               positionClass: 'toast-top-right',
             });
           }else{
-            this.toastr.error(res.message,'signup', {
+            this.toastr.error(res.message,'reset password', {
               timeOut: 3000,
               positionClass: 'toast-top-right',
             });

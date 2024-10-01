@@ -16,27 +16,40 @@
                         <div class="col-xl-12">
                                 <label for="role-id" class="form-label text-default">Type
                                     <span class="text-danger"> *</span></label>
-                                <select class="form-select form-select-lg" id="role-id"
-                                    formControlName="type">
+                                <select class="form-select form-select-lg" id="role-id" formControlName="type" 
+                                    [ngClass]="{ 'is-invalid': submitted && f['type'].errors }" >
                                     <option value="" disabled selected>Select type</option>
                                     <option value="1">Individual</option>
                                     <option value="2">Enterprise</option>
                                 </select>
+                            <div *ngIf="submitted && f['type'].errors" class="invalid-feedback">
+                                <div *ngIf="f['type'].errors['required']">Type is required</div>
+                            </div>
                             </div>
                         <div class="col-xl-12">
                             <label for="signup-firstname" class="form-label text-default">First Name<sup>*</sup></label>
                             <input type="text" class="form-control form-control-lg" id="signup-firstname" placeholder="First name"
-                            formControlName="firstName">
+                                formControlName="firstName" [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }" >
+                            <div *ngIf="submitted && f['firstName'].errors" class="invalid-feedback">
+                                <div *ngIf="f['firstName'].errors['required']">First name is required</div>
+                            </div>
                         </div>
                         <div class="col-xl-12">
                             <label for="signup-lastname" class="form-label text-default">Last Name<sup>*</sup></label>
                             <input type="text" class="form-control form-control-lg" id="signup-lastname" 
-                            placeholder="Last name" formControlName="lastName">
+                            placeholder="Last name" formControlName="lastName"
+                            [ngClass]="{ 'is-invalid': submitted && f['lastName'].errors }">
+                            <div *ngIf="submitted && f['lastName'].errors" class="invalid-feedback">
+                                <div *ngIf="f['lastName'].errors['required']">Last name is required</div>
+                            </div>
                         </div>
                         <div class="col-xl-12">
                             <label for="signup-username" class="form-label text-default">User Name<sup>*</sup></label>
                             <input type="text" class="form-control form-control-lg" id="signup-username" placeholder="username"
-                            formControlName="username">
+                            formControlName="username" [ngClass]="{ 'is-invalid': submitted && f['username'].errors }">
+                            <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
+                                <div *ngIf="f['username'].errors['required']">User name is required</div>
+                            </div>
                         </div>
                         <div class="col-xl-12">
                             <label for="signup-dob" class="form-label text-default">Date of birth<sup>*</sup></label>
@@ -46,21 +59,32 @@
                         <div class="col-xl-12">
                             <label for="signup-email" class="form-label text-default">Email<sup>*</sup></label>
                             <input type="text" class="form-control form-control-lg" id="signup-email" placeholder="email"
-                            formControlName="email">
+                            formControlName="email" [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" >
+                            <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                                <div *ngIf="f['email'].errors['required']">Email is required</div>
+                            </div>
                         </div>
                         <div class="col-xl-12">
                             <label for="signup-password" class="form-label text-default">Password<sup>*</sup></label>
                             <div class="position-relative">
                                 <input type="password" class="form-control form-control-lg" id="signup-password" placeholder="password" 
-                                [type]="showPassword ? 'text' : 'password'" autocomplete formControlName="password">
+                                [type]="showPassword ? 'text' : 'password'" autocomplete formControlName="password"
+                                [ngClass]="{ 'is-invalid': submitted && f['password'].errors }" [(ngModel)]="paswrd">
                                 <a href="javascript:void(0);" class="show-password-button text-muted" (click)="createpassword()"  id="button-addon2"><i class="ri-eye-{{toggleClass}} align-middle"></i></a>
+                                
+                                <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['password'].errors['required']">Password is required</div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-xl-12 mb-2">
                             <label for="signup-confirmpassword" class="form-label text-default">Confirm Password<sup>*</sup></label>
                             <div class="position-relative">
-                                <input type="password" class="form-control form-control-lg" id="signup-confirmpassword" placeholder="confirm password" [type]="showPassword1 ? 'text' : 'password'" autocomplete>
-                                <a href="javascript:void(0);" class="show-password-button text-muted" (click)="createpassword1()"  id="button-addon21"><i class="ri-eye-{{toggleClass1}} align-middle"></i></a>
+                                <input type="password" class="form-control form-control-lg" id="signup-confirmpassword" 
+                                placeholder="confirm password" [type]="showPassword1 ? 'text' : 'password'" autocomplete 
+                                [(ngModel)]="cnfmPaswrd" [ngModelOptions]="{standalone: true}">
+                                <a href="javascript:void(0);" class="show-password-button text-muted" (click)="createpassword1()"  
+                                id="button-addon21"><i class="ri-eye-{{toggleClass1}} align-middle"></i></a>
                             </div>
                             
                         </div>
