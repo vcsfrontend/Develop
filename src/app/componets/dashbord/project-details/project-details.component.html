@@ -1,4 +1,5 @@
-<p>project-details works!</p>
+<app-page-header title="Project-Details" title1="Dashboards" activeTitle="Project-Details"></app-page-header>
+
 <!-- Start::row-2 -->
 <div class="row">
     <div class="col-xl-7">
@@ -104,6 +105,382 @@
             </div>
         </div>
     </div>
+    <div class="col-xl-5">
+        <div [ngClass]="{'main-chart-wrapper': true, 'responsive-chat-open': isOpen}"
+            class="main-chart-wrapper p-2 gap-2 d-lg-flex">
+        
+            <div class="chat-info border">
+                <a aria-label="anchor" href="javascript:void(0)"
+                    class="btn btn-secondary btn-icon rounded-circle chat-add-icon">
+                    <i class="ri-add-line"></i>
+                </a>
+                <!-- <div class="d-flex align-items-center justify-content-between w-100 p-3 border-bottom">
+                    <div>
+                        <h5 class="fw-medium mb-0">Messages</h5>
+                    </div>
+                    <div ngbDropdown class="dropdown no-caret">
+                        <button ngbDropdownToggle aria-label="button"
+                            class="btn btn-icon btn-secondary-light btn-wave waves-light" type="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="ri-settings-3-line"></i>
+                        </button>
+                        <ul ngbDropdownMenu class="dropdown-menu">
+                            <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">Action</a></li>
+                            <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">Another action</a></li>
+                            <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
+                        </ul>
+                    </div>
+                </div> -->
+                <!-- <div class="chat-search p-3 border-bottom">
+                    <div class="input-group">
+                        <input type="text" class="form-control bg-light border-0" placeholder="Search Chat"
+                            aria-describedby="button-addon2">
+                        <button aria-label="button" class="btn btn-light" type="button" id="button-addon2"><i
+                                class="ri-search-line text-muted"></i></button>
+                    </div>
+                </div> -->
+                <overlay-scrollbars [defer]>
+                    <ul ngbNav #nav="ngbNav" class="nav nav-tabs tab-style-2 nav-justified mb-0 border-bottom d-flex"
+                        id="myTab1" role="tablist">
+                        <li ngbNavItem class="nav-item border-end me-0" role="presentation">
+                            <button ngbNavLink class="nav-link  h-100" id="users-tab" data-bs-toggle="tab"
+                                data-bs-target="#users-tab-pane" type="button" role="tab" aria-controls="users-tab-pane"
+                                aria-selected="true"><i
+                                    class="ri-history-line me-1 align-middle d-inline-block"></i>My Organization</button>
+                            <ng-template ngbNavContent>
+                                <div class="col-xl-12 d-flex p-3 align-items-center justify-content-between border-bottom">
+                                <div class="col-xl-6">project users</div>
+                                <div class="d-grid border-bottom border-block-end-dashed">
+                                    <button class="btn btn-sm btn-secondary  d-flex"
+                                    (click)="open(content)"    data-bs-toggle="modal" data-bs-target="#addtask">
+                                        <i class="ri-add-line fs-14 align-middle me-1"></i>Add users
+                                    </button>
+                                
+                                    <ng-template #content id="addtask" let-modal>
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h6 class="modal-title" id="mail-ComposeLabel">assign project users</h6>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            (click)="modal.close('Cross click')" aria-label="Close"></button>
+                                            </div>
+                                        <div class="modal-body px-4">
+                                            <div class="row gy-2">
+                                                <div class="col-xl-12">
+                                                    <label class="form-label">Select User</label>
+                                                    <ng-select  data-trigger name="choices-single-default" placeholder="select"
+                                                        id="choices-single-default">
+                                                        <ng-option value="" selected>Select</ng-option>
+                                                        <ng-option value="Critical">Critical</ng-option>
+                                                        <ng-option value="High">High</ng-option>
+                                                        <ng-option value="Medium">Medium</ng-option>
+                                                        <ng-option value="Low">Low</ng-option>
+                                                    </ng-select>
+                                                </div>
+                                                <div class="col-xl-12">
+                                                    <label class="form-label">Select User role</label>
+                                                    <ng-select  data-trigger name="choices-single-default" placeholder="select"
+                                                        id="choices-single-default">
+                                                        <ng-option value="" selected>Select</ng-option>
+                                                        <ng-option value="Critical">Critical</ng-option>
+                                                        <ng-option value="High">High</ng-option>
+                                                        <ng-option value="Medium">Medium</ng-option>
+                                                        <ng-option value="Low">Low</ng-option>
+                                                    </ng-select>
+                                                </div>
+                                                
+                                                  
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-light" data-bs-dismiss="modal"  (click)="modal.close('Cross click')">Cancel</button>
+                                            <button type="button" class="btn btn-primary">Create</button>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                                </div>
+                            </div>
+                                <div class="  border-0 chat-users-tab" id="users-tab-pane" role="tabpanel"
+                                    aria-labelledby="users-tab" tabindex="0">
+                                    <overlay-scrollbars [defer] class="list-unstyled mb-0 mt-2 chat-users-tab" id="chat-msg-scroll">
+                                        <li class="pb-0">
+                                            <p class="text-muted fs-11 fw-medium mb-2 op-7">ACTIVE CHATS</p>
+                                        </li>
+                                        @for (recent of recents; track recent) {
+                                        <li class="checkforactive" [ngClass]="recent.chatMsgUnread ? 'chat-msg-unread' : ''">
+                                            <a href="javascript:void(0);" 
+                                            (click)="changeTheInfo(recent)">
+                                                <div class="d-flex align-items-top">
+                                                    <div class="me-1 lh-1">
+                                                        <span class="avatar avatar-md  me-2 avatar-rounded"
+                                                            [ngClass]="recent.status == 'online' ? 'online' : 'offline'">
+                                                            <img [src]="recent.image" alt="img">
+                                                        </span>
+                                                    </div>
+                                                    <div class="flex-fill">
+                                                        <p class="mb-0 fw-medium">
+                                                            {{ recent.name }}<span
+                                                                class="float-end text-muted fw-normal fs-11">{{ recent.time
+                                                                }}</span>
+                                                        </p>
+                                                        <p class="fs-12 mb-0" [ngClass]="recent.chatMsgTyping ? 'chat-msg-typing' : ''">
+                                                            <span class="chat-msg text-truncate">{{ recent.message }}</span>
+                                                            @if(recent.unReadMsgStatus){
+                                                            <span [ngClass]="recent.unReadMsgStatus"
+                                                                class="badge rounded-circle float-end">{{ recent.unReadMsgCount
+                                                                }}</span>
+                                                            }@else {
+                                                            <span class="chat-read-icon float-end align-middle"><i
+                                                                    class="ri-check-double-fill"></i></span>
+                                                            }
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </a>
+        
+                                        </li>
+                                        }
+                                        <li class="pb-0">
+                                            <p class="text-muted fs-11 fw-medium mb-2 op-7">ALL CHATS</p>
+                                        </li>
+                                        @for (allchat of allchats; track allchat) {
+                                        <li class="checkforactive" [ngClass]="{'chat-msg-unread':allchat.chatMsgUnread , 'chat-inactive':allchat.status == 'offline'}">
+                                            <a href="javascript:void(0);"
+                                             (click)="changeTheInfo(allchat)">
+                                                <div class="d-flex align-items-top">
+                                                    <div class="me-1 lh-1">
+                                                        <span class="avatar avatar-md  me-2 avatar-rounded"
+                                                            [ngClass]="allchat.status == 'online' ? 'online' : 'offline'">
+                                                            <img [src]="allchat.image" alt="img">
+                                                        </span>
+                                                    </div>
+                                                    <div class="flex-fill">
+                                                        <p class="mb-0 fw-medium">
+                                                            {{ allchat.name }}<span
+                                                                class="float-end text-muted fw-normal fs-11">{{ allchat.time
+                                                                }}</span>
+                                                        </p>
+                                                        <p class="fs-12 mb-0">
+                                                            <span class="chat-msg text-truncate">{{ allchat.message }}</span>
+                                                            @if(allchat.unReadMsgStatus){
+                                                            <span [ngClass]="allchat.unReadMsgStatus"
+                                                                class="badge rounded-circle float-end">{{ allchat.unReadMsgCount
+                                                                }}</span>
+                                                            }@else {
+                                                            <span class="chat-read-icon float-end align-middle"><i
+                                                                    class="ri-check-double-fill"></i></span>
+                                                            }
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </a>
+        
+                                        </li>
+                                        }
+                                    </overlay-scrollbars>
+                                </div>
+        
+                            </ng-template>
+                        </li>
+                        <li ngbNavItem class="nav-item border-end me-0" role="presentation">
+                            <button ngbNavLink class="nav-link h-100" id="groups-tab" data-bs-toggle="tab"
+                                data-bs-target="#groups-tab-pane" type="button" role="tab" aria-controls="groups-tab-pane"
+                                aria-selected="false"><i
+                                    class="ri-group-2-line me-1 align-middle d-inline-block"></i>Other Organization</button>
+                            <ng-template ngbNavContent>
+                                <overlay-scrollbars [defer] class=" border-0 chat-groups-tab" id="groups-tab-pane" role="tabpanel"
+                                    aria-labelledby="groups-tab" tabindex="0">
+        
+                                        <ul class="list-unstyled mb-0 mt-2 ">
+                                            <li class="pb-0">
+                                                <p class="text-muted fs-11 fw-medium mb-1 op-7">MY CHAT GROUPS</p>
+                                            </li>
+                                            <li>
+                                                <div class="d-flex align-items-center justify-content-between">
+                                                    <div>
+                                                        <p class="mb-0">1) Family Together</p>
+                                                        <p class="mb-0"><span class="badge bg-success-transparent">4
+                                                                Online</span></p>
+                                                    </div>
+                                                    <div class="avatar-list-stacked my-auto">
+                                                        <span class="avatar avatar-sm avatar-rounded">
+                                                            <img src="./assets/images/faces/2.jpg" alt="img">
+                                                        </span>
+                                                        <span class="avatar avatar-sm avatar-rounded">
+                                                            <img src="./assets/images/faces/8.jpg" alt="img">
+                                                        </span>
+                                                        <span class="avatar avatar-sm avatar-rounded">
+                                                            <img src="./assets/images/faces/2.jpg" alt="img">
+                                                        </span>
+                                                        <span class="avatar avatar-sm avatar-rounded">
+                                                            <img src="./assets/images/faces/10.jpg" alt="img">
+                                                        </span>
+                                                        <a class="avatar avatar-sm bg-primary text-fixed-white avatar-rounded"
+                                                            href="javascript:void(0);">
+                                                            +19
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="d-flex align-items-center justify-content-between">
+                                                    <div>
+                                                        <p class="mb-0">2) Work Buddies </p>
+                                                        <p class="mb-0"><span class="badge bg-secondary-transparent">32
+                                                                Online</span></p>
+                                                    </div>
+                                                    <div class="avatar-list-stacked my-auto">
+                                                        <span class="avatar avatar-sm avatar-rounded">
+                                                            <img src="./assets/images/faces/1.jpg" alt="img">
+                                                        </span>
+                                                        <span class="avatar avatar-sm avatar-rounded">
+                                                            <img src="./assets/images/faces/7.jpg" alt="img">
+                                                        </span>
+                                                        <span class="avatar avatar-sm avatar-rounded">
+                                                            <img src="./assets/images/faces/3.jpg" alt="img">
+                                                        </span>
+                                                        <span class="avatar avatar-sm avatar-rounded">
+                                                            <img src="./assets/images/faces/9.jpg" alt="img">
+                                                        </span>
+                                                        <span class="avatar avatar-sm avatar-rounded">
+                                                            <img src="./assets/images/faces/12.jpg" alt="img">
+                                                        </span>
+                                                        <a class="avatar avatar-sm bg-primary text-fixed-white avatar-rounded"
+                                                            href="javascript:void(0);">
+                                                            +123
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="d-flex align-items-center justify-content-between">
+                                                    <div>
+                                                        <p class="mb-0">3) Friends Forever</p>
+                                                        <p class="mb-0"><span class="badge bg-warning-transparent">3
+                                                                Online</span></p>
+                                                    </div>
+                                                    <div class="avatar-list-stacked my-auto">
+                                                        <span class="avatar avatar-sm avatar-rounded">
+                                                            <img src="./assets/images/faces/4.jpg" alt="img">
+                                                        </span>
+                                                        <span class="avatar avatar-sm avatar-rounded">
+                                                            <img src="./assets/images/faces/8.jpg" alt="img">
+                                                        </span>
+                                                        <span class="avatar avatar-sm avatar-rounded">
+                                                            <img src="./assets/images/faces/13.jpg" alt="img">
+                                                        </span>
+                                                        <a class="avatar avatar-sm bg-primary text-fixed-white avatar-rounded"
+                                                            href="javascript:void(0);">
+                                                            +15
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="d-flex align-items-center justify-content-between">
+                                                    <div>
+                                                        <p class="mb-0">4) Social Media Deals</p>
+                                                        <p class="mb-0"><span class="badge bg-danger-transparent">5
+                                                                Online</span></p>
+                                                    </div>
+                                                    <div class="avatar-list-stacked my-auto">
+                                                        <span class="avatar avatar-sm avatar-rounded">
+                                                            <img src="./assets/images/faces/1.jpg" alt="img">
+                                                        </span>
+                                                        <span class="avatar avatar-sm avatar-rounded">
+                                                            <img src="./assets/images/faces/7.jpg" alt="img">
+                                                        </span>
+                                                        <span class="avatar avatar-sm avatar-rounded">
+                                                            <img src="./assets/images/faces/14.jpg" alt="img">
+                                                        </span>
+                                                        <a class="avatar avatar-sm bg-primary text-fixed-white avatar-rounded"
+                                                            href="javascript:void(0);">
+                                                            +28
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="d-flex align-items-center justify-content-between">
+                                                    <div>
+                                                        <p class="mb-0">4) Apartment Group</p>
+                                                        <p class="mb-0"><span class="badge bg-light text-dark">0 Online</span>
+                                                        </p>
+                                                    </div>
+                                                    <div class="avatar-list-stacked my-auto">
+                                                        <span class="avatar avatar-sm avatar-rounded">
+                                                            <img src="./assets/images/faces/5.jpg" alt="img">
+                                                        </span>
+                                                        <span class="avatar avatar-sm avatar-rounded">
+                                                            <img src="./assets/images/faces/6.jpg" alt="img">
+                                                        </span>
+                                                        <span class="avatar avatar-sm avatar-rounded">
+                                                            <img src="./assets/images/faces/12.jpg" alt="img">
+                                                        </span>
+                                                        <span class="avatar avatar-sm avatar-rounded">
+                                                            <img src="./assets/images/faces/3.jpg" alt="img">
+                                                        </span>
+                                                        <a class="avatar avatar-sm bg-primary text-fixed-white avatar-rounded"
+                                                            href="javascript:void(0);">
+                                                            +53
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    <ul class="list-unstyled mb-0 mt-2 ">
+                                        <li class="pb-0">
+                                            <p class="text-muted fs-11 fw-medium mb-1 op-7">GROUP CHATS</p>
+                                        </li>
+                                        @for (group of groups; track group) {
+                                            <li class="checkforactive" [ngClass]="{'chat-msg-unread':group.chatMsgUnread , 'chat-inactive':group.status == 'offline'}">                                        <a href="javascript:void(0);"
+                                                  (click)="changeTheInfo(group)">
+                                                    <div class="d-flex align-items-top">
+                                                        <div class="me-1 lh-1">
+                                                            <span class="avatar avatar-md  me-2 avatar-rounded"
+                                                                [ngClass]="group.status == 'online' ? 'online' : 'offline'">
+                                                                <img [src]="group.image" alt="img">
+                                                            </span>
+                                                        </div>
+                                                        <div class="flex-fill">
+                                                            <p class="mb-0 fw-medium">
+                                                                {{ group.name }}<span
+                                                                    class="float-end text-muted fw-normal fs-11">{{ group.time
+                                                                    }}</span>
+                                                            </p>
+                                                            <p class="fs-12 mb-0" [ngClass]="group.chatMsgTyping ? 'chat-msg-typing' : ''">
+                                                                <span class="chat-msg text-truncate">{{ group.message }}</span>
+                                                                @if(group.unReadMsgStatus){
+                                                                <span [ngClass]="group.unReadMsgStatus"
+                                                                    class="badge rounded-circle float-end">{{ group.unReadMsgCount
+                                                                    }}</span>
+                                                                }@else {
+                                                                <span class="chat-read-icon float-end align-middle"><i
+                                                                        class="ri-check-double-fill"></i></span>
+                                                                }
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            }
+                                    </ul>
+                                </overlay-scrollbars>
+                            </ng-template>
+                        </li>
+                        
+                    </ul>
+        
+                    <div class="tab-content" id="myTabContent" [ngbNavOutlet]="nav">
+        
+         
+        
+                    </div>
+               </overlay-scrollbars> 
+            </div>
+        
+            
+        </div>
+        </div>
     
 </div>
 

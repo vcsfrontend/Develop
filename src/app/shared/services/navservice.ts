@@ -112,7 +112,7 @@ export class NavService implements OnDestroy {
       type: 'link',
       linkType : 'external',
       active: false,
-      path : "https://stag.solidperformers.com/new/auth/access_account/Y3JtYXBpcmVnNEBnbWFpbC5jb20="
+      path : "https://crmexpert.vcs.plus/auth/access_account/Y3JtYXBpcmVnNEBnbWFpbC5jb20="
     },
     {
       title: 'Settings',
