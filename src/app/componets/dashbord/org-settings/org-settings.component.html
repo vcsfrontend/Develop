@@ -85,6 +85,48 @@
                     </div>
                 </div>
                 <div class="card-body p-0">
+                    <div class="mat-elevation-z8">
+                        <div class="table-responsive">
+                            <table mat-table [dataSource]="dataSource">
+        
+                                <!-- Position Column -->
+                                <ng-container matColumnDef="slNo">
+                                    <th mat-header-cell *matHeaderCellDef> S.No. </th>
+                                    <td mat-cell *matCellDef="let element; let i = index"> {{getSNo(i)}} </td>
+                                </ng-container>
+                               
+                                <!-- Name Column -->
+                                <ng-container matColumnDef="firstName">
+                                    <th mat-header-cell *matHeaderCellDef> First Name </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+                                </ng-container>
+        
+                                <!-- Weight Column -->
+                                <ng-container matColumnDef="lastName">
+                                    <th mat-header-cell *matHeaderCellDef> Last Name </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+                                </ng-container>
+        
+                                <!-- Symbol Column -->
+                                <ng-container matColumnDef="email">
+                                    <th mat-header-cell *matHeaderCellDef> Email </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                                </ng-container>
+                                <ng-container matColumnDef="dateOfBirth">
+                                    <th mat-header-cell *matHeaderCellDef> Date of Birth </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.dob}} </td>
+                                </ng-container>
+        
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                            </table>
+                        </div>
+                        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+                            aria-label="Select page of periodic elements">
+                        </mat-paginator>
+                    </div>
+                </div>
+                <!-- <div class="card-body p-0">
                     <div class="table-responsive">
                         <table class="table text-nowrap">
                             <thead>
@@ -109,16 +151,11 @@
                                     <td>{{item.dob}}</td>
                                     <td>{{item.phoneNumber}}</td>
                                     <td>{{item.id}}</td>
-                                    <!-- <td>
-                                        <button type="button" class="btn btn-sm btn-primary text-center" title="Edit"
-                                            (click)="isAddEdt=!isAddEdt;aeTyp='e';onEdit(item._id);">Edit
-                                        </button>
-                                    </td> -->
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                </div>
+                </div> -->
 
 
             </div>

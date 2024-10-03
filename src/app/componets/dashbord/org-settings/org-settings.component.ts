@@ -17,22 +17,27 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { Tools } from '../../../shared/common/Enums/Tools';
+import { MaterialModuleModule } from '../../../material-module/material-module.module';
 @Component({
   selector: 'app-org-settings',
   standalone: true,
   imports: [RouterModule,NgbModule,FormsModule,ReactiveFormsModule ,AngularFireModule,
     AngularFireDatabaseModule, CommonModule,  MatFormFieldModule, MatSelectModule,
-    AngularFirestoreModule,ToastrModule, SharedModule, ShowcodeCardComponent],
+    AngularFirestoreModule,ToastrModule, SharedModule, ShowcodeCardComponent, MaterialModuleModule],
+    // imports: [SharedModule,NgbTableComponent,AddRowComponent,DeleteRowsComponent,
+    //   AddrowtableComponent,ScrollTableComponent,SelectionTableComponent,MaterialModuleModule],
+  
     providers: [FirebaseService,{ provide: ToastrService, useClass: ToastrService }],
   templateUrl: './org-settings.component.html',
   styleUrl: './org-settings.component.scss'
 })
 export class OrgSettingsComponent {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA1);
+  displayedColumns: string[] = ['slNo', 'firstName', 'lastName', 'email', 'dateOfBirth'];
+  dataSource = new MatTableDataSource<any>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  isAddEdt = false; aeTyp='a'; playersList: any; editData: any; winLossCount: any;
-  adonai= false; crm = false; userLst:any; submitted = false;
+  isAddEdt = false; aeTyp='a'; playersList: any; editData: any; 
+  adonai= false; crm = false; userLst:any; 
+  submitted = false;
   userForm!: FormGroup; cnfmPaswrd: any = ''; paswrd:any = '';
   adoanAiRole :any;
   crmRole :any; toolsList = [Tools.Adonai,Tools.Crm]
@@ -42,6 +47,7 @@ export class OrgSettingsComponent {
 
     ngOnInit(){
       this.formInit(); this.getUsers();
+      
     }
 
     ngAfterViewInit() {
@@ -68,13 +74,18 @@ export class OrgSettingsComponent {
         tools : new FormControl('')
       })
     }
+
+    getSNo(index: number): number {
+      return this.paginator.pageIndex * this.paginator.pageSize + index + 1;
+    }
     
     getUsers(){
-      this.switchService.getAllUsers().subscribe({
-        next: (res:any) => {
-          if(res){
-            this.userLst = res
-            console.log('userdata-', this.userLst);
+      this.switchService.getAllUsers().subscribe({ next: (res:any) => {
+        if(res){
+          this.userLst = res
+          // this.dataSource = new MatTableDataSource<any>(res);
+          this.dataSource.data = res;
+          console.log('userdata-', this.userLst);
           } else{
             this.toastr.error(res.message,'signup', {
               timeOut: 3000,
