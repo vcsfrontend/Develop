@@ -1,0 +1,15 @@
+<p>design works!</p>
+<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+
+    @if(images6){
+    <ngb-carousel class="carousel-inner" [interval]="3000" [showNavigationArrows]="true"
+        [showNavigationIndicators]="false">
+        @for (image of images6; track images6) {
+        <ng-template ngbSlide class="carousel-item active">
+            <img [src]="image.src" class="d-block w-100" alt="...">
+        </ng-template>
+        }
+    </ngb-carousel>
+    }
+    
+</div>

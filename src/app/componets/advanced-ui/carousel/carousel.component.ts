@@ -27,7 +27,7 @@ export class CarouselComponent {
 ];
 images6 = [
   
-  {src:'./assets/images/media/media-28.jpg'},
+  {src:'../'},
   {src:'./assets/images/media/media-31.jpg'},
   {src:'./assets/images/media/media-32.jpg'},
 ];
