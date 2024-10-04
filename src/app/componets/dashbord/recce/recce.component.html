@@ -12,96 +12,8 @@
         </div>
     </div>
 </div>
- <div class="row">
-    <!-- <div class="col-xl-12">
-        <div class="card custom-card">
-            <div class="card-header">
-                <div class="card-title">
-                    Vertical alignment with lists
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-xl-3">
-                        <ul ngbNav #nav5="ngbNav" [activeId]="active5" orientation="vertical" class="nav nav-pills nav-tabs flex-column nav-style-4" role="tablist">
-                            <li ngbNavItem="Home" class="nav-item">
-                                <a class="nav-link " data-bs-toggle="tab" role="tab"
-                                    aria-current="page" 
-                                    aria-selected="true" ngbNavLink >Home</a>
-                                    <ng-template ngbNavContent class="tab-content mt-2 mt-xl-0"> 
-                                        <div class=" show active text-muted mt-2" id="home-vertical"
-                                                    role="tabpanel">
-                                                    How hotel deals can help you live a better life. <b>How celebrity
-                                                        cruises</b> aren't as bad as you think. How cultural solutions
-                                                    can help you predict the future. How to cheat at dog friendly hotels
-                                                    and get away with it. 17 problems with summer activities. How to
-                                                    cheat at travel agents and get away with it. How not knowing family
-                                                    trip ideas makes you a rookie. What everyone is saying about daily
-                                                    deals.
-                                                </div>
-                                     </ng-template>
-                            </li>
-                            <li ngbNavItem="About" class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" role="tab"
-                                    aria-current="page" 
-                                    aria-selected="true" ngbNavLink >About</a>
-                                    <ng-template ngbNavContent class="tab-content mt-2 mt-xl-0"> 
-                                        <div class=" text-muted mt-2" id="about-vertical"
-                                            role="tabpanel">
-                                            How travel coupons make you a better lover. Why cultural solutions
-                                            are the new black. Why mom was right about travel insurances. How
-                                            family trip ideas can help you predict the future. <b>How carnival
-                                                cruises make you a better lover</b>. Why you'll never succeed at
-                                            daily deals. 11 ways cheapest flights can find you the love of your
-                                            life. The complete beginner's guide to mission trips.
-                                        </div>
-                                        </ng-template>
-                            </li>
-                            <li ngbNavItem="Services"class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" role="tab"
-                                    aria-current="page" 
-                                    aria-selected="true" ngbNavLink>Services</a>
-                                    <ng-template ngbNavContent class="tab-content mt-2 mt-xl-0"> 
-                                        <div class=" text-muted mt-2" id="services-vertical"
-                                        role="tabpanel">
-                                        Unbelievable healthy snack success stories. 12 facts about safe food
-                                        handling tips that will impress your friends. Restaurant weeks by
-                                        the numbers. Will mexican food ever rule the world? The 10 best thai
-                                        restaurant youtube videos. How restaurant weeks can make you sick.
-                                        The complete beginner's guide to cooking healthy food. Unbelievable
-                                        food stamp success stories.
-                                    </div>  
-                                    </ng-template>
-                            </li>
-                            <li ngbNavItem="Contacts" class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" role="tab"
-                                    aria-current="page" 
-                                    aria-selected="true" ngbNavLink>Contacts</a>
-                                    <ng-template ngbNavContent class="tab-content mt-2 mt-xl-0"> 
-                                        <div class=" text-muted mt-2" id="contacts-vertical"
-                                                     role="tabpanel">
-                                                     Why delicious magazines are killing you. Why our world would end if
-                                                     restaurants disappeared. Why restaurants are on crack about
-                                                     restaurants. How restaurants are making the world a better place. 8
-                                                     great articles about minute meals. Why our world would end if
-                                                     healthy snacks disappeared. Why the world would end without mexican
-                                                     food. The evolution of chef uniforms.
-                                                 </div>
-                                        </ng-template>
-                            </li>
-                        </ul>
-                       
-                    </div>
-                    <div class="col-xl-9">
-                        <div [ngbNavOutlet]="nav5" class="ms-4"> 
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
 
-    
+<div class="row">
     <div class="col-xl-12">
         <div class="card custom-card">
             <div class="card-header">
@@ -110,84 +22,86 @@
                 </div>
             </div>
             <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-xl-12">
+                        <div class="float-start">
+                            <button type="button" class="btn btn-sm btn-danger text-center me-2"
+                                (click)="openModal(content)" data-bs-toggle="modal1" data-bs-target="#addProject">
+                                Create Project
+                            </button>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-xl-3">
-                        <nav ngbNav #nav6="ngbNav" [activeId]="active6" orientation="vertical" class="nav nav-tabs flex-column nav-style-5" role="tablist">
+                        <nav ngbNav #nav6="ngbNav" [activeId]="active6" orientation="vertical"
+                            class="nav nav-tabs flex-column nav-style-5" role="tablist">
                             <ng-container ngbNavItem="Home">
-                                <a ngbNavLink class="nav-link" data-bs-toggle="tab" role="tab"
-                                aria-current="page"  aria-selected="false"><i
-                                    class="ri-home-smile-line me-2 align-middle d-inline-block"></i>Home</a>
-                                    <ng-template ngbNavContent class="tab-content mt-2 mt-xl-0">
-                                        <div class=" text-muted" id="home-vertical-link" role="tabpanel">
-                                            <img src="../../../../assets/images/ecommerce/jpg/19.jpeg" class="img-thumbnail" alt="Responsive image"
-                                            (click)="open(content)" data-bs-toggle="modal" data-bs-target="#addtask">
-                                        </div>
-                                        <div class=" text-muted" id="home-vertical-link" role="tabpanel">
-                                            <img src="../../../../assets/images/ecommerce/jpg/19.jpeg" class="img-thumbnail" alt="Responsive image"
-                                            (click)="open(content)" data-bs-toggle="modal1" data-bs-target="#addtask">
-                                        </div>
-                                        <div class=" text-muted" id="home-vertical-link" role="tabpanel">
-                                            <img src="../../../../assets/images/ecommerce/jpg/19.jpeg" class="img-thumbnail" alt="Responsive image"
-                                            (click)="open(content)" data-bs-toggle="modal" data-bs-target="#addtask">
-                                        </div>
-                                        <div class=" text-muted" id="home-vertical-link" role="tabpanel">
-                                            <img src="../../../../assets/images/ecommerce/jpg/19.jpeg" class="img-thumbnail" alt="Responsive image"
-                                            (click)="open(content)" data-bs-toggle="modal" data-bs-target="#addtask">
-                                        </div>
-                                     </ng-template>
+                                <a ngbNavLink class="nav-link" data-bs-toggle="tab" role="tab" aria-current="page"
+                                    aria-selected="false"><i
+                                        class="ri-home-smile-line me-2 align-middle d-inline-block"></i>External Environment</a>
+                                <ng-template ngbNavContent class="tab-content mt-2 mt-xl-0">
+                                    <h5><b>External Environment :</b></h5>
+                                    <div class="file-upload float-end">
+                                        <input type="file"  id="file-input" (change)="onFileSelected($event)"
+                                          accept="*/*" hidden>
+                                        <label for="file-input" class="text-danger">Upload File</label>
+                                        <!-- <p *ngIf="fileName">Selected File: {{ fileName }}</p> -->
+                                    </div>
+                                    
+                                    <div class=" text-muted" id="home-vertical-link" role="tabpanel">
+                                        <img src="./assets/images/ecommerce/jpg/19.jpeg" class="img-thumbnail"
+                                            alt="Responsive image" (click)="open(content)" data-bs-toggle="modal"
+                                            data-bs-target="#addtask">
+                                        <img src="./assets/images/ecommerce/jpg/19.jpeg" class="img-thumbnail"
+                                            alt="Responsive image" (click)="open(content)" data-bs-toggle="modal1"
+                                            data-bs-target="#addtask">
+                                    </div>
+                                </ng-template>
                             </ng-container>
                             <ng-container ngbNavItem="About">
-                                <a ngbNavLink class="nav-link" data-bs-toggle="tab" role="tab"
-                            aria-current="page"  aria-selected="false"><i
-                                    class="ri-archive-drawer-line me-2 align-middle d-inline-block"></i>About</a>
-                                    <ng-template ngbNavContent class="tab-content mt-2 mt-xl-0"> 
-                                        <div class=" text-muted mt-2" id="about-vertical-link"
-                                role="tabpanel">
-                                How travel coupons make you a better lover. Why cultural solutions
-                                are the new black. Why mom was right about travel insurances. How
-                                family trip ideas can help you predict the future. <b>How carnival
-                                    cruises make you a better lover</b>. Why you'll never succeed at
-                                daily deals. 11 ways cheapest flights can find you the love of your
-                                life. The complete beginner's guide to mission trips.
-                            </div>
-                                     </ng-template>
+                                <a ngbNavLink class="nav-link" data-bs-toggle="tab" role="tab" aria-current="page"
+                                    aria-selected="false"><i
+                                        class="ri-archive-drawer-line me-2 align-middle d-inline-block"></i>Internal Environment</a>
+                                <ng-template ngbNavContent class="tab-content mt-2 mt-xl-0">
+                                    <h5><b>Internal Environment :</b></h5>
+                                    <div class=" text-muted mt-2" id="about-vertical-link" role="tabpanel">
+                                        <img src="../../../../assets/images/ecommerce/jpg/19.jpeg" class="img-thumbnail"
+                                            alt="Responsive image" (click)="open(content)" data-bs-toggle="modal"
+                                            data-bs-target="#addtask">
+                                    </div>
+                                </ng-template>
                             </ng-container>
                             <ng-container ngbNavItem="Services">
-                                <a ngbNavLink class="nav-link " data-bs-toggle="tab" role="tab"
-                            aria-current="page"  aria-selected="true"><i
-                                    class="ri-bank-line me-2 align-middle d-inline-block"></i>Services</a>
-                                    <ng-template ngbNavContent class="tab-content mt-2 mt-xl-0"> 
-                                        <div class=" show  text-muted mt-2" id="services-vertical-link"
-                                        role="tabpanel">
-                                        Unbelievable healthy snack success stories. 12 facts about safe food
-                                        handling tips that will impress your friends. Restaurant weeks by
-                                        the numbers. <b><i>Will mexican food ever rule the world? The 10 best thai
-                                        restaurant youtube videos</i></b>. How restaurant weeks can make you sick.
-                                        The complete beginner's guide to cooking healthy food. Unbelievable
-                                        food stamp success stories.
+                                <a ngbNavLink class="nav-link " data-bs-toggle="tab" role="tab" aria-current="page"
+                                    aria-selected="true"><i
+                                        class="ri-bank-line me-2 align-middle d-inline-block"></i>Capture Spaces</a>
+                                <ng-template ngbNavContent class="tab-content mt-2 mt-xl-0">
+                                    <h5><b>Capture Spaces :</b></h5>
+                                    <div class=" show  text-muted mt-2" id="services-vertical-link" role="tabpanel">
+                                        <img src="../../../../assets/images/ecommerce/jpg/19.jpeg" class="img-thumbnail"
+                                            alt="Responsive image" (click)="open(content)" data-bs-toggle="modal"
+                                            data-bs-target="#addtask">
                                     </div>
-                                     </ng-template>
+                                </ng-template>
                             </ng-container>
                             <ng-container ngbNavItem="Contacts">
-                                <a ngbNavLink class="nav-link" data-bs-toggle="tab" role="tab"
-                                aria-current="page"  aria-selected="false"><i
-                                        class="ri-contacts-book-2-line me-2 align-middle d-inline-block"></i>Contacts</a>
-                                        <ng-template ngbNavContent class="tab-content mt-2 mt-xl-0"> 
-                                            <div class=" text-muted mt-2" id="contacts-vertical-link"
-                                role="tabpanel">
-                                Why delicious magazines are killing you. Why our world would end if
-                                restaurants disappeared. Why restaurants are on crack about
-                                restaurants. How restaurants are making the world a better place. 8
-                                great articles about minute meals. Why our world would end if
-                                healthy snacks disappeared. Why the world would end without mexican
-                                food. The evolution of chef uniforms.
-                            </div>
-                                         </ng-template>
+                                <a ngbNavLink class="nav-link" data-bs-toggle="tab" role="tab" aria-current="page"
+                                    aria-selected="false"><i
+                                        class="ri-contacts-book-2-line me-2 align-middle d-inline-block"></i>Environment</a>
+                                <ng-template ngbNavContent class="tab-content mt-2 mt-xl-0">
+                                    <h5><b>Environment</b></h5>
+                                    <div class=" text-muted mt-2" id="contacts-vertical-link" role="tabpanel">
+                                        <img src="../../../../assets/images/ecommerce/jpg/19.jpeg" class="img-thumbnail"
+                                            alt="Responsive image" (click)="open(content)" data-bs-toggle="modal"
+                                            data-bs-target="#addtask">
+                                    </div>
+                                </ng-template>
                             </ng-container>
                         </nav>
                     </div>
                     <div class="col-xl-9">
-                        <div [ngbNavOutlet]="nav6" class="ms-4"> 
+                        <div [ngbNavOutlet]="nav6" class="ms-4">
                         </div>
                     </div>
                 </div>
@@ -195,44 +109,156 @@
         </div>
     </div>
 </div>
+<!-- create project modal -->
+<ng-template #content id="addProject" let-modal>
+    <div class="modal-content">
 
-    
-
-    <ng-template #content id="addtask" let-modal>
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h6 class="modal-title" id="mail-ComposeLabel">Create Task</h6>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                    (click)="modal.close('Cross click')" aria-label="Close"></button>
-                </div>
-                <div class="modal-body px-4">
-                    <div class="row gy-2">
-                        <div class="col-xl-12">
-                            <label for="task-name" class="form-label">Task Name</label>
-                            <input type="text" class="form-control" id="task-name"
-                                placeholder="Task Name">
-                                <div>
-                                    <img src="../../../../assets/images/ecommerce/jpg/19.jpeg" class="img-fluid" alt="Responsive image"
-                                    (click)="open(content)" data-bs-toggle="modal" data-bs-target="#addtask">
+        <div class="modal-header">
+            <h6 class="modal-title" id="mail-ComposeLabel">Create New Recce</h6>
+            <button type="button" class="btn-close" data-bs-dismiss="modal1" (click)="modal.close('Cross click')"
+                aria-label="Close"></button>
+        </div>
+        <div class="modal-body px-4">
+            <div class="row">
+                
+                    <!-- <nav ngbNav #nav6="ngbNav" [activeId]="active6" orientation="vertical"
+                        class="nav nav-tabs flex-column nav-style-5" role="tablist">
+                        <ng-container ngbNavItem="Home">
+                            <a ngbNavLink class="nav-link" data-bs-toggle="tab" role="tab" aria-current="page"
+                                aria-selected="false"><i
+                                    class="ri-home-smile-line me-2 align-middle d-inline-block"></i>Home</a>
+                            <ng-template ngbNavContent class="tab-content mt-2 mt-xl-0">
+                                <div class=" text-muted" id="home-vertical-link" role="tabpanel">
+                                    <h5>Recce Details</h5>
+                                    <div class="row">
+                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                            <p class="mb-2 text-muted">Recce Name</p>
+                                            <input type="text" class="form-control" id="input">
+                                        </div>
+                                    </div>
                                 </div>
+                            </ng-template>
+                        </ng-container>
+                        <ng-container ngbNavItem="About">
+                            <a ngbNavLink class="nav-link" data-bs-toggle="tab" role="tab" aria-current="page"
+                                aria-selected="false"><i
+                                    class="ri-archive-drawer-line me-2 align-middle d-inline-block"></i>About</a>
+                            <ng-template ngbNavContent class="tab-content mt-2 mt-xl-0">
+                                <div class=" text-muted mt-2" id="about-vertical-link" role="tabpanel">
+                                    <b>How carnival cruises make you a better lover</b>
+                                </div>
+                            </ng-template>
+                        </ng-container>
+                        <ng-container ngbNavItem="Services">
+                            <a ngbNavLink class="nav-link " data-bs-toggle="tab" role="tab" aria-current="page"
+                                aria-selected="true"><i
+                                    class="ri-bank-line me-2 align-middle d-inline-block"></i>Services</a>
+                            <ng-template ngbNavContent class="tab-content mt-2 mt-xl-0">
+                                <div class=" show  text-muted mt-2" id="services-vertical-link" role="tabpanel">
+                                    Unbelievable healthy snack success stories. 12 facts about safe food
+                                    handling tips that will impress your friends. Restaurant weeks by
+                                    the numbers. <b><i>Will mexican food ever rule the world? The 10 best thai
+                                            restaurant youtube videos</i></b>.
+                                </div>
+                            </ng-template>
+                        </ng-container>
+                        <ng-container ngbNavItem="Contacts">
+                            <a ngbNavLink class="nav-link" data-bs-toggle="tab" role="tab" aria-current="page"
+                                aria-selected="false"><i
+                                    class="ri-contacts-book-2-line me-2 align-middle d-inline-block"></i>Contacts</a>
+                            <ng-template ngbNavContent class="tab-content mt-2 mt-xl-0">
+                                <div class=" text-muted mt-2" id="contacts-vertical-link" role="tabpanel">
+                                    Why delicious magazines are killing you. Why our world would end if
+                                    restaurants disappeared.
+                                </div>
+                            </ng-template>
+                        </ng-container>
+                    </nav> -->
+
+
+
+                    <div class="d-flex">
+                        <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist"
+                            aria-orientation="vertical">
+                            <button class="nav-link" [ngClass]="{ active: activeTab === 'tab1' }"
+                                (click)="selectTab('tab1')">
+                                Tab 1
+                                <input type="checkbox" [(ngModel)]="tab1Checked">
+                            </button>
+                            <button class="nav-link" [ngClass]="{ active: activeTab === 'tab2' }"
+                                (click)="selectTab('tab2')">
+                                Tab 2
+                                <input type="checkbox" [(ngModel)]="tab2Checked">
+                            </button>
+                            <button class="nav-link" [ngClass]="{ active: activeTab === 'tab3' }"
+                                (click)="selectTab('tab3')">
+                                Tab 3
+                                <input type="checkbox" [(ngModel)]="tab3Checked" />
+                            </button>
                         </div>
+
+                        <div class="tab-content">
+                            <div [ngClass]="{ 'tab-pane fade show': activeTab === 'tab1', 'tab-pane fade': activeTab !== 'tab1' }">
+                                <h4>Content for Tab 1</h4>
+                                <p>This is the content for Tab 1.</p>
+                            </div>
+                            <div [ngClass]="{ 'tab-pane fade show': activeTab === 'tab2', 'tab-pane fade': activeTab !== 'tab2' }">
+                                <h4>Content for Tab 2</h4>
+                                <p>This is the content for Tab 2.</p>
+                            </div>
+                            <div [ngClass]="{ 'tab-pane fade show': activeTab === 'tab3', 'tab-pane fade': activeTab !== 'tab3' }">
+                                <h4>Content for Tab 3</h4>
+                                <p>This is the content for Tab 3.</p>
+                            </div>
+                        </div>                    
+                    </div>
+
+
+
+
+
+
+
+                
+                <!-- <div class="col-xl-9">
+                    <div [ngbNavOutlet]="nav6" class="ms-4">
+                    </div>
+                </div> -->
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-light" data-bs-dismiss="modal1"
+                (click)="modal.close('Cross click')">Cancel</button>
+            <button type="button" class="btn btn-primary">Create</button>
+        </div>
+
+    </div>
+</ng-template>
+<!-- end create project modal -->
+
+<!-- <ng-template #content id="addtask" let-modal>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h6 class="modal-title" id="mail-ComposeLabel">Create Task</h6>
+            <button type="button" class="btn-close" data-bs-dismiss="modal2" (click)="modal.close('Cross click')"
+                aria-label="Close"></button>
+        </div>
+        <div class="modal-body px-4">
+            <div class="row gy-2">
+                <div class="col-xl-12">
+                    <label for="task-name" class="form-label">Task Name</label>
+                    <input type="text" class="form-control" id="task-name" placeholder="Task Name">
+                    <div>
+                        <img src="../../../../assets/images/ecommerce/jpg/19.jpeg" class="img-fluid"
+                            alt="Responsive image" data-bs-toggle="modal" data-bs-target="#addtask">
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-light" data-bs-dismiss="modal"  (click)="modal.close('Cross click')">Cancel</button>
-                    <button type="button" class="btn btn-primary">Create</button>
-                </div>
             </div>
-        </ng-template>
-       
-
-
-
-<div class="card">
-    <iframe width="914" height="514" src="https://www.youtube.com/embed/96Xez3LFoDc?playlist=96Xez3LFoDc&loop=1&autoplay=1&mute=1" title="Our New Commercial Project - 3D Walkthrough Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-light" data-bs-dismiss="modal"
+                (click)="modal.close('Cross click')">Cancel</button>
+            <button type="button" class="btn btn-primary">Create</button>
+        </div>
     </div>
-</div>
+</ng-template> -->
