@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,HostListener } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import flatpickr from 'flatpickr';
@@ -6,12 +6,13 @@ import { FlatpickrDefaults, FlatpickrModule } from 'angularx-flatpickr';
 import { SharedModule } from '../../../../app/shared/common/sharedmodule';
 import { NgbDropdownModule, NgbNavModule, NgbModal, NgbModalConfig, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
+import { OverlayscrollbarsModule } from 'overlayscrollbars-ngx';
 
 @Component({
   selector: 'app-recce',
   standalone: true,
   imports: [SharedModule, NgSelectModule, NgbModule, CommonModule,
-    NgbNavModule,NgbDropdownModule,FlatpickrModule,FormsModule,ReactiveFormsModule],
+    NgbNavModule,NgbDropdownModule,FlatpickrModule,FormsModule,ReactiveFormsModule , OverlayscrollbarsModule],
   providers: [NgbModalConfig, NgbModal,FlatpickrDefaults, SharedModule,NgbNavModule,NgbDropdownModule],
   templateUrl: './recce.component.html',
   styleUrl: './recce.component.scss'
@@ -62,5 +63,43 @@ export class RecceComponent {
       dateFormat: 'H:i',
     };
     flatpickr('#addignedDate', this.flatpickrOptions);
+  }
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.myFileClick();
+    this.detailsClick(); 
+  }
+
+  myFileClick() {
+    const fileManagerFolders = document.querySelector('.file-manager-folders');
+    const fileManagerNavigation = document.querySelector('.file-manager-navigation');
+
+    if (window.innerWidth <= 992) {
+      if (fileManagerFolders) {
+        fileManagerFolders.classList.add('open');
+      }
+      if (fileManagerNavigation) {
+        fileManagerNavigation.classList.add('close');
+      }
+    } else {
+      if (fileManagerFolders) {
+        fileManagerFolders.classList.remove('open');
+      }
+      if (fileManagerNavigation) {
+        fileManagerNavigation.classList.remove('close');
+      }
+    }
+  }
+  detailsClick() {
+    const selectedFileDetails = document.querySelector('.selected-file-details');
+
+    if (window.innerWidth <= 1180 && selectedFileDetails) {
+      selectedFileDetails.classList.add('open');
+    } else {
+      // Close the details when the window width is greater than 992
+      if (selectedFileDetails) {
+        selectedFileDetails.classList.remove('open');
+      }
+  }
   }
 }

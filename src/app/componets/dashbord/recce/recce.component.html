@@ -18,35 +18,33 @@
         <div class="card custom-card">
             <div class="card-header">
                 <div class="card-title">
-                    Vertical alignment with links
+                    <button type="button" class="btn btn-sm btn-danger text-center me-2"
+                    (click)="openModal(content)" data-bs-toggle="modal1" data-bs-target="#addProject">
+                    Create Recce
+                </button>
                 </div>
             </div>
             <div class="card-body">
                 <div class="row mb-3">
                     <div class="col-xl-12">
                         <div class="float-start">
-                            <button type="button" class="btn btn-sm btn-danger text-center me-2"
-                                (click)="openModal(content)" data-bs-toggle="modal1" data-bs-target="#addProject">
-                                Create Project
-                            </button>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-xl-3">
+                <div class="row ">
+                    <div class="col-xl-3 border-end">
                         <nav ngbNav #nav6="ngbNav" [activeId]="active6" orientation="vertical"
                             class="nav nav-tabs flex-column nav-style-5" role="tablist">
                             <ng-container ngbNavItem="Home">
                                 <a ngbNavLink class="nav-link" data-bs-toggle="tab" role="tab" aria-current="page"
                                     aria-selected="false"><i
-                                        class="ri-home-smile-line me-2 align-middle d-inline-block"></i>External Environment</a>
+                                        class="ri-home-smile-line me-2 align-middle d-inline-block"></i>Exterior </a>
                                 <ng-template ngbNavContent class="tab-content mt-2 mt-xl-0">
-                                    <h5><b>External Environment :</b></h5>
+                                    <h5><b>Exterior :</b></h5>
                                     <div class="file-upload float-end">
                                         <input type="file"  id="file-input" (change)="onFileSelected($event)"
                                           accept="*/*" hidden>
                                         <label for="file-input" class="text-danger">Upload File</label>
-                                        <!-- <p *ngIf="fileName">Selected File: {{ fileName }}</p> -->
                                     </div>
                                     
                                     <div class=" text-muted" id="home-vertical-link" role="tabpanel">
@@ -62,9 +60,14 @@
                             <ng-container ngbNavItem="About">
                                 <a ngbNavLink class="nav-link" data-bs-toggle="tab" role="tab" aria-current="page"
                                     aria-selected="false"><i
-                                        class="ri-archive-drawer-line me-2 align-middle d-inline-block"></i>Internal Environment</a>
+                                        class="ri-archive-drawer-line me-2 align-middle d-inline-block"></i>Interior </a>
                                 <ng-template ngbNavContent class="tab-content mt-2 mt-xl-0">
-                                    <h5><b>Internal Environment :</b></h5>
+                                    <h5><b>Interior :</b></h5>
+                                    <div class="file-upload float-end">
+                                        <input type="file"  id="file-input" (change)="onFileSelected($event)"
+                                          accept="*/*" hidden>
+                                        <label for="file-input" class="text-danger">Upload File</label>
+                                    </div>
                                     <div class=" text-muted mt-2" id="about-vertical-link" role="tabpanel">
                                         <img src="../../../../assets/images/ecommerce/jpg/19.jpeg" class="img-thumbnail"
                                             alt="Responsive image" (click)="open(content)" data-bs-toggle="modal"
@@ -75,9 +78,10 @@
                             <ng-container ngbNavItem="Services">
                                 <a ngbNavLink class="nav-link " data-bs-toggle="tab" role="tab" aria-current="page"
                                     aria-selected="true"><i
-                                        class="ri-bank-line me-2 align-middle d-inline-block"></i>Capture Spaces</a>
+                                        class="ri-bank-line me-2 align-middle d-inline-block"></i>Site Images </a>
                                 <ng-template ngbNavContent class="tab-content mt-2 mt-xl-0">
-                                    <h5><b>Capture Spaces :</b></h5>
+                                    <h5><b>Site Images :</b></h5>
+                                    
                                     <div class=" show  text-muted mt-2" id="services-vertical-link" role="tabpanel">
                                         <img src="../../../../assets/images/ecommerce/jpg/19.jpeg" class="img-thumbnail"
                                             alt="Responsive image" (click)="open(content)" data-bs-toggle="modal"
@@ -88,9 +92,10 @@
                             <ng-container ngbNavItem="Contacts">
                                 <a ngbNavLink class="nav-link" data-bs-toggle="tab" role="tab" aria-current="page"
                                     aria-selected="false"><i
-                                        class="ri-contacts-book-2-line me-2 align-middle d-inline-block"></i>Environment</a>
+                                        class="ri-contacts-book-2-line me-2 align-middle d-inline-block"></i>Remarks</a>
                                 <ng-template ngbNavContent class="tab-content mt-2 mt-xl-0">
-                                    <h5><b>Environment</b></h5>
+                                    <h5><b>Remarks</b></h5>
+                                    
                                     <div class=" text-muted mt-2" id="contacts-vertical-link" role="tabpanel">
                                         <img src="../../../../assets/images/ecommerce/jpg/19.jpeg" class="img-thumbnail"
                                             alt="Responsive image" (click)="open(content)" data-bs-toggle="modal"
@@ -98,6 +103,21 @@
                                     </div>
                                 </ng-template>
                             </ng-container>
+                            <ng-container ngbNavItem="gallery">
+                                <a ngbNavLink class="nav-link" data-bs-toggle="tab" role="tab" aria-current="page"
+                                    aria-selected="false"><i
+                                        class="ri-contacts-book-2-line me-2 align-middle d-inline-block"></i>Site Dimentions</a>
+                                <ng-template ngbNavContent class="tab-content mt-2 mt-xl-0">
+                                    <h5><b>Site Dimentions</b></h5>
+                                    
+                                    <div class=" text-muted mt-2" id="contacts-vertical-link" role="tabpanel">
+                                        <img src="../../../../assets/images/ecommerce/jpg/19.jpeg" class="img-thumbnail"
+                                            alt="Responsive image" (click)="open(content)" data-bs-toggle="modal"
+                                            data-bs-target="#addtask">
+                                    </div>
+                                </ng-template>
+                            </ng-container>
+                            
                         </nav>
                     </div>
                     <div class="col-xl-9">
@@ -109,121 +129,214 @@
         </div>
     </div>
 </div>
+
 <!-- create project modal -->
 <ng-template #content id="addProject" let-modal>
     <div class="modal-content">
-
         <div class="modal-header">
-            <h6 class="modal-title" id="mail-ComposeLabel">Create New Recce</h6>
+            <h6 class="modal-title" id="mail-ComposeLabel">Creating  New Recce</h6>
             <button type="button" class="btn-close" data-bs-dismiss="modal1" (click)="modal.close('Cross click')"
-                aria-label="Close"></button>
+                aria-label="Close">
+            </button>
+        </div>
+        <div class="container border">
+            <div class="row col-lg-12 border mb-3">
+                <div class="col-lg-3 mt-2">
+                    select template
+                </div>
+                <div class="col-lg-9">
+                    <select id="inputState1" class="form-select">
+                        <option selected>test</option>
+                        <option>default template</option>     
+                    </select> 
+                </div>
+            </div>
         </div>
         <div class="modal-body px-4">
             <div class="row">
-                
-                    <!-- <nav ngbNav #nav6="ngbNav" [activeId]="active6" orientation="vertical"
-                        class="nav nav-tabs flex-column nav-style-5" role="tablist">
-                        <ng-container ngbNavItem="Home">
-                            <a ngbNavLink class="nav-link" data-bs-toggle="tab" role="tab" aria-current="page"
-                                aria-selected="false"><i
-                                    class="ri-home-smile-line me-2 align-middle d-inline-block"></i>Home</a>
-                            <ng-template ngbNavContent class="tab-content mt-2 mt-xl-0">
-                                <div class=" text-muted" id="home-vertical-link" role="tabpanel">
-                                    <h5>Recce Details</h5>
-                                    <div class="row">
-                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                            <p class="mb-2 text-muted">Recce Name</p>
-                                            <input type="text" class="form-control" id="input">
+                <div class="d-flex">
+                    <div class="nav flex-column me-3 border-end align-items-start" id="v-pills-tab" role="tablist"
+                        aria-orientation="vertical">
+                        <button class="nav-link" [ngClass]="{ active: activeTab === 'tab1' }"
+                            (click)="selectTab('tab1')">
+                            
+                            <input type="checkbox" [(ngModel)]="tab1Checked">
+                            Recce Details
+                        </button>
+                        <button class="nav-link" [ngClass]="{ active: activeTab === 'tab2' }"
+                            (click)="selectTab('tab2')">
+                            
+                            <input type="checkbox" [(ngModel)]="tab2Checked">
+                            external Environment
+                        </button>
+                        <button class="nav-link" [ngClass]="{ active: activeTab === 'tab3' }"
+                            (click)="selectTab('tab3')">
+                            
+                            <input type="checkbox" [(ngModel)]="tab3Checked" />
+                            Internal Environment
+                        </button>
+                        <button class="nav-link" [ngClass]="{ active: activeTab === 'tab4' }"
+                            (click)="selectTab('tab4')">
+                            
+                            <input type="checkbox" [(ngModel)]="tab3Checked" />
+                            capture Spaces
+                        </button>
+                        <button class="nav-link" [ngClass]="{ active: activeTab === 'tab5' }"
+                            (click)="selectTab('tab3')">
+                            
+                            <input type="checkbox" [(ngModel)]="tab3Checked" />
+                            Signage and Facade
+                        </button>
+                        <button class="nav-link" [ngClass]="{ active: activeTab === 'tab6' }"
+                            (click)="selectTab('tab6')">
+                            
+                            <input type="checkbox" [(ngModel)]="tab3Checked" />
+                            Layout and Sketches
+                        </button>
+                    </div>
+
+                    <div class="col-md-8">
+                        <overlay-scrollbars [defer] id="filemanager-scroll">
+                            <div class="modal-body px-4">
+                                <div class="col-md-12">
+                                    <div class="tab-content ">
+                                        <div [ngClass]="{ 'tab-pane fade show': activeTab === 'tab1', 'tab-pane fade': activeTab !== 'tab1' }">
+                                            <h6>Recce Details</h6>
+                                            <div class="mb-3">
+                                                <label class="form-label">Recce Name</label>
+                                                <input type="text" class="form-control" placeholder="S.NO" aria-label="First name">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Recce Due Date</label>
+                                                <input type="date" class="form-control" placeholder="S.NO" aria-label="First name">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Assign Recce to(will receive recce link)</label>
+                                                <!-- <input type="date" class="form-control" placeholder="S.NO" aria-label="First name"> -->
+                                                <select id="inputState1" class="form-select selectpicker"  data-live-search="true">
+                                                    
+                                                    <option selected>select users</option>
+                                                    <option>user1</option>
+                                                    <option>user2</option>
+                                                    
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Project Stakeholders to be contacted </label>
+                                                <!-- <input type="date" class="form-control" placeholder="S.NO" aria-label="First name"> -->
+                                                <select id="inputState1" class="form-select selectpicker"  data-live-search="true">
+                                                    
+                                                    <option selected>select users</option>
+                                                    <option>user1</option>
+                                                    <option>user2</option>
+                                                    
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Client POC to be contacted</label>
+                                                <!-- <input type="date" class="form-control" placeholder="S.NO" aria-label="First name"> -->
+                                                <select id="inputState1" class="form-select selectpicker"  data-live-search="true">
+                                                    
+                                                    <option selected>select users</option>
+                                                    <option>user1</option>
+                                                    <option>user2</option>
+                                                    
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Instruction for Recce  </label>
+                                                <input type="text area" class="form-control"  aria-label="First name">
+                                                
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </ng-template>
-                        </ng-container>
-                        <ng-container ngbNavItem="About">
-                            <a ngbNavLink class="nav-link" data-bs-toggle="tab" role="tab" aria-current="page"
-                                aria-selected="false"><i
-                                    class="ri-archive-drawer-line me-2 align-middle d-inline-block"></i>About</a>
-                            <ng-template ngbNavContent class="tab-content mt-2 mt-xl-0">
-                                <div class=" text-muted mt-2" id="about-vertical-link" role="tabpanel">
-                                    <b>How carnival cruises make you a better lover</b>
-                                </div>
-                            </ng-template>
-                        </ng-container>
-                        <ng-container ngbNavItem="Services">
-                            <a ngbNavLink class="nav-link " data-bs-toggle="tab" role="tab" aria-current="page"
-                                aria-selected="true"><i
-                                    class="ri-bank-line me-2 align-middle d-inline-block"></i>Services</a>
-                            <ng-template ngbNavContent class="tab-content mt-2 mt-xl-0">
-                                <div class=" show  text-muted mt-2" id="services-vertical-link" role="tabpanel">
-                                    Unbelievable healthy snack success stories. 12 facts about safe food
-                                    handling tips that will impress your friends. Restaurant weeks by
-                                    the numbers. <b><i>Will mexican food ever rule the world? The 10 best thai
-                                            restaurant youtube videos</i></b>.
-                                </div>
-                            </ng-template>
-                        </ng-container>
-                        <ng-container ngbNavItem="Contacts">
-                            <a ngbNavLink class="nav-link" data-bs-toggle="tab" role="tab" aria-current="page"
-                                aria-selected="false"><i
-                                    class="ri-contacts-book-2-line me-2 align-middle d-inline-block"></i>Contacts</a>
-                            <ng-template ngbNavContent class="tab-content mt-2 mt-xl-0">
-                                <div class=" text-muted mt-2" id="contacts-vertical-link" role="tabpanel">
-                                    Why delicious magazines are killing you. Why our world would end if
-                                    restaurants disappeared.
-                                </div>
-                            </ng-template>
-                        </ng-container>
-                    </nav> -->
+                                        <div [ngClass]="{ 'tab-pane fade show': activeTab === 'tab2', 'tab-pane fade': activeTab !== 'tab2' }">
+                                            <p>External Environment</p>
+                                            <button class="nav-link" [ngClass]="{ active: activeTab === 'tab2' }"
+                                                (click)="selectTab('tab2')">
+                                                
+                                                <input type="checkbox" [(ngModel)]="tab2Checked">
+                                                External Photos and Videos
+                                            </button>
+                                        </div>
+                                        <div [ngClass]="{ 'tab-pane fade show': activeTab === 'tab3', 'tab-pane fade': activeTab !== 'tab3' }">
+                                            <p>Internal Environment</p>
+                                            <button class="nav-link" [ngClass]="{ active: activeTab === 'tab2' }"
+                                                (click)="selectTab('tab2')">
+                                                
+                                                <input type="checkbox" [(ngModel)]="tab2Checked">
+                                                Internal Photos and Videos
+                                            </button>
+                                        </div>
+                                        <div [ngClass]="{ 'tab-pane fade show': activeTab === 'tab4', 'tab-pane fade': activeTab !== 'tab4' }">
+                                            <p>Capture Spaces</p>
+                                            <button class="nav-link" [ngClass]="{ active: activeTab === 'tab2' }"
+                                                (click)="selectTab('tab2')">
+                                                
+                                                <input type="checkbox" [(ngModel)]="tab2Checked">
+                                                My Space
+                                            </button>
+                                        </div>
+                                        <div [ngClass]="{ 'tab-pane fade show': activeTab === 'tab5', 'tab-pane fade': activeTab !== 'tab5' }">
+                                            <p>Signage and Facade</p>
+                                            <button class="nav-link" [ngClass]="{ active: activeTab === 'tab2' }"
+                                                (click)="selectTab('tab2')">
+                                                
+                                                <input type="checkbox" [(ngModel)]="tab2Checked">Store Name <br>
+                                                <!-- <input type="checkbox" [(ngModel)]="tab2Checked">Store GSTIN <br>
+                                                <input type="checkbox" [(ngModel)]="tab2Checked">Signage contact number <br>
+                                                <input type="checkbox" [(ngModel)]="tab2Checked">Local Language
+                                                <input type="checkbox" [(ngModel)]="tab2Checked">Store name in local language
+                                                <input type="checkbox" [(ngModel)]="tab2Checked">Dealer request
+                                                <input type="checkbox" [(ngModel)]="tab2Checked">Scaffolding Crane Specification
+                                                <input type="checkbox" [(ngModel)]="tab2Checked">Is Scaffolding/crane etc required ?
+                                                <input type="checkbox" [(ngModel)]="tab2Checked">Scaffolding Crane Type
+                                                <input type="checkbox" [(ngModel)]="tab2Checked">Is Mounting support required for new signages ?
+                                                <input type="checkbox" [(ngModel)]="tab2Checked">Select Mounting Support
+                                                <input type="checkbox" [(ngModel)]="tab2Checked">Please enter the type of support, dimension and quantity needed.
+                                                <input type="checkbox" [(ngModel)]="tab2Checked">Others
+                                                <input type="checkbox" [(ngModel)]="tab2Checked">Cladding Required?
+                                                <input type="checkbox" [(ngModel)]="tab2Checked">Cladding Details
+                                                <input type="checkbox" [(ngModel)]="tab2Checked">How are the signages currently supported ?
+                                                <input type="checkbox" [(ngModel)]="tab2Checked">Enter other details
+                                                <input type="checkbox" [(ngModel)]="tab2Checked">Scaffolding Crane Length
+                                                <input type="checkbox" [(ngModel)]="tab2Checked">Scaffolding Height
+                                                <input type="checkbox" [(ngModel)]="tab2Checked">Crane Height
+                                                <input type="checkbox" [(ngModel)]="tab2Checked">Ladder Height
+                                                <input type="checkbox" [(ngModel)]="tab2Checked">Number of Spiders
+                                                <input type="checkbox" [(ngModel)]="tab2Checked">Number of Ladders
+                                                <input type="checkbox" [(ngModel)]="tab2Checked">Number of Cranes
+                                                <input type="checkbox" [(ngModel)]="tab2Checked">Pipe Section Size
+                                                <input type="checkbox" [(ngModel)]="tab2Checked">Is the Site ready for work ?
+                                                <input type="checkbox" [(ngModel)]="tab2Checked">In how many days will site get ready ?
+                                                <input type="checkbox" [(ngModel)]="tab2Checked">L Angle Section
+                                                <input type="checkbox" [(ngModel)]="tab2Checked">Pipe Section
+                                                <input type="checkbox" [(ngModel)]="tab2Checked">My Space
+                                                <input type="checkbox" [(ngModel)]="tab2Checked">Store Files
+                                                <input type="checkbox" [(ngModel)]="tab2Checked">Other Details -->
 
-
-
-                    <div class="d-flex">
-                        <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist"
-                            aria-orientation="vertical">
-                            <button class="nav-link" [ngClass]="{ active: activeTab === 'tab1' }"
-                                (click)="selectTab('tab1')">
-                                Tab 1
-                                <input type="checkbox" [(ngModel)]="tab1Checked">
-                            </button>
-                            <button class="nav-link" [ngClass]="{ active: activeTab === 'tab2' }"
-                                (click)="selectTab('tab2')">
-                                Tab 2
-                                <input type="checkbox" [(ngModel)]="tab2Checked">
-                            </button>
-                            <button class="nav-link" [ngClass]="{ active: activeTab === 'tab3' }"
-                                (click)="selectTab('tab3')">
-                                Tab 3
-                                <input type="checkbox" [(ngModel)]="tab3Checked" />
-                            </button>
-                        </div>
-
-                        <div class="tab-content">
-                            <div [ngClass]="{ 'tab-pane fade show': activeTab === 'tab1', 'tab-pane fade': activeTab !== 'tab1' }">
-                                <h4>Content for Tab 1</h4>
-                                <p>This is the content for Tab 1.</p>
+                                            </button>
+                                        </div>
+                                        <div [ngClass]="{ 'tab-pane fade show': activeTab === 'tab6', 'tab-pane fade': activeTab !== 'tab6' }">
+                                            <p>Layout and Sketches</p>
+                                            <button class="nav-link" [ngClass]="{ active: activeTab === 'tab2' }"
+                                                (click)="selectTab('tab2')">
+                                                
+                                                <input type="checkbox" [(ngModel)]="tab2Checked">
+                                                Plans
+                                            </button>
+                                            <button class="nav-link" [ngClass]="{ active: activeTab === 'tab2' }"
+                                                (click)="selectTab('tab2')">
+                                                
+                                                <input type="checkbox" [(ngModel)]="tab2Checked">
+                                                Elevations
+                                            </button>
+                                        </div>
+                                    </div>                    
+                                </div>
                             </div>
-                            <div [ngClass]="{ 'tab-pane fade show': activeTab === 'tab2', 'tab-pane fade': activeTab !== 'tab2' }">
-                                <h4>Content for Tab 2</h4>
-                                <p>This is the content for Tab 2.</p>
-                            </div>
-                            <div [ngClass]="{ 'tab-pane fade show': activeTab === 'tab3', 'tab-pane fade': activeTab !== 'tab3' }">
-                                <h4>Content for Tab 3</h4>
-                                <p>This is the content for Tab 3.</p>
-                            </div>
-                        </div>                    
-                    </div>
-
-
-
-
-
-
-
-                
-                <!-- <div class="col-xl-9">
-                    <div [ngbNavOutlet]="nav6" class="ms-4">
-                    </div>
-                </div> -->
+                        </overlay-scrollbars>
+                    </div>                   
+                </div>
             </div>
         </div>
         <div class="modal-footer">
@@ -236,29 +349,6 @@
 </ng-template>
 <!-- end create project modal -->
 
-<!-- <ng-template #content id="addtask" let-modal>
-    <div class="modal-content">
-        <div class="modal-header">
-            <h6 class="modal-title" id="mail-ComposeLabel">Create Task</h6>
-            <button type="button" class="btn-close" data-bs-dismiss="modal2" (click)="modal.close('Cross click')"
-                aria-label="Close"></button>
-        </div>
-        <div class="modal-body px-4">
-            <div class="row gy-2">
-                <div class="col-xl-12">
-                    <label for="task-name" class="form-label">Task Name</label>
-                    <input type="text" class="form-control" id="task-name" placeholder="Task Name">
-                    <div>
-                        <img src="../../../../assets/images/ecommerce/jpg/19.jpeg" class="img-fluid"
-                            alt="Responsive image" data-bs-toggle="modal" data-bs-target="#addtask">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-light" data-bs-dismiss="modal"
-                (click)="modal.close('Cross click')">Cancel</button>
-            <button type="button" class="btn btn-primary">Create</button>
-        </div>
-    </div>
-</ng-template> -->
+
+    
+
