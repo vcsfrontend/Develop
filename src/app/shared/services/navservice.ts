@@ -97,7 +97,7 @@ export class NavService implements OnDestroy {
     // Dashboard
     { headTitle: 'MAIN' },
     {
-      title: 'Adoani',
+      title: 'Adonai',
       icon: 'bi-house',
       dirchange: false,
       type: 'link',

@@ -51,7 +51,7 @@ export class SidebarComponent implements AfterViewInit {
     this.menuitemsSubscribe$ = this.navServices.items.subscribe((items) => {
       items.forEach((item)=>{
         switch(item.title) {
-          case 'Adoani' :
+          case 'Adonai' :
             this.navServices.isAdonaiApplicable$.subscribe(val=>{
               item.isVisible = val
             });
