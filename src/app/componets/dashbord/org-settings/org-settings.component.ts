@@ -86,7 +86,6 @@ export class OrgSettingsComponent {
           this.userLst = res
           // this.dataSource = new MatTableDataSource<any>(res);
           this.dataSource.data = res;
-          console.log('userdata-', this.userLst);
           } else{
             this.toastr.error(res.message,'signup', {
               timeOut: 3000,
@@ -105,8 +104,7 @@ export class OrgSettingsComponent {
       payload.type = +payload.type,
       payload.crm = crm,
     payload.adonai = adonai, delete payload.tools,
-      payload.phoneNumber = +payload.phoneNumber,
-      console.log('payload -', payload);
+      payload.phoneNumber = +payload.phoneNumber;
       if(this.userForm.invalid){
         return;
       } else if(this.paswrd != this.cnfmPaswrd){
@@ -156,7 +154,7 @@ export class OrgSettingsComponent {
     }
 
     toolId(tool:string) {
-      console.log("51",tool,this.adonai,this.crm);
+      // console.log("51",tool,this.adonai,this.crm);
     }
 
   // get rows(): FormArray {

@@ -100,7 +100,7 @@ export class SidebarComponent implements AfterViewInit {
 
   // Start of Set menu Active event
   setNavActive(event:any, currentPath: string, menuData = this.menuItems) {
-    console.log("103",currentPath)
+    // console.log("103",currentPath)
     if(event){
       if (event?.ctrlKey) {
         return;

@@ -122,7 +122,6 @@ login() {
     //   });
     this.authservice.login(this.email, this.password).subscribe({
       next: (res) => {
-        console.log("125",res)
         // Redirect on successful login
       if (res.status == true) {
         this.toastr.success('login successful','VCS', {

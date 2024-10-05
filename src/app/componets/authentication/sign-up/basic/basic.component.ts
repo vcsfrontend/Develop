@@ -83,8 +83,7 @@ export class BasicComponent {
     payload.type = +payload.type,
     payload.crm = crm,
     payload.adonai = adonai,
-    payload.phoneNumber = +payload.phoneNumber,
-    console.log('payload -', payload);
+    payload.phoneNumber = +payload.phoneNumber;
     if (this.signupFrm.invalid) {
         return;
     }
@@ -132,6 +131,6 @@ export class BasicComponent {
   }
   
   toolId(tool:string) {
-    console.log("51",tool,this.adonai,this.crm);
+    // console.log("51",tool,this.adonai,this.crm);
   }
 }

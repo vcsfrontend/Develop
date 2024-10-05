@@ -71,8 +71,8 @@ export class SettingsComponent {
     let payload = this.userForm.getRawValue();
     // if (this.userForm.valid) {
       payload.vcsUsersList = this.userForm.value.users
-      console.log('Submitted Users:', this.userForm.value.users);
-      console.log('pl-',payload)
+      // console.log('Submitted Users:', this.userForm.value.users);
+      // console.log('pl-',payload)
       // Here you can handle the submission, e.g., send to an API
     // }
   }
