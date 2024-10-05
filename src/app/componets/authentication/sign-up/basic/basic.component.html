@@ -10,90 +10,115 @@
                         </a>
                     </div> -->
                     <p class="h5 mb-2 text-center">Sign Up</p>
-                    <p class="mb-4 text-muted op-7 fw-normal text-center">Welcome & Join us by creating a free account !</p>
+                    <p class="mb-4 text-muted op-7 fw-normal text-center">Welcome & Join us by creating a free account !
+                    </p>
                     <form [formGroup]="signupFrm" (ngSubmit)="onSignup()">
-                    <div class="row gy-3" >
-                        <div class="col-xl-12">
+                        <div class="row gy-3">
+                            <div class="col-xl-12">
                                 <label for="role-id" class="form-label text-default">Type
                                     <span class="text-danger"> *</span></label>
-                                <select class="form-select form-select-lg" id="role-id" formControlName="type" 
-                                    [ngClass]="{ 'is-invalid': submitted && f['type'].errors }" >
+                                <select class="form-select form-select-lg" id="role-id" formControlName="type"
+                                    [ngClass]="{ 'is-invalid': submitted && f['type'].errors }">
                                     <option value="" disabled selected>Select type</option>
                                     <option value="1">Individual</option>
                                     <option value="2">Enterprise</option>
                                 </select>
-                            <div *ngIf="submitted && f['type'].errors" class="invalid-feedback">
-                                <div *ngIf="f['type'].errors['required']">Type is required</div>
-                            </div>
-                            </div>
-                        <div class="col-xl-12">
-                            <label for="signup-firstname" class="form-label text-default">First Name<sup>*</sup></label>
-                            <input type="text" class="form-control form-control-lg" id="signup-firstname" placeholder="First name"
-                                formControlName="firstName" [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }" >
-                            <div *ngIf="submitted && f['firstName'].errors" class="invalid-feedback">
-                                <div *ngIf="f['firstName'].errors['required']">First name is required</div>
-                            </div>
-                        </div>
-                        <div class="col-xl-12">
-                            <label for="signup-lastname" class="form-label text-default">Last Name<sup>*</sup></label>
-                            <input type="text" class="form-control form-control-lg" id="signup-lastname" 
-                            placeholder="Last name" formControlName="lastName"
-                            [ngClass]="{ 'is-invalid': submitted && f['lastName'].errors }">
-                            <div *ngIf="submitted && f['lastName'].errors" class="invalid-feedback">
-                                <div *ngIf="f['lastName'].errors['required']">Last name is required</div>
-                            </div>
-                        </div>
-                        <div class="col-xl-12">
-                            <label for="signup-username" class="form-label text-default">User Name<sup>*</sup></label>
-                            <input type="text" class="form-control form-control-lg" id="signup-username" placeholder="username"
-                            formControlName="username" [ngClass]="{ 'is-invalid': submitted && f['username'].errors }">
-                            <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
-                                <div *ngIf="f['username'].errors['required']">User name is required</div>
-                            </div>
-                        </div>
-                        <div class="col-xl-12">
-                            <label for="signup-dob" class="form-label text-default">Date of birth<sup>*</sup></label>
-                            <input type="text" class="form-control form-control-lg" id="signup-dob" placeholder="dob"
-                            formControlName="dob">
-                        </div>
-                        <div class="col-xl-12">
-                            <label for="signup-email" class="form-label text-default">Email<sup>*</sup></label>
-                            <input type="text" class="form-control form-control-lg" id="signup-email" placeholder="email"
-                            formControlName="email" [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" >
-                            <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
-                                <div *ngIf="f['email'].errors['required']">Email is required</div>
-                            </div>
-                        </div>
-                        <div class="col-xl-12">
-                            <label for="signup-password" class="form-label text-default">Password<sup>*</sup></label>
-                            <div class="position-relative">
-                                <input type="password" class="form-control form-control-lg" id="signup-password" placeholder="password" 
-                                [type]="showPassword ? 'text' : 'password'" autocomplete formControlName="password"
-                                [ngClass]="{ 'is-invalid': submitted && f['password'].errors }" [(ngModel)]="paswrd">
-                                <a href="javascript:void(0);" class="show-password-button text-muted" (click)="createpassword()"  id="button-addon2"><i class="ri-eye-{{toggleClass}} align-middle"></i></a>
-                                
-                                <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
-                                    <div *ngIf="f['password'].errors['required']">Password is required</div>
+                                <div *ngIf="submitted && f['type'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['type'].errors['required']">Type is required</div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-xl-12 mb-2">
-                            <label for="signup-confirmpassword" class="form-label text-default">Confirm Password<sup>*</sup></label>
-                            <div class="position-relative">
-                                <input type="password" class="form-control form-control-lg" id="signup-confirmpassword" 
-                                placeholder="confirm password" [type]="showPassword1 ? 'text' : 'password'" autocomplete 
-                                [(ngModel)]="cnfmPaswrd" [ngModelOptions]="{standalone: true}">
-                                <a href="javascript:void(0);" class="show-password-button text-muted" (click)="createpassword1()"  
-                                id="button-addon21"><i class="ri-eye-{{toggleClass1}} align-middle"></i></a>
+                            <div class="col-xl-12">
+                                <label for="signup-firstname" class="form-label text-default">First
+                                    Name<sup>*</sup></label>
+                                <input type="text" class="form-control form-control-lg" id="signup-firstname"
+                                    placeholder="First name" formControlName="firstName"
+                                    [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }">
+                                <div *ngIf="submitted && f['firstName'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['firstName'].errors['required']">First name is required</div>
+                                </div>
                             </div>
-                            
-                        </div>
-                        <div class="col-xl-12">
-                            <label for="signup-mobile" class="form-label text-default">Phone Number<sup>*</sup></label>
-                            <input type="text" class="form-control form-control-lg" id="signup-mobile" placeholder="mobile"
-                            formControlName="phoneNumber" maxlength="10">
-                        </div>
-                        <!-- <div class="col-xl-12">
+                            <div class="col-xl-12">
+                                <label for="signup-lastname" class="form-label text-default">Last
+                                    Name<sup>*</sup></label>
+                                <input type="text" class="form-control form-control-lg" id="signup-lastname"
+                                    placeholder="Last name" formControlName="lastName"
+                                    [ngClass]="{ 'is-invalid': submitted && f['lastName'].errors }">
+                                <div *ngIf="submitted && f['lastName'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['lastName'].errors['required']">Last name is required</div>
+                                </div>
+                            </div>
+                            <div class="col-xl-12">
+                                <label for="signup-username" class="form-label text-default">User
+                                    Name<sup>*</sup></label>
+                                <input type="text" class="form-control form-control-lg" id="signup-username"
+                                    placeholder="username" formControlName="username"
+                                    [ngClass]="{ 'is-invalid': submitted && f['username'].errors }">
+                                <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['username'].errors['required']">User name is required</div>
+                                </div>
+                            </div>
+                            <div class="col-xl-12">
+                                <label for="signup-dob" class="form-label text-default">Date of
+                                    birth<sup>*</sup></label>
+                                <input type="text" class="form-control form-control-lg" id="signup-dob"
+                                    placeholder="dob" formControlName="dob">
+                            </div>
+                            <div class="col-xl-12">
+                                <label for="signup-email" class="form-label text-default">Email<sup>*</sup></label>
+                                <input type="text" class="form-control form-control-lg" id="signup-email"
+                                    placeholder="email" formControlName="email"
+                                    [ngClass]="{ 'is-invalid': submitted && f['email'].errors }">
+                                <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['email'].errors['required']">Email is required</div>
+                                </div>
+                            </div>
+                            <div class="col-xl-12">
+                                <label for="signup-password"
+                                    class="form-label text-default">Password<sup>*</sup></label>
+                                <div class="position-relative">
+                                    <input type="password" class="form-control form-control-lg" id="signup-password"
+                                        placeholder="password" [type]="showPassword ? 'text' : 'password'" autocomplete
+                                        formControlName="password"
+                                        [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
+                                        [(ngModel)]="paswrd">
+                                    <a href="javascript:void(0);" class="show-password-button text-muted"
+                                        (click)="createpassword()" id="button-addon2"><i
+                                            class="ri-eye-{{toggleClass}} align-middle"></i></a>
+
+                                    <!-- <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['password'].errors['required']">Password is required</div>
+                                </div> -->
+                                    <div *ngIf="submitted && f['password'].errors || f['password'].touched"
+                                        class="invalid-feedback">
+                                        <div *ngIf="f['password'].errors?.['required']">Password is required.</div>
+                                        <div *ngIf="f['password'].errors?.['invalidPassword']">
+                                            Password must be at least 8 characters long, contain at least one uppercase
+                                            letter, one lowercase letter, and one number.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-12 mb-2">
+                                <label for="signup-confirmpassword" class="form-label text-default">Confirm
+                                    Password<sup>*</sup></label>
+                                <div class="position-relative">
+                                    <input type="password" class="form-control form-control-lg"
+                                        id="signup-confirmpassword" placeholder="confirm password"
+                                        [type]="showPassword1 ? 'text' : 'password'" autocomplete
+                                        [(ngModel)]="cnfmPaswrd" [ngModelOptions]="{standalone: true}">
+                                    <a href="javascript:void(0);" class="show-password-button text-muted"
+                                        (click)="createpassword1()" id="button-addon21"><i
+                                            class="ri-eye-{{toggleClass1}} align-middle"></i></a>
+                                </div>
+
+                            </div>
+                            <div class="col-xl-12">
+                                <label for="signup-mobile" class="form-label text-default">Phone
+                                    Number<sup>*</sup></label>
+                                <input type="text" class="form-control form-control-lg" id="signup-mobile"
+                                    placeholder="mobile" formControlName="phoneNumber" maxlength="10">
+                            </div>
+                            <!-- <div class="col-xl-12">
                             <label for="tool-id" class="form-label text-default">Tool ID<sup>*</sup></label>
                             <select class="form-select form-select-lg" id="role-id" formControlName="toolId">
                                 <option value="0" disabled selected>Select tool</option>
@@ -102,17 +127,17 @@
                                 <option value="3">CRM & Design Tool</option>
                             </select>
                         </div> -->
-                        <div class="col-xl-12">
-                            <label for="role-id" class="form-label text-default">Tool ID<sup>*</sup></label>
-                            <mat-form-field>
-                                <!-- <mat-label>Toppings</mat-label> -->
-                                <mat-select formControlName="tools" multiple>
-                                  @for (topping of toolsList; track topping) {
-                                    <mat-option [value]="topping">{{topping}}</mat-option>
-                                  }
-                                </mat-select>
-                              </mat-form-field>
-                            <!-- <div class="form-check">
+                            <div class="col-xl-12">
+                                <label for="role-id" class="form-label text-default">Tool ID<sup>*</sup></label>
+                                <mat-form-field>
+                                    <!-- <mat-label>Toppings</mat-label> -->
+                                    <mat-select formControlName="tools" multiple>
+                                        @for (topping of toolsList; track topping) {
+                                        <mat-option [value]="topping">{{topping}}</mat-option>
+                                        }
+                                    </mat-select>
+                                </mat-form-field>
+                                <!-- <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="1" name="toolId1" 
                                     id="flexCheckDefault" [(ngModel)]="adonai" [ngModelOptions]="{standalone: true}">
                                 <label class="form-check-label" for="flexCheckDefault">
@@ -126,8 +151,8 @@
                                   CRM
                                 </label>
                               </div> -->
-                        </div>
-                        <!-- @if (toolid1) {
+                            </div>
+                            <!-- @if (toolid1) {
                             <div class="col-xl-12" >
                                 <label for="role-id" class="form-label text-default">Role ID for Adonai<sup>*</sup></label>
                                 <select class="form-select form-select-lg" id="role-id" name="adoanairole" 
@@ -139,7 +164,7 @@
                                 </select>
                             </div>
                         } -->
-                        <!-- @if (toolid2) {
+                            <!-- @if (toolid2) {
                             <div class="col-xl-12" >
                                 <label for="role-id" class="form-label text-default">Role ID for CRM<sup>*</sup></label>
                                 <select class="form-select form-select-lg" id="role-id" name="crmrole" 
@@ -152,30 +177,32 @@
                             </div>
                         } -->
 
-                        <!-- <div class="col-xl-12">
+                            <!-- <div class="col-xl-12">
                             <label for="signup-users" class="form-label text-default">No of Users<sup>*</sup></label>
                             <input type="number" class="form-control form-control-lg" id="signup-users" placeholder="no of users"
                             formControlName="noOfUsers">
                         </div> -->
-                        <div class="col-xl-12">
-                            <label for="signup-country" class="form-label text-default">Country<sup>*</sup></label>
-                            <input type="text" class="form-control form-control-lg" id="signup-country" placeholder="Country"
-                            formControlName="country">
-                        </div>
-                        <!-- <div class="col-xl-12">
+                            <div class="col-xl-12">
+                                <label for="signup-country" class="form-label text-default">Country<sup>*</sup></label>
+                                <input type="text" class="form-control form-control-lg" id="signup-country"
+                                    placeholder="Country" formControlName="country">
+                            </div>
+                            <!-- <div class="col-xl-12">
                             <label for="signup-company" class="form-label text-default">Company Name<sup>*</sup></label>
                             <input type="text" class="form-control form-control-lg" id="signup-company" placeholder="mobile">
                         </div> -->
 
-                        
-                        <div class="form-check mt-3">
-                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                            <label class="form-check-label text-muted fw-normal" for="defaultCheck1">
-                                By creating a account you agree to our <a routerLink="/pages/terms-conditions" class="text-success"><u>Terms & Conditions</u></a> and <a class="text-success"><u>Privacy Policy</u></a>
-                            </label>
-                        </div>
-                        
-                        <!-- <div class="col-xl-12">
+
+                            <div class="form-check mt-3">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                <label class="form-check-label text-muted fw-normal" for="defaultCheck1">
+                                    By creating a account you agree to our <a routerLink="/pages/terms-conditions"
+                                        class="text-success"><u>Terms & Conditions</u></a> and <a
+                                        class="text-success"><u>Privacy Policy</u></a>
+                                </label>
+                            </div>
+
+                            <!-- <div class="col-xl-12">
                             <label for="role-id" class="form-label text-default">Role ID<sup>*</sup></label>
                             <select class="form-select form-select-lg" id="role-id" formControlName="roleId">
                                 <option value="0" disabled selected>Select Role</option>
@@ -186,21 +213,22 @@
                             </select>
                         </div> -->
 
-                        
-                        
-                    </div>
-                    <div class="text-center my-3 authentication-barrier">
-                        <span>OR</span>
-                    </div>
-                    <div class="d-grid mb-3">
-                        <button class="btn btn-lg btn-light-ghost border d-flex align-items-center justify-content-center">
-                            <span class="avatar avatar-xs">
-                                <img src="./assets/images/media/apps/google1.png" alt="">
-                            </span>
-                            <span class="lh-1 ms-2 fs-13 text-default">Signup with Google</span>
-                        </button>
-                    </div>
-                    <!-- <div class="d-grid mb-3">
+
+
+                        </div>
+                        <div class="text-center my-3 authentication-barrier">
+                            <span>OR</span>
+                        </div>
+                        <div class="d-grid mb-3">
+                            <button
+                                class="btn btn-lg btn-light-ghost border d-flex align-items-center justify-content-center">
+                                <span class="avatar avatar-xs">
+                                    <img src="./assets/images/media/apps/google1.png" alt="">
+                                </span>
+                                <span class="lh-1 ms-2 fs-13 text-default">Signup with Google</span>
+                            </button>
+                        </div>
+                        <!-- <div class="d-grid mb-3">
                         <button class="btn btn-lg btn-light-ghost border d-flex align-items-center justify-content-center">
                             <span class="avatar avatar-xs invert-1">
                                 <img src="./assets/images/media/apps/apple.png" alt="">
@@ -208,15 +236,17 @@
                             <span class="lh-1 ms-2 fs-13 text-default">Signup with Apple</span>
                         </button>
                     </div> -->
-                    <div class="d-grid mt-4">
-                        <!-- <button (click)="onSignup()"> -->
-                            <a routerLink="/authentication/sign-up/basic" class="btn btn-lg btn-primary" (click)="onSignup()">
+                        <div class="d-grid mt-4">
+                            <!-- <button (click)="onSignup()"> -->
+                            <a routerLink="/authentication/sign-up/basic" class="btn btn-lg btn-primary"
+                                (click)="onSignup()">
                                 Create Account</a>
-                        <!-- </button> -->
-                    </div>
-                </form>
+                            <!-- </button> -->
+                        </div>
+                    </form>
                     <div class="text-center">
-                        <p class="text-muted mt-3 mb-0">Already have an account? <a routerLink="/authentication/sign-in/basic" class="text-primary">Sign In</a></p>
+                        <p class="text-muted mt-3 mb-0">Already have an account? <a
+                                routerLink="/authentication/sign-in/basic" class="text-primary">Sign In</a></p>
                     </div>
                 </div>
             </div>

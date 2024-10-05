@@ -35,19 +35,21 @@ export class AdonaiComponent {
     this.switchService.onAdonai(JSON.parse(this.userData).email).subscribe({
       //this.switchService.onAdonai('vcs.fronetnd@gmail.com').subscribe({
       next: (res:any) => {
-        // if(res.status == true){
+        if(res.status == false){
+          alert(res.message)
+          return;
+        } else {
           window.open(res.newDesign, '_blank');
           // this.router.navigate(['/dashboard/adonai']);
           this.toastr.success(res.message,'Adonai', {
             timeOut: 3000,
             positionClass: 'toast-top-right',
           });
-        // }else{
         //   this.toastr.error(res.message,'adonai', {
         //     timeOut: 3000,
         //     positionClass: 'toast-top-right',
         //   });
-        // }
+        }
       }
     })
   

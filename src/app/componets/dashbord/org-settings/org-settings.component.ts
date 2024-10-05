@@ -37,13 +37,13 @@ export class OrgSettingsComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   isAddEdt = false; aeTyp='a'; playersList: any; editData: any; 
   adonai= false; crm = false; userLst:any; 
-  submitted = false;
+  submitted = false; userData: any;
   userForm!: FormGroup; cnfmPaswrd: any = ''; paswrd:any = '';
   adoanAiRole :any;
   crmRole :any; toolsList = [Tools.Adonai,Tools.Crm]
 
   constructor(public fb: FormBuilder, public switchService: SwitherService, 
-    private toastr: ToastrService) { }
+    private toastr: ToastrService) {  this.userData = localStorage.getItem('userDetails') }
 
     ngOnInit(){
       this.formInit(); this.getUsers();
@@ -80,7 +80,8 @@ export class OrgSettingsComponent {
     }
     
     getUsers(){
-      this.switchService.getAllUsers().subscribe({ next: (res:any) => {
+      // this.switchService.getAllUsers().subscribe({ next: (res:any) => {
+        this.switchService.cmpnyUsers(JSON.parse(this.userData).companyName).subscribe({ next: (res:any) => {
         if(res){
           this.userLst = res
           // this.dataSource = new MatTableDataSource<any>(res);

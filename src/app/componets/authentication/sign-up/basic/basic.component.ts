@@ -42,7 +42,7 @@ export class BasicComponent {
     adonai:false,
     phoneNumber: '',
     username: ['', Validators.required],
-    password: ['', Validators.required],
+    password: ['', [Validators.required,this.passwordValidator]],
     tools : new FormControl('')
     //"toolId": 0,
     //"roleId": 0,
@@ -65,6 +65,16 @@ export class BasicComponent {
   // ngAfterViewChecked() {
   //   console.log("60",this.signupFrm.get('tools'))
   // }
+  passwordValidator(control: any) {
+    const value = control.value;
+    const hasUpperCase = /[A-Z]/.test(value);
+    const hasLowerCase = /[a-z]/.test(value);
+    const hasNumber = /\d/.test(value);
+    const hasMinLength = value.length >= 8;
+    const valid = hasUpperCase && hasLowerCase && hasNumber && hasMinLength;
+    return valid ? null : { invalidPassword: true };
+  }
+
   onSignup(){
     this.submitted = true;
     const crm = this.signupFrm.get('tools')?.value.includes('crm');
