@@ -133,6 +133,15 @@ export class NavService implements OnDestroy {
       active: false,
       path : "/dashboard/design"
     },
+    {
+      title: 'Design',
+      icon: 'bi-file-earmark',
+      dirchange: false,
+      type: 'link',
+      linkType : 'external',
+      active: false,
+      path : "/dashboard/hrm"
+    },
 
 
 
