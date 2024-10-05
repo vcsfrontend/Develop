@@ -60,7 +60,7 @@ export class NavService implements OnDestroy {
   public crmRole$ = new BehaviorSubject<string>("USER");
 
   constructor(private router: Router) {
-    this.setScreenWidth(window.innerWidth);
+     this.setScreenWidth(window.innerWidth);
     fromEvent(window, 'resize')
       .pipe(debounceTime(1000), takeUntil(this.unsubscriber))
       .subscribe((evt: any) => {
@@ -110,9 +110,10 @@ export class NavService implements OnDestroy {
       icon: 'bi-file-earmark',
       dirchange: false,
       type: 'link',
-      linkType : 'external',
+      linkType : 'internal',
       active: false,
-      path : "https://crmexpert.vcs.plus/auth/access_account/Y3JtYXBpcmVnNEBnbWFpbC5jb20="
+      // path : `https://crmexpert.vcs.plus/auth/access_account/${JSON.parse(this.userData).encodeEmail}`
+      path: '/dashboard/crm'
     },
     {
       title: 'Settings',

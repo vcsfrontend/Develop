@@ -56,14 +56,17 @@ export class CrmComponent {
     }
     ngOnInit(): void {
         // window.open('https://crmexpert.vcs.plus/auth/access_account/Y3JtYXBpcmVnNEBnbWFpbC5jb20=', '_blank');
+        // console.log('url-', `https://crmexpert.vcs.plus/auth/access_account/${JSON.parse(this.userData).encodeEmail}`)
+        // console.log('email',JSON.parse(this.userData).encodeEmail);
+        
         window.open(`https://crmexpert.vcs.plus/auth/access_account/${JSON.parse(this.userData).encodeEmail}`, '_blank');
         //leaflet maps 1
         this.router.navigate(['/dashboard/sales']);
-        const map = L.map('customers-countries').setView([51.505, -0.09], 13);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          maxZoom: 18,
-          attribution: '© OpenStreetMap',
-        }).addTo(map);
+        // const map = L.map('customers-countries').setView([51.505, -0.09], 13);
+        // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        //   maxZoom: 18,
+        //   attribution: '© OpenStreetMap',
+        // }).addTo(map);
       }
 
   chartOptions:any = {
