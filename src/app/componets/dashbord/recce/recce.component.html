@@ -16,12 +16,27 @@
 <div class="row">
     <div class="col-xl-12">
         <div class="card custom-card">
-            <div class="card-header">
+            <div class="card-header justify-content-between">
                 <div class="card-title">
                     <button type="button" class="btn btn-sm btn-danger text-center me-2"
                     (click)="openModal(content)" data-bs-toggle="modal1" data-bs-target="#addProject">
                     Create Recce
                 </button>
+                </div>
+                <div ngbDropdown class="dropdown no-caret">
+                    <a ngbDropdownToggle href="javascript:void(0);" class="btn btn-icon btn-sm btn-light"
+                        data-bs-toggle="dropdown">
+                        <i class="fe fe-more-vertical"></i>
+                    </a>
+                    <ul ngbDropdownMenu class="dropdown-menu">
+                        <li><a ngbDropdownItem class="dropdown-item" (click)="openModal(cnt)" 
+                            data-bs-toggle="modal123" data-bs-target="#addProject123" href="javascript:void(0);">Add input field</a></li>
+                        <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">Add Space</a></li>
+                        <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">Add Image and Videos</a></li>
+                        <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">Dropdown fields</a></li>
+                        <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">single attachment field</a></li>
+                        <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">Date field</a></li>
+                    </ul>
                 </div>
             </div>
             <div class="card-body">
@@ -129,6 +144,63 @@
         </div>
     </div>
 </div>
+
+<ng-template #cnt id="addProject123" let-modal>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h6 class="modal-title" id="mail-ComposeLabel">Add input field</h6>
+            <button type="button" class="btn-close" data-bs-dismiss="modal123" (click)="modal.close('Cross click')"
+                aria-label="Close">
+            </button>
+        </div>
+        <div class="modal-body px-4">
+            <div class="row gy-2">
+                <div class="col-xl-12">
+                    <label for="task-name" class="form-label">input field title</label>
+                    <input type="text" class="form-control" id="task-name"
+                        placeholder="input field title">
+                </div>
+                <div class="col-xl-12">
+                    <label for="task-name" class="form-label">Add Space field</label>
+                    <input type="text" class="form-control" id="task-name"
+                        placeholder="Add Space">
+                </div>
+                <div class="col-xl-12">
+                    <label for="task-name" class="form-label">Add image and videos field</label>
+                    <input type="text" class="form-control" id="task-name"
+                        placeholder="Add image and videos">
+                </div>
+                <div class="col-xl-12">
+                    <label for="task-name" class="form-label">Dropdown field title</label>
+                    <input type="text" class="form-control" id="task-name"
+                        placeholder="Dropdown field">
+                        <button class="btn d-flex align-items-center justify-content-center"
+    >
+                            <i class="ri-add-circle-line fs-16 align-middle me-1 mb-1"></i>Add more fields
+                        </button>
+                    <label for="task-name" class="form-label">Dropdown values</label>
+                    <input type="text" class="form-control" id="task-name"
+                        placeholder="enter value">
+                        
+                </div>
+                <div class="col-xl-12">
+                    <label for="task-name" class="form-label">single attachment file Upload field</label>
+                    <input type="text" class="form-control" id="task-name"
+                        placeholder="single attachment file Upload field">
+                </div>
+                <div class="col-xl-12">
+                    <label for="task-name" class="form-label">enter date field</label>
+                    <input type="text" class="form-control" id="task-name"
+                        placeholder="enter date field">
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-light" data-bs-dismiss="modal"  (click)="modal.close('Cross click')">Cancel</button>
+            <button type="button" class="btn btn-primary">Add</button>
+        </div>
+    </div>
+</ng-template>
 
 <!-- create project modal -->
 <ng-template #content id="addProject" let-modal>
@@ -348,6 +420,20 @@
     </div>
 </ng-template>
 <!-- end create project modal -->
+<div ngbDropdown class="dropdown no-caret">
+    <a ngbDropdownToggle href="javascript:void(0);" class="btn btn-icon btn-sm btn-light"
+        data-bs-toggle="dropdown">
+        <i class="fe fe-more-vertical"></i>
+    </a>
+    <ul ngbDropdownMenu class="dropdown-menu">
+        <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">Action</a></li>
+        <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">Another
+                action</a></li>
+        <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">Something else
+                here</a></li>
+    </ul>
+</div>
+
 
 
     
