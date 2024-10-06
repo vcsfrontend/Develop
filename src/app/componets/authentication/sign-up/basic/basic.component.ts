@@ -26,7 +26,7 @@ import { CommonModule } from '@angular/common';
 })
 export class BasicComponent {
   crm = false; submitted =false; cnfmPaswrd: any = ''; paswrd:any = '';
-  adonai = false;
+  adonai = false;btnDisable =false;
   adoanAiRole :any;
   crmRole :any;
   toolsList = [Tools.Adonai,Tools.Crm]
@@ -76,7 +76,7 @@ export class BasicComponent {
   }
 
   onSignup(){
-    this.submitted = true;
+    this.submitted = true; 
     const crm = this.signupFrm.get('tools')?.value.includes('crm');
     const adonai = this.signupFrm.get('tools')?.value.includes('adonai');
     let payload = this.signupFrm.getRawValue();
@@ -85,6 +85,7 @@ export class BasicComponent {
     payload.adonai = adonai,
     payload.phoneNumber = +payload.phoneNumber;
     if (this.signupFrm.invalid) {
+      this.btnDisable = false;
         return;
     }
     else if(this.paswrd != this.cnfmPaswrd){
@@ -95,13 +96,14 @@ export class BasicComponent {
       return;
     }
     else{
-      this.switchService.signupApi(payload).subscribe({
-      next: (res:any) => {
+      this.btnDisable = true;
+      this.switchService.signupApi(payload).subscribe({ next: (res:any) => {
         if(res.status == true){
           this.toastr.success(res.message,'signup', {
             timeOut: 3000, positionClass: 'toast-top-right' });
           this.router.navigate(['authentication/sign-in/basic'])
           } else {
+            this.btnDisable = false;
             this.toastr.error(res.message,'signup', {
               timeOut: 3000, positionClass: 'toast-top-right' });
           }

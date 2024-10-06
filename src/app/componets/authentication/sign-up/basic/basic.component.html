@@ -237,10 +237,9 @@
                         </button>
                     </div> -->
                         <div class="d-grid mt-4">
-                            <!-- <button (click)="onSignup()"> -->
-                            <a routerLink="/authentication/sign-up/basic" class="btn btn-lg btn-primary"
-                                (click)="onSignup()">
-                                Create Account</a>
+                            <!-- <button routerLink="/authentication/sign-up/basic"  (click)="onSignup()"> -->
+                            <!-- <a class="btn btn-lg btn-primary" (click)="onSignup()" [disabled]="btnDisable">Create Account</a> -->
+                            <button class="btn btn-lg btn-primary" (click)="onSignup()" [disabled]="btnDisable">Create Account</button>
                             <!-- </button> -->
                         </div>
                     </form>
