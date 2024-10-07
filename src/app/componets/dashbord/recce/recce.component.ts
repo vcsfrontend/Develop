@@ -41,9 +41,12 @@ export class RecceComponent {
 
   modal: any; active5='Home';
   active6='Home'
+  active7='Home1'
   constructor(// config: NgbModalConfig,
     private modalService: NgbModal) {}
   
+  
+    
   open(content:any) {
     this.modalService.open(content,{ centered: true });
   }
@@ -107,14 +110,5 @@ export class RecceComponent {
   }
   }
 
-  newItem: string = '';    // Holds the value of the new item to be added
-  navItems: string[] = []; // Array to hold the items in the nav bar
-
-  // Add the new item to the nav bar when the 'Add' button is clicked
-  addItem() {
-    if (this.newItem.trim()) {
-      this.navItems.push(this.newItem);  // Add new item to the array
-      this.newItem = '';                 // Clear the input field after adding
-    }
-  }
+  
 }

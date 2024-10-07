@@ -64,8 +64,8 @@
                                     
                                     <div class=" text-muted" id="home-vertical-link" role="tabpanel">
                                         <img src="./assets/images/ecommerce/jpg/19.jpeg" class="img-thumbnail"
-                                            alt="Responsive image" (click)="open(content)" data-bs-toggle="modal"
-                                            data-bs-target="#addtask">
+                                            alt="Responsive image" (click)="openModal(image)" 
+                                            data-bs-toggle="modal2" data-bs-target="#addimage">
                                         <img src="./assets/images/ecommerce/jpg/19.jpeg" class="img-thumbnail"
                                             alt="Responsive image" (click)="open(content)" data-bs-toggle="modal1"
                                             data-bs-target="#addtask">
@@ -248,6 +248,18 @@
                             <div class="modal-body px-4">
                                 <div class="col-md-12">
                                     <div class="tab-content ">
+                                        <div [ngClass]="{ 'tab-pane fade show': activeTab === 'tab2', 'tab-pane fade': activeTab !== 'tab2' }">
+                                            <h6>Recce Details</h6>
+                                            <div class="mb-3">
+                                                <label class="form-label">Recce Name</label>
+                                                <input type="text" class="form-control" placeholder="Recce name" aria-label="First name">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Recce Due Date</label>
+                                                <input type="date" class="form-control" placeholder="select due date" aria-label="First name">
+                                            </div>
+                                            
+                                        </div>
                                         <div [ngClass]="{ 'tab-pane fade show': activeTab === 'tab1', 'tab-pane fade': activeTab !== 'tab1' }">
                                             <h6>Recce Details</h6>
                                             <div class="mb-3">
@@ -298,21 +310,7 @@
                                                 <button type="button" class="btn btn-primary ">Create</button>
                                             </div>
                                         </div>
-                                        <div [ngClass]="{ 'tab-pane fade show': activeTab === 'tab2', 'tab-pane fade': activeTab !== 'tab2' }">
-                                            <p>test</p>
-                                            <button class="nav-link" [ngClass]="{ active: activeTab === 'tab2' }"
-                                                (click)="selectTab('tab2')">
-                                                
-                                                <input type="checkbox" [(ngModel)]="tab2Checked">
-                                                t1
-                                            </button>
-                                            <button class="nav-link" [ngClass]="{ active: activeTab === 'tab2' }"
-                                                (click)="selectTab('tab2')">
-                                                
-                                                <input type="checkbox" [(ngModel)]="tab2Checked">
-                                                t2
-                                            </button>
-                                        </div>
+                                        
                                     </div>                    
                                 </div>
                             </div>
@@ -330,21 +328,150 @@
     </div>
 </ng-template>
 <!-- end create project modal -->
-<div ngbDropdown class="dropdown no-caret">
-    <a ngbDropdownToggle href="javascript:void(0);" class="btn btn-icon btn-sm btn-light"
-        data-bs-toggle="dropdown">
-        <i class="fe fe-more-vertical"></i>
-    </a>
-    <ul ngbDropdownMenu class="dropdown-menu">
-        <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">Action</a></li>
-        <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">Another
-                action</a></li>
-        <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">Something else
-                here</a></li>
-    </ul>
+
+<div class="row">
+    <div class="d-flex col-xl-12">
+        <div class="nav flex-column me-3 border-end align-items-start" id="v-pills-tab" role="tablist"
+            aria-orientation="vertical">
+            <button class="nav-link" [ngClass]="{ active: activeTab === 'tab12' }"
+                (click)="selectTab('tab12')">
+                
+                <!-- <input type="checkbox" [(ngModel)]="tab12Checked"> -->
+                Recce Details
+            </button>
+            
+        </div>
+
+        <div class="col-xl-8">
+            <overlay-scrollbars [defer] id="filemanager-scroll">
+                
+                    <div class="col-md-12">
+                        <div class="tab-content ">
+                            <div class="row gy-4">
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <label for="input-label" class="form-label">Main Header </label>
+                                    <input type="text" class="form-control" id="input">
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <label for="input-label" class="form-label">category</label>
+                                    <input type="text" class="form-control" id="input-label">
+                                </div>
+                                <div class="file-upload float-end">
+                                    <input type="file" id="file-input" (change)="onFileSelected($event)"
+                                        accept="*/*" hidden>
+                                    <label for="file-input" class="text-danger">Upload File</label>
+                                </div>
+                                <div class=" text-muted  p-4" id="home-vertical-link"
+                                    role="tabpanel">
+                                    <img src="./assets/images/ecommerce/jpg/19.jpeg"
+                                        data-bs-toggle="modal" data-bs-target="#addtask">
+                                        
+                                </div>
+                                <div class="row g-3 align-items-center p-4">
+                                    <div class="col-xl-3">
+                                        <label for="inputPassword6"
+                                            class="col-form-label">Discription</label>
+                                    </div>
+                                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
+                                        <label for="input-label" class="form-label">Height </label>
+                                        <input type="text" class="form-control" id="input">
+                                    </div>
+                                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
+                                        <label for="input-label" class="form-label">Width</label>
+                                        <input type="text" class="form-control" id="input-label">
+                                    </div>
+                                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
+                                        <label for="input-label" class="form-label">Depth</label>
+                                        <input type="text" class="form-control" id="input-label">
+                                    </div>
+                                    <button class="btn d-flex align-items-center justify-content-center"
+    >
+                                        <i class="ri-add-circle-line fs-16 align-middle me-1 mb-1"></i>Add more fields
+                                    </button>
+                                    <div class="row g-3 align-items-center p-4">
+                                        <div class="col-xl-3">
+                                            <label for="inputPassword6"
+                                                class="col-form-label">Description</label>
+                                        </div>
+                                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
+                                            <label for="input-label" class="form-label">Height </label>
+                                            <input type="text" class="form-control" id="input">
+                                        </div>
+                                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
+                                            <label for="input-label" class="form-label">Width</label>
+                                            <input type="text" class="form-control" id="input-label">
+                                        </div>
+                                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
+                                            <label for="input-label" class="form-label">Depth</label>
+                                            <input type="text" class="form-control" id="input-label">
+                                        </div>
+    
+                                    </div>
+
+                                </div>
+                                
+                            </div>
+                            <div
+                                [ngClass]="{ 'tab-pane fade show': activeTab === 'tab12', 'tab-pane fade': activeTab !== 'tab12' }" >
+
+                                
+                                
+                                <div class="row g-3 align-items-center p-4">
+                                    <div class="col-xl-3">
+                                        <label for="inputPassword6"
+                                            class="col-form-label">Discription</label>
+                                    </div>
+                                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
+                                        <label for="input-label" class="form-label">Height </label>
+                                        <input type="text" class="form-control" id="input">
+                                    </div>
+                                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
+                                        <label for="input-label" class="form-label">Width</label>
+                                        <input type="text" class="form-control" id="input-label">
+                                    </div>
+                                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
+                                        <label for="input-label" class="form-label">Depth</label>
+                                        <input type="text" class="form-control" id="input-label">
+                                    </div>
+
+                                </div>
+                                <button class="btn d-flex align-items-center justify-content-center"
+    >
+                                    <i class="ri-add-circle-line fs-16 align-middle me-1 mb-1"></i>Add more fields
+                                </button>
+                                
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                
+            </overlay-scrollbars>
+        </div>                   
+    </div>
 </div>
 
-
+<ng-template #image id="addimage" let-modal>
+    <div class="col-xxl-12 col-xl-10 col-lg-6 col-md-6 col-sm-12 modal-body px-4"  >
+        <div class="card custom-card product-card">
+            <div class="card-body">
+                <a  class="product-image">
+                    <img  src="./assets/images/ecommerce/jpg/19.jpeg" class="card-img mb-3" alt="...">
+                </a>
+                <div class="product-icons">
+                    <a   class="wishlist"><i class="ri-heart-line"></i></a>
+                    <a   class="cart"><i class="ri-shopping-cart-line"></i></a>
+                    <a   class="view"><i class="ri-eye-line"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-bs-dismiss="modal"  (click)="modal.close('Cross click')">Cancel</button>
+        
+    </div>
+</ng-template>
 
     
 

@@ -106,11 +106,11 @@
                                 <form [formGroup]="loginForm" (ngSubmit)="Submit()">
                                 <div class="row gy-3">
                                     <div class="col-xl-12">
-                                        <label for="signin-username" class="form-label text-default">User Name</label>
-                                        <input type="text" class="form-control form-control-lg" id="signin-username" autocomplete  formControlName="email"    [(ngModel)]="email" required placeholder="user name">
+                                        <label for="signin-username" class="form-label text-default">email</label>
+                                        <input type="text" class="form-control form-control-lg" id="signin-username" autocomplete  formControlName="email"    [(ngModel)]="email" required placeholder="email">
                                     </div>
                                     <div class="col-xl-12 mb-2">
-                                        <label for="signin-password" class="form-label text-default d-block">Password<a  routerLink="/authentication/reset-password/basic" class="float-end text-danger">Forget password ?</a></label>
+                                        <label for="signin-password" class="form-label text-default d-block">Password<a  routerLink="/authentication/reset-password/basic" class="float-end text-danger">Forgot password ?</a></label>
                                         <div class="position-relative">
                                             <input type="password" class="form-control form-control-lg" id="signin-password" placeholder="password" [type]="showPassword ? 'text' : 'password'"  autocomplete id="input-password"  formControlName="password" [(ngModel)]="password" required>
                                             <a href="javascript:void(0);" class="show-password-button text-muted"  id="button-addon2"><i class="ri-eye-{{toggleClass}} align-middle"></i></a>
