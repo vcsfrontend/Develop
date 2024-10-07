@@ -239,31 +239,7 @@
                             (click)="selectTab('tab2')">
                             
                             <input type="checkbox" [(ngModel)]="tab2Checked">
-                            external Environment
-                        </button>
-                        <button class="nav-link" [ngClass]="{ active: activeTab === 'tab3' }"
-                            (click)="selectTab('tab3')">
-                            
-                            <input type="checkbox" [(ngModel)]="tab3Checked" />
-                            Internal Environment
-                        </button>
-                        <button class="nav-link" [ngClass]="{ active: activeTab === 'tab4' }"
-                            (click)="selectTab('tab4')">
-                            
-                            <input type="checkbox" [(ngModel)]="tab3Checked" />
-                            capture Spaces
-                        </button>
-                        <button class="nav-link" [ngClass]="{ active: activeTab === 'tab5' }"
-                            (click)="selectTab('tab3')">
-                            
-                            <input type="checkbox" [(ngModel)]="tab3Checked" />
-                            Signage and Facade
-                        </button>
-                        <button class="nav-link" [ngClass]="{ active: activeTab === 'tab6' }"
-                            (click)="selectTab('tab6')">
-                            
-                            <input type="checkbox" [(ngModel)]="tab3Checked" />
-                            Layout and Sketches
+                            test
                         </button>
                     </div>
 
@@ -276,11 +252,11 @@
                                             <h6>Recce Details</h6>
                                             <div class="mb-3">
                                                 <label class="form-label">Recce Name</label>
-                                                <input type="text" class="form-control" placeholder="S.NO" aria-label="First name">
+                                                <input type="text" class="form-control" placeholder="Recce name" aria-label="First name">
                                             </div>
                                             <div class="mb-3">
                                                 <label class="form-label">Recce Due Date</label>
-                                                <input type="date" class="form-control" placeholder="S.NO" aria-label="First name">
+                                                <input type="date" class="form-control" placeholder="select due date" aria-label="First name">
                                             </div>
                                             <div class="mb-3">
                                                 <label class="form-label">Assign Recce to(will receive recce link)</label>
@@ -319,88 +295,22 @@
                                                 <label class="form-label">Instruction for Recce  </label>
                                                 <input type="text area" class="form-control"  aria-label="First name">
                                                 
+                                                <button type="button" class="btn btn-primary ">Create</button>
                                             </div>
                                         </div>
                                         <div [ngClass]="{ 'tab-pane fade show': activeTab === 'tab2', 'tab-pane fade': activeTab !== 'tab2' }">
-                                            <p>External Environment</p>
+                                            <p>test</p>
                                             <button class="nav-link" [ngClass]="{ active: activeTab === 'tab2' }"
                                                 (click)="selectTab('tab2')">
                                                 
                                                 <input type="checkbox" [(ngModel)]="tab2Checked">
-                                                External Photos and Videos
-                                            </button>
-                                        </div>
-                                        <div [ngClass]="{ 'tab-pane fade show': activeTab === 'tab3', 'tab-pane fade': activeTab !== 'tab3' }">
-                                            <p>Internal Environment</p>
-                                            <button class="nav-link" [ngClass]="{ active: activeTab === 'tab2' }"
-                                                (click)="selectTab('tab2')">
-                                                
-                                                <input type="checkbox" [(ngModel)]="tab2Checked">
-                                                Internal Photos and Videos
-                                            </button>
-                                        </div>
-                                        <div [ngClass]="{ 'tab-pane fade show': activeTab === 'tab4', 'tab-pane fade': activeTab !== 'tab4' }">
-                                            <p>Capture Spaces</p>
-                                            <button class="nav-link" [ngClass]="{ active: activeTab === 'tab2' }"
-                                                (click)="selectTab('tab2')">
-                                                
-                                                <input type="checkbox" [(ngModel)]="tab2Checked">
-                                                My Space
-                                            </button>
-                                        </div>
-                                        <div [ngClass]="{ 'tab-pane fade show': activeTab === 'tab5', 'tab-pane fade': activeTab !== 'tab5' }">
-                                            <p>Signage and Facade</p>
-                                            <button class="nav-link" [ngClass]="{ active: activeTab === 'tab2' }"
-                                                (click)="selectTab('tab2')">
-                                                
-                                                <input type="checkbox" [(ngModel)]="tab2Checked">Store Name <br>
-                                                <!-- <input type="checkbox" [(ngModel)]="tab2Checked">Store GSTIN <br>
-                                                <input type="checkbox" [(ngModel)]="tab2Checked">Signage contact number <br>
-                                                <input type="checkbox" [(ngModel)]="tab2Checked">Local Language
-                                                <input type="checkbox" [(ngModel)]="tab2Checked">Store name in local language
-                                                <input type="checkbox" [(ngModel)]="tab2Checked">Dealer request
-                                                <input type="checkbox" [(ngModel)]="tab2Checked">Scaffolding Crane Specification
-                                                <input type="checkbox" [(ngModel)]="tab2Checked">Is Scaffolding/crane etc required ?
-                                                <input type="checkbox" [(ngModel)]="tab2Checked">Scaffolding Crane Type
-                                                <input type="checkbox" [(ngModel)]="tab2Checked">Is Mounting support required for new signages ?
-                                                <input type="checkbox" [(ngModel)]="tab2Checked">Select Mounting Support
-                                                <input type="checkbox" [(ngModel)]="tab2Checked">Please enter the type of support, dimension and quantity needed.
-                                                <input type="checkbox" [(ngModel)]="tab2Checked">Others
-                                                <input type="checkbox" [(ngModel)]="tab2Checked">Cladding Required?
-                                                <input type="checkbox" [(ngModel)]="tab2Checked">Cladding Details
-                                                <input type="checkbox" [(ngModel)]="tab2Checked">How are the signages currently supported ?
-                                                <input type="checkbox" [(ngModel)]="tab2Checked">Enter other details
-                                                <input type="checkbox" [(ngModel)]="tab2Checked">Scaffolding Crane Length
-                                                <input type="checkbox" [(ngModel)]="tab2Checked">Scaffolding Height
-                                                <input type="checkbox" [(ngModel)]="tab2Checked">Crane Height
-                                                <input type="checkbox" [(ngModel)]="tab2Checked">Ladder Height
-                                                <input type="checkbox" [(ngModel)]="tab2Checked">Number of Spiders
-                                                <input type="checkbox" [(ngModel)]="tab2Checked">Number of Ladders
-                                                <input type="checkbox" [(ngModel)]="tab2Checked">Number of Cranes
-                                                <input type="checkbox" [(ngModel)]="tab2Checked">Pipe Section Size
-                                                <input type="checkbox" [(ngModel)]="tab2Checked">Is the Site ready for work ?
-                                                <input type="checkbox" [(ngModel)]="tab2Checked">In how many days will site get ready ?
-                                                <input type="checkbox" [(ngModel)]="tab2Checked">L Angle Section
-                                                <input type="checkbox" [(ngModel)]="tab2Checked">Pipe Section
-                                                <input type="checkbox" [(ngModel)]="tab2Checked">My Space
-                                                <input type="checkbox" [(ngModel)]="tab2Checked">Store Files
-                                                <input type="checkbox" [(ngModel)]="tab2Checked">Other Details -->
-
-                                            </button>
-                                        </div>
-                                        <div [ngClass]="{ 'tab-pane fade show': activeTab === 'tab6', 'tab-pane fade': activeTab !== 'tab6' }">
-                                            <p>Layout and Sketches</p>
-                                            <button class="nav-link" [ngClass]="{ active: activeTab === 'tab2' }"
-                                                (click)="selectTab('tab2')">
-                                                
-                                                <input type="checkbox" [(ngModel)]="tab2Checked">
-                                                Plans
+                                                t1
                                             </button>
                                             <button class="nav-link" [ngClass]="{ active: activeTab === 'tab2' }"
                                                 (click)="selectTab('tab2')">
                                                 
                                                 <input type="checkbox" [(ngModel)]="tab2Checked">
-                                                Elevations
+                                                t2
                                             </button>
                                         </div>
                                     </div>                    
