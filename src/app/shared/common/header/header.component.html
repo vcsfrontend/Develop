@@ -130,14 +130,14 @@
         <!-- End::header-element -->
 
         <!-- Start::header-element -->
-        <li ngbDropdown class="header-element country-selector" [autoClose]="'outside'">
+        <!-- <li ngbDropdown class="header-element country-selector" [autoClose]="'outside'"> -->
           <!-- Start::header-link|dropdown-toggle -->
-          <a ngbDropdownToggle href="javascript:void(0);" class="header-link dropdown-toggle"
+          <!-- <a ngbDropdownToggle href="javascript:void(0);" class="header-link dropdown-toggle"
             data-bs-auto-close="outside" data-bs-toggle="dropdown">
             <img src="./assets/images/flags/india_flag.jpg" alt="img" class="rounded-circle">
-          </a>
+          </a> -->
           <!-- End::header-link|dropdown-toggle -->
-          <ul ngbDropdownMenu class="main-header-dropdown dropdown-menu dropdown-menu-end full-width"
+          <!-- <ul ngbDropdownMenu class="main-header-dropdown dropdown-menu dropdown-menu-end full-width"
             data-popper-placement="none">
             <li>
               <a ngbDropdownItem class="dropdown-item d-flex align-items-center" href="javascript:void(0);">
@@ -188,7 +188,7 @@
               </a>
             </li>
           </ul>
-        </li>
+        </li> -->
         <!-- End::header-element -->
 
         <!-- Start::header-element themes-->
@@ -211,16 +211,16 @@
         <!-- End::header-element -->
 
         <!-- Start::header-element  cart-->
-        <li ngbDropdown  class="header-element cart-dropdown" [autoClose]="'outside'">
+        <!-- <li ngbDropdown  class="header-element cart-dropdown" [autoClose]="'outside'"> -->
           <!-- Start::header-link|dropdown-toggle -->
-          <a ngbDropdownToggle href="javascript:void(0);" class="header-link dropdown-toggle" data-bs-auto-close="outside"
+          <!-- <a ngbDropdownToggle href="javascript:void(0);" class="header-link dropdown-toggle" data-bs-auto-close="outside"
             data-bs-toggle="dropdown">
             <i class="bi bi-cart2 header-link-icon"></i>
             <span class="badge bg-primary rounded-pill header-icon-badge" id="cart-icon-badge">{{ cartItemCount }}</span>
-          </a>
+          </a> -->
           <!-- End::header-link|dropdown-toggle -->
           <!-- Start::main-header-dropdown -->
-          <div ngbDropdownMenu  class="main-header-dropdown dropdown-menu dropdown-menu-end" data-popper-placement="none">
+          <!-- <div ngbDropdownMenu  class="main-header-dropdown dropdown-menu dropdown-menu-end" data-popper-placement="none">
             <div class="p-3">
               <div class="d-flex align-items-center justify-content-between">
                 <p class="mb-0 fs-16">Cart Items<span
@@ -229,10 +229,10 @@
                 <span><span class="text-muted me-1">Total:</span><span
               class="text-primary fw-medium">$14,289</span></span>
             </div>
-          </div>
-          <div class="dropdown-divider"></div>
+          </div> -->
+          <!-- <div class="dropdown-divider"></div> -->
 
-          <overlay-scrollbars [defer]>
+          <!-- <overlay-scrollbars [defer]>
             <ul class="list-unstyled mb-0" id="header-cart-items-scroll">
               <li ngbDropdownItem class="dropdown-item" (click)="handleCardClick($event)" id="row1">
                 <div class="d-flex align-items-start cart-dropdown-item">
@@ -356,8 +356,8 @@
               </div>
             </li>
           </ul>
-        </overlay-scrollbars>
-        @if (!isCartEmpty) {
+        </overlay-scrollbars> -->
+        <!-- @if (!isCartEmpty) {
 
           <div  class="p-3 empty-header-item border-top">
             <div class="text-center">
@@ -365,10 +365,10 @@
               checkout</a>
             </div>
           </div>
-        }
+        } -->
 
 
-        <div  class="p-5 empty-item " [class.d-none]="!isCartEmpty">
+        <!-- <div  class="p-5 empty-item " [class.d-none]="!isCartEmpty">
           <div class="text-center">
             <span class="avatar avatar-xl avatar-rounded bg-primary-transparent">
               <i class="ri-shopping-cart-2-line fs-2"></i>
@@ -380,22 +380,22 @@
             </div>
           </div>
 
-        </div>
+        </div> -->
         <!-- End::main-header-dropdown -->
-      </li>
+      <!-- </li> -->
       <!-- End::header-element -->
 
       <!-- Start::header-element  notifications-->
-      <li ngbDropdown class="header-element notifications-dropdown d-xl-block d-none" [autoClose]="'outside'">
+      <!-- <li ngbDropdown class="header-element notifications-dropdown d-xl-block d-none" [autoClose]="'outside'"> -->
         <!-- Start::header-link|dropdown-toggle -->
-        <a ngbDropdownToggle href="javascript:void(0);" class="header-link dropdown-toggle" data-bs-toggle="dropdown"
+        <!-- <a ngbDropdownToggle href="javascript:void(0);" class="header-link dropdown-toggle" data-bs-toggle="dropdown"
           data-bs-auto-close="outside" id="messageDropdown" aria-expanded="false">
           <i class="bi bi-bell header-link-icon"></i>
           <span class="header-icon-pulse bg-secondary rounded pulse pulse-secondary"></span>
-        </a>
+        </a> -->
         <!-- End::header-link|dropdown-toggle -->
         <!-- Start::main-header-dropdown -->
-        <div ngbDropdownMenu   class="main-header-dropdown dropdown-menu dropdown-menu-end" data-popper-placement="none">
+        <!-- <div ngbDropdownMenu   class="main-header-dropdown dropdown-menu dropdown-menu-end" data-popper-placement="none">
           <div  class="p-3">
             <div class="d-flex align-items-center justify-content-between">
               <p class="mb-0 fs-16">Notifications</p>
@@ -529,9 +529,9 @@
               <h6 class="fw-medium mt-3">No New Notifications</h6>
             </div>
           </div>
-        </div>
+        </div> -->
         <!-- End::main-header-dropdown -->
-      </li>
+      <!-- </li> -->
       <!-- End::header-element -->
 
       <!-- Start::header-element fullscreen -->
