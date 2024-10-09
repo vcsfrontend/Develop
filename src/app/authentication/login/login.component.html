@@ -106,14 +106,14 @@
                                 <form [formGroup]="loginForm" (ngSubmit)="Submit()">
                                 <div class="row gy-3">
                                     <div class="col-xl-12">
-                                        <label for="signin-username" class="form-label text-default">email</label>
+                                        <label for="signin-username" class="form-label text-default">Email</label>
                                         <input type="text" class="form-control form-control-lg" id="signin-username" autocomplete  formControlName="email"    [(ngModel)]="email" required placeholder="email">
                                     </div>
                                     <div class="col-xl-12 mb-2">
                                         <label for="signin-password" class="form-label text-default d-block">Password<a  routerLink="/authentication/reset-password/basic" class="float-end text-danger">Forgot password ?</a></label>
                                         <div class="position-relative">
                                             <input type="password" class="form-control form-control-lg" id="signin-password" placeholder="password" [type]="showPassword ? 'text' : 'password'"  autocomplete id="input-password"  formControlName="password" [(ngModel)]="password" required>
-                                            <a href="javascript:void(0);" class="show-password-button text-muted"  id="button-addon2"><i class="ri-eye-{{toggleClass}} align-middle"></i></a>
+                                            <a href="javascript:void(0);" class="show-password-button text-muted"  id="button-addon2"><i class="ri-eye-off-line align-middle"></i></a>
                                         </div>
                                         <div class="mt-2">
                                             <div class="form-check">
@@ -125,17 +125,17 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="text-center my-3 authentication-barrier">
+                                <!-- <div class="text-center my-3 authentication-barrier">
                                     <span>OR</span>
-                                </div>
-                                <div class="d-grid mb-3">
+                                </div> -->
+                                <!-- <div class="d-grid mb-3">
                                     <button class="btn btn-lg btn-light-ghost border d-flex align-items-center justify-content-center">
                                         <span class="avatar avatar-xs">
                                             <img src="./assets/images/media/apps/google1.png" alt="">
                                         </span>
                                         <span class="lh-1 ms-2 fs-13 text-default">Signin with Google</span>
                                     </button>
-                                </div>
+                                </div> -->
                                 <!-- <div class="d-grid mb-3">
                                     <button class="btn btn-lg btn-light-ghost border d-flex align-items-center justify-content-center">
                                         <span class="avatar avatar-xs invert-1">
@@ -152,7 +152,7 @@
                                 </div>
                             </form>
                                 <div class="text-center">
-                                    <p class="text-muted mt-3 mb-0">Dont have an account? <a routerLink="/authentication/sign-up/basic" class="text-primary">Sign Up</a></p>
+                                    <p class="text-muted mt-3 mb-0">Don't have an account? <a routerLink="/authentication/sign-up/basic" class="text-primary">Sign Up</a></p>
                                 </div>
                                
                                 </ng-template>
