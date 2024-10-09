@@ -49,7 +49,7 @@
                     </div>
                 </div>
                 <div class="row ">
-                    <div class="col-xl-3 border-end">
+                    <div class="col-xl-3">
                         <nav ngbNav #nav6="ngbNav" [activeId]="active6" orientation="vertical"
                             class="nav nav-tabs flex-column nav-style-5" role="tablist">
                             <ng-container ngbNavItem="Home">
@@ -142,22 +142,21 @@
                                 <ng-template ngbNavContent class="tab-content mt-2 mt-xl-0">
                                    
                                     <overlay-scrollbars [defer] id="filemanager-scroll">
-                                        <div class="modal-body px-3">
-                                            <div class="col-md-12">
+                                        <div class="modal-body px-0">
+                                            <div class="col-md-11">
                                                 <div class="tab-content ">
-                                                    <div class="row pb-2 ">
+                                                    <div class="row pb-2 pt-3 ">
                                                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 ">
-                                                            <label for="input-label" class="form-label">Main Header </label>
-                                                            <input type="text" class="form-control" id="input">
+                                                            <input type="text" placeholder="Main Header" class="form-control" id="input">
                                                         </div>
                                                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                                            <label for="input-label" class="form-label">category</label>
-                                                            <input type="text" class="form-control" id="input-label">
+                                            
+                                                            <input type="text" placeholder="category" class="form-control" id="input-label">
                                                         </div>
                                                         
                                                     </div>
                                                     
-                                                        <div class="card-header justify-content-between bg-dark-gradient ">
+                                                        <div class="card-header justify-content-between ">
                                                             <div class="card-title">
                                                                 <button type="button" class="btn btn-sm btn-danger text-center me-2">
                                                                 Recce 1
@@ -229,8 +228,8 @@
                             </ng-container>
                         </nav>
                     </div>
-                    <div class="col-xl-9">
-                        <div [ngbNavOutlet]="nav6" class="ms-4">
+                    <div class="col-xl-9 bg-light border rounded">
+                        <div [ngbNavOutlet]="nav6" class="">
                         </div>
                     </div>
                 </div>
@@ -340,7 +339,7 @@
 
                     <div class="col-md-8">
                         <overlay-scrollbars [defer] id="filemanager-scroll">
-                            <div class="modal-body px-3">
+                            <div class="modal-body">
                                 <div class="col-md-12">
                                     <div class="tab-content ">
                                         <div [ngClass]="{ 'tab-pane fade show': activeTab === 'tab1', 'tab-pane fade': activeTab !== 'tab1' }">
