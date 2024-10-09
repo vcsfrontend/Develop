@@ -10,8 +10,8 @@
                         </a>
                     </div> -->
                     <p class="h5 mb-2 text-center">Sign Up</p>
-                    <p class="mb-4 text-muted op-7 fw-normal text-center">Welcome & Join us by creating a free account !
-                    </p>
+                    <!-- <p class="mb-4 text-muted op-7 fw-normal text-center">Welcome & Join us by creating a free account !
+                    </p> -->
                     <form [formGroup]="signupFrm" (ngSubmit)="onSignup()">
                         <div class="row gy-3">
                             <div class="col-xl-12">
@@ -25,6 +25,16 @@
                                 </select>
                                 <div *ngIf="submitted && f['type'].errors" class="invalid-feedback">
                                     <div *ngIf="f['type'].errors['required']">Type is required</div>
+                                </div>
+                            </div>
+                            <div class="col-xl-12">
+                                <label for="signup-companyName" class="form-label text-default">
+                                    Company Name<sup>*</sup></label>
+                                <input type="text" class="form-control form-control-lg" id="signup-companyName"
+                                    placeholder="First name" formControlName="companyName"
+                                    [ngClass]="{ 'is-invalid': submitted && f['companyName'].errors }">
+                                <div *ngIf="submitted && f['companyName'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['companyName'].errors['required']">First name is required</div>
                                 </div>
                             </div>
                             <div class="col-xl-12">
@@ -58,10 +68,14 @@
                                 </div>
                             </div>
                             <div class="col-xl-12">
-                                <label for="signup-dob" class="form-label text-default">Date of
-                                    birth<sup>*</sup></label>
-                                <input type="text" class="form-control form-control-lg" id="signup-dob"
-                                    placeholder="dob" formControlName="dob">
+                                <label for="signup-dob" class="form-label text-default">Date of birth<sup>*</sup></label>
+                                <!-- <input type="date" class="form-control form-control-lg" id="signup-dob"
+                                    placeholder="dob" formControlName="dob"> -->
+                                <div class="input-group">
+                                    <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                    <input class="form-control" placeholder="Choose date" type="text" mwlFlatpickr
+                                    formControlName="dob" [maxDate]="todayDt">
+                                </div>
                             </div>
                             <div class="col-xl-12">
                                 <label for="signup-email" class="form-label text-default">Email<sup>*</sup></label>
@@ -182,15 +196,12 @@
                             <input type="number" class="form-control form-control-lg" id="signup-users" placeholder="no of users"
                             formControlName="noOfUsers">
                         </div> -->
-                            <div class="col-xl-12">
+                            <!-- <div class="col-xl-12">
                                 <label for="signup-country" class="form-label text-default">Country<sup>*</sup></label>
                                 <input type="text" class="form-control form-control-lg" id="signup-country"
                                     placeholder="Country" formControlName="country">
-                            </div>
-                            <!-- <div class="col-xl-12">
-                            <label for="signup-company" class="form-label text-default">Company Name<sup>*</sup></label>
-                            <input type="text" class="form-control form-control-lg" id="signup-company" placeholder="mobile">
-                        </div> -->
+                            </div> -->
+                        
 
 
                             <div class="form-check mt-3">
@@ -216,10 +227,10 @@
 
 
                         </div>
-                        <div class="text-center my-3 authentication-barrier">
+                        <!-- <div class="text-center my-3 authentication-barrier">
                             <span>OR</span>
-                        </div>
-                        <div class="d-grid mb-3">
+                        </div> -->
+                        <!-- <div class="d-grid mb-3">
                             <button
                                 class="btn btn-lg btn-light-ghost border d-flex align-items-center justify-content-center">
                                 <span class="avatar avatar-xs">
@@ -227,7 +238,7 @@
                                 </span>
                                 <span class="lh-1 ms-2 fs-13 text-default">Signup with Google</span>
                             </button>
-                        </div>
+                        </div> -->
                         <!-- <div class="d-grid mb-3">
                         <button class="btn btn-lg btn-light-ghost border d-flex align-items-center justify-content-center">
                             <span class="avatar avatar-xs invert-1">
@@ -245,7 +256,7 @@
                     </form>
                     <div class="text-center">
                         <p class="text-muted mt-3 mb-0">Already have an account? <a
-                                routerLink="/authentication/sign-in/basic" class="text-primary">Sign In</a></p>
+                                routerLink="/auth/login" class="text-primary">Sign In</a></p>
                     </div>
                 </div>
             </div>

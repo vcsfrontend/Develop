@@ -8,36 +8,34 @@ import { FirebaseService } from '../../../../shared/services/firebase.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { Tools } from '../../../../shared/common/Enums/Tools';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
+import flatpickr from 'flatpickr';
+import { FlatpickrModule,FlatpickrDefaults  } from 'angularx-flatpickr';
 @Component({
   selector: 'app-basic',
   standalone: true,
-  // imports: [RouterModule],
   imports: [RouterModule,NgbModule,FormsModule,ReactiveFormsModule ,ToastrModule,
-    MatFormFieldModule, MatSelectModule, CommonModule],
-    // AngularFireModule,
-    // AngularFireDatabaseModule,
-    // AngularFirestoreModule,
-    
-  
-    providers: [FirebaseService,{ provide: ToastrService, useClass: ToastrService }],
+    MatFormFieldModule, MatSelectModule, CommonModule, FlatpickrModule],
+    // AngularFireModule,  AngularFireDatabaseModule, AngularFirestoreModule,
+  providers: [FirebaseService,{ provide: ToastrService, useClass: ToastrService },FlatpickrDefaults, DatePipe],
   templateUrl: './basic.component.html',
   styleUrl: './basic.component.scss'
 })
 export class BasicComponent {
   crm = false; submitted =false; cnfmPaswrd: any = ''; paswrd:any = '';
-  adonai = false;btnDisable =false;
+  adonai = false;btnDisable =false; todayDt = new Date();
   adoanAiRole :any;
   crmRole :any;
   toolsList = [Tools.Adonai,Tools.Crm]
 
   signupFrm: FormGroup = this.fb.group({ 
     type : ['', Validators.required],
+    companyName : ['', Validators.required],
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
     email: ['', Validators.required],
-    country: "",
-    dob: "",
+    // country: "",
+    dob: [new Date()],
     crm:false,
     adonai:false,
     phoneNumber: '',
@@ -49,7 +47,7 @@ export class BasicComponent {
   })
   
   constructor(public fb: FormBuilder, public switchService: SwitherService, 
-    private toastr: ToastrService, private router: Router){
+    private toastr: ToastrService, private router: Router, private dp: DatePipe){
     document.body.classList.add('authentication-background');
   }
 
@@ -83,7 +81,8 @@ export class BasicComponent {
     payload.type = +payload.type,
     payload.crm = crm,
     payload.adonai = adonai,
-    payload.phoneNumber = +payload.phoneNumber;
+    payload.phoneNumber = +payload.phoneNumber, delete payload.tools,
+    payload.dob = this.dp.transform(payload.dob, 'dd-MM-yyyy')
     if (this.signupFrm.invalid) {
       this.btnDisable = false;
         return;
