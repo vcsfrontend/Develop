@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SwitherService } from '../../../../shared/services/swither.service';
@@ -11,17 +11,19 @@ import { Tools } from '../../../../shared/common/Enums/Tools';
 import { CommonModule, DatePipe } from '@angular/common';
 import flatpickr from 'flatpickr';
 import { FlatpickrModule,FlatpickrDefaults  } from 'angularx-flatpickr';
+import { ShowCodeContentDirective } from '../../../../shared/directives/show-code-content.directive';
+import { BaseComponent } from '../../../../shared/base/base.component';
 @Component({
   selector: 'app-basic',
   standalone: true,
   imports: [RouterModule,NgbModule,FormsModule,ReactiveFormsModule ,ToastrModule,
-    MatFormFieldModule, MatSelectModule, CommonModule, FlatpickrModule],
+    MatFormFieldModule, MatSelectModule, CommonModule, FlatpickrModule, ShowCodeContentDirective],
     // AngularFireModule,  AngularFireDatabaseModule, AngularFirestoreModule,
   providers: [FirebaseService,{ provide: ToastrService, useClass: ToastrService },FlatpickrDefaults, DatePipe],
   templateUrl: './basic.component.html',
   styleUrl: './basic.component.scss'
 })
-export class BasicComponent {
+export class BasicComponent extends BaseComponent implements OnInit {
   crm = false; submitted =false; cnfmPaswrd: any = ''; paswrd:any = '';
   adonai = false;btnDisable =false; todayDt = new Date();
   adoanAiRole :any;
@@ -34,7 +36,7 @@ export class BasicComponent {
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
     email: ['', Validators.required],
-    // country: "",
+    country: ['0'],
     dob: [new Date()],
     crm:false,
     adonai:false,
@@ -48,11 +50,11 @@ export class BasicComponent {
   
   constructor(public fb: FormBuilder, public switchService: SwitherService, 
     private toastr: ToastrService, private router: Router, private dp: DatePipe){
+    super();
     document.body.classList.add('authentication-background');
   }
 
   ngOnInit(){
-    
   }
   ngOnDestroy(): void {
     document.body.classList.remove('authentication-background');    
@@ -84,6 +86,10 @@ export class BasicComponent {
     payload.phoneNumber = +payload.phoneNumber, delete payload.tools,
     payload.dob = this.dp.transform(payload.dob, 'dd-MM-yyyy')
     if (this.signupFrm.invalid) {
+      this.toastr.error('Please fill mandatory fields','signup', {
+        timeOut: 3000,
+        positionClass: 'toast-top-right',
+      });
       this.btnDisable = false;
         return;
     }

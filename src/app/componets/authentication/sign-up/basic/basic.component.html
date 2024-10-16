@@ -12,7 +12,7 @@
                     <p class="h5 mb-2 text-center">Sign Up</p>
                     <!-- <p class="mb-4 text-muted op-7 fw-normal text-center">Welcome & Join us by creating a free account !
                     </p> -->
-                    <form [formGroup]="signupFrm" (ngSubmit)="onSignup()">
+                    <form [formGroup]="signupFrm" >
                         <div class="row gy-3">
                             <div class="col-xl-12">
                                 <label for="role-id" class="form-label text-default">Type
@@ -31,17 +31,18 @@
                                 <label for="signup-companyName" class="form-label text-default">
                                     Company Name<sup>*</sup></label>
                                 <input type="text" class="form-control form-control-lg" id="signup-companyName"
-                                    placeholder="First name" formControlName="companyName"
-                                    [ngClass]="{ 'is-invalid': submitted && f['companyName'].errors }">
+                                    placeholder="Company name" formControlName="companyName"
+                                    [ngClass]="{ 'is-invalid': submitted && f['companyName'].errors }"
+                                    appShowCodeContent>
                                 <div *ngIf="submitted && f['companyName'].errors" class="invalid-feedback">
-                                    <div *ngIf="f['companyName'].errors['required']">First name is required</div>
+                                    <div *ngIf="f['companyName'].errors['required']">Company name is required</div>
                                 </div>
                             </div>
                             <div class="col-xl-12">
                                 <label for="signup-firstname" class="form-label text-default">First
                                     Name<sup>*</sup></label>
                                 <input type="text" class="form-control form-control-lg" id="signup-firstname"
-                                    placeholder="First name" formControlName="firstName"
+                                    placeholder="First name" formControlName="firstName" appShowCodeContent
                                     [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }">
                                 <div *ngIf="submitted && f['firstName'].errors" class="invalid-feedback">
                                     <div *ngIf="f['firstName'].errors['required']">First name is required</div>
@@ -51,7 +52,7 @@
                                 <label for="signup-lastname" class="form-label text-default">Last
                                     Name<sup>*</sup></label>
                                 <input type="text" class="form-control form-control-lg" id="signup-lastname"
-                                    placeholder="Last name" formControlName="lastName"
+                                    placeholder="Last name" formControlName="lastName" appShowCodeContent
                                     [ngClass]="{ 'is-invalid': submitted && f['lastName'].errors }">
                                 <div *ngIf="submitted && f['lastName'].errors" class="invalid-feedback">
                                     <div *ngIf="f['lastName'].errors['required']">Last name is required</div>
@@ -61,7 +62,7 @@
                                 <label for="signup-username" class="form-label text-default">User
                                     Name<sup>*</sup></label>
                                 <input type="text" class="form-control form-control-lg" id="signup-username"
-                                    placeholder="username" formControlName="username"
+                                    placeholder="username" formControlName="username" appShowCodeContent
                                     [ngClass]="{ 'is-invalid': submitted && f['username'].errors }">
                                 <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
                                     <div *ngIf="f['username'].errors['required']">User name is required</div>
@@ -80,7 +81,7 @@
                             <div class="col-xl-12">
                                 <label for="signup-email" class="form-label text-default">Email<sup>*</sup></label>
                                 <input type="text" class="form-control form-control-lg" id="signup-email"
-                                    placeholder="email" formControlName="email"
+                                    placeholder="email" formControlName="email" appShowCodeContent
                                     [ngClass]="{ 'is-invalid': submitted && f['email'].errors }">
                                 <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
                                     <div *ngIf="f['email'].errors['required']">Email is required</div>
@@ -92,7 +93,7 @@
                                 <div class="position-relative">
                                     <input type="password" class="form-control form-control-lg" id="signup-password"
                                         placeholder="password" [type]="showPassword ? 'text' : 'password'" autocomplete
-                                        formControlName="password"
+                                        formControlName="password" appShowCodeContent
                                         [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
                                         [(ngModel)]="paswrd">
                                     <a href="javascript:void(0);" class="show-password-button text-muted"
@@ -119,7 +120,7 @@
                                     <input type="password" class="form-control form-control-lg"
                                         id="signup-confirmpassword" placeholder="confirm password"
                                         [type]="showPassword1 ? 'text' : 'password'" autocomplete
-                                        [(ngModel)]="cnfmPaswrd" [ngModelOptions]="{standalone: true}">
+                                        [(ngModel)]="cnfmPaswrd" [ngModelOptions]="{standalone: true}" appShowCodeContent>
                                     <a href="javascript:void(0);" class="show-password-button text-muted"
                                         (click)="createpassword1()" id="button-addon21"><i
                                             class="ri-eye-{{toggleClass1}} align-middle"></i></a>
@@ -130,7 +131,9 @@
                                 <label for="signup-mobile" class="form-label text-default">Phone
                                     Number<sup>*</sup></label>
                                 <input type="text" class="form-control form-control-lg" id="signup-mobile"
-                                    placeholder="mobile" formControlName="phoneNumber" maxlength="10">
+                                    placeholder="mobile" formControlName="phoneNumber" maxlength="10"
+                                    onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
+                                    event.charCode == 8)'>
                             </div>
                             <!-- <div class="col-xl-12">
                             <label for="tool-id" class="form-label text-default">Tool ID<sup>*</sup></label>
@@ -196,22 +199,23 @@
                             <input type="number" class="form-control form-control-lg" id="signup-users" placeholder="no of users"
                             formControlName="noOfUsers">
                         </div> -->
-                            <!-- <div class="col-xl-12">
+                            <div class="col-xl-12">
                                 <label for="signup-country" class="form-label text-default">Country<sup>*</sup></label>
-                                <input type="text" class="form-control form-control-lg" id="signup-country"
-                                    placeholder="Country" formControlName="country">
-                            </div> -->
-                        
-
-
-                            <div class="form-check mt-3">
+                                <!-- <input type="text" class="form-control form-control-lg" id="signup-country"
+                                    placeholder="Country" formControlName="country"> -->
+                                <select class="form-select form-select-lg" id="role-id" formControlName="country">
+                                    <option value="0" disabled selected>Select</option>
+                                    <option value="{{c.country}}" *ngFor="let c of countryLst">{{c.country}}</option>
+                                </select>
+                            </div>
+                            <!-- <div class="form-check mt-3">
                                 <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
                                 <label class="form-check-label text-muted fw-normal" for="defaultCheck1">
                                     By creating a account you agree to our <a routerLink="/pages/terms-conditions"
                                         class="text-success"><u>Terms & Conditions</u></a> and <a
                                         class="text-success"><u>Privacy Policy</u></a>
                                 </label>
-                            </div>
+                            </div> -->
 
                             <!-- <div class="col-xl-12">
                             <label for="role-id" class="form-label text-default">Role ID<sup>*</sup></label>
