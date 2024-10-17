@@ -45,6 +45,7 @@ export class AdonaiComponent {
             timeOut: 3000,
             positionClass: 'toast-top-right',
           });
+          this.router.navigate(['/dashboard/sales']);
         //   this.toastr.error(res.message,'adonai', {
         //     timeOut: 3000,
         //     positionClass: 'toast-top-right',

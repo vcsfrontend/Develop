@@ -29,7 +29,7 @@
                             </div>
                             <div class="col-xl-12">
                                 <label for="signup-companyName" class="form-label text-default">
-                                    Company Name<sup>*</sup></label>
+                                    Company Name<span class="text-danger"> *</span></label>
                                 <input type="text" class="form-control form-control-lg" id="signup-companyName"
                                     placeholder="Company name" formControlName="companyName"
                                     [ngClass]="{ 'is-invalid': submitted && f['companyName'].errors }"
@@ -40,7 +40,7 @@
                             </div>
                             <div class="col-xl-12">
                                 <label for="signup-firstname" class="form-label text-default">First
-                                    Name<sup>*</sup></label>
+                                    Name<span class="text-danger"> *</span></label>
                                 <input type="text" class="form-control form-control-lg" id="signup-firstname"
                                     placeholder="First name" formControlName="firstName" appShowCodeContent
                                     [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }">
@@ -50,7 +50,7 @@
                             </div>
                             <div class="col-xl-12">
                                 <label for="signup-lastname" class="form-label text-default">Last
-                                    Name<sup>*</sup></label>
+                                    Name<span class="text-danger"> *</span></label>
                                 <input type="text" class="form-control form-control-lg" id="signup-lastname"
                                     placeholder="Last name" formControlName="lastName" appShowCodeContent
                                     [ngClass]="{ 'is-invalid': submitted && f['lastName'].errors }">
@@ -60,16 +60,19 @@
                             </div>
                             <div class="col-xl-12">
                                 <label for="signup-username" class="form-label text-default">User
-                                    Name<sup>*</sup></label>
+                                    Name<span class="text-danger"> *</span></label>
                                 <input type="text" class="form-control form-control-lg" id="signup-username"
                                     placeholder="username" formControlName="username" appShowCodeContent
+                                    onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
+                                    (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && 
+                                    event.charCode <= 122) || event.charCode == 8 || event.charCode == 95)'
                                     [ngClass]="{ 'is-invalid': submitted && f['username'].errors }">
                                 <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
                                     <div *ngIf="f['username'].errors['required']">User name is required</div>
                                 </div>
                             </div>
                             <div class="col-xl-12">
-                                <label for="signup-dob" class="form-label text-default">Date of birth<sup>*</sup></label>
+                                <label for="signup-dob" class="form-label text-default">Date of birth<span class="text-danger"> *</span></label>
                                 <!-- <input type="date" class="form-control form-control-lg" id="signup-dob"
                                     placeholder="dob" formControlName="dob"> -->
                                 <div class="input-group">
@@ -79,7 +82,7 @@
                                 </div>
                             </div>
                             <div class="col-xl-12">
-                                <label for="signup-email" class="form-label text-default">Email<sup>*</sup></label>
+                                <label for="signup-email" class="form-label text-default">Email<span class="text-danger"> *</span></label>
                                 <input type="text" class="form-control form-control-lg" id="signup-email"
                                     placeholder="email" formControlName="email" appShowCodeContent
                                     [ngClass]="{ 'is-invalid': submitted && f['email'].errors }">
@@ -89,17 +92,15 @@
                             </div>
                             <div class="col-xl-12">
                                 <label for="signup-password"
-                                    class="form-label text-default">Password<sup>*</sup></label>
+                                    class="form-label text-default">Password<span class="text-danger"> *</span></label>
                                 <div class="position-relative">
                                     <input type="password" class="form-control form-control-lg" id="signup-password"
                                         placeholder="password" [type]="showPassword ? 'text' : 'password'" autocomplete
-                                        formControlName="password" appShowCodeContent
-                                        [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
-                                        [(ngModel)]="paswrd">
+                                        formControlName="password" appShowCodeContent [(ngModel)]="paswrd"
+                                        [ngClass]="{ 'is-invalid': submitted && f['password'].errors }">
                                     <a href="javascript:void(0);" class="show-password-button text-muted"
                                         (click)="createpassword()" id="button-addon2"><i
                                             class="ri-eye-{{toggleClass}} align-middle"></i></a>
-
                                     <!-- <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
                                     <div *ngIf="f['password'].errors['required']">Password is required</div>
                                 </div> -->
@@ -115,7 +116,7 @@
                             </div>
                             <div class="col-xl-12 mb-2">
                                 <label for="signup-confirmpassword" class="form-label text-default">Confirm
-                                    Password<sup>*</sup></label>
+                                    Password<span class="text-danger"> *</span></label>
                                 <div class="position-relative">
                                     <input type="password" class="form-control form-control-lg"
                                         id="signup-confirmpassword" placeholder="confirm password"
@@ -128,15 +129,17 @@
 
                             </div>
                             <div class="col-xl-12">
-                                <label for="signup-mobile" class="form-label text-default">Phone
-                                    Number<sup>*</sup></label>
+                                <label for="signup-mobile" class="form-label text-default">Phone Number<span class="text-danger"> *</span></label>
                                 <input type="text" class="form-control form-control-lg" id="signup-mobile"
                                     placeholder="mobile" formControlName="phoneNumber" maxlength="10"
                                     onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
-                                    event.charCode == 8)'>
+                                    event.charCode == 8)' [ngClass]="{ 'is-invalid': submitted && f['phoneNumber'].errors }">
+                                <div *ngIf="submitted && f['phoneNumber'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['phoneNumber'].errors['required']">Phone Number is required</div>
+                                </div>
                             </div>
                             <!-- <div class="col-xl-12">
-                            <label for="tool-id" class="form-label text-default">Tool ID<sup>*</sup></label>
+                            <label for="tool-id" class="form-label text-default">Tool ID<span class="text-danger"> *</span></label>
                             <select class="form-select form-select-lg" id="role-id" formControlName="toolId">
                                 <option value="0" disabled selected>Select tool</option>
                                 <option value="1">CRM</option>
@@ -145,7 +148,7 @@
                             </select>
                         </div> -->
                             <div class="col-xl-12">
-                                <label for="role-id" class="form-label text-default">Tool ID<sup>*</sup></label>
+                                <label for="role-id" class="form-label text-default">Tool ID<span class="text-danger"> *</span></label>
                                 <mat-form-field>
                                     <!-- <mat-label>Toppings</mat-label> -->
                                     <mat-select formControlName="tools" multiple>
@@ -153,6 +156,9 @@
                                         <mat-option [value]="topping">{{topping}}</mat-option>
                                         }
                                     </mat-select>
+                                    <mat-error *ngIf="f['tools'].errors?.['required']">
+                                        Please select at least one tool.
+                                    </mat-error>
                                 </mat-form-field>
                                 <!-- <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="1" name="toolId1" 
@@ -171,7 +177,7 @@
                             </div>
                             <!-- @if (toolid1) {
                             <div class="col-xl-12" >
-                                <label for="role-id" class="form-label text-default">Role ID for Adonai<sup>*</sup></label>
+                                <label for="role-id" class="form-label text-default">Role ID for Adonai<span class="text-danger"> *</span></label>
                                 <select class="form-select form-select-lg" id="role-id" name="adoanairole" 
                                     [(ngModel)]="adoanAiRole">
                                     <option value="" disabled selected>Select Role</option>
@@ -183,7 +189,7 @@
                         } -->
                             <!-- @if (toolid2) {
                             <div class="col-xl-12" >
-                                <label for="role-id" class="form-label text-default">Role ID for CRM<sup>*</sup></label>
+                                <label for="role-id" class="form-label text-default">Role ID for CRM<span class="text-danger"> *</span></label>
                                 <select class="form-select form-select-lg" id="role-id" name="crmrole" 
                                     [(ngModel)]="crmRole">
                                     <option value="" disabled selected>Select Role</option>
@@ -195,30 +201,34 @@
                         } -->
 
                             <!-- <div class="col-xl-12">
-                            <label for="signup-users" class="form-label text-default">No of Users<sup>*</sup></label>
+                            <label for="signup-users" class="form-label text-default">No of Users<span class="text-danger"> *</span></label>
                             <input type="number" class="form-control form-control-lg" id="signup-users" placeholder="no of users"
                             formControlName="noOfUsers">
                         </div> -->
                             <div class="col-xl-12">
-                                <label for="signup-country" class="form-label text-default">Country<sup>*</sup></label>
+                                <label for="signup-country" class="form-label text-default">Country<span class="text-danger">*</span></label>
                                 <!-- <input type="text" class="form-control form-control-lg" id="signup-country"
                                     placeholder="Country" formControlName="country"> -->
-                                <select class="form-select form-select-lg" id="role-id" formControlName="country">
-                                    <option value="0" disabled selected>Select</option>
+                                <select class="form-select form-select-lg" id="country" formControlName="country" 
+                                    [ngClass]="{ 'is-invalid': submitted && f['country'].errors }">
+                                    <option value="" disabled selected>Select</option>
                                     <option value="{{c.country}}" *ngFor="let c of countryLst">{{c.country}}</option>
                                 </select>
+                                <div *ngIf="submitted && f['country'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['country'].errors['required']">Country is required</div>
+                                </div>
                             </div>
                             <!-- <div class="form-check mt-3">
                                 <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
                                 <label class="form-check-label text-muted fw-normal" for="defaultCheck1">
-                                    By creating a account you agree to our <a routerLink="/pages/terms-conditions"
+                                    By creating an account you agree to our <a routerLink="/pages/terms-conditions"
                                         class="text-success"><u>Terms & Conditions</u></a> and <a
                                         class="text-success"><u>Privacy Policy</u></a>
                                 </label>
                             </div> -->
 
                             <!-- <div class="col-xl-12">
-                            <label for="role-id" class="form-label text-default">Role ID<sup>*</sup></label>
+                            <label for="role-id" class="form-label text-default">Role ID<span class="text-danger"> *</span></label>
                             <select class="form-select form-select-lg" id="role-id" formControlName="roleId">
                                 <option value="0" disabled selected>Select Role</option>
                                 <option value="1">Admin</option>

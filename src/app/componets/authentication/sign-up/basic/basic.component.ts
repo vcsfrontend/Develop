@@ -36,14 +36,14 @@ export class BasicComponent extends BaseComponent implements OnInit {
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
     email: ['', Validators.required],
-    country: ['0'],
+    country: ['', Validators.required],
     dob: [new Date()],
     crm:false,
     adonai:false,
-    phoneNumber: '',
+    phoneNumber: ['', Validators.required],
     username: ['', Validators.required],
     password: ['', [Validators.required,this.passwordValidator]],
-    tools : new FormControl('')
+    tools : [[],Validators.required]
     //"toolId": 0,
     //"roleId": 0,
   })
@@ -106,7 +106,7 @@ export class BasicComponent extends BaseComponent implements OnInit {
         if(res.status == true){
           this.toastr.success(res.message,'signup', {
             timeOut: 3000, positionClass: 'toast-top-right' });
-          this.router.navigate(['authentication/sign-in/basic'])
+          this.router.navigate(['auth/login'])
           } else {
             this.btnDisable = false;
             this.toastr.error(res.message,'signup', {
