@@ -200,4 +200,5 @@ export function checkHoriMenu() {
       slideLeft.classList.remove('hidden');
     }
   }
+  
 }

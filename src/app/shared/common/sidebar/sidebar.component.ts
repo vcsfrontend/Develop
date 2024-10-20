@@ -495,4 +495,37 @@ HoverToggleInnerMenuFn(event:Event, item:Menu) {
      }
    }
  }
+ 
+ fileName: string | null = null;
+
+ onFileSelected(event: Event): void {
+   const input = event.target as HTMLInputElement;
+   if (input.files && input.files.length > 0) {
+     this.fileName = input.files[0].name;
+   } else {
+     this.fileName = null; // Reset if no file selected
+   }
+ }
+ 
+ myFileClick() {
+  const fileManagerFolders = document.querySelector('.file-manager-folders');
+  const fileManagerNavigation = document.querySelector('.file-manager-navigation');
+
+  if (window.innerWidth <= 992) {
+    if (fileManagerFolders) {
+      fileManagerFolders.classList.add('open');
+    }
+    if (fileManagerNavigation) {
+      fileManagerNavigation.classList.add('close');
+    }
+  } else {
+    if (fileManagerFolders) {
+      fileManagerFolders.classList.remove('open');
+    }
+    if (fileManagerNavigation) {
+      fileManagerNavigation.classList.remove('close');
+    }
+  }
+}
+ 
 }
