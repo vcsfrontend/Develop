@@ -1,5 +1,6 @@
+<!-- <video class="video-background ratio ratio-1x" src="./assets/video/school_of_fish.mp4" autoplay loop muted></video>  -->
 <div class="container-lg">
-    <div class="row justify-content-center align-items-center authentication authentication-basic h-100">
+    <div class="row justify-content-center align-items-center authentication authentication-basic h-5000">
         <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-6 col-sm-8 col-12">
             <div class="card custom-card my-4">
                 <div class="card-body p-5">
@@ -29,7 +30,7 @@
                             </div>
                             <div class="col-xl-12">
                                 <label for="signup-companyName" class="form-label text-default">
-                                    Company Name<span class="text-danger"> *</span></label>
+                                    Company Name <span class="text-danger"> *</span></label>
                                 <input type="text" class="form-control form-control-lg" id="signup-companyName"
                                     placeholder="Company name" formControlName="companyName"
                                     [ngClass]="{ 'is-invalid': submitted && f['companyName'].errors }"
@@ -84,7 +85,9 @@
                             <div class="col-xl-12">
                                 <label for="signup-email" class="form-label text-default">Email<span class="text-danger"> *</span></label>
                                 <input type="text" class="form-control form-control-lg" id="signup-email"
-                                    placeholder="email" formControlName="email" appShowCodeContent
+                                    placeholder="email" onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
+                                    (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && 
+                                    event.charCode <= 122) || event.charCode == 8)' formControlName="email" appShowCodeContent
                                     [ngClass]="{ 'is-invalid': submitted && f['email'].errors }">
                                 <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
                                     <div *ngIf="f['email'].errors['required']">Email is required</div>
@@ -108,7 +111,7 @@
                                         class="invalid-feedback">
                                         <div *ngIf="f['password'].errors?.['required']">Password is required.</div>
                                         <div *ngIf="f['password'].errors?.['invalidPassword']">
-                                            Password must be at least 8 characters long, contain at least one uppercase
+                                            Password must be at least 8 characters long, contain one Special character at least one uppercase
                                             letter, one lowercase letter, and one number.
                                         </div>
                                     </div>
@@ -164,16 +167,16 @@
                                 <input class="form-check-input" type="checkbox" value="1" name="toolId1" 
                                     id="flexCheckDefault" [(ngModel)]="adonai" [ngModelOptions]="{standalone: true}">
                                 <label class="form-check-label" for="flexCheckDefault">
-                                  Adonai
+                                Adonai
                                 </label>
-                              </div>
-                              <div class="form-check">
+                            </div>
+                            <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="2" name="toolId2" 
                                     id="flexCheckChecked" [(ngModel)]="crm" [ngModelOptions]="{standalone: true}">
                                 <label class="form-check-label" for="flexCheckChecked">
-                                  CRM
+                                CRM
                                 </label>
-                              </div> -->
+                            </div> -->
                             </div>
                             <!-- @if (toolid1) {
                             <div class="col-xl-12" >
@@ -212,7 +215,8 @@
                                 <select class="form-select form-select-lg" id="country" formControlName="country" 
                                     [ngClass]="{ 'is-invalid': submitted && f['country'].errors }">
                                     <option value="" disabled selected>Select</option>
-                                    <option value="{{c.country}}" *ngFor="let c of countryLst">{{c.country}}</option>
+                                    <!-- <option *ngFor="let country of countryList" [value]="country.code" [selected]="country.name == 'United States'">  {{country.name}}    </option> -->
+                                    <option value="{{c.country}},{{c.code}}" *ngFor="let c of countryLst">+{{ c.code }} - {{c.country}}</option>
                                 </select>
                                 <div *ngIf="submitted && f['country'].errors" class="invalid-feedback">
                                     <div *ngIf="f['country'].errors['required']">Country is required</div>
@@ -277,3 +281,4 @@
         </div>
     </div>
 </div>
+

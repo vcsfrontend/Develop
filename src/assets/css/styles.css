@@ -22025,6 +22025,13 @@ caption {
   inset-inline-end: 0;
 }
 
+.video-background{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+ 
+}
+
 .authentication-background {
   position: relative;
   background-image: url("../images/media/backgrounds/1.png");

@@ -32,18 +32,18 @@ import { NavService } from '../../shared/services/navservice';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-  public showPassword: boolean = false;
+  // public showPassword: boolean = false;
 
-  toggleClass = 'ri-eye-off-line';
+  // toggleClass = 'ri-eye-off-line';
   active="Angular";
 
   public togglePassword() {
-    this.showPassword = !this.showPassword;
-    if (this.toggleClass === 'ri-eye-line') {
-      this.toggleClass = 'ri-eye-off-line';
-    } else {
-      this.toggleClass = 'ri-eye-line';
-    }
+    // this.showPassword = !this.showPassword;
+    // if (this.toggleClass === 'ri-eye-line') {
+    //   this.toggleClass = 'ri-eye-off-line';
+    // } else {
+    //   this.toggleClass = 'ri-eye-line';
+    // }
 }
 disabled = '';
 public localdata:any=this.appStateService;
@@ -62,9 +62,9 @@ constructor(
 ) {
   // AngularFireModule.initializeApp(environment.firebase);
 
-  document.body.classList.add('authentication-background');
-  const htmlElement =
-  this.elementRef.nativeElement.ownerDocument.documentElement;
+  // document.body.classList.add('authentication-background');
+  // const htmlElement =
+  // this.elementRef.nativeElement.ownerDocument.documentElement;
 // htmlElement.removeAttribute('style');
   //User Tools
 
@@ -84,9 +84,16 @@ ngOnDestroy(): void {
 this.elementRef.nativeElement.ownerDocument.documentElement;
   document.body.classList.remove('authentication-background');    
 
-
-
-
+}
+showPassword = false;
+toggleClass = "off-line";
+createpassword() {
+  this.showPassword = !this.showPassword;
+  if (this.toggleClass === "off-line") {
+    this.toggleClass = "line";
+  } else {
+    this.toggleClass = "off-line";
+  }
 }
  firestoreModule = this.firebaseService.getFirestore();
  databaseModule = this.firebaseService.getDatabase();

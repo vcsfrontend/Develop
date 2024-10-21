@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, input, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SwitherService } from '../../../../shared/services/swither.service';
@@ -13,11 +13,13 @@ import flatpickr from 'flatpickr';
 import { FlatpickrModule,FlatpickrDefaults  } from 'angularx-flatpickr';
 import { ShowCodeContentDirective } from '../../../../shared/directives/show-code-content.directive';
 import { BaseComponent } from '../../../../shared/base/base.component';
+import { OverlayscrollbarsModule } from 'overlayscrollbars-ngx';
+import { Title } from 'chart.js';
 @Component({
   selector: 'app-basic',
   standalone: true,
   imports: [RouterModule,NgbModule,FormsModule,ReactiveFormsModule ,ToastrModule,
-    MatFormFieldModule, MatSelectModule, CommonModule, FlatpickrModule, ShowCodeContentDirective],
+    MatFormFieldModule, MatSelectModule, CommonModule, FlatpickrModule, OverlayscrollbarsModule, ShowCodeContentDirective],
     // AngularFireModule,  AngularFireDatabaseModule, AngularFirestoreModule,
   providers: [FirebaseService,{ provide: ToastrService, useClass: ToastrService },FlatpickrDefaults, DatePipe],
   templateUrl: './basic.component.html',
@@ -51,17 +53,20 @@ export class BasicComponent extends BaseComponent implements OnInit {
   constructor(public fb: FormBuilder, public switchService: SwitherService, 
     private toastr: ToastrService, private router: Router, private dp: DatePipe){
     super();
-    document.body.classList.add('authentication-background');
+    // document.body.classList.add('authentication-background');
   }
 
   ngOnInit(){
   }
   ngOnDestroy(): void {
-    document.body.classList.remove('authentication-background');    
+   
+    // document.body.classList.remove('authentication-background');   
   }
+  title = "intlInputNew" ;
   get f() {
     return this.signupFrm.controls;
   }
+  
   // ngAfterViewChecked() {
   //   console.log("60",this.signupFrm.get('tools'))
   // }
@@ -69,9 +74,10 @@ export class BasicComponent extends BaseComponent implements OnInit {
     const value = control.value;
     const hasUpperCase = /[A-Z]/.test(value);
     const hasLowerCase = /[a-z]/.test(value);
+    const hasSpecialCharacter = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(value);
     const hasNumber = /\d/.test(value);
     const hasMinLength = value.length >= 8;
-    const valid = hasUpperCase && hasLowerCase && hasNumber && hasMinLength;
+    const valid = hasUpperCase && hasLowerCase && hasSpecialCharacter && hasNumber && hasMinLength;
     return valid ? null : { invalidPassword: true };
   }
 
@@ -140,4 +146,5 @@ export class BasicComponent extends BaseComponent implements OnInit {
   toolId(tool:string) {
     // console.log("51",tool,this.adonai,this.crm);
   }
+  
 }

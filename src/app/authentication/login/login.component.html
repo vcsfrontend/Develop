@@ -1,7 +1,7 @@
-<div class="container">
+<video class="video-background ratio ratio-4x3" src="./assets/video/school_of_fish.mp4" autoplay loop muted></video> 
+<div class="container" >
     <div class="row justify-content-center align-items-center authentication authentication-basic h-100">
         <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-6 col-sm-8 col-12">
-
             <div class="card custom-card my-4">
                 <div class="card-body p-5">
                     <ul ngbNav #nav="ngbNav" [(activeId)]="active"
@@ -65,7 +65,8 @@
                                         <span>OR</span>
                                     </div>
                                     <div class="d-grid mb-3">
-                                        <button class="btn btn-lg btn-light-ghost border d-flex align-items-center justify-content-center">
+                                        <button
+                                            class="btn btn-lg btn-light-ghost border d-flex align-items-center justify-content-center">
                                             <span class="avatar avatar-xs">
                                                 <img src="./assets/images/media/apps/google.png" alt="">
                                             </span>
@@ -73,7 +74,8 @@
                                         </button>
                                     </div>
                                     <div class="d-grid mb-3">
-                                        <button class="btn btn-lg btn-light-ghost border d-flex align-items-center justify-content-center">
+                                        <button
+                                            class="btn btn-lg btn-light-ghost border d-flex align-items-center justify-content-center">
                                             <span class="avatar avatar-xs invert-1">
                                                 <img src="./assets/images/media/apps/apple.png" alt="">
                                             </span>
@@ -88,7 +90,7 @@
                                     </div>
                                 </form>
                                 <div class="text-center">
-                                    <p class="text-muted mt-3 mb-0">Dont have an account? 
+                                    <p class="text-muted mt-3 mb-0">Dont have an account?
                                         <a routerLink="/authentication/sign-up/basic" class="text-primary">Sign Up</a>
                                     </p>
                                 </div>
@@ -119,25 +121,20 @@
                                         </div>
                                         <div class="col-xl-12 mb-2">
                                             <label for="signin-password"
-                                                class="form-label text-default d-block">Password<a
-                                                    routerLink="/authentication/reset-password/basic"
-                                                    class="float-end text-danger">Forgot password ?</a></label>
+                                                class="form-label text-default d-block">Password</label>
                                             <div class="position-relative">
                                                 <input type="password" class="form-control form-control-lg"
-                                                    id="signin-password" placeholder="password"
-                                                    [type]="showPassword ? 'text' : 'password'" autocomplete
-                                                    id="input-password" formControlName="password"
-                                                    [(ngModel)]="password" required>
-                                                <a href="javascript:void(0);" class="show-password-button text-muted"
-                                                    id="button-addon2"><i class="ri-eye-off-line align-middle"></i></a>
+                                                    id="signin-password" placeholder="password" [type]="showPassword ? 'text' : 'password'" autocomplete
+                                                    id="input-password" formControlName="password"  [(ngModel)]="password" required>
+                                                    <a href="javascript:void(0);" class="show-password-button text-muted" (click)="createpassword()" id="button-addon2"><i class="ri-eye-{{toggleClass}} align-middle"></i></a>
                                             </div>
                                             <div class="mt-2">
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox" value=""
                                                         id="defaultCheck1">
-                                                    <label class="form-check-label text-muted fw-normal"
+                                                    <label class="form-check-label text-muted fw-normal d-block"
                                                         for="defaultCheck1">
-                                                        Remember password ?
+                                                        Remember password ?<a routerLink="/authentication/reset-password/basic" class="float-end text-danger">Forgot password ?</a>
                                                     </label>
                                                 </div>
                                             </div>
@@ -163,11 +160,12 @@
                                     </button>
                                 </div> -->
                                     <div class="d-grid mt-4">
-                                        <button type="submit" class="btn btn-lg btn-primary{{disabled}}" autofocus>Sign In</button>
+                                        <button type="submit" class="btn btn-lg btn-primary{{disabled}}" autofocus>Sign
+                                            In</button>
                                     </div>
                                 </form>
                                 <div class="text-center">
-                                    <p class="text-muted mt-3 mb-0">Don't have an account? 
+                                    <p class="text-muted mt-3 mb-0">Don't have an account?
                                         <a routerLink="/authentication/sign-up/basic" class="text-primary">Sign Up</a>
                                     </p>
                                 </div>
