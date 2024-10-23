@@ -2,7 +2,7 @@
 <div class="container-lg">
     <div class="row justify-content-center align-items-center authentication authentication-basic h-100">
         <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-6 col-sm-8 col-12">
-            <div class="card custom-card my-4">
+            <div class="card custom-card my-4 bg-light p-2 text-white bg-opacity-25">
                 <div class="card-body p-5">
                     <div class="mb-3 d-flex justify-content-center">
                         <a routerLink="/dashboard/sales">
@@ -12,16 +12,16 @@
                     </div>
                     <p class="h5 mb-2 text-center">Forgot Password</p>
                     <!-- <p class="mb-4 text-muted op-7 fw-normal text-center">Hello Stark !</p> -->
-                    <form [formGroup]="resetFrm">
+                    <form [formGroup]="resetFrm" class="bg-light p-2 bg-opacity-25">
                     <div class="row gy-3">
                         <div class="col-xl-12" *ngIf="submt">
                             <label for="signin-username" class="form-label text-default">Email</label>
-                            <input type="text" class="form-control form-control-lg" id="signin-username"  
+                            <input type="text" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" id="signin-username"  
                             [(ngModel)]="email" [ngModelOptions]="{standalone: true}" placeholder="email">
                             <!-- formControlName="email" [ngModel]="email" placeholder="email"> -->
                         </div>
                         <div class="d-grid mt-4" *ngIf="submt">
-                            <a  class="btn btn-lg btn-primary" (click)="onEmail()">Submit</a>
+                            <a  class="btn btn-lg bg-light p-2 text-dark bg-opacity-25 border border-dark" (click)="onEmail()">Submit</a>
                             <!-- routerLink="/authentication/sign-in/basic" -->
                         </div>
                        
@@ -97,7 +97,7 @@
                     </div>
                 </form>
                     <div class="text-center">
-                        <p class="text-muted mt-3">Already have an account? <a routerLink="/auth/login" class="text-primary">Sign In</a></p>
+                        <p class="text-dark mt-3">Already have an account? <a routerLink="/auth/login" class="text-primary">Sign In</a></p>
                     </div>
                 </div>
             </div>
