@@ -1,3 +1,4 @@
+import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { Component, input, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -37,14 +38,14 @@ export class BasicComponent extends BaseComponent implements OnInit {
     companyName : ['', Validators.required],
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
-    email: ['', Validators.required],
+    email: ['', [Validators.required,  Validators.email]],
     country: ['', Validators.required],
     dob: [new Date()],
     crm:false,
     adonai:false,
     phoneNumber: ['', Validators.required],
     username: ['', Validators.required],
-    password: ['', [Validators.required,this.passwordValidator]],
+    password: ['', [Validators.required, this.passwordValidator]],
     tools : [[],Validators.required]
     //"toolId": 0,
     //"roleId": 0,
@@ -79,6 +80,13 @@ export class BasicComponent extends BaseComponent implements OnInit {
     const hasMinLength = value.length >= 8;
     const valid = hasUpperCase && hasLowerCase && hasSpecialCharacter && hasNumber && hasMinLength;
     return valid ? null : { invalidPassword: true };
+  }
+
+  noWhitespaceValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const isWhitespace = (control.value || '').includes(' ');
+      return isWhitespace ? { whitespace: true } : null;
+    };
   }
 
   onSignup(){

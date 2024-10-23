@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SwitherService } from '../../../../shared/services/swither.service';
@@ -6,6 +6,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { FirebaseService } from '../../../../shared/services/firebase.service';
 import { CommonModule } from '@angular/common';
+import { BaseComponent } from '../../../../shared/base/base.component';
 
 @Component({
   selector: 'app-basic',
@@ -21,15 +22,26 @@ import { CommonModule } from '@angular/common';
   templateUrl: './basic.component.html',
   styleUrl: './basic.component.scss'
 })
-export class BasicComponent {
+export class BasicComponent extends BaseComponent implements OnInit {
   // {
   //   "email": "string",
   //   "password": "string"
   // }
-  confirmPassword:any = ''; newPassword:any = ''; email:any = ''; submt = true;
+  confirmPassword:any = ''; newPassword:any = ''; email:any = ''; submt = true; submitted =false;
+  resetFrm: FormGroup = this.fb.group({ 
+    // email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, this.passwordValidator]],
+    // cnfmPasswrd: ['', [Validators.required, this.passwordValidator]],
+  })
+
   constructor(public fb: FormBuilder, public switchService: SwitherService, 
     private toastr: ToastrService, private router: Router){
     document.body.classList.add('authentication-background');
+    super();
+  }
+
+  ngOnInit(){
+
   }
 
   ngOnDestroy(): void {
@@ -49,6 +61,22 @@ export class BasicComponent {
       this.toggleClass = "off-line";
     }
   }
+
+  get f() {
+    return this.resetFrm.controls;
+  }
+
+  passwordValidator(control: any) {
+    const value = control.value;
+    const hasUpperCase = /[A-Z]/.test(value);
+    const hasLowerCase = /[a-z]/.test(value);
+    const hasSpecialCharacter = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(value);
+    const hasNumber = /\d/.test(value);
+    const hasMinLength = value.length >= 8;
+    const valid = hasUpperCase && hasLowerCase && hasSpecialCharacter && hasNumber && hasMinLength;
+    return valid ? null : { invalidPassword: true };
+  }
+
   createpassword1() {
     this.showPassword1 = !this.showPassword1;
     if (this.toggleClass1 === "off-line") {
@@ -91,19 +119,37 @@ export class BasicComponent {
   }
 
   onResetpPassword(){
-    let payload = {
-      email: this.email,
-      password: (this.newPassword == this.confirmPassword) ? this.newPassword : ''
-    };
-    if(this.newPassword == ''){
+    this.submitted = true;
+    // let payload = {
+    //   email: this.email,
+    //   password: (this.newPassword == this.confirmPassword) ? this.newPassword : ''
+    // };
+    let payload = this.resetFrm.getRawValue();
+    payload.email = this.email; 
+    
+    if (this.resetFrm.invalid) {
+      this.toastr.error('Please fill mandatory fields','signup', {
+        timeOut: 3000,
+        positionClass: 'toast-top-right',
+      });
+      // this.btnDisable = false;
+        return;
+    }
+    else if(this.newPassword == ''){
       this.toastr.warning('please enter password ','reset', { timeOut: 3000, positionClass: 'toast-top-right'})
     } else if(this.confirmPassword == ''){
       this.toastr.warning('please enter confirmpassword ','reset', { timeOut: 3000, positionClass: 'toast-top-right'})
     } else if(this.newPassword != this.confirmPassword){
       this.toastr.warning('passwords not matched','reset', { timeOut: 3000,positionClass: 'toast-top-right' })
-      this.newPassword = ''; this.confirmPassword = '';
+      // this.newPassword = ''; 
+      this.confirmPassword = '';
       return;
     } else {
+      let payload = {
+          email: this.email,
+          password: (this.newPassword == this.confirmPassword) ? this.newPassword : ''
+        };
+      // payload.password =  (this.newPassword == this.confirmPassword) ? this.newPassword : '', delete payload.cnfmPasswrd;
       this.switchService.onForgotPassword(payload).subscribe({
         next: (res:any) => {
           if(res.status == true){
