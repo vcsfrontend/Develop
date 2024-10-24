@@ -22029,7 +22029,20 @@ caption {
   position: absolute;
   right: 0;
   bottom: 0;
+  z-index: -1;
  
+}
+@media (max-aspect-ratio :16/9) {
+  .video-background{
+    width: 100%;
+    height: auto;
+  }
+}
+@media (max-aspect-ratio :16/9) {
+  .video-background{
+    width: auto;
+    height: 100%;
+  }
 }
 
 .authentication-background {

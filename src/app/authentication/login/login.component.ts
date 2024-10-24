@@ -230,6 +230,13 @@ Submit() {
   //     positionClass: 'toast-top-right',
   //   });
   }
+  
 
+}
+preventCopyPaste(event: ClipboardEvent): void {
+  event.preventDefault();
+  // alert('Copy, paste, and cut actions are disabled for security reasons.');
+  // this.toastr.error('Copy, paste, and cut actions are disabled for security reasons.','signup', {
+  //   timeOut: 3000, positionClass: 'toast-top-right' });
 }
 }

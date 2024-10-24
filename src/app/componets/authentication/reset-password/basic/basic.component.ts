@@ -36,7 +36,7 @@ export class BasicComponent extends BaseComponent implements OnInit {
 
   constructor(public fb: FormBuilder, public switchService: SwitherService, 
     private toastr: ToastrService, private router: Router){
-    document.body.classList.add('authentication-background');
+    // document.body.classList.add('authentication-background');
     super();
   }
 

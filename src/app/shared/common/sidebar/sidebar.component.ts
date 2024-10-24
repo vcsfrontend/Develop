@@ -11,6 +11,7 @@ import { Menu, NavService } from '../../services/navservice';
 import { Subscription, fromEvent } from 'rxjs';
 import { NavigationEnd, Router } from '@angular/router';
 import { checkHoriMenu } from './sidebar';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-sidebar',
