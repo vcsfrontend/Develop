@@ -16,10 +16,11 @@ import { ShowCodeContentDirective } from '../../../../shared/directives/show-cod
 import { BaseComponent } from '../../../../shared/base/base.component';
 import { OverlayscrollbarsModule } from 'overlayscrollbars-ngx';
 import { Title } from 'chart.js';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'app-basic',
   standalone: true,
-  imports: [RouterModule,NgbModule,FormsModule,ReactiveFormsModule ,ToastrModule,
+  imports: [RouterModule,NgbModule,FormsModule,ReactiveFormsModule ,ToastrModule, MatIconModule,
     MatFormFieldModule, MatSelectModule, CommonModule, FlatpickrModule, OverlayscrollbarsModule, ShowCodeContentDirective],
     // AngularFireModule,  AngularFireDatabaseModule, AngularFirestoreModule,
   providers: [FirebaseService,{ provide: ToastrService, useClass: ToastrService },FlatpickrDefaults, DatePipe],
@@ -32,6 +33,11 @@ export class BasicComponent extends BaseComponent implements OnInit {
   adoanAiRole :any;
   crmRole :any;
   toolsList = [Tools.Adonai,Tools.Crm]
+
+  icons = [
+    { value: 'Individual', icon: 'home', name: 'Home' },
+    { value: 'Enterprise', icon: 'settings', name: 'Settings' },
+  ];
 
   signupFrm: FormGroup = this.fb.group({ 
     type : ['', Validators.required],
@@ -89,10 +95,17 @@ export class BasicComponent extends BaseComponent implements OnInit {
     };
   }
 
+  preventCopyPaste(event: ClipboardEvent): void {
+    event.preventDefault();
+    // alert('Copy, paste, and cut actions are disabled for security reasons.');
+    // this.toastr.error('Copy, paste, and cut actions are disabled for security reasons.','signup', {
+    //   timeOut: 3000, positionClass: 'toast-top-right' });
+  }
+
   onSignup(){
     this.submitted = true; 
-    const crm = this.signupFrm.get('tools')?.value.includes('crm');
-    const adonai = this.signupFrm.get('tools')?.value.includes('adonai');
+    const crm = this.signupFrm.get('tools')?.value.includes('CRM');
+    const adonai = this.signupFrm.get('tools')?.value.includes('Adonai');
     let payload = this.signupFrm.getRawValue();
     payload.type = +payload.type,
     payload.crm = crm,

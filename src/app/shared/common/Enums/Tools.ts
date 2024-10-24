@@ -1,4 +1,4 @@
 export enum Tools {
-    Adonai = "adonai",
-    Crm = "crm"
+    Adonai = "Adonai",
+    Crm = "CRM"
 }

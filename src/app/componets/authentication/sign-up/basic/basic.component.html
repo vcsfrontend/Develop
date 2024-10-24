@@ -1,18 +1,10 @@
 <!-- <video class="video-background ratio ratio-1x" src="./assets/video/school_of_fish.mp4" autoplay loop muted></video>  -->
 <div class="container-lg">
     <div class="row justify-content-center align-items-center authentication authentication-basic h-5000">
-        <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-6 col-sm-8 col-12">
+        <div class="col-xxl-4 col-xl-4 col-lg-5 col-md-6 col-sm-8 col-12">
             <div class="card custom-card my-4">
                 <div class="card-body p-5">
-                    <!-- <div class="mb-3 d-flex justify-content-center">
-                        <a routerLink="/dashboard/sales">
-                            <img src="./assets/images/brand-logos/logo.png" alt="logo" class="desktop-logo">
-                            <img src="./assets/images/brand-logos/desktop-dark.png" alt="logo" class="desktop-dark">
-                        </a>
-                    </div> -->
                     <p class="h5 mb-2 text-center">Sign Up</p>
-                    <!-- <p class="mb-4 text-muted op-7 fw-normal text-center">Welcome & Join us by creating a free account !
-                    </p> -->
                     <form [formGroup]="signupFrm">
                         <div class="row gy-3">
                             <div class="col-xl-12">
@@ -28,6 +20,18 @@
                                     <div *ngIf="f['type'].errors['required']">Type is required</div>
                                 </div>
                             </div>
+                            <!-- <div class="col-xl-12">
+                                <mat-form-field>
+                                    <mat-label>Icon dropdown</mat-label>
+                                    <mat-select>
+                                      <mat-option *ngFor="let icon of icons" [value]="icon.value">
+                                        <mat-icon mat-list-icon>{{ icon.icon }}</mat-icon>
+                                        {{ icon.name }}
+                                      </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div> -->
+                            
                             <div class="col-xl-12">
                                 <label for="signup-companyName" class="form-label text-default">
                                     Company Name <span class="text-danger"> *</span></label>
@@ -40,28 +44,29 @@
                                 </div>
                             </div>
                             <div class="col-xl-12">
-                                <label for="signup-firstname" class="form-label text-default">First
-                                    Name<span class="text-danger"> *</span></label>
+                                <label for="signup-firstname" class="form-label text-default">First Name<span class="text-danger"> *</span></label>
                                 <input type="text" class="form-control form-control-lg" id="signup-firstname"
                                     placeholder="First name" formControlName="firstName" appShowCodeContent
+                                    onkeypress='return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && 
+                                    event.charCode <= 122) || event.charCode == 8)'
                                     [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }" maxlength="50">
                                 <div *ngIf="submitted && f['firstName'].errors" class="invalid-feedback">
                                     <div *ngIf="f['firstName'].errors['required']">First name is required</div>
                                 </div>
                             </div>
                             <div class="col-xl-12">
-                                <label for="signup-lastname" class="form-label text-default">Last
-                                    Name<span class="text-danger"> *</span></label>
+                                <label for="signup-lastname" class="form-label text-default">Last Name<span class="text-danger"> *</span></label>
                                 <input type="text" class="form-control form-control-lg" id="signup-lastname"
                                     placeholder="Last name" formControlName="lastName" appShowCodeContent
+                                    onkeypress='return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && 
+                                    event.charCode <= 122) || event.charCode == 8)'
                                     [ngClass]="{ 'is-invalid': submitted && f['lastName'].errors }" maxlength="50">
                                 <div *ngIf="submitted && f['lastName'].errors" class="invalid-feedback">
                                     <div *ngIf="f['lastName'].errors['required']">Last name is required</div>
                                 </div>
                             </div>
                             <div class="col-xl-12">
-                                <label for="signup-username" class="form-label text-default">User
-                                    Name<span class="text-danger"> *</span></label>
+                                <label for="signup-username" class="form-label text-default">User Name<span class="text-danger"> *</span></label>
                                 <input type="text" class="form-control form-control-lg" id="signup-username"
                                     placeholder="username" formControlName="username" appShowCodeContent
                                     onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
@@ -74,8 +79,6 @@
                             </div>
                             <div class="col-xl-12">
                                 <label for="signup-dob" class="form-label text-default">Date of birth<span class="text-danger"> *</span></label>
-                                <!-- <input type="date" class="form-control form-control-lg" id="signup-dob"
-                                    placeholder="dob" formControlName="dob"> -->
                                 <div class="input-group">
                                     <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
                                     <input class="form-control" placeholder="Choose date" type="text" mwlFlatpickr
@@ -86,14 +89,19 @@
                                 <label for="signup-email" class="form-label text-default">Email<span class="text-danger"> *</span></label>
                                 <input type="email" class="form-control form-control-lg" id="signup-email"
                                     placeholder="email" onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
-                                    (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && 
-                                    event.charCode <= 122) || event.charCode == 8)' formControlName="email" appShowCodeContent
+                                    (event.charCode >= 64 && event.charCode <= 90) || (event.charCode >= 97 && 
+                                    event.charCode <= 122) || event.charCode == 8 || event.charCode == 46 || event.charCode == 95)'
+                                    formControlName="email" appShowCodeContent
                                     [ngClass]="{ 'is-invalid': submitted && f['email'].errors }">
-                                <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                                <!-- <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
                                     <div *ngIf="f['email'].errors['required']">Email is required</div>
-                                    <!-- <div *ngIf="f['email']?.errors['email'] && f['email']?.touched" class="text-danger">
+                                    <div *ngIf="f['email']?.errors['email'] && f['email']?.touched" class="text-danger">
                                         Please enter the email address in the correct format.
-                                    </div> -->
+                                    </div>
+                                </div> -->
+                                <div *ngIf="submitted && f['email'].errors && f['email'].touched" class="invalid-feedback">
+                                    <span *ngIf="f['email'].errors['required']">Email is required.</span>
+                                    <span *ngIf="f['email'].errors['email']">Invalid email address.</span>
                                 </div>
                                 
                             </div>
@@ -104,13 +112,11 @@
                                     <input type="password" class="form-control form-control-lg" id="signup-password"
                                         placeholder="password" [type]="showPassword ? 'text' : 'password'" autocomplete
                                         formControlName="password" appShowCodeContent [(ngModel)]="paswrd"
-                                        [ngClass]="{ 'is-invalid': submitted && f['password'].errors }" maxlength="16">
+                                        onkeypress='return ((event.charCode >= 33 && event.charCode <= 127) || event.charCode == 8)' 
+                                        (copy)="preventCopyPaste($event)" (cut)="preventCopyPaste($event)" (paste)="preventCopyPaste($event)"
+                                        maxlength="16" [ngClass]="{ 'is-invalid': submitted && f['password'].errors }">
                                     <a href="javascript:void(0);" class="show-password-button text-muted"
-                                        (click)="createpassword()" id="button-addon2"><i
-                                            class="ri-eye-{{toggleClass}} align-middle"></i></a>
-                                    <!-- <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
-                                    <div *ngIf="f['password'].errors['required']">Password is required</div>
-                                </div> -->
+                                        (click)="createpassword()" id="button-addon2"><i class="ri-eye-{{toggleClass}} align-middle"></i></a>
                                     <div *ngIf="submitted && f['password'].errors || f['password'].touched"
                                         class="invalid-feedback">
                                         <div *ngIf="f['password'].errors?.['required']">Password is required.</div>
@@ -122,12 +128,13 @@
                                 </div>
                             </div>
                             <div class="col-xl-12 mb-2">
-                                <label for="signup-confirmpassword" class="form-label text-default">Confirm
-                                    Password<span class="text-danger"> *</span></label>
+                                <label for="signup-confirmpassword" class="form-label text-default">Confirm Password<span class="text-danger"> *</span></label>
                                 <div class="position-relative">
                                     <input type="password" class="form-control form-control-lg"
                                         id="signup-confirmpassword" placeholder="confirm password"
                                         [type]="showPassword1 ? 'text' : 'password'" autocomplete maxlength="16"
+                                        (copy)="preventCopyPaste($event)" (cut)="preventCopyPaste($event)" (paste)="preventCopyPaste($event)"
+                                        onkeypress='return ((event.charCode >= 33 && event.charCode <= 127) || event.charCode == 8)' 
                                         [(ngModel)]="cnfmPaswrd" [ngModelOptions]="{standalone: true}" appShowCodeContent>
                                     <a href="javascript:void(0);" class="show-password-button text-muted"
                                         (click)="createpassword1()" id="button-addon21"><i
@@ -145,19 +152,9 @@
                                     <div *ngIf="f['phoneNumber'].errors['required']">Phone Number is required</div>
                                 </div>
                             </div>
-                            <!-- <div class="col-xl-12">
-                            <label for="tool-id" class="form-label text-default">Tool ID<span class="text-danger"> *</span></label>
-                            <select class="form-select form-select-lg" id="role-id" formControlName="toolId">
-                                <option value="0" disabled selected>Select tool</option>
-                                <option value="1">CRM</option>
-                                <option value="2">Design Tool</option>
-                                <option value="3">CRM & Design Tool</option>
-                            </select>
-                        </div> -->
                             <div class="col-xl-12">
                                 <label for="role-id" class="form-label text-default">Tool ID<span class="text-danger"> *</span></label>
                                 <mat-form-field>
-                                    <!-- <mat-label>Toppings</mat-label> -->
                                     <mat-select formControlName="tools" multiple>
                                         @for (topping of toolsList; track topping) {
                                         <mat-option [value]="topping">{{topping}}</mat-option>
@@ -167,55 +164,9 @@
                                         Please select at least one tool.
                                     </mat-error>
                                 </mat-form-field>
-                                <!-- <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="1" name="toolId1" 
-                                    id="flexCheckDefault" [(ngModel)]="adonai" [ngModelOptions]="{standalone: true}">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                Adonai
-                                </label>
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="2" name="toolId2" 
-                                    id="flexCheckChecked" [(ngModel)]="crm" [ngModelOptions]="{standalone: true}">
-                                <label class="form-check-label" for="flexCheckChecked">
-                                CRM
-                                </label>
-                            </div> -->
-                            </div>
-                            <!-- @if (toolid1) {
-                            <div class="col-xl-12" >
-                                <label for="role-id" class="form-label text-default">Role ID for Adonai<span class="text-danger"> *</span></label>
-                                <select class="form-select form-select-lg" id="role-id" name="adoanairole" 
-                                    [(ngModel)]="adoanAiRole">
-                                    <option value="" disabled selected>Select Role</option>
-                                    <option value="1">Super Admin</option>
-                                    <option value="2">Admin</option>
-                                    <option value="3">User</option>
-                                </select>
-                            </div>
-                        } -->
-                            <!-- @if (toolid2) {
-                            <div class="col-xl-12" >
-                                <label for="role-id" class="form-label text-default">Role ID for CRM<span class="text-danger"> *</span></label>
-                                <select class="form-select form-select-lg" id="role-id" name="crmrole" 
-                                    [(ngModel)]="crmRole">
-                                    <option value="" disabled selected>Select Role</option>
-                                    <option value="1">Super Admin</option>
-                                    <option value="2">Admin</option>
-                                    <option value="3">User</option>
-                                </select>
-                            </div>
-                        } -->
-
-                            <!-- <div class="col-xl-12">
-                            <label for="signup-users" class="form-label text-default">No of Users<span class="text-danger"> *</span></label>
-                            <input type="number" class="form-control form-control-lg" id="signup-users" placeholder="no of users"
-                            formControlName="noOfUsers">
-                        </div> -->
                             <div class="col-xl-12">
                                 <label for="signup-country" class="form-label text-default">Country<span class="text-danger">*</span></label>
-                                <!-- <input type="text" class="form-control form-control-lg" id="signup-country"
-                                    placeholder="Country" formControlName="country"> -->
                                 <select class="form-select form-select-lg" id="country" formControlName="country" 
                                     [ngClass]="{ 'is-invalid': submitted && f['country'].errors }">
                                     <option value="" disabled selected>Select</option>
@@ -226,54 +177,9 @@
                                     <div *ngIf="f['country'].errors['required']">Country is required</div>
                                 </div>
                             </div>
-                            <!-- <div class="form-check mt-3">
-                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                <label class="form-check-label text-muted fw-normal" for="defaultCheck1">
-                                    By creating an account you agree to our <a routerLink="/pages/terms-conditions"
-                                        class="text-success"><u>Terms & Conditions</u></a> and <a
-                                        class="text-success"><u>Privacy Policy</u></a>
-                                </label>
-                            </div> -->
-
-                            <!-- <div class="col-xl-12">
-                            <label for="role-id" class="form-label text-default">Role ID<span class="text-danger"> *</span></label>
-                            <select class="form-select form-select-lg" id="role-id" formControlName="roleId">
-                                <option value="0" disabled selected>Select Role</option>
-                                <option value="1">Admin</option>
-                                <option value="2">User</option>
-                                <option value="3">Manager</option>
-                                <option value="4">Viewer</option>
-                            </select>
-                        </div> -->
-
-
-
                         </div>
-                        <!-- <div class="text-center my-3 authentication-barrier">
-                            <span>OR</span>
-                        </div> -->
-                        <!-- <div class="d-grid mb-3">
-                            <button
-                                class="btn btn-lg btn-light-ghost border d-flex align-items-center justify-content-center">
-                                <span class="avatar avatar-xs">
-                                    <img src="./assets/images/media/apps/google1.png" alt="">
-                                </span>
-                                <span class="lh-1 ms-2 fs-13 text-default">Signup with Google</span>
-                            </button>
-                        </div> -->
-                        <!-- <div class="d-grid mb-3">
-                        <button class="btn btn-lg btn-light-ghost border d-flex align-items-center justify-content-center">
-                            <span class="avatar avatar-xs invert-1">
-                                <img src="./assets/images/media/apps/apple.png" alt="">
-                            </span>
-                            <span class="lh-1 ms-2 fs-13 text-default">Signup with Apple</span>
-                        </button>
-                    </div> -->
                         <div class="d-grid mt-4">
-                            <!-- <button routerLink="/authentication/sign-up/basic"  (click)="onSignup()"> -->
-                            <!-- <a class="btn btn-lg btn-primary" (click)="onSignup()" [disabled]="btnDisable">Create Account</a> -->
                             <button class="btn btn-lg btn-primary" (click)="onSignup()" [disabled]="btnDisable">Create Account</button>
-                            <!-- </button> -->
                         </div>
                     </form>
                     <div class="text-center">
