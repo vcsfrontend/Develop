@@ -92,7 +92,7 @@
                                     (event.charCode >= 64 && event.charCode <= 90) || (event.charCode >= 97 && 
                                     event.charCode <= 122) || event.charCode == 8 || event.charCode == 46 || event.charCode == 95)'
                                     formControlName="email" appShowCodeContent
-                                    [ngClass]="{ 'is-invalid': submitted && f['email'].errors }">
+                                    [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" >
                                 <!-- <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
                                     <div *ngIf="f['email'].errors['required']">Email is required</div>
                                     <div *ngIf="f['email']?.errors['email'] && f['email']?.touched" class="text-danger">
@@ -104,7 +104,28 @@
                                     <span *ngIf="f['email'].errors['email']">Invalid email address.</span>
                                 </div>
                                 
+                                
                             </div>
+                            <div class="col-xl-12">
+                                <label for="signup-email" class="form-label text-default">Email<span class="text-danger"> *</span></label>
+                                <div class="input-group ">  
+                                    <input type="email" class="form-control form-control-lg" id="signup-email"
+                                    placeholder="email" >
+                                    <button class="btn btn-primary" type="button" id="inputGroupFileAddon03">Verify</button>
+                                </div>
+                            </div>
+                            <div class="col-xl-12">
+                                <label for="signup-password"
+                                    class="form-label text-default">OTP<span class="text-danger"> *</span></label>
+                                <div class="input-group ">  
+                                    <input type="text" class="form-control form-control-lg" id="signup-password"
+                                        placeholder="OTP"  appShowCodeContent maxlength="6" onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
+                                    event.charCode == 8)' >
+                                    <button class="btn btn-primary" type="button" id="inputGroupFileAddon03">Verify</button>
+                                </div>
+                                
+                            </div>
+                            
                             <div class="col-xl-12">
                                 <label for="signup-password"
                                     class="form-label text-default">Password<span class="text-danger"> *</span></label>
@@ -147,7 +168,7 @@
                                 <input type="text" class="form-control form-control-lg" id="signup-mobile"
                                     placeholder="mobile" formControlName="phoneNumber" maxlength="10"
                                     onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
-                                    event.charCode == 8)' [ngClass]="{ 'is-invalid': submitted && f['phoneNumber'].errors }">
+                                    event.charCode == 8)' (copy)="preventCopyPaste($event)" (cut)="preventCopyPaste($event)" (paste)="preventCopyPaste($event)" [ngClass]="{ 'is-invalid': submitted && f['phoneNumber'].errors }">
                                 <div *ngIf="submitted && f['phoneNumber'].errors" class="invalid-feedback">
                                     <div *ngIf="f['phoneNumber'].errors['required']">Phone Number is required</div>
                                 </div>
