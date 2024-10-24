@@ -30,7 +30,7 @@ import { MatIcon, MatIconModule } from '@angular/material/icon';
 export class BasicComponent extends BaseComponent implements OnInit {
   crm = false; submitted =false; cnfmPaswrd: any = ''; paswrd:any = ''; mailId:any = '';
   adonai = false; btnDisable = false; todayDt = new Date(); otp:any = '';
-  adoanAiRole :any; isEmailDisabled = true; isOtpDisabled = true;
+  adoanAiRole :any; isEmailDisabled = false; isOtpDisabled = false;
   crmRole :any;
   toolsList = [Tools.Adonai,Tools.Crm]
 
