@@ -85,53 +85,45 @@
                                     formControlName="dob" [maxDate]="todayDt">
                                 </div>
                             </div>
-                            <div class="col-xl-12">
+                            <!-- <div class="col-xl-12">
                                 <label for="signup-email" class="form-label text-default">Email<span class="text-danger"> *</span></label>
                                 <input type="email" class="form-control form-control-lg" id="signup-email"
                                     placeholder="email" onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
                                     (event.charCode >= 64 && event.charCode <= 90) || (event.charCode >= 97 && 
                                     event.charCode <= 122) || event.charCode == 8 || event.charCode == 46 || event.charCode == 95)'
-                                    formControlName="email" appShowCodeContent
+                                    formControlName="email" appShowCodeContent [(ngModel)] = 'mailId'
                                     [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" >
-                                <!-- <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
-                                    <div *ngIf="f['email'].errors['required']">Email is required</div>
-                                    <div *ngIf="f['email']?.errors['email'] && f['email']?.touched" class="text-danger">
-                                        Please enter the email address in the correct format.
-                                    </div>
-                                </div> -->
-                                <div *ngIf="submitted && f['email'].errors && f['email'].touched" class="invalid-feedback">
+                                <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
                                     <span *ngIf="f['email'].errors['required']">Email is required.</span>
                                     <span *ngIf="f['email'].errors['email']">Invalid email address.</span>
                                 </div>
-                                
-                                
-                            </div>
-                            <!-- <div class="col-xl-12">
-                                
-                                
-                                <label for="signup-email" class="form-label text-default">Email<span class="text-danger"> *</span></label>
-                                <div class="input-group ">  
-                                    <input type="email" class="form-control form-control-lg" id="signup-email"
-                                    placeholder="email" onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
-                                    (event.charCode >= 64 && event.charCode <= 90) || (event.charCode >= 97 && 
-                                    event.charCode <= 122) || event.charCode == 8 || event.charCode == 46 || event.charCode == 95)'
-                                    formControlName="email" appShowCodeContent
-                                    [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" >
-                                    
-                                    <button class="btn btn-primary" type="button" id="inputGroupFileAddon03">Verify</button>
-                                    
-                                </div>
-                                
-                                
                             </div> -->
                             <div class="col-xl-12">
-                                <label for="signup-password"
+                                <label for="signup-email" class="form-label text-default">Email<span class="text-danger"> *</span></label>
+                                <div class="input-group ">  
+                                    <input type="email" class="form-control form-control-lg" id="signup-email" placeholder="email" 
+                                        onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
+                                        (event.charCode >= 64 && event.charCode <= 90) || (event.charCode >= 97 && 
+                                        event.charCode <= 122) || event.charCode == 8 || event.charCode == 46 || event.charCode == 95)'
+                                        formControlName="email" appShowCodeContent [(ngModel)] = 'mailId'
+                                        [ngClass]="{ 'is-invalid': submitted && f['email'].errors }">
+                                    <button class="btn btn-primary" type="button" id="inputGroupFileAddon03"
+                                    (click)="onMailCheck()">Verify</button>
+                                </div>
+                                <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                                    <span *ngIf="f['email'].errors['required']">Email is required.</span>
+                                    <span *ngIf="f['email'].errors['email']">Invalid email address.</span>
+                                </div>
+                            </div>
+                            <div class="col-xl-12">
+                                <label for="signup-otp"
                                     class="form-label text-default">OTP<span class="text-danger"> *</span></label>
                                 <div class="input-group ">  
-                                    <input type="text" class="form-control form-control-lg" id="signup-password"
+                                    <input type="text" class="form-control form-control-lg" id="signup-otp"
                                         placeholder="OTP"  appShowCodeContent maxlength="6" onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
-                                    event.charCode == 8)' >
-                                    <button class="btn btn-primary" type="button" id="inputGroupFileAddon03">Verify</button>
+                                    event.charCode == 8)' [(ngModel)] = 'otp' [ngModelOptions]="{standalone: true}">
+                                    <button class="btn btn-primary" type="button" id="inputGroup"
+                                    (click)="onOtpCheck()">Verify</button>
                                 </div>
                                 
                             </div>

@@ -28,11 +28,13 @@ export class BasicComponent extends BaseComponent implements OnInit {
   //   "password": "string"
   // }
   confirmPassword:any = ''; newPassword:any = ''; email:any = ''; submt = true; submitted =false;
+  otp: any = '';
   resetFrm: FormGroup = this.fb.group({ 
     // email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, this.passwordValidator]],
     // cnfmPasswrd: ['', [Validators.required, this.passwordValidator]],
   })
+  
 
   constructor(public fb: FormBuilder, public switchService: SwitherService, 
     private toastr: ToastrService, private router: Router){
@@ -116,6 +118,32 @@ export class BasicComponent extends BaseComponent implements OnInit {
         }
       })
     }
+  }
+
+  onMailCheck(){
+    this.switchService.onMailValidReset(this.email).subscribe({ next: (res:any) => {
+      if(res.status == true){
+        this.toastr.success(res.message,'Reset', {
+          timeOut: 3000, positionClass: 'toast-top-right' });
+        } else {
+          this.toastr.error(res.message,'Reset', {
+            timeOut: 3000, positionClass: 'toast-top-right' });
+        }
+      }
+    })
+  }
+
+  onOtpCheck(){
+    this.switchService.onOtpSignup(this.email, this.otp).subscribe({ next: (res:any) => {
+      if(res.status == true){
+        this.toastr.success(res,'reset', {
+          timeOut: 3000, positionClass: 'toast-top-right' });
+        } else {
+          this.toastr.error(res.message,'reset', {
+            timeOut: 3000, positionClass: 'toast-top-right' });
+        }
+      }
+    })
   }
 
   onResetpPassword(){
