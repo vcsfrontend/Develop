@@ -85,9 +85,9 @@
                                     formControlName="dob" [maxDate]="todayDt">
                                 </div>
                             </div>
-                            <!-- <div class="col-xl-12">
+                            <!-- <div class="col-xl-10">
                                 <label for="signup-email" class="form-label text-default">Email<span class="text-danger"> *</span></label>
-                                <input type="email" class="form-control form-control-lg" id="signup-email"
+                                <input type="text" class="form-control form-control-lg" id="signup-email" [disabled]="isEmailDisabled"
                                     placeholder="email" onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
                                     (event.charCode >= 64 && event.charCode <= 90) || (event.charCode >= 97 && 
                                     event.charCode <= 122) || event.charCode == 8 || event.charCode == 46 || event.charCode == 95)'
@@ -97,35 +97,51 @@
                                     <span *ngIf="f['email'].errors['required']">Email is required.</span>
                                     <span *ngIf="f['email'].errors['email']">Invalid email address.</span>
                                 </div>
-                            </div> -->
-                            <div class="col-xl-12">
-                                <label for="signup-email" class="form-label text-default">Email<span class="text-danger"> *</span></label>
-                                <div class="input-group ">  
-                                    <input type="email" class="form-control form-control-lg" id="signup-email" placeholder="email" 
-                                        onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
-                                        (event.charCode >= 64 && event.charCode <= 90) || (event.charCode >= 97 && 
-                                        event.charCode <= 122) || event.charCode == 8 || event.charCode == 46 || event.charCode == 95)'
-                                        formControlName="email" appShowCodeContent [(ngModel)] = 'mailId'
-                                        [ngClass]="{ 'is-invalid': submitted && f['email'].errors }">
-                                    <button class="btn btn-primary" type="button" id="inputGroupFileAddon03"
-                                    (click)="onMailCheck()">Verify</button>
-                                </div>
-                                <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
-                                    <span *ngIf="f['email'].errors['required']">Email is required.</span>
-                                    <span *ngIf="f['email'].errors['email']">Invalid email address.</span>
-                                </div>
                             </div>
-                            <div class="col-xl-12">
+                            <div class="col-xl-2 pt-4">
+                                <button class="btn btn-primary mt-2" type="button" id="inputGroupFileAddon03"
+                                    (click)="onMailCheck()">Verify</button>
+                            </div> -->
+                            <div class="col-xl-10">
+                                <label for="signup-email" class="form-label text-default">Email</label>
+                                    <input type="text" class="form-control form-control-lg" id="signup-email"
+                                        placeholder="email" appShowCodeContent maxlength="6" [disabled]="isEmailDisabled"
+                                        onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
+                                    (event.charCode >= 64 && event.charCode <= 90) || (event.charCode >= 97 && 
+                                    event.charCode <= 122) || event.charCode == 8 || event.charCode == 46 || event.charCode == 95)'
+                                     [(ngModel)] = 'mailId' formControlName="email">
+                                    <!-- <button class="btn btn-primary" type="button" id="inputGroup"
+                                    (click)="onMailCheck()">Verify</button> -->
+                            </div>
+                            <div class="col-xl-2 pt-4">
+                                <button class="btn btn-primary mt-2" type="button" id="inputGroup"
+                                    (click)="onOtpCheck()">Verify</button>
+                            </div>
+                            <!-- <div class="col-xl-12">
                                 <label for="signup-otp"
                                     class="form-label text-default">OTP<span class="text-danger"> *</span></label>
-                                <div class="input-group ">  
+                                <div class="input-group">  
                                     <input type="text" class="form-control form-control-lg" id="signup-otp"
-                                        placeholder="OTP"  appShowCodeContent maxlength="6" onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
-                                    event.charCode == 8)' [(ngModel)] = 'otp' [ngModelOptions]="{standalone: true}">
+                                        placeholder="OTP"  appShowCodeContent maxlength="6" [disabled]="isOtpDisabled"
+                                        onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
+                                        event.charCode == 8)' [(ngModel)] = 'otp' [ngModelOptions]="{standalone: true}">
                                     <button class="btn btn-primary" type="button" id="inputGroup"
                                     (click)="onOtpCheck()">Verify</button>
                                 </div>
                                 
+                            </div> -->
+                            <div class="col-xl-10">
+                                <label for="signup-otp" class="form-label text-default">OTP</label>
+                                    <input type="text" class="form-control form-control-lg" id="signup-otp"
+                                        placeholder="OTP"  appShowCodeContent maxlength="6" [disabled]="isOtpDisabled"
+                                        onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
+                                        event.charCode == 8)' [(ngModel)] = 'otp' [ngModelOptions]="{standalone: true}">
+                                    <!-- <button class="btn btn-primary" type="button" id="inputGroup"
+                                    (click)="onOtpCheck()">Verify</button> -->
+                            </div>
+                            <div class="col-xl-2 pt-4">
+                                <button class="btn btn-primary mt-2" type="button" id="inputGroup"
+                                    (click)="onOtpCheck()">Verify</button>
                             </div>
                             
                             <div class="col-xl-12">

@@ -29,8 +29,8 @@ import { MatIcon, MatIconModule } from '@angular/material/icon';
 })
 export class BasicComponent extends BaseComponent implements OnInit {
   crm = false; submitted =false; cnfmPaswrd: any = ''; paswrd:any = ''; mailId:any = '';
-  adonai = false;btnDisable = false; todayDt = new Date(); otp:any = '';
-  adoanAiRole :any;
+  adonai = false; btnDisable = false; todayDt = new Date(); otp:any = '';
+  adoanAiRole :any; isEmailDisabled = true; isOtpDisabled = true;
   crmRole :any;
   toolsList = [Tools.Adonai,Tools.Crm]
 
@@ -145,31 +145,44 @@ export class BasicComponent extends BaseComponent implements OnInit {
   }
 
   onMailCheck(){
-    this.switchService.onMailValidSignup(this.mailId).subscribe({ next: (res:any) => {
-      if(res.status == true){
-        this.toastr.success(res.message,'signup', {
-          timeOut: 3000, positionClass: 'toast-top-right' });
-        } else {
-          this.toastr.error(res.message,'signup', {
+    if(this.mailId == ''){
+      this.toastr.warning('Please Enter email','signup', {
+        timeOut: 3000, positionClass: 'toast-top-right' });
+    } else {
+      this.switchService.onMailValidSignup(this.mailId).subscribe({ next: (res:any) => {
+        if(res.status == true){
+          this.isEmailDisabled = true;
+          this.toastr.success(res.message,'signup', {
             timeOut: 3000, positionClass: 'toast-top-right' });
+          } else {
+            this.toastr.error(res.message,'signup', {
+              timeOut: 3000, positionClass: 'toast-top-right' });
+          }
         }
-      }
-    })
+      })
+    }
   }
 
   onOtpCheck(){
-    this.switchService.onOtpSignup(this.mailId, this.otp).subscribe({ next: (res:any) => {
-      if(res.status == true){
-        this.toastr.success(res.message,'signup', {
-          timeOut: 3000, positionClass: 'toast-top-right' });
-        } else {
-          this.toastr.error(res.message,'signup', {
+    // this.isOtpDisabled = true;
+    // this.btnDisable = false;
+    if(this.otp == ''){
+      this.toastr.warning('Please Enter OTP','signup', {
+        timeOut: 3000, positionClass: 'toast-top-right' });
+    } else {
+      this.switchService.onOtpSignup(this.mailId, this.otp).subscribe({ next: (res:any) => {
+        if(res.status == true){
+        this.btnDisable = false, this.isOtpDisabled = true, 
+          this.toastr.success(res.message,'signup', {
             timeOut: 3000, positionClass: 'toast-top-right' });
+          } else {
+            this.toastr.error(res.message,'signup', {
+              timeOut: 3000, positionClass: 'toast-top-right' });
+          }
         }
-      }
-    })
+      })
+    }
   }
-
 
   showPassword = false;
   showPassword1 = false;
