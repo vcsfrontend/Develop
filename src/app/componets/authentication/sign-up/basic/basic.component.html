@@ -106,14 +106,24 @@
                                 
                                 
                             </div>
-                            <div class="col-xl-12">
+                            <!-- <div class="col-xl-12">
+                                
+                                
                                 <label for="signup-email" class="form-label text-default">Email<span class="text-danger"> *</span></label>
                                 <div class="input-group ">  
                                     <input type="email" class="form-control form-control-lg" id="signup-email"
-                                    placeholder="email" >
+                                    placeholder="email" onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
+                                    (event.charCode >= 64 && event.charCode <= 90) || (event.charCode >= 97 && 
+                                    event.charCode <= 122) || event.charCode == 8 || event.charCode == 46 || event.charCode == 95)'
+                                    formControlName="email" appShowCodeContent
+                                    [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" >
+                                    
                                     <button class="btn btn-primary" type="button" id="inputGroupFileAddon03">Verify</button>
+                                    
                                 </div>
-                            </div>
+                                
+                                
+                            </div> -->
                             <div class="col-xl-12">
                                 <label for="signup-password"
                                     class="form-label text-default">OTP<span class="text-danger"> *</span></label>
