@@ -10,7 +10,7 @@
                             <div class="col-xl-6">
                                 <label for="role-id" class="form-label text-default">Type
                                     <span class="text-danger"> *</span></label>
-                                <select class="form-select form-select-lg" id="role-id" formControlName="type"
+                                <select class="form-select form-select-lg form-control-lg"  id="role-id" formControlName="type"
                                     [ngClass]="{ 'is-invalid': submitted && f['type'].errors }">
                                     <option value="" disabled selected>Select type</option>
                                     <option value="1">Individual</option>
@@ -80,14 +80,14 @@
                             <div class="col-xl-6">
                                 <label for="signup-dob" class="form-label text-default">Date of birth<span class="text-danger"> *</span></label>
                                 <div class="input-group">
-                                    <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
-                                    <input class="form-control" placeholder="Choose date" type="text" mwlFlatpickr
+                                    <div class="input-group-text text-muted "> <i class="ri-calendar-line"></i> </div>
+                                    <input class="form-control form-control-lg" placeholder="Choose date" type="text" mwlFlatpickr
                                     formControlName="dob" [maxDate]="todayDt">
                                 </div>
                             </div>
                             <div class="col-xl-5">
                                 <label for="signup-email" class="form-label text-default">Email<span class="text-danger"> *</span></label>
-                                <input type="text" class="form-control form-control-lg" id="signup-email" [disabled]="isEmailDisabled"
+                                <input type="text" class="form-control form-control-lg " id="signup-email" [disabled]="isEmailDisabled"
                                     placeholder="email" onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
                                     (event.charCode >= 64 && event.charCode <= 90) || (event.charCode >= 97 && 
                                     event.charCode <= 122) || event.charCode == 8 || event.charCode == 46 || event.charCode == 95)'
@@ -98,8 +98,8 @@
                                     <span *ngIf="f['email'].errors['email']">Invalid email address.</span>
                                 </div>
                             </div>
-                            <div class="col-xl-1 pt-4">
-                                <button class="btn btn-primary mt-2" type="button" id="inputGroupFileAddon03"
+                            <div class="col-xl-1 pt-4 pavan ">
+                                <button class="btn btn-primary mt-2 " type="button" id="inputGroupFileAddon03"
                                     (click)="onMailCheck()">Verify</button>
                             </div>
                             <!-- <div class="col-xl-5">
@@ -139,7 +139,7 @@
                                     <!-- <button class="btn btn-primary" type="button" id="inputGroup"
                                     (click)="onOtpCheck()">Verify</button> -->
                             </div>
-                            <div class="col-xl-1 pt-4">
+                            <div class="col-xl-1 pt-4 pavan">
                                 <button class="btn btn-primary mt-2" type="button" id="inputGroup"
                                     (click)="onOtpCheck()">Verify</button>
                             </div>
@@ -191,10 +191,10 @@
                                     <div *ngIf="f['phoneNumber'].errors['required']">Phone Number is required</div>
                                 </div>
                             </div>
-                            <div class="col-xl-6">
+                            <div class="col-xl-6 pt-4">
                                 <label for="role-id" class="form-label text-default">Tool ID<span class="text-danger"> *</span></label>
                                 <mat-form-field>
-                                    <mat-select formControlName="tools" multiple>
+                                    <mat-select  formControlName="tools" multiple>
                                         @for (topping of toolsList; track topping) {
                                         <mat-option [value]="topping">{{topping}}</mat-option>
                                         }
@@ -206,7 +206,7 @@
                             </div>
                             <div class="col-xl-6">
                                 <label for="signup-country" class="form-label text-default">Country<span class="text-danger">*</span></label>
-                                <select class="form-select form-select-lg" id="country" formControlName="country" 
+                                <select class="form-select form-select-lg form-control-lg" id="country" formControlName="country" 
                                     [ngClass]="{ 'is-invalid': submitted && f['country'].errors }">
                                     <option value="" disabled selected>Select</option>
                                     <!-- <option *ngFor="let country of countryList" [value]="country.code" [selected]="country.name == 'United States'">  {{country.name}}    </option> -->
