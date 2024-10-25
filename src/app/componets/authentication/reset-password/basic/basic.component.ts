@@ -27,7 +27,8 @@ export class BasicComponent extends BaseComponent implements OnInit {
   //   "email": "string",
   //   "password": "string"
   // }
-  confirmPassword:any = ''; newPassword:any = ''; email:any = ''; submt = true; submitted =false;
+  confirmPassword:any = ''; newPassword:any = ''; email:any = ''; submt = true; submitted = false; 
+  isEmailDisable = false; isOtpDisable = false; isBtndisable = true;
   otp: any = '';
   resetFrm: FormGroup = this.fb.group({ 
     // email: ['', [Validators.required, Validators.email]],
@@ -121,29 +122,44 @@ export class BasicComponent extends BaseComponent implements OnInit {
   }
 
   onMailCheck(){
-    this.switchService.onMailValidReset(this.email).subscribe({ next: (res:any) => {
-      if(res.status == true){
-        this.toastr.success(res.message,'Reset', {
-          timeOut: 3000, positionClass: 'toast-top-right' });
-        } else {
-          this.toastr.error(res.message,'Reset', {
+    if(this.email == ''){
+      this.toastr.warning('Please enter email','', {
+      timeOut: 3000, positionClass: 'toast-top-right'});
+    } else {
+      this.switchService.onMailValidReset(this.email).subscribe({ next: (res:any) => {
+        if(res.status == true){
+          this.isEmailDisable = true;
+          this.toastr.success(res.message,'', {
             timeOut: 3000, positionClass: 'toast-top-right' });
+          } else {
+            this.toastr.error(res.message,'', {
+              timeOut: 3000, positionClass: 'toast-top-right' });
+          }
         }
-      }
-    })
+      })
+    }
   }
 
   onOtpCheck(){
-    this.switchService.onOtpSignup(this.email, this.otp).subscribe({ next: (res:any) => {
-      if(res.status == true){
-        this.toastr.success(res,'reset', {
-          timeOut: 3000, positionClass: 'toast-top-right' });
-        } else {
-          this.toastr.error(res.message,'reset', {
+    if(this.email == ''){
+      this.toastr.warning('Please enter email','', {
+      timeOut: 3000, positionClass: 'toast-top-right'});
+    } else if(this.otp == ''){
+      this.toastr.warning('Please enter OTP','', {
+      timeOut: 3000, positionClass: 'toast-top-right'});
+    } else {
+      this.switchService.onOtpSignup(this.email, this.otp).subscribe({ next: (res:any) => {
+        if(res.status == true){
+          this.isOtpDisable = true, this.isBtndisable = false,
+          this.toastr.success(res.message,'reset', {
             timeOut: 3000, positionClass: 'toast-top-right' });
+          } else {
+            this.toastr.error(res.message,'reset', {
+              timeOut: 3000, positionClass: 'toast-top-right' });
+          }
         }
-      }
-    })
+      })
+    }
   }
 
   onResetpPassword(){

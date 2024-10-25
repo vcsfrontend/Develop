@@ -18,7 +18,7 @@
                                  id="signup-email" placeholder="email"  onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
                                     (event.charCode >= 64 && event.charCode <= 90) || (event.charCode >= 97 && 
                                     event.charCode <= 122) || event.charCode == 8 || event.charCode == 46 || event.charCode == 95)'
-                                    appShowCodeContent [(ngModel)] = 'email' [ngModelOptions]="{standalone: true}">
+                                    appShowCodeContent [(ngModel)] = 'email' [ngModelOptions]="{standalone: true}" [disabled]="isEmailDisable">
                                 <button class="btn btn-primary" type="button" id="inputGroupFileAddon03"
                                 (click)="onMailCheck()">Verify</button>
                             </div>
@@ -28,7 +28,7 @@
                                 class="form-label text-default">OTP<span class="text-danger"> *</span></label>
                             <div class="input-group ">  
                                 <input type="text" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" 
-                                    id="signup-otp" placeholder="OTP" appShowCodeContent maxlength="6" 
+                                    id="signup-otp" placeholder="OTP" appShowCodeContent maxlength="6" [disabled]="isOtpDisable"
                                     onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
                                     event.charCode == 8)' [(ngModel)] = 'otp' [ngModelOptions]="{standalone: true}">
                                 <button class="btn btn-primary" type="button" id="inputGroup"
@@ -37,7 +37,8 @@
                             
                         </div>
                         <div class="d-grid mt-4" *ngIf="submt">
-                            <a  class="btn btn-lg bg-light p-2 text-dark bg-opacity-25 border border-dark" (click)="onEmail()">Submit</a>
+                            <button  class="btn btn-lg bg-light p-2 text-dark bg-opacity-25 border border-dark" 
+                            (click)="onEmail()" [disabled]="isBtndisable">Submit</button>
                         </div>
                        
                         <div class="col-xl-12" *ngIf="!submt">
@@ -70,7 +71,6 @@
                                 [ngModelOptions]="{standalone: true}" appShowCodeContent maxlength="16">
                                 <a href="javascript:void(0);" class="show-password-button text-muted"  (click)="createpassword2()" 
                                 id="button-addon22"><i class="ri-eye-{{toggleClass2}} align-middle"></i></a>
-                                
                             </div>
                         </div>
                     </div>
