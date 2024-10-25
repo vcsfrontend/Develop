@@ -11,7 +11,7 @@
                                 <label for="role-id" class="form-label text-default">Type
                                     <span class="text-danger"> *</span></label>
                                 <select class="form-select form-select-lg form-control-lg"  id="role-id" formControlName="type"
-                                    [ngClass]="{ 'is-invalid': submitted && f['type'].errors }">
+                                    [ngClass]="{ 'is-invalid': submitted && f['type'].errors }" (change)="onDropdownChange()">
                                     <option value="" disabled selected>Select type</option>
                                     <option value="1">Individual</option>
                                     <option value="2">Enterprise</option>
@@ -100,7 +100,7 @@
                             </div>
                             <div class="col-xl-1 pt-4 pavan ">
                                 <button class="btn btn-primary mt-2 " type="button" id="inputGroupFileAddon03"
-                                    (click)="onMailCheck()">Verify</button>
+                                    (click)="onMailCheck()" [disabled]="isBtnDsbl">Verify</button>
                             </div>
                             <!-- <div class="col-xl-5">
                                 <label for="signup-email" class="form-label text-default">Email</label>
@@ -134,14 +134,14 @@
                                 <label for="signup-otp" class="form-label text-default">OTP</label>
                                     <input type="text" class="form-control form-control-lg" id="signup-otp"
                                         placeholder="OTP"  appShowCodeContent maxlength="6" [disabled]="isOtpDisabled"
-                                        onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
-                                        event.charCode == 8)' [(ngModel)] = 'otp' [ngModelOptions]="{standalone: true}">
+                                        onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || event.charCode == 8)'
+                                         [(ngModel)] = 'otp' [ngModelOptions]="{standalone: true}">
                                     <!-- <button class="btn btn-primary" type="button" id="inputGroup"
                                     (click)="onOtpCheck()">Verify</button> -->
                             </div>
                             <div class="col-xl-1 pt-4 pavan">
                                 <button class="btn btn-primary mt-2" type="button" id="inputGroup"
-                                    (click)="onOtpCheck()">Verify</button>
+                                    (click)="onOtpCheck()" [disabled]="isBtnDsbl">Verify</button>
                             </div>
                             
                             <div class="col-xl-6">

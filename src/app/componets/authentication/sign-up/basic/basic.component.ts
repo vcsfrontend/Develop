@@ -29,7 +29,7 @@ import { MatIcon, MatIconModule } from '@angular/material/icon';
 })
 export class BasicComponent extends BaseComponent implements OnInit {
   crm = false; submitted =false; cnfmPaswrd: any = ''; paswrd:any = ''; mailId:any = '';
-  adonai = false; btnDisable = false; todayDt = new Date(); otp:any = '';
+  adonai = false; btnDisable = false; todayDt = new Date(); otp:any = ''; isBtnDsbl = false;
   adoanAiRole :any; isEmailDisabled = false; isOtpDisabled = false;
   crmRole :any;
   toolsList = [Tools.Adonai,Tools.Crm]
@@ -151,7 +151,8 @@ export class BasicComponent extends BaseComponent implements OnInit {
     } else {
       this.switchService.onMailValidSignup(this.mailId).subscribe({ next: (res:any) => {
         if(res.status == true){
-          this.isEmailDisabled = true;
+          this.isEmailDisabled = true,
+          this.signupFrm.get('email')?.disable();
           this.toastr.success(res.message,'signup', {
             timeOut: 3000, positionClass: 'toast-top-right' });
           } else {
@@ -173,6 +174,7 @@ export class BasicComponent extends BaseComponent implements OnInit {
       this.switchService.onOtpSignup(this.mailId, this.otp).subscribe({ next: (res:any) => {
         if(res.status == true){
         this.btnDisable = false, this.isOtpDisabled = true, 
+        this.isBtnDsbl = true;
           this.toastr.success(res.message,'signup', {
             timeOut: 3000, positionClass: 'toast-top-right' });
           } else {
@@ -183,6 +185,19 @@ export class BasicComponent extends BaseComponent implements OnInit {
       })
     }
   }
+
+  onDropdownChange() {
+    const textFieldControl = this.signupFrm.get('companyName');
+
+    if (this.signupFrm.get('type')?.value === '2') {
+      textFieldControl?.setValidators([Validators.required]);
+    } else {
+      textFieldControl?.clearValidators();
+    }
+
+    textFieldControl?.updateValueAndValidity();  // This updates the validation status of the control
+  }
+
 
   showPassword = false;
   showPassword1 = false;
