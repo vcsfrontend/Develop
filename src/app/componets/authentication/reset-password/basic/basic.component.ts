@@ -100,7 +100,11 @@ export class BasicComponent extends BaseComponent implements OnInit {
   onEmail(){
     if (this.email == ''){
       this.toastr.warning('please enter email ','reset', { timeOut: 3000, positionClass: 'toast-top-right'})
-    } else {
+    } 
+    else if(this.otp == '') {
+      this.toastr.warning('please enter OTP','reset', { timeOut: 3000, positionClass: 'toast-top-right'})
+    }
+    else {
     this.switchService.getValidEmail(this.email).subscribe({
       next: (res:any) => {
         if(res.status == true){
@@ -197,7 +201,7 @@ export class BasicComponent extends BaseComponent implements OnInit {
       this.switchService.onForgotPassword(payload).subscribe({
         next: (res:any) => {
           if(res.status == true){
-            this.router.navigate(['/authentication/sign-in/basic']);
+            this.router.navigate(['/auth/login']);
             this.toastr.success(res.message,'reset password', {
               timeOut: 3000,
               positionClass: 'toast-top-right',

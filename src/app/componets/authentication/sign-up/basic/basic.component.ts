@@ -30,8 +30,8 @@ import { MatIcon, MatIconModule } from '@angular/material/icon';
 export class BasicComponent extends BaseComponent implements OnInit {
   crm = false; submitted =false; cnfmPaswrd: any = ''; paswrd:any = ''; mailId:any = '';
   adonai = false; btnDisable = false; todayDt = new Date(); otp:any = ''; isBtnDsbl = false;
-  adoanAiRole :any; isEmailDisabled = false; isOtpDisabled = false;
-  crmRole :any;
+  adoanAiRole :any; isEmailDisabled = false; isOtpDisabled = false; isCompany : string = 'col-xl-6';
+  crmRole :any; isShowUsers = false;
   toolsList = [Tools.Adonai,Tools.Crm]
 
   icons = [
@@ -42,6 +42,7 @@ export class BasicComponent extends BaseComponent implements OnInit {
   signupFrm: FormGroup = this.fb.group({ 
     type : ['', Validators.required],
     companyName : ['', Validators.required],
+    noOfUsers: [''],
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
     email: ['', [Validators.required,  Validators.email]],
@@ -187,15 +188,23 @@ export class BasicComponent extends BaseComponent implements OnInit {
   }
 
   onDropdownChange() {
-    const textFieldControl = this.signupFrm.get('companyName');
+    const cmpnyFieldControl = this.signupFrm.get('companyName');
+    const typeFieldControl = this.signupFrm.get('type');
 
     if (this.signupFrm.get('type')?.value === '2') {
-      textFieldControl?.setValidators([Validators.required]);
+      cmpnyFieldControl?.setValidators([Validators.required]),
+      typeFieldControl?.setValidators([Validators.required]),
+      this.isCompany = 'col-xl-4',
+      this.isShowUsers = true;
     } else {
-      textFieldControl?.clearValidators();
+      cmpnyFieldControl?.clearValidators(),
+      typeFieldControl?.clearValidators(),
+      // this.signupFrm?.get('noOfUsers')?.value.clear()
+      this.isCompany = 'col-xl-6';
+      this.isShowUsers = false;
     }
 
-    textFieldControl?.updateValueAndValidity();  // This updates the validation status of the control
+    cmpnyFieldControl?.updateValueAndValidity();  // This updates the validation status of the control
   }
 
 
