@@ -17,7 +17,7 @@ import { BaseComponent } from '../../../../shared/base/base.component';
     // AngularFirestoreModule,
     ToastrModule, CommonModule
 ],
-  
+
     providers: [FirebaseService,{ provide: ToastrService, useClass: ToastrService }],
   templateUrl: './basic.component.html',
   styleUrl: './basic.component.scss'
@@ -104,6 +104,9 @@ export class BasicComponent extends BaseComponent implements OnInit {
     else if(this.otp == '') {
       this.toastr.warning('please enter OTP','reset', { timeOut: 3000, positionClass: 'toast-top-right'})
     }
+    // else if(this.verify == '') {
+    //   this.toastr.warning('please enter OTP','reset', { timeOut: 3000, positionClass: 'toast-top-right'})
+    // }
     else {
     this.switchService.getValidEmail(this.email).subscribe({
       next: (res:any) => {

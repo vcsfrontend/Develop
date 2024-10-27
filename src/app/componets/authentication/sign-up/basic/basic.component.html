@@ -3,244 +3,247 @@
     <div class="row justify-content-center align-items-center authentication authentication-basic h-5000">
         <div class="col-xxl-4 col-xl-6 col-lg-5 col-md-6 col-sm-8 col-12">
             <div class="card custom-card my-4">
-                <div class="card-body p-5">
-                    <p class="h5 mb-2 text-center">Sign Up</p>
-                    <form [formGroup]="signupFrm">
-                        <div class="row gy-2">
-                            <div class="col-xl-6">
-                                <label for="role-id" class="form-label text-default">Type
-                                    <span class="text-danger"> *</span></label>
-                                <select class="form-select form-select-lg form-control-lg"  id="role-id" formControlName="type"
-                                    [ngClass]="{ 'is-invalid': submitted && f['type'].errors }" (change)="onDropdownChange()">
-                                    <option value="" disabled selected>Select type</option>
-                                    <option value="1">Individual</option>
-                                    <option value="2">Enterprise</option>
-                                </select>
-                                <div *ngIf="submitted && f['type'].errors" class="invalid-feedback">
-                                    <div *ngIf="f['type'].errors['required']">Type is required</div>
-                                </div>
-                            </div>
-                            
-                            <!-- <div class="col-xl-12">
-                                <mat-form-field>
-                                    <mat-label>Icon dropdown</mat-label>
-                                    <mat-select>
-                                      <mat-option *ngFor="let icon of icons" [value]="icon.value">
-                                        <mat-icon mat-list-icon>{{ icon.icon }}</mat-icon>
-                                        {{ icon.name }}
-                                      </mat-option>
-                                    </mat-select>
-                                </mat-form-field>
-                            </div> -->
-                            
-                            <div [ngClass]="isCompany">
-                                <label for="signup-companyName" class="form-label text-default">
-                                    Company Name <span class="text-danger"> *</span></label>
-                                <input type="text" class="form-control form-control-lg" id="signup-companyName"
-                                    placeholder="Company name" formControlName="companyName"
-                                    [ngClass]="{ 'is-invalid': submitted && f['companyName'].errors }"
-                                    appShowCodeContent maxlength="50">
-                                <div *ngIf="submitted && f['companyName'].errors" class="invalid-feedback">
-                                    <div *ngIf="f['companyName'].errors['required']">Company name is required</div>
-                                </div>
-                            </div>
-                            <div class="col-xl-2" *ngIf="isShowUsers">
-                                <label for="signup-noOfUsers" class="form-label text-default">No. of Users
-                                    <span class="text-danger"> *</span></label>
-                                <input type="text" class="form-control form-control-lg" id="signup-noOfUsers"
-                                    placeholder="Users" formControlName="noOfUsers"
-                                    [ngClass]="{ 'is-invalid': submitted && f['noOfUsers'].errors }"
-                                    appShowCodeContent maxlength="50">
-                                <div *ngIf="submitted && f['noOfUsers'].errors" class="invalid-feedback">
-                                    <div *ngIf="f['noOfUsers'].errors['required']">no Of Users is required</div>
-                                </div>
-                            </div>
-                            <div class="col-xl-6">
-                                <label for="signup-firstname" class="form-label text-default">First Name<span class="text-danger"> *</span></label>
-                                <input type="text" class="form-control form-control-lg" id="signup-firstname"
-                                    placeholder="First name" formControlName="firstName" appShowCodeContent
-                                    onkeypress='return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && 
-                                    event.charCode <= 122) || event.charCode == 8 || event.charCode == 32)'
-                                    [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }" maxlength="50">
-                                <div *ngIf="submitted && f['firstName'].errors" class="invalid-feedback">
-                                    <div *ngIf="f['firstName'].errors['required']">First name is required</div>
-                                </div>
-                            </div>
-                            <div class="col-xl-6">
-                                <label for="signup-lastname" class="form-label text-default">Last Name<span class="text-danger"> *</span></label>
-                                <input type="text" class="form-control form-control-lg" id="signup-lastname"
-                                    placeholder="Last name" formControlName="lastName" appShowCodeContent
-                                    onkeypress='return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && 
-                                    event.charCode <= 122) || event.charCode == 8 ||event.charCode == 32)'
-                                    [ngClass]="{ 'is-invalid': submitted && f['lastName'].errors }" maxlength="50">
-                                <div *ngIf="submitted && f['lastName'].errors" class="invalid-feedback">
-                                    <div *ngIf="f['lastName'].errors['required']">Last name is required</div>
-                                </div>
-                            </div>
-                            <div class="col-xl-6">
-                                <label for="signup-username" class="form-label text-default">User Name<span class="text-danger"> *</span></label>
-                                <input type="text" class="form-control form-control-lg" id="signup-username"
-                                    placeholder="username" formControlName="username" appShowCodeContent
-                                    onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
-                                    (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && 
-                                    event.charCode <= 122) || event.charCode == 8 || event.charCode == 95)'
-                                    [ngClass]="{ 'is-invalid': submitted && f['username'].errors }" maxlength="25">
-                                <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
-                                    <div *ngIf="f['username'].errors['required']">User name is required</div>
-                                </div>
-                            </div>
-                            <div class="col-xl-6">
-                                <label for="signup-dob" class="form-label text-default">Date of birth<span class="text-danger"> *</span></label>
-                                <div class="input-group">
-                                    <div class="input-group-text text-muted "> <i class="ri-calendar-line"></i> </div>
-                                    <input class="form-control form-control-lg" placeholder="Choose date" type="text" mwlFlatpickr
-                                    formControlName="dob" [maxDate]="todayDt">
-                                </div>
-                            </div>
-                            <div class="col-xl-5">
-                                <label for="signup-email" class="form-label text-default">Email<span class="text-danger"> *</span></label>
-                                <input type="text" class="form-control form-control-lg " id="signup-email" [disabled]="isEmailDisabled"
-                                    placeholder="email" onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
-                                    (event.charCode >= 64 && event.charCode <= 90) || (event.charCode >= 97 && 
-                                    event.charCode <= 122) || event.charCode == 8 || event.charCode == 46 || event.charCode == 95)'
-                                    formControlName="email" appShowCodeContent [(ngModel)] = 'mailId'
-                                    [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" >
-                                <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
-                                    <span *ngIf="f['email'].errors['required']">Email is required.</span>
-                                    <span *ngIf="f['email'].errors['email']">Invalid email address.</span>
-                                </div>
-                            </div>
-                            <div class="col-xl-1 pt-4 pavan ">
-                                <button class="btn btn-success me-2 btn-wave mt-2 " type="button" id="inputGroupFileAddon03"
-                                    (click)="onMailCheck()" [disabled]="isBtnDsbl">Verify</button>
-                            </div>
-                            <!-- <div class="col-xl-5">
-                                <label for="signup-email" class="form-label text-default">Email</label>
-                                    <input type="text" class="form-control form-control-lg" id="signup-email"
-                                        placeholder="email" appShowCodeContent maxlength="6" [disabled]="isEmailDisabled"
-                                        onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
-                                    (event.charCode >= 64 && event.charCode <= 90) || (event.charCode >= 97 && 
-                                    event.charCode <= 122) || event.charCode == 8 || event.charCode == 46 || event.charCode == 95)'
-                                     [(ngModel)] = 'mailId' formControlName="email">
-                                    <button class="btn btn-primary" type="button" id="inputGroup"
-                                    (click)="onMailCheck()">Verify</button>
-                            </div>
-                            <div class="col-xl-1 pt-4">
-                                <button class="btn btn-primary mt-2" type="button" id="inputGroup"
-                                    (click)="onOtpCheck()">Verify</button>
-                            </div> -->
-                            <!-- <div class="col-xl-12">
-                                <label for="signup-otp"
-                                    class="form-label text-default">OTP<span class="text-danger"> *</span></label>
-                                <div class="input-group">  
-                                    <input type="text" class="form-control form-control-lg" id="signup-otp"
-                                        placeholder="OTP"  appShowCodeContent maxlength="6" [disabled]="isOtpDisabled"
-                                        onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
-                                        event.charCode == 8)' [(ngModel)] = 'otp' [ngModelOptions]="{standalone: true}">
-                                    <button class="btn btn-primary" type="button" id="inputGroup"
-                                    (click)="onOtpCheck()">Verify</button>
+                <!-- <overlay-scrollbars [defer] id="filemanager-scroll"> -->
+                    <div class="card-body p-5">
+                        <p class="h5 mb-2 text-center">Sign Up</p>
+                        <form [formGroup]="signupFrm">
+                            <div class="row gy-2">
+                                <div class="col-xl-6">
+                                    <label for="role-id" class="form-label text-default">Type
+                                        <span class="text-danger"> *</span></label>
+                                    <select class="form-select form-select-lg form-control-lg"  id="role-id" formControlName="type"
+                                        [ngClass]="{ 'is-invalid': submitted && f['type'].errors }" (change)="onDropdownChange()">
+                                        <option value="" disabled selected>Select type</option>
+                                        <option value="1">Individual</option>
+                                        <option value="2">Enterprise</option>
+                                    </select>
+                                    <div *ngIf="submitted && f['type'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['type'].errors['required']">Type is required</div>
+                                    </div>
                                 </div>
                                 
-                            </div> -->
-                            <div class="col-xl-5">
-                                <label for="signup-otp" class="form-label text-default">OTP</label>
-                                    <input type="text" class="form-control form-control-lg" id="signup-otp"
-                                        placeholder="OTP"  appShowCodeContent maxlength="6" [disabled]="isOtpDisabled"
-                                        onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || event.charCode == 8)'
-                                        (copy)="preventCopyPaste($event)" (cut)="preventCopyPaste($event)" (paste)="preventCopyPaste($event)"
+                                <!-- <div class="col-xl-12">
+                                    <mat-form-field>
+                                        <mat-label>Icon dropdown</mat-label>
+                                        <mat-select>
+                                        <mat-option *ngFor="let icon of icons" [value]="icon.value">
+                                            <mat-icon mat-list-icon>{{ icon.icon }}</mat-icon>
+                                            {{ icon.name }}
+                                        </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div> -->
+                                
+                                <div [ngClass]="isCompany">
+                                    <label for="signup-companyName" class="form-label text-default">
+                                        Company Name <span class="text-danger"> *</span></label>
+                                    <input type="text" class="form-control form-control-lg" id="signup-companyName"
+                                        placeholder="Company name" formControlName="companyName"
+                                        [ngClass]="{ 'is-invalid': submitted && f['companyName'].errors }"
+                                        appShowCodeContent maxlength="50">
+                                    <div *ngIf="submitted && f['companyName'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['companyName'].errors['required']">Company name is required</div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-2" *ngIf="isShowUsers">
+                                    <label for="signup-noOfUsers" class="form-label text-default">No. of Users
+                                        <span class="text-danger"> *</span></label>
+                                    <input type="text" class="form-control form-control-lg" id="signup-noOfUsers"
+                                        placeholder="Users" formControlName="noOfUsers"
+                                        [ngClass]="{ 'is-invalid': submitted && f['noOfUsers'].errors }"
+                                        onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || (event.charCode == 8 || event.charCode == 95))'
+                                        appShowCodeContent maxlength="3">
+                                    <div *ngIf="submitted && f['noOfUsers'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['noOfUsers'].errors['required']">Users is required</div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6">
+                                    <label for="signup-firstname" class="form-label text-default">First Name<span class="text-danger"> *</span></label>
+                                    <input type="text" class="form-control form-control-lg" id="signup-firstname"
+                                        placeholder="First name" formControlName="firstName" appShowCodeContent
+                                        onkeypress='return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && 
+                                        event.charCode <= 122) || event.charCode == 8 || event.charCode == 32)'
+                                        [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }" maxlength="50">
+                                    <div *ngIf="submitted && f['firstName'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['firstName'].errors['required']">First name is required</div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6">
+                                    <label for="signup-lastname" class="form-label text-default">Last Name<span class="text-danger"> *</span></label>
+                                    <input type="text" class="form-control form-control-lg" id="signup-lastname"
+                                        placeholder="Last name" formControlName="lastName" appShowCodeContent
+                                        onkeypress='return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && 
+                                        event.charCode <= 122) || event.charCode == 8 ||event.charCode == 32)'
+                                        [ngClass]="{ 'is-invalid': submitted && f['lastName'].errors }" maxlength="50">
+                                    <div *ngIf="submitted && f['lastName'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['lastName'].errors['required']">Last name is required</div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6">
+                                    <label for="signup-username" class="form-label text-default">User Name<span class="text-danger"> *</span></label>
+                                    <input type="text" class="form-control form-control-lg" id="signup-username"
+                                        placeholder="username" formControlName="username" appShowCodeContent
+                                        onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
+                                        (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && 
+                                        event.charCode <= 122) || event.charCode == 8 || event.charCode == 95)'
+                                        [ngClass]="{ 'is-invalid': submitted && f['username'].errors }" maxlength="25">
+                                    <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['username'].errors['required']">User name is required</div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6">
+                                    <label for="signup-dob" class="form-label text-default">Date of birth<span class="text-danger"> *</span></label>
+                                    <div class="input-group">
+                                        <div class="input-group-text text-muted "> <i class="ri-calendar-line"></i> </div>
+                                        <input class="form-control form-control-lg" placeholder="Choose date" type="text" mwlFlatpickr
+                                        formControlName="dob" [maxDate]="todayDt">
+                                    </div>
+                                </div>
+                                <div class="col-xl-6">
+                                    <label for="signup-email" class="form-label text-default">Email<span class="text-danger"> *</span></label>
+                                    <input type="text" class="form-control form-control-lg " id="signup-email" [disabled]="isEmailDisabled"
+                                        placeholder="email" onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
+                                        (event.charCode >= 64 && event.charCode <= 90) || (event.charCode >= 97 && 
+                                        event.charCode <= 122) || event.charCode == 8 || event.charCode == 46 || event.charCode == 95)'
+                                        formControlName="email" appShowCodeContent [(ngModel)] = 'mailId'
+                                        [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" >
+                                    <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                                        <span *ngIf="f['email'].errors['required']">Email is required.</span>
+                                        <span *ngIf="f['email'].errors['email']">Invalid email address.</span>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-xl-1 pt-4 pavan ">
+                                    <button class="btn btn-success me-2 btn-wave mt-2 " type="button" id="inputGroupFileAddon03"
+                                        (click)="onMailCheck()" [disabled]="isBtnDsbl">Verify</button>
+                                </div> -->
+                                <!-- <div class="col-xl-5">
+                                    <label for="signup-email" class="form-label text-default">Email</label>
+                                        <input type="text" class="form-control form-control-lg" id="signup-email"
+                                            placeholder="email" appShowCodeContent maxlength="6" [disabled]="isEmailDisabled"
+                                            onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
+                                        (event.charCode >= 64 && event.charCode <= 90) || (event.charCode >= 97 && 
+                                        event.charCode <= 122) || event.charCode == 8 || event.charCode == 46 || event.charCode == 95)'
+                                        [(ngModel)] = 'mailId' formControlName="email">
+                                        <button class="btn btn-primary" type="button" id="inputGroup"
+                                        (click)="onMailCheck()">Verify</button>
+                                </div>
+                                <div class="col-xl-1 pt-4">
+                                    <button class="btn btn-primary mt-2" type="button" id="inputGroup"
+                                        (click)="onOtpCheck()">Verify</button>
+                                </div> -->
+                                <!-- <div class="col-xl-12">
+                                    <label for="signup-otp"
+                                        class="form-label text-default">OTP<span class="text-danger"> *</span></label>
+                                    <div class="input-group">  
+                                        <input type="text" class="form-control form-control-lg" id="signup-otp"
+                                            placeholder="OTP"  appShowCodeContent maxlength="6" [disabled]="isOtpDisabled"
+                                            onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
+                                            event.charCode == 8)' [(ngModel)] = 'otp' [ngModelOptions]="{standalone: true}">
+                                        <button class="btn btn-primary" type="button" id="inputGroup"
+                                        (click)="onOtpCheck()">Verify</button>
+                                    </div>
+                                    
+                                </div> -->
+                                <!-- <div class="col-xl-5">
+                                    <label for="signup-otp" class="form-label text-default">OTP</label>
+                                        <input type="text" class="form-control form-control-lg" id="signup-otp"
+                                            placeholder="OTP"  appShowCodeContent maxlength="6" [disabled]="isOtpDisabled"
+                                            onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || event.charCode == 8)'
+                                            (copy)="preventCopyPaste($event)" (cut)="preventCopyPaste($event)" (paste)="preventCopyPaste($event)"
 
-                                         [(ngModel)] = 'otp' [ngModelOptions]="{standalone: true}">
-                                    <!-- <button class="btn btn-primary" type="button" id="inputGroup"
-                                    (click)="onOtpCheck()">Verify</button> -->
-                            </div>
-                            <div class="col-xl-1 pt-4 pavan">
-                                <button class="btn btn-success me-2 btn-wave mt-2" type="button" id="inputGroup"
-                                    (click)="onOtpCheck()" [disabled]="isBtnDsbl">Verify</button>
-                            </div>
-                            
-                            <div class="col-xl-6">
-                                <label for="signup-password"
-                                    class="form-label text-default">Password<span class="text-danger"> *</span></label>
-                                <div class="position-relative">
-                                    <input type="password" class="form-control form-control-lg" id="signup-password"
-                                        placeholder="password" [type]="showPassword ? 'text' : 'password'" autocomplete
-                                        formControlName="password" appShowCodeContent [(ngModel)]="paswrd"
-                                        onkeypress='return ((event.charCode >= 33 && event.charCode <= 127) || event.charCode == 8)' 
-                                        (copy)="preventCopyPaste($event)" (cut)="preventCopyPaste($event)" (paste)="preventCopyPaste($event)"
-                                        maxlength="16" [ngClass]="{ 'is-invalid': submitted && f['password'].errors }">
-                                    <a href="javascript:void(0);" class="show-password-button text-muted"
-                                        (click)="createpassword()" id="button-addon2"><i class="ri-eye-{{toggleClass}} align-middle"></i></a>
-                                    <div *ngIf="submitted && f['password'].errors || f['password'].touched"
-                                        class="invalid-feedback">
-                                        <div *ngIf="f['password'].errors?.['required']">Password is required.</div>
-                                        <div *ngIf="f['password'].errors?.['invalidPassword']">
-                                            Password must be at least 8 characters long, contain one Special character at least one uppercase
-                                            letter, one lowercase letter and one number.
+                                            [(ngModel)] = 'otp' [ngModelOptions]="{standalone: true}">
+                                </div>
+                                <div class="col-xl-1 pt-4 pavan">
+                                    <button class="btn btn-success me-2 btn-wave mt-2" type="button" id="inputGroup"
+                                        (click)="onOtpCheck()" [disabled]="isBtnDsbl">Verify</button>
+                                </div> -->
+                                
+                                <div class="col-xl-6">
+                                    <label for="signup-password"
+                                        class="form-label text-default">Password<span class="text-danger"> *</span></label>
+                                    <div class="position-relative">
+                                        <input type="password" class="form-control form-control-lg" id="signup-password"
+                                            placeholder="password" [type]="showPassword ? 'text' : 'password'" autocomplete
+                                            formControlName="password" appShowCodeContent [(ngModel)]="paswrd"
+                                            onkeypress='return ((event.charCode >= 33 && event.charCode <= 127) || event.charCode == 8)' 
+                                            (copy)="preventCopyPaste($event)" (cut)="preventCopyPaste($event)" (paste)="preventCopyPaste($event)"
+                                            maxlength="16" [ngClass]="{ 'is-invalid': submitted && f['password'].errors }">
+                                        <a href="javascript:void(0);" class="show-password-button text-muted"
+                                            (click)="createpassword()" id="button-addon2"><i class="ri-eye-{{toggleClass}} align-middle"></i></a>
+                                        <div *ngIf="submitted && f['password'].errors || f['password'].touched"
+                                            class="invalid-feedback">
+                                            <div *ngIf="f['password'].errors?.['required']">Password is required.</div>
+                                            <div *ngIf="f['password'].errors?.['invalidPassword']">
+                                                Password must be at least 8 characters long, contain one Special character at least one uppercase
+                                                letter, one lowercase letter and one number.
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-xl-6">
-                                <label for="signup-confirmpassword" class="form-label text-default">Confirm Password<span class="text-danger"> *</span></label>
-                                <div class="position-relative">
-                                    <input type="password" class="form-control form-control-lg"
-                                        id="signup-confirmpassword" placeholder="confirm password"
-                                        [type]="showPassword1 ? 'text' : 'password'" autocomplete maxlength="16"
-                                        (copy)="preventCopyPaste($event)" (cut)="preventCopyPaste($event)" (paste)="preventCopyPaste($event)"
-                                        onkeypress='return ((event.charCode >= 33 && event.charCode <= 127) || event.charCode == 8)' 
-                                        [(ngModel)]="cnfmPaswrd" [ngModelOptions]="{standalone: true}" appShowCodeContent>
-                                    <a href="javascript:void(0);" class="show-password-button text-muted"
-                                        (click)="createpassword1()" id="button-addon21"><i
-                                            class="ri-eye-{{toggleClass1}} align-middle"></i></a>
-                                </div>
+                                <div class="col-xl-6">
+                                    <label for="signup-confirmpassword" class="form-label text-default">Confirm Password<span class="text-danger"> *</span></label>
+                                    <div class="position-relative">
+                                        <input type="password" class="form-control form-control-lg"
+                                            id="signup-confirmpassword" placeholder="confirm password"
+                                            [type]="showPassword1 ? 'text' : 'password'" autocomplete maxlength="16"
+                                            (copy)="preventCopyPaste($event)" (cut)="preventCopyPaste($event)" (paste)="preventCopyPaste($event)"
+                                            onkeypress='return ((event.charCode >= 33 && event.charCode <= 127) || event.charCode == 8)' 
+                                            [(ngModel)]="cnfmPaswrd" [ngModelOptions]="{standalone: true}" appShowCodeContent>
+                                        <a href="javascript:void(0);" class="show-password-button text-muted"
+                                            (click)="createpassword1()" id="button-addon21"><i
+                                                class="ri-eye-{{toggleClass1}} align-middle"></i></a>
+                                    </div>
 
-                            </div>
-                            <div class="col-xl-6">
-                                <label for="signup-mobile" class="form-label text-default">Phone Number<span class="text-danger"> *</span></label>
-                                <input type="text" class="form-control form-control-lg" id="signup-mobile"
-                                    placeholder="mobile" formControlName="phoneNumber" maxlength="10"
-                                    onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
-                                    event.charCode == 8)' (copy)="preventCopyPaste($event)" (cut)="preventCopyPaste($event)" (paste)="preventCopyPaste($event)" [ngClass]="{ 'is-invalid': submitted && f['phoneNumber'].errors }">
-                                <div *ngIf="submitted && f['phoneNumber'].errors" class="invalid-feedback">
-                                    <div *ngIf="f['phoneNumber'].errors['required']">Phone Number is required</div>
+                                </div>
+                                <div class="col-xl-6">
+                                    <label for="signup-mobile" class="form-label text-default">Phone Number<span class="text-danger"> *</span></label>
+                                    <input type="text" class="form-control form-control-lg" id="signup-mobile"
+                                        placeholder="mobile" formControlName="phoneNumber" maxlength="10"
+                                        onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
+                                        event.charCode == 8)' (copy)="preventCopyPaste($event)" (cut)="preventCopyPaste($event)" (paste)="preventCopyPaste($event)" [ngClass]="{ 'is-invalid': submitted && f['phoneNumber'].errors }">
+                                    <div *ngIf="submitted && f['phoneNumber'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['phoneNumber'].errors['required']">Phone Number is required</div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 pt-4">
+                                    <label for="role-id" class="form-label text-default">Tool ID<span class="text-danger"> *</span></label>
+                                    <mat-form-field>
+                                        <mat-select  formControlName="tools" multiple>
+                                            @for (topping of toolsList; track topping) {
+                                            <mat-option [value]="topping">{{topping}}</mat-option>
+                                            }
+                                        </mat-select>
+                                        <mat-error *ngIf="f['tools'].errors?.['required']">
+                                            Please select at least one tool.
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-xl-6 ">
+                                    <label for="signup-country" class="form-label text-default">Country<span class="text-danger">*</span></label>
+                                    <select class="form-select form-select-lg form-control-lg" id="country" formControlName="country" 
+                                        [ngClass]="{ 'is-invalid': submitted && f['country'].errors }">
+                                        <option value="" disabled selected>Select</option>
+                                        <!-- <option *ngFor="let country of countryList" [value]="country.code" [selected]="country.name == 'United States'">  {{country.name}}    </option> -->
+                                        <option value="{{c.country}},{{c.code}}" *ngFor="let c of countryLst">{{c.country}} (+{{ c.code }})</option>
+                                    </select>
+                                    <div *ngIf="submitted && f['country'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['country'].errors['required']">Country is required</div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-xl-6 pt-4">
-                                <label for="role-id" class="form-label text-default">Tool ID<span class="text-danger"> *</span></label>
-                                <mat-form-field>
-                                    <mat-select  formControlName="tools" multiple>
-                                        @for (topping of toolsList; track topping) {
-                                        <mat-option [value]="topping">{{topping}}</mat-option>
-                                        }
-                                    </mat-select>
-                                    <mat-error *ngIf="f['tools'].errors?.['required']">
-                                        Please select at least one tool.
-                                    </mat-error>
-                                </mat-form-field>
+                            <div class="d-grid gap-2 col-8 mx-auto mt-4">
+                                <button class="btn btn-lg btn-teal-gradient btn-wave" (click)="onSignup()" [disabled]="btnDisable">Create Account</button>
                             </div>
-                            <div class="col-xl-6">
-                                <label for="signup-country" class="form-label text-default">Country<span class="text-danger">*</span></label>
-                                <select class="form-select form-select-lg form-control-lg" id="country" formControlName="country" 
-                                    [ngClass]="{ 'is-invalid': submitted && f['country'].errors }">
-                                    <option value="" disabled selected>Select</option>
-                                    <!-- <option *ngFor="let country of countryList" [value]="country.code" [selected]="country.name == 'United States'">  {{country.name}}    </option> -->
-                                    <option value="{{c.country}},{{c.code}}" *ngFor="let c of countryLst">{{c.country}} (+{{ c.code }})</option>
-                                </select>
-                                <div *ngIf="submitted && f['country'].errors" class="invalid-feedback">
-                                    <div *ngIf="f['country'].errors['required']">Country is required</div>
-                                </div>
-                            </div>
+                        </form>
+                        <div class="text-center">
+                            <p class="text-muted mt-3 mb-0">Already have an account? <a
+                                    routerLink="/auth/login" class="text-primary">Sign In</a></p>
                         </div>
-                        <div class="d-grid gap-2 col-8 mx-auto mt-4">
-                            <button class="btn btn-lg btn-primary" (click)="onSignup()" [disabled]="btnDisable">Create Account</button>
-                        </div>
-                    </form>
-                    <div class="text-center">
-                        <p class="text-muted mt-3 mb-0">Already have an account? <a
-                                routerLink="/auth/login" class="text-primary">Sign In</a></p>
                     </div>
-                </div>
+                <!-- </overlay-scrollbars> -->
             </div>
         </div>
+        
     </div>
+    
 </div>
