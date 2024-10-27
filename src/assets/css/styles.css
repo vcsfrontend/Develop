@@ -67,7 +67,7 @@ typography
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 :root {
   --body-bg-rgb: 247, 248, 249;
-  --primary-rgb: 185, 78, 237;
+  --primary-rgb: 28, 164, 238;
   --secondary-rgb: 69, 214, 91;
   --warning-rgb: 243, 156, 18;
   --info-rgb: 52, 152, 219;
@@ -22036,12 +22036,18 @@ caption {
   .video-background{
     width: 100%;
     height: auto;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 }
 @media (max-aspect-ratio :16/9) {
   .video-background{
     width: auto;
     height: 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 }
 

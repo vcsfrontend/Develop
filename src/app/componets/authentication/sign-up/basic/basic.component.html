@@ -100,6 +100,16 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-6">
+                                    <label for="signup-mobile" class="form-label text-default">Phone Number<span class="text-danger"> *</span></label>
+                                    <input type="text" class="form-control form-control-lg" id="signup-mobile"
+                                        placeholder="mobile" formControlName="phoneNumber" maxlength="10"
+                                        onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
+                                        event.charCode == 8)' (copy)="preventCopyPaste($event)" (cut)="preventCopyPaste($event)" (paste)="preventCopyPaste($event)" [ngClass]="{ 'is-invalid': submitted && f['phoneNumber'].errors }">
+                                    <div *ngIf="submitted && f['phoneNumber'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['phoneNumber'].errors['required']">Phone Number is required</div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6">
                                     <label for="signup-email" class="form-label text-default">Email<span class="text-danger"> *</span></label>
                                     <input type="text" class="form-control form-control-lg " id="signup-email" [disabled]="isEmailDisabled"
                                         placeholder="email" onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
@@ -195,17 +205,8 @@
                                     </div>
 
                                 </div>
-                                <div class="col-xl-6">
-                                    <label for="signup-mobile" class="form-label text-default">Phone Number<span class="text-danger"> *</span></label>
-                                    <input type="text" class="form-control form-control-lg" id="signup-mobile"
-                                        placeholder="mobile" formControlName="phoneNumber" maxlength="10"
-                                        onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
-                                        event.charCode == 8)' (copy)="preventCopyPaste($event)" (cut)="preventCopyPaste($event)" (paste)="preventCopyPaste($event)" [ngClass]="{ 'is-invalid': submitted && f['phoneNumber'].errors }">
-                                    <div *ngIf="submitted && f['phoneNumber'].errors" class="invalid-feedback">
-                                        <div *ngIf="f['phoneNumber'].errors['required']">Phone Number is required</div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-6 pt-4">
+                                
+                                <div class="col-xl-6 pt-3">
                                     <label for="role-id" class="form-label text-default">Tool ID<span class="text-danger"> *</span></label>
                                     <mat-form-field>
                                         <mat-select  formControlName="tools" multiple>
@@ -232,7 +233,7 @@
                                 </div>
                             </div>
                             <div class="d-grid gap-2 col-8 mx-auto mt-4">
-                                <button class="btn btn-lg btn-teal-gradient btn-wave" (click)="onSignup()" [disabled]="btnDisable">Create Account</button>
+                                <button class="btn btn-primary btn-wave" (click)="onSignup()" [disabled]="btnDisable">Create Account</button>
                             </div>
                         </form>
                         <div class="text-center">
