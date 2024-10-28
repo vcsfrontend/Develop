@@ -114,7 +114,7 @@
                                         placeholder="email" onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
                                         (event.charCode >= 64 && event.charCode <= 90) || (event.charCode >= 97 && 
                                         event.charCode <= 122) || event.charCode == 8 || event.charCode == 46 || event.charCode == 95)'
-                                        formControlName="email" appShowCodeContent [(ngModel)] = 'mailId'
+                                        formControlName="email" appShowCodeContent [(ngModel)] = 'mailId' maxlength="50"
                                         [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" >
                                     <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
                                         <span *ngIf="f['email'].errors['required']">Email is required.</span>
@@ -244,8 +244,8 @@
                             <div class="d-grid gap-2 col-8 mx-auto mt-4">
                                 <!-- <button class="h6 btn btn-lg bg-light p-2 font-weight-bold text-dark bg-opacity-25 border border-dark" 
                                 (click)="onSignup()" [disabled]="btnDisable">Create Account</button> -->
-                                <button class="btn btn-primary btn-wave" (click)="onSignup()"
-                                [disabled]="btnDisable">Create Account</button>
+                                <button class="btn btn-lg bg-light p-2 font-weight-bold text-dark bg-opacity-25 border border-dark" (click)="onSignup()"
+                                [disabled]="btnDisable"><strong>Create Account</strong></button>
                             </div>
                         </form>
                         <div class="text-center">
