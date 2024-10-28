@@ -57,6 +57,7 @@
                                     <input type="text" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" id="signup-noOfUsers"
                                         placeholder="Users" formControlName="noOfUsers" [(ngModel)]="users"
                                         [ngClass]="{ 'is-invalid': submitted && f['noOfUsers'].errors }"
+                                        maxlength="3"
                                         onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || (event.charCode == 8 || event.charCode == 95))'
                                         appShowCodeContent (change)="onChng($event)">
                                         <!-- <div *ngIf="noUsers!=''" style="color: red !important;">
