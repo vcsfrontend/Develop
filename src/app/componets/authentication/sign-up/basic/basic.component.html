@@ -11,8 +11,14 @@
                                 <div class="col-xl-6">
                                     <label for="role-id" class="form-label text-default"><strong>Type</strong>
                                         <span class="text-danger"> *</span></label>                                   
-                                    <select class="form-select form-select-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" id="role-id" formControlName="type"
+                                    <!-- <select class="form-select form-select-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" id="role-id" formControlName="type"
                                         [ngClass]="{ 'is-invalid': submitted && f['type'].errors }">
+                                        <option value="" disabled selected>Select type</option>
+                                        <option value="1">Individual</option>
+                                        <option value="2">Enterprise</option>
+                                    </select> -->
+                                    <select class="form-select form-select-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark"  id="role-id" formControlName="type"
+                                        [ngClass]="{ 'is-invalid': submitted && f['type'].errors }" (change)="onDropdownChange()">
                                         <option value="" disabled selected>Select type</option>
                                         <option value="1">Individual</option>
                                         <option value="2">Enterprise</option>
@@ -233,9 +239,10 @@
                                 
                             </div>
                             <div class="d-grid gap-2 col-8 mx-auto mt-4">
-                                <button class="h6 btn btn-lg bg-light p-2 font-weight-bold text-dark bg-opacity-25 border border-dark" (click)="onSignup()" [disabled]="btnDisable">Create Account</button>
-                                <!-- <button class="btn btn-primary btn-wave" (click)="open(content)">Create Account</button> -->
-
+                                <!-- <button class="h6 btn btn-lg bg-light p-2 font-weight-bold text-dark bg-opacity-25 border border-dark" 
+                                (click)="onSignup()" [disabled]="btnDisable">Create Account</button> -->
+                                <button class="btn btn-primary btn-wave" (click)="onSignup()"
+                                [disabled]="btnDisable">Create Account</button>
                             </div>
                         </form>
                         <div class="text-center">
@@ -250,7 +257,7 @@
 </div>
 
 
-<ng-template #content let-modal>
+<!-- <ng-template #content let-modal>
     <div class="modal-header justify-content-center align-items-center">
         <h5 class="modal-title">OTP </h5>
       </div>
@@ -267,7 +274,35 @@
       </div>
       <div class="d-grid gap-2 col-3 mx-auto">
         <div class="modal-footer ">
-            <button type="button" class="btn btn-primary btn-wave">OK</button>
+            <button type="button" class="btn btn-primary btn-wave" (click)="onOtpCheck()">OK</button>
           </div>
       </div>
+</ng-template> -->
+
+<ng-template #modalTemplate>
+  <div class="modal fade show d-block" style="background: rgba(0,0,0,0.5);" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">OTP</h5>
+          <!-- <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button> -->
+        </div>
+        <div class="modal-body">
+            <div class="col-xl-12">
+                <div class="otp-container">
+                    <input *ngFor="let digit of otpArray; let i = index"
+                    type="text" maxlength="1" (input)="onInputChange($event, i)"
+                    (keydown)="onKeydown($event, i)" [(ngModel)]="otp[i]"
+                    onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || event.charCode == 8)'
+                    [ngModelOptions]="{standalone: true}" [attr.aria-label]="'Digit ' + (i + 1)"/>
+                </div>
+            </div> 
+          </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="onOtpCheck()"
+            [disabled]="isOkBtn">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </ng-template>

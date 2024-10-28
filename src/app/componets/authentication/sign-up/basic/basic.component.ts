@@ -1,5 +1,5 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
-import { Component, input, OnInit } from '@angular/core';
+import { Component, input, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SwitherService } from '../../../../shared/services/swither.service';
@@ -33,8 +33,10 @@ export class BasicComponent extends BaseComponent implements OnInit {
   crm = false; submitted =false; cnfmPaswrd: any = ''; paswrd:any = ''; mailId:any = '';
   adonai = false; btnDisable = false; todayDt = new Date(); isBtnDsbl = false;
   adoanAiRole :any; isEmailDisabled = false; isOtpDisabled = false; isCompany : string = 'col-xl-6';
-  crmRole :any; isShowUsers = false;
-  toolsList = [Tools.Adonai,Tools.Crm]
+  crmRole :any; isShowUsers = false; pload:any[] = [];isOkBtn = false;
+  toolsList = [Tools.Adonai,Tools.Crm];
+  @ViewChild('modalTemplate') modalTemplate!: TemplateRef<any>;  // Access the ng-template
+  private modalRef: any;
 
   icons = [
     { value: 'Individual', icon: 'home', name: 'Home' },
@@ -61,7 +63,8 @@ export class BasicComponent extends BaseComponent implements OnInit {
   })
   
   constructor(public fb: FormBuilder, public switchService: SwitherService, 
-    private toastr: ToastrService, private router: Router, private dp: DatePipe, private modalService: NgbModal ){
+    private toastr: ToastrService, private router: Router, private dp: DatePipe,
+     private modalService: NgbModal,  private viewContainerRef: ViewContainerRef ){
     super();
     // document.body.classList.add('authentication-background');
   }
@@ -72,6 +75,7 @@ export class BasicComponent extends BaseComponent implements OnInit {
    
     // document.body.classList.remove('authentication-background');   
   }
+
   title = "intlInputNew" ;
   get f() {
     return this.signupFrm.controls;
@@ -115,6 +119,7 @@ export class BasicComponent extends BaseComponent implements OnInit {
     payload.adonai = adonai,
     payload.phoneNumber = +payload.phoneNumber, delete payload.tools,
     payload.dob = this.dp.transform(payload.dob, 'dd-MM-yyyy')
+    this.pload = payload
     if (this.signupFrm.invalid) {
       this.toastr.error('Please fill mandatory fields','signup', {
         timeOut: 3000,
@@ -131,12 +136,51 @@ export class BasicComponent extends BaseComponent implements OnInit {
       return;
     }
     else{
-      // this.btnDisable = true;
-      this.switchService.signupApi(payload).subscribe({ next: (res:any) => {
+      this.btnDisable = true;
+      this.onMailCheck();
+      // this.switchService.signupApi(payload).subscribe({ next: (res:any) => {
+      //   if(res.status == true){
+      //     this.toastr.success(res.message,'signup', {
+      //       timeOut: 3000, positionClass: 'toast-top-right' });
+      //     this.router.navigate(['auth/login'])
+      //     } else {
+      //       this.btnDisable = false;
+      //       this.toastr.error(res.message,'signup', {
+      //         timeOut: 3000, positionClass: 'toast-top-right' });
+      //     }
+      //   }
+      // })
+    }
+  }
+
+  onSignupApi(){
+    this.switchService.signupApi(this.pload).subscribe({ next: (res:any) => {
+      if(res.status == true){
+        this.closeModal(), 
+        this.toastr.success(res.message,'signup', {
+          timeOut: 3000, positionClass: 'toast-top-right' });
+        this.router.navigate(['auth/login'])
+        } else {
+          this.btnDisable = false;
+          this.toastr.error(res.message,'signup', {
+            timeOut: 3000, positionClass: 'toast-top-right' });
+        }
+      }
+    })
+  }
+
+  onMailCheck(){
+    if(this.mailId == ''){
+      this.toastr.warning('Please Enter email','signup', {
+        timeOut: 3000, positionClass: 'toast-top-right' });
+    } else {
+      this.switchService.onMailValidSignup(this.mailId).subscribe({ next: (res:any) => {
         if(res.status == true){
+          this.openModal();
+          this.btnDisable = true,
+          this.signupFrm.get('email')?.disable();
           this.toastr.success(res.message,'signup', {
             timeOut: 3000, positionClass: 'toast-top-right' });
-          this.router.navigate(['auth/login'])
           } else {
             this.btnDisable = false;
             this.toastr.error(res.message,'signup', {
@@ -147,23 +191,21 @@ export class BasicComponent extends BaseComponent implements OnInit {
     }
   }
 
-  onMailCheck(){
-    if(this.mailId == ''){
-      this.toastr.warning('Please Enter email','signup', {
-        timeOut: 3000, positionClass: 'toast-top-right' });
-    } else {
-      this.switchService.onMailValidSignup(this.mailId).subscribe({ next: (res:any) => {
-        if(res.status == true){
-          this.isEmailDisabled = true,
-          this.signupFrm.get('email')?.disable();
-          this.toastr.success(res.message,'signup', {
-            timeOut: 3000, positionClass: 'toast-top-right' });
-          } else {
-            this.toastr.error(res.message,'signup', {
-              timeOut: 3000, positionClass: 'toast-top-right' });
-          }
-        }
-      })
+  onClickButton() {
+      this.openModal();  // Open the modal on successful response
+       
+  }
+
+  openModal() {
+    // Create an embedded view from the modal template
+    this.modalRef = this.viewContainerRef.createEmbeddedView(this.modalTemplate);
+  }
+
+  closeModal() {
+    // Destroy the modal view when closing
+    if (this.modalRef) {
+      this.modalRef.destroy();
+      this.modalRef = null;
     }
   }
 
@@ -185,11 +227,13 @@ export class BasicComponent extends BaseComponent implements OnInit {
     else {
       this.switchService.onOtpSignup(this.mailId, enteredOtp).subscribe({ next: (res:any) => {
         if(res.status == true){
-        this.btnDisable = false, this.isOtpDisabled = true, 
-        this.isBtnDsbl = true;
+        // this.btnDisable = false, this.isOtpDisabled = true, 
+        this.isOkBtn = true; 
+        this.onSignupApi();
           this.toastr.success(res.message,'signup', {
             timeOut: 3000, positionClass: 'toast-top-right' });
           } else {
+            this.isOkBtn = false;
             this.toastr.error(res.message,'signup', {
               timeOut: 3000, positionClass: 'toast-top-right' });
           }
@@ -263,8 +307,8 @@ export class BasicComponent extends BaseComponent implements OnInit {
       (document.querySelectorAll('.otp-container input')[index - 1] as HTMLInputElement)?.focus();
     }
   }
-  open(content: any) {
-    this.modalService.open(content, {
+  open() {
+    this.modalService.open( {
       backdrop: 'static', // Disable close on clicking outside
       keyboard: false , centered: true 
     });
