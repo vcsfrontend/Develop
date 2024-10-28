@@ -12,21 +12,20 @@
                                 <form class="bg-light p-2 text-white bg-opacity-25" [formGroup]="loginForm" (ngSubmit)="Submit()">
                                     <div class="row gy-3">
                                         <div class="col-xl-12">
-                                            <label for="signin-username" class="form-label text-default">Email</label>
+                                            <label for="signin-username" class="form-label text-default"><strong>Email</strong></label>
                                             <input type="text" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" id="signin-username"
                                                 autocomplete formControlName="email" [(ngModel)]="email" required
                                                 placeholder="email">
                                         </div>
                                         <div class="col-xl-12 mb-2">
                                             <label for="signin-password"
-                                                class="form-label text-default d-block">Password</label>
+                                                class="form-label text-default d-block"><strong>Password</strong></label>
                                             <div class="position-relative">
                                                 <input type="password" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark"
                                                     id="signin-password" placeholder="password"
                                                     [type]="showPassword ? 'text' : 'password'" autocomplete
                                                     onkeypress='return ((event.charCode >= 33 && event.charCode <= 127) || event.charCode == 8)'
                                                     id="input-password" formControlName="password"
-                                                    (copy)="preventCopyPaste($event)" (cut)="preventCopyPaste($event)" (paste)="preventCopyPaste($event)"
                                                     [(ngModel)]="password" required>
                                                 <a href="javascript:void(0);" class="show-password-button text-muted"
                                                     (click)="createpassword()" id="button-addon2"><i
@@ -38,22 +37,21 @@
                                                         id="darkChecked">
                                                     <label class=" form-check-label text-dark fw-normal d-block"
                                                         for="darkChecked">
-                                                        Remember password ?<a
+                                                        <strong>Remember password ?</strong><a
                                                             routerLink="/authentication/reset-password/basic"
-                                                            class=" float-end text-danger">Forgot password ?</a>
+                                                            class=" float-end text-danger"><strong>Forgot password ?</strong></a>
                                                     </label>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="d-grid mt-4">
-                                        <button type="submit" class="h6 btn btn-lg bg-light p-2 font-weight-bold text-dark bg-opacity-25 border border-dark" autofocus>Sign
-                                            In</button>
+                                        <button type="submit" class="btn btn-lg bg-light p-2 font-weight-bold text-dark bg-opacity-25 border border-dark" autofocus><strong>Sign In</strong></button>
                                     </div>
                                 </form>
                                 <div class="text-center">
-                                    <p class="h6 font-weight-bold mt-3 mb-0">Don't have an account?
-                                        <a routerLink="/authentication/sign-up/basic" class=" font-weight-bold text-primary">Sign Up</a>
+                                    <p class="h6 font-weight-bold mt-3 mb-0"><strong>Don't have an account? </strong>
+                                        <a routerLink="/authentication/sign-up/basic" class=" font-weight-bold text-primary"><strong> Sign Up</strong></a>
                                     </p>
                                 </div>
                             </ng-template>

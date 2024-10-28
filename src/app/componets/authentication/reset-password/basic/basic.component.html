@@ -9,7 +9,7 @@
                     <div class="row gy-3">
                         <div *ngIf="submt">
                             <div class="col-xl-12" *ngIf="isEmail">
-                                <label for="signin-username" class="form-label text-default">Email</label>
+                                <label for="signin-username" class="form-label text-default"><strong>Email</strong></label>
                                 <input type="text" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" id="signin-username"  
                                 [(ngModel)]="email" [ngModelOptions]="{standalone: true}" placeholder="email">
                                 <!-- formControlName="email" [ngModel]="email" placeholder="email"> -->
@@ -29,7 +29,7 @@
                                 (click)="onEmail()">Verify</button>
                             </div>
                             <div class="col-xl-12" *ngIf="!isEmail">
-                                <label for="signup-otp" class="form-label text-default">OTP
+                                <label for="signup-otp" class="form-label text-default"><strong>OTP</strong>
                                     <span class="text-danger"> *</span></label>
                                 <!-- <input type="text" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" id="signin-username"  
                                     [(ngModel)] = 'otp' [ngModelOptions]="{standalone: true}"> -->
@@ -56,10 +56,11 @@
                             </div>
                         </div>
                         <div class="col-xl-12" *ngIf="!submt">
-                            <label for="reset-newpassword" class="form-label text-default">New Password</label>
+                            <label for="reset-newpassword" class="form-label text-default"><strong>New Password</strong></label>
                             <div class="position-relative">
                                 <input type="password" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" id="reset-newpassword" placeholder="new password" 
-                                [type]="showPassword1 ? 'text' : 'password'" autocomplete [(ngModel)]="newPassword" 
+                                [type]="showPassword1 ? 'text' : 'password'" autocomplete [(ngModel)]="newPassword"
+                                (copy)="preventCopyPaste($event)" (cut)="preventCopyPaste($event)" (paste)="preventCopyPaste($event)" 
                                 formControlName="password" appShowCodeContent maxlength="16"
                                 [ngClass]="{ 'is-invalid': submitted && f['password'].errors }" >
                                 <!-- [ngModelOptions]="{standalone: true}"> -->
@@ -78,10 +79,11 @@
                             </div>
                         </div>
                         <div class="col-xl-12 mb-2" *ngIf="!submt">
-                            <label for="reset-confirmpassword" class="form-label text-default">Confirm Password</label>
+                            <label for="reset-confirmpassword" class="form-label text-default"><strong>Confirm Password</strong></label>
                             <div class="position-relative">
                                 <input type="password" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" id="reset-confirmpassword" placeholder="confirm password"
                                 [type]="showPassword2 ? 'text' : 'password'" autocomplete [(ngModel)]="confirmPassword" 
+                                (copy)="preventCopyPaste($event)" (cut)="preventCopyPaste($event)" (paste)="preventCopyPaste($event)"
                                 [ngModelOptions]="{standalone: true}" appShowCodeContent maxlength="16">
                                 <a href="javascript:void(0);" class="show-password-button text-muted"  (click)="createpassword2()" 
                                 id="button-addon22"><i class="ri-eye-{{toggleClass2}} align-middle"></i></a>
@@ -89,11 +91,11 @@
                         </div>
                     </div>
                     <div class="d-grid mt-4" *ngIf = "!submt">
-                        <a  class="btn btn-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" (click)="onResetpPassword()">Reset Password</a>
+                        <a  class="btn btn-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" (click)="onResetpPassword()"><strong>Reset Password</strong></a>
                     </div>
                 </form>
                     <div class="text-center">
-                        <p class="text-dark mt-3">Already have an account? <a routerLink="/auth/login" class="text-primary">Sign In</a></p>
+                        <p class="text-dark mt-3"><strong>Already have an account? </strong><a routerLink="/auth/login" class="text-primary"><strong> Sign In</strong></a></p>
                     </div>
                 </div>
             </div>

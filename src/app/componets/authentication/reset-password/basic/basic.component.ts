@@ -83,7 +83,12 @@ export class BasicComponent extends BaseComponent implements OnInit {
     const valid = hasUpperCase && hasLowerCase && hasSpecialCharacter && hasNumber && hasMinLength;
     return valid ? null : { invalidPassword: true };
   }
-
+  preventCopyPaste(event: ClipboardEvent): void {
+    event.preventDefault();
+    // alert('Copy, paste, and cut actions are disabled for security reasons.');
+    // this.toastr.error('Copy, paste, and cut actions are disabled for security reasons.','signup', {
+    //   timeOut: 3000, positionClass: 'toast-top-right' });
+  }
   createpassword1() {
     this.showPassword1 = !this.showPassword1;
     if (this.toggleClass1 === "off-line") {
