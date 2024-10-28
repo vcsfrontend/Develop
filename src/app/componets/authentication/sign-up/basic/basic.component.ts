@@ -17,6 +17,8 @@ import { BaseComponent } from '../../../../shared/base/base.component';
 import { OverlayscrollbarsModule } from 'overlayscrollbars-ngx';
 import { Title } from 'chart.js';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { NgbDropdownModule, NgbNavModule, NgbModal, NgbModalConfig, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+
 @Component({
   selector: 'app-basic',
   standalone: true,
@@ -29,7 +31,7 @@ import { MatIcon, MatIconModule } from '@angular/material/icon';
 })
 export class BasicComponent extends BaseComponent implements OnInit {
   crm = false; submitted =false; cnfmPaswrd: any = ''; paswrd:any = ''; mailId:any = '';
-  adonai = false; btnDisable = false; todayDt = new Date(); otp:any = ''; isBtnDsbl = false;
+  adonai = false; btnDisable = false; todayDt = new Date(); isBtnDsbl = false;
   adoanAiRole :any; isEmailDisabled = false; isOtpDisabled = false; isCompany : string = 'col-xl-6';
   crmRole :any; isShowUsers = false;
   toolsList = [Tools.Adonai,Tools.Crm]
@@ -42,7 +44,7 @@ export class BasicComponent extends BaseComponent implements OnInit {
   signupFrm: FormGroup = this.fb.group({ 
     type : ['', Validators.required],
     companyName : ['', Validators.required],
-    noOfUsers: [''],
+    noOfUsers: ['', Validators.required],
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
     email: ['', [Validators.required,  Validators.email]],
@@ -59,11 +61,11 @@ export class BasicComponent extends BaseComponent implements OnInit {
   })
   
   constructor(public fb: FormBuilder, public switchService: SwitherService, 
-    private toastr: ToastrService, private router: Router, private dp: DatePipe){
+    private toastr: ToastrService, private router: Router, private dp: DatePipe, private modalService: NgbModal ){
     super();
     // document.body.classList.add('authentication-background');
   }
-
+  
   ngOnInit(){
   }
   ngOnDestroy(): void {
@@ -168,11 +170,20 @@ export class BasicComponent extends BaseComponent implements OnInit {
   onOtpCheck(){
     // this.isOtpDisabled = true;
     // this.btnDisable = false;
-    if(this.otp == ''){
-      this.toastr.warning('Please Enter OTP','signup', {
-        timeOut: 3000, positionClass: 'toast-top-right' });
-    } else {
-      this.switchService.onOtpSignup(this.mailId, this.otp).subscribe({ next: (res:any) => {
+    // if(this.otp == ''){
+    //   this.toastr.warning('Please Enter OTP','signup', {
+    //     timeOut: 3000, positionClass: 'toast-top-right' });
+    // } 
+    const enteredOtp = this.otp.join('');
+
+    // Check if OTP length is less than 6
+    if (enteredOtp.length < 6) {
+      this.isOtpValid = false;
+      this.errorMessage = 'Please enter the complete OTP.';
+      return;
+    }
+    else {
+      this.switchService.onOtpSignup(this.mailId, enteredOtp).subscribe({ next: (res:any) => {
         if(res.status == true){
         this.btnDisable = false, this.isOtpDisabled = true, 
         this.isBtnDsbl = true;
@@ -189,22 +200,24 @@ export class BasicComponent extends BaseComponent implements OnInit {
 
   onDropdownChange() {
     const cmpnyFieldControl = this.signupFrm.get('companyName');
-    const typeFieldControl = this.signupFrm.get('type');
+    const userFieldControl = this.signupFrm.get('noOfUsers');
 
     if (this.signupFrm.get('type')?.value === '2') {
       cmpnyFieldControl?.setValidators([Validators.required]),
-      typeFieldControl?.setValidators([Validators.required]),
+      userFieldControl?.setValidators([Validators.required]),
       this.isCompany = 'col-xl-4',
       this.isShowUsers = true;
     } else {
       cmpnyFieldControl?.clearValidators(),
-      typeFieldControl?.clearValidators(),
-      // this.signupFrm?.get('noOfUsers')?.value.clear()
+      userFieldControl?.clearValidators(),
+      this.signupFrm?.get('noOfUsers')?.setValue(''),
       this.isCompany = 'col-xl-6';
       this.isShowUsers = false;
     }
 
-    cmpnyFieldControl?.updateValueAndValidity();  // This updates the validation status of the control
+    cmpnyFieldControl?.updateValueAndValidity(); 
+    userFieldControl?.updateValueAndValidity();
+     // This updates the validation status of the control
   }
 
 
@@ -231,6 +244,30 @@ export class BasicComponent extends BaseComponent implements OnInit {
   
   toolId(tool:string) {
     // console.log("51",tool,this.adonai,this.crm);
+  }
+  otpArray = Array(6).fill(null);
+  otp: string[] = Array(this.otpArray.length).fill('');
+  isOtpValid = true;
+  errorMessage = ''; 
+  onInputChange(event: Event, index: number): void {
+    const input = event.target as HTMLInputElement;
+    this.otp[index] = input.value;
+
+    if (input.value && index < this.otpArray.length - 1) {
+      (document.querySelectorAll('.otp-container input')[index + 1] as HTMLInputElement)?.focus();
+    }
+  }
+
+  onKeydown(event: KeyboardEvent, index: number): void {
+    if (event.key === 'Backspace' && index > 0 && !this.otp[index]) {
+      (document.querySelectorAll('.otp-container input')[index - 1] as HTMLInputElement)?.focus();
+    }
+  }
+  open(content: any) {
+    this.modalService.open(content, {
+      backdrop: 'static', // Disable close on clicking outside
+      keyboard: false , centered: true 
+    });
   }
   
 }

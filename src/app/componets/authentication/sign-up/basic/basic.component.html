@@ -1,8 +1,8 @@
 <!-- <video class="video-background ratio ratio-1x" src="./assets/video/school_of_fish.mp4" autoplay loop muted></video>  -->
 <div class="container-lg">
-    <div class="row justify-content-center align-items-center authentication authentication-basic h-5000">
-        <div class="col-xxl-4 col-xl-6 col-lg-5 col-md-6 col-sm-8 col-12">
-            <div class="card custom-card my-4">
+    <div class="row justify-content-center align-items-center authentication authentication-basic h-100">
+        <div class="col-xxl-4 col-xl-8 col-lg-5 col-md-6 col-sm-8 col-12">
+            <div class="card custom-card my-4 pr-5">
                 <!-- <overlay-scrollbars [defer] id="filemanager-scroll"> -->
                     <div class="card-body p-5">
                         <p class="h5 mb-2 text-center">Sign Up</p>
@@ -52,9 +52,9 @@
                                         placeholder="Users" formControlName="noOfUsers"
                                         [ngClass]="{ 'is-invalid': submitted && f['noOfUsers'].errors }"
                                         onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || (event.charCode == 8 || event.charCode == 95))'
-                                        appShowCodeContent maxlength="3">
+                                        appShowCodeContent maxlength="2">
                                     <div *ngIf="submitted && f['noOfUsers'].errors" class="invalid-feedback">
-                                        <div *ngIf="f['noOfUsers'].errors['required']">Users is required</div>
+                                        <div *ngIf="f['noOfUsers'].errors['required']">Users required</div>
                                     </div>
                                 </div>
                                 <div class="col-xl-6">
@@ -79,7 +79,7 @@
                                         <div *ngIf="f['lastName'].errors['required']">Last name is required</div>
                                     </div>
                                 </div>
-                                <div class="col-xl-6">
+                                <!-- <div class="col-xl-6">
                                     <label for="signup-username" class="form-label text-default">User Name<span class="text-danger"> *</span></label>
                                     <input type="text" class="form-control form-control-lg" id="signup-username"
                                         placeholder="username" formControlName="username" appShowCodeContent
@@ -90,7 +90,7 @@
                                     <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
                                         <div *ngIf="f['username'].errors['required']">User name is required</div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="col-xl-6">
                                     <label for="signup-dob" class="form-label text-default">Date of birth<span class="text-danger"> *</span></label>
                                     <div class="input-group">
@@ -100,18 +100,8 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-6">
-                                    <label for="signup-mobile" class="form-label text-default">Phone Number<span class="text-danger"> *</span></label>
-                                    <input type="text" class="form-control form-control-lg" id="signup-mobile"
-                                        placeholder="mobile" formControlName="phoneNumber" maxlength="10"
-                                        onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
-                                        event.charCode == 8)' (copy)="preventCopyPaste($event)" (cut)="preventCopyPaste($event)" (paste)="preventCopyPaste($event)" [ngClass]="{ 'is-invalid': submitted && f['phoneNumber'].errors }">
-                                    <div *ngIf="submitted && f['phoneNumber'].errors" class="invalid-feedback">
-                                        <div *ngIf="f['phoneNumber'].errors['required']">Phone Number is required</div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-6">
                                     <label for="signup-email" class="form-label text-default">Email<span class="text-danger"> *</span></label>
-                                    <input type="text" class="form-control form-control-lg " id="signup-email" [disabled]="isEmailDisabled"
+                                    <input type="text" class="form-control form-control-lg " id="signup-email" 
                                         placeholder="email" onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
                                         (event.charCode >= 64 && event.charCode <= 90) || (event.charCode >= 97 && 
                                         event.charCode <= 122) || event.charCode == 8 || event.charCode == 46 || event.charCode == 95)'
@@ -205,7 +195,16 @@
                                     </div>
 
                                 </div>
-                                
+                                <div class="col-xl-6">
+                                    <label for="signup-mobile" class="form-label text-default">Phone Number<span class="text-danger"> *</span></label>
+                                    <input type="text" class="form-control form-control-lg" id="signup-mobile"
+                                        placeholder="mobile" formControlName="phoneNumber" maxlength="10"
+                                        onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
+                                        event.charCode == 8)' (copy)="preventCopyPaste($event)" (cut)="preventCopyPaste($event)" (paste)="preventCopyPaste($event)" [ngClass]="{ 'is-invalid': submitted && f['phoneNumber'].errors }">
+                                    <div *ngIf="submitted && f['phoneNumber'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['phoneNumber'].errors['required']">Phone Number is required</div>
+                                    </div>
+                                </div>
                                 <div class="col-xl-6 pt-3">
                                     <label for="role-id" class="form-label text-default">Tool ID<span class="text-danger"> *</span></label>
                                     <mat-form-field>
@@ -225,15 +224,18 @@
                                         [ngClass]="{ 'is-invalid': submitted && f['country'].errors }">
                                         <option value="" disabled selected>Select</option>
                                         <!-- <option *ngFor="let country of countryList" [value]="country.code" [selected]="country.name == 'United States'">  {{country.name}}    </option> -->
-                                        <option value="{{c.country}},{{c.code}}" *ngFor="let c of countryLst">{{c.country}} (+{{ c.code }})</option>
+                                        <option value="{{c.country}}" *ngFor="let c of countryLst">{{c.country}} (+{{ c.code }})</option>
                                     </select>
                                     <div *ngIf="submitted && f['country'].errors" class="invalid-feedback">
                                         <div *ngIf="f['country'].errors['required']">Country is required</div>
                                     </div>
                                 </div>
+                                
                             </div>
                             <div class="d-grid gap-2 col-8 mx-auto mt-4">
                                 <button class="btn btn-primary btn-wave" (click)="onSignup()" [disabled]="btnDisable">Create Account</button>
+                                <!-- <button class="btn btn-primary btn-wave" (click)="open(content)">Create Account</button> -->
+
                             </div>
                         </form>
                         <div class="text-center">
@@ -243,8 +245,29 @@
                     </div>
                 <!-- </overlay-scrollbars> -->
             </div>
-        </div>
-        
+        </div> 
     </div>
-    
 </div>
+
+
+<ng-template #content let-modal>
+    <div class="modal-header justify-content-center align-items-center">
+        <h5 class="modal-title">OTP </h5>
+      </div>
+      <div class="modal-body">
+        <div class="col-xl-12">
+            <div class="otp-container">
+                <input *ngFor="let digit of otpArray; let i = index"
+                type="text" maxlength="1" (input)="onInputChange($event, i)"
+                (keydown)="onKeydown($event, i)" [(ngModel)]="otp[i]"
+                onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || event.charCode == 8)'
+                [ngModelOptions]="{standalone: true}" [attr.aria-label]="'Digit ' + (i + 1)"/>
+            </div>
+        </div> 
+      </div>
+      <div class="d-grid gap-2 col-3 mx-auto">
+        <div class="modal-footer ">
+            <button type="button" class="btn btn-primary btn-wave">OK</button>
+          </div>
+      </div>
+</ng-template>
