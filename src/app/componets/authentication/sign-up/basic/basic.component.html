@@ -55,10 +55,13 @@
                                     <label for="signup-noOfUsers" class="form-label text-default"><strong>No. of Users</strong>
                                         <span class="text-danger"> *</span></label>
                                     <input type="text" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" id="signup-noOfUsers"
-                                        placeholder="Users" formControlName="noOfUsers"
+                                        placeholder="Users" formControlName="noOfUsers" [(ngModel)]="users"
                                         [ngClass]="{ 'is-invalid': submitted && f['noOfUsers'].errors }"
                                         onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || (event.charCode == 8 || event.charCode == 95))'
-                                        appShowCodeContent maxlength="2">
+                                        appShowCodeContent (change)="onChng($event)">
+                                        <!-- <div *ngIf="noUsers!=''" style="color: red !important;">
+                                            {{noUsers}}
+                                        </div> -->
                                     <div *ngIf="submitted && f['noOfUsers'].errors" class="invalid-feedback">
                                         <div *ngIf="f['noOfUsers'].errors['required']">Users required</div>
                                     </div>

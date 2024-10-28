@@ -36,7 +36,7 @@ export class BasicComponent extends BaseComponent implements OnInit {
   crmRole :any; isShowUsers = false; pload:any[] = [];isOkBtn = false;
   toolsList = [Tools.Adonai,Tools.Crm];
   @ViewChild('modalTemplate') modalTemplate!: TemplateRef<any>;  // Access the ng-template
-  private modalRef: any;
+  private modalRef: any; noUsers:any=''; users:any = '';
 
   icons = [
     { value: 'Individual', icon: 'home', name: 'Home' },
@@ -114,7 +114,7 @@ export class BasicComponent extends BaseComponent implements OnInit {
     const crm = this.signupFrm.get('tools')?.value.includes('CRM');
     const adonai = this.signupFrm.get('tools')?.value.includes('Adonai');
     let payload = this.signupFrm.getRawValue();
-    payload.type = +payload.type,
+    payload.type = +payload.type, payload.noOfUsers = +this.users,
     payload.crm = crm,
     payload.adonai = adonai,
     payload.phoneNumber = +payload.phoneNumber, delete payload.tools,
@@ -167,6 +167,17 @@ export class BasicComponent extends BaseComponent implements OnInit {
         }
       }
     })
+  }
+  onChng(event:any){
+    let val = event.target.value
+    this.noUsers = '';
+      if (+val > 100 || +val < 2){
+      this.users = '';
+      this.toastr.warning('value should be in between 2 to 100 only','No. of Users', {
+        timeOut: 3000, positionClass: 'toast-top-right' });
+      }
+      else
+        this.users = +val;
   }
 
   onMailCheck(){
