@@ -53,7 +53,7 @@ export class BasicComponent extends BaseComponent implements OnInit {
     crm:false,
     adonai:false,
     phoneNumber: ['', Validators.required],
-    username: ['', Validators.required],
+    username: ['',],
     password: ['', [Validators.required, this.passwordValidator]],
     tools : [[],Validators.required]
     //"toolId": 0,
@@ -131,7 +131,7 @@ export class BasicComponent extends BaseComponent implements OnInit {
       return;
     }
     else{
-      this.btnDisable = true;
+      // this.btnDisable = true;
       this.switchService.signupApi(payload).subscribe({ next: (res:any) => {
         if(res.status == true){
           this.toastr.success(res.message,'signup', {
