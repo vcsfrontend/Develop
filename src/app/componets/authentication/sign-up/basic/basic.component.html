@@ -1,19 +1,19 @@
-<!-- <video class="video-background ratio ratio-1x" src="./assets/video/school_of_fish.mp4" autoplay loop muted></video>  -->
+<video class="video-background ratio ratio-1x" src="./assets/video/school_of_fish.mp4" autoplay loop muted></video> 
 <div class="container-lg">
     <div class="row justify-content-center align-items-center authentication authentication-basic h-100">
         <div class="col-xxl-4 col-xl-8 col-lg-5 col-md-6 col-sm-8 col-12">
-            <div class="card custom-card my-4 pr-5">
-                <!-- <overlay-scrollbars [defer] id="filemanager-scroll"> -->
-                    <div class="card-body p-5">
-                        <p class="h5 mb-2 text-center">Sign Up</p>
-                        <form [formGroup]="signupFrm">
+            <div class="card custom-card bg-light p-2 text-white bg-opacity-75  ">
+                <overlay-scrollbars [defer] id="filemanager-scroll">
+                    <div class="card-body p-4">
+                        <p class="h5 mb-2 text-center"><strong>Sign Up</strong></p>
+                        <form [formGroup]="signupFrm" class="bg-light p-2 text-white bg-opacity-25">
                             <div class="row gy-2">
                                 <div class="col-xl-6">
-                                    <label for="role-id" class="form-label text-default">Type
+                                    <label for="role-id" class="form-label text-default"><strong>Type</strong>
                                         <span class="text-danger"> *</span></label>
-                                    <select class="form-select form-select-lg form-control-lg"  id="role-id" formControlName="type"
+                                    <select class="form-select form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark"  id="role-id" formControlName="type"
                                         [ngClass]="{ 'is-invalid': submitted && f['type'].errors }" (change)="onDropdownChange()">
-                                        <option value="" disabled selected>Select type</option>
+                                        <option class=" bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" disabled selected>Select type</option>
                                         <option value="1">Individual</option>
                                         <option value="2">Enterprise</option>
                                     </select>
@@ -36,8 +36,8 @@
                                 
                                 <div [ngClass]="isCompany">
                                     <label for="signup-companyName" class="form-label text-default">
-                                        Company Name <span class="text-danger"> *</span></label>
-                                    <input type="text" class="form-control form-control-lg" id="signup-companyName"
+                                        <strong>Company Name</strong> <span class="text-danger"> *</span></label>
+                                    <input type="text" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" id="signup-companyName"
                                         placeholder="Company name" formControlName="companyName"
                                         [ngClass]="{ 'is-invalid': submitted && f['companyName'].errors }"
                                         appShowCodeContent maxlength="50">
@@ -46,9 +46,9 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-2" *ngIf="isShowUsers">
-                                    <label for="signup-noOfUsers" class="form-label text-default">No. of Users
+                                    <label for="signup-noOfUsers" class="form-label text-default"><strong>No. of Users</strong>
                                         <span class="text-danger"> *</span></label>
-                                    <input type="text" class="form-control form-control-lg" id="signup-noOfUsers"
+                                    <input type="text" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" id="signup-noOfUsers"
                                         placeholder="Users" formControlName="noOfUsers"
                                         [ngClass]="{ 'is-invalid': submitted && f['noOfUsers'].errors }"
                                         onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || (event.charCode == 8 || event.charCode == 95))'
@@ -58,8 +58,8 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-6">
-                                    <label for="signup-firstname" class="form-label text-default">First Name<span class="text-danger"> *</span></label>
-                                    <input type="text" class="form-control form-control-lg" id="signup-firstname"
+                                    <label for="signup-firstname" class="form-label text-default"><strong>First Name</strong><span class="text-danger"> *</span></label>
+                                    <input type="text" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" id="signup-firstname"
                                         placeholder="First name" formControlName="firstName" appShowCodeContent
                                         onkeypress='return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && 
                                         event.charCode <= 122) || event.charCode == 8 || event.charCode == 32)'
@@ -69,8 +69,8 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-6">
-                                    <label for="signup-lastname" class="form-label text-default">Last Name<span class="text-danger"> *</span></label>
-                                    <input type="text" class="form-control form-control-lg" id="signup-lastname"
+                                    <label for="signup-lastname" class="form-label text-default"><strong>Last Name</strong><span class="text-danger"> *</span></label>
+                                    <input type="text" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" id="signup-lastname"
                                         placeholder="Last name" formControlName="lastName" appShowCodeContent
                                         onkeypress='return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && 
                                         event.charCode <= 122) || event.charCode == 8 ||event.charCode == 32)'
@@ -92,16 +92,16 @@
                                     </div>
                                 </div> -->
                                 <div class="col-xl-6">
-                                    <label for="signup-dob" class="form-label text-default">Date of birth<span class="text-danger"> *</span></label>
+                                    <label for="signup-dob" class="form-label text-default"><strong>Date of birth</strong><span class="text-danger"> *</span></label>
                                     <div class="input-group">
-                                        <div class="input-group-text text-muted "> <i class="ri-calendar-line"></i> </div>
-                                        <input class="form-control form-control-lg" placeholder="Choose date" type="text" mwlFlatpickr
+                                        <div class="input-group-text text-muted bg-light pl-4 font-weight-bold bg-opacity-25 border border-dark"> <i class="ri-calendar-line"></i> </div>
+                                        <input class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" placeholder="Choose date" type="text" mwlFlatpickr
                                         formControlName="dob" [maxDate]="todayDt">
                                     </div>
                                 </div>
                                 <div class="col-xl-6">
-                                    <label for="signup-email" class="form-label text-default">Email<span class="text-danger"> *</span></label>
-                                    <input type="text" class="form-control form-control-lg " id="signup-email" 
+                                    <label for="signup-email" class="form-label text-default"><strong>Email</strong><span class="text-danger"> *</span></label>
+                                    <input type="text" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark " id="signup-email" 
                                         placeholder="email" onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
                                         (event.charCode >= 64 && event.charCode <= 90) || (event.charCode >= 97 && 
                                         event.charCode <= 122) || event.charCode == 8 || event.charCode == 46 || event.charCode == 95)'
@@ -160,9 +160,9 @@
                                 
                                 <div class="col-xl-6">
                                     <label for="signup-password"
-                                        class="form-label text-default">Password<span class="text-danger"> *</span></label>
+                                        class="form-label text-default"><strong>Password</strong><span class="text-danger"> *</span></label>
                                     <div class="position-relative">
-                                        <input type="password" class="form-control form-control-lg" id="signup-password"
+                                        <input type="password" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" id="signup-password"
                                             placeholder="password" [type]="showPassword ? 'text' : 'password'" autocomplete
                                             formControlName="password" appShowCodeContent [(ngModel)]="paswrd"
                                             onkeypress='return ((event.charCode >= 33 && event.charCode <= 127) || event.charCode == 8)' 
@@ -181,9 +181,9 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-6">
-                                    <label for="signup-confirmpassword" class="form-label text-default">Confirm Password<span class="text-danger"> *</span></label>
+                                    <label for="signup-confirmpassword" class="form-label text-default"><strong>Confirm Password</strong><span class="text-danger"> *</span></label>
                                     <div class="position-relative">
-                                        <input type="password" class="form-control form-control-lg"
+                                        <input type="password" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark"
                                             id="signup-confirmpassword" placeholder="confirm password"
                                             [type]="showPassword1 ? 'text' : 'password'" autocomplete maxlength="16"
                                             (copy)="preventCopyPaste($event)" (cut)="preventCopyPaste($event)" (paste)="preventCopyPaste($event)"
@@ -196,8 +196,8 @@
 
                                 </div>
                                 <div class="col-xl-6">
-                                    <label for="signup-mobile" class="form-label text-default">Phone Number<span class="text-danger"> *</span></label>
-                                    <input type="text" class="form-control form-control-lg" id="signup-mobile"
+                                    <label for="signup-mobile" class="form-label text-default"><strong>Phone Number</strong><span class="text-danger"> *</span></label>
+                                    <input type="text" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" id="signup-mobile"
                                         placeholder="mobile" formControlName="phoneNumber" maxlength="10"
                                         onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
                                         event.charCode == 8)' (copy)="preventCopyPaste($event)" (cut)="preventCopyPaste($event)" (paste)="preventCopyPaste($event)" [ngClass]="{ 'is-invalid': submitted && f['phoneNumber'].errors }">
@@ -205,10 +205,10 @@
                                         <div *ngIf="f['phoneNumber'].errors['required']">Phone Number is required</div>
                                     </div>
                                 </div>
-                                <div class="col-xl-6 pt-3">
-                                    <label for="role-id" class="form-label text-default">Tool ID<span class="text-danger"> *</span></label>
-                                    <mat-form-field>
-                                        <mat-select  formControlName="tools" multiple>
+                                <div class="col-xl-6 ">
+                                    <label for="role-id" class="form-label text-default"><strong>Tool ID</strong><span class="text-danger"> *</span></label>
+                                    <mat-form-field >
+                                        <mat-select formControlName="tools" multiple>
                                             @for (topping of toolsList; track topping) {
                                             <mat-option [value]="topping">{{topping}}</mat-option>
                                             }
@@ -219,8 +219,8 @@
                                     </mat-form-field>
                                 </div>
                                 <div class="col-xl-6 ">
-                                    <label for="signup-country" class="form-label text-default">Country<span class="text-danger">*</span></label>
-                                    <select class="form-select form-select-lg form-control-lg" id="country" formControlName="country" 
+                                    <label for="signup-country" class="form-label text-default"><strong>Country</strong><span class="text-danger">*</span></label>
+                                    <select class="form-select form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" id="country" formControlName="country" 
                                         [ngClass]="{ 'is-invalid': submitted && f['country'].errors }">
                                         <option value="" disabled selected>Select</option>
                                         <!-- <option *ngFor="let country of countryList" [value]="country.code" [selected]="country.name == 'United States'">  {{country.name}}    </option> -->
@@ -233,17 +233,17 @@
                                 
                             </div>
                             <div class="d-grid gap-2 col-8 mx-auto mt-4">
-                                <button class="btn btn-primary btn-wave" (click)="onSignup()" [disabled]="btnDisable">Create Account</button>
+                                <button class="h6 btn btn-lg bg-light p-2 font-weight-bold text-dark bg-opacity-25 border border-dark" (click)="onSignup()" [disabled]="btnDisable">Create Account</button>
                                 <!-- <button class="btn btn-primary btn-wave" (click)="open(content)">Create Account</button> -->
 
                             </div>
                         </form>
                         <div class="text-center">
-                            <p class="text-muted mt-3 mb-0">Already have an account? <a
-                                    routerLink="/auth/login" class="text-primary">Sign In</a></p>
+                            <p class="h6 font-weight-bold mt-3 mb-0"><strong>Already have an account? </strong> <a
+                                    routerLink="/auth/login" class="text-primary"><strong> Sign In</strong></a></p>
                         </div>
                     </div>
-                <!-- </overlay-scrollbars> -->
+                </overlay-scrollbars>
             </div>
         </div> 
     </div>

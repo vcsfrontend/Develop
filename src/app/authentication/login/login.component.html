@@ -24,6 +24,7 @@
                                                 <input type="password" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark"
                                                     id="signin-password" placeholder="password"
                                                     [type]="showPassword ? 'text' : 'password'" autocomplete
+                                                    onkeypress='return ((event.charCode >= 33 && event.charCode <= 127) || event.charCode == 8)'
                                                     id="input-password" formControlName="password"
                                                     (copy)="preventCopyPaste($event)" (cut)="preventCopyPaste($event)" (paste)="preventCopyPaste($event)"
                                                     [(ngModel)]="password" required>
