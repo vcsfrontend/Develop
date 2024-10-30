@@ -1,8 +1,8 @@
 <video class="video-background ratio ratio-1x" src="./assets/video/school_of_fish.mp4" autoplay loop muted></video> 
 <div class="container-lg">
     <div class="row justify-content-center align-items-center authentication authentication-basic h-100">
-        <div class="col-xxl-4 col-xl-8 col-lg-5 col-md-6 col-sm-8 col-12">
-            <div class="card custom-card bg-light p-2 text-white bg-opacity-75  ">
+        <div class="col-xxl-7 col-xl-8 col-lg-5 col-md-6 col-sm-12 col-12">
+            <div class="card custom-card bg-light p-2 text-white bg-opacity-75">
                 <overlay-scrollbars [defer] id="filemanager-scroll">
                     <div class="card-body p-4">
                         <p class="h5 mb-2 text-center"><strong>Sign Up</strong></p>
@@ -285,26 +285,26 @@
 
 <ng-template #modalTemplate>
   <div class="modal fade show d-block" style="background: rgba(0,0,0,0.5);" tabindex="-1">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
+    <div class="modal-dialog bg-light p-2 text-white bg-opacity-50">
+      <div class="modal-content bg-light p-2 text-white bg-opacity-50">
+        <div class="modal-header justify-content-center">
           <h5 class="modal-title">OTP</h5>
           <!-- <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button> -->
         </div>
         <div class="modal-body">
             <div class="col-xl-12">
                 <div class="otp-container">
-                    <input *ngFor="let digit of otpArray; let i = index"
+                    <input class="bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" *ngFor="let digit of otpArray; let i = index"
                     type="text" maxlength="1" (input)="onInputChange($event, i)"
                     (keydown)="onKeydown($event, i)" [(ngModel)]="otp[i]"
                     onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || event.charCode == 8)'
                     [ngModelOptions]="{standalone: true}" [attr.aria-label]="'Digit ' + (i + 1)"/>
                 </div>
             </div> 
-          </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" (click)="onOtpCheck()"
-            [disabled]="isOkBtn">OK</button>
+        </div>
+        <div class="modal-footer justify-content-center">
+          <button type="button" class="btn btn-lg bg-light p-2 font-weight-bold text-dark bg-opacity-25 border border-dark" (click)="onOtpCheck()"
+            [disabled]="isOkBtn">Submit</button>
         </div>
       </div>
     </div>

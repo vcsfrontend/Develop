@@ -34558,6 +34558,7 @@ div.mat-mdc-select-panel {
 .mdc-text-field {
   border: 1px solid var(--default-border) !important;
   border-radius: 4px !important;
+  background-color: rgba(var(--light-rgb), 0.25) !important;
 }
 
 .mat-elevation-z8,
