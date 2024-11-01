@@ -37,6 +37,11 @@ export class BasicComponent extends BaseComponent implements OnInit {
   toolsList = [Tools.Adonai,Tools.Crm];
   @ViewChild('modalTemplate') modalTemplate!: TemplateRef<any>;  // Access the ng-template
   private modalRef: any; noUsers:any=''; users:any = '';
+  passwordStrengthMessage: string = '';
+  passwordStrengthColor: string = ''; // Control message color
+  confirmPasswordStrengthMessage: string = '';
+  confirmPasswordStrengthColor: string = '';
+  isPasswordValid: boolean = false; isPasswrd:boolean = false; isPassValid:boolean = false; isCnfmPwd:boolean = false;
 
   icons = [
     { value: 'Individual', icon: 'home', name: 'Home' },
@@ -57,7 +62,8 @@ export class BasicComponent extends BaseComponent implements OnInit {
     phoneNumber: ['', Validators.required],
     username: ['',],
     password: ['', [Validators.required, this.passwordValidator]],
-    tools : [[],Validators.required]
+    tools : [[],Validators.required],
+    confirmPassword: ['', Validators.required]
     //"toolId": 0,
     //"roleId": 0,
   })
@@ -67,10 +73,22 @@ export class BasicComponent extends BaseComponent implements OnInit {
      private modalService: NgbModal,  private viewContainerRef: ViewContainerRef ){
     super();
     // document.body.classList.add('authentication-background');
+    this.signupFrm.get('password')?.valueChanges.subscribe((value) => {
+      this.checkPasswordStrength(value);
+    });
+    this.signupFrm.get('confirmPassword')?.valueChanges.subscribe((value) => {
+      this.checkPasswordMatch(value);
+    });
   }
   
   ngOnInit(){
+    // this.f['password'].statusChanges.subscribe(() => {
+    //   if (this.f['password'].touched && this.f['password'].invalid) {
+    //     this.showPasswordError();
+    //   }
+    // });
   }
+
   ngOnDestroy(): void {
    
     // document.body.classList.remove('authentication-background');   
@@ -80,6 +98,24 @@ export class BasicComponent extends BaseComponent implements OnInit {
   get f() {
     return this.signupFrm.controls;
   }
+
+  // showPasswordError(): void {
+  //   if (this.f['password'].errors?.['invalidPassword']) {
+  //     this.toastr.error(
+  //       'Password must be at least 8 characters long, contain one special character, one uppercase letter, one lowercase letter, and one number.',
+  //       'Invalid Password'
+  //     );
+  //   } 
+  // }
+
+  // get password(): AbstractControl | null {
+  //   return this.signupFrm.get('password');
+  // }
+
+  // get f(): { [key: string]: AbstractControl } { 
+  //   return this.signupFrm.controls; 
+  // }
+
   
   // ngAfterViewChecked() {
   //   console.log("60",this.signupFrm.get('tools'))
@@ -95,11 +131,74 @@ export class BasicComponent extends BaseComponent implements OnInit {
     return valid ? null : { invalidPassword: true };
   }
 
-  noWhitespaceValidator(): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      const isWhitespace = (control.value || '').includes(' ');
-      return isWhitespace ? { whitespace: true } : null;
-    };
+  // passwordValidator(control: AbstractControl) {
+  //   const password = control.value;
+  //   const hasUpperCase = /[A-Z]/.test(password);
+  //   const hasLowerCase = /[a-z]/.test(password);
+  //   const hasNumber = /\d/.test(password);
+  //   const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+  //   const isValid = hasUpperCase && hasLowerCase && hasNumber && hasSpecialChar;
+  //   return isValid && password.length >= 8 ? null : { invalidPassword: true };
+  // }
+
+  // Check password strength and update the message and color dynamically
+  checkPasswordStrength(password: string): void {
+    this.cnfmPaswrd = '', this.confirmPasswordStrengthMessage = '', this.isCnfmPwd = false;
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasNumber = /\d/.test(password);
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+    const lengthCriteria = password.length >= 8;
+
+    // Calculate strength score
+    let strength = 0;
+    if (hasUpperCase) strength++;
+    if (hasLowerCase) strength++;
+    if (hasNumber) strength++;
+    if (hasSpecialChar) strength++;
+    if (lengthCriteria) strength++;
+    if(strength == 0){
+      this.passwordStrengthMessage = '';
+      this.isPasswordValid = false;
+    }
+
+    // Determine message and color based on strength score
+    if (strength == 0 && this.submitted == true) {
+      this.passwordStrengthMessage = '';
+      this.isPasswordValid = false;
+    }
+    else if (strength <= 2 && strength > 0) {
+      this.passwordStrengthMessage = 'Password is Weak';
+      this.passwordStrengthColor = 'red';
+      this.isPasswordValid = false; this.isPasswrd = true; this.isPassValid = true;
+    } else if (strength === 3 || strength === 4) {
+      this.passwordStrengthMessage = 'Password is Medium';
+      this.passwordStrengthColor = 'orange';
+      this.isPasswordValid = false; this.isPasswrd = true; this.isPassValid = true;
+    } else if (strength === 5) {
+      this.passwordStrengthMessage = 'Password is Good';
+      this.passwordStrengthColor = 'green';
+      this.isPasswordValid = true; 
+    }
+  }
+
+  checkPasswordMatch(password: string): void {
+    if(this.paswrd != ''){
+      // this.toastr.warning("please enter password first")
+    // } else {
+      if(this.paswrd != password && password != ''){
+        this.isCnfmPwd = false;
+        this.confirmPasswordStrengthMessage = 'Passwords not matched';
+        this.confirmPasswordStrengthColor = 'red'
+      } else if(this.paswrd == password){
+        this.isCnfmPwd = true;
+        this.confirmPasswordStrengthColor = 'green'
+        this.confirmPasswordStrengthMessage = 'Passwords matched';
+      } else if(password == ''){
+        this.confirmPasswordStrengthMessage = '';
+      }
+    }
   }
 
   preventCopyPaste(event: ClipboardEvent): void {
@@ -110,21 +209,18 @@ export class BasicComponent extends BaseComponent implements OnInit {
   }
 
   onSignup(){
-    this.submitted = true; 
+    this.submitted = true; this.isPasswrd = true; this.isPassValid = false;
     const crm = this.signupFrm.get('tools')?.value.includes('CRM');
     const adonai = this.signupFrm.get('tools')?.value.includes('Adonai');
     let payload = this.signupFrm.getRawValue();
     payload.type = +payload.type, payload.noOfUsers = +this.users,
     payload.crm = crm,
     payload.adonai = adonai,
-    payload.phoneNumber = +payload.phoneNumber, delete payload.tools,
+    payload.phoneNumber = +payload.phoneNumber, delete payload.tools, delete payload.confirmPassword,
     payload.dob = this.dp.transform(payload.dob, 'dd-MM-yyyy')
     this.pload = payload
     if (this.signupFrm.invalid) {
-      this.toastr.error('Please fill mandatory fields','signup', {
-        timeOut: 3000,
-        positionClass: 'toast-top-right',
-      });
+      this.toastr.error('Please fill mandatory fields');
       this.btnDisable = false;
         return;
     }

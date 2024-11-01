@@ -1,8 +1,8 @@
 <video class="video-background ratio ratio-1x" src="./assets/video/school_of_fish.mp4" autoplay loop muted></video> 
 <div class="container-lg">
     <div class="row justify-content-center align-items-center authentication authentication-basic h-100">
-        <div class="col-xxl-7 col-xl-8 col-lg-5 col-md-6 col-sm-12 col-12">
-            <div class="card custom-card bg-light p-2 text-white bg-opacity-75">
+        <div class="col-xxl-7 col-xl-8 col-lg-5 col-md-8 col-sm-12 col-12">
+            <div class="card custom-card bg-light p-2 text-white bg-opacity-75  ">
                 <overlay-scrollbars [defer] id="filemanager-scroll">
                     <div class="card-body p-4">
                         <p class="h5 mb-2 text-center"><strong>Sign Up</strong></p>
@@ -56,8 +56,7 @@
                                         <span class="text-danger"> *</span></label>
                                     <input type="text" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" id="signup-noOfUsers"
                                         placeholder="Users" formControlName="noOfUsers" [(ngModel)]="users"
-                                        [ngClass]="{ 'is-invalid': submitted && f['noOfUsers'].errors }"
-                                        maxlength="3"
+                                        [ngClass]="{ 'is-invalid': submitted && f['noOfUsers'].errors }" maxlength="3"
                                         onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || (event.charCode == 8 || event.charCode == 95))'
                                         appShowCodeContent (change)="onChng($event)">
                                         <!-- <div *ngIf="noUsers!=''" style="color: red !important;">
@@ -115,7 +114,7 @@
                                         placeholder="email" onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
                                         (event.charCode >= 64 && event.charCode <= 90) || (event.charCode >= 97 && 
                                         event.charCode <= 122) || event.charCode == 8 || event.charCode == 46 || event.charCode == 95)'
-                                        formControlName="email" appShowCodeContent [(ngModel)] = 'mailId' maxlength="50"
+                                        formControlName="email" appShowCodeContent [(ngModel)] = 'mailId'
                                         [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" >
                                     <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
                                         <span *ngIf="f['email'].errors['required']">Email is required.</span>
@@ -178,44 +177,109 @@
                                             onkeypress='return ((event.charCode >= 33 && event.charCode <= 127) || event.charCode == 8)' 
                                             (copy)="preventCopyPaste($event)" (cut)="preventCopyPaste($event)" (paste)="preventCopyPaste($event)"
                                             maxlength="16" [ngClass]="{ 'is-invalid': submitted && f['password'].errors }">
+                                            <span class="checkmark" *ngIf="isPasswordValid">&#10003;</span>
+                                        
                                         <a href="javascript:void(0);" class="show-password-button text-muted"
                                             (click)="createpassword()" id="button-addon2"><i class="ri-eye-{{toggleClass}} align-middle"></i></a>
+                                            <div class="message" [style.color]="passwordStrengthColor">
+                                                {{ passwordStrengthMessage }}
+                                            </div>
                                         <div *ngIf="submitted && f['password'].errors || f['password'].touched"
                                             class="invalid-feedback">
-                                            <div *ngIf="f['password'].errors?.['required']">Password is required.</div>
-                                            <div *ngIf="f['password'].errors?.['invalidPassword']">
+                                            <div *ngIf="isPasswrd && f['password'].errors?.['required']">Password is required.</div>
+                                            <div *ngIf="isPassValid && f['password'].errors?.['invalidPassword']">
                                                 Password must be at least 8 characters long, contain one Special character at least one uppercase
                                                 letter, one lowercase letter and one number.
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <!-- <div class="col-xl-6">
+                                    <div class="password-field">
+                                        <label for="signup-password" class="form-label text-default"><strong>Password</strong><span class="text-danger"> *</span></label>
+                                        <input type="password" formControlName="password" placeholder="Enter password"
+                                          [ngClass]="{ valid: isPasswordValid, invalid: submitted && f['password'].invalid }"/>
+                                        <input type="password" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" id="signup-password"
+                                            placeholder="password" [type]="showPassword ? 'text' : 'password'" autocomplete
+                                            formControlName="password" appShowCodeContent [(ngModel)]="paswrd"
+                                            onkeypress='return ((event.charCode >= 33 && event.charCode <= 127) || event.charCode == 8)' 
+                                            (copy)="preventCopyPaste($event)" (cut)="preventCopyPaste($event)" (paste)="preventCopyPaste($event)"
+                                            maxlength="16" [ngClass]="{'is-invalid': submitted && f['password'].errors }">
+                                        
+                                        <span class="checkmark" *ngIf="isPasswordValid">&#10003;</span>
+                                      </div>
+                                      <div class="message" [style.color]="passwordStrengthColor">
+                                        {{ passwordStrengthMessage }}
+                                      </div>
+                                      <div *ngIf="submitted && f['password'].errors"
+                                            class="invalid-feedback">Password is required1.
+                                            <div *ngIf="f['password'].errors?.['required']">Password is required.</div>
+                                            <div *ngIf="f['password'].errors?.['invalidPassword']">
+                                                Password must be at least 8 characters long, contain one Special character at least one uppercase
+                                                letter, one lowercase letter and one number.
+                                            </div>
+                                        </div>
+                                    <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['password'].errors?.['required']" class="invalid-feedback">
+                                          Password is required.
+                                        </div>
+                                        <div *ngIf="f['password'].errors?.['invalidPassword']" class="invalid-feedback">
+                                          Password must be at least 8 characters long, contain one special character, one uppercase letter, one lowercase letter, and one number.
+                                        </div>
+                                    </div>
+                                </div> -->
                                 <div class="col-xl-6">
                                     <label for="signup-confirmpassword" class="form-label text-default"><strong>Confirm Password</strong><span class="text-danger"> *</span></label>
                                     <div class="position-relative">
                                         <input type="password" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark"
-                                            id="signup-confirmpassword" placeholder="confirm password"
+                                            id="signup-confirmpassword" placeholder="confirm password" formControlName="confirmPassword"
                                             [type]="showPassword1 ? 'text' : 'password'" autocomplete maxlength="16"
                                             (copy)="preventCopyPaste($event)" (cut)="preventCopyPaste($event)" (paste)="preventCopyPaste($event)"
                                             onkeypress='return ((event.charCode >= 33 && event.charCode <= 127) || event.charCode == 8)' 
-                                            [(ngModel)]="cnfmPaswrd" [ngModelOptions]="{standalone: true}" appShowCodeContent>
+                                            [(ngModel)]="cnfmPaswrd" appShowCodeContent [ngClass]="{ 'is-invalid': submitted && f['confirmPassword'].errors }">
+                                        <span class="checkmark" *ngIf="isCnfmPwd">&#10003;</span>
                                         <a href="javascript:void(0);" class="show-password-button text-muted"
                                             (click)="createpassword1()" id="button-addon21"><i
                                                 class="ri-eye-{{toggleClass1}} align-middle"></i></a>
+                                        <div class="message" [style.color]="confirmPasswordStrengthColor">
+                                            {{ confirmPasswordStrengthMessage }}
+                                        </div>
+                                        <div *ngIf="submitted && f['confirmPassword'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['confirmPassword'].errors['required']">Confirm Password is required</div>
+                                        </div>
                                     </div>
-
                                 </div>
                                 <div class="col-xl-6">
                                     <label for="signup-mobile" class="form-label text-default"><strong>Phone Number</strong><span class="text-danger"> *</span></label>
                                     <input type="text" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" id="signup-mobile"
                                         placeholder="mobile" formControlName="phoneNumber" maxlength="10"
                                         onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
-                                        event.charCode == 8)' (copy)="preventCopyPaste($event)" (cut)="preventCopyPaste($event)" (paste)="preventCopyPaste($event)" [ngClass]="{ 'is-invalid': submitted && f['phoneNumber'].errors }">
+                                        event.charCode == 8)' (copy)="preventCopyPaste($event)" (cut)="preventCopyPaste($event)" (paste)="preventCopyPaste($event)" 
+                                        [ngClass]="{ 'is-invalid': submitted && f['phoneNumber'].errors }">
                                     <div *ngIf="submitted && f['phoneNumber'].errors" class="invalid-feedback">
                                         <div *ngIf="f['phoneNumber'].errors['required']">Phone Number is required</div>
                                     </div>
                                 </div>
-                                <div class="col-xl-6 ">
+                                <!-- <div class="col-xl-6">
+                                    <label for="signup-mobile" class="form-label text-default"><strong>Phone Number</strong><span class="text-danger"> *</span></label>
+                                    <div class="input-group mb-3">
+                                            <select class="form-select form-control form-control-sm bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" id="country" formControlName="country" 
+                                            [ngClass]="{ 'is-invalid': submitted && f['country'].errors }">
+                                            <option value="{{c.country}}" *ngFor="let c of countryLst">+{{ c.code }}</option>
+                                        </select>
+                                        <div class="input-group-prepend">
+                                            <input type="text" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" id="signup-mobile"
+                                            placeholder="mobile" formControlName="phoneNumber" maxlength="10"
+                                            onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
+                                            event.charCode == 8)' (copy)="preventCopyPaste($event)" (cut)="preventCopyPaste($event)" (paste)="preventCopyPaste($event)" 
+                                            [ngClass]="{ 'is-invalid': submitted && f['phoneNumber'].errors }">
+                                        <div *ngIf="submitted && f['phoneNumber'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['phoneNumber'].errors['required']">Phone Number is required</div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <div class="col-xl-6">
                                     <label for="role-id" class="form-label text-default"><strong>Tool ID</strong><span class="text-danger"> *</span></label>
                                     <mat-form-field >
                                         <mat-select formControlName="tools" multiple>
@@ -228,7 +292,7 @@
                                         </mat-error>
                                     </mat-form-field>
                                 </div>
-                                <div class="col-xl-6 ">
+                                <div class="col-xl-6">
                                     <label for="signup-country" class="form-label text-default"><strong>Country</strong><span class="text-danger">*</span></label>
                                     <select class="form-select form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" id="country" formControlName="country" 
                                         [ngClass]="{ 'is-invalid': submitted && f['country'].errors }">
@@ -246,7 +310,7 @@
                                 <!-- <button class="h6 btn btn-lg bg-light p-2 font-weight-bold text-dark bg-opacity-25 border border-dark" 
                                 (click)="onSignup()" [disabled]="btnDisable">Create Account</button> -->
                                 <button class="btn btn-lg bg-light p-2 font-weight-bold text-dark bg-opacity-25 border border-dark" (click)="onSignup()"
-                                [disabled]="btnDisable"><strong>Create Account</strong></button>
+                                [disabled]="btnDisable">Create Account</button>
                             </div>
                         </form>
                         <div class="text-center">
@@ -284,29 +348,29 @@
 </ng-template> -->
 
 <ng-template #modalTemplate>
-  <div class="modal fade show d-block" style="background: rgba(0,0,0,0.5);" tabindex="-1">
-    <div class="modal-dialog bg-light p-2 text-white bg-opacity-50">
-      <div class="modal-content bg-light p-2 text-white bg-opacity-50">
-        <div class="modal-header justify-content-center">
-          <h5 class="modal-title">OTP</h5>
-          <!-- <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button> -->
+    <div class="modal fade show d-block" style="background: rgba(0,0,0,0.5);" tabindex="-1">
+        <div class="modal-dialog bg-light p-2 text-white bg-opacity-50">
+          <div class="modal-content bg-light p-2 text-white bg-opacity-50">
+            <div class="modal-header justify-content-center">
+              <h5 class="modal-title">OTP</h5>
+              <!-- <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button> -->
+            </div>
+            <div class="modal-body">
+                <div class="col-xl-12">
+                    <div class="otp-container">
+                        <input class="bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" *ngFor="let digit of otpArray; let i = index"
+                        type="text" maxlength="1" (input)="onInputChange($event, i)"
+                        (keydown)="onKeydown($event, i)" [(ngModel)]="otp[i]"
+                        onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || event.charCode == 8)'
+                        [ngModelOptions]="{standalone: true}" [attr.aria-label]="'Digit ' + (i + 1)"/>
+                    </div>
+                </div> 
+            </div>
+            <div class="modal-footer justify-content-center">
+              <button type="button" class="btn btn-lg bg-light p-2 font-weight-bold text-dark bg-opacity-25 border border-dark" (click)="onOtpCheck()"
+                [disabled]="isOkBtn">Submit</button>
+            </div>
+          </div>
         </div>
-        <div class="modal-body">
-            <div class="col-xl-12">
-                <div class="otp-container">
-                    <input class="bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" *ngFor="let digit of otpArray; let i = index"
-                    type="text" maxlength="1" (input)="onInputChange($event, i)"
-                    (keydown)="onKeydown($event, i)" [(ngModel)]="otp[i]"
-                    onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || event.charCode == 8)'
-                    [ngModelOptions]="{standalone: true}" [attr.aria-label]="'Digit ' + (i + 1)"/>
-                </div>
-            </div> 
-        </div>
-        <div class="modal-footer justify-content-center">
-          <button type="button" class="btn btn-lg bg-light p-2 font-weight-bold text-dark bg-opacity-25 border border-dark" (click)="onOtpCheck()"
-            [disabled]="isOkBtn">Submit</button>
-        </div>
-      </div>
     </div>
-  </div>
 </ng-template>

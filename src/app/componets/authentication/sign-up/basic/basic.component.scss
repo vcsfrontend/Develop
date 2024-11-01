@@ -31,7 +31,44 @@
 .os-scrollbar-visible {
     visibility:hidden;
 }
-// .form-select option:checked {
-//     background-color: rgba(245, 247, 250, 0.25) !important;
-//     color: rgba(245, 247, 250, 0.25);
-// }
+
+.password-field {
+    position: relative;
+    width: 300px;
+    margin-bottom: 10px;
+  }
+  
+  input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #ccc;
+    outline: none;
+  }
+  
+  input.valid {
+    border-color: #28a745; /* Green for valid */
+  }
+  
+  input.invalid {
+    border-color: #dc3545; /* Red for invalid */
+  }
+  
+  .checkmark {
+    position: absolute;
+    right: 30px;
+    top: 40%;
+    transform: translateY(-50%);
+    color: #28a745;
+    font-size: 20px;
+  }
+  
+  .message {
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  
+  .invalid-feedback {
+    color: #dc3545;
+    margin-top: 5px;
+    font-size: 14px;
+  }  
