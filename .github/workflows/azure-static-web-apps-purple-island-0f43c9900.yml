@@ -1,17 +1,13 @@
-name: Azure Static Web Apps CI/CD
+name: Build and deploy Angular app to Azure Static Web Apps
 
 on:
   push:
     branches:
-      - stage
-  pull_request:
-    types: [opened, synchronize, reopened, closed]
-    branches:
-      - stage
+      - stage  # Replace with your branch name
+  workflow_dispatch:
 
 jobs:
-  build_and_deploy_job:
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+  build_and_deploy:
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     steps:
@@ -23,33 +19,25 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20.x'
+          node-version: '20.x'  # Specify the Node.js version
 
       - name: Install Angular CLI
-        run: npm install -g @angular/cli
+        run: npm install -g @angular/cli  # Install Angular CLI globally
 
       - name: Install dependencies
-        run: npm install -f
-
-      - name: Check Node.js version
-        run: node -v
-
-      - name: Check Angular CLI version
-        run: ng version
+        run: npm install  # Install project dependencies
 
       - name: Build the Angular application
-        run: ng build --output-path=dist
+        run: ng build --prod --output-path=dist/preview  # Build the Angular app
 
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_PURPLE_ISLAND_0F43C9900 }}
-          repo_token: ${{ secrets.GITHUB_TOKEN }}  # Used for Github integrations (i.e. PR comments)
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_PURPLE_ISLAND_0F43C9900 }}  # Use the correct token
           action: "upload"
           app_location: "/"  # App source code path
-          api_location: ""  # Api source code path - optional
-          output_location: "dist/browser"  # Built app content directory
+          output_location: "dist/preview"  # Directory to upload
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
