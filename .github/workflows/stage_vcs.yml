@@ -1,7 +1,4 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
-name: Build and deploy Node.js app to Azure Web App - vcs
+name: Build and deploy Angular app to Azure Web App - stage
 
 on:
   push:
@@ -14,31 +11,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v2
 
       - name: Set up Node.js version
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v2
         with:
-          node-version: '20.x'
+          node-version: '20.x'  # Use the appropriate Node.js version
 
-      - name: Install Angular CLI
-        run: npm install -g @angular/cli
+      - name: Install dependencies
+        run: npm install
 
-      - name: npm install, build, and test
-        run: |
-          npm install -f
-          ng build --output-path=dist
-          # npm run test --if-present
-      - name: List dist directory
-        run: ls -la ./dist 
+      - name: Build Angular App
+        run: npm run build --output-path=dist  # Build the Angular app
 
       - name: Zip artifact for deployment
-        run: zip release.zip ./dist/browser
+        run: zip -r release.zip ./dist/browser  # Zip the contents of the dist folder
 
       - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v2
         with:
-          name: node-app
+          name: angular-app
           path: release.zip
 
   deploy:
@@ -46,21 +38,19 @@ jobs:
     needs: build
     environment:
       name: 'Production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    permissions:
-      id-token: write #This is required for requesting the JWT
+      url: ${{ secrets.AZURE_WEBAPP_URL }}  # Update this with your Web App URL
 
     steps:
       - name: Download artifact from build job
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v2
         with:
-          name: node-app
+          name: angular-app
 
       - name: Unzip artifact for deployment
         run: unzip release.zip
-      
+
       - name: Login to Azure
-        uses: azure/login@v2
+        uses: azure/login@v1
         with:
           client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_4C72E6BEA4F14D3486A4CBF9973836AC }}
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_48BEBC00004A466AB3FD4EDA79BF5A71 }}
@@ -68,9 +58,8 @@ jobs:
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
-        uses: azure/webapps-deploy@v3
+        uses: azure/webapps-deploy@v2
         with:
-          app-name: 'vcs'
-          slot-name: 'Production'
-          package: .
-          
+          app-name: 'vcs'  # Your Azure Web App name
+          slot-name: 'Production'  # Deployment slot (if any)
+          package: ./dist/browser  # Path to your built Angular app folder
