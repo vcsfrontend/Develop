@@ -89,7 +89,6 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: angular-app
-
       - name: Deploy to Azure Static Web Apps
         uses: Azure/static-web-apps-deploy@v1
         with:
