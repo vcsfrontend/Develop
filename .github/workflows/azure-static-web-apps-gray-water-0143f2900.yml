@@ -97,7 +97,7 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_GRAY_WATER_0143F2900 }}  # Set this in your secrets
           name: vcs-frontend  # Replace with your Azure Static Web App name
-          app_location: "/dist/browser"  # Adjust this to the path of your built app
+          app_location: "./dist/browser"  # Adjust this to the path of your built app
           output_location: "/"
           deployment_action: "upload"
 
