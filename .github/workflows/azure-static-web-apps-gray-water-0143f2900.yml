@@ -99,5 +99,5 @@ jobs:
           name: vcs-frontend  # Replace with your Azure Static Web App name
           app_location: "/"  # Adjust this to the path of your built app
           output_location: ""
-          deployment_action: "./dist/preview/browser"
+          deployment_action: "upload"
 
