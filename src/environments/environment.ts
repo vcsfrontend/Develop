@@ -5,8 +5,8 @@ export const environment = {
   production: true,
   // webURL: origin.includes('localhost') ? 'https://sasi-vcs-repo.onrender.com/' : origin,
   // masterURL: origin.includes('localhost') ? 'https://adonai-microservice.onrender.com/' : origin,
-  webURL: origin.includes('localhost') ? 'https://auth-service.vcs.plus/' : origin,
-  masterURL: origin.includes('localhost') ? 'https://adonai-serv.vcs.plus/' : origin,
+  webURL: 'https://auth-service.vcs.plus/',
+  masterURL: 'https://adonai-serv.vcs.plus/',
   firebase: {
     apiKey: "***************************************",
     authDomain: "************************",
