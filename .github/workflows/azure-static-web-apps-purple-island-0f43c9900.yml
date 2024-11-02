@@ -23,16 +23,22 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20.x'  # Specify the Node.js version you need
+          node-version: '20.x'
 
       - name: Install Angular CLI
-        run: npm install -g @angular/cli  # Install Angular CLI globally
+        run: npm install -g @angular/cli
 
       - name: Install dependencies
-        run: npm install -f  # Install dependencies with force option
+        run: npm install -f
+
+      - name: Check Node.js version
+        run: node -v
+
+      - name: Check Angular CLI version
+        run: ng version
 
       - name: Build the Angular application
-        run: ng build --output-path=dist  # Build the Angular app and output to the specified directory
+        run: ng build --output-path=dist
 
       - name: Build And Deploy
         id: builddeploy
@@ -41,11 +47,9 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_PURPLE_ISLAND_0F43C9900 }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}  # Used for Github integrations (i.e. PR comments)
           action: "upload"
-          ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
           app_location: "/"  # App source code path
           api_location: ""  # Api source code path - optional
           output_location: "dist/browser"  # Built app content directory
-          ###### End of Repository/Build Configurations ######
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
