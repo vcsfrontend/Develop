@@ -75,6 +75,9 @@ jobs:
       - name: Build Angular App
         run: ng build --output-path=dist  # Build the Angular app
 
+      - name: List dist directory
+        run: ls -al ./dist
+
       - name: Upload artifact for deployment
         uses: actions/upload-artifact@v3
         with:
