@@ -122,7 +122,7 @@ export class NavService implements OnDestroy {
       type: 'link',
       linkType : 'internal',
       active: false,
-      path : "/dashboard/orgSettings"
+      path : "/dashboard/settings"
     },
     {
       title: 'Design',
