@@ -17,6 +17,9 @@ export class SuperadminComponent {
 
   content3: any;
   content4: any;
+  content5: any;
+  content6: any;
+  content7: any;
 
   constructor(config: NgbModalConfig, private modalService: NgbModal,) {
   }

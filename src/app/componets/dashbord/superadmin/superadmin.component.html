@@ -64,8 +64,10 @@
                                 data-bs-target="#exampleModalScrollable3">test123&#64;gmail.com</td>
                                 <td>Alpha Kitchens</td>
                                 <td>0001333</td>
-                                <td>true</td>
-                                <td>true</td>
+                                <td data-bs-toggle="modal" (click)="VerticallyScrol(content5)"
+                                data-bs-target="#exampleModalScrollable34">true</td>
+                                <td data-bs-toggle="modal" (click)="VerticallyScrol(content5)"
+                                data-bs-target="#exampleModalScrollable34">true</td>
                                 <td>Active</td>
                                 <td>Active</td>
                                 <td>05 Aug, 2024</td>
@@ -82,8 +84,10 @@
                                 data-bs-target="#exampleModalScrollable3">test123&#64;gmail.com</td>
                                 <td>Alpha Kitchens</td>
                                 <td>0001333</td>
-                                <td>true</td>
-                                <td>true</td>
+                                <td data-bs-toggle="modal" (click)="VerticallyScrol(content5)"
+                                data-bs-target="#exampleModalScrollable34">true</td>
+                                <td data-bs-toggle="modal" (click)="VerticallyScrol(content5)"
+                                data-bs-target="#exampleModalScrollable34">true</td>
                                 <td>Active</td>
                                 <td>Active</td>
                                 <td>05 Aug, 2024</td>
@@ -101,8 +105,10 @@
                                 <td data-bs-toggle="modal" (click)="VerticallyScrol(Content4)"
                                 data-bs-target="#exampleModalScrollable3">Alpha Kitchens</td>
                                 <td>0001333</td>
-                                <td>true</td>
-                                <td>true</td>
+                                <td data-bs-toggle="modal" (click)="VerticallyScrol(content5)"
+                                data-bs-target="#exampleModalScrollable34">true</td>
+                                <td data-bs-toggle="modal" (click)="VerticallyScrol(content5)"
+                                data-bs-target="#exampleModalScrollable34">true</td>
                                 <td>Active</td>
                                 <td>Active</td>
                                 <td>05 Aug, 2024</td>
@@ -119,8 +125,10 @@
                                 data-bs-target="#exampleModalScrollable3">test123&#64;gmail.com</td>
                                 <td>Alpha Kitchens</td>
                                 <td>0001333</td>
-                                <td>true</td>
-                                <td>true</td>
+                                <td data-bs-toggle="modal" (click)="VerticallyScrol(content5)"
+                                data-bs-target="#exampleModalScrollable34">true</td>
+                                <td data-bs-toggle="modal" (click)="VerticallyScrol(content5)"
+                                data-bs-target="#exampleModalScrollable34">true</td>
                                 <td>Active</td>
                                 <td>Active</td>
                                 <td>05 Aug, 2024</td>
@@ -251,3 +259,109 @@
         </div>
     </div>
 </div>
+
+<!-- adonai -->
+<div class="modal fade" id="exampleModalScrollable34" tabindex="-1" aria-labelledby="exampleModalScrollable34" data-bs-keyboard="false" aria-hidden="true">
+    <!-- Scrollable modal -->
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <ng-template #content5 let-modal>
+                    <div class="modal-header justify-content-center">
+                        <h6 class="modal-title" id="staticBackdropLabel3">Adonai Users </h6>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            (click)="modal.dismiss('Cross click')" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                          <div class="col-lg-3">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" (click)="VerticallyScrol(content6)"
+                            data-bs-target="#exampleModalScrollable345"
+                            >View</button>
+                            
+                          </div>
+                          <div class="col-lg-3">
+                            <button type="button" class="btn btn-primary"data-bs-toggle="modal" (click)="VerticallyScrol(content7)"
+                            data-bs-target="#exampleModalScrollable4" 
+                            >Edit</button>
+                            
+                          </div>  
+                            
+                            
+                            
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')"
+                            data-bs-dismiss="modal">Close</button>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModalScrollable345" tabindex="-1" aria-labelledby="exampleModalScrollable345" data-bs-keyboard="false" aria-hidden="true">
+        <!-- Scrollable modal -->
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <ng-template #content6 let-modal>
+                        <div class="modal-header justify-content-center">
+                            <h6 class="modal-title" id="staticBackdropLabel3">Personal Information </h6>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                (click)="modal.dismiss('Cross click')" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div>
+                                <!-- 1.hhjemail:text@mail.com -->
+                                2.phone number :8978675645 <br>
+                                2.hello world
+                            </div>
+                                
+                                
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')"
+                                data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+    </div>
+
+    <div class="modal fade" id="exampleModalScrollable4" tabindex="-1" aria-labelledby="exampleModalScrollable4" data-bs-keyboard="false" aria-hidden="true">
+        <!-- Scrollable modal -->
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <ng-template #content7 let-modal>
+                        <div class="modal-header justify-content-center">
+                            <h6 class="modal-title" id="staticBackdropLabel3">Edit Your information </h6>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                (click)="modal.dismiss('Cross click')" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <label for="input-tel" class="form-label">Phone Number</label>
+                                    <input type="tel" class="form-control" id="input-tel" placeholder="1233">
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <label for="input-text" class="form-label">First Name</label>
+                                    <input type="text" class="form-control" id="input-text" placeholder="Text">
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <label for="input-text" class="form-label">Last Name</label>
+                                    <input type="text" class="form-control" id="input-text" placeholder="Text">
+                                </div>
+                                
+                                
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')"
+                                data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+    </div>
+    
