@@ -1,63 +1,393 @@
-<app-page-header title="settings" title1="dashboard" activeTitle="settings"></app-page-header>
-
-<div class="container mt-2 mb-2">
-    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-        <div formArrayName="users">
-            <div *ngFor="let user of users.controls; let i = index" [formGroupName]="i" class="row mb-2">
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                    <p class="mb-2 text-muted">First Name</p>
-                    <input type="text" class="form-control" id="firstName" formControlName="firstName">
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                    <p class="mb-2 text-muted">Last Name</p>
-                    <input type="text" class="form-control" id="lastName" formControlName="lastName">
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                    <p class="mb-2 text-muted">User Name</p>
-                    <input type="text" class="form-control" id="userName" formControlName="userName">
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                    <p class="mb-2 text-muted">Date of Birth</p>
-                    <input type="text" class="form-control" id="dob" formControlName="dob">
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                    <p class="mb-2 text-muted">Email</p>
-                    <input type="text" class="form-control" id="input" formControlName="email">
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                    <label for="input-label" class="form-label">Password</label>
-                    <input type="text" class="form-control" id="input-label"  formControlName="password">
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                    <label for="input-label" class="form-label">Confirm Password</label>
-                    <input type="password" class="form-control" formControlName="password" id="password" required>
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                    <label for="input-label" class="form-label">Phone Number</label>
-                    <input type="phoneNo" class="form-control" formControlName="phoneNo" id="phoneNo">
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                    <label for="role-id" class="form-label text-default">Tool ID<sup>*</sup></label>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="1" name="adonai" 
-                            id="flexCheckDefault" [(ngModel)]="adonai" [ngModelOptions]="{standalone: true}">
-                        <label class="form-check-label" for="flexCheckDefault">Adonai</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="2" name="crm" 
-                            id="flexCheckChecked" [(ngModel)]="crm" [ngModelOptions]="{standalone: true}">
-                        <label class="form-check-label" for="flexCheckChecked">CRM</label>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                    <label for="input-label" class="form-label">Country</label>
-                    <input type="country" class="form-control" formControlName="country" id="country">
-                </div>
-                <div class="mb-2"><hr></div>
-                <!-- <button type="button" class="btn btn-danger" (click)="removeUser(i)">Remove User</button> -->
-            </div>
-        </div> 
-        <button type="button" class="btn btn-primary" (click)="addUser()">Add User</button>
-        <button type="submit" class="btn btn-success" (click)="onSubmit()">Submit</button>
-    </form>
+<div class="my-4 page-header-breadcrumb d-flex align-items-center justify-content-between flex-wrap gap-2">
+    <div>
+        <h1 class="page-title fw-medium fs-18 mb-2">New Settings</h1>
+        <div class="">
+            <nav>
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">dashboard</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">settings</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
 </div>
+<div class="card shadow" style="border-radius: 32px;">
+    <div class="card-header bg-white p-2 px-3">
+        <div class="row">
+            <div class="col-xl-6">
+                <h4>Signup Form</h4>
+            </div>
+            <div class="col-xl-6">
+                <div class="float-end" *ngIf="!isAddEdt">
+                    <button type="button" class="btn btn-sm btn-primary text-center"
+                        (click)="isAddEdt=!isAddEdt;aeTyp='a';onRst()">Add
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-2">
+        <div class="row">
+            <div *ngIf="!isAddEdt">
+                <div class="col-md-12">
+                    <div class="row mb-2">
+
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    <div class="mat-elevation-z8">
+                        <div class="table-responsive">
+                            <table mat-table [dataSource]="dataSource">
+                                <!-- Position Column -->
+                                <ng-container matColumnDef="slNo">
+                                    <th mat-header-cell *matHeaderCellDef> S.No. </th>
+                                    <td mat-cell *matCellDef="let element; let i = index"> {{getSNo(i)}} </td>
+                                </ng-container>
+                                <!-- Name Column -->
+                                <ng-container matColumnDef="firstName">
+                                    <th mat-header-cell *matHeaderCellDef> First Name </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+                                </ng-container>
+                                <!-- Weight Column -->
+                                <ng-container matColumnDef="lastName">
+                                    <th mat-header-cell *matHeaderCellDef> Last Name </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+                                </ng-container>
+                                <!-- Symbol Column -->
+                                <ng-container matColumnDef="email">
+                                    <th mat-header-cell *matHeaderCellDef> Email </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                                </ng-container>
+                                <ng-container matColumnDef="dateOfBirth">
+                                    <th mat-header-cell *matHeaderCellDef> Date of Birth </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.dob}} </td>
+                                </ng-container>
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                            </table>
+                        </div>
+                        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+                            aria-label="Select page of periodic elements">
+                        </mat-paginator>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="isAddEdt">
+                <div class="container mt-2 mb-2">
+                    <!-- <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+                        <div class="row">
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                                <p class="mb-2 text-muted">First Name</p>
+                                <input type="text" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" id="signup-firstname"
+                                    placeholder="First name" formControlName="firstName" appShowCodeContent
+                                    onkeypress='return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && 
+                                    event.charCode <= 122) || event.charCode == 8 || event.charCode == 32)'
+                                    [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }" maxlength="50">
+                                <div *ngIf="submitted && f['firstName'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['firstName'].errors['required']">First name is required</div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                                <p class="mb-2 text-muted">Last Name</p>
+                                <input type="text" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" id="signup-lastname"
+                                    placeholder="Last name" formControlName="lastName" appShowCodeContent
+                                    onkeypress='return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && 
+                                    event.charCode <= 122) || event.charCode == 8 ||event.charCode == 32)'
+                                    [ngClass]="{ 'is-invalid': submitted && f['lastName'].errors }" maxlength="50">
+                                <div *ngIf="submitted && f['lastName'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['lastName'].errors['required']">Last name is required</div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                                <label for="signup-dob" class="form-label text-default"><strong>Date of birth</strong><span class="text-danger"> *</span></label>
+                                <div class="input-group">
+                                    <div class="input-group-text text-muted bg-light pl-4 font-weight-bold bg-opacity-25 border border-dark"> <i class="ri-calendar-line"></i> </div>
+                                    <input class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" placeholder="Choose date" type="text" mwlFlatpickr
+                                    formControlName="dob" [maxDate]="todayDt">
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                                <p class="mb-2 text-muted">Email</p>
+                                <input type="text" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark " id="signup-email" 
+                                    placeholder="email" onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
+                                    (event.charCode >= 64 && event.charCode <= 90) || (event.charCode >= 97 && 
+                                    event.charCode <= 122) || event.charCode == 8 || event.charCode == 46 || event.charCode == 95)'
+                                    formControlName="email" appShowCodeContent [(ngModel)] = 'mailId'
+                                    [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" >
+                                <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                                    <span *ngIf="f['email'].errors['required']">Email is required.</span>
+                                    <span *ngIf="f['email'].errors['email']">Invalid email address.</span>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                                <label for="input-label" class="form-label">Password</label>
+                               
+                                <div class="position-relative">
+                                    <input type="password" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" id="signup-password"
+                                        placeholder="password" [type]="showPassword ? 'text' : 'password'" autocomplete
+                                        formControlName="password" appShowCodeContent [(ngModel)]="paswrd"
+                                        onkeypress='return ((event.charCode >= 33 && event.charCode <= 127) || event.charCode == 8)' 
+                                        (copy)="preventCopyPaste($event)" (cut)="preventCopyPaste($event)" (paste)="preventCopyPaste($event)"
+                                        maxlength="16" [ngClass]="{ 'is-invalid': submitted && f['password'].errors }">
+                                        <span class="checkmark" *ngIf="isPasswordValid">&#10003;</span>
+                                    <a href="javascript:void(0);" class="show-password-button text-muted"
+                                        (click)="createpassword()" id="button-addon2"><i class="ri-eye-{{toggleClass}} align-middle"></i></a>
+                                    <div class="message" [style.color]="passwordStrengthColor">
+                                        {{ passwordStrengthMessage }}
+                                    </div>
+                                    <div *ngIf="submitted && f['password'].errors || f['password'].touched"
+                                        class="invalid-feedback">
+                                        <div *ngIf="isPasswrd && f['password'].errors?.['required']">Password is required.</div>
+                                        <div *ngIf="isPassValid && f['password'].errors?.['invalidPassword']">
+                                            Password must be at least 8 characters long, contain one Special character at least one uppercase
+                                            letter, one lowercase letter and one number.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                                <label for="input-label" class="form-label">Confirm Password</label>
+                                
+                                <div class="position-relative">
+                                    <input type="password" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark"
+                                        id="signup-confirmpassword" placeholder="confirm password" formControlName="confirmPassword"
+                                        [type]="showPassword1 ? 'text' : 'password'" autocomplete maxlength="16"
+                                        (copy)="preventCopyPaste($event)" (cut)="preventCopyPaste($event)" (paste)="preventCopyPaste($event)"
+                                        onkeypress='return ((event.charCode >= 33 && event.charCode <= 127) || event.charCode == 8)' 
+                                        [(ngModel)]="cnfmPaswrd" appShowCodeContent [ngClass]="{ 'is-invalid': submitted && f['confirmPassword'].errors }">
+                                    <span class="checkmark" *ngIf="isCnfmPwd">&#10003;</span>
+                                    <a href="javascript:void(0);" class="show-password-button text-muted"
+                                        (click)="createpassword1()" id="button-addon21"><i
+                                            class="ri-eye-{{toggleClass1}} align-middle"></i></a>
+                                    <div class="message" [style.color]="confirmPasswordStrengthColor">
+                                        {{ confirmPasswordStrengthMessage }}
+                                    </div>
+                                    <div *ngIf="submitted && f['confirmPassword'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['confirmPassword'].errors['required']">Confirm Password is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                                <label for="input-label" class="form-label">Phone Number</label>
+                                <input type="text" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" id="signup-mobile"
+                                    placeholder="mobile" formControlName="phoneNumber" maxlength="10"
+                                    onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
+                                    event.charCode == 8)' (copy)="preventCopyPaste($event)" (cut)="preventCopyPaste($event)" (paste)="preventCopyPaste($event)" 
+                                    [ngClass]="{ 'is-invalid': submitted && f['phoneNumber'].errors }">
+                                <div *ngIf="submitted && f['phoneNumber'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['phoneNumber'].errors['required']">Phone Number is required</div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                                <label for="role-id" class="form-label text-default">Tool ID<sup>*</sup></label><br>
+                                <mat-form-field>
+                                    <mat-select formControlName="tools" multiple>
+                                    @for (topping of toolsList; track topping) {
+                                        <mat-option [value]="topping">{{topping}}</mat-option>
+                                    }
+                                    </mat-select>
+                                    <mat-error *ngIf="f['tools'].errors?.['required']">
+                                        Please select at least one tool.
+                                    </mat-error>
+                                </mat-form-field>
+                                
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                                <label for="input-label" class="form-label">Country</label>
+                                <select class="form-select form-select-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" id="country" formControlName="country" 
+                                    [ngClass]="{ 'is-invalid': submitted && f['country'].errors }">
+                                    <option value="" disabled selected>Select</option>
+                                    <option value="{{c.country}}" *ngFor="let c of countryLst">{{c.country}} (+{{ c.code }})</option>
+                                </select>
+                                <div *ngIf="submitted && f['country'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['country'].errors['required']">Country is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </form> -->
+
+                    <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="bg-light p-2 text-white bg-opacity-25">
+                        <div class="row gy-2">
+                            <div class="col-xl-4">
+                                <label for="signup-firstname" class="form-label text-default"><strong>First Name</strong><span class="text-danger"> *</span></label>
+                                <input type="text" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" id="signup-firstname"
+                                    placeholder="First name" formControlName="firstName" appShowCodeContent
+                                    onkeypress='return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && 
+                                    event.charCode <= 122) || event.charCode == 8 || event.charCode == 32)'
+                                    [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }" maxlength="50">
+                                <div *ngIf="submitted && f['firstName'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['firstName'].errors['required']">First name is required</div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <label for="signup-lastname" class="form-label text-default"><strong>Last Name</strong><span class="text-danger"> *</span></label>
+                                <input type="text" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" id="signup-lastname"
+                                    placeholder="Last name" formControlName="lastName" appShowCodeContent
+                                    onkeypress='return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && 
+                                    event.charCode <= 122) || event.charCode == 8 ||event.charCode == 32)'
+                                    [ngClass]="{ 'is-invalid': submitted && f['lastName'].errors }" maxlength="50">
+                                <div *ngIf="submitted && f['lastName'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['lastName'].errors['required']">Last name is required</div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <label for="signup-dob" class="form-label text-default"><strong>Date of birth</strong><span class="text-danger"> *</span></label>
+                                <div class="input-group">
+                                    <div class="input-group-text text-muted bg-light pl-4 font-weight-bold bg-opacity-25 border border-dark"> <i class="ri-calendar-line"></i> </div>
+                                    <input class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" placeholder="Choose date" type="text" mwlFlatpickr
+                                    formControlName="dob" [maxDate]="todayDt">
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <label for="signup-email" class="form-label text-default"><strong>Email</strong><span class="text-danger"> *</span></label>
+                                <input type="text" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark " id="signup-email" 
+                                    placeholder="email" onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
+                                    (event.charCode >= 64 && event.charCode <= 90) || (event.charCode >= 97 && 
+                                    event.charCode <= 122) || event.charCode == 8 || event.charCode == 46 || event.charCode == 95)'
+                                    formControlName="email" appShowCodeContent [(ngModel)] = 'mailId'
+                                    [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" >
+                                <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                                    <span *ngIf="f['email'].errors['required']">Email is required.</span>
+                                    <span *ngIf="f['email'].errors['email']">Invalid email address.</span>
+                                </div>
+                            </div>
+                            
+                            <div class="col-xl-4">
+                                <label for="signup-password"
+                                    class="form-label text-default"><strong>Password</strong><span class="text-danger"> *</span></label>
+                                <div class="position-relative">
+                                    <input type="password" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" id="signup-password"
+                                        placeholder="password" [type]="showPassword ? 'text' : 'password'" autocomplete
+                                        formControlName="password" appShowCodeContent [(ngModel)]="paswrd"
+                                        onkeypress='return ((event.charCode >= 33 && event.charCode <= 127) || event.charCode == 8)' 
+                                        (copy)="preventCopyPaste($event)" (cut)="preventCopyPaste($event)" (paste)="preventCopyPaste($event)"
+                                        maxlength="16" [ngClass]="{ 'is-invalid': submitted && f['password'].errors }">
+                                        <span class="checkmark" *ngIf="isPasswordValid">&#10003;</span>
+                                    
+                                    <a href="javascript:void(0);" class="show-password-button text-muted"
+                                        (click)="createpassword()" id="button-addon2"><i class="ri-eye-{{toggleClass}} align-middle"></i></a>
+                                        <div class="message" [style.color]="passwordStrengthColor">
+                                            {{ passwordStrengthMessage }}
+                                        </div>
+                                    <div *ngIf="submitted && f['password'].errors || f['password'].touched"
+                                        class="invalid-feedback">
+                                        <div *ngIf="isPasswrd && f['password'].errors?.['required']">Password is required.</div>
+                                        <div *ngIf="isPassValid && f['password'].errors?.['invalidPassword']">
+                                            Password must be at least 8 characters long, contain one Special character at least one uppercase
+                                            letter, one lowercase letter and one number.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-xl-4">
+                                <label for="signup-confirmpassword" class="form-label text-default"><strong>Confirm Password</strong><span class="text-danger"> *</span></label>
+                                <div class="position-relative">
+                                    <input type="password" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark"
+                                        id="signup-confirmpassword" placeholder="confirm password" formControlName="confirmPassword"
+                                        [type]="showPassword1 ? 'text' : 'password'" autocomplete maxlength="16"
+                                        (copy)="preventCopyPaste($event)" (cut)="preventCopyPaste($event)" (paste)="preventCopyPaste($event)"
+                                        onkeypress='return ((event.charCode >= 33 && event.charCode <= 127) || event.charCode == 8)' 
+                                        [(ngModel)]="cnfmPaswrd" appShowCodeContent [ngClass]="{ 'is-invalid': submitted && f['confirmPassword'].errors }">
+                                    <span class="checkmark" *ngIf="isCnfmPwd">&#10003;</span>
+                                    <a href="javascript:void(0);" class="show-password-button text-muted"
+                                        (click)="createpassword1()" id="button-addon21"><i
+                                            class="ri-eye-{{toggleClass1}} align-middle"></i></a>
+                                    <div class="message" [style.color]="confirmPasswordStrengthColor">
+                                        {{ confirmPasswordStrengthMessage }}
+                                    </div>
+                                    <div *ngIf="submitted && f['confirmPassword'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['confirmPassword'].errors['required']">Confirm Password is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <label for="signup-mobile" class="form-label text-default"><strong>Phone Number</strong><span class="text-danger"> *</span></label>
+                                <input type="text" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" id="signup-mobile"
+                                    placeholder="mobile" formControlName="phoneNumber" maxlength="10"
+                                    onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
+                                    event.charCode == 8)' (copy)="preventCopyPaste($event)" (cut)="preventCopyPaste($event)" (paste)="preventCopyPaste($event)" 
+                                    [ngClass]="{ 'is-invalid': submitted && f['phoneNumber'].errors }">
+                                <div *ngIf="submitted && f['phoneNumber'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['phoneNumber'].errors['required']">Phone Number is required</div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-xl-4">
+                                <label for="role-id" class="form-label text-default"><strong>Tool ID</strong><span class="text-danger"> *</span></label>
+                                <br>
+                                <mat-form-field >
+                                    <mat-select formControlName="tools" multiple>
+                                        @for (topping of toolsList; track topping) {
+                                        <mat-option [value]="topping">{{topping}}</mat-option>
+                                        }
+                                    </mat-select>
+                                    <mat-error *ngIf="f['tools'].errors?.['required']">
+                                        Please select at least one tool.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-xl-4">
+                                <label for="signup-country" class="form-label text-default"><strong>Country</strong><span class="text-danger">*</span></label>
+                                <select class="form-select form-select-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" id="country" formControlName="country" 
+                                    [ngClass]="{ 'is-invalid': submitted && f['country'].errors }">
+                                    <option value="" disabled selected>Select</option>
+                                    <option value="{{c.country}}" *ngFor="let c of countryLst">{{c.country}} (+{{ c.code }})</option>
+                                </select>
+                                <div *ngIf="submitted && f['country'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['country'].errors['required']">Country is required</div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <!-- <div class="d-grid gap-2 col-8 mx-auto mt-4">
+                            <button class="btn btn-lg bg-light p-2 font-weight-bold text-dark bg-opacity-25 border border-dark" (click)="onSignup()"
+                            [disabled]="btnDisable">Create Account</button>
+                        </div> -->
+                    </form>
+                </div>
+            </div>
+            <div class="card-footer bg-white" *ngIf="isAddEdt">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="float-end">
+                            <button type="button" class="btn btn-sm btn-success text-center me-2"
+                                (click)="onSubmit();" *ngIf="aeTyp == 'a'">Save
+                            </button>
+                            <button type="button" class="btn btn-sm btn-danger text-center"
+                                (click)="isAddEdt=!isAddEdt;onRst()">Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #modalTemplate>
+    <div class="modal fade show d-block" style="background: rgba(0,0,0,0.5);" tabindex="-1">
+        <div class="modal-dialog bg-light p-2 text-white bg-opacity-50">
+          <div class="modal-content bg-light p-2 text-white bg-opacity-50">
+            <div class="modal-header justify-content-center">
+              <h5 class="modal-title">OTP</h5>
+              <!-- <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button> -->
+            </div>
+            <div class="modal-body">
+                <div class="col-xl-12">
+                    <div class="otp-container">
+                        <input class="bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" *ngFor="let digit of otpArray; let i = index"
+                        type="text" maxlength="1" (input)="onInputChange($event, i)"
+                        (keydown)="onKeydown($event, i)" [(ngModel)]="otp[i]"
+                        onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || event.charCode == 8)'
+                        [ngModelOptions]="{standalone: true}" [attr.aria-label]="'Digit ' + (i + 1)"/>
+                    </div>
+                </div> 
+            </div>
+            <div class="modal-footer justify-content-center">
+              <button type="button" class="btn btn-lg bg-light p-2 font-weight-bold text-dark bg-opacity-25 border border-dark" (click)="onOtpCheck()"
+                [disabled]="isOkBtn">Submit</button>
+            </div>
+          </div>
+        </div>
+    </div>
+</ng-template>
