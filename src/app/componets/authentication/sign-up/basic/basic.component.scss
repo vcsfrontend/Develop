@@ -73,12 +73,10 @@
     font-size: 14px;
   }  
 
-  mat-form-field.ng-pristine, mat-select.ng-pristine {
-    border: 1px solid rgb(44, 62, 80) !important;
-    // background-color: aliceblue;
-    opacity: 0.9;
+  mat-select {
+    background-color: #e5f8fb;    
   }
 
-  mat-form-field {
-    width:100%;
+  ::ng-deep .mat-primary.mdc-menu-surface {
+    background-color: #e5f8fb !important;
   }

@@ -20,7 +20,10 @@
                                     <select class="form-select form-select-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark"  id="role-id" formControlName="type"
                                         [ngClass]="{ 'is-invalid': submitted && f['type'].errors }" (change)="onDropdownChange()">
                                         <option value="" disabled selected>Select type</option>
-                                        <option value="1">Individual </option>
+                                        <option value="1">Individual 
+                                            <i class="bi bi-person"></i>
+
+                                        </option>
                                             <!-- <mat-icon>perm_identity</mat-icon> -->
                                             <!-- <img src="../../../../../assets/images/icons/Person.png"></option> -->
                                             <!-- <span class="material-symbols-outlined">
@@ -290,8 +293,8 @@
                                     </div>
                                 </div> -->
                                 <div class="col-xl-6">
-                                    <label for="role-id" class="form-label text-default"><strong>Tool ID</strong><span class="text-danger"> *</span></label><br>
-                                    <mat-form-field >
+                                    <label for="tool" class="form-label text-default"><strong>Tool ID</strong><span class="text-danger"> *</span></label><br>
+                                    <mat-form-field class="form-select form-select-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark">
                                         <mat-select formControlName="tools" multiple>
                                             @for (topping of toolsList; track topping) {
                                             <mat-option [value]="topping">{{topping}}</mat-option>
