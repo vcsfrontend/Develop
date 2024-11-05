@@ -20,9 +20,19 @@
                                     <select class="form-select form-select-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark"  id="role-id" formControlName="type"
                                         [ngClass]="{ 'is-invalid': submitted && f['type'].errors }" (change)="onDropdownChange()">
                                         <option value="" disabled selected>Select type</option>
-                                        <option value="1">Individual</option>
-                                        <option value="2">Enterprise</option>
-                                    </select>
+                                        <option value="1">Individual
+                                            <mat-icon>perm_identity</mat-icon>
+                                            <!-- <img src="../../../../../assets/images/icons/Person.png"></option> -->
+                                            <span class="material-symbols-outlined">
+                                                person
+                                                </span>
+                                            <option value="2">Enterprise
+                                            <mat-icon> business</mat-icon>
+                                            <!-- <img src="../../../../../assets/images/icons/Office.png"></option> -->
+                                            <span class="material-symbols-outlined">
+                                                apartment
+                                                </span>
+                                        </select>
                                     <div *ngIf="submitted && f['type'].errors" class="invalid-feedback">
                                         <div *ngIf="f['type'].errors['required']">Type is required</div>
                                     </div>
@@ -280,7 +290,7 @@
                                     </div>
                                 </div> -->
                                 <div class="col-xl-6">
-                                    <label for="role-id" class="form-label text-default"><strong>Tool ID</strong><span class="text-danger"> *</span></label>
+                                    <label for="role-id" class="form-label text-default"><strong>Tool ID</strong><span class="text-danger"> *</span></label><br>
                                     <mat-form-field >
                                         <mat-select formControlName="tools" multiple>
                                             @for (topping of toolsList; track topping) {
