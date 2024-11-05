@@ -21,17 +21,17 @@
                                         [ngClass]="{ 'is-invalid': submitted && f['type'].errors }" (change)="onDropdownChange()">
                                         <option value="" disabled selected>Select type</option>
                                         <option value="1">Individual
-                                            <mat-icon>perm_identity</mat-icon>
+                                            <!-- <mat-icon>perm_identity</mat-icon> -->
                                             <!-- <img src="../../../../../assets/images/icons/Person.png"></option> -->
-                                            <span class="material-symbols-outlined">
+                                            <!-- <span class="material-symbols-outlined">
                                                 person
-                                                </span>
+                                                </span> -->
                                             <option value="2">Enterprise
-                                            <mat-icon> business</mat-icon>
+                                            <!-- <mat-icon> business</mat-icon> -->
                                             <!-- <img src="../../../../../assets/images/icons/Office.png"></option> -->
-                                            <span class="material-symbols-outlined">
+                                            <!-- <span class="material-symbols-outlined">
                                                 apartment
-                                                </span>
+                                                </span> -->
                                         </select>
                                     <div *ngIf="submitted && f['type'].errors" class="invalid-feedback">
                                         <div *ngIf="f['type'].errors['required']">Type is required</div>
