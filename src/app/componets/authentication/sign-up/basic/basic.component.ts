@@ -1,3 +1,4 @@
+//sig u .ts
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { Component, input, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
@@ -17,6 +18,9 @@ import { BaseComponent } from '../../../../shared/base/base.component';
 import { OverlayscrollbarsModule } from 'overlayscrollbars-ngx';
 import { Title } from 'chart.js';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { NgbOffcanvas, OffcanvasDismissReasons,} from '@ng-bootstrap/ng-bootstrap';
+// import { ShowcodeCardComponent } from '../../../shared/common/includes/showcode-card/showcode-card.component';
+
 import { NgbDropdownModule, NgbNavModule, NgbModal, NgbModalConfig, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -70,7 +74,7 @@ export class BasicComponent extends BaseComponent implements OnInit {
   
   constructor(public fb: FormBuilder, public switchService: SwitherService, 
     private toastr: ToastrService, private router: Router, private dp: DatePipe,
-     private modalService: NgbModal,  private viewContainerRef: ViewContainerRef ){
+     private modalService: NgbModal,  private viewContainerRef: ViewContainerRef,private offcanvasService: NgbOffcanvas ){
     super();
     // document.body.classList.add('authentication-background');
     this.signupFrm.get('password')?.valueChanges.subscribe((value) => {
@@ -420,5 +424,14 @@ export class BasicComponent extends BaseComponent implements OnInit {
       keyboard: false , centered: true 
     });
   }
-  
+  openTop(content: any) {
+    this.offcanvasService.open(content, { position: 'top' });
+  }
+  openRight(content: any) {
+    this.offcanvasService.open(content, { position: 'end' });
+  }
+
+  openBottom(content: any) {
+    this.offcanvasService.open(content, { position: 'bottom' });
+  }
 }
