@@ -39,7 +39,7 @@ import { SwitherService } from '../../../shared/services/swither.service';
   styleUrl: './superadmin.component.scss'
 })
 export class SuperadminComponent {
-  displayedColumns: string[] = ['slNo', 'firstName', 'lastName', 'email', 'adonai', 'crm', 'action'];
+  displayedColumns: string[] = ['slNo', 'firstName', 'lastName', 'email', 'adonai', 'crm', 'action', 'view', 'edit' ];
   dataSource = new MatTableDataSource<any>(); 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild('modalTemplate') modalTemplate!: TemplateRef<any>;  // Access the ng-template
