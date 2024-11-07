@@ -15,7 +15,7 @@ import { AppStateService } from './shared/services/app-state.service';
     imports: [FilePondModule, RouterOutlet, ToastrModule, NgxEchartsModule, ColorPickerModule]
 })
 export class AppComponent {
-  title = 'udon';
+  title = 'VCS';
 
   constructor(private appState : AppStateService){
     this.appState.updateState();

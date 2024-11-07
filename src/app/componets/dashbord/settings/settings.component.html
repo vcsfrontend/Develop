@@ -1,6 +1,6 @@
 <div class="my-4 page-header-breadcrumb d-flex align-items-center justify-content-between flex-wrap gap-2">
     <div>
-        <h1 class="page-title fw-medium fs-18 mb-2">New Settings</h1>
+        <h1 class="page-title fw-medium fs-18 mb-2">Settings</h1>
         <div class="">
             <nav>
                 <ol class="breadcrumb mb-0">
@@ -263,7 +263,6 @@
                                         (copy)="preventCopyPaste($event)" (cut)="preventCopyPaste($event)" (paste)="preventCopyPaste($event)"
                                         maxlength="16" [ngClass]="{ 'is-invalid': submitted && f['password'].errors }">
                                         <span class="checkmark" *ngIf="isPasswordValid">&#10003;</span>
-                                    
                                     <a href="javascript:void(0);" class="show-password-button text-muted"
                                         (click)="createpassword()" id="button-addon2"><i class="ri-eye-{{toggleClass}} align-middle"></i></a>
                                         <div class="message" [style.color]="passwordStrengthColor">
@@ -288,7 +287,8 @@
                                         [type]="showPassword1 ? 'text' : 'password'" autocomplete maxlength="16"
                                         (copy)="preventCopyPaste($event)" (cut)="preventCopyPaste($event)" (paste)="preventCopyPaste($event)"
                                         onkeypress='return ((event.charCode >= 33 && event.charCode <= 127) || event.charCode == 8)' 
-                                        [(ngModel)]="cnfmPaswrd" appShowCodeContent [ngClass]="{ 'is-invalid': submitted && f['confirmPassword'].errors }">
+                                        [(ngModel)]="cnfmPaswrd" 
+                                        appShowCodeContent [ngClass]="{ 'is-invalid': submitted && f['confirmPassword'].errors }">
                                     <span class="checkmark" *ngIf="isCnfmPwd">&#10003;</span>
                                     <a href="javascript:void(0);" class="show-password-button text-muted"
                                         (click)="createpassword1()" id="button-addon21"><i
@@ -312,7 +312,6 @@
                                     <div *ngIf="f['phoneNumber'].errors['required']">Phone Number is required</div>
                                 </div>
                             </div>
-                            
                             <div class="col-xl-4">
                                 <label for="role-id" class="form-label text-default"><strong>Tool ID</strong><span class="text-danger"> *</span></label>
                                 <br>
@@ -323,7 +322,9 @@
                                         }
                                     </mat-select>
                                     <mat-error *ngIf="f['tools'].errors?.['required']">
-                                        Please select at least one tool.
+                                        <!-- <div *ngIf="submitted"> -->
+                                            Please select at least one tool.
+                                        <!-- </div> -->
                                     </mat-error>
                                 </mat-form-field>
                             </div>

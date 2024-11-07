@@ -375,4 +375,9 @@ export class HeaderComponent implements OnInit {
   toggleFullscreen() {
     this.isFullscreen = !this.isFullscreen;
   }
+
+  onLogout(){
+    this.router.navigate(['/auth/login']);
+    window.open(`https://crmexpert.vcs.plus/auth/logout`);
+  }
 }

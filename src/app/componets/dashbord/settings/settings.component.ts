@@ -42,7 +42,8 @@ export class SettingsComponent extends BaseComponent implements OnInit{
   isAddEdt = false; aeTyp='a'; playersList: any; editData: any; 
   adonai= false; crm = false; userLst:any; 
   submitted = false; userData: any;
-  userForm!: FormGroup; cnfmPaswrd: any = ''; paswrd:any = '';
+  // userForm!: FormGroup;
+   cnfmPaswrd: any = ''; paswrd:any = '';
   adoanAiRole :any; todayDt = new Date(); 
   crmRole :any; toolsList = [Tools.Adonai,Tools.Crm];
   passwordStrengthMessage: string = '';
@@ -55,22 +56,41 @@ export class SettingsComponent extends BaseComponent implements OnInit{
    isShowUsers = false; pload:any[] = [];isOkBtn = false;
   @ViewChild('modalTemplate') modalTemplate!: TemplateRef<any>;  // Access the ng-template
   private modalRef: any; noUsers:any=''; users:any = '';
+  userForm: FormGroup = this.fb.group({ 
+    type : [2],
+    firstName: ['', Validators.required],
+    lastName: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
+    country: ['', Validators.required],
+    dob: [new Date().toISOString().split('T')[0], Validators.required],
+    crm:false,
+    adonai:false,
+    phoneNumber: ['', Validators.required],
+    username: [''],
+    password: ['', [Validators.required, this.passwordValidator]],
+    confirmPassword: ['', Validators.required],
+    tools : [[],Validators.required],
+  })
   
   constructor(public fb: FormBuilder, public switchService: SwitherService, 
     private toastr: ToastrService,private router: Router, private dp: DatePipe,
     private modalService: NgbModal,  private viewContainerRef: ViewContainerRef ){
       super();
-      this.userData = localStorage.getItem('userDetails'),
+      this.userData = localStorage.getItem('userDetails');
+      this.formInit();
+  }
+
+    ngOnInit(){
+      this.formInit(); this.getUsers();
+      // setTimeout(() => {
+        
+      // }, 500);
       this.userForm?.get('password')?.valueChanges.subscribe((value) => {
         this.checkPasswordStrength(value);
       });
       this.userForm?.get('confirmPassword')?.valueChanges.subscribe((value) => {
         this.checkPasswordMatch(value);
       });
-  }
-
-    ngOnInit(){
-      this.formInit(); this.getUsers();
     }
 
     ngAfterViewInit() {
@@ -86,21 +106,21 @@ export class SettingsComponent extends BaseComponent implements OnInit{
     }
 
     formInit(){
-      this.userForm = this.fb.group({
-        type : [2],
-        firstName: ['', Validators.required],
-        lastName: ['', Validators.required],
-        email: ['', [Validators.required, Validators.email]],
-        country: ['', Validators.required],
-        dob: [new Date(), Validators.required],
-        crm:false,
-        adonai:false,
-        phoneNumber: ['', Validators.required],
-        username: [''],
-        password: ['', [Validators.required, this.passwordValidator]],
-        confirmPassword: ['', Validators.required],
-        tools : [[],Validators.required],
-      })
+      // this.userForm = this.fb.group({
+        // type : [2],
+        // firstName: ['', Validators.required],
+        // lastName: ['', Validators.required],
+        // email: ['', [Validators.required, Validators.email]],
+        // country: ['', Validators.required],
+        // dob: [new Date().toISOString().split('T')[0], Validators.required],
+        // crm:false,
+        // adonai:false,
+        // phoneNumber: ['', Validators.required],
+        // username: [''],
+        // password: ['', [Validators.required, this.passwordValidator]],
+        // confirmPassword: ['', Validators.required],
+        // tools : [[],Validators.required],
+      // })
     }
 
     // getSNo(index: number): number {
@@ -112,7 +132,7 @@ export class SettingsComponent extends BaseComponent implements OnInit{
           return this.paginator.pageIndex * this.paginator.pageSize + index + 1;
       }
       return index + 1; // Default return if paginator is not yet defined
-  }
+    }
     
     
     getUsers(){
@@ -242,7 +262,7 @@ export class SettingsComponent extends BaseComponent implements OnInit{
       const crm = this.userForm.get('tools')?.value.includes('CRM');
       const adonai = this.userForm.get('tools')?.value.includes('Adonai');
       let payload = this.userForm.getRawValue();
-      
+      payload.username = payload.firstName + ' ' + payload.lastName,
       payload.crm = crm,
       payload.adonai = adonai,
       payload.phoneNumber = +payload.phoneNumber, delete payload.tools, delete payload.confirmPassword,
@@ -418,7 +438,20 @@ export class SettingsComponent extends BaseComponent implements OnInit{
     }
 
     onRst(){
-      this.formInit(); this.getUsers();
+      this.formInit(); this.getUsers(); this.submitted = false;
+      this.userForm.patchValue({ 
+        type : [2],
+        firstName: '',
+        lastName: '',
+        email: '',
+        country: '',
+        dob: new Date().toISOString().split('T')[0],
+        phoneNumber: '',
+        username: '',
+        password: '',
+        confirmPassword: '',
+        tools : [],
+       })
     }
 
     
