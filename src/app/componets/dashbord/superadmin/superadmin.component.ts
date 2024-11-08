@@ -45,15 +45,17 @@ export class SuperadminComponent {
   @ViewChild('modalTemplate') modalTemplate!: TemplateRef<any>;  // Access the ng-template
   private modalRef: any;
   userLst:any; userData: any;
-  content3: any;
-  content4: any;
-  content5: any;
-  content6: any;
-  content7: any;
+  content3: any; content4: any; content5: any; content6: any; content7: any;
   firstNm: any; lastNm: any; companyNm: any; phoneNo: any; dob: any;
+  adonaiData: any; crmData: any; 
+  adonaiEmail: any; adonaiRoleId: any; isAdonai: any; adonaiActivitySts: any; 
+  adonaiSubStartDate: any; adonaiSubEndDate: any; adonaiSubDate: any; adonaiRemarks: any; 
+  crmEmail: any; crmRoleId: any; isCrm: any; crmStatus: any; crmSubStartDate: any; 
+  crmSubEndDate: any; crmSubDate: any; crmRemarks: any; 
+  isAdonaiView = false; isCrmView = false;
 
   constructor(config: NgbModalConfig, private modalService: NgbModal, private viewContainerRef: ViewContainerRef,
-    public switchService: SwitherService, private toastr: ToastrService,) {
+    public switchService: SwitherService, private toastr: ToastrService, private dp: DatePipe) {
   }
 
   applyFilter(event: Event) {
@@ -94,10 +96,10 @@ export class SuperadminComponent {
     return index + 1; // Default return if paginator is not yet defined
   }
   
-  onClkRB(gI: number, crdtNteDtls: any) {
+  // onClkRB(gI: number, crdtNteDtls: any) {
     // this.userLst.forEach((e:any) => { e.isChk = false}), this.lstGrid[gI].isChk = true;
     // this.crdtNteDtls = crdtNteDtls != '' ? crdtNteDtls: 0;
-  }
+  // }
   
   getUsers(){
     this.switchService.getAllUsers().subscribe({ next: (res:any) => {
@@ -113,6 +115,106 @@ export class SuperadminComponent {
         }
       }
     })
+  }
+
+  getAdonai(data: any, ctrl: string =''){
+    ctrl == 'v' ? (this.isAdonaiView = true) : (this.isAdonaiView = false);
+    this.switchService.onAdonaiView(data.email).subscribe({ next: (res:any) => {
+      if(res){
+        this.adonaiData = res
+        this.adonaiEmail = data.email; 
+        this.adonaiRoleId = res.roleId; 
+        // this.isAdonai = res.email; 
+        this.adonaiActivitySts = res.activityStatus; 
+        this.adonaiSubStartDate = this.dp.transform(res.subStartDate, 'yyyy-MM-dd'); 
+        this.adonaiSubEndDate = res.subEndDate; 
+        this.adonaiSubDate = res.subscriptionDate; 
+        this.adonaiRemarks = res.remarks; 
+      //   {
+      //     "email": null,
+      //     "roleId": 12,
+      //     "activityStatus": true,
+      //     "subscriptionDate": "",
+      //     "subStartDate": "2024-10-16T13:58:55.506427433",
+      //     "subEndDate": "",
+      //     "remarks": null,
+      //     "updatedBy": "",
+      //     "updatedDate": ""
+      // }
+        } else{
+          this.toastr.error(res.message);
+          return;
+        }
+      }
+    })
+  }
+
+  getCrm(data:any, ctrl:string = ''){
+    ctrl == 'v' ? (this.isCrmView = true) : (this.isCrmView = false);
+    this.switchService.onCrmView(data.email).subscribe({ next: (res:any) => {
+      if(res){
+        this.crmData = res,
+        this.crmEmail = data.email; 
+        this.crmRoleId = res.roleId; 
+        this.isCrm = true; 
+        this.crmStatus = res.crmActivityStatus; 
+        this.crmSubStartDate = res.subStartDate; 
+        this.crmSubEndDate = res.subEndDate; 
+        this.crmSubDate = res.subDate; 
+        this.crmRemarks = res.remarks; 
+        // {
+        //   "roleId": 0,
+        //   "crmActivityStatus": true,
+        //   "subDate": "",
+        //   "subStartDate": "2024-10-16T13:58:58.969282899",
+        //   "subEndDate": "",
+        //   "updatedBy": "",
+        //   "updatedDate": "",
+        //   "remarks": null
+        // }
+        
+        } else{
+          this.toastr.error(res.message);
+          return;
+        }
+      }
+    })
+  }
+
+  updateAdonai(){
+    // this.submitted = true; 
+    let payload = {
+        "email": this.adonaiEmail,
+        "roleId": this.adonaiRoleId,
+        "activityStatus": this.adonaiActivitySts,
+        "subscriptionDate": this.dp.transform(this.adonaiSubDate, 'dd-MM-yyyy'),
+        "subStartDate": this.dp.transform(this.adonaiSubStartDate, 'dd-MM-yyyy'),
+        "subEndDate": this.dp.transform(this.adonaiSubEndDate, 'dd-MM-yyyy'),
+        "remarks": this.adonaiRemarks,
+        "updatedBy": ""
+    };
+    // payload.type = +payload.type, 
+    // payload.dob = this.dp.transform(payload.dob, 'dd-MM-yyyy');
+    // if (this.signupFrm.invalid) {
+    //   this.toastr.error('Please fill mandatory fields');
+    //   this.btnDisable = false;
+    //     return;
+    // }
+    // else{
+    console.log('pl-',payload);
+    return;
+      this.switchService.onAdonaiUpdate(payload).subscribe({ next: (res:any) => {
+        if(res.status == true){
+          this.toastr.success(res.message,'signup', {
+            timeOut: 3000, positionClass: 'toast-top-right' });
+          } else {
+            // this.btnDisable = false;
+            this.toastr.error(res.message,'signup', {
+              timeOut: 3000, positionClass: 'toast-top-right' });
+          }
+        }
+      })
+    // }
   }
 
   openLg(content10:any) {

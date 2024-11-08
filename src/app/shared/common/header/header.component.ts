@@ -378,6 +378,6 @@ export class HeaderComponent implements OnInit {
 
   onLogout(){
     this.router.navigate(['/auth/login']);
-    window.open(`https://crmexpert.vcs.plus/auth/logout`);
+    // window.open(`https://crmexpert.vcs.plus/auth/logout`);
   }
 }
