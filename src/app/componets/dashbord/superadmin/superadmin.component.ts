@@ -39,7 +39,7 @@ import { SwitherService } from '../../../shared/services/swither.service';
   styleUrl: './superadmin.component.scss'
 })
 export class SuperadminComponent {
-  displayedColumns: string[] = ['slNo', 'firstName', 'lastName', 'email', 'adonai', 'crm', 'action', 'view', 'edit' ];
+  displayedColumns: string[] = ['slNo', 'firstName', 'lastName', 'mobile', 'adonai', 'crm', 'action', 'view', 'edit' ];
   dataSource = new MatTableDataSource<any>(); 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild('modalTemplate') modalTemplate!: TemplateRef<any>;  // Access the ng-template
@@ -52,7 +52,7 @@ export class SuperadminComponent {
   adonaiSubStartDate: any; adonaiSubEndDate: any; adonaiSubDate: any; adonaiRemarks: any; 
   crmEmail: any; crmRoleId: any; isCrm: any; crmStatus: any; crmSubStartDate: any; 
   crmSubEndDate: any; crmSubDate: any; crmRemarks: any; 
-  isAdonaiView = false; isCrmView = false;
+  isAdonaiView = false; isCrmView = false; userNm: any;
 
   constructor(config: NgbModalConfig, private modalService: NgbModal, private viewContainerRef: ViewContainerRef,
     public switchService: SwitherService, private toastr: ToastrService, private dp: DatePipe) {
@@ -118,6 +118,7 @@ export class SuperadminComponent {
   }
 
   getAdonai(data: any, ctrl: string =''){
+    this.userNm = data.username,
     ctrl == 'v' ? (this.isAdonaiView = true) : (this.isAdonaiView = false);
     this.switchService.onAdonaiView(data.email).subscribe({ next: (res:any) => {
       if(res){
@@ -150,6 +151,7 @@ export class SuperadminComponent {
   }
 
   getCrm(data:any, ctrl:string = ''){
+    this.userNm = data.username,
     ctrl == 'v' ? (this.isCrmView = true) : (this.isCrmView = false);
     this.switchService.onCrmView(data.email).subscribe({ next: (res:any) => {
       if(res){
@@ -172,7 +174,6 @@ export class SuperadminComponent {
         //   "updatedDate": "",
         //   "remarks": null
         // }
-        
         } else{
           this.toastr.error(res.message);
           return;
@@ -191,7 +192,7 @@ export class SuperadminComponent {
         "subStartDate": this.dp.transform(this.adonaiSubStartDate, 'dd-MM-yyyy'),
         "subEndDate": this.dp.transform(this.adonaiSubEndDate, 'dd-MM-yyyy'),
         "remarks": this.adonaiRemarks,
-        "updatedBy": ""
+        "updatedBy": this.userNm
     };
     // payload.type = +payload.type, 
     // payload.dob = this.dp.transform(payload.dob, 'dd-MM-yyyy');
@@ -202,15 +203,12 @@ export class SuperadminComponent {
     // }
     // else{
     console.log('pl-',payload);
-    return;
       this.switchService.onAdonaiUpdate(payload).subscribe({ next: (res:any) => {
         if(res.status == true){
-          this.toastr.success(res.message,'signup', {
-            timeOut: 3000, positionClass: 'toast-top-right' });
+          this.toastr.success(res.message)
           } else {
             // this.btnDisable = false;
-            this.toastr.error(res.message,'signup', {
-              timeOut: 3000, positionClass: 'toast-top-right' });
+            this.toastr.error(res.message);
           }
         }
       })
