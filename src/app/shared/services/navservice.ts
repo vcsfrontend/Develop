@@ -122,7 +122,7 @@ export class NavService implements OnDestroy {
       type: 'link',
       linkType : 'internal',
       active: false,
-      path : "/dashboard/orgSettings"
+      path : "/dashboard/settings"
     },
     {
       title: 'Design',
@@ -141,6 +141,15 @@ export class NavService implements OnDestroy {
       linkType : 'external',
       active: false,
       path : "/dashboard/hrm"
+    },
+    {
+      title: 'superadmin',
+      icon: 'bi-file-earmark',
+      dirchange: false,
+      type: 'link',
+      linkType : 'external',
+      active: false,
+      path : "/dashboard/superadmin"
     },
 
 

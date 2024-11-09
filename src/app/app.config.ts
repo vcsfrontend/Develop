@@ -28,6 +28,12 @@ export const appConfig: ApplicationConfig = {
   providers: [provideRouter(App_Route), AngularFireModule,
     AngularFireDatabaseModule,
     AngularFirestoreModule,
-    AngularFireAuthModule, provideAnimations(),importProvidersFrom(AppStateService,ColorPickerModule,AngularFireModule.initializeApp(environment.firebase), ToastrModule.forRoot({ positionClass: 'top' }),FullCalendarModule,FilePondModule,NgbNavModule,EditorModule,NgbCollapseModule,NgxCleaveDirectiveModule,TableModule,NgxSliderModule,FlatpickrModule,MatTableModule,MatTableDataSource,NgApexchartsModule,LeafletModule,ColorPickerModule,HttpClientModule,HttpClientJsonpModule)],
-
+    AngularFireAuthModule, provideAnimations(),importProvidersFrom(AppStateService,ColorPickerModule,
+      AngularFireModule.initializeApp(environment.firebase), 
+      ToastrModule.forRoot({ timeOut: 3000, positionClass: 'toast-top-right' }),
+      FullCalendarModule,FilePondModule,NgbNavModule,EditorModule,
+      NgbCollapseModule,NgxCleaveDirectiveModule,TableModule,NgxSliderModule,
+      FlatpickrModule,MatTableModule,MatTableDataSource,NgApexchartsModule,
+      LeafletModule,ColorPickerModule,HttpClientModule,HttpClientJsonpModule)],
+   
   }

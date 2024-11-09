@@ -38,6 +38,11 @@ export const admin: Routes = [
     import('./hrm/hrm.component').then((m) => m.HrmComponent),
 },
 {
+  path: 'superadmin',
+  loadComponent: () =>
+    import('./superadmin/superadmin.component').then((m) => m.SuperadminComponent),
+},
+{
   path: 'nft',
   loadComponent: () =>
     import('./nft/nft.component').then((m) => m.NftComponent),

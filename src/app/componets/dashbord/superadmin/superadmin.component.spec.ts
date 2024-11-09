@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BasicComponent } from './basic.component';
+import { SuperadminComponent } from './superadmin.component';
 
-describe('BasicComponent', () => {
-  let component: BasicComponent;
-  let fixture: ComponentFixture<BasicComponent>;
+describe('SuperadminComponent', () => {
+  let component: SuperadminComponent;
+  let fixture: ComponentFixture<SuperadminComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BasicComponent]
+      imports: [SuperadminComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(BasicComponent);
+    fixture = TestBed.createComponent(SuperadminComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -20,7 +20,4 @@ describe('BasicComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  
 });
-
-

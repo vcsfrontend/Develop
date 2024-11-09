@@ -1,9 +1,10 @@
+//sig u .ts
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { Component, input, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SwitherService } from '../../../../shared/services/swither.service';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAccordionConfig, NgbAccordionModule, NgbCollapseModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { FirebaseService } from '../../../../shared/services/firebase.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -17,19 +18,30 @@ import { BaseComponent } from '../../../../shared/base/base.component';
 import { OverlayscrollbarsModule } from 'overlayscrollbars-ngx';
 import { Title } from 'chart.js';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
-import { NgbDropdownModule, NgbNavModule, NgbModal, NgbModalConfig, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgbOffcanvas, OffcanvasDismissReasons,} from '@ng-bootstrap/ng-bootstrap';
+// import { ShowcodeCardComponent } from '../../../shared/common/includes/showcode-card/showcode-card.component';
 
+import { NgbDropdownModule, NgbNavModule, NgbModal, NgbModalConfig, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import * as prismCodeData from '../../../../shared/prismData/advancedUi/accordion';
+//'../../../shared/prismData/advancedUi/accordion'
 @Component({
   selector: 'app-basic',
   standalone: true,
   imports: [RouterModule,NgbModule,FormsModule,ReactiveFormsModule ,ToastrModule, MatIconModule,
-    MatFormFieldModule, MatSelectModule, CommonModule, FlatpickrModule, OverlayscrollbarsModule, ShowCodeContentDirective],
+    MatFormFieldModule, MatSelectModule, CommonModule, FlatpickrModule, OverlayscrollbarsModule, 
+    NgbAccordionModule,NgbCollapseModule,ShowCodeContentDirective],
     // AngularFireModule,  AngularFireDatabaseModule, AngularFirestoreModule,
   providers: [FirebaseService,{ provide: ToastrService, useClass: ToastrService },FlatpickrDefaults, DatePipe],
   templateUrl: './basic.component.html',
   styleUrl: './basic.component.scss'
 })
 export class BasicComponent extends BaseComponent implements OnInit {
+  prismCode = prismCodeData;
+ 
+isCollapsed = true;
+isCollapsed1 = true;
+isCollapsed2 = true;
+
   crm = false; submitted =false; cnfmPaswrd: any = ''; paswrd:any = ''; mailId:any = '';
   adonai = false; btnDisable = false; todayDt = new Date(); isBtnDsbl = false;
   adoanAiRole :any; isEmailDisabled = false; isOtpDisabled = false; isCompany : string = 'col-xl-6';
@@ -70,8 +82,10 @@ export class BasicComponent extends BaseComponent implements OnInit {
   
   constructor(public fb: FormBuilder, public switchService: SwitherService, 
     private toastr: ToastrService, private router: Router, private dp: DatePipe,
-     private modalService: NgbModal,  private viewContainerRef: ViewContainerRef ){
+     private modalService: NgbModal,  private viewContainerRef: ViewContainerRef,
+     private offcanvasService: NgbOffcanvas, config: NgbAccordionConfig ){
     super();
+    config.closeOthers = true;
     // document.body.classList.add('authentication-background');
     this.signupFrm.get('password')?.valueChanges.subscribe((value) => {
       this.checkPasswordStrength(value);
@@ -420,5 +434,14 @@ export class BasicComponent extends BaseComponent implements OnInit {
       keyboard: false , centered: true 
     });
   }
-  
+  openTop(content: any) {
+    this.offcanvasService.open(content, { position: 'top' });
+  }
+  openRight(content: any) {
+    this.offcanvasService.open(content, { position: 'end' });
+  }
+
+  openBottom(content: any) {
+    this.offcanvasService.open(content, { position: 'bottom' });
+  }
 }
