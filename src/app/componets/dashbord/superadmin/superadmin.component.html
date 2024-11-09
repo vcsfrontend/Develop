@@ -6,56 +6,34 @@
     <div class="col-xl-12">
         <div class="card custom-card">
             <div class="card-header justify-content-between">
-                <div class="card-title">Users </div>
+                <div class="card-title">
+                    <h4>Users</h4> 
+                </div>
                 <div class="d-flex flex-wrap gap-3">
-                    <div>
-                        <input class="form-control form-control-sm" type="text" placeholder="Search Here"
-                            aria-label=".form-control-sm example">
-                    </div>
-                    <div ngbDropdown class="dropdown">
-                        <a ngbDropdownToggle href="javascript:void(0);"
-                            class="btn btn-primary btn-sm btn-wave waves-effect waves-light" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Sort By
-                        </a>
-                        <ul ngbDropdownMenu class="dropdown-menu" role="menu">
-                            <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">New</a></li>
-                            <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">Popular</a></li>
-                            <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">Relevant</a></li>
-                        </ul>
-                    </div>
-                    <!-- <a routerLink="apps/projects/create-project" class="btn btn-primary me-2" href="apps/projects/create-project"><i
-                        class="ri-add-line me-1 fw-medium align-middle"></i>New Project</a> -->
-                        <div>
-                            <!-- <a routerLink="/apps/projects/create-project" class="btn btn-sm btn-secondary btn-wave" href="apps/projects/create-project"><i class="ri-add-line align-middle me-1 fw-medium"></i>Create Project</a> -->
-                            <a  class="btn btn-sm btn-secondary btn-wave" ><i class="ri-add-line align-middle me-1 fw-medium"></i>Create Project</a>
-                        </div>
+                    <input class="form-control form-control-sm" type="text" placeholder="Search Here"
+                        aria-label=".form-control-sm example">
                 </div>
             </div>
             <div class="card-body p-0">
                 <div class="mat-elevation-z8">
-                    <mat-form-field>
+                    <mat-form-field class="mt-2 p-2">
                         <mat-label>Filter</mat-label>
                         <input matInput (keyup)="applyFilter($event)" #input>
                     </mat-form-field>
                     <div class="table-responsive">
                         <table mat-table [dataSource]="dataSource">
-                            <!-- Position Column -->
                             <ng-container matColumnDef="slNo">
                                 <th mat-header-cell *matHeaderCellDef> S.No. </th>
                                 <td mat-cell *matCellDef="let element; let i = index"> {{getSNo(i)}} </td>
                             </ng-container>
-                            <!-- Name Column -->
                             <ng-container matColumnDef="firstName">
                                 <th mat-header-cell *matHeaderCellDef> First Name </th>
                                 <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
                             </ng-container>
-                            <!-- Weight Column -->
                             <ng-container matColumnDef="lastName">
                                 <th mat-header-cell *matHeaderCellDef> Last Name </th>
                                 <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
                             </ng-container>
-                            <!-- Symbol Column -->
                             <!-- <ng-container matColumnDef="email">
                                 <th mat-header-cell *matHeaderCellDef> Email </th>
                                 <td mat-cell *matCellDef="let element"> {{element.email}} </td>
@@ -89,7 +67,7 @@
                             <ng-container matColumnDef="view">
                                 <th mat-header-cell *matHeaderCellDef>Adonai</th>
                                 <td mat-cell *matCellDef="let element">
-                                    <div class="hstack gap-2 fs-15">
+                                    <div class="hstack gap-2 fs-15" *ngIf="element.adonai">
                                         <a aria-label="anchor" href="javascript:void(0);"
                                             class="btn btn-icon btn-sm btn-success" data-bs-toggle="modal" 
                                             (click)="VerticallyScrol(content6); getAdonai(element, 'v')"
@@ -99,13 +77,13 @@
                                             class="btn btn-icon btn-sm btn-info" data-bs-toggle="modal" 
                                             (click)="VerticallyScrol(content6);getAdonai(element, 'e')"
                                             data-bs-target="#exampleModalScrollable345"><i class="ri-edit-line"></i></a>
-                                    </div>   
+                                    </div>
                                 </td>
                             </ng-container>
                             <ng-container matColumnDef="edit">
                                 <th mat-header-cell *matHeaderCellDef>CRM</th>
                                 <td mat-cell *matCellDef="let element">
-                                    <div class="hstack gap-2 fs-15">
+                                    <div class="hstack gap-2 fs-15" *ngIf="element.crm">
                                         <a aria-label="anchor" href="javascript:void(0);"
                                             class="btn btn-icon btn-sm btn-success" data-bs-toggle="modal" 
                                             (click)="VerticallyScrol(content5); getCrm(element, 'v')" data-bs-target="#exampleModalScrollable34"><i
@@ -131,34 +109,59 @@
                     <div class="modal-content">
                         <ng-template #Content10 let-modal>
                             <div class="modal-header">
-                                <h6 class="modal-title" id="exampleModalLgLabel">Personal Information</h6>
+                                <h6 class="modal-title" id="exampleModalLgLabel"><b>Personal Information</b></h6>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     (click)="modal.dismiss('Cross click')" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 <div class="row">
-                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                                        <label for="input-text" class="form-label">Type</label>
+                                        <input type="text" class="form-control" id="input-text" [(ngModel)]="type" readonly>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
                                         <label for="input-text" class="form-label">First Name</label>
-                                        <input type="text" class="form-control" id="input-text" placeholder="Text"
-                                        [(ngModel)]="firstNm">
+                                        <input type="text" class="form-control" id="input-text" [(ngModel)]="firstNm" readonly>
                                     </div>
-                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
                                         <label for="input-text" class="form-label">Last Name</label>
-                                        <input type="text" class="form-control" id="input-text" placeholder="Text"
-                                        [(ngModel)]="lastNm">
+                                        <input type="text" class="form-control" id="input-text" [(ngModel)]="lastNm" readonly>
                                     </div>
-                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
                                         <label for="input-text" class="form-label">Company Name</label>
-                                        <input type="text" class="form-control" id="input-text" placeholder="Text"
-                                        [(ngModel)]="companyNm">
+                                        <input type="text" class="form-control" id="input-text" [(ngModel)]="companyNm" readonly>
                                     </div>
-                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                                        <label for="input-text" class="form-label">No.of Users</label>
+                                        <input type="text" class="form-control" id="input-text" [(ngModel)]="users" readonly>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                                        <label for="input-text" class="form-label">Email</label>
+                                        <input type="text" class="form-control" id="input-text" [(ngModel)]="email" readonly>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
                                         <label for="input-date" class="form-label">Date Of Birth</label>
-                                        <input type="text" class="form-control" id="input-date" [(ngModel)]="dob">
+                                        <input type="text" class="form-control" id="input-date" [(ngModel)]="dob" readonly>
                                     </div>
-                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                                        <label for="input-date" class="form-label">Username</label>
+                                        <input type="text" class="form-control" id="input-date" [(ngModel)]="username" readonly>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
                                         <label for="input-tel" class="form-label">Phone Number</label>
-                                        <input type="tel" class="form-control" id="input-tel" [(ngModel)]="phoneNo">
+                                        <input type="tel" class="form-control" id="input-tel" [(ngModel)]="phoneNo" readonly>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                                        <label for="input-tel" class="form-label">Country</label>
+                                        <input type="tel" class="form-control" id="input-tel" [(ngModel)]="country" readonly>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                                        <label for="input-tel" class="form-label">Adonai</label>
+                                        <input type="tel" class="form-control" id="input-tel" [(ngModel)]="isAdonaiTrue" readonly>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                                        <label for="input-tel" class="form-label">Crm</label>
+                                        <input type="tel" class="form-control" id="input-tel" [(ngModel)]="isCrmTrue" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -173,129 +176,126 @@
         </div>
     </div>
 </div>
-<!-- End:: row-3 -->
 
 <!-- Crm -->
 <div class="modal fade" id="exampleModalScrollable34" tabindex="-1" aria-labelledby="exampleModalScrollable34" data-bs-keyboard="false" aria-hidden="true">
-    <!-- Scrollable modal -->
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-                <ng-template #content5 let-modal>
-                    <div class="modal-header justify-content-center">
-                        <h6 class="modal-title" id="staticBackdropLabel3">Crm Information</h6>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                            (click)="modal.dismiss('Cross click')" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <!-- <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                <label for="input-text" class="form-label">Email</label>
-                                <input type="text" class="form-control" id="input-text" 
-                                [(ngModel)]="crmEmail" [disabled]="isCrmView">
-                            </div> -->
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                <label for="input-text" class="form-label">Role Id</label>
-                                <input type="text" class="form-control" id="input-text" 
-                                [(ngModel)]="crmRoleId" [disabled]="isCrmView">
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                <label for="input-text" class="form-label">CRM Activity Status</label>
-                                <input type="text" class="form-control" id="input-text" 
-                                [(ngModel)]="crmStatus" [disabled]="isCrmView">
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                <label for="input-date" class="form-label">Sub Start date</label>
-                                <input type="date" class="form-control" id="input-date" 
-                                [(ngModel)]="crmSubStartDate" [disabled]="isCrmView">
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                <label for="input-date" class="form-label">Sub End date</label>
-                                <input type="date" class="form-control" id="input-date" 
-                                [(ngModel)]="crmSubEndDate" [disabled]="isCrmView">
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                <label for="input-date" class="form-label">Subscription</label>
-                                <input type="date" class="form-control" id="input-date" 
-                                [(ngModel)]="crmSubDate" [disabled]="isCrmView">
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                <label for="input-text" class="form-label">Remarks</label>
-                                <input type="text" class="form-control" id="input-text" 
-                                [(ngModel)]="crmRemarks" [disabled]="isCrmView">
-                            </div>
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <ng-template #content5 let-modal>
+                <div class="modal-header justify-content-center">
+                    <h6 class="modal-title" id="staticBackdropLabel3">Crm Information</h6>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        (click)="modal.dismiss('Cross click')" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <!-- <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <label for="input-text" class="form-label">Email</label>
+                            <input type="text" class="form-control" id="input-text" 
+                            [(ngModel)]="crmEmail" [disabled]="isCrmView">
+                        </div> -->
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <label for="input-text" class="form-label">Role Id</label>
+                            <input type="text" class="form-control" id="input-text" 
+                            [(ngModel)]="crmRoleId" [disabled]="isCrmView">
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <label for="input-text" class="form-label">CRM Activity Status</label>
+                            <input type="text" class="form-control" id="input-text" 
+                            [(ngModel)]="crmStatus" [disabled]="isCrmView">
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <label for="input-date" class="form-label">Sub Start date</label>
+                            <input type="date" class="form-control" id="input-date" 
+                            [(ngModel)]="crmSubStartDate" [disabled]="isCrmView">
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <label for="input-date" class="form-label">Sub End date</label>
+                            <input type="date" class="form-control" id="input-date" 
+                            [(ngModel)]="crmSubEndDate" [disabled]="isCrmView">
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <label for="input-date" class="form-label">Subscription</label>
+                            <input type="date" class="form-control" id="input-date" 
+                            [(ngModel)]="crmSubDate" [disabled]="isCrmView">
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <label for="input-text" class="form-label">Remarks</label>
+                            <input type="text" class="form-control" id="input-text" 
+                            [(ngModel)]="crmRemarks" [disabled]="isCrmView">
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')"
-                            data-bs-dismiss="modal">Close</button>
-                    </div>
-                </ng-template>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')"
+                        data-bs-dismiss="modal">Close</button>
+                </div>
+            </ng-template>
         </div>
     </div>
-    <div class="modal fade" id="exampleModalScrollable345" tabindex="-1" aria-labelledby="exampleModalScrollable345" data-bs-keyboard="false" aria-hidden="true">
-        <!-- Scrollable modal -->
-            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                <div class="modal-content">
-                    <ng-template #content6 let-modal>
-                        <div class="modal-header justify-content-center">
-                            <h6 class="modal-title" id="staticBackdropLabel3">Adonai Information </h6>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                (click)="modal.dismiss('Cross click')" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row">
-                                <!-- <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                    <label for="input-text" class="form-label">Email</label>
-                                    <input type="text" class="form-control" id="input-text" 
-                                    [(ngModel)]="adonaiEmail" [disabled]="isAdonaiView">
-                                </div> -->
-                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                    <label for="input-text" class="form-label">Role Id</label>
-                                    <!-- <input type="text" class="form-control" id="input-text" [(ngModel)]="adonaiRoleId"
-                                    [disabled]="isAdonaiView"> -->
-                                    <select class="form-select form-select-lg" id="input-text" [(ngModel)]="adonaiRoleId"
-                                        [disabled]="isAdonaiView">
-                                        <option value="" disabled selected>Select type</option>
-                                        <option value="12">Basic</option>
-                                        <option value="5">Elite</option>
-                                        <option value="3">Pro Elite</option>
-                                    </select>
-                                </div>
-                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                    <label for="input-text" class="form-label">Adonai Activity Status</label>
-                                    <input type="text" class="form-control" id="input-text" 
-                                    [(ngModel)]="adonaiActivitySts" [disabled]="isAdonaiView">
-                                </div>
-                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                    <label for="input-date" class="form-label">Sub Start date</label>
-                                    <input type="date" class="form-control" id="input-date" 
-                                    [(ngModel)]="adonaiSubStartDate" [disabled]="isAdonaiView">
-                                </div>
-                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                    <label for="input-date" class="form-label">Sub End date</label>
-                                    <input type="date" class="form-control" id="input-date" 
-                                    [(ngModel)]="adonaiSubEndDate" [disabled]="isAdonaiView">
-                                </div>
-                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                    <label for="input-date" class="form-label">Subscription Date</label>
-                                    <input type="date" class="form-control" id="input-date" 
-                                    [(ngModel)]="adonaiSubDate" [disabled]="isAdonaiView">
-                                </div>
-                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                    <label for="input-text" class="form-label">Remarks</label>
-                                    <input type="text" class="form-control" id="input-text" 
-                                    [(ngModel)]="adonaiRemarks" [disabled]="isAdonaiView">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" (click)="updateAdonai()"
-                                data-bs-dismiss="modal" *ngIf="!isAdonaiView">Update</button>
-                            <button type="button" class="btn btn-danger" (click)="modal.close('Close click')"
-                                data-bs-dismiss="modal">Close</button>
-                        </div>
-                    </ng-template>
+</div>
+<div class="modal fade" id="exampleModalScrollable345" tabindex="-1" aria-labelledby="exampleModalScrollable345" data-bs-keyboard="false" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <ng-template #content6 let-modal>
+                <div class="modal-header justify-content-center">
+                    <h6 class="modal-title" id="staticBackdropLabel3">Adonai Information </h6>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        (click)="modal.dismiss('Cross click')" aria-label="Close"></button>
                 </div>
-            </div>
-    </div>    
+                <div class="modal-body">
+                    <div class="row">
+                        <!-- <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <label for="input-text" class="form-label">Email</label>
+                            <input type="text" class="form-control" id="input-text" 
+                            [(ngModel)]="adonaiEmail" [disabled]="isAdonaiView">
+                        </div> -->
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <label for="input-text" class="form-label">Role Id</label>
+                            <!-- <input type="text" class="form-control" id="input-text" [(ngModel)]="adonaiRoleId"
+                            [disabled]="isAdonaiView"> -->
+                            <select class="form-select form-select-lg" id="input-text" [(ngModel)]="adonaiRoleId"
+                                [disabled]="isAdonaiView">
+                                <option value="" disabled selected>Select type</option>
+                                <option value="12">Basic</option>
+                                <option value="5">Elite</option>
+                                <option value="3">Pro Elite</option>
+                            </select>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <label for="input-text" class="form-label">Adonai Activity Status</label>
+                            <input type="text" class="form-control" id="input-text" 
+                            [(ngModel)]="adonaiActivitySts" [disabled]="isAdonaiView">
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <label for="input-date" class="form-label">Sub Start date</label>
+                            <input type="date" class="form-control" id="input-date" 
+                            [(ngModel)]="adonaiSubStartDate" [disabled]="isAdonaiView">
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <label for="input-date" class="form-label">Sub End date</label>
+                            <input type="date" class="form-control" id="input-date" 
+                            [(ngModel)]="adonaiSubEndDate" [disabled]="isAdonaiView">
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <label for="input-date" class="form-label">Subscription Date</label>
+                            <input type="date" class="form-control" id="input-date" 
+                            [(ngModel)]="adonaiSubDate" [disabled]="isAdonaiView">
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <label for="input-text" class="form-label">Remarks</label>
+                            <input type="text" class="form-control" id="input-text" 
+                            [(ngModel)]="adonaiRemarks" [disabled]="isAdonaiView">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)="updateAdonai()"
+                        data-bs-dismiss="modal" *ngIf="!isAdonaiView">Update</button>
+                    <button type="button" class="btn btn-danger" (click)="modal.close('Close click')"
+                        data-bs-dismiss="modal">Close</button>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>    

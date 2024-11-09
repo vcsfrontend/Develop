@@ -53,6 +53,7 @@ export class SuperadminComponent {
   crmEmail: any; crmRoleId: any; isCrm: any; crmStatus: any; crmSubStartDate: any; 
   crmSubEndDate: any; crmSubDate: any; crmRemarks: any; 
   isAdonaiView = false; isCrmView = false; userNm: any;
+  isCrmTrue: any; type: any; users: any; email: any; username: any; country: any; isAdonaiTrue: any;
 
   constructor(config: NgbModalConfig, private modalService: NgbModal, private viewContainerRef: ViewContainerRef,
     public switchService: SwitherService, private toastr: ToastrService, private dp: DatePipe) {
@@ -76,13 +77,20 @@ export class SuperadminComponent {
     this.getUsers();
   }
 
-  onRowButtonClick(rowData: any) {
-    console.log('Selected Row Data:', rowData);
-    this.firstNm = rowData.firstName
-    this.lastNm = rowData.lastName
-    this.companyNm = rowData.companyName
-    this.phoneNo = rowData.phoneNumber
-    this.dob = rowData.dob
+  onRowButtonClick(data: any) {
+    console.log('Selected Row Data:', data);
+    this.type = (+data.type)== 1 ? 'Individual' : 'Enterprise',
+    this.users = data.noOfUsers,
+    this.email = data.email,
+    this.username = data.username,
+    this.country = data.country,
+    this.isAdonaiTrue = data.adonai,
+    this.isCrmTrue = data.crm,
+    this.firstNm = data.firstName,
+    this.lastNm = data.lastName,
+    this.companyNm = data.companyName,
+    this.phoneNo = data.phoneNumber,
+    this.dob = data.dob
   }
 
   ngAfterViewInit() {
@@ -122,15 +130,15 @@ export class SuperadminComponent {
     ctrl == 'v' ? (this.isAdonaiView = true) : (this.isAdonaiView = false);
     this.switchService.onAdonaiView(data.email).subscribe({ next: (res:any) => {
       if(res){
-        this.adonaiData = res
-        this.adonaiEmail = data.email; 
-        this.adonaiRoleId = res.roleId; 
+        this.adonaiData = res,
+        this.adonaiEmail = data.email,
+        this.adonaiRoleId = res.roleId,
         // this.isAdonai = res.email; 
-        this.adonaiActivitySts = res.activityStatus; 
-        this.adonaiSubStartDate = this.dp.transform(res.subStartDate, 'yyyy-MM-dd'); 
-        this.adonaiSubEndDate = res.subEndDate; 
-        this.adonaiSubDate = res.subscriptionDate; 
-        this.adonaiRemarks = res.remarks; 
+        this.adonaiActivitySts = res.activityStatus,
+        this.adonaiSubStartDate = this.dp.transform(res.subStartDate, 'yyyy-MM-dd'), 
+        this.adonaiSubEndDate = res.subEndDate, 
+        this.adonaiSubDate = res.subscriptionDate, 
+        this.adonaiRemarks = res.remarks;
       //   {
       //     "email": null,
       //     "roleId": 12,
