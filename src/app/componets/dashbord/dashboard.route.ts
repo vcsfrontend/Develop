@@ -38,6 +38,11 @@ export const admin: Routes = [
     import('./crm2/crm2.component').then((m) => m.CRM2Component),
 },
 {
+  path: 'dashboard2',
+  loadComponent: () =>
+    import('./dashboard2/dashboard2.component').then((m) => m.Dashboard2Component),
+},
+{
   path: 'hrm',
   loadComponent: () =>
     import('./hrm/hrm.component').then((m) => m.HrmComponent),

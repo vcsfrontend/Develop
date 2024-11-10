@@ -210,6 +210,15 @@ export class NavService implements OnDestroy {
       active: false,
       path : "/dashboard/superadmin"
     },
+    {
+      title: 'Dashboard2',
+      icon: 'bi bi-shield-lock',
+      dirchange: false,
+      type: 'link',
+      linkType : 'internal',
+      active: false,
+      path : "/dashboard/dashboard2"
+    },
         
     // //PAGES
     // { headTitle: 'PAGES' },
