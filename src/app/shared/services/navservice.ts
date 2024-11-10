@@ -98,7 +98,7 @@ export class NavService implements OnDestroy {
     { headTitle: 'MAIN' },
     {
       title: 'Adonai',
-      icon: 'bi-house',
+      icon: 'bi bi-rulers',
       dirchange: false,
       type: 'link',
       linkType : 'internal',
@@ -129,41 +129,97 @@ export class NavService implements OnDestroy {
       icon: 'bi-file-earmark',
       dirchange: false,
       type: 'link',
-      linkType : 'external',
+      linkType : 'internal',
       active: false,
       path : "/dashboard/design"
     },
     {
-      title: 'Design',
+      title: 'Dashboard',
+      icon: 'bi-house',
+      dirchange: false,
+      active: false,
+      type: 'link',
+      linkType : 'internal',
+      path: '/dashboard/sales',
+    },
+    {
+      title: 'Projects',
+      dirchange: false,
+      type: 'link',
+      linkType : 'internal',
+      icon: ' bi-layers side-menu__icon',
+      active: false,
+      selected: false,
+      path: '/dashboard/projects',
+    },
+    {
+      title: 'To-Do-List',
+      dirchange: false,
+      type: 'link',
+      linkType : 'internal',
+      icon :'bi-check2-square',
+      active: false,
+      selected: false,
+      path: '/pages/to-do-list',
+    },
+    {
+      title: 'HRM',
       icon: 'bi-file-earmark',
       dirchange: false,
       type: 'link',
-      linkType : 'external',
+      linkType : 'internal',
       active: false,
       path : "/dashboard/hrm"
     },
     {
-      title: 'superadmin',
-      icon: 'bi-file-earmark',
+      title: 'Analytics',
       dirchange: false,
       type: 'link',
-      linkType : 'external',
+      icon : 'bi bi-graph-up',
+      active: false,
+      selected: false,
+      linkType : 'internal',
+      path: '/dashboard/analytics',
+    },
+    {
+      title: 'Customer',
+      dirchange: false,
+      type: 'link',
+      linkType : 'internal',
+      icon : 'bi bi-person',
+      active: false,
+      selected: false,
+      path: '/dashboard/customer',
+    },
+    {
+      title: 'Crm',
+      dirchange: false,
+      type: 'link',
+      linkType : 'internal',
+      icon :'bi-file-earmark',
+      active: false,
+      selected: false,
+      path: '/dashboard/crm2',
+    },
+    {
+      title: 'superadmin',
+      icon: 'bi bi-shield-lock',
+      dirchange: false,
+      type: 'link',
+      linkType : 'internal',
       active: false,
       path : "/dashboard/superadmin"
     },
-
-
-
-
-    // // 
-    // {
-    //   title: 'Dashboard',
-    //   icon: 'bi-house',
-    //   dirchange: false,
-    //   active: false,
-    //   type: 'link',
-    //   path: '/dashboard/sales',
-    // },
+    {
+      title: 'Dashboard2',
+      icon: 'bi bi-shield-lock',
+      dirchange: false,
+      type: 'link',
+      linkType : 'internal',
+      active: false,
+      path : "/dashboard/dashboard2"
+    },
+        
     // //PAGES
     // { headTitle: 'PAGES' },
     // {
