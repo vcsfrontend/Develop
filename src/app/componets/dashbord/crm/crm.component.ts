@@ -61,7 +61,8 @@ export class CrmComponent {
         
         window.open(`https://crmexpert.vcs.plus/auth/access_account/${JSON.parse(this.userData).encodeEmail}`, '_blank');
         //leaflet maps 1
-        this.router.navigate(['/dashboard/sales']);
+        this.router.navigate(['/dashboard/crm2']);
+        // this.router.navigate(['/dashboard/sales']);
         // const map = L.map('customers-countries').setView([51.505, -0.09], 13);
         // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         //   maxZoom: 18,

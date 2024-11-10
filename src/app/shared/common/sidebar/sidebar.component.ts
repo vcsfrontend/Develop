@@ -62,18 +62,30 @@ export class SidebarComponent implements AfterViewInit {
               item.isVisible = val
             });
             break;
+          case 'Dashboard':
+              this.checkAdminRole(item);
+              break;
+          case 'Projects':
+            this.checkAdminRole(item);
+            break;
+          case 'To-Do-List':
+            this.checkAdminRole(item);
+            break;
+          case 'HRM':
+            this.checkAdminRole(item);
+            break;
+          case 'Analytics':
+            this.checkAdminRole(item);
+            break;
+          case 'Customer':
+            this.checkAdminRole(item);
+            break;
+          case 'Crm':
+            this.checkAdminRole(item);
+            break;
+          
           case 'Settings' :
-            let adonaiRole;
-            let crmRole;
-            this.navServices.adonaiRole$.subscribe(val=>{
-              adonaiRole = val
-            });
-            this.navServices.crmRole$.subscribe(val=>{
-              crmRole = val
-            });
-            if(adonaiRole === 'ADMIN' || crmRole === 'ADMIN') {
-              item.isVisible = true;
-            }
+            this.checkAdminRole(item);
             break;
         }
       })
@@ -97,6 +109,23 @@ export class SidebarComponent implements AfterViewInit {
 
     if (document.querySelector('html')?.getAttribute('data-nav-layout') == 'horizontal' && window.innerWidth >= 992) { this.clearNavDropdown(); }
     
+  }
+
+  checkAdminRole(item:any) {
+    let adonaiRole;
+    let crmRole;
+  
+    this.navServices.adonaiRole$.subscribe(val => {
+      adonaiRole = val;
+    });
+  
+    this.navServices.crmRole$.subscribe(val => {
+      crmRole = val;
+    });
+  
+    if (adonaiRole === 'ADMIN' || crmRole === 'ADMIN') {
+      item.isVisible = true;
+    }
   }
 
   // Start of Set menu Active event
