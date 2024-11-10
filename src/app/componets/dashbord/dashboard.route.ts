@@ -33,6 +33,11 @@ export const admin: Routes = [
     import('./adonai/adonai.component').then((m) => m.AdonaiComponent),
 },
 {
+  path: 'crm2',
+  loadComponent: () =>
+    import('./crm2/crm2.component').then((m) => m.CRM2Component),
+},
+{
   path: 'hrm',
   loadComponent: () =>
     import('./hrm/hrm.component').then((m) => m.HrmComponent),
