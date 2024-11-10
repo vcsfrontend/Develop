@@ -134,7 +134,7 @@ export class NavService implements OnDestroy {
       path : "/dashboard/design"
     },
     {
-      title: 'Design',
+      title: 'HRM',
       icon: 'bi-file-earmark',
       dirchange: false,
       type: 'link',
@@ -155,15 +155,48 @@ export class NavService implements OnDestroy {
 
 
 
-    // // 
-    // {
-    //   title: 'Dashboard',
-    //   icon: 'bi-house',
-    //   dirchange: false,
-    //   active: false,
-    //   type: 'link',
-    //   path: '/dashboard/sales',
-    // },
+     
+    {
+      title: 'Dashboard',
+      icon: 'bi-house',
+      dirchange: false,
+      active: false,
+      type: 'link',
+      path: '/dashboard/sales',
+    },
+    {
+        title: 'Analytics',
+        dirchange: false,
+        type: 'link',
+        active: false,
+        selected: false,
+        path: '/dashboard/analytics',
+      },
+      {
+          title: 'Projects',
+          dirchange: false,
+          type: 'link',
+          icon: ' bi-layers side-menu__icon',
+          active: false,
+          selected: false,
+          path: '/dashboard/projects',
+        },
+        {
+            title: 'Customer',
+            dirchange: false,
+            type: 'link',
+            active: false,
+            selected: false,
+            path: '/dashboard/customer',
+          },
+          {
+              title: 'To-Do-List',
+              dirchange: false,
+              type: 'link',
+              active: false,
+              selected: false,
+              path: '/pages/to-do-list',
+            },
     // //PAGES
     // { headTitle: 'PAGES' },
     // {

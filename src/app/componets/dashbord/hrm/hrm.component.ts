@@ -1,206 +1,280 @@
-//hrm
-import { Component,OnInit,ElementRef,  ViewChild } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgSelectModule } from '@ng-select/ng-select';
-import flatpickr from 'flatpickr';
-import { FlatpickrDefaults, FlatpickrModule } from 'angularx-flatpickr';
+
+import { Component,OnInit } from '@angular/core';
+import {
+  ChartComponent,
+  ApexAxisChartSeries,
+  ApexChart,
+  ApexXAxis,
+  ApexDataLabels,
+  ApexStroke,
+  ApexYAxis,
+  ApexTitleSubtitle,
+  ApexLegend,
+  ApexResponsive,
+  NgApexchartsModule,
+} from 'ng-apexcharts';
 import { SharedModule } from '../../../shared/common/sharedmodule';
-import { NgbDropdownModule, NgbNavModule, NgbModal, NgbModalConfig, NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { CommonModule } from '@angular/common';
-import { OverlayscrollbarsModule } from 'overlayscrollbars-ngx';
-import { ToastrService } from 'ngx-toastr';
-import { ShowcodeCardComponent } from '../../../shared/common/includes/showcode-card/showcode-card.component';
-import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
-import * as prismcodeData from '../../../shared/prismData/toasts';
-// import { SearchCountryField, CountryISO, PhoneNumberFormat } from 'ngx-intl-tel-input';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-// import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+export type ChartOptions = {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  xaxis: ApexXAxis;
+  stroke: ApexStroke;
+  dataLabels: ApexDataLabels;
+  yaxis: ApexYAxis;
+  title: ApexTitleSubtitle;
+  labels: string[];
+  legend: ApexLegend;
+  subtitle: ApexTitleSubtitle;
+ tooltip: ApexTooltip;
+ plotOptions: ApexPlotOptions;
+ responsive: ApexResponsive[];
+ fill:ApexFill;
+ grid: any; //ApexGrid;
+  colors: any;
+  toolbar: any;
 
-
-
-
-
-
+};
 
 @Component({
   selector: 'app-hrm',
   standalone: true,
-  imports: [SharedModule, NgSelectModule, NgbModule, CommonModule,
-    NgbNavModule,NgbDropdownModule,FlatpickrModule,FormsModule,ReactiveFormsModule , OverlayscrollbarsModule,NgbToastModule, ShowcodeCardComponent],
-  providers: [NgbModalConfig, NgbModal,FlatpickrDefaults, SharedModule,NgbNavModule,NgbDropdownModule,{ provide: ToastrService, useClass: ToastrService }],
+  imports: [SharedModule,NgApexchartsModule,NgbDropdownModule],
   templateUrl: './hrm.component.html',
   styleUrl: './hrm.component.scss'
 })
 export class HrmComponent {
-  @ViewChild('toastContainer') toastContainer!: ElementRef;
-  prismCode = prismcodeData;
-  separateDialCode = false;
-
-	// SearchCountryField = SearchCountryField;
-	// CountryISO = CountryISO;
-  // PhoneNumberFormat = PhoneNumberFormat;
-	// preferredCountries: CountryISO[] = [CountryISO.UnitedStates, CountryISO.UnitedKingdom];
-	// phoneForm = new FormGroup({
-	// 	phone: new FormControl(undefined, [Validators.required])
-	// });
-
-	// changePreferredCountries() {
-	// 	this.preferredCountries = [CountryISO.India, CountryISO.Canada];
-	// }
-  show0 = false;
-  autohide = true;
-  activeTab: string = 'tab1';
-  tab1Checked: boolean = false;
-  tab2Checked: boolean = false;
-  tab3Checked: boolean = false;
-
-  selectTab(tab: string) {
-    this.activeTab = tab;
+  chartOptions:any = {
+    series: [
+      {
+        name: "Applications Received",
+        data: [15, 30, 22, 49, 32, 45, 30, 45, 65, 45, 25, 45],
+      }
+    ],
+    chart: {
+      type: "area",
+      height: 230,
+      toolbar: {
+        show: false
+      }
+    },
+    colors: [
+      "rgb(69, 214, 91)"
+    ],
+    fill: {
+      type: 'gradient',
+      gradient: {
+        shadeIntensity: 0.9,
+        opacityFrom: 0.4,
+        opacityTo: 0.5,
+        stops: [0, 75]
+      }
+    },
+    grid: {
+      show: false,
+      xaxis: {
+        lines: {
+          show: false
+        }
+      },
+      yaxis: {
+        lines: {
+          show: false
+        }
+      },
+    },
+    dataLabels: {
+      enabled: false,
+    },
+    legend: {
+      show: true,
+      position: "top",
+    },
+    stroke: {
+      curve: 'stepline',
+      width: [1]
+    },
+    yaxis: {
+      min: 0,
+      show: false
+    },
+    xaxis: {
+      type: "month",
+      categories: [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "sep",
+        "oct",
+        "nov",
+        "dec",
+      ],
+      axisBorder: {
+        show: false,
+        color: "rgba(119, 119, 142, 0.05)",
+        offsetX: 0,
+        offsetY: 0,
+      },
+      axisTicks: {
+        show: false,
+        borderType: "solid",
+        color: "rgba(119, 119, 142, 0.05)",
+        width: 6,
+        offsetX: 0,
+        offsetY: 0,
+      },
+      labels: {
+        rotate: -90,
+      },
+    },
   }
-
-  fileName: string | null = null;
-
-  onFileSelected(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      this.fileName = input.files[0].name;
-    } else {
-      this.fileName = null; // Reset if no file selected
-    }
-  }
-
-  modal: any; active5='Home';
-  active6='Home'
-  constructor(// config: NgbModalConfig,
-    private modalService: NgbModal,
-    private toastr: ToastrService) {}
+  chartOptions1:any = {
+    series: [
+      {
+        name: "Hired",
+        data: [44, 42, 57, 86, 58, 55, 70, 43, 23, 54, 77, 34],
+      },
+      {
+        name: "Rejected",
+        data: [-34, -22, -37, -56, -21, -35, -60, -34, -56, -78, -89, -53],
+      },
+    ],
+    chart: {
+      toolbar: {
+        show: false,
+      },
+      type: "bar",
+      fontFamily: "'Poppins', sans-serif",
+      height: 353,
+      stacked: true,
+    },
+    colors: ["rgb(69, 214, 91)", "var(--primary-color)"],
+    plotOptions: {
+      bar: {
+        horizontal: false,
+        columnWidth: "2%",
+      },
+    },
+    dataLabels: {
+      enabled: false,
+    },
+    legend: {
+      show: true,
+      position: "top",
+      offsetX: 0,
+      offsetY: 8,
+      markers: {
+        width: 5,
+        height: 5,
+        strokeWidth: 0,
+        strokeColor: '#fff',
+        fillColors: undefined,
+        radius: 12,
+        customHTML: undefined,
+        onClick: undefined,
+        offsetX: 0,
+        offsetY: 0
+      },
+    },
+    grid: {
+      borderColor: "rgba(0,0,0,0.1)",
+      strokeDashArray: 3,
+      xaxis: {
+        lines: {
+          show: false,
+        },
+      },
+    },
+    xaxis: {
+      axisBorder: {
+        show: false,
+      },
+      categories: [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+      ],
   
-  open(content:any) {
-    this.modalService.open(content,{ centered: true });
-  }
-
-  openModal(content:any) {
-    this.modalService.open(content, { size: 'lg' }); // 'lg' for large modal
-  }
-  
-  flatpickrOptions: any = {
-    inline: true
+    },
+    yaxis: {
+      tickAmount: 4,
+    },
   };
+  chartOptions2:any = {
+    series: [1454, 1234],
+    labels: ["Male", "Female"],
+    chart: {
+      height: 250,
+      type: 'donut'
+    },
+    dataLabels: {
+      enabled: false,
+    },
   
-  ngOnInit(): void {
-    this.flatpickrOptions = {
-      enableTime: true,
-      noCalendar: true,
-      dateFormat: 'H:i',
-    };
-    flatpickr('#addignedDate', this.flatpickrOptions);
-  }
-  // @HostListener('window:resize', ['$event'])
-  // onResize(event: any) {
-  //   this.myFileClick();
-  //   this.detailsClick(); 
-  // }
-
-  myFileClick() {
-    const fileManagerFolders = document.querySelector('.file-manager-folders');
-    const fileManagerNavigation = document.querySelector('.file-manager-navigation');
-
-    if (window.innerWidth <= 992) {
-      if (fileManagerFolders) {
-        fileManagerFolders.classList.add('open');
-      }
-      if (fileManagerNavigation) {
-        fileManagerNavigation.classList.add('close');
-      }
-    } else {
-      if (fileManagerFolders) {
-        fileManagerFolders.classList.remove('open');
-      }
-      if (fileManagerNavigation) {
-        fileManagerNavigation.classList.remove('close');
-      }
-    }
-  }
-  detailsClick() {
-    const selectedFileDetails = document.querySelector('.selected-file-details');
-
-    if (window.innerWidth <= 1180 && selectedFileDetails) {
-      selectedFileDetails.classList.add('open');
-    } else {
-      // Close the details when the window width is greater than 992
-      if (selectedFileDetails) {
-        selectedFileDetails.classList.remove('open');
-      }
-  }
-  }
-  toasts: { autohide: boolean }[] = [];
-  toasts1: { autohide: boolean }[] = [];
-  toasts2: { autohide: boolean }[] = [];
-  toasts3: { autohide: boolean }[] = [];
-  toasts4: { autohide: boolean }[] = [];
-  toasts5: { autohide: boolean }[] = [];
-  toasts6: { autohide: boolean }[] = [];
-  toastsA: { autohide: boolean }[] = [];
-  toastsB: { autohide: boolean }[] = [];
-  toastsC: { autohide: boolean }[] = [];
-  toastsD: { autohide: boolean }[] = [];
-  toastsE: { autohide: boolean }[] = [];
-  toastsF: { autohide: boolean }[] = [];
-  toasts7: { autohide: boolean }[] = [];
-  toasts8: { autohide: boolean }[] = [];
-  toasts9: { autohide: boolean }[] = [];
-  toasts10: { autohide: boolean }[] = [];
-  toasts11: { autohide: boolean }[] = [];
-  toasts12: { autohide: boolean }[] = [];
-  toasts13: { autohide: boolean }[] = [];
-  toasts14: { autohide: boolean }[] = [];
-  toasts15: { autohide: boolean }[] = [];
-//solid toast
-SolidToastprimary() {
-  const newToast = { autohide: true };
-  this.toastsA.push(newToast);
-}
-
-SolidToastsecondary() {
-  const newToast = { autohide: true };
-  this.toastsB.push(newToast);
-}
-SolidToastwarning() {
-  const newToast = { autohide: true };
-  this.toastsC.push(newToast);
-}
-SolidToastinfo() {
-  const newToast = { autohide: true };
-  this.toastsD.push(newToast);
-}
-SolidToastsuccess() {
-  const newToast = { autohide: true };
-  this.toastsE.push(newToast);
-}
-SolidToastdanger() {
-  const newToast = { autohide: true };
-  this.toastsF.push(newToast);
-}
-hideSolidToastprimary(toastA: { autohide: boolean }) {
-  this.toastsA = this.toastsA.filter((t) => t !== toastA);
-}
-hideSolidToastsecondary(toast: { autohide: boolean }) {
-  this.toastsB = this.toasts2.filter((t) => t !== toast);
-}
-hideSolidToastwarning(toast: { autohide: boolean }) {
-  this.toastsC = this.toasts3.filter((t) => t !== toast);
-}
-hideSolidToastinfo(toast: { autohide: boolean }) {
-  this.toastsD = this.toasts4.filter((t) => t !== toast);
-}
-hideSolidToastsuccess(toast: { autohide: boolean }) {
-  this.toastsE = this.toasts5.filter((t) => t !== toast);
-}
-hideSolidToastdanger(toast: { autohide: boolean }) {
+    legend: {
+      show: false,
+    },
+    stroke: {
+      show: true,
+      curve: 'smooth',
+      lineCap: 'round',
+      colors: "#fff",
+      width: 0,
+      dashArray: 0,
+    },
+    plotOptions: {
+      pie: {
+        startAngle: 0,
+        endAngle: 360,
+        expandOnClick: false,
+        donut: {
+          size: '99%',
+          background: 'transparent',
+          labels: {
+            show: true,
+            name: {
+              show: true,
+              fontSize: '20px',
+              color: '#495057',
+              offsetY: -4
+            },
+            value: {
+              show: true,
+              fontSize: '18px',
+              color: undefined,
+              offsetY: 8,
+              formatter: function (val:any) {
+                return val + "%"
+              }
+            },
+            total: {
+              show: true,
+              showAlways: true,
+              label: 'Total',
+              fontSize: '22px',
+              fontWeight: 600,
+              color: '#495057',
+            }
   
-  this.toastsF = this.toasts6.filter((t) => t !== toast);
+          }
+        }
+      }
+    },
+    colors: ["var(--primary-color)", "rgba(69, 214, 91, 1)"],
   
+  };
 }
-
-    
-  }
