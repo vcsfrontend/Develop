@@ -1,497 +1,195 @@
+// import { Component,ViewChild } from '@angular/core';
+// import { SharedModule } from '../../../../shared/common/sharedmodule';
+// import { AngularEditorConfig,AngularEditorModule } from '@kolkov/angular-editor';
+// import { NgSelectModule } from '@ng-select/ng-select';
+// import { FormsModule } from '@angular/forms';
+// import { FilePondComponent, FilePondModule } from 'ngx-filepond';
+// import * as FilePond from 'filepond';
+// import flatpickr from 'flatpickr';
+// import { FlatpickrModule,FlatpickrDefaults  } from 'angularx-flatpickr';
+// @Component({
+//   selector: 'app-create-project',
+//   standalone: true,
+//   imports: [SharedModule,NgSelectModule,AngularEditorModule,FormsModule,FlatpickrModule,FilePondModule],
+//   templateUrl: './create-project.component.html',
+//   providers: [FlatpickrDefaults],
+//   styleUrl: './create-project.component.scss'
+// })
+// export class CreateProjectComponent {
+//   selectedTags=['Angelina May'];
+//   selectedTags1=['Marketing', 'Sales', 'Development', 'Design', 'Research'];
+
+//   tags=[
+//     {id:1,name:'Kiara advain'},
+//     {id:2,name:'Hercules Jhon'},
+//     {id:3,name:'Mayor Kim'},
+//     {id:4,name:'Alexa Biss'},
+//     {id:5,name:'Karley Dia'},
+//     {id:6,name:'Kim Jong'},
+//     {id:7,name:'Darren Sami'},
+//     {id:8,name:'Elizabeth'},
+//     {id:9,name:'Bear Gills'},
+//     {id:10,name:'Alex Carey'},
+    
+//   ]
+
+//   @ViewChild("myPond") myPond!: FilePondComponent;
+
+// pondOptions: FilePond.FilePondOptions = {
+//   allowMultiple: true,
+//   labelIdle: "Drop files here to Upload...",
+// };
+// singlepondOptions: FilePond.FilePondOptions = {
+//   allowMultiple: false,
+//   labelIdle: "Drop files here to Upload...",
+// };
+
+// pondFiles: FilePond.FilePondOptions["files"] = [
+ 
+// ];
+
+// pondHandleInit() {
+//   // console.log("FilePond has initialised", this.myPond);
+// }
+
+// pondHandleAddFile(event: any) {
+//   // console.log("A file was added", event);
+// }
+
+// pondHandleActivateFile(event: any) {
+//   // console.log("A file was activated", event);
+// }
+// htmlContent:string = '';
+
+// config: AngularEditorConfig = {
+//   editable: true,
+//   spellcheck: true,
+//   height: '10rem',
+//   minHeight: '5rem',
+//   placeholder: `  lorem Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in 
+//   Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33.`,
+//   translate: 'no',
+//   defaultParagraphSeparator: 'p',
+//   defaultFontName: 'Arial',
+//   toolbarHiddenButtons: [
+//     ['bold']
+//     ],
+//   customClasses: [
+//     {
+//       name: "quote",
+//       class: "quote",
+//     },
+//     {
+//       name: 'redText',
+//       class: 'redText'
+//     },
+//     {
+//       name: "titleText",
+//       class: "titleText",
+//       tag: "h1",
+//     },
+//   ]
+// };
+
+
+// flatpickrOptions: any = {
+//   inline: true,
+// };
+// // flatpickrOptions: FlatpickrOptions;
+
+// constructor() {}
+
+// ngOnInit() {
+//   this.flatpickrOptions = {
+//     enableTime: true,
+//     noCalendar: true,
+//     dateFormat: 'H:i',
+//   };
+
+//   flatpickr('#inlinetime', this.flatpickrOptions);
+
+//     this.flatpickrOptions = {
+//       enableTime: true,
+//       dateFormat: 'Y-m-d H:i', // Specify the format you want
+//       defaultDate: '2023-11-07 14:30', // Set the default/preloaded time (adjust this to your desired time)
+//     };
+
+//     flatpickr('#pretime', this.flatpickrOptions);
+// }
+// }
 import { Component, OnInit } from '@angular/core';
-import {
-  ChartComponent,
-  ApexAxisChartSeries,
-  ApexChart,
-  ApexXAxis,
-  ApexDataLabels,
-  ApexStroke,
-  ApexYAxis,
-  ApexTitleSubtitle,
-  ApexLegend,
-  ApexResponsive,
-  NgApexchartsModule,
-} from 'ng-apexcharts';
-import { SharedModule } from '../../../shared/common/sharedmodule';
-import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
-export type ChartOptions = {
-  series: ApexAxisChartSeries;
-  chart: ApexChart;
-  xaxis: ApexXAxis;
-  stroke: ApexStroke;
-  dataLabels: ApexDataLabels;
-  yaxis: ApexYAxis;
-  title: ApexTitleSubtitle;
-  labels: string[];
-  legend: ApexLegend;
-  subtitle: ApexTitleSubtitle;
-  tooltip: ApexTooltip;
-  plotOptions: ApexPlotOptions;
-  responsive: ApexResponsive[];
-  fill: ApexFill;
-  grid: any; //ApexGrid;
-  colors: any;
-  toolbar: any;
-};
+import { FormBuilder, FormGroup, Validators,ReactiveFormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http'; // Import HttpClient for making HTTP requests
+import { FilePondOptions } from 'filepond';
+import { SharedModule } from '../../../shared/common/sharedmodule' ;
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @Component({
-  selector: 'app-projects',
-  standalone: true,
-  imports: [SharedModule, NgApexchartsModule, NgbDropdownModule],
+  selector: 'app-create-project',
   templateUrl: './dashboard2.component.html',
-  styleUrl: './dashboard2.component.scss',
+  styleUrls: ['./dashboard2.component.scss'],
+  standalone: true,
+  imports:[SharedModule,ReactiveFormsModule,MatDatepickerModule,MatInputModule,MatNativeDateModule]
 })
-export class Dashboard2Component {
-  chartOptions: any = {
-    series: [
-      {
-        data: [98, 110, 80, 145, 105, 112, 87, 148, 102],
-      },
-    ],
-    chart: {
-      height: 70,
-      type: 'area',
-      fontFamily: 'Poppins, sans-serif',
-      foreColor: '#5d6162',
-      zoom: {
-        enabled: false,
-      },
-      sparkline: {
-        enabled: true,
-      },
-    },
-    tooltip: {
-      enabled: true,
-      x: {
-        show: false,
-      },
-      y: {
-        title: {
-          formatter: function (seriesName: any) {
-            return '';
-          },
-        },
-      },
-      marker: {
-        show: false,
-      },
-    },
-    dataLabels: {
-      enabled: false,
-    },
-    stroke: {
-      curve: 'smooth',
-      width: '1',
-    },
-    title: {
-      text: undefined,
-    },
-    grid: {
-      borderColor: 'transparent',
-    },
-    xaxis: {
-      crosshairs: {
-        show: false,
-      },
-    },
-    colors: ['var(--primary-color)'],
-    stroke1: {
-      width: [1],
-    },
-    fill: {
-      type: 'gradient',
-      gradient: {
-        opacityFrom: 0.5,
-        opacityTo: 0.2,
-        stops: [0, 60],
-        colorStops: [
-          [
-            {
-              offset: 0,
-              color: 'var(--primary02)',
-              opacity: 1,
-            },
-            {
-              offset: 60,
-              color: 'var(--primary02)',
-              opacity: 0.1,
-            },
-          ],
-        ],
-      },
-    },
-  };
-  chartOptions1: any = {
-    series: [
-      {
-        data: [98, 110, 80, 145, 105, 112, 87, 148, 102],
-      },
-    ],
-    chart: {
-      height: 70,
-      type: 'area',
-      fontFamily: 'Poppins, sans-serif',
-      foreColor: '#5d6162',
-      zoom: {
-        enabled: false,
-      },
-      sparkline: {
-        enabled: true,
-      },
-    },
-    tooltip: {
-      enabled: true,
-      x: {
-        show: false,
-      },
-      y: {
-        title: {
-          formatter: function (seriesName: any) {
-            return '';
-          },
-        },
-      },
-      marker: {
-        show: false,
-      },
-    },
-    dataLabels: {
-      enabled: false,
-    },
-    stroke: {
-      curve: 'smooth',
-      width: '1',
-    },
-    title: {
-      text: undefined,
-    },
-    grid: {
-      borderColor: 'transparent',
-    },
-    xaxis: {
-      crosshairs: {
-        show: false,
-      },
-    },
-    colors: ['rgb(52, 152, 219)'],
-    stroke1: {
-      width: [1],
-    },
-    fill: {
-      type: 'gradient',
-      gradient: {
-        opacityFrom: 0.5,
-        opacityTo: 0.2,
-        stops: [0, 60],
-      },
-    },
-  };
-  chartOptions2: any = {
-    series: [
-      {
-        data: [98, 110, 80, 145, 105, 112, 87, 148, 102],
-      },
-    ],
-    chart: {
-      height: 70,
-      type: 'area',
-      fontFamily: 'Poppins, sans-serif',
-      foreColor: '#5d6162',
-      zoom: {
-        enabled: false,
-      },
-      sparkline: {
-        enabled: true,
-      },
-    },
-    tooltip: {
-      enabled: true,
-      x: {
-        show: false,
-      },
-      y: {
-        title: {
-          formatter: function (seriesName: any) {
-            return '';
-          },
-        },
-      },
-      marker: {
-        show: false,
-      },
-    },
-    dataLabels: {
-      enabled: false,
-    },
-    stroke: {
-      curve: 'smooth',
-      width: '1',
-    },
-    title: {
-      text: undefined,
-    },
-    grid: {
-      borderColor: 'transparent',
-    },
-    xaxis: {
-      crosshairs: {
-        show: false,
-      },
-    },
-    colors: ['rgb(46, 204, 113)'],
-    stroke1: {
-      width: [1],
-    },
-    fill: {
-      type: 'gradient',
-      gradient: {
-        opacityFrom: 0.5,
-        opacityTo: 0.2,
-        stops: [0, 60],
-      },
-    },
-  };
-  chartOptions3: any = {
-    series: [
-      {
-        data: [98, 110, 80, 145, 105, 112, 87, 148, 102],
-      },
-    ],
-    chart: {
-      height: 70,
-      type: 'area',
-      fontFamily: 'Poppins, sans-serif',
-      foreColor: '#5d6162',
-      zoom: {
-        enabled: false,
-      },
-      sparkline: {
-        enabled: true,
-      },
-    },
-    tooltip: {
-      enabled: true,
-      x: {
-        show: false,
-      },
-      y: {
-        title: {
-          formatter: function (seriesName: any) {
-            return '';
-          },
-        },
-      },
-      marker: {
-        show: false,
-      },
-    },
-    dataLabels: {
-      enabled: false,
-    },
-    stroke: {
-      curve: 'smooth',
-      width: '1',
-    },
-    title: {
-      text: undefined,
-    },
-    grid: {
-      borderColor: 'transparent',
-    },
-    xaxis: {
-      crosshairs: {
-        show: false,
-      },
-    },
-    colors: ['rgb(231, 76, 60)'],
-    stroke1: {
-      width: [1],
-    },
-    fill: {
-      type: 'gradient',
-      gradient: {
-        opacityFrom: 0.5,
-        opacityTo: 0.2,
-        stops: [0, 60],
-      },
-    },
-  };
-  chartOptions4: any = {
-    series: [
-      {
-        name: 'Income',
-        data: [44, 42, 57, 86, 58, 55, 70, 43, 23, 54, 77, 34],
-      },
-      {
-        name: 'Expenses',
-        data: [-34, -22, -37, -56, -21, -35, -60, -34, -56, -78, -89, -53],
-      },
-    ],
-    chart: {
-      toolbar: {
-        show: false,
-      },
-      type: 'bar',
-      fontFamily: "'Poppins', sans-serif",
-      height: 380,
-      stacked: true,
-    },
-    colors: ['var(--primary-color)', 'rgb(69, 214, 91)'],
-    plotOptions: {
-      bar: {
-        horizontal: false,
-        columnWidth: '22%',
-      },
-    },
-    dataLabels: {
-      enabled: false,
-    },
-    stroke: {
-      show: true,
-      width: ['6', '6'],
-      curve: 'smooth',
-    },
-    legend: {
-      show: true,
-      position: 'top',
-      offsetX: 0,
-      offsetY: 8,
-      markers: {
-        width: 5,
-        height: 5,
-        strokeWidth: 0,
-        strokeColor: '#fff',
-        fillColors: undefined,
-        radius: 12,
-        customHTML: undefined,
-        onClick: undefined,
-        offsetX: 0,
-        offsetY: 0,
-      },
-    },
-    grid: {
-      borderColor: 'rgba(0,0,0,0.1)',
-      strokeDashArray: 3,
-      xaxis: {
-        lines: {
-          show: false,
-        },
-      },
-    },
-    xaxis: {
-      axisBorder: {
-        show: false,
-      },
-      categories: [
-        'Jan',
-        'Feb',
-        'Mar',
-        'Apr',
-        'May',
-        'Jun',
-        'Jul',
-        'Aug',
-        'Sep',
-        'Oct',
-        'Nov',
-        'Dec',
-      ],
-    },
-    yaxis: {
-      tickAmount: 4,
-    },
-  };
-  chartOptions5: any = {
-    chart: {
-      type: 'line',
-      height: 45,
-      sparkline: {
-        enabled: true,
-      },
-      dropShadow: {
-        enabled: true,
-        enabledOnSeries: undefined,
-        top: 0,
-        left: 0,
-        blur: 1,
-        color: '#fff',
-        opacity: 0.05,
-      },
-    },
-    stroke: {
-      show: true,
-      curve: 'smooth',
-      lineCap: 'butt',
-      colors: undefined,
-      width: 2,
-      dashArray: 0,
-    },
-    fill: {
-      gradient: {
-        enabled: false,
-      },
-    },
-    series: [
-      {
-        name: 'Value',
-        data: [54, 38, 56, 35, 65, 43, 53, 45, 62, 80, 35, 48],
-      },
-    ],
-    yaxis: {
-      min: 0,
-      show: false,
-    },
-    xaxis: {
-      axisBorder: {
-        show: false,
-      },
-    },
-    yaxis1: {
-      axisBorder: {
-        show: false,
-      },
-    },
-    colors: ['rgba(243, 156, 18, 0.2)'],
-    tooltip: {
-      enabled: true,
-    },
-  };
-  chartOptions6: any = {
-    chart: {
-      height: 150,
-      width: 150,
-      type: 'radialBar',
-    },
+export class Dashboard2Component implements OnInit {
+  createProjectForm!: FormGroup;
+  pondOptions: FilePondOptions;
 
-    series: [48],
-    colors: ['rgb(69, 214, 91)'],
-    plotOptions: {
-      radialBar: {
-        hollow: {
-          margin: 0,
-          size: '70%',
-          background: '#fff',
+  constructor(private fb: FormBuilder, private http: HttpClient) { // Inject HttpClient
+    // Initialize FilePond options if needed
+    this.pondOptions = {
+      allowMultiple: true,
+      // other FilePond options here
+    };
+  }
+
+  ngOnInit(): void {
+    // Initialize the form with the necessary controls and validators
+    this.createProjectForm = this.fb.group({
+      projectName: ['', Validators.required],
+      clientName: ['', Validators.required],
+      businessCategory: ['', Validators.required],
+      projectAddress: ['', Validators.required],
+      state: ['', Validators.required],
+      city: ['', Validators.required],
+      projectState: ['', Validators.required],
+      projectEstimation: ['', [Validators.required, Validators.min(0)]], // Assuming estimation should be a positive number
+      projectArea: ['', [Validators.required, Validators.min(0)]], // Assuming area should be a positive number
+      projectStartDate: ['', Validators.required],
+      projectEndDate: ['', Validators.required],
+      action: ['', Validators.required],
+      companyName: ['', Validators.required],
+      attachments: [null] // Adjust based on your attachment handling
+    });
+  }
+
+  onSubmit(): void {
+    if (this.createProjectForm.valid) {
+      const projectData = this.createProjectForm.value;
+      this.http.post('https://adonai-vcs-fmbqfgbudgendtfu.israelcentral-01.azurewebsites.net/adonai/save_project_details', projectData).subscribe({
+        next: (response) => {
+          console.log('Project created successfully', response);
         },
-        dataLabels: {
-          name: {
-            offsetY: -10,
-            color: '#4b9bfa',
-            fontSize: '10px',
-            show: false,
-          },
-          value: {
-            offsetY: 5,
-            color: '#4b9bfa',
-            fontSize: '12px',
-            show: true,
-            fontWeight: 800,
-          },
+        error: (error) => {
+          console.error('Error creating project', error);
         },
-      },
-    },
-    stroke: {
-      lineCap: "round"
-    },
-    labels: ['Followers'],
-  };
+        complete: () => {
+          console.log('Project creation process completed.');
+          this.resetForm(); // Optionally reset the form after submission
+        },
+      });
+    } else {
+      // Mark all controls as touched to show validation errors
+      this.createProjectForm.markAllAsTouched();
+      console.log('Form is invalid');
+    }
+  }
+
+  // Optional: You can create a method to reset the form
+  resetForm(): void {
+    this.createProjectForm.reset();
+  }
 }
+
