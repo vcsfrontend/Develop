@@ -43,6 +43,7 @@ export class SuperadminComponent {
   dataSource = new MatTableDataSource<any>(); 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild('modalTemplate') modalTemplate!: TemplateRef<any>;  // Access the ng-template
+  @ViewChild('template', { static: true }) templateRef!: TemplateRef<any>;
   private modalRef: any;
   userLst:any; userData: any;
   content3: any; content4: any; content5: any; content6: any; content7: any;
@@ -50,6 +51,7 @@ export class SuperadminComponent {
   adonaiData: any; crmData: any; 
   adonaiEmail: any; adonaiRoleId: any; isAdonai: any; adonaiActivitySts: any; 
   adonaiSubStartDate: any; adonaiSubEndDate: any; adonaiSubDate: any; adonaiRemarks: any; 
+  adonaiAppUid: any; adonaiUsername: any; adonaiCity: any; adonaiUpdatedBy: any; adonaiUpdatedDate: any;
   crmEmail: any; crmRoleId: any; isCrm: any; crmStatus: any; crmSubStartDate: any; 
   crmSubEndDate: any; crmSubDate: any; crmRemarks: any; 
   isAdonaiView = false; isCrmView = false; userNm: any;
@@ -58,7 +60,6 @@ export class SuperadminComponent {
   constructor(config: NgbModalConfig, private modalService: NgbModal, private viewContainerRef: ViewContainerRef,
     public switchService: SwitherService, private toastr: ToastrService, private dp: DatePipe) {
   }
-  @ViewChild('template', { static: true }) templateRef!: TemplateRef<any>;
 
    applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -127,30 +128,33 @@ export class SuperadminComponent {
   }
 
   getAdonai(data: any, ctrl: string =''){
-    this.userNm = data.username,
+    // this.userNm = data.username,
     ctrl == 'v' ? (this.isAdonaiView = true) : (this.isAdonaiView = false);
     this.switchService.onAdonaiView(data.email).subscribe({ next: (res:any) => {
       if(res){
         this.adonaiData = res,
         this.adonaiEmail = data.email,
-        this.adonaiRoleId = res.roleId,
+        this.adonaiRoleId = res.subData.roleId,
         // this.isAdonai = res.email; 
-        this.adonaiActivitySts = res.activityStatus,
-        this.adonaiSubStartDate = this.dp.transform(res.subStartDate, 'yyyy-MM-dd'), 
-        this.adonaiSubEndDate = res.subEndDate, 
-        this.adonaiSubDate = res.subscriptionDate, 
-        this.adonaiRemarks = res.remarks;
-      //   {
-      //     "email": null,
-      //     "roleId": 12,
-      //     "activityStatus": true,
-      //     "subscriptionDate": "",
-      //     "subStartDate": "2024-10-16T13:58:55.506427433",
-      //     "subEndDate": "",
-      //     "remarks": null,
-      //     "updatedBy": "",
-      //     "updatedDate": ""
-      // }
+        this.adonaiActivitySts = res.subData.activityStatus,
+        this.adonaiSubStartDate = this.dp.transform(res.subData.subStartDate, 'yyyy-MM-dd'), 
+        this.adonaiSubEndDate = res.subData.subEndDate, 
+        this.adonaiSubDate = this.dp.transform(res.subData.subscriptionDate, 'yyyy-MM-dd'), 
+        this.adonaiRemarks = res.subData.remarks;
+    //     "subData": {
+    //     "email": null,
+    //     "roleId": 12,
+    //     "activityStatus": true,
+    //     "subscriptionDate": "2024-11-05T01:24:21.150848386",
+    //     "subStartDate": "",
+    //     "subEndDate": "",
+    //     "remarks": null,
+    //     "updatedBy": "",
+    //     "updatedDate": ""
+    // },
+    // "appuid": "DBU0yUs7aN",
+    // "username": "Anjana Lokesh",
+    // "city": null
         } else{
           this.toastr.error(res.message);
           return;
@@ -160,7 +164,7 @@ export class SuperadminComponent {
   }
 
   getCrm(data:any, ctrl:string = ''){
-    this.userNm = data.username,
+    // this.userNm = data.username,
     ctrl == 'v' ? (this.isCrmView = true) : (this.isCrmView = false);
     this.switchService.onCrmView(data.email).subscribe({ next: (res:any) => {
       if(res){
@@ -173,16 +177,20 @@ export class SuperadminComponent {
         this.crmSubEndDate = res.subEndDate; 
         this.crmSubDate = res.subDate; 
         this.crmRemarks = res.remarks; 
-        // {
-        //   "roleId": 0,
-        //   "crmActivityStatus": true,
-        //   "subDate": "",
-        //   "subStartDate": "2024-10-16T13:58:58.969282899",
-        //   "subEndDate": "",
-        //   "updatedBy": "",
-        //   "updatedDate": "",
-        //   "remarks": null
-        // }
+    //     "subData": {
+    //     "email": null,
+    //     "roleId": 12,
+    //     "activityStatus": true,
+    //     "subscriptionDate": "2024-11-05T01:24:21.150848386",
+    //     "subStartDate": "",
+    //     "subEndDate": "",
+    //     "remarks": null,
+    //     "updatedBy": "",
+    //     "updatedDate": ""
+    // },
+    // "appuid": "DBU0yUs7aN",
+    // "username": "Anjana Lokesh",
+    // "city": null
         } else{
           this.toastr.error(res.message);
           return;
@@ -201,7 +209,7 @@ export class SuperadminComponent {
         "subStartDate": this.dp.transform(this.adonaiSubStartDate, 'dd-MM-yyyy'),
         "subEndDate": this.dp.transform(this.adonaiSubEndDate, 'dd-MM-yyyy'),
         "remarks": this.adonaiRemarks,
-        "updatedBy": this.userNm
+        "updatedBy": localStorage.getItem('username')
     };
     // payload.type = +payload.type, 
     // payload.dob = this.dp.transform(payload.dob, 'dd-MM-yyyy');

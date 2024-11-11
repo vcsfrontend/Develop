@@ -180,6 +180,99 @@
     </div>
 </div>
 
+<!-- Adonai -->
+<div class="modal fade" id="exampleModalScrollable345" tabindex="-1" aria-labelledby="exampleModalScrollable345" 
+    data-bs-keyboard="false" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <ng-template #content6 let-modal>
+                <div class="modal-header justify-content-center">
+                    <h6 class="modal-title" id="staticBackdropLabel3">Adonai Information </h6>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        (click)="modal.dismiss('Cross click')" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <label for="input-text" class="form-label">Email</label>
+                            <input type="text" class="form-control" id="input-text" 
+                            [(ngModel)]="adonaiEmail" [disabled]="true">
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <label for="input-text" class="form-label">Role Id</label>
+                            <!-- <input type="text" class="form-control" id="input-text" [(ngModel)]="adonaiRoleId"
+                            [disabled]="isAdonaiView"> -->
+                            <select class="form-select form-select-lg" id="input-text" [(ngModel)]="adonaiRoleId"
+                                [disabled]="isAdonaiView">
+                                <option value="" disabled selected>Select type</option>
+                                <option value="12">Basic</option>
+                                <option value="5">Elite</option>
+                                <option value="3">Pro Elite</option>
+                            </select>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <label for="input-text" class="form-label">Adonai Activity Status</label>
+                            <input type="text" class="form-control" id="input-text" 
+                            [(ngModel)]="adonaiActivitySts" [disabled]="isAdonaiView">
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <label for="input-date" class="form-label">Subscription Date</label>
+                            <input type="date" class="form-control" id="input-date" 
+                            [(ngModel)]="adonaiSubDate" [disabled]="isAdonaiView">
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <label for="input-date" class="form-label">Sub Start date</label>
+                            <input type="date" class="form-control" id="input-date" 
+                            [(ngModel)]="adonaiSubStartDate" [disabled]="isAdonaiView">
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <label for="input-date" class="form-label">Sub End date</label>
+                            <input type="date" class="form-control" id="input-date" 
+                            [(ngModel)]="adonaiSubEndDate" [disabled]="isAdonaiView">
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <label for="input-text" class="form-label">Remarks</label>
+                            <input type="text" class="form-control" id="input-text" 
+                            [(ngModel)]="adonaiRemarks" [disabled]="isAdonaiView">
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <label for="input-text" class="form-label">App UId</label>
+                            <input type="text" class="form-control" id="input-text" 
+                            [(ngModel)]="adonaiAppUid" [disabled]="isAdonaiView">
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <label for="input-text" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="input-text" 
+                            [(ngModel)]="adonaiUsername" [disabled]="isAdonaiView">
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <label for="input-text" class="form-label">City</label>
+                            <input type="text" class="form-control" id="input-text" 
+                            [(ngModel)]="adonaiCity" [disabled]="isAdonaiView">
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <label for="input-text" class="form-label">updatedBy</label>
+                            <input type="text" class="form-control" id="input-text" 
+                            [(ngModel)]="adonaiUpdatedBy" [disabled]="isAdonaiView">
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <label for="input-text" class="form-label">updatedDate</label>
+                            <input type="text" class="form-control" id="input-text" 
+                            [(ngModel)]="adonaiUpdatedDate" [disabled]="isAdonaiView">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)="updateAdonai()"
+                        data-bs-dismiss="modal" *ngIf="!isAdonaiView">Update</button>
+                    <button type="button" class="btn btn-danger" (click)="modal.close('Close click')"
+                        data-bs-dismiss="modal">Close</button>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>   
+
 <!-- Crm -->
 <div class="modal fade" id="exampleModalScrollable34" tabindex="-1" aria-labelledby="exampleModalScrollable34" data-bs-keyboard="false" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -237,71 +330,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="exampleModalScrollable345" tabindex="-1" aria-labelledby="exampleModalScrollable345" data-bs-keyboard="false" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content">
-            <ng-template #content6 let-modal>
-                <div class="modal-header justify-content-center">
-                    <h6 class="modal-title" id="staticBackdropLabel3">Adonai Information </h6>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                        (click)="modal.dismiss('Cross click')" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <!-- <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                            <label for="input-text" class="form-label">Email</label>
-                            <input type="text" class="form-control" id="input-text" 
-                            [(ngModel)]="adonaiEmail" [disabled]="isAdonaiView">
-                        </div> -->
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                            <label for="input-text" class="form-label">Role Id</label>
-                            <!-- <input type="text" class="form-control" id="input-text" [(ngModel)]="adonaiRoleId"
-                            [disabled]="isAdonaiView"> -->
-                            <select class="form-select form-select-lg" id="input-text" [(ngModel)]="adonaiRoleId"
-                                [disabled]="isAdonaiView">
-                                <option value="" disabled selected>Select type</option>
-                                <option value="12">Basic</option>
-                                <option value="5">Elite</option>
-                                <option value="3">Pro Elite</option>
-                            </select>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                            <label for="input-text" class="form-label">Adonai Activity Status</label>
-                            <input type="text" class="form-control" id="input-text" 
-                            [(ngModel)]="adonaiActivitySts" [disabled]="isAdonaiView">
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                            <label for="input-date" class="form-label">Sub Start date</label>
-                            <input type="date" class="form-control" id="input-date" 
-                            [(ngModel)]="adonaiSubStartDate" [disabled]="isAdonaiView">
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                            <label for="input-date" class="form-label">Sub End date</label>
-                            <input type="date" class="form-control" id="input-date" 
-                            [(ngModel)]="adonaiSubEndDate" [disabled]="isAdonaiView">
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                            <label for="input-date" class="form-label">Subscription Date</label>
-                            <input type="date" class="form-control" id="input-date" 
-                            [(ngModel)]="adonaiSubDate" [disabled]="isAdonaiView">
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                            <label for="input-text" class="form-label">Remarks</label>
-                            <input type="text" class="form-control" id="input-text" 
-                            [(ngModel)]="adonaiRemarks" [disabled]="isAdonaiView">
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" (click)="updateAdonai()"
-                        data-bs-dismiss="modal" *ngIf="!isAdonaiView">Update</button>
-                    <button type="button" class="btn btn-danger" (click)="modal.close('Close click')"
-                        data-bs-dismiss="modal">Close</button>
-                </div>
-            </ng-template>
-        </div>
-    </div>
-</div>    
+ 
 
 <div class="modal fade" id="largeModal" tabindex="-1" aria-labelledby="largeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
