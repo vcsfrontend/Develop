@@ -94,6 +94,9 @@
                                         <a aria-label="anchor" href="javascript:void(0);"
                                             class="btn btn-icon btn-sm btn-info" data-bs-toggle="modal" 
                                             (click)="VerticallyScrol(content5); getCrm(element, 'e')" data-bs-target="#exampleModalScrollable34" ><i class="ri-edit-line"></i></a>
+                                        <a aria-label="anchor" href="javascript:void(0);" class="btn btn-sm btn-icon btn-wave btn btn-danger"
+                                            data-bs-toggle="modal" data-bs-target="#exampleModalLg" (click)="openMdl(template1)">
+                                            <i class="las la-history"></i></a>
                                     </div>   
                                 </td>
                             </ng-container>
@@ -285,11 +288,11 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <!-- <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                             <label for="input-text" class="form-label">Email</label>
                             <input type="text" class="form-control" id="input-text" 
                             [(ngModel)]="crmEmail" [disabled]="isCrmView">
-                        </div> -->
+                        </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                             <label for="input-text" class="form-label">Role Id</label>
                             <input type="text" class="form-control" id="input-text" 
@@ -299,6 +302,11 @@
                             <label for="input-text" class="form-label">CRM Activity Status</label>
                             <input type="text" class="form-control" id="input-text" 
                             [(ngModel)]="crmStatus" [disabled]="isCrmView">
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <label for="input-date" class="form-label">Subscription</label>
+                            <input type="date" class="form-control" id="input-date" 
+                            [(ngModel)]="crmSubDate" [disabled]="isCrmView">
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                             <label for="input-date" class="form-label">Sub Start date</label>
@@ -311,12 +319,27 @@
                             [(ngModel)]="crmSubEndDate" [disabled]="isCrmView">
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                            <label for="input-date" class="form-label">Subscription</label>
-                            <input type="date" class="form-control" id="input-date" 
-                            [(ngModel)]="crmSubDate" [disabled]="isCrmView">
+                            <label for="input-text" class="form-label">Remarks</label>
+                            <input type="text" class="form-control" id="input-text" 
+                            [(ngModel)]="crmRemarks" [disabled]="isCrmView">
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                            <label for="input-text" class="form-label">Remarks</label>
+                            <label for="input-text" class="form-label">Updated By</label>
+                            <input type="text" class="form-control" id="input-text" 
+                            [(ngModel)]="crmRemarks" [disabled]="isCrmView">
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <label for="input-date" class="form-label">Updated Date</label>
+                            <input type="date" class="form-control" id="input-date" 
+                            [(ngModel)]="crmSubEndDate" [disabled]="isCrmView">
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <label for="input-text" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="input-text" 
+                            [(ngModel)]="crmRemarks" [disabled]="isCrmView">
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <label for="input-text" class="form-label">City</label>
                             <input type="text" class="form-control" id="input-text" 
                             [(ngModel)]="crmRemarks" [disabled]="isCrmView">
                         </div>
@@ -355,11 +378,74 @@
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modalLabel">Large Modal with ng-template</h5>
+          <h5 class="modal-title" id="modalLabel">Adonai History</h5>
           <button type="button" class="btn-close" aria-label="Close" (click)="closeMdl()"></button>
         </div>
-        <div class="modal-body">
-          <p>This is the content of the large modal created with ng-template and Bootstrap.</p>
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card custom-card">
+                    
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table text-nowrap">
+                                <thead>
+                                    <tr>
+                                        
+                                        <th scope="col">S.NO</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Adonao activity status</th>
+                                        <th scope="col">Sub start date</th>
+                                        <th scope="col">Sub end date</th>
+                                        <th scope="col">Updated date</th>
+                                        <th scope="col">updated time</th>
+                                        <th scope="col">Updated by</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Manufacturer</td>
+                                        <td>mayorkrlly&#64;gmail.com</td>
+                                        <td>True</td>
+                                        <td>11-11-2024</td>
+                                        <td>11-12-2024</td>
+                                        <td>11-11-2024</td>
+                                        <td>3:27 pm</td>
+                                        <td>ABC</td>
+
+                                    </tr>   
+                                </tbody>
+                                
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card-footer border-top-0">
+                        <div class="d-flex align-items-center flex-wrap overflow-auto">
+                            <!-- <div class="mb-2 mb-sm-0">
+                                Showing <b>1</b> to <b>5</b> of <b>200</b> entries <i
+                                    class="bi bi-arrow-right ms-2 fw-medium"></i>
+                            </div> -->
+                            <!-- <div class="ms-auto">
+                                <ul class="pagination mb-0 overflow-auto">
+                                    <li class="page-item disabled">
+                                        <a class="page-link">Previous</a>
+                                    </li>
+                                    <li class="page-item active" aria-current="page"><a class="page-link" href="javascript:;"href="javascript:;">1</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="javascript:;">2</a>
+                                    </li>
+                                    <li class="page-item"><a class="page-link" href="javascript:;">3</a></li>
+                                    <li class="page-item"><a class="page-link" href="javascript:;">4</a></li>
+                                    <li class="page-item"><a class="page-link" href="javascript:;">5</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="javascript:;">Next</a>
+                                    </li>
+                                </ul>
+                            </div> -->
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" (click)="closeMdl()">Close</button>
@@ -369,5 +455,88 @@
     </div>
   </div>
 </ng-template>
+
+<ng-template #template1 let-modal>
+    <div class="modal fade show d-block" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true" style="background: rgba(0, 0, 0, 0.5);">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalLabel">CRM History</h5>
+            <button type="button" class="btn-close" aria-label="Close" (click)="closeMdl()"></button>
+          </div>
+          <div class="row">
+              <div class="col-xl-12">
+                  <div class="card custom-card">
+                      
+                      <div class="card-body p-0">
+                          <div class="table-responsive">
+                              <table class="table text-nowrap">
+                                  <thead>
+                                      <tr>
+                                          
+                                          <th scope="col">S.NO</th>
+                                          <th scope="col">Email</th>
+                                          <th scope="col">Adonao activity status</th>
+                                          <th scope="col">Sub start date</th>
+                                          <th scope="col">Sub end date</th>
+                                          <th scope="col">Updated date</th>
+                                          <th scope="col">updated time</th>
+                                          <th scope="col">Updated by</th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                      <tr>
+                                          <td>Manufacturer</td>
+                                          <td>mayorkrlly&#64;gmail.com</td>
+                                          <td>True</td>
+                                          <td>11-11-2024</td>
+                                          <td>11-12-2024</td>
+                                          <td>11-11-2024</td>
+                                          <td>3:27 pm</td>
+                                          <td>ABC</td>
+  
+                                      </tr>   
+                                  </tbody>
+                                  
+                              </table>
+                          </div>
+                      </div>
+                      <div class="card-footer border-top-0">
+                          <div class="d-flex align-items-center flex-wrap overflow-auto">
+                              <!-- <div class="mb-2 mb-sm-0">
+                                  Showing <b>1</b> to <b>5</b> of <b>200</b> entries <i
+                                      class="bi bi-arrow-right ms-2 fw-medium"></i>
+                              </div> -->
+                              <!-- <div class="ms-auto">
+                                  <ul class="pagination mb-0 overflow-auto">
+                                      <li class="page-item disabled">
+                                          <a class="page-link">Previous</a>
+                                      </li>
+                                      <li class="page-item active" aria-current="page"><a class="page-link" href="javascript:;"href="javascript:;">1</a></li>
+                                      <li class="page-item">
+                                          <a class="page-link" href="javascript:;">2</a>
+                                      </li>
+                                      <li class="page-item"><a class="page-link" href="javascript:;">3</a></li>
+                                      <li class="page-item"><a class="page-link" href="javascript:;">4</a></li>
+                                      <li class="page-item"><a class="page-link" href="javascript:;">5</a></li>
+                                      <li class="page-item">
+                                          <a class="page-link" href="javascript:;">Next</a>
+                                      </li>
+                                  </ul>
+                              </div> -->
+                              
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="closeMdl()">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
 
   
