@@ -58,8 +58,9 @@ export class SuperadminComponent {
   constructor(config: NgbModalConfig, private modalService: NgbModal, private viewContainerRef: ViewContainerRef,
     public switchService: SwitherService, private toastr: ToastrService, private dp: DatePipe) {
   }
+  @ViewChild('template', { static: true }) templateRef!: TemplateRef<any>;
 
-  applyFilter(event: Event) {
+   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
@@ -227,18 +228,12 @@ export class SuperadminComponent {
 		this.modalService.open(content10, { size: 'lg' },);
 	}
 
-  openModal() {
-    // Create an embedded view from the modal template
-    this.modalRef = this.viewContainerRef.createEmbeddedView(this.modalTemplate);
+  openMdl(template: TemplateRef<any>) {
+    this.viewContainerRef.createEmbeddedView(template);
   }
 
-  closeModal() {
-    // Destroy the modal view when closing
-    if (this.modalRef) {
-      this.modalRef.destroy();
-      this.modalRef = null;
-    }
-  }
-  
+  closeMdl() {
+    this.viewContainerRef.clear();
+  }  
   
 }
