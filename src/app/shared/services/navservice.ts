@@ -97,13 +97,13 @@ export class NavService implements OnDestroy {
     // Dashboard
     { headTitle: 'MAIN' },
     {
-      title: 'Adonai',
-      icon: 'bi bi-rulers',
+      title: 'Dashboard',
+      icon: 'bi-house',
       dirchange: false,
+      active: false,
       type: 'link',
       linkType : 'internal',
-      active: false,
-      path: '/dashboard/adonai'
+      path: '/dashboard/sales',
     },
     {
       title: 'CRM',
@@ -114,34 +114,7 @@ export class NavService implements OnDestroy {
       active: false,
       // path : `https://crmexpert.vcs.plus/auth/access_account/${JSON.parse(this.userData).encodeEmail}`
       path: '/dashboard/crm'
-    },
-    {
-      title: 'Settings',
-      icon: 'bi bi-gear',
-      dirchange: false,
-      type: 'link',
-      linkType : 'internal',
-      active: false,
-      path : "/dashboard/settings"
-    },
-    {
-      title: 'Design',
-      icon: 'bi-file-earmark',
-      dirchange: false,
-      type: 'link',
-      linkType : 'internal',
-      active: false,
-      path : "/dashboard/design"
-    },
-    {
-      title: 'Dashboard',
-      icon: 'bi-house',
-      dirchange: false,
-      active: false,
-      type: 'link',
-      linkType : 'internal',
-      path: '/dashboard/sales',
-    },
+    }, 
     {
       title: 'Projects',
       dirchange: false,
@@ -151,6 +124,15 @@ export class NavService implements OnDestroy {
       active: false,
       selected: false,
       path: '/dashboard/projects',
+    },
+    {
+      title: 'Adonai',
+      icon: 'bi bi-rulers',
+      dirchange: false,
+      type: 'link',
+      linkType : 'internal',
+      active: false,
+      path: '/dashboard/adonai'
     },
     {
       title: 'To-Do-List',
@@ -172,16 +154,6 @@ export class NavService implements OnDestroy {
       path : "/dashboard/hrm"
     },
     {
-      title: 'Analytics',
-      dirchange: false,
-      type: 'link',
-      icon : 'bi bi-graph-up',
-      active: false,
-      selected: false,
-      linkType : 'internal',
-      path: '/dashboard/analytics',
-    },
-    {
       title: 'Customer',
       dirchange: false,
       type: 'link',
@@ -191,6 +163,37 @@ export class NavService implements OnDestroy {
       selected: false,
       path: '/dashboard/customer',
     },
+    {
+      title: 'Settings',
+      icon: 'bi bi-gear',
+      dirchange: false,
+      type: 'link',
+      linkType : 'internal',
+      active: false,
+      path : "/dashboard/settings"
+    },
+    {
+      title: 'Design',
+      icon: 'bi-file-earmark',
+      dirchange: false,
+      type: 'link',
+      linkType : 'internal',
+      active: false,
+      path : "/dashboard/design"
+    },
+    
+    
+    // {
+    //   title: 'Analytics',
+    //   dirchange: false,
+    //   type: 'link',
+    //   icon : 'bi bi-graph-up',
+    //   active: false,
+    //   selected: false,
+    //   linkType : 'internal',
+    //   path: '/dashboard/analytics',
+    // },
+    
     {
       title: 'Crm',
       dirchange: false,
