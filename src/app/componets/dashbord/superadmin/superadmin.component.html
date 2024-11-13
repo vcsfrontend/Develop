@@ -1,6 +1,29 @@
 
 
-<app-page-header title="superadmin" title1="Dashboards" activeTitle="superadmin"></app-page-header>
+<!-- <app-page-header title="superadmin" title1="Dashboards" activeTitle="superadmin"></app-page-header> -->
+<div class="my-4 page-header-breadcrumb d-flex align-items-center justify-content-between flex-wrap gap-2">
+    <div>
+        <h1 class="page-title fw-medium fs-18 mb-2">Superadmin</h1>
+        <div class="">
+            <nav>
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Dashboard</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Superadmin</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <div class="btn-list">
+        <!-- <button class="btn btn-primary-light btn-wave me-2">
+            <i class="bx bx-crown align-middle"></i> Plan Upgrade
+        </button> -->
+        <button (click)="onclick()" type="button" class="btn btn-primary-light btn-wave me-0">
+            <i class="bi bi-arrow-right-circle align-middle"></i>&nbsp; {{ReadMore?"Read More":"Read Less"}}
+        </button>
+        
+    </div>
+</div>
+
  <!-- Page Header -->
 <!-- End Page Header -->
 <!-- Start::row-1 -->
@@ -118,6 +141,8 @@
 <!-- End::row-1 -->
 
 <!-- Start::row-1 -->
+<ng-container *ngIf="visible">
+
 <div class="row">
 <!-- <iframe width="800" height="425" src="https://www.youtube.com/embed/e_ra0TePr_I?1&autoplay=1&mute=1&playlist=e_ra0TePr_I&loop=1" title="🎥 How to upload a floor plan" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> -->
     <div class="col-md-12 col-xl-12">
@@ -229,120 +254,122 @@
         </div>
     </div>
 </div> 
-<!-- End::row-1 -->
-
-<!-- Start::row-1 -->
 <div class="row">
-<!-- <iframe width="800" height="425" src="https://www.youtube.com/embed/e_ra0TePr_I?1&autoplay=1&mute=1&playlist=e_ra0TePr_I&loop=1" title="🎥 How to upload a floor plan" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> -->
-    <div class="col-md-12 col-xl-12">
-        <div class="row">
-            <div class="col-md-6 col-lg-3 col-xl-3">
-                <div class="card custom-card overflow-hidden">
-                    <div class="card-body p-0">
-                        <div class="mb-2 p-3 pb-0">
-                            <div class="flex-fill fs-15">CRM Users</div>
-                        </div>
-                        <div class="d-flex align-items-center ps-3">
-                            <div class="flex-fill">
-                                <div class="fs-25 fw-normal mb-2">$170k+</div>
-                                <p class="mb-0">
-                                    <i class="ri-arrow-up-line text-primary fs-15 align-middle"></i>
-                                    <span  class="text-primary fs-12"> 26.35% last month</span>
-                                </p>
+    <!-- <iframe width="800" height="425" src="https://www.youtube.com/embed/e_ra0TePr_I?1&autoplay=1&mute=1&playlist=e_ra0TePr_I&loop=1" title="🎥 How to upload a floor plan" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> -->
+        <div class="col-md-12 col-xl-12">
+            <div class="row">
+                <div class="col-md-6 col-lg-3 col-xl-3">
+                    <div class="card custom-card overflow-hidden">
+                        <div class="card-body p-0">
+                            <div class="mb-2 p-3 pb-0">
+                                <div class="flex-fill fs-15">CRM Users</div>
                             </div>
-                            <div id="sales-card" class="crm-card-chart">
-                                <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart"
-                                [xaxis]="chartOptions.xaxis" [colors]="chartOptions.colors" [fill]="chartOptions.fill"
-                                [stroke]="chartOptions.stroke" [tooltip]="chartOptions.tooltip"
-                                [dataLabels]="chartOptions.dataLabels" [grid]="chartOptions.grid"
-                                [yaxis]="chartOptions.yaxis">
-                            </apx-chart>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3 col-xl-3">
-                <div class="card custom-card overflow-hidden">
-                    <div class="card-body p-0">
-                        <div class="mb-2 p-3 pb-0">
-                            <div class="flex-fill fs-15">CRM New Users</div>
-                        </div>
-                        <div class="d-flex align-items-center ps-3">
-                            <div class="flex-fill">
-                                <div class="fs-25 fw-normal mb-2">$115k</div>
-                                <p class="mb-0">
-                                    <i class="ri-arrow-down-line text-danger fs-15 align-middle"></i>
-                                    <span  class="text-danger fs-12"> 11.35% last month</span>
-                                </p>
-                            </div>
-                            <div id="revenue-card" class="crm-card-chart">
-                                <apx-chart [series]="chartOptions1.series" [chart]="chartOptions1.chart"
-                                [xaxis]="chartOptions1.xaxis" [colors]="chartOptions1.colors" [fill]="chartOptions1.fill"
-                                [stroke]="chartOptions1.stroke" [tooltip]="chartOptions1.tooltip"
-                                [dataLabels]="chartOptions1.dataLabels" [grid]="chartOptions1.grid"
-                                [yaxis]="chartOptions1.yaxis">
-                            </apx-chart>
+                            <div class="d-flex align-items-center ps-3">
+                                <div class="flex-fill">
+                                    <div class="fs-25 fw-normal mb-2">$170k+</div>
+                                    <p class="mb-0">
+                                        <i class="ri-arrow-up-line text-primary fs-15 align-middle"></i>
+                                        <span  class="text-primary fs-12"> 26.35% last month</span>
+                                    </p>
+                                </div>
+                                <div id="sales-card" class="crm-card-chart">
+                                    <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart"
+                                    [xaxis]="chartOptions.xaxis" [colors]="chartOptions.colors" [fill]="chartOptions.fill"
+                                    [stroke]="chartOptions.stroke" [tooltip]="chartOptions.tooltip"
+                                    [dataLabels]="chartOptions.dataLabels" [grid]="chartOptions.grid"
+                                    [yaxis]="chartOptions.yaxis">
+                                </apx-chart>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6 col-lg-3 col-xl-3">
-                <div class="card custom-card overflow-hidden">
-                    <div class="card-body p-0">
-                        <div class="mb-2 p-3 pb-0">
-                            <div class="flex-fill fs-15">CRM Revenue Generated</div>
-                        </div>
-                        <div class="d-flex align-items-center ps-3">
-                            <div class="flex-fill">
-                                <div class="fs-25 fw-normal mb-2">1500+</div>
-                                <p class="mb-0">
-                                    <i class="ri-arrow-up-line text-secondary fs-15 align-middle"></i>
-                                    <span  class="text-secondary fs-12"> 26.35% last month</span>
-                                </p>
+                <div class="col-md-6 col-lg-3 col-xl-3">
+                    <div class="card custom-card overflow-hidden">
+                        <div class="card-body p-0">
+                            <div class="mb-2 p-3 pb-0">
+                                <div class="flex-fill fs-15">CRM New Users</div>
                             </div>
-                            <div id="customers-card" class="crm-card-chart">
-                                <apx-chart [series]="chartOptions2.series" [chart]="chartOptions2.chart"
-                                [xaxis]="chartOptions2.xaxis" [colors]="chartOptions2.colors" [fill]="chartOptions2.fill"
-                                [stroke]="chartOptions2.stroke" [tooltip]="chartOptions2.tooltip"
-                                [dataLabels]="chartOptions2.dataLabels" [grid]="chartOptions2.grid"
-                                [yaxis]="chartOptions2.yaxis">
-                            </apx-chart>
+                            <div class="d-flex align-items-center ps-3">
+                                <div class="flex-fill">
+                                    <div class="fs-25 fw-normal mb-2">$115k</div>
+                                    <p class="mb-0">
+                                        <i class="ri-arrow-down-line text-danger fs-15 align-middle"></i>
+                                        <span  class="text-danger fs-12"> 11.35% last month</span>
+                                    </p>
+                                </div>
+                                <div id="revenue-card" class="crm-card-chart">
+                                    <apx-chart [series]="chartOptions1.series" [chart]="chartOptions1.chart"
+                                    [xaxis]="chartOptions1.xaxis" [colors]="chartOptions1.colors" [fill]="chartOptions1.fill"
+                                    [stroke]="chartOptions1.stroke" [tooltip]="chartOptions1.tooltip"
+                                    [dataLabels]="chartOptions1.dataLabels" [grid]="chartOptions1.grid"
+                                    [yaxis]="chartOptions1.yaxis">
+                                </apx-chart>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6 col-lg-3 col-xl-3">
-                <div class="card custom-card overflow-hidden">
-                    <div class="card-body p-0">
-                        <div class="mb-2 p-3 pb-0">
-                            <div class="flex-fill fs-15">CRM Renewal Users</div>
-                        </div>
-                        <div class="d-flex align-items-center ps-3">
-                            <div class="flex-fill">
-                                <div class="fs-25 fw-normal mb-2">30k+</div>
-                                <p class="mb-0">
-                                    <i class="ri-arrow-up-line text-info fs-15 align-middle"></i>
-                                    <span  class="text-info fs-12"> 16.35% last month</span>
-                                </p>
+                <div class="col-md-6 col-lg-3 col-xl-3">
+                    <div class="card custom-card overflow-hidden">
+                        <div class="card-body p-0">
+                            <div class="mb-2 p-3 pb-0">
+                                <div class="flex-fill fs-15">CRM Revenue Generated</div>
                             </div>
-                            <div id="orders-card" class="crm-card-chart">
-                                <apx-chart [series]="chartOptions3.series" [chart]="chartOptions3.chart"
-                                [xaxis]="chartOptions3.xaxis" [colors]="chartOptions3.colors" [fill]="chartOptions3.fill"
-                                [stroke]="chartOptions3.stroke" [tooltip]="chartOptions3.tooltip"
-                                [dataLabels]="chartOptions3.dataLabels" [grid]="chartOptions3.grid"
-                                [yaxis]="chartOptions3.yaxis">
-                            </apx-chart>
+                            <div class="d-flex align-items-center ps-3">
+                                <div class="flex-fill">
+                                    <div class="fs-25 fw-normal mb-2">1500+</div>
+                                    <p class="mb-0">
+                                        <i class="ri-arrow-up-line text-secondary fs-15 align-middle"></i>
+                                        <span  class="text-secondary fs-12"> 26.35% last month</span>
+                                    </p>
+                                </div>
+                                <div id="customers-card" class="crm-card-chart">
+                                    <apx-chart [series]="chartOptions2.series" [chart]="chartOptions2.chart"
+                                    [xaxis]="chartOptions2.xaxis" [colors]="chartOptions2.colors" [fill]="chartOptions2.fill"
+                                    [stroke]="chartOptions2.stroke" [tooltip]="chartOptions2.tooltip"
+                                    [dataLabels]="chartOptions2.dataLabels" [grid]="chartOptions2.grid"
+                                    [yaxis]="chartOptions2.yaxis">
+                                </apx-chart>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 col-xl-3">
+                    <div class="card custom-card overflow-hidden">
+                        <div class="card-body p-0">
+                            <div class="mb-2 p-3 pb-0">
+                                <div class="flex-fill fs-15">CRM Renewal Users</div>
+                            </div>
+                            <div class="d-flex align-items-center ps-3">
+                                <div class="flex-fill">
+                                    <div class="fs-25 fw-normal mb-2">30k+</div>
+                                    <p class="mb-0">
+                                        <i class="ri-arrow-up-line text-info fs-15 align-middle"></i>
+                                        <span  class="text-info fs-12"> 16.35% last month</span>
+                                    </p>
+                                </div>
+                                <div id="orders-card" class="crm-card-chart">
+                                    <apx-chart [series]="chartOptions3.series" [chart]="chartOptions3.chart"
+                                    [xaxis]="chartOptions3.xaxis" [colors]="chartOptions3.colors" [fill]="chartOptions3.fill"
+                                    [stroke]="chartOptions3.stroke" [tooltip]="chartOptions3.tooltip"
+                                    [dataLabels]="chartOptions3.dataLabels" [grid]="chartOptions3.grid"
+                                    [yaxis]="chartOptions3.yaxis">
+                                </apx-chart>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div> 
+    </div> 
+</ng-container>
+<!-- End::row-1 -->
+
+<!-- Start::row-1 -->
+ 
 <!-- End::row-1 -->
 
 <!-- Start::row-2 -->

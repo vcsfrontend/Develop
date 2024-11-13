@@ -846,6 +846,19 @@ chartOptions6:any= {
   closeMdl() {
     this.viewContainerRef.clear();
   }  
+
+  ReadMore:boolean = true
+
+  //hiding info box
+  visible:boolean = false
+
+
+  //onclick toggling both
+  onclick()
+  {
+    this.ReadMore = !this.ReadMore; //not equal to condition
+    this.visible = !this.visible
+  }
   
   
 }
