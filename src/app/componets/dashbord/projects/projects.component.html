@@ -592,7 +592,7 @@
                         </div>
                 </div>
             </div>
-            <div class="card-body p-0">
+            <!-- <div class="card-body p-0">
                 <div class="table-responsive">
                     <table class="table text-nowrap">
                         <thead>
@@ -709,6 +709,85 @@
                             </li>
                         </ul>
                     </div>
+                </div>
+            </div> -->
+
+
+            <div class="card-body p-0">
+                <div class="mat-elevation-z8">
+                    <div class="table-responsive">
+                        <table mat-table [dataSource]="dataSource">
+                            <ng-container matColumnDef="slNo">
+                                <th mat-header-cell *matHeaderCellDef> S.No. </th>
+                                <td mat-cell *matCellDef="let element; let i = index"> {{getSNo(i)}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="projectId">
+                                <th mat-header-cell *matHeaderCellDef> Project Id </th>
+                                <td mat-cell *matCellDef="let element"> {{element.projectId}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="projectName">
+                                <th mat-header-cell *matHeaderCellDef> Project Name </th>
+                                <td mat-cell *matCellDef="let element"> {{element.projectName}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="clientName">
+                                <th mat-header-cell *matHeaderCellDef> Client Name </th>
+                                <td mat-cell *matCellDef="let element"> {{element.clientName}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="businessCategory">
+                                <th mat-header-cell *matHeaderCellDef> Business Category</th>
+                                <td mat-cell *matCellDef="let element"> {{element.businessCategory}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="projectAddress">
+                                <th mat-header-cell *matHeaderCellDef> Project Address </th>
+                                <td mat-cell *matCellDef="let element"> {{element.projectAddress}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="state">
+                                <th mat-header-cell *matHeaderCellDef>State </th>
+                                <td mat-cell *matCellDef="let element"> {{element.state}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="city">
+                                <th mat-header-cell *matHeaderCellDef> City </th>
+                                <td mat-cell *matCellDef="let element"> {{element.city}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="projectState">
+                                <th mat-header-cell *matHeaderCellDef>Project State</th>
+                                <td mat-cell *matCellDef="let element"> {{element.projectState}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="projectEstimation">
+                                <th mat-header-cell *matHeaderCellDef>Project Estimation</th>
+                                <td mat-cell *matCellDef="let element"> {{element.projectEstimation}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="projectArea">
+                                <th mat-header-cell *matHeaderCellDef>Project Area</th>
+                                <td mat-cell *matCellDef="let element"> {{element.projectArea}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="action">
+                                <th mat-header-cell *matHeaderCellDef>Action</th>
+                                <td mat-cell *matCellDef="let element"> {{element.action}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="projectStartDate">
+                                <th mat-header-cell *matHeaderCellDef>Project Start Date</th>
+                                <td mat-cell *matCellDef="let element"> {{element.projectStartDate}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="projectEndDate">
+                                <th mat-header-cell *matHeaderCellDef>Project End Date</th>
+                                <td mat-cell *matCellDef="let element"> {{element.projectEndDate}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="designId">
+                                <th mat-header-cell *matHeaderCellDef>Design Id</th>
+                                <td mat-cell *matCellDef="let element"> {{element.designId}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="companyName">
+                                <th mat-header-cell *matHeaderCellDef>Company Name</th>
+                                <td mat-cell *matCellDef="let element"> {{element.companyName}} </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                    </div>
+                    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+                        aria-label="Select page of periodic elements">
+                    </mat-paginator>
                 </div>
             </div>
         </div>

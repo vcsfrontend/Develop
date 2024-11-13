@@ -39,6 +39,7 @@ export class SwitherService {
   onCrmView(email:any): Observable<any> { return this.http.get(`${this.apiUrl}auth/fetch_data_crm/${email}`); }
   onCrmUpdate(data:any): Observable<any> { return this.http.post(`${this.apiUrl}crm/update_subscription`, data); }
   adonaiHstry(email:any): Observable<any> { return this.http.get(`${this.adonaiURL}adonai/sub_scription_history/${email}`); }
+  projectLst(data:any): Observable<any> { return this.http.get(`${this.adonaiURL}adonai/get_proj_details/${data}`); }
  
-  // adonai/sub_scription_history/
+  // https://adonai-vcs-fmbqfgbudgendtfu.israelcentral-01.azurewebsites.net/adonai/get_proj_details/{companyname}
 }
