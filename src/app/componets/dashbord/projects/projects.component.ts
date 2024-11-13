@@ -13,7 +13,13 @@ import {
   NgApexchartsModule,
 } from 'ng-apexcharts';
 import { SharedModule } from '../../../shared/common/sharedmodule';
-import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormBuilder, FormGroup, Validators,ReactiveFormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http'; // Import HttpClient for making HTTP requests
+import { FilePondOptions } from 'filepond';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatNativeDateModule } from '@angular/material/core';
+import { NgbDropdownModule,NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export type ChartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
@@ -37,11 +43,74 @@ export type ChartOptions = {
 @Component({
   selector: 'app-projects',
   standalone: true,
-  imports: [SharedModule, NgApexchartsModule, NgbDropdownModule],
+  imports: [SharedModule, NgApexchartsModule, NgbDropdownModule,MatDatepickerModule,MatInputModule,MatNativeDateModule],
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.scss',
 })
 export class ProjectsComponent {
+  modal: any;
+  open(content1:any) {
+		this.modalService.open(content1,{ centered: true });
+	}
+  createProjectForm!: FormGroup;
+  pondOptions: FilePondOptions;
+
+  constructor(private fb: FormBuilder, private http: HttpClient,private modalService: NgbModal) { // Inject HttpClient
+    // Initialize FilePond options if needed
+    this.pondOptions = {
+      allowMultiple: true,
+      // other FilePond options here
+    };
+  }
+
+  ngOnInit(): void {
+    // Initialize the form with the necessary controls and validators
+    this.createProjectForm = this.fb.group({
+      projectName: ['', Validators.required],
+      clientName: ['', Validators.required],
+      businessCategory: ['', Validators.required],
+      projectAddress: ['', Validators.required],
+      state: ['', Validators.required],
+      city: ['', Validators.required],
+      projectState: ['', Validators.required],
+      projectEstimation: ['', [Validators.required, Validators.min(0)]], // Assuming estimation should be a positive number
+      projectArea: ['', [Validators.required, Validators.min(0)]], // Assuming area should be a positive number
+      projectStartDate: ['', Validators.required],
+      projectEndDate: ['', Validators.required],
+      action: ['', Validators.required],
+      companyName: ['', Validators.required],
+      attachments: [null] // Adjust based on your attachment handling
+    });
+  }
+
+  onSubmit(): void {
+    if (this.createProjectForm.valid) {
+      const projectData = this.createProjectForm.value;
+      this.http.post('https://adonai-vcs-fmbqfgbudgendtfu.israelcentral-01.azurewebsites.net/adonai/save_project_details', projectData).subscribe({
+        next: (response) => {
+          console.log('Project created successfully', response);
+        },
+        error: (error) => {
+          console.error('Error creating project', error);
+        },
+        complete: () => {
+          console.log('Project creation process completed.');
+          this.resetForm(); // Optionally reset the form after submission
+        },
+      });
+    } else {
+      // Mark all controls as touched to show validation errors
+      this.createProjectForm.markAllAsTouched();
+      console.log('Form is invalid');
+    }
+  }
+
+  // Optional: You can create a method to reset the form
+  resetForm(): void {
+    this.createProjectForm.reset();
+  }
+
+
   chartOptions: any = {
     series: [
       {
@@ -495,3 +564,4 @@ export class ProjectsComponent {
     labels: ['Followers'],
   };
 }
+
