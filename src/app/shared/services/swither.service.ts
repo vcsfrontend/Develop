@@ -38,6 +38,7 @@ export class SwitherService {
   onAdonaiUpdate(data:any): Observable<any> { return this.http.post(`${this.adonaiURL}adonai/update_subscription`, data); }
   onCrmView(email:any): Observable<any> { return this.http.get(`${this.apiUrl}auth/fetch_data_crm/${email}`); }
   onCrmUpdate(data:any): Observable<any> { return this.http.post(`${this.apiUrl}crm/update_subscription`, data); }
-
-  // http://auth-service.vcs.plus:8080/auth/validate_otp?email=vijay%40gmail.com&otp=123456
+  adonaiHstry(email:any): Observable<any> { return this.http.get(`${this.adonaiURL}adonai/sub_scription_history/${email}`); }
+ 
+  // adonai/sub_scription_history/
 }
