@@ -20,6 +20,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { NgbDropdownModule,NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CommonModule } from '@angular/common';
 export type ChartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
@@ -43,7 +44,8 @@ export type ChartOptions = {
 @Component({
   selector: 'app-projects',
   standalone: true,
-  imports: [SharedModule, NgApexchartsModule, NgbDropdownModule,MatDatepickerModule,MatInputModule,MatNativeDateModule],
+  imports: [SharedModule, NgApexchartsModule, CommonModule,
+    NgbDropdownModule,MatDatepickerModule,MatInputModule,MatNativeDateModule,ReactiveFormsModule],
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.scss',
 })
@@ -51,6 +53,9 @@ export class ProjectsComponent {
   modal: any;
   open(content1:any) {
 		this.modalService.open(content1,{ centered: true });
+	}
+  openLg(content10:any) {
+		this.modalService.open(content10, { size: 'lg' },);
 	}
   createProjectForm!: FormGroup;
   pondOptions: FilePondOptions;
