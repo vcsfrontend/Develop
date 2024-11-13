@@ -11,16 +11,4 @@ export const environment = {
     webURL: 'https://auth-service.vcs.plus/',
     masterURL: 'https://adonai-serv.vcs.plus/',
   },
-  // tblPgeSze: 25,
-  // imgDmnsn: 140,
-  // imgHtWdt: 60,
-  // securityKey: 'h1ms6@nush',
-  // isLcl: origin.includes('localhost'),
-  // himsApiURL: origin.includes('localhost') ? 'https://hmsdev.dhanushinfotech.com/hims-services/api/': `${origin}/hims-services/api/`, // 'https://hmsdev.dhanushinfotech.com/hims-services/api/' : `${origin}/hims-services/api/`,
-  // prntPath: ['/hims-services', ''],
-  // srcePath: ['', '/hims-services/', '/masters/v1/', '/', '/registration/', '/patient/v1/', '/masters/', '/appointments/v1/', 
-  //   '/consultation/v1/', '/op-billing/v1/', '/cashier/v1/', '/ip-adt/v1/', '/ip-billing/v1/', '/radiology/v1/', '/laboratory/v1/',
-  //   '/blood-bank/v1/' , '/cssd/v1/', '/nursing-station/v1/','/ambulance/v1/','/mortuary/v1/','/equipment/v1/', '/laundry/v1/'],
-  // srcePathOld: ['', '/hims-login/nojwt/', '/masters/fetch/', '/masters/save/', '/masters/common/', '/masters/', '/registration/', '/', '/registration/v1/'],
-  // chngPths: ['generalstore']
 };
