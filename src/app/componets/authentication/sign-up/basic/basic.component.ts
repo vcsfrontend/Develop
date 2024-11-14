@@ -37,20 +37,22 @@ import * as prismCodeData from '../../../../shared/prismData/advancedUi/accordio
 })
 export class BasicComponent extends BaseComponent implements OnInit {
   prismCode = prismCodeData;
- 
-isCollapsed = true;
-isCollapsed1 = true;
-isCollapsed2 = true;
+  selectedCountry: string = 'India'; city = '';
+  selectedCountryCode: string = ''; phoneNumber = '';
+
+  isCollapsed = true;
+  isCollapsed1 = true;
+  isCollapsed2 = true;
 
   crm = false; submitted =false; cnfmPaswrd: any = ''; paswrd:any = ''; mailId:any = '';
   adonai = false; btnDisable = false; todayDt = new Date(); isBtnDsbl = false;
   adoanAiRole :any; isEmailDisabled = false; isOtpDisabled = false; isCompany : string = 'col-xl-6';
-  crmRole :any; isShowUsers = false; pload:any[] = [];isOkBtn = false;
+  crmRole :any; isShowUsers = false; pload:any[] = [];isOkBtn = false; showCity: boolean = true;
   toolsList = [Tools.Adonai,Tools.Crm];
-  @ViewChild('modalTemplate') modalTemplate!: TemplateRef<any>;  // Access the ng-template
+  @ViewChild('modalTemplate') modalTemplate!: TemplateRef<any>;
   private modalRef: any; noUsers:any=''; users:any = '';
   passwordStrengthMessage: string = '';
-  passwordStrengthColor: string = ''; // Control message color
+  passwordStrengthColor: string = '';
   confirmPasswordStrengthMessage: string = '';
   confirmPasswordStrengthColor: string = '';
   isPasswordValid: boolean = false; isPasswrd:boolean = false; isPassValid:boolean = false; isCnfmPwd:boolean = false;
@@ -63,11 +65,11 @@ isCollapsed2 = true;
   signupFrm: FormGroup = this.fb.group({ 
     type : ['', Validators.required],
     companyName : ['', Validators.required],
-    noOfUsers: ['', Validators.required],
+    noOfUsers: [''],
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
     email: ['', [Validators.required,  Validators.email]],
-    country: ['', Validators.required],
+    country: ['India', Validators.required],
     dob: [new Date()],
     crm:false,
     adonai:false,
@@ -75,7 +77,10 @@ isCollapsed2 = true;
     username: ['',],
     password: ['', [Validators.required, this.passwordValidator]],
     tools : [[],Validators.required],
-    confirmPassword: ['', Validators.required]
+    confirmPassword: ['', Validators.required],
+    userflag: ['signup'],
+    city: [''],
+    updatedBy: ['']
     //"toolId": 0,
     //"roleId": 0,
   })
@@ -104,7 +109,6 @@ isCollapsed2 = true;
   }
 
   ngOnDestroy(): void {
-   
     // document.body.classList.remove('authentication-background');   
   }
 
@@ -113,6 +117,9 @@ isCollapsed2 = true;
     return this.signupFrm.controls;
   }
 
+  onCountryChange(data:any) {
+    data == 'India' ? (this.showCity = true) : (this.showCity = false , this.city = '')
+  }
   // showPasswordError(): void {
   //   if (this.f['password'].errors?.['invalidPassword']) {
   //     this.toastr.error(
@@ -365,24 +372,24 @@ isCollapsed2 = true;
 
   onDropdownChange() {
     const cmpnyFieldControl = this.signupFrm.get('companyName');
-    const userFieldControl = this.signupFrm.get('noOfUsers');
+    // const userFieldControl = this.signupFrm.get('noOfUsers');
 
     if (this.signupFrm.get('type')?.value === '2') {
       cmpnyFieldControl?.setValidators([Validators.required]),
-      userFieldControl?.setValidators([Validators.required]),
-      this.isCompany = 'col-xl-4',
+      // userFieldControl?.setValidators([Validators.required]),
+      // this.isCompany = 'col-xl-4',
+      this.isCompany = 'col-xl-6',
       this.isShowUsers = true;
     } else {
       cmpnyFieldControl?.clearValidators(),
-      userFieldControl?.clearValidators(),
-      this.signupFrm?.get('noOfUsers')?.setValue(''),
+      // userFieldControl?.clearValidators(),
+      // this.signupFrm?.get('noOfUsers')?.setValue(''),
       this.isCompany = 'col-xl-6';
       this.isShowUsers = false;
     }
 
     cmpnyFieldControl?.updateValueAndValidity(); 
-    userFieldControl?.updateValueAndValidity();
-     // This updates the validation status of the control
+    // userFieldControl?.updateValueAndValidity();
   }
 
 
