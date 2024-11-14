@@ -75,12 +75,14 @@ curve:string
 })
 export class SuperadminComponent {
   displayedColumns: string[] = ['slNo', 'firstName', 'lastName', 'mobile', 'adonai', 'crm', 'action', 'view', 'edit' ];
+  displayAdonaiColumns: string[] = ['slNo', 'id', 'email', 'history']
   dataSource = new MatTableDataSource<any>(); 
+  adonaiSource = new MatTableDataSource<any>(); 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild('modalTemplate') modalTemplate!: TemplateRef<any>;  // Access the ng-template
   @ViewChild('template', { static: true }) templateRef!: TemplateRef<any>;
   private modalRef: any;
-  userLst:any; userData: any;
+  userLst:any; userData: any; adonaiHstryLst: any;
   content3: any; content4: any; content5: any; content6: any; content7: any;
   firstNm: any; lastNm: any; companyNm: any; phoneNo: any; dob: any;
   adonaiData: any; crmData: any; 
@@ -681,6 +683,7 @@ chartOptions6:any= {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.adonaiSource.paginator = this.paginator;
   }  
 
   getSNo(index: number): number {
@@ -816,6 +819,22 @@ chartOptions6:any= {
     // }
   }
 
+  getHistory(data:any){
+    this.switchService.adonaiHstry(data.email).subscribe({ next: (res:any) => {
+      if(res){
+        this.adonaiHstryLst = res,
+        this.adonaiSource.data = res;
+        console.log(res);
+      } else{
+        this.toastr.error(res.message,'', {
+          timeOut: 3000,
+          positionClass: 'toast-top-right',
+          });
+        }
+      }
+    })
+  }
+
   openLg(content10:any) {
 		this.modalService.open(content10, { size: 'lg' },);
 	}
@@ -827,6 +846,19 @@ chartOptions6:any= {
   closeMdl() {
     this.viewContainerRef.clear();
   }  
+
+  ReadMore:boolean = true
+
+  //hiding info box
+  visible:boolean = false
+
+
+  //onclick toggling both
+  onclick()
+  {
+    this.ReadMore = !this.ReadMore; //not equal to condition
+    this.visible = !this.visible
+  }
   
   
 }

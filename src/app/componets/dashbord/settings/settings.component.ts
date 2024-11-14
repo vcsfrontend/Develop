@@ -27,9 +27,9 @@ import { ShowCodeContentDirective } from '../../../shared/directives/show-code-c
 @Component({
   selector: 'app-settings',
   standalone: true,
-  imports: [RouterModule,NgbModule,FormsModule,ReactiveFormsModule ,AngularFireModule,
+  imports: [RouterModule,NgbModule,FormsModule,ReactiveFormsModule, AngularFireModule,
     AngularFireDatabaseModule, CommonModule,  MatFormFieldModule, MatSelectModule, FlatpickrModule,
-    AngularFirestoreModule,ToastrModule, SharedModule, ShowcodeCardComponent, MaterialModuleModule,
+    AngularFirestoreModule, ToastrModule, SharedModule, ShowcodeCardComponent, MaterialModuleModule,
     OverlayscrollbarsModule, ShowCodeContentDirective, MatIconModule],
   providers: [FirebaseService,{ provide: ToastrService, useClass: ToastrService }, FlatpickrDefaults, DatePipe],
   templateUrl: './settings.component.html',
@@ -70,6 +70,8 @@ export class SettingsComponent extends BaseComponent implements OnInit{
     password: ['', [Validators.required, this.passwordValidator]],
     confirmPassword: ['', Validators.required],
     tools : [[],Validators.required],
+    userflag: ['settings'], 
+    updatedBy: [localStorage.getItem('username')]
   })
   
   constructor(public fb: FormBuilder, public switchService: SwitherService, 

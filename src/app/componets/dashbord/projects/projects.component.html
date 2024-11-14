@@ -26,7 +26,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> 
             <div class="col-xl-3">
                 <div class="card custom-card overflow-hidden">
                     <div class="card-body p-0">
@@ -178,7 +178,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
     <div class="col-xxl-3">
@@ -566,7 +566,7 @@
     <div class="col-xl-12">
         <div class="card custom-card">
             <div class="card-header justify-content-between">
-                <div class="card-title">Projects Summary</div>
+                <div class="card-title">My Projects</div>
                 <div class="d-flex flex-wrap gap-3">
                     <div>
                         <input class="form-control form-control-sm" type="text" placeholder="Search Here"
@@ -584,266 +584,104 @@
                             <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">Relevant</a></li>
                         </ul>
                     </div>
+                    <!-- <a routerLink="apps/projects/create-project" class="btn btn-primary me-2" href="apps/projects/create-project"><i
+                        class="ri-add-line me-1 fw-medium align-middle"></i>New Project</a> -->
+                        <div>
+                            <a routerLink="/apps/projects/create-project" class="btn btn-sm btn-secondary btn-wave" data-bs-toggle="modal" data-bs-target="#exampleModalLg"
+                            (click)="openLg(Content10)"><i class="ri-add-line align-middle me-1 fw-medium"></i>Create Project</a>
+                        </div>
                 </div>
             </div>
-            <div class="card-body p-0">
+            <!-- <div class="card-body p-0">
                 <div class="table-responsive">
                     <table class="table text-nowrap">
                         <thead>
                             <tr>
-                                <th scope="col"><input class="form-check-input" type="checkbox" id="checkboxNoLabel"
-                                        value="" aria-label="..."></th>
-                                <th scope="col">Client</th>
-                                <th scope="col">Project Category</th>
-                                <th scope="col">Company</th>
-                                <th scope="col">Gmail</th>
-                                <th scope="col">Team</th>
-                                <th scope="col">Work Progress</th>
-                                <th scope="col">Revenue</th>
+                                
+                                <th scope="col">SI.No</th>
+                                <th scope="col">Project ID</th>
+                                <th scope="col">Project Name</th>
+                                <th scope="col">Client Name</th>
+                                <th scope="col">Business Category</th>
+                                <th scope="col">Project Address</th>
+                                <th scope="col">State</th>
+                                <th scope="col">City</th>
+                                <th scope="col">Project Stage</th>
+                                <th scope="col">Project Estimation</th>
+                                <th scope="col">Project area</th>
                                 <th scope="col">Action</th>
+                                <th scope="col">Company Name</th>
+                                <th scope="col">Created By</th>
+                                <th scope="col">Start Date</th>
+                                <th scope="col">End Date</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <th scope="row"><input class="form-check-input" type="checkbox" id="checkboxNoLabel1"
-                                        value="" aria-label="..."></th>
+                                <td>1 . </td>
+                                <td>VA001 </td>
                                 <td>
-                                    <div class="d-flex align-items-center">
-                                        <span class="avatar avatar-xs me-2 online avatar-rounded">
-                                            <img src="./assets/images/faces/3.jpg" alt="img">
-                                        </span>Mayor Kelly
-                                    </div>
-                                </td>
-                                <td>Manufacturer</td>
-                                <td><span class="badge bg-primary-transparent">Apex Industries</span></td>
-                                <td>mayorkrlly&#64;gmail.com</td>
+                                    Standalone (SaiKrishna)</td>
+                                <td>Sai Krishna</td>
+                                <td>IR Residential</td>
+                                <td>kphb telangana</td>
+                                <td>Telangana</td>
+                                <td>Hyderabad</td>
+                                <td><span class="badge bg-primary-transparent">Execution In Progress </span></td>
+                                <td>₹ 3,60,868</td>
+                                <td>1860</td>
                                 <td>
-                                    <div class="avatar-list-stacked">
-                                        <span class="avatar avatar-sm avatar-rounded">
-                                            <img src="./assets/images/faces/2.jpg" alt="img">
-                                        </span>
-                                        <span class="avatar avatar-sm avatar-rounded">
-                                            <img src="./assets/images/faces/8.jpg" alt="img">
-                                        </span>
-                                        <span class="avatar avatar-sm avatar-rounded">
-                                            <img src="./assets/images/faces/2.jpg" alt="img">
-                                        </span>
-                                        <a class="avatar avatar-sm bg-primary text-fixed-white avatar-rounded"
-                                            href="javascript:void(0);">
-                                            +4
-                                        </a>
-                                    </div>
+                                    hello
                                 </td>
-                                <td>
-                                    <div class="progress progress-xs">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 52%"
-                                            aria-valuenow="52" aria-valuemin="0" aria-valuemax="100">
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>$10,984.29</td>
-                                <td>
-                                    <div class="hstack gap-2 fs-15">
-                                        <a aria-label="anchor" href="javascript:void(0);"
-                                            class="btn btn-icon btn-sm btn-success"><i
-                                                class="ri-download-2-line"></i></a>
-                                        <a aria-label="anchor" href="javascript:void(0);"
-                                            class="btn btn-icon btn-sm btn-info"><i class="ri-edit-line"></i></a>
-                                    </div>
-                                </td>
+                                <td>Varmagroup</td>
+                                <td>CH TARUN, Varma Group</td>
+                                <td>13-11-2024</td>
+                                <td>13-12-2024</td>
                             </tr>
                             <tr>
-                                <th scope="row"><input class="form-check-input" type="checkbox" id="checkboxNoLabel2"
-                                        value="" aria-label="..."></th>
+                                <td>1 . </td>
+                                <td>VA001 </td>
                                 <td>
-                                    <div class="d-flex align-items-center">
-                                        <span class="avatar avatar-xs me-2 online avatar-rounded">
-                                            <img src="./assets/images/faces/12.jpg" alt="img">
-                                        </span>Andrew Garfield
-                                    </div>
-                                </td>
-                                <td>Managing Director</td>
-                                <td><span class="badge bg-warning-transparent">AlphaCraft Labs</span></td>
-                                <td>andrewgarfield&#64;gmail.com</td>
+                                    Standalone (SaiKrishna)</td>
+                                <td>Sai Krishna</td>
+                                <td>IR Residential</td>
+                                <td>kphb telangana</td>
+                                <td>Telangana</td>
+                                <td>Hyderabad</td>
+                                <td><span class="badge bg-primary-transparent">Execution In Progress </span></td>
+                                <td>₹ 3,60,868</td>
+                                <td>1860</td>
                                 <td>
-                                    <div class="avatar-list-stacked">
-                                        <span class="avatar avatar-sm avatar-rounded">
-                                            <img src="./assets/images/faces/1.jpg" alt="img">
-                                        </span>
-                                        <span class="avatar avatar-sm avatar-rounded">
-                                            <img src="./assets/images/faces/5.jpg" alt="img">
-                                        </span>
-                                        <span class="avatar avatar-sm avatar-rounded">
-                                            <img src="./assets/images/faces/11.jpg" alt="img">
-                                        </span>
-                                        <span class="avatar avatar-sm avatar-rounded">
-                                            <img src="./assets/images/faces/15.jpg" alt="img">
-                                        </span>
-                                        <a class="avatar avatar-sm bg-primary text-fixed-white avatar-rounded"
-                                            href="javascript:void(0);">
-                                            +4
-                                        </a>
-                                    </div>
+                                    hiii
                                 </td>
-                                <td>
-                                    <div class="progress progress-xs">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 91%"
-                                            aria-valuenow="91" aria-valuemin="0" aria-valuemax="100">
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>$1.4billion</td>
-                                <td>
-                                    <div class="hstack gap-2 fs-15">
-                                        <a aria-label="anchor" href="javascript:void(0);"
-                                            class="btn btn-icon btn-sm btn-success"><i
-                                                class="ri-download-2-line"></i></a>
-                                        <a aria-label="anchor" href="javascript:void(0);"
-                                            class="btn btn-icon btn-sm btn-info"><i class="ri-edit-line"></i></a>
-                                    </div>
-                                </td>
+                                <td>Varmagroup</td>
+                                <td>CH TARUN, Varma Group</td>
+                                <td>13-11-2024</td>
+                                <td>13-12-2024</td>
                             </tr>
                             <tr>
-                                <th scope="row"><input class="form-check-input" type="checkbox" id="checkboxNoLabel3"
-                                        value="" aria-label="..."></th>
+                                <td>1 . </td>
+                                <td>VA001 </td>
                                 <td>
-                                    <div class="d-flex align-items-center">
-                                        <span class="avatar avatar-xs me-2 online avatar-rounded">
-                                            <img src="./assets/images/faces/14.jpg" alt="img">
-                                        </span>Simon Cowel
-                                    </div>
-                                </td>
-                                <td>Service Manager</td>
-                                <td><span class="badge bg-success-transparent">Infinite Horizons</span></td>
-                                <td>simoncowel234&#64;gmail.com</td>
+                                    Standalone (SaiKrishna)</td>
+                                <td>Sai Krishna</td>
+                                <td>IR Residential</td>
+                                <td>kphb telangana</td>
+                                <td>Telangana</td>
+                                <td>Hyderabad</td>
+                                <td><span class="badge bg-primary-transparent">Execution In Progress </span></td>
+                                <td>₹ 3,60,868</td>
+                                <td>1860</td>
                                 <td>
-                                    <div class="avatar-list-stacked">
-                                        <span class="avatar avatar-sm avatar-rounded">
-                                            <img src="./assets/images/faces/6.jpg" alt="img">
-                                        </span>
-                                        <span class="avatar avatar-sm avatar-rounded">
-                                            <img src="./assets/images/faces/16.jpg" alt="img">
-                                        </span>
-                                        <a class="avatar avatar-sm bg-primary text-fixed-white avatar-rounded"
-                                            href="javascript:void(0);">
-                                            +10
-                                        </a>
-                                    </div>
+                                    hello
                                 </td>
-                                <td>
-                                    <div class="progress progress-xs">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 45%"
-                                            aria-valuenow="45" aria-valuemin="0" aria-valuemax="100">
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>$7,123.21</td>
-                                <td>
-                                    <div class="hstack gap-2 fs-15">
-                                        <a aria-label="anchor" href="javascript:void(0);"
-                                            class="btn btn-icon btn-sm btn-success"><i
-                                                class="ri-download-2-line"></i></a>
-                                        <a aria-label="anchor" href="javascript:void(0);"
-                                            class="btn btn-icon btn-sm btn-info"><i class="ri-edit-line"></i></a>
-                                    </div>
-                                </td>
+                                <td>Varmagroup</td>
+                                <td>CH TARUN, Varma Group</td>
+                                <td>13-11-2024</td>
+                                <td>13-12-2024</td>
                             </tr>
-                            <tr>
-                                <th scope="row"><input class="form-check-input" type="checkbox" id="checkboxNoLabel14"
-                                        value="" aria-label="..."></th>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <span class="avatar avatar-xs me-2 online avatar-rounded">
-                                            <img src="./assets/images/faces/5.jpg" alt="img">
-                                        </span>Mirinda Hers
-                                    </div>
-                                </td>
-                                <td>Recruiter</td>
-                                <td><span class="badge bg-danger-transparent">Solaris Systems</span></td>
-                                <td>mirindahers&#64;gmail.com</td>
-                                <td>
-                                    <div class="avatar-list-stacked">
-                                        <span class="avatar avatar-sm avatar-rounded">
-                                            <img src="./assets/images/faces/3.jpg" alt="img">
-                                        </span>
-                                        <span class="avatar avatar-sm avatar-rounded">
-                                            <img src="./assets/images/faces/10.jpg" alt="img">
-                                        </span>
-                                        <span class="avatar avatar-sm avatar-rounded">
-                                            <img src="./assets/images/faces/14.jpg" alt="img">
-                                        </span>
-                                        <a class="avatar avatar-sm bg-primary text-fixed-white avatar-rounded"
-                                            href="javascript:void(0);">
-                                            +6
-                                        </a>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="progress progress-xs">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 21%"
-                                            aria-valuenow="21" aria-valuemin="0" aria-valuemax="100">
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>$2,325.45</td>
-                                <td>
-                                    <div class="hstack gap-2 fs-15">
-                                        <a aria-label="anchor" href="javascript:void(0);"
-                                            class="btn btn-icon btn-sm btn-success"><i
-                                                class="ri-download-2-line"></i></a>
-                                        <a aria-label="anchor" href="javascript:void(0);"
-                                            class="btn btn-icon btn-sm btn-info"><i class="ri-edit-line"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row"><input class="form-check-input" type="checkbox" id="checkboxNoLabel15"
-                                        value="" aria-label="..."></th>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <span class="avatar avatar-xs me-2 online avatar-rounded">
-                                            <img src="./assets/images/faces/2.jpg" alt="img">
-                                        </span>Alicia Fox
-                                    </div>
-                                </td>
-                                <td>Developer</td>
-                                <td><span class="badge bg-info-transparent">BioTech Nexus</span></td>
-                                <td>aliciafox2732&#64;gmail.com</td>
-                                <td>
-                                    <div class="avatar-list-stacked">
-                                        <span class="avatar avatar-sm avatar-rounded">
-                                            <img src="./assets/images/faces/3.jpg" alt="img">
-                                        </span>
-                                        <span class="avatar avatar-sm avatar-rounded">
-                                            <img src="./assets/images/faces/10.jpg" alt="img">
-                                        </span>
-                                        <span class="avatar avatar-sm avatar-rounded">
-                                            <img src="./assets/images/faces/14.jpg" alt="img">
-                                        </span>
-                                        <a class="avatar avatar-sm bg-primary text-fixed-white avatar-rounded"
-                                            href="javascript:void(0);">
-                                            +6
-                                        </a>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="progress progress-xs">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 21%"
-                                            aria-valuenow="21" aria-valuemin="0" aria-valuemax="100">
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>$2,325.45</td>
-                                <td>
-                                    <div class="hstack gap-2 fs-15">
-                                        <a aria-label="anchor" href="javascript:void(0);"
-                                            class="btn btn-icon btn-sm btn-success"><i
-                                                class="ri-download-2-line"></i></a>
-                                        <a aria-label="anchor" href="javascript:void(0);"
-                                            class="btn btn-icon btn-sm btn-info"><i class="ri-edit-line"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
+                            
+                            
                         </tbody>
                     </table>
                 </div>
@@ -872,8 +710,190 @@
                         </ul>
                     </div>
                 </div>
+            </div> -->
+
+
+            <div class="card-body p-0">
+                <div class="mat-elevation-z8">
+                    <div class="table-responsive">
+                        <table mat-table [dataSource]="dataSource">
+                            <ng-container matColumnDef="slNo">
+                                <th mat-header-cell *matHeaderCellDef> S.No. </th>
+                                <td mat-cell *matCellDef="let element; let i = index"> {{getSNo(i)}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="projectId">
+                                <th mat-header-cell *matHeaderCellDef> Project Id </th>
+                                <td mat-cell *matCellDef="let element"> {{element.projectId}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="projectName">
+                                <th mat-header-cell *matHeaderCellDef> Project Name </th>
+                                <td mat-cell *matCellDef="let element"> {{element.projectName}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="clientName">
+                                <th mat-header-cell *matHeaderCellDef> Client Name </th>
+                                <td mat-cell *matCellDef="let element"> {{element.clientName}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="businessCategory">
+                                <th mat-header-cell *matHeaderCellDef> Business Category</th>
+                                <td mat-cell *matCellDef="let element"> {{element.businessCategory}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="projectAddress">
+                                <th mat-header-cell *matHeaderCellDef> Project Address </th>
+                                <td mat-cell *matCellDef="let element"> {{element.projectAddress}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="state">
+                                <th mat-header-cell *matHeaderCellDef>State </th>
+                                <td mat-cell *matCellDef="let element"> {{element.state}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="city">
+                                <th mat-header-cell *matHeaderCellDef> City </th>
+                                <td mat-cell *matCellDef="let element"> {{element.city}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="projectState">
+                                <th mat-header-cell *matHeaderCellDef>Project State</th>
+                                <td mat-cell *matCellDef="let element"> {{element.projectState}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="projectEstimation">
+                                <th mat-header-cell *matHeaderCellDef>Project Estimation</th>
+                                <td mat-cell *matCellDef="let element"> {{element.projectEstimation}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="projectArea">
+                                <th mat-header-cell *matHeaderCellDef>Project Area</th>
+                                <td mat-cell *matCellDef="let element"> {{element.projectArea}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="action">
+                                <th mat-header-cell *matHeaderCellDef>Action</th>
+                                <td mat-cell *matCellDef="let element"> {{element.action}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="projectStartDate">
+                                <th mat-header-cell *matHeaderCellDef>Project Start Date</th>
+                                <td mat-cell *matCellDef="let element"> {{element.projectStartDate}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="projectEndDate">
+                                <th mat-header-cell *matHeaderCellDef>Project End Date</th>
+                                <td mat-cell *matCellDef="let element"> {{element.projectEndDate}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="designId">
+                                <th mat-header-cell *matHeaderCellDef>Design Id</th>
+                                <td mat-cell *matCellDef="let element"> {{element.designId}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="companyName">
+                                <th mat-header-cell *matHeaderCellDef>Company Name</th>
+                                <td mat-cell *matCellDef="let element"> {{element.companyName}} </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                    </div>
+                    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+                        aria-label="Select page of periodic elements">
+                    </mat-paginator>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+<ng-template #Content10 id="addtask" let-modal>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h6 class="modal-title" id="mail-ComposeLabel">Create Project</h6>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"
+            (click)="modal.close('Cross click')" aria-label="Close"></button>
+        </div>
+        <div class="modal-body px-4">
+            <form [formGroup]="createProjectForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                  <div class="col-xl-12">
+                    <div class="card custom-card">
+                      <!-- <div class="card-header">
+                        <div class="card-title">Create Project</div>
+                        
+                      </div> -->
+                      <div class="card-body">
+                        <div class="row gy-3">
+                          <div class="col-xl-4">
+                            <label for="projectName" class="form-label">Project Name:</label>
+                            <input type="text" class="form-control" id="projectName" formControlName="projectName" placeholder="Enter Project Name">
+                          </div>
+                          <div class="col-xl-4">
+                            <label for="clientName" class="form-label">Client Name:</label>
+                            <input type="text" class="form-control" id="clientName" formControlName="clientName" placeholder="Enter Client Name">
+                          </div>
+                          <div class="col-xl-4">
+                            <label for="businessCategory" class="form-label">Business Category:</label>
+                            <input type="text" class="form-control" id="businessCategory" formControlName="businessCategory" placeholder="Business Category">
+                          </div>
+                          <div class="col-xl-4">
+                            <label for="projectAddress" class="form-label">Project Address:</label>
+                            <input type="text" class="form-control" id="projectAddress" formControlName="projectAddress" placeholder="Enter Project Address">
+                          </div>
+                          <div class="col-xl-4">
+                            <label for="state" class="form-label">State:</label>
+                            <input type="text" class="form-control" id="state" formControlName="state" placeholder="Enter State">
+                          </div>
+                          <div class="col-xl-4">
+                            <label for="city" class="form-label">City:</label>
+                            <input type="text" class="form-control" id="city" formControlName="city" placeholder="Enter City">
+                          </div>
+                          <div class="col-xl-4">
+                            <label for="projectState" class="form-label">Project State:</label>
+                            <input type="text" class="form-control" id="projectState" formControlName="projectState" placeholder="Enter Project State">
+                          </div>
+                          <div class="col-xl-4">
+                            <label for="projectEstimation" class="form-label">Project Estimation:</label>
+                            <input type="number" class="form-control" id="projectEstimation" formControlName="projectEstimation" placeholder="Enter Estimation">
+                          </div>
+                          <div class="col-xl-4">
+                            <label for="projectArea" class="form-label">Project Area:</label>
+                            <input type="number" class="form-control" id="projectArea" formControlName="projectArea" placeholder="Enter Project Area">
+                          </div>
+                          <div class="col-xl-4">
+                            <label for="action" class="form-label">Action:</label>
+                            <input type="text" class="form-control" id="action" formControlName="action" placeholder="Enter Action">
+                          </div>
+                          <div class="col-xl-4">
+                            <label for="companyName" class="form-label">Company Name:</label>
+                            <input type="text" class="form-control" id="companyName" formControlName="companyName" placeholder="Enter Company Name">
+                          </div>
+                          <div class="col-xl-4"></div>
+                          <div class="col-xl-4">
+                            <mat-form-field appearance="fill">
+                              <mat-label>Start Date</mat-label>
+                              <input matInput [matDatepicker]="startPicker" formControlName="projectStartDate" placeholder="Choose Start Date">
+                              <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+                              <mat-datepicker #startPicker></mat-datepicker>
+                            </mat-form-field>
+                          </div>
+                          <div class="col-xl-4">
+                            <mat-form-field appearance="fill">
+                              <mat-label>End Date</mat-label>
+                              <input matInput [matDatepicker]="endPicker" formControlName="projectEndDate" placeholder="Choose End Date">
+                              <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+                              <mat-datepicker #endPicker></mat-datepicker>
+                            </mat-form-field>
+                          </div>
+                          
+                          <!-- <div class="col-xl-12">
+                            <label class="form-label">Attachments</label>
+                            <file-pond #myPond [options]="pondOptions" formControlName="attachments"></file-pond>
+                          </div> -->
+                        </div>
+                      </div>
+                      <!-- <div class="card-footer">
+                        <button class="btn btn-primary-light btn-wave ms-auto float-end" type="submit">Create Project</button>
+                      </div> -->
+                    </div>
+                  </div>
+                </div>
+              </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary-light btn-wave ms-auto float-end" type="submit">Create Project</button>
+
+            <button type="button" class="btn btn-light" data-bs-dismiss="modal"  (click)="modal.close('Cross click')">Cancel</button>
+            <!-- <button type="button" class="btn btn-primary">Create</button> -->
+        </div>
+    </div>
+</ng-template>
 <!-- End:: row-3 -->
