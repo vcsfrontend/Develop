@@ -63,27 +63,26 @@ export class SidebarComponent implements AfterViewInit {
             });
             break;
           case 'Dashboard':
-              this.checkAdminRole(item);
-              break;
+            item.isVisible = true;
+            break;
           case 'Projects':
-            this.checkAdminRole(item);
+            item.isVisible = true;
             break;
           case 'To-Do-List':
-            this.checkAdminRole(item);
+            item.isVisible = true;
             break;
           case 'HRM':
-            this.checkAdminRole(item);
+            item.isVisible = true;
             break;
           case 'Analytics':
-            this.checkAdminRole(item);
+            item.isVisible = true;
             break;
           case 'Customer':
-            this.checkAdminRole(item);
+            item.isVisible = true;
             break;
           case 'Crm':
-            this.checkAdminRole(item);
+            item.isVisible = true;
             break;
-          
           case 'Settings' :
             this.checkAdminRole(item);
             break;
