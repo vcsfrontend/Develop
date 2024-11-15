@@ -13,16 +13,22 @@
                                     <div class="row gy-3">
                                         <div class="col-xl-12">
                                             <label for="signin-username" class="form-label text-default"><strong>Email</strong></label>
-                                            <input type="text" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" id="signin-username"
+                                            <div class="input-group">
+                                                <div class="input-group-text text-muted bg-light pl-4 font-weight-bold bg-opacity-25 border border-dark "> <i class="ri-user-line"></i> </div>
+                                            <input type="text" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark rounded-end" id="signin-username"
                                                 autocomplete formControlName="email" [(ngModel)]="email" required
-                                                placeholder="email">
+                                                placeholder="Enter Your Email">
+                                            </div>
                                         </div>
                                         <div class="col-xl-12 mb-2">
+                                            
                                             <label for="signin-password"
                                                 class="form-label text-default d-block"><strong>Password</strong></label>
                                             <div class="position-relative">
-                                                <input type="password" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark"
-                                                    id="signin-password" placeholder="password"
+                                                <div class="input-group">
+                                                    <div class="input-group-text text-muted bg-light pl-4 font-weight-bold bg-opacity-25 border border-dark"> <i class="ri-lock-line"></i> </div>
+                                                <input type="password" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark rounded-end"
+                                                    id="signin-password" placeholder="Enter Your Password"
                                                     [type]="showPassword ? 'text' : 'password'" autocomplete
                                                     onkeypress='return ((event.charCode >= 33 && event.charCode <= 127) || event.charCode == 8)'
                                                     id="input-password" formControlName="password"
@@ -30,6 +36,7 @@
                                                 <a href="javascript:void(0);" class="show-password-button text-muted"
                                                     (click)="createpassword()" id="button-addon2"><i
                                                         class="ri-eye-{{toggleClass}} align-middle"></i></a>
+                                                </div>
                                             </div>
                                             <div class="mt-2">
                                                 <div class="form-check">
@@ -46,7 +53,7 @@
                                         </div>
                                     </div>
                                     <div class="d-grid mt-4">
-                                        <button type="submit" class="btn btn-lg bg-light p-2 font-weight-bold text-dark bg-opacity-25 border border-dark" autofocus><strong>Sign In</strong></button>
+                                        <button type="submit" class="btn btn-lg bg-light p-2 font-weight-bold text-dark bg-opacity-25 border border-dark rounded-3" autofocus><strong>Sign In</strong></button>
                                     </div>
                                 </form>
                                 <div class="text-center">
