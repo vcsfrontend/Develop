@@ -85,3 +85,24 @@ mat-select {
   font-size: 0.8125rem;
   color: black;
 }
+// new
+.phone-input-container {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Space between the dropdown and input field */
+}
+
+.country-code {
+  width: 80px; /* Adjust the width as per your preference */
+  height: 100%; /* Make it match the height of the input */
+}
+
+.phone-number {
+  flex: 1; /* Take up the remaining space */
+}
+
+.error-message {
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 4px;
+}
