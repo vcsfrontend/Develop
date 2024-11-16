@@ -78,19 +78,20 @@ export class SuperadminComponent {
   displayAdonaiColumns: string[] = ['slNo', 'id', 'email', 'history']
   dataSource = new MatTableDataSource<any>(); 
   adonaiSource = new MatTableDataSource<any>(); 
+  crmSource = new MatTableDataSource<any>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild('modalTemplate') modalTemplate!: TemplateRef<any>;  // Access the ng-template
   @ViewChild('template', { static: true }) templateRef!: TemplateRef<any>;
   private modalRef: any;
-  userLst:any; userData: any; adonaiHstryLst: any;
+  userLst:any; userData: any; adonaiHstryLst: any; crmHstryLst: any;
   content3: any; content4: any; content5: any; content6: any; content7: any;
   firstNm: any; lastNm: any; companyNm: any; phoneNo: any; dob: any;
   adonaiData: any; crmData: any; 
   adonaiEmail: any; adonaiRoleId: any; isAdonai: any; adonaiActivitySts: any; 
   adonaiSubStartDate: any; adonaiSubEndDate: any; adonaiSubDate: any; adonaiRemarks: any; 
   adonaiAppUid: any; adonaiUsername: any; adonaiCity: any; adonaiUpdatedBy: any; adonaiUpdatedDate: any;
-  crmEmail: any; crmRoleId: any; isCrm: any; crmStatus: any; crmSubStartDate: any; 
-  crmSubEndDate: any; crmSubDate: any; crmRemarks: any; 
+  crmEmail: any; crmRoleId: any; isCrm: any; crmStatus: any; crmSubStartDate: any; crmSubEndDate: any; 
+  crmSubDate: any; crmRemarks: any; crmUsername: any; crmCity:any; crmUpdatedBy: any;
   isAdonaiView = false; isCrmView = false; userNm: any;
   isCrmTrue: any; type: any; users: any; email: any; username: any; country: any; isAdonaiTrue: any;
   
@@ -643,6 +644,7 @@ chartOptions6:any= {
     },
   },
 };
+  
   constructor(config: NgbModalConfig, private modalService: NgbModal, private viewContainerRef: ViewContainerRef,
     public switchService: SwitherService, private toastr: ToastrService, private dp: DatePipe) {
   }
@@ -724,30 +726,25 @@ chartOptions6:any= {
         this.adonaiRoleId = res.subData.roleId,
         // this.isAdonai = res.email; 
         this.adonaiActivitySts = res.subData.activityStatus,
-        this.adonaiSubStartDate = this.dp.transform(res.subData.subStartDate, 'yyyy-MM-dd'), 
-        this.adonaiSubEndDate = res.subData.subEndDate, 
+        this.adonaiSubStartDate = this.convertDate(res.subData.subStartDate), 
+        this.adonaiSubEndDate = this.convertDate(res.subData.subEndDate)
         this.adonaiSubDate = this.dp.transform(res.subData.subscriptionDate, 'yyyy-MM-dd'), 
         this.adonaiRemarks = res.subData.remarks;
-    //     "subData": {
-    //     "email": null,
-    //     "roleId": 12,
-    //     "activityStatus": true,
-    //     "subscriptionDate": "2024-11-05T01:24:21.150848386",
-    //     "subStartDate": "",
-    //     "subEndDate": "",
-    //     "remarks": null,
-    //     "updatedBy": "",
-    //     "updatedDate": ""
-    // },
-    // "appuid": "DBU0yUs7aN",
-    // "username": "Anjana Lokesh",
-    // "city": null
+        this.adonaiAppUid = res.appuid;
+        this.adonaiUsername = res.username;
+        this.adonaiCity = res.city;
         } else{
           this.toastr.error(res.message);
           return;
         }
       }
     })
+  }
+
+  convertDate(date:any) {
+    const [month, day, year] = date.split('-');
+    const formattedDate = `${year}-${month}-${day}`;
+    return formattedDate; // Output: 2024-12-15
   }
 
   getCrm(data:any, ctrl:string = ''){
@@ -757,27 +754,29 @@ chartOptions6:any= {
       if(res){
         this.crmData = res,
         this.crmEmail = data.email; 
-        this.crmRoleId = res.roleId; 
-        this.isCrm = true; 
-        this.crmStatus = res.crmActivityStatus; 
-        this.crmSubStartDate = res.subStartDate; 
-        this.crmSubEndDate = res.subEndDate; 
-        this.crmSubDate = res.subDate; 
-        this.crmRemarks = res.remarks; 
-    //     "subData": {
-    //     "email": null,
-    //     "roleId": 12,
-    //     "activityStatus": true,
-    //     "subscriptionDate": "2024-11-05T01:24:21.150848386",
+        this.crmRoleId = res.crmDataResponse.roleId; 
+        this.crmStatus = res.crmDataResponse.crmActivityStatus; 
+        this.crmSubStartDate = res.crmDataResponse.subStartDate; 
+        this.crmSubEndDate = res.crmDataResponse.subEndDate; 
+        this.crmSubDate = res.crmDataResponse.subDate; 
+        this.crmRemarks = res.crmDataResponse.remarks; 
+        this.crmUsername = res.username; 
+        this.crmCity = res.city; 
+    // "crmDataResponse": {
+    //     "roleId": 0,
+    //     "crmActivityStatus": true,
+    //     "subDate": "2024-10-16T13:58:58.969282899",
     //     "subStartDate": "",
     //     "subEndDate": "",
-    //     "remarks": null,
     //     "updatedBy": "",
-    //     "updatedDate": ""
+    //     "updatedDate": "",
+    //     "remarks": null
     // },
-    // "appuid": "DBU0yUs7aN",
-    // "username": "Anjana Lokesh",
-    // "city": null
+    // "email": "masteradonai@gmail.com",
+    // "username": "adonai-master",
+    // "city": null,
+    // "companyname": "individual company",
+    // "noOfUsers": 1
         } else{
           this.toastr.error(res.message);
           return;
@@ -789,14 +788,14 @@ chartOptions6:any= {
   updateAdonai(){
     // this.submitted = true; 
     let payload = {
-        "email": this.adonaiEmail,
-        "roleId": this.adonaiRoleId,
-        "activityStatus": this.adonaiActivitySts,
-        "subscriptionDate": this.dp.transform(this.adonaiSubDate, 'dd-MM-yyyy'),
-        "subStartDate": this.dp.transform(this.adonaiSubStartDate, 'dd-MM-yyyy'),
-        "subEndDate": this.dp.transform(this.adonaiSubEndDate, 'dd-MM-yyyy'),
-        "remarks": this.adonaiRemarks,
-        "updatedBy": localStorage.getItem('username')
+      "email": this.adonaiEmail,
+      "roleId": this.adonaiRoleId,
+      "activityStatus": this.adonaiActivitySts,
+      "subscriptionDate": this.dp.transform(this.adonaiSubDate, 'dd-MM-yyyy'),
+      "subStartDate": this.dp.transform(this.adonaiSubStartDate, 'dd-MM-yyyy'),
+      "subEndDate": this.dp.transform(this.adonaiSubEndDate, 'dd-MM-yyyy'),
+      "remarks": this.adonaiRemarks,
+      "updatedBy": localStorage.getItem('username')
     };
     // payload.type = +payload.type, 
     // payload.dob = this.dp.transform(payload.dob, 'dd-MM-yyyy');
@@ -819,11 +818,61 @@ chartOptions6:any= {
     // }
   }
 
-  getHistory(data:any){
+  updateCrm(){
+    // this.submitted = true; 
+    let payload = {
+      "email": this.crmEmail,
+      "roleId": this.crmRoleId,
+      "crmActivityStatus": this.crmStatus,
+      "subDate": this.dp.transform(this.crmSubDate, 'dd-MM-yyyy'),
+      "subStartDate": this.dp.transform(this.crmSubStartDate, 'dd-MM-yyyy'),
+      "subEndDate": this.dp.transform(this.crmSubEndDate, 'dd-MM-yyyy'),
+      "remarks": this.crmRemarks,
+      "updatedBy": localStorage.getItem('username')
+    };
+
+    // payload.type = +payload.type, 
+    // payload.dob = this.dp.transform(payload.dob, 'dd-MM-yyyy');
+    // if (this.signupFrm.invalid) {
+    //   this.toastr.error('Please fill mandatory fields');
+    //   this.btnDisable = false;
+    //     return;
+    // }
+    // else{
+    console.log('crmPl-',payload);
+      this.switchService.onCrmUpdate(payload).subscribe({ next: (res:any) => {
+        if(res.status == true){
+          this.toastr.success(res.message)
+          } else {
+            // this.btnDisable = false;
+            this.toastr.error(res.message);
+          }
+        }
+      })
+    // }
+  }
+
+  getAdonaiHistory(data:any){
     this.switchService.adonaiHstry(data.email).subscribe({ next: (res:any) => {
       if(res){
         this.adonaiHstryLst = res,
         this.adonaiSource.data = res;
+        console.log(res);
+      } else{
+        this.toastr.error(res.message,'', {
+          timeOut: 3000,
+          positionClass: 'toast-top-right',
+          });
+        }
+      }
+    })
+  }
+
+  getCrmHistory(data:any){
+    this.switchService.crmHstry(data.email).subscribe({ next: (res:any) => {
+      if(res){
+        this.crmHstryLst = res,
+        this.crmSource.data = res;
         console.log(res);
       } else{
         this.toastr.error(res.message,'', {
