@@ -173,79 +173,25 @@ export class SuperadminComponent {
     },
 };
 chartOptions1:any = {
-  series: [{
-    data: [0, 32, 18, 58]
-  }],
+  series: [44, 55, 13, 43],
   chart: {
-    height: 115,
-    width: 180,
-    type: 'area',
-    fontFamily: 'Roboto, Arial, sans-serif',
-    foreColor: '#5d6162',
-    zoom: {
-      enabled: false
-    },
-    sparkline: {
-      enabled: true
-    }
+    heght:250,
+    width:250,
+      type: "pie",
   },
-  tooltip: {
-    enabled: true,
-    x: {
-      show: false
-    },
-    y: {
-      title: {
-        formatter: function (seriesName: any) {
-          return ''
-        }
-      }
-    },
-    marker: {
-      show: false
-    }
-  },
-  dataLabels: {
-    enabled: false
+  colors: ["var(--primary08)", "rgba(69, 214, 91, 0.8)", "rgba(243, 156, 18, 0.8)", "rgba(231, 76, 60, 0.8)"],
+  labels: ["Mobile", "Desktop", "Laptop", "Tablet"],
+  legend: {
+      show: false,
   },
   stroke: {
-    curve: 'smooth',
-    width: [1],
+      width: 0
   },
-  title: {
-    text: undefined,
-  },
-  grid: {
-    borderColor: 'transparent',
-  },
-  xaxis: {
-    crosshairs: {
-      show: false,
-    }
-  },
-  colors: ["rgb(231, 76, 60)"],
- 
-  fill: {
-    type: 'gradient',
-    gradient: {
-      opacityFrom: 0.5,
-      opacityTo: 0.2,
-      stops: [0, 60],
-      colorStops: [
-        [
-          {
-            offset: 0,
-            color: 'rgba(231, 76, 60, 0.2)',
-            opacity: 1
-          },
-          {
-            offset: 60,
-            color: 'rgba(231, 76, 60, 0.2)',
-            opacity: 0.1
-          }
-        ],
-      ]
-    }
+  dataLabels: {
+      enabled: true,
+      dropShadow: {
+          enabled: false,
+      },
   },
 };
 chartOptions2:any = {
