@@ -94,7 +94,15 @@ export class SuperadminComponent {
   crmSubDate: any; crmRemarks: any; crmUsername: any; crmCity:any; crmUpdatedBy: any;
   isAdonaiView = false; isCrmView = false; userNm: any;
   isCrmTrue: any; type: any; users: any; email: any; username: any; country: any; isAdonaiTrue: any;
-  
+  dbData : any;
+  adonaiDt = [
+    { count: 12, city: 'Bangalore' },
+    { count: 11, city: 'Chennai' },
+    { count: 4, city: 'Delhi' },
+    { count: 3, city: 'Hyderabad' }
+  ];
+
+  totalUsers = 896; // Replace this with the correct total value if it's dynamic
   newUser: string = '';
   chartOptions:any = {
     series: [{
@@ -610,7 +618,7 @@ chartOptions6:any= {
 	}
 
   ngOnInit(){
-    this.getUsers();
+    this.getUsers(); this.getInfo();
   }
 
   onRowButtonClick(data: any) {
@@ -855,5 +863,73 @@ chartOptions6:any= {
     this.visible = !this.visible
   }
   
+  getInfo() {
+    this.dbData = {
+      "totalUsers": 55,
+  "totalUserAnalytics": 16.363636363636363,
+  "totalNewUsers": 10,
+  "totalNewAnalytics": 111.11111111111111,
+  "revenueGenerated": 0,
+  "revenueAnalytics": 0,
+  "totalRenevalUsers": 0,
+  "renevalUsersAnalytics": 0,
+  "crmTotalUsers": 33,
+  "crmTotalUserAnalytics": 27.272727272727273,
+  "crmTotalNewUsers": 8,
+  "crmTotalNewAnalytics": 88.88888888888889,
+  "crmRevenueGenerated": 0,
+  "crmRevenueAnalytics": 0,
+  "crmTotalRenevalUsers": 0,
+  "crmRenevalUserAnalytics": 0,
+  "adonaiTotalUsers": 30,
+  "adonaiTotalUserAnalytics": 30,
+  "adonaiTotalNewUsers": 8,
+  "adonaiTotalNewAnalytics": 30,
+  "adonaiRevenueGenerated": 0,
+  "adonaiRevenueAnalytics": 0,
+  "adonaiTotalRenevalUsers": 0,
+  "adonaiRenevalUserAnalytics": 0,
+  "individualCount": 44,
+  "enterpriseCount": 11,
+  "adonaiData": [
+    {
+      "count": 12,
+      "city": "Bangalore"
+    },
+    {
+      "city": "Chennai",
+      "count": 11
+    },
+    {
+      "city": "Delhi",
+      "count": 4
+    },
+    {
+      "city": "Hyderabad",
+      "count": 3
+    }
+  ],
+  "crmData": [
+    {
+      "count": 15,
+      "city": "Bangalore"
+    },
+    {
+      "city": "Chennai",
+      "count": 11
+    },
+    {
+      "city": "Delhi",
+      "count": 4
+    },
+    {
+      "city": "Hyderabad",
+      "count": 3
+    }
+  ]
+
+
+    }
+  }
   
 }
