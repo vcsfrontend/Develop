@@ -846,7 +846,7 @@
                                             class="btn btn-icon btn-sm btn-info" data-bs-toggle="modal" 
                                             (click)="VerticallyScrol(content5); getCrm(element, 'e')" data-bs-target="#exampleModalScrollable34" ><i class="ri-edit-line"></i></a>
                                         <a aria-label="anchor" href="javascript:void(0);" class="btn btn-sm btn-icon btn-wave btn btn-danger"
-                                            data-bs-toggle="modal" data-bs-target="#exampleModalLg" (click)="openMdl(template1)">
+                                            data-bs-toggle="modal" data-bs-target="#exampleModalLg" (click)="openMdl(template1); getCrmHistory(element)">
                                             <i class="las la-history"></i></a>
                                     </div>   
                                 </td>
@@ -855,7 +855,7 @@
                             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                         </table>
                     </div>
-                    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+                    <mat-paginator #paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
                         aria-label="Select page of periodic elements">
                     </mat-paginator>
                 </div>
@@ -968,7 +968,40 @@
                             <label for="input-text" class="form-label">Adonai Activity Status</label>
                             <input type="text" class="form-control" id="input-text" 
                             [(ngModel)]="adonaiActivitySts" [disabled]="isAdonaiView">
+                            <!-- <div class="form-check form-check-inline">
+                                <input class="form-check-input me-2" type="radio" name="sts" (click)="adonaiActivitySts=true"
+                                    [checked]="adonaiActivitySts==true"><label>true</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input me-2" type="radio" name="sts" (click)="adonaiActivitySts=false"
+                                    [checked]="adonaiActivitySts==false"><label>false</label>
+                            </div> -->
                         </div>
+                        <!-- <div class="form-check form-check-inline">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              id="activeOption"
+                              name="status"(click)="adonaiActivitySts=true"
+                              [checked]="adonaiActivitySts==true"
+                              [(ngModel)]="adonaiActivitySts"
+                            />
+                            <label class="form-check-label" for="activeOption">true</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              id="inactiveOption"
+                              name="status"
+                              (click)="adonaiActivitySts=false"
+                                    [checked]="adonaiActivitySts==false"
+                              [(ngModel)]="adonaiActivitySts"
+                            />
+                            <label class="form-check-label" for="inactiveOption">false</label>
+                          </div> -->
+                          
+                          
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                             <label for="input-date" class="form-label">Subscription Date</label>
                             <input type="date" class="form-control" id="input-date" 
@@ -1107,11 +1140,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')"
-                        data-bs-dismiss="modal">Close</button>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" (click)="updateAdonai()"
+                    <button type="button" class="btn btn-secondary" (click)="updateCrm()"
                         data-bs-dismiss="modal" *ngIf="!isAdonaiView">Update</button>
                     <button type="button" class="btn btn-danger" (click)="modal.close('Close click')"
                         data-bs-dismiss="modal">Close</button>
@@ -1150,7 +1179,7 @@
             <div class="col-xl-12">
                 <div class="card custom-card">
                     <div class="card-body p-0">
-                        <div class="mat-elevation-z8">
+                        <div class="mat-elevation-z8" *ngIf="adonaiSource.data.length > 0; else noData">
                             <!-- <mat-form-field class="mt-2 p-2">
                                 <mat-label>Filter</mat-label>
                                 <input matInput (keyup)="applyFilter($event)" #input>
@@ -1177,10 +1206,15 @@
                                     <tr mat-row *matRowDef="let row; columns: displayAdonaiColumns;"></tr>
                                 </table>
                             </div>
-                            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+                            <mat-paginator #paginator1 [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
                                 aria-label="Select page of periodic elements">
                             </mat-paginator>
                         </div>
+                        <ng-template #noData>
+                            <div class="text-center p-4">
+                              <p>No data available</p>
+                            </div>
+                        </ng-template>
                     </div>
                     
                     <!-- <div class="card-body p-0">
@@ -1263,10 +1297,10 @@
           <div class="row">
               <div class="col-xl-12">
                   <div class="card custom-card">
-                    <!-- <div class="card-body p-0">
-                        <div class="mat-elevation-z8">
-                            <div class="table-responsive">
-                                <table mat-table [dataSource]="adonaiSource">
+                    <div class="card-body p-0">
+                        <div class="mat-elevation-z8" *ngIf="crmSource.data.length > 0; else noData">
+                            <div class="table-responsive" >
+                                <table mat-table [dataSource]="crmSource">
                                     <ng-container matColumnDef="slNo">
                                         <th mat-header-cell *matHeaderCellDef> S.No. </th>
                                         <td mat-cell *matCellDef="let element; let i = index"> {{getSNo(i)}} </td>
@@ -1283,16 +1317,21 @@
                                         <th mat-header-cell *matHeaderCellDef> History </th>
                                         <td mat-cell *matCellDef="let element"> {{element.subHistory}} </td>
                                     </ng-container>
-                                    <tr mat-header-row *matHeaderRowDef="displayAdonaiColumns"></tr>
-                                    <tr mat-row *matRowDef="let row; columns: displayAdonaiColumns;"></tr>
+                                    <tr mat-header-row *matHeaderRowDef="displayCrmColumns"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayCrmColumns;"></tr>
                                 </table>
                             </div>
-                            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+                            <mat-paginator #paginator2 [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
                                 aria-label="Select page of periodic elements">
                             </mat-paginator>
                         </div>
-                    </div> -->
-                      <div class="card-body p-0">
+                        <ng-template #noData>
+                            <div class="text-center p-4">
+                              <p>No data available</p>
+                            </div>
+                        </ng-template>
+                    </div>
+                      <!-- <div class="card-body p-0">
                           <div class="table-responsive">
                               <table class="table text-nowrap">
                                   <thead>
@@ -1321,30 +1360,9 @@
                                   </tbody>
                               </table>
                           </div>
-                      </div>
+                      </div> -->
                       <div class="card-footer border-top-0">
                           <div class="d-flex align-items-center flex-wrap overflow-auto">
-                              <!-- <div class="mb-2 mb-sm-0">
-                                  Showing <b>1</b> to <b>5</b> of <b>200</b> entries <i
-                                      class="bi bi-arrow-right ms-2 fw-medium"></i>
-                              </div> -->
-                              <!-- <div class="ms-auto">
-                                  <ul class="pagination mb-0 overflow-auto">
-                                      <li class="page-item disabled">
-                                          <a class="page-link">Previous</a>
-                                      </li>
-                                      <li class="page-item active" aria-current="page"><a class="page-link" href="javascript:;"href="javascript:;">1</a></li>
-                                      <li class="page-item">
-                                          <a class="page-link" href="javascript:;">2</a>
-                                      </li>
-                                      <li class="page-item"><a class="page-link" href="javascript:;">3</a></li>
-                                      <li class="page-item"><a class="page-link" href="javascript:;">4</a></li>
-                                      <li class="page-item"><a class="page-link" href="javascript:;">5</a></li>
-                                      <li class="page-item">
-                                          <a class="page-link" href="javascript:;">Next</a>
-                                      </li>
-                                  </ul>
-                              </div> -->
                               
                           </div>
                       </div>
@@ -1359,36 +1377,3 @@
       </div>
     </div>
   </ng-template>
-
-  <div class="card">
-    <div class="card-header">
-      <h5>Adonai Users By City</h5>
-    </div>
-    <div class="card-body">
-      <ul class="list-group">
-        <li class="list-group-item" *ngFor="let data of adonaiDt">
-          <div class="d-flex justify-content-between align-items-center">
-            <span class="city-name">{{ data.city }}</span>
-            <span class="user-count">
-              {{ data.count }}/{{ totalUsers }}
-            </span>
-          </div>
-          <div class="progress mt-2">
-            <div
-              class="progress-bar"
-              [ngStyle]="{ 'width': (data.count / totalUsers) * 100 + '%' }"
-              [ngClass]="{
-                'bg-success': data.count / totalUsers >= 0.4,
-                'bg-warning': data.count / totalUsers < 0.4 && data.count / totalUsers >= 0.2,
-                'bg-danger': data.count / totalUsers < 0.2
-              }"
-            ></div>
-          </div>
-        </li>
-      </ul>
-      <div class="text-center mt-3">
-        <a href="#" class="btn btn-link">Full Details</a>
-      </div>
-    </div>
-  </div>
-  

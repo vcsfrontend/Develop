@@ -75,32 +75,29 @@ curve:string
 })
 export class SuperadminComponent {
   displayedColumns: string[] = ['slNo', 'firstName', 'lastName', 'mobile', 'adonai', 'crm', 'action', 'view', 'edit' ];
-  displayAdonaiColumns: string[] = ['slNo', 'id', 'email', 'history']
+  displayAdonaiColumns: string[] = ['slNo', 'id', 'email', 'history'];
+  displayCrmColumns: string[] = ['slNo', 'id', 'email', 'history'];
   dataSource = new MatTableDataSource<any>(); 
   adonaiSource = new MatTableDataSource<any>(); 
   crmSource = new MatTableDataSource<any>();
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild('paginator') paginator!: MatPaginator;
+  @ViewChild('paginator1') paginator1!: MatPaginator;
+  @ViewChild('paginator2') paginator2!: MatPaginator;
   @ViewChild('modalTemplate') modalTemplate!: TemplateRef<any>;  // Access the ng-template
   @ViewChild('template', { static: true }) templateRef!: TemplateRef<any>;
   private modalRef: any;
-  userLst:any; userData: any; adonaiHstryLst: any; crmHstryLst: any;
   content3: any; content4: any; content5: any; content6: any; content7: any;
+  userLst:any; userData: any; adonaiHstryLst: any; crmHstryLst: any;
   firstNm: any; lastNm: any; companyNm: any; phoneNo: any; dob: any;
   adonaiData: any; crmData: any; 
-  adonaiEmail: any; adonaiRoleId: any; isAdonai: any; adonaiActivitySts: any; 
+  adonaiEmail: any; adonaiRoleId: any; isAdonai: any; adonaiActivitySts:any; 
   adonaiSubStartDate: any; adonaiSubEndDate: any; adonaiSubDate: any; adonaiRemarks: any; 
   adonaiAppUid: any; adonaiUsername: any; adonaiCity: any; adonaiUpdatedBy: any; adonaiUpdatedDate: any;
   crmEmail: any; crmRoleId: any; isCrm: any; crmStatus: any; crmSubStartDate: any; crmSubEndDate: any; 
   crmSubDate: any; crmRemarks: any; crmUsername: any; crmCity:any; crmUpdatedBy: any;
   isAdonaiView = false; isCrmView = false; userNm: any;
   isCrmTrue: any; type: any; users: any; email: any; username: any; country: any; isAdonaiTrue: any;
-  dbData : any;
-  adonaiDt = [
-    { count: 12, city: 'Bangalore' },
-    { count: 11, city: 'Chennai' },
-    { count: 4, city: 'Delhi' },
-    { count: 3, city: 'Hyderabad' }
-  ];
+  dbData: any = {}; isSts:boolean =true;
 
   totalUsers = 896; // Replace this with the correct total value if it's dynamic
   newUser: string = '';
@@ -639,8 +636,13 @@ chartOptions6:any= {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
-    this.adonaiSource.paginator = this.paginator;
+    this.adonaiSource.paginator = this.paginator1;
+    this.crmSource.paginator = this.paginator2;
   }  
+
+  getSnos(index: number): number {
+    return this.paginator ? index + 1 + this.paginator.pageIndex * this.paginator.pageSize : index + 1;
+  }
 
   getSNo(index: number): number {
     if (this.paginator && this.paginator.pageIndex !== undefined && this.paginator.pageSize !== undefined) {
@@ -680,6 +682,7 @@ chartOptions6:any= {
         this.adonaiRoleId = res.subData.roleId,
         // this.isAdonai = res.email; 
         this.adonaiActivitySts = res.subData.activityStatus,
+        // this.isSts = res.subData.activityStatus,
         this.adonaiSubStartDate = this.convertDate(res.subData.subStartDate), 
         this.adonaiSubEndDate = this.convertDate(res.subData.subEndDate)
         this.adonaiSubDate = this.dp.transform(res.subData.subscriptionDate, 'yyyy-MM-dd'), 
@@ -864,72 +867,58 @@ chartOptions6:any= {
   }
   
   getInfo() {
-    this.dbData = {
-      "totalUsers": 55,
-  "totalUserAnalytics": 16.363636363636363,
-  "totalNewUsers": 10,
-  "totalNewAnalytics": 111.11111111111111,
-  "revenueGenerated": 0,
-  "revenueAnalytics": 0,
-  "totalRenevalUsers": 0,
-  "renevalUsersAnalytics": 0,
-  "crmTotalUsers": 33,
-  "crmTotalUserAnalytics": 27.272727272727273,
-  "crmTotalNewUsers": 8,
-  "crmTotalNewAnalytics": 88.88888888888889,
-  "crmRevenueGenerated": 0,
-  "crmRevenueAnalytics": 0,
-  "crmTotalRenevalUsers": 0,
-  "crmRenevalUserAnalytics": 0,
-  "adonaiTotalUsers": 30,
-  "adonaiTotalUserAnalytics": 30,
-  "adonaiTotalNewUsers": 8,
-  "adonaiTotalNewAnalytics": 30,
-  "adonaiRevenueGenerated": 0,
-  "adonaiRevenueAnalytics": 0,
-  "adonaiTotalRenevalUsers": 0,
-  "adonaiRenevalUserAnalytics": 0,
-  "individualCount": 44,
-  "enterpriseCount": 11,
-  "adonaiData": [
-    {
-      "count": 12,
-      "city": "Bangalore"
-    },
-    {
-      "city": "Chennai",
-      "count": 11
-    },
-    {
-      "city": "Delhi",
-      "count": 4
-    },
-    {
-      "city": "Hyderabad",
-      "count": 3
-    }
-  ],
-  "crmData": [
-    {
-      "count": 15,
-      "city": "Bangalore"
-    },
-    {
-      "city": "Chennai",
-      "count": 11
-    },
-    {
-      "city": "Delhi",
-      "count": 4
-    },
-    {
-      "city": "Hyderabad",
-      "count": 3
-    }
-  ]
-
-
-    }
+    // superAdminDbData
+    this.switchService.superAdminDbData().subscribe({ next: (res:any) => {
+      if(res){
+        this.dbData = res;
+      } else{
+        this.toastr.error(res.message,'', {
+          timeOut: 3000,
+          positionClass: 'toast-top-right',
+          });
+        }
+      }
+    })
+    // this.dbData = {
+    //   "totalUsers": 55,
+    //   "totalUserAnalytics": 16.363636363636363,
+    //   "totalNewUsers": 10,
+    //   "totalNewAnalytics": 111.11111111111111,
+    //   "revenueGenerated": 0,
+    //   "revenueAnalytics": 0,
+    //   "totalRenevalUsers": 0,
+    //   "renevalUsersAnalytics": 0,
+    //   "crmTotalUsers": 33,
+    //   "crmTotalUserAnalytics": 27.272727272727273,
+    //   "crmTotalNewUsers": 8,
+    //   "crmTotalNewAnalytics": 88.88888888888889,
+    //   "crmRevenueGenerated": 0,
+    //   "crmRevenueAnalytics": 0,
+    //   "crmTotalRenevalUsers": 0,
+    //   "crmRenevalUserAnalytics": 0,
+    //   "adonaiTotalUsers": 30,
+    //   "adonaiTotalUserAnalytics": 30,
+    //   "adonaiTotalNewUsers": 8,
+    //   "adonaiTotalNewAnalytics": 30,
+    //   "adonaiRevenueGenerated": 0,
+    //   "adonaiRevenueAnalytics": 0,
+    //   "adonaiTotalRenevalUsers": 0,
+    //   "adonaiRenevalUserAnalytics": 0,
+    //   "individualCount": 44,
+    //   "enterpriseCount": 11,
+    //   "adonaiData": [
+    //     { "count": 12,"city": "Bangalore"},
+    //     { "city": "Chennai", "count": 11 },
+    //     { "city": "Delhi", "count": 4 },
+    //     { "city": "Hyderabad", "count": 3 }
+    //   ],
+    //   "crmData": [
+    //     { "count": 15, "city": "Bangalore" },
+    //     { "city": "Chennai", "count": 11 },
+    //     { "city": "Delhi", "count": 4 },
+    //     { "city": "Hyderabad", "count": 3 }
+    //   ]
+    // }
   }
   
 }
