@@ -39,7 +39,7 @@ export class BasicComponent extends BaseComponent implements OnInit {
   prismCode = prismCodeData;
   selectedCountry: string = 'India'; city = '';
   selectedCountryCode: string = ''; phoneNumber = '';
-
+  mobileNumber: string = ''; // Mobile number input
   isCollapsed = true;
   isCollapsed1 = true;
   isCollapsed2 = true;
@@ -55,7 +55,8 @@ export class BasicComponent extends BaseComponent implements OnInit {
   passwordStrengthColor: string = '';
   confirmPasswordStrengthMessage: string = '';
   confirmPasswordStrengthColor: string = '';
-  isPasswordValid: boolean = false; isPasswrd:boolean = false; isPassValid:boolean = false; isCnfmPwd:boolean = false;
+  isPasswordValid: boolean = false; isPasswrd:boolean = false; isPassValid:boolean = false; 
+  isCnfmPwd:boolean = false; agree: boolean = false; isResend:boolean = false;
 
   icons = [
     { value: 'Individual', icon: 'home', name: 'Home' },
@@ -74,12 +75,12 @@ export class BasicComponent extends BaseComponent implements OnInit {
     crm:false,
     adonai:false,
     phoneNumber: ['', Validators.required],
-    username: ['',],
+    username: [''],
     password: ['', [Validators.required, this.passwordValidator]],
     tools : [[],Validators.required],
     confirmPassword: ['', Validators.required],
     userflag: ['signup'],
-    city: [''],
+    city: ['', Validators.required],
     updatedBy: ['']
     //"toolId": 0,
     //"roleId": 0,
@@ -118,8 +119,17 @@ export class BasicComponent extends BaseComponent implements OnInit {
   }
 
   onCountryChange(data:any) {
-    data == 'India' ? (this.showCity = true) : (this.showCity = false , this.city = '')
+    data == 'India' ? (this.showCity = true) : (this.showCity = false , this.city = '');
+    this.signupFrm.patchValue({ country: data});
+    const cityFieldControl = this.signupFrm.get('city');
+    if (data == 'India') {
+      cityFieldControl?.setValidators([Validators.required])
+    } else {
+      cityFieldControl?.clearValidators()
+    }
+    cityFieldControl?.updateValueAndValidity(); 
   }
+
   // showPasswordError(): void {
   //   if (this.f['password'].errors?.['invalidPassword']) {
   //     this.toastr.error(
@@ -234,7 +244,9 @@ export class BasicComponent extends BaseComponent implements OnInit {
     const crm = this.signupFrm.get('tools')?.value.includes('CRM');
     const adonai = this.signupFrm.get('tools')?.value.includes('Adonai');
     let payload = this.signupFrm.getRawValue();
-    payload.type = +payload.type, payload.noOfUsers = +this.users,
+    payload.type = +payload.type, 
+    payload.noOfUsers = +this.users,
+    payload.username = payload.firstName +' '+ payload.lastName,
     payload.crm = crm,
     payload.adonai = adonai,
     payload.phoneNumber = +payload.phoneNumber, delete payload.tools, delete payload.confirmPassword,
@@ -251,6 +263,9 @@ export class BasicComponent extends BaseComponent implements OnInit {
         positionClass: 'toast-top-right',
       });
       return;
+    }
+    else if (this.agree == false) {
+      this.toastr.error('Please agree to the terms and conditions!', 'Error');
     }
     else{
       this.btnDisable = true;
@@ -282,19 +297,23 @@ export class BasicComponent extends BaseComponent implements OnInit {
           this.toastr.error(res.message,'signup', {
             timeOut: 3000, positionClass: 'toast-top-right' });
         }
-      }
+      },
+      error: (error) => {
+        this.toastr.error(error);
+      },
     })
   }
+
   onChng(event:any){
     let val = event.target.value
     this.noUsers = '';
-      if (+val > 100 || +val < 2){
-      this.users = '';
-      this.toastr.warning('value should be in between 2 to 100 only','No. of Users', {
-        timeOut: 3000, positionClass: 'toast-top-right' });
-      }
-      else
-        this.users = +val;
+    if (+val > 100 || +val < 2){
+    this.users = '';
+    this.toastr.warning('value should be in between 2 to 100 only','No. of Users', {
+      timeOut: 3000, positionClass: 'toast-top-right' });
+    }
+    else
+      this.users = +val;
   }
 
   onMailCheck(){
@@ -304,7 +323,9 @@ export class BasicComponent extends BaseComponent implements OnInit {
     } else {
       this.switchService.onMailValidSignup(this.mailId).subscribe({ next: (res:any) => {
         if(res.status == true){
-          this.openModal();
+          if(this.isResend == false){
+            this.openModal();
+          } 
           this.btnDisable = true,
           this.signupFrm.get('email')?.disable();
           this.toastr.success(res.message,'signup', {
@@ -321,7 +342,6 @@ export class BasicComponent extends BaseComponent implements OnInit {
 
   onClickButton() {
       this.openModal();  // Open the modal on successful response
-       
   }
 
   openModal() {
@@ -345,7 +365,6 @@ export class BasicComponent extends BaseComponent implements OnInit {
     //     timeOut: 3000, positionClass: 'toast-top-right' });
     // } 
     const enteredOtp = this.otp.join('');
-
     // Check if OTP length is less than 6
     if (enteredOtp.length < 6) {
       this.isOtpValid = false;
@@ -373,7 +392,6 @@ export class BasicComponent extends BaseComponent implements OnInit {
   onDropdownChange() {
     const cmpnyFieldControl = this.signupFrm.get('companyName');
     // const userFieldControl = this.signupFrm.get('noOfUsers');
-
     if (this.signupFrm.get('type')?.value === '2') {
       cmpnyFieldControl?.setValidators([Validators.required]),
       // userFieldControl?.setValidators([Validators.required]),
@@ -387,7 +405,6 @@ export class BasicComponent extends BaseComponent implements OnInit {
       this.isCompany = 'col-xl-6';
       this.isShowUsers = false;
     }
-
     cmpnyFieldControl?.updateValueAndValidity(); 
     // userFieldControl?.updateValueAndValidity();
   }

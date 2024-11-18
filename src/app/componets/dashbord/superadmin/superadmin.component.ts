@@ -75,25 +75,31 @@ curve:string
 })
 export class SuperadminComponent {
   displayedColumns: string[] = ['slNo', 'firstName', 'lastName', 'mobile', 'adonai', 'crm', 'action', 'view', 'edit' ];
-  displayAdonaiColumns: string[] = ['slNo', 'id', 'email', 'history']
+  displayAdonaiColumns: string[] = ['slNo', 'id', 'email', 'history'];
+  displayCrmColumns: string[] = ['slNo', 'id', 'email', 'history'];
   dataSource = new MatTableDataSource<any>(); 
   adonaiSource = new MatTableDataSource<any>(); 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  crmSource = new MatTableDataSource<any>();
+  @ViewChild('paginator') paginator!: MatPaginator;
+  @ViewChild('paginator1') paginator1!: MatPaginator;
+  @ViewChild('paginator2') paginator2!: MatPaginator;
   @ViewChild('modalTemplate') modalTemplate!: TemplateRef<any>;  // Access the ng-template
   @ViewChild('template', { static: true }) templateRef!: TemplateRef<any>;
   private modalRef: any;
-  userLst:any; userData: any; adonaiHstryLst: any;
   content3: any; content4: any; content5: any; content6: any; content7: any;
+  userLst:any; userData: any; adonaiHstryLst: any; crmHstryLst: any;
   firstNm: any; lastNm: any; companyNm: any; phoneNo: any; dob: any;
   adonaiData: any; crmData: any; 
-  adonaiEmail: any; adonaiRoleId: any; isAdonai: any; adonaiActivitySts: any; 
+  adonaiEmail: any; adonaiRoleId: any; isAdonai: any; adonaiActivitySts:any; 
   adonaiSubStartDate: any; adonaiSubEndDate: any; adonaiSubDate: any; adonaiRemarks: any; 
   adonaiAppUid: any; adonaiUsername: any; adonaiCity: any; adonaiUpdatedBy: any; adonaiUpdatedDate: any;
-  crmEmail: any; crmRoleId: any; isCrm: any; crmStatus: any; crmSubStartDate: any; 
-  crmSubEndDate: any; crmSubDate: any; crmRemarks: any; 
+  crmEmail: any; crmRoleId: any; isCrm: any; crmStatus: any; crmSubStartDate: any; crmSubEndDate: any; 
+  crmSubDate: any; crmRemarks: any; crmUsername: any; crmCity:any; crmUpdatedBy: any;
   isAdonaiView = false; isCrmView = false; userNm: any;
   isCrmTrue: any; type: any; users: any; email: any; username: any; country: any; isAdonaiTrue: any;
-  
+  dbData: any = {}; isSts:boolean =true;
+
+  totalUsers = 896; // Replace this with the correct total value if it's dynamic
   newUser: string = '';
   chartOptions:any = {
     series: [{
@@ -172,79 +178,25 @@ export class SuperadminComponent {
     },
 };
 chartOptions1:any = {
-  series: [{
-    data: [0, 32, 18, 58]
-  }],
+  series: [44, 55, 13, 43],
   chart: {
-    height: 115,
-    width: 180,
-    type: 'area',
-    fontFamily: 'Roboto, Arial, sans-serif',
-    foreColor: '#5d6162',
-    zoom: {
-      enabled: false
-    },
-    sparkline: {
-      enabled: true
-    }
+    heght:250,
+    width:250,
+      type: "pie",
   },
-  tooltip: {
-    enabled: true,
-    x: {
-      show: false
-    },
-    y: {
-      title: {
-        formatter: function (seriesName: any) {
-          return ''
-        }
-      }
-    },
-    marker: {
-      show: false
-    }
-  },
-  dataLabels: {
-    enabled: false
+  colors: ["var(--primary08)", "rgba(69, 214, 91, 0.8)", "rgba(243, 156, 18, 0.8)", "rgba(231, 76, 60, 0.8)"],
+  labels: ["Mobile", "Desktop", "Laptop", "Tablet"],
+  legend: {
+      show: false,
   },
   stroke: {
-    curve: 'smooth',
-    width: [1],
+      width: 0
   },
-  title: {
-    text: undefined,
-  },
-  grid: {
-    borderColor: 'transparent',
-  },
-  xaxis: {
-    crosshairs: {
-      show: false,
-    }
-  },
-  colors: ["rgb(231, 76, 60)"],
- 
-  fill: {
-    type: 'gradient',
-    gradient: {
-      opacityFrom: 0.5,
-      opacityTo: 0.2,
-      stops: [0, 60],
-      colorStops: [
-        [
-          {
-            offset: 0,
-            color: 'rgba(231, 76, 60, 0.2)',
-            opacity: 1
-          },
-          {
-            offset: 60,
-            color: 'rgba(231, 76, 60, 0.2)',
-            opacity: 0.1
-          }
-        ],
-      ]
-    }
+  dataLabels: {
+      enabled: true,
+      dropShadow: {
+          enabled: false,
+      },
   },
 };
 chartOptions2:any = {
@@ -643,6 +595,7 @@ chartOptions6:any= {
     },
   },
 };
+  
   constructor(config: NgbModalConfig, private modalService: NgbModal, private viewContainerRef: ViewContainerRef,
     public switchService: SwitherService, private toastr: ToastrService, private dp: DatePipe) {
   }
@@ -662,7 +615,7 @@ chartOptions6:any= {
 	}
 
   ngOnInit(){
-    this.getUsers();
+    this.getUsers(); this.getInfo();
   }
 
   onRowButtonClick(data: any) {
@@ -683,8 +636,13 @@ chartOptions6:any= {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
-    this.adonaiSource.paginator = this.paginator;
+    this.adonaiSource.paginator = this.paginator1;
+    this.crmSource.paginator = this.paginator2;
   }  
+
+  getSnos(index: number): number {
+    return this.paginator ? index + 1 + this.paginator.pageIndex * this.paginator.pageSize : index + 1;
+  }
 
   getSNo(index: number): number {
     if (this.paginator && this.paginator.pageIndex !== undefined && this.paginator.pageSize !== undefined) {
@@ -724,30 +682,26 @@ chartOptions6:any= {
         this.adonaiRoleId = res.subData.roleId,
         // this.isAdonai = res.email; 
         this.adonaiActivitySts = res.subData.activityStatus,
-        this.adonaiSubStartDate = this.dp.transform(res.subData.subStartDate, 'yyyy-MM-dd'), 
-        this.adonaiSubEndDate = res.subData.subEndDate, 
+        // this.isSts = res.subData.activityStatus,
+        this.adonaiSubStartDate = this.convertDate(res.subData.subStartDate), 
+        this.adonaiSubEndDate = this.convertDate(res.subData.subEndDate)
         this.adonaiSubDate = this.dp.transform(res.subData.subscriptionDate, 'yyyy-MM-dd'), 
         this.adonaiRemarks = res.subData.remarks;
-    //     "subData": {
-    //     "email": null,
-    //     "roleId": 12,
-    //     "activityStatus": true,
-    //     "subscriptionDate": "2024-11-05T01:24:21.150848386",
-    //     "subStartDate": "",
-    //     "subEndDate": "",
-    //     "remarks": null,
-    //     "updatedBy": "",
-    //     "updatedDate": ""
-    // },
-    // "appuid": "DBU0yUs7aN",
-    // "username": "Anjana Lokesh",
-    // "city": null
+        this.adonaiAppUid = res.appuid;
+        this.adonaiUsername = res.username;
+        this.adonaiCity = res.city;
         } else{
           this.toastr.error(res.message);
           return;
         }
       }
     })
+  }
+
+  convertDate(date:any) {
+    const [month, day, year] = date.split('-');
+    const formattedDate = `${year}-${month}-${day}`;
+    return formattedDate; // Output: 2024-12-15
   }
 
   getCrm(data:any, ctrl:string = ''){
@@ -757,27 +711,29 @@ chartOptions6:any= {
       if(res){
         this.crmData = res,
         this.crmEmail = data.email; 
-        this.crmRoleId = res.roleId; 
-        this.isCrm = true; 
-        this.crmStatus = res.crmActivityStatus; 
-        this.crmSubStartDate = res.subStartDate; 
-        this.crmSubEndDate = res.subEndDate; 
-        this.crmSubDate = res.subDate; 
-        this.crmRemarks = res.remarks; 
-    //     "subData": {
-    //     "email": null,
-    //     "roleId": 12,
-    //     "activityStatus": true,
-    //     "subscriptionDate": "2024-11-05T01:24:21.150848386",
+        this.crmRoleId = res.crmDataResponse.roleId; 
+        this.crmStatus = res.crmDataResponse.crmActivityStatus; 
+        this.crmSubStartDate = res.crmDataResponse.subStartDate; 
+        this.crmSubEndDate = res.crmDataResponse.subEndDate; 
+        this.crmSubDate = res.crmDataResponse.subDate; 
+        this.crmRemarks = res.crmDataResponse.remarks; 
+        this.crmUsername = res.username; 
+        this.crmCity = res.city; 
+    // "crmDataResponse": {
+    //     "roleId": 0,
+    //     "crmActivityStatus": true,
+    //     "subDate": "2024-10-16T13:58:58.969282899",
     //     "subStartDate": "",
     //     "subEndDate": "",
-    //     "remarks": null,
     //     "updatedBy": "",
-    //     "updatedDate": ""
+    //     "updatedDate": "",
+    //     "remarks": null
     // },
-    // "appuid": "DBU0yUs7aN",
-    // "username": "Anjana Lokesh",
-    // "city": null
+    // "email": "masteradonai@gmail.com",
+    // "username": "adonai-master",
+    // "city": null,
+    // "companyname": "individual company",
+    // "noOfUsers": 1
         } else{
           this.toastr.error(res.message);
           return;
@@ -789,14 +745,14 @@ chartOptions6:any= {
   updateAdonai(){
     // this.submitted = true; 
     let payload = {
-        "email": this.adonaiEmail,
-        "roleId": this.adonaiRoleId,
-        "activityStatus": this.adonaiActivitySts,
-        "subscriptionDate": this.dp.transform(this.adonaiSubDate, 'dd-MM-yyyy'),
-        "subStartDate": this.dp.transform(this.adonaiSubStartDate, 'dd-MM-yyyy'),
-        "subEndDate": this.dp.transform(this.adonaiSubEndDate, 'dd-MM-yyyy'),
-        "remarks": this.adonaiRemarks,
-        "updatedBy": localStorage.getItem('username')
+      "email": this.adonaiEmail,
+      "roleId": this.adonaiRoleId,
+      "activityStatus": this.adonaiActivitySts,
+      "subscriptionDate": this.dp.transform(this.adonaiSubDate, 'dd-MM-yyyy'),
+      "subStartDate": this.dp.transform(this.adonaiSubStartDate, 'dd-MM-yyyy'),
+      "subEndDate": this.dp.transform(this.adonaiSubEndDate, 'dd-MM-yyyy'),
+      "remarks": this.adonaiRemarks,
+      "updatedBy": localStorage.getItem('username')
     };
     // payload.type = +payload.type, 
     // payload.dob = this.dp.transform(payload.dob, 'dd-MM-yyyy');
@@ -819,11 +775,61 @@ chartOptions6:any= {
     // }
   }
 
-  getHistory(data:any){
+  updateCrm(){
+    // this.submitted = true; 
+    let payload = {
+      "email": this.crmEmail,
+      "roleId": this.crmRoleId,
+      "crmActivityStatus": this.crmStatus,
+      "subDate": this.dp.transform(this.crmSubDate, 'dd-MM-yyyy'),
+      "subStartDate": this.dp.transform(this.crmSubStartDate, 'dd-MM-yyyy'),
+      "subEndDate": this.dp.transform(this.crmSubEndDate, 'dd-MM-yyyy'),
+      "remarks": this.crmRemarks,
+      "updatedBy": localStorage.getItem('username')
+    };
+
+    // payload.type = +payload.type, 
+    // payload.dob = this.dp.transform(payload.dob, 'dd-MM-yyyy');
+    // if (this.signupFrm.invalid) {
+    //   this.toastr.error('Please fill mandatory fields');
+    //   this.btnDisable = false;
+    //     return;
+    // }
+    // else{
+    console.log('crmPl-',payload);
+      this.switchService.onCrmUpdate(payload).subscribe({ next: (res:any) => {
+        if(res.status == true){
+          this.toastr.success(res.message)
+          } else {
+            // this.btnDisable = false;
+            this.toastr.error(res.message);
+          }
+        }
+      })
+    // }
+  }
+
+  getAdonaiHistory(data:any){
     this.switchService.adonaiHstry(data.email).subscribe({ next: (res:any) => {
       if(res){
         this.adonaiHstryLst = res,
         this.adonaiSource.data = res;
+        console.log(res);
+      } else{
+        this.toastr.error(res.message,'', {
+          timeOut: 3000,
+          positionClass: 'toast-top-right',
+          });
+        }
+      }
+    })
+  }
+
+  getCrmHistory(data:any){
+    this.switchService.crmHstry(data.email).subscribe({ next: (res:any) => {
+      if(res){
+        this.crmHstryLst = res,
+        this.crmSource.data = res;
         console.log(res);
       } else{
         this.toastr.error(res.message,'', {
@@ -860,5 +866,59 @@ chartOptions6:any= {
     this.visible = !this.visible
   }
   
+  getInfo() {
+    // superAdminDbData
+    this.switchService.superAdminDbData().subscribe({ next: (res:any) => {
+      if(res){
+        this.dbData = res;
+      } else{
+        this.toastr.error(res.message,'', {
+          timeOut: 3000,
+          positionClass: 'toast-top-right',
+          });
+        }
+      }
+    })
+    // this.dbData = {
+    //   "totalUsers": 55,
+    //   "totalUserAnalytics": 16.363636363636363,
+    //   "totalNewUsers": 10,
+    //   "totalNewAnalytics": 111.11111111111111,
+    //   "revenueGenerated": 0,
+    //   "revenueAnalytics": 0,
+    //   "totalRenevalUsers": 0,
+    //   "renevalUsersAnalytics": 0,
+    //   "crmTotalUsers": 33,
+    //   "crmTotalUserAnalytics": 27.272727272727273,
+    //   "crmTotalNewUsers": 8,
+    //   "crmTotalNewAnalytics": 88.88888888888889,
+    //   "crmRevenueGenerated": 0,
+    //   "crmRevenueAnalytics": 0,
+    //   "crmTotalRenevalUsers": 0,
+    //   "crmRenevalUserAnalytics": 0,
+    //   "adonaiTotalUsers": 30,
+    //   "adonaiTotalUserAnalytics": 30,
+    //   "adonaiTotalNewUsers": 8,
+    //   "adonaiTotalNewAnalytics": 30,
+    //   "adonaiRevenueGenerated": 0,
+    //   "adonaiRevenueAnalytics": 0,
+    //   "adonaiTotalRenevalUsers": 0,
+    //   "adonaiRenevalUserAnalytics": 0,
+    //   "individualCount": 44,
+    //   "enterpriseCount": 11,
+    //   "adonaiData": [
+    //     { "count": 12,"city": "Bangalore"},
+    //     { "city": "Chennai", "count": 11 },
+    //     { "city": "Delhi", "count": 4 },
+    //     { "city": "Hyderabad", "count": 3 }
+    //   ],
+    //   "crmData": [
+    //     { "count": 15, "city": "Bangalore" },
+    //     { "city": "Chennai", "count": 11 },
+    //     { "city": "Delhi", "count": 4 },
+    //     { "city": "Hyderabad", "count": 3 }
+    //   ]
+    // }
+  }
   
 }

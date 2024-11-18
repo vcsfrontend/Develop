@@ -35,7 +35,7 @@ export class LoginComponent {
   // public showPassword: boolean = false;
 
   // toggleClass = 'ri-eye-off-line';
-  active="Angular";
+  active="Angular"; btnDisable = false; 
 
   public togglePassword() {
     // this.showPassword = !this.showPassword;
@@ -127,6 +127,7 @@ login() {
     //     this._error = _error;
     //     this.router.navigate(['/']);
     //   });
+    this.btnDisable = true;
     this.authservice.login(this.email, this.password).subscribe({
       next: (res) => {
         // Redirect on successful login
@@ -142,19 +143,19 @@ login() {
           this.navSvc.adonaiRole$.next(res.adonaiRole);
           this.navSvc.crmRole$.next(res.crmRole)
         this.router.navigate(['/dashboard/sales']);
-        
-
       }
     else{
       this.toastr.error(res.message,'VCS', {
             timeOut: 3000,
             positionClass: 'toast-top-right',
           });
+          this.btnDisable = false;
         }
         // this.glblSvc.onTstr(this.tstrTyp.error, r?.message);
       },
       error: () => {
         // this.errorMessage = 'Invalid username or password. Please try again';
+        this.btnDisable = false;
         this.toastr.error('Invalid username or password','VCS', {
           timeOut: 3000,
           positionClass: 'toast-top-right',
@@ -201,7 +202,7 @@ get form() {
   return this.loginForm.controls;
 }
 
-Submit() {
+onSubmit() {
   if(this.loginForm.controls['email'].value == ''){
     this.errorMessage = 'please enter email id';
     this.toastr.warning(`Please enter username`, 'VCS',{

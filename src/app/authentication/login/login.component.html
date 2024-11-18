@@ -9,7 +9,7 @@
                         <li ngbNavItem="Angular">
                             <ng-template ngbNavContent>
                                 <p class="h5 mb-2 text-center"><strong>Sign In</strong></p>
-                                <form class="bg-light p-2 text-white bg-opacity-25" [formGroup]="loginForm" (ngSubmit)="Submit()">
+                                <form class="bg-light p-2 text-white bg-opacity-25" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                                     <div class="row gy-3">
                                         <div class="col-xl-12">
                                             <label for="signin-username" class="form-label text-default"><strong>Email</strong></label>
@@ -32,7 +32,7 @@
                                                     [type]="showPassword ? 'text' : 'password'" autocomplete
                                                     onkeypress='return ((event.charCode >= 33 && event.charCode <= 127) || event.charCode == 8)'
                                                     id="input-password" formControlName="password"
-                                                    [(ngModel)]="password" required>
+                                                    [(ngModel)]="password" required (keydown.enter)="onSubmit()">
                                                 <a href="javascript:void(0);" class="show-password-button text-muted"
                                                     (click)="createpassword()" id="button-addon2"><i
                                                         class="ri-eye-{{toggleClass}} align-middle"></i></a>
@@ -53,7 +53,8 @@
                                         </div>
                                     </div>
                                     <div class="d-grid mt-4">
-                                        <button type="submit" class="btn btn-lg bg-light p-2 font-weight-bold text-dark bg-opacity-25 border border-dark " autofocus><strong>Sign In</strong></button>
+                                        <button type="submit" class="btn btn-lg bg-light p-2 font-weight-bold text-dark bg-opacity-25 border border-dark" 
+                                            autofocus [disabled]="btnDisable"><strong>Sign In</strong></button>
                                     </div>
                                 </form>
                                 <div class="text-center">

@@ -73,7 +73,7 @@ export const admin: Routes = [
     import('./projects/projects.component').then((m) => m.ProjectsComponent),
 },
 {
-  path: 'Designers',
+  path: 'designers',
   loadComponent: () =>
     import('./Designers/designers.component').then((m) => m.DesignersComponent),
 },
