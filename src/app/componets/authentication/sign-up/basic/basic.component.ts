@@ -56,7 +56,7 @@ export class BasicComponent extends BaseComponent implements OnInit {
   confirmPasswordStrengthMessage: string = '';
   confirmPasswordStrengthColor: string = '';
   isPasswordValid: boolean = false; isPasswrd:boolean = false; isPassValid:boolean = false; 
-  isCnfmPwd:boolean = false; agree: boolean = false;
+  isCnfmPwd:boolean = false; agree: boolean = false; isResend:boolean = false;
 
   icons = [
     { value: 'Individual', icon: 'home', name: 'Home' },
@@ -297,20 +297,23 @@ export class BasicComponent extends BaseComponent implements OnInit {
           this.toastr.error(res.message,'signup', {
             timeOut: 3000, positionClass: 'toast-top-right' });
         }
-      }
+      },
+      error: (error) => {
+        this.toastr.error(error);
+      },
     })
   }
 
   onChng(event:any){
     let val = event.target.value
     this.noUsers = '';
-      if (+val > 100 || +val < 2){
-      this.users = '';
-      this.toastr.warning('value should be in between 2 to 100 only','No. of Users', {
-        timeOut: 3000, positionClass: 'toast-top-right' });
-      }
-      else
-        this.users = +val;
+    if (+val > 100 || +val < 2){
+    this.users = '';
+    this.toastr.warning('value should be in between 2 to 100 only','No. of Users', {
+      timeOut: 3000, positionClass: 'toast-top-right' });
+    }
+    else
+      this.users = +val;
   }
 
   onMailCheck(){
@@ -320,7 +323,9 @@ export class BasicComponent extends BaseComponent implements OnInit {
     } else {
       this.switchService.onMailValidSignup(this.mailId).subscribe({ next: (res:any) => {
         if(res.status == true){
-          this.openModal();
+          if(this.isResend == false){
+            this.openModal();
+          } 
           this.btnDisable = true,
           this.signupFrm.get('email')?.disable();
           this.toastr.success(res.message,'signup', {
