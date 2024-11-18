@@ -80,7 +80,7 @@ export class BasicComponent extends BaseComponent implements OnInit {
     tools : [[],Validators.required],
     confirmPassword: ['', Validators.required],
     userflag: ['signup'],
-    city: [''],
+    city: ['', Validators.required],
     updatedBy: ['']
     //"toolId": 0,
     //"roleId": 0,
@@ -119,9 +119,17 @@ export class BasicComponent extends BaseComponent implements OnInit {
   }
 
   onCountryChange(data:any) {
-    data == 'India' ? (this.showCity = true) : (this.showCity = false , this.city = '')
-    this.signupFrm.patchValue({ country: data})
+    data == 'India' ? (this.showCity = true) : (this.showCity = false , this.city = '');
+    this.signupFrm.patchValue({ country: data});
+    const cityFieldControl = this.signupFrm.get('city');
+    if (data == 'India') {
+      cityFieldControl?.setValidators([Validators.required])
+    } else {
+      cityFieldControl?.clearValidators()
+    }
+    cityFieldControl?.updateValueAndValidity(); 
   }
+
   // showPasswordError(): void {
   //   if (this.f['password'].errors?.['invalidPassword']) {
   //     this.toastr.error(
