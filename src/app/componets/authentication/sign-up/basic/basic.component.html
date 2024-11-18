@@ -174,7 +174,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-xl-6">
+                                <!-- <div class="col-xl-6">
                                     <label for="signup-mobile" class="form-label text-default"><strong>Phone Number</strong><span class="text-danger"> *</span></label>
                                     <input type="text" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" id="signup-mobile"
                                         placeholder="mobile" formControlName="phoneNumber" maxlength="10"
@@ -184,7 +184,7 @@
                                     <div *ngIf="submitted && f['phoneNumber'].errors" class="invalid-feedback">
                                         <div *ngIf="f['phoneNumber'].errors['required']">Phone Number is required</div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="col-xl-6">
                                     <label for="tool" class="form-label text-default"><strong>Tool ID</strong><span class="text-danger"> *</span></label><br>
                                     <mat-form-field class="form-select form-select-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark">
@@ -257,18 +257,32 @@
                                         <div *ngIf="f['phoneNumber'].errors['required']">Phone Number is required</div>
                                     </div>
                                 </div> -->
-                                
                                 <div class="col-xl-6">
-                                    <label for="signup-country" class="form-label text-default"><strong>Country</strong><span class="text-danger">*</span></label>
-                                    <select class="form-select bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" id="country" formControlName="country" 
-                                        [ngClass]="{ 'is-invalid': submitted && f['country'].errors }" (change)="onCountryChange($any($event.target).value)">
-                                        <option value="" disabled selected>Select</option>
-                                        <option value="{{c.country}}" *ngFor="let c of countryLst">{{c.country}} (+{{ c.code }})</option>
-                                    </select>
-                                    <div *ngIf="submitted && f['country'].errors" class="invalid-feedback">
-                                        <div *ngIf="f['country'].errors['required']">Country is required</div>
+                                    <label for="signup-phone" class="form-label text-default"><strong>Phone Number</strong><span class="text-danger"> *</span></label>
+                                    <div class="input-group custom-input-group">
+                                        <!-- Country Code Select Dropdown -->
+                                        <select class="form-select form-select-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" 
+                                            id="country1" formControlName="country" [(ngModel)]="selectedCountry" 
+                                            (change)="onCountryChange($any($event.target).value)"
+                                            [ngClass]="{ 'is-invalid': submitted && f['country'].errors }">
+                                            <option value="" disabled selected>code</option>
+                                            <option *ngFor="let c of countryLst" [value]="c.country">
+                                                <span *ngIf="selectedCountry !== c.country">{{ c.country }} (+{{ c.code }})</span>
+                                                <span *ngIf="selectedCountry === c.country">+{{ c.code }}</span>
+                                            </option>
+                                        </select>
+                                        <input type="text" 
+                                            class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark"
+                                            formControlName="phoneNumber" maxlength="10"
+                                            onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || event.charCode == 8)" 
+                                            (copy)="preventCopyPaste($event)" (cut)="preventCopyPaste($event)" (paste)="preventCopyPaste($event)" 
+                                            [ngClass]="{ 'is-invalid': submitted && f['phoneNumber'].errors }">
+                                    </div>
+                                    <div *ngIf="submitted && f['phoneNumber'].errors" class="text-danger">
+                                        <div *ngIf="f['phoneNumber'].errors['required']">Phone Number is required</div>
                                     </div>
                                 </div>
+                                
                                 <div class="col-xl-6" *ngIf="showCity">
                                     <label for="signup-city" class="form-label text-default"><strong>City</strong><span class="text-danger">*</span></label>
                                     <select class="form-select form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" 
@@ -284,9 +298,20 @@
                                         <div *ngIf="f['city'].errors['required']">City is required</div>
                                     </div> -->
                                 </div>
+                                <div class="col-xl-6">
+                                    <label for="signup-country" class="form-label text-default"><strong>Country</strong><span class="text-danger">*</span></label>
+                                    <select class="form-select bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" id="country" formControlName="country" 
+                                        [ngClass]="{ 'is-invalid': submitted && f['country'].errors }" (change)="onCountryChange($any($event.target).value)">
+                                        <option value="" disabled selected>Select</option>
+                                        <option value="{{c.country}}" *ngFor="let c of countryLst">{{c.country}} (+{{ c.code }})</option>
+                                    </select>
+                                    <div *ngIf="submitted && f['country'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['country'].errors['required']">Country is required</div>
+                                    </div>
+                                </div>
                                 
                                 <div class="col-xl-12">
-                                    <input type="checkbox">&nbsp;
+                                    <input type="checkbox" [(ngModel)]="agree" [ngModelOptions]="{standalone:true}">&nbsp;
                                     <label class="form-label text-default"><b>By continuing, I agree to VCS's</b></label>&nbsp;
                                     <span class="text-primary cursor-pointer" data-bs-toggle="offcanvas"
                                     (click)="openRight(content)" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"> 
