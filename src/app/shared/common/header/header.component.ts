@@ -9,8 +9,13 @@ import { Menu, NavService } from '../../services/navservice';
 import { SwitcherComponent } from '../switcher/switcher.component';
 import { NgbModal, NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
 import { AppStateService } from '../../services/app-state.service';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, RouterModule } from '@angular/router';
 import { filter } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { SharedModule } from '../sharedmodule';
 interface Item {
   id: number;
   name: string;
@@ -20,6 +25,9 @@ interface Item {
 }
 @Component({
   selector: 'app-header',
+  // standalone: true,
+  // imports: [RouterModule, FormsModule, ReactiveFormsModule, CommonModule, ToastrModule, SharedModule],
+  // providers: [{ provide: ToastrService, useClass: ToastrService }],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
@@ -32,21 +40,23 @@ export class HeaderComponent implements OnInit {
   themeType: string | undefined; userName:any; userData:any;
 
   selectedItem: string  | null ='selectedItem'
-  isOpen: boolean = false;
+  isOpen: boolean = false; isCrm:boolean = false; isAdonai:boolean = false;
   constructor(
     private appStateService: AppStateService,
     public navServices: NavService,
     private elementRef: ElementRef,
     public renderer: Renderer2,
     public modalService:NgbModal,
-    private router: Router, private activatedRoute: ActivatedRoute
+    private toastr: ToastrService,
+    private router: Router, private activatedRoute: ActivatedRoute, private http: HttpClient
   ) {this.localStorageBackUp()
     this.userData = localStorage.getItem('userDetails'),
-    this.userName = JSON.parse(this.userData).username
+    this.userName = JSON.parse(this.userData).username,
+    this.isCrm = JSON.parse(this.userData).crm,
+    this.isAdonai = JSON.parse(this.userData).adonai
   }
 
   private offcanvasService = inject(NgbOffcanvas);
-
 
   toggleDropdown() {
     this.isOpen = !this.isOpen;
@@ -377,7 +387,32 @@ export class HeaderComponent implements OnInit {
   }
 
   onLogout(){
+    // window.location.href = 'https://crmexpert.vcs.plus/auth/logout';
+    if(this.isAdonai){
+      this.http.post('https://adonai.vcs.plus/api/account/auth/token/logout', {}).subscribe({ next: (res:any) => {
+        location.reload();
+        },
+        // error: (error) => {
+        //   this.toastr.error('Logout failed', error);
+        // },
+      })
+    }
     this.router.navigate(['/auth/login']);
-    // window.open(`https://crmexpert.vcs.plus/auth/logout`);
+    localStorage.clear();
   }
+
+  // onLogout(){
+    
+  //     this.http.post('https://adonai.vcs.plus/api/account/auth/token/logout', {}).subscribe({ next: (res:any) => {
+  //       this.router.navigate(['/auth/login']);
+  //       location.reload();
+  //       },
+  //       error: (error) => {
+  //         this.toastr.error('Logout failed', error);
+  //       },
+  //     })
+  //   this.router.navigate(['/auth/login']);
+    
+  // }
+  
 }

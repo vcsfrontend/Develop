@@ -133,7 +133,10 @@ export class BasicComponent extends BaseComponent implements OnInit {
             positionClass: 'toast-top-right',
             });
           }
-        }
+        },
+        error: (error) => {
+          this.toastr.error(error.statusText);
+        },
       })
     }
   }
