@@ -299,7 +299,7 @@ export class BasicComponent extends BaseComponent implements OnInit {
         }
       },
       error: (error) => {
-        this.toastr.error(error);
+        this.toastr.error(error.statusText);
       },
     })
   }
@@ -335,7 +335,10 @@ export class BasicComponent extends BaseComponent implements OnInit {
             this.toastr.error(res.message,'signup', {
               timeOut: 3000, positionClass: 'toast-top-right' });
           }
-        }
+        },
+        error: (error) => {
+          this.toastr.error(error.statusText);
+        },
       })
     }
   }
@@ -384,7 +387,10 @@ export class BasicComponent extends BaseComponent implements OnInit {
             this.toastr.error(res.message,'signup', {
               timeOut: 3000, positionClass: 'toast-top-right' });
           }
-        }
+        },
+        error: (error) => {
+          this.toastr.error(error.statusText);
+        },
       })
     }
   }

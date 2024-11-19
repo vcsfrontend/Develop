@@ -386,37 +386,33 @@ export class HeaderComponent implements OnInit {
     this.isFullscreen = !this.isFullscreen;
   }
 
+  onLogout(){
+    // window.location.href = 'https://crmexpert.vcs.plus/auth/logout';
+    if(this.isAdonai){
+      this.http.post('https://adonai.vcs.plus/api/account/auth/token/logout', {}).subscribe({ next: (res:any) => {
+        location.reload();
+        },
+        // error: (error) => {
+        //   this.toastr.error('Logout failed', error);
+        // },
+      })
+    }
+    this.router.navigate(['/auth/login']);
+    localStorage.clear();
+  }
+
   // onLogout(){
-  //   localStorage.clear();
-  //   // this.router.navigate(['/auth/login']);
-  //   // window.location.href = 'https://crmexpert.vcs.plus/auth/logout';
-  //   if(this.isAdonai){
+    
   //     this.http.post('https://adonai.vcs.plus/api/account/auth/token/logout', {}).subscribe({ next: (res:any) => {
   //       this.router.navigate(['/auth/login']);
-  //       // Reload the page on success
   //       location.reload();
   //       },
   //       error: (error) => {
   //         this.toastr.error('Logout failed', error);
   //       },
   //     })
-  //   }
+  //   this.router.navigate(['/auth/login']);
+    
   // }
-
-  onLogout(){
-    // this.router.navigate(['/auth/login']);
-    
-      this.http.post('https://adonai.vcs.plus/api/account/auth/token/logout', {}).subscribe({ next: (res:any) => {
-        this.router.navigate(['/auth/login']);
-        // Reload the page on success
-        location.reload();
-        },
-        error: (error) => {
-          this.toastr.error('Logout failed', error);
-        },
-      })
-    // this.router.navigate(['/auth/login']);
-    
-  }
   
 }
