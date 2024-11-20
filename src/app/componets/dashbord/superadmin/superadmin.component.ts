@@ -312,7 +312,7 @@ chartOptions3:any = {
       show: false,
     }
   },
-  colors: ["rgb(52, 152, 219)"],
+  colors: ["rgb(231, 76, 60)"],
 
   fill: {
     type: 'gradient',

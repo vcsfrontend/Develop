@@ -67,34 +67,8 @@
                             <div class="flex-fill">
                                 <div class="fs-25 fw-normal mb-2">{{dbData.totalNewUsers}}</div>
                                 <p class="mb-0">
-                                    <i class="ri-arrow-down-line text-danger fs-15 align-middle"></i>
-                                    <span  class="text-danger fs-12"> {{dbData.totalNewAnalytics | number:'1.2-2' }}% last month</span>
-                                </p>
-                            </div>
-                            <div id="sales-card" class="crm-card-chart">
-                                <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart"
-                                [xaxis]="chartOptions.xaxis" [colors]="chartOptions.colors" [fill]="chartOptions.fill"
-                                [stroke]="chartOptions.stroke" [tooltip]="chartOptions.tooltip"
-                                [dataLabels]="chartOptions.dataLabels" [grid]="chartOptions.grid"
-                                [yaxis]="chartOptions.yaxis">
-                            </apx-chart>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3 col-xl-3">
-                <div class="card custom-card overflow-hidden">
-                    <div class="card-body p-0">
-                        <div class="mb-2 p-3 pb-0">
-                            <div class="flex-fill fs-15">Total Revenue Generated</div>
-                        </div>
-                        <div class="d-flex align-items-center ps-3">
-                            <div class="flex-fill">
-                                <div class="fs-25 fw-normal mb-2">₹{{dbData.revenueGenerated}}</div>
-                                <p class="mb-0">
                                     <i class="ri-arrow-up-line text-secondary fs-15 align-middle"></i>
-                                    <span  class="text-secondary fs-12"> {{dbData.revenueAnalytics | number:'1.2-2' }}% last month</span>
+                                    <span  class="text-secondary fs-12"> {{dbData.totalNewAnalytics | number:'1.2-2' }}% last month</span>
                                 </p>
                             </div>
                             <div id="customers-card" class="crm-card-chart">
@@ -113,14 +87,40 @@
                 <div class="card custom-card overflow-hidden">
                     <div class="card-body p-0">
                         <div class="mb-2 p-3 pb-0">
+                            <div class="flex-fill fs-15">Total Revenue Generated</div>
+                        </div>
+                        <div class="d-flex align-items-center ps-3">
+                            <div class="flex-fill">
+                                <div class="fs-25 fw-normal mb-2">₹{{dbData.revenueGenerated}}</div>
+                                <p class="mb-0">
+                                    <i class="ri-arrow-down-line text-danger fs-15 align-middle"></i>
+                                    <span  class="text-danger fs-12"> {{dbData.revenueAnalytics | number:'1.2-2' }}% last month</span>
+                                </p>
+                            </div>
+                            <div id="customers-card" class="crm-card-chart">
+                                <apx-chart [series]="chartOptions3.series" [chart]="chartOptions3.chart"
+                                [xaxis]="chartOptions3.xaxis" [colors]="chartOptions3.colors" [fill]="chartOptions3.fill"
+                                [stroke]="chartOptions3.stroke" [tooltip]="chartOptions3.tooltip"
+                                [dataLabels]="chartOptions3.dataLabels" [grid]="chartOptions3.grid"
+                                [yaxis]="chartOptions3.yaxis">
+                            </apx-chart>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 col-xl-3">
+                <div class="card custom-card overflow-hidden">
+                    <div class="card-body p-0">
+                        <div class="mb-2 p-3 pb-0">
                             <div class="flex-fill fs-15">Total Renewal Users</div>
                         </div>
                         <div class="d-flex align-items-center ps-3">
                             <div class="flex-fill">
                                 <div class="fs-25 fw-normal mb-2">{{dbData.totalRenevalUsers}}</div>
                                 <p class="mb-0">
-                                    <i class="ri-arrow-up-line text-info fs-15 align-middle"></i>
-                                    <span  class="text-info fs-12"> {{dbData.renevalUsersAnalytics | number:'1.2-2' }}% last month</span>
+                                    <i class="ri-arrow-down-line text-danger fs-15 align-middle"></i>
+                                    <span  class="text-danger fs-12"> {{dbData.renevalUsersAnalytics | number:'1.2-2' }}% last month</span>
                                 </p>
                             </div>
                             <div id="orders-card" class="crm-card-chart">
@@ -183,8 +183,8 @@
                             <div class="flex-fill">
                                 <div class="fs-25 fw-normal mb-2">{{dbData.adonaiTotalNewUsers}}</div>
                                 <p class="mb-0">
-                                    <i class="ri-arrow-down-line text-danger fs-15 align-middle"></i>
-                                    <span  class="text-danger fs-12"> {{dbData.adonaiTotalNewAnalytics | number:'1.2-2' }}% last month</span>
+                                    <i class="ri-arrow-up-line text-secondary fs-15 align-middle"></i>
+                                    <span  class="text-secondary fs-12"> {{dbData.adonaiTotalNewAnalytics | number:'1.2-2' }}% last month</span>
                                 </p>
                             </div>
                             <div id="sales-card" class="crm-card-chart">
@@ -207,18 +207,18 @@
                         </div>
                         <div class="d-flex align-items-center ps-3">
                             <div class="flex-fill">
-                                <div class="fs-25 fw-normal mb-2">{{dbData.adonaiRevenueGenerated}}</div>
+                                <div class="fs-25 fw-normal mb-2">₹{{dbData.adonaiRevenueGenerated}}</div>
                                 <p class="mb-0">
-                                    <i class="ri-arrow-up-line text-secondary fs-15 align-middle"></i>
-                                    <span  class="text-secondary fs-12"> {{dbData.adonaiRevenueAnalytics | number:'1.2-2' }}% last month</span>
+                                    <i class="ri-arrow-down-line text-danger fs-15 align-middle"></i>
+                                    <span  class="text-danger fs-12"> {{dbData.adonaiRevenueAnalytics | number:'1.2-2' }}% last month</span>
                                 </p>
                             </div>
                             <div id="customers-card" class="crm-card-chart">
-                                <apx-chart [series]="chartOptions2.series" [chart]="chartOptions2.chart"
-                                [xaxis]="chartOptions2.xaxis" [colors]="chartOptions2.colors" [fill]="chartOptions2.fill"
-                                [stroke]="chartOptions2.stroke" [tooltip]="chartOptions2.tooltip"
-                                [dataLabels]="chartOptions2.dataLabels" [grid]="chartOptions2.grid"
-                                [yaxis]="chartOptions2.yaxis">
+                                <apx-chart [series]="chartOptions3.series" [chart]="chartOptions3.chart"
+                                [xaxis]="chartOptions3.xaxis" [colors]="chartOptions3.colors" [fill]="chartOptions3.fill"
+                                [stroke]="chartOptions3.stroke" [tooltip]="chartOptions3.tooltip"
+                                [dataLabels]="chartOptions3.dataLabels" [grid]="chartOptions3.grid"
+                                [yaxis]="chartOptions3.yaxis">
                             </apx-chart>
                             </div>
                         </div>
@@ -235,8 +235,8 @@
                             <div class="flex-fill">
                                 <div class="fs-25 fw-normal mb-2">{{dbData.adonaiTotalRenevalUsers}}</div>
                                 <p class="mb-0">
-                                    <i class="ri-arrow-up-line text-info fs-15 align-middle"></i>
-                                    <span  class="text-info fs-12"> {{dbData.adonaiRenevalUserAnalytics | number:'1.2-2' }}% last month</span>
+                                    <i class="ri-arrow-down-line text-danger fs-15 align-middle"></i>
+                                    <span  class="text-danger fs-12"> {{dbData.adonaiRenevalUserAnalytics | number:'1.2-2' }}% last month</span>
                                 </p>
                             </div>
                             <div id="orders-card" class="crm-card-chart">
@@ -294,8 +294,8 @@
                                 <div class="flex-fill">
                                     <div class="fs-25 fw-normal mb-2">{{dbData.crmTotalNewUsers}}</div>
                                     <p class="mb-0">
-                                        <i class="ri-arrow-down-line text-danger fs-15 align-middle"></i>
-                                        <span  class="text-danger fs-12"> {{dbData.crmTotalNewAnalytics | number:'1.2-2' }}% last month</span>
+                                        <i class="ri-arrow-up-line text-secondary fs-15 align-middle"></i>
+                                        <span  class="text-secondary fs-12"> {{dbData.crmTotalNewAnalytics | number:'1.2-2' }}% last month</span>
                                     </p>
                                 </div>
                                 <div id="sales-card" class="crm-card-chart">
@@ -318,18 +318,18 @@
                             </div>
                             <div class="d-flex align-items-center ps-3">
                                 <div class="flex-fill">
-                                    <div class="fs-25 fw-normal mb-2">{{dbData.crmRevenueGenerated}}</div>
+                                    <div class="fs-25 fw-normal mb-2">₹{{dbData.crmRevenueGenerated}}</div>
                                     <p class="mb-0">
-                                        <i class="ri-arrow-up-line text-secondary fs-15 align-middle"></i>
-                                        <span  class="text-secondary fs-12"> {{dbData.crmRevenueAnalytics | number:'1.2-2' }}% last month</span>
+                                        <i class="ri-arrow-down-line text-danger fs-15 align-middle"></i>
+                                        <span  class="text-danger fs-12"> {{dbData.crmRevenueAnalytics | number:'1.2-2' }}% last month</span>
                                     </p>
                                 </div>
                                 <div id="customers-card" class="crm-card-chart">
-                                    <apx-chart [series]="chartOptions2.series" [chart]="chartOptions2.chart"
-                                    [xaxis]="chartOptions2.xaxis" [colors]="chartOptions2.colors" [fill]="chartOptions2.fill"
-                                    [stroke]="chartOptions2.stroke" [tooltip]="chartOptions2.tooltip"
-                                    [dataLabels]="chartOptions2.dataLabels" [grid]="chartOptions2.grid"
-                                    [yaxis]="chartOptions2.yaxis">
+                                    <apx-chart [series]="chartOptions3.series" [chart]="chartOptions3.chart"
+                                    [xaxis]="chartOptions3.xaxis" [colors]="chartOptions3.colors" [fill]="chartOptions3.fill"
+                                    [stroke]="chartOptions3.stroke" [tooltip]="chartOptions3.tooltip"
+                                    [dataLabels]="chartOptions3.dataLabels" [grid]="chartOptions3.grid"
+                                    [yaxis]="chartOptions3.yaxis">
                                 </apx-chart>
                                 </div>
                             </div>
@@ -346,8 +346,8 @@
                                 <div class="flex-fill">
                                     <div class="fs-25 fw-normal mb-2">{{dbData.crmTotalRenevalUsers}}</div>
                                     <p class="mb-0">
-                                        <i class="ri-arrow-up-line text-info fs-15 align-middle"></i>
-                                        <span  class="text-info fs-12"> {{dbData.crmRenevalUserAnalytics | number:'1.2-2' }}% last month</span>
+                                        <i class="ri-arrow-down-line text-danger fs-15 align-middle"></i>
+                                        <span  class="text-danger fs-12"> {{dbData.crmRenevalUserAnalytics | number:'1.2-2' }}% last month</span>
                                     </p>
                                 </div>
                                 <div id="orders-card" class="crm-card-chart">
@@ -760,10 +760,10 @@
                 <div class="card-title">
                     <h4>Users</h4> 
                 </div>
-                <div class="d-flex flex-wrap gap-3">
+                <!-- <div class="d-flex flex-wrap gap-3">
                     <input class="form-control form-control-sm" type="text" placeholder="Search Here"
                         aria-label=".form-control-sm example">
-                </div>
+                </div> -->
             </div>
             <div class="card-body p-0">
                 <div class="mat-elevation-z8">
