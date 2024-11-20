@@ -101,9 +101,9 @@ export class DesignersComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   modal: any;
   projectLst: any; userDetails:any;
-  // open(content1:any) {
-	// 	this.modalService.open(content1,{ centered: true });
-	// }
+  open(content:any) {
+		this.modalService.open(content,{ centered: true });
+	}
   openLg(content10:any) {
 		this.modalService.open(content10, { size: 'lg' },);
 	}

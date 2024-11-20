@@ -1,13 +1,21 @@
-.modal-content {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    width: 150%;
-    color: var(--bs-modal-color);
-    pointer-events: auto;
-    background-color: var(--bs-modal-bg);
-    background-clip: padding-box;
-    border: var(--bs-modal-border-width) solid var(--bs-modal-border-color);
-    border-radius: var(--bs-modal-border-radius);
-    outline: 0;
+// .modal-content {
+//     position: relative;
+//     display: flex;
+//     flex-direction: column;
+//     width: 150%;
+//     color: var(--bs-modal-color);
+//     pointer-events: auto;
+//     background-color: var(--bs-modal-bg);
+//     background-clip: padding-box;
+//     border: var(--bs-modal-border-width) solid var(--bs-modal-border-color);
+//     border-radius: var(--bs-modal-border-radius);
+//     outline: 0;
+// }
+
+.table{
+    --bs-table-bg: var(--custom-white);
+    color: var(--default-text-color);
+    border-color: var(--default-border);
+    margin-block-end: 0;
+    cursor: pointer;
 }
