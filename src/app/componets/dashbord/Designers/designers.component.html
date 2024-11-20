@@ -2,9 +2,9 @@
 
 <!-- Start::row-1 -->
 <div class="row">
-    <div class="col-xxl-9">
+    <div class="col-xxl-12">
         <div class="row">
-            <div class="col-xl-3">
+            <div class="col-xl-3 col-xxl-3">
                 <div class="card custom-card overflow-hidden">
                     <div class="card-body p-0">
                         <div class="p-3 pb-0">
@@ -96,92 +96,12 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-12">
-                <div class="card custom-card">
-                    <div class="card-header justify-content-between">
-                        <div class="card-title">Projects Revenue</div>
-                        <div class="d-flex align-items-center gap-2">
-                            <span class="text-muted">Year - </span>
-                            <div ngbDropdown class="dropdown">
-                                <a ngbDropdownToggle href="javascript:void(0);" class="btn btn-light btn-sm border"
-                                    data-bs-toggle="dropdown">
-                                    2023
-                                </a>
-                                <ul ngbDropdownMenu class="dropdown-menu" role="menu">
-                                    <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">2022</a>
-                                    </li>
-                                    <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">2021</a>
-                                    </li>
-                                    <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">2020</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body p-0">
-                        <div class="row g-0">
-                            <div class="col-xl-8 border-end border-inline-end-dashed">
-                                <div class="p-3">
-                                    <div id="projects-revenue">
-                                        <apx-chart [series]="chartOptions4.series" [chart]="chartOptions4.chart"
-                                            [xaxis]="chartOptions4.xaxis" [colors]="chartOptions4.colors"  [plotOptions]="chartOptions4.plotOptions"
-                                            [stroke]="chartOptions4.stroke" [tooltip]="chartOptions4.tooltip" [legend]="chartOptions4.legend"
-                                            [dataLabels]="chartOptions4.dataLabels" [grid]="chartOptions4.grid"
-                                            [yaxis]="chartOptions4.yaxis"></apx-chart>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 ps-0">
-                                <div class="p-3">
-                                    <div class="border rounded p-3 mb-4 position-relative overflow-hidden">
-                                        <div class="d-flex align-items-center justify-content-between">
-                                            <div class="d-flex align-items-center justify-content-between mb-4">
-                                                <div>
-                                                    <h6 class="text-warning mb-3">Projects In Progress</h6>
-                                                    <span class="fs-25 d-flex align-items-center">55.3% <span
-                                                            class="fs-12 text-warning op-7 ms-2">+0.59<i
-                                                                class="ti ti-arrow-big-up-line ms-1 d-inline-flex"></i></span></span>
-                                                </div>
-                                            </div>
-                                            <div id="projects-ongoing" class="mt-1 w-100">
-                                                <apx-chart [series]="chartOptions5.series" [chart]="chartOptions5.chart"
-                                                    [xaxis]="chartOptions5.xaxis" [colors]="chartOptions5.colors"
-                                                    [stroke]="chartOptions5.stroke" [tooltip]="chartOptions5.tooltip"
-                                                    [dataLabels]="chartOptions5.dataLabels" [grid]="chartOptions5.grid"
-                                                    [yaxis]="chartOptions5.yaxis"></apx-chart>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="border rounded p-3 mb-4">
-                                        <div class="d-flex align-items-center justify-content-between">
-                                            <div>
-                                                <span class="d-block fs-16 mb-3">Completed Projects</span>
-                                                <h3 class="mb-3">28</h3>
-                                                <span class="d-block text-muted">Increased by <span
-                                                        class="text-green ms-1">0.45%<i
-                                                            class="ti ti-arrow-narrow-up"></i></span></span>
-                                            </div>
-                                            <div id="projects-done">
-                                                <apx-chart [series]="chartOptions6.series" [chart]="chartOptions6.chart"
-                                                    [xaxis]="chartOptions6.xaxis" [colors]="chartOptions6.colors" [plotOptions]="chartOptions6.plotOptions"
-                                                    [stroke]="chartOptions6.stroke" [labels]="chartOptions6.labels"
-                                                   ></apx-chart>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="d-grid">
-                                        <button type="button" class="btn btn-primary-ghost btn-wave btn-lg">View Total
-                                            Revenue</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
+            
+            
+            
         </div>
     </div>
-    <div class="col-xxl-3">
+    <!-- <div class="col-xxl-3">
         <div class="row">
             <div class="col-xl-12">
                 <div class="card custom-card card-bg-primary all-clients-card">
@@ -227,339 +147,140 @@
                     </div>
                 </div>
             </div> 
-            <div class="col-xl-12"> 
-                <div class="card custom-card">
-                    <div class="card-header justify-content-between">
-                        <div class="card-title">
-                            Projects Discussions
-                        </div>
-                        <button type="button" class="btn btn-sm btn-primary-light">View All<i
-                                class="ri-arrow-right-line ms-1 align-middle"></i></button>
+            
+        </div>
+    </div>  -->
+</div>
+<!--End::row-1 -->
+<div class="row">
+    <div class="col-xl-12 col-xxl-7">
+        <div class="card custom-card">
+            <div class="card-header justify-content-between">
+                <div class="card-title">Projects Revenue</div>
+                <div class="d-flex align-items-center gap-2">
+                    <span class="text-muted">Year - </span>
+                    <div ngbDropdown class="dropdown">
+                        <a ngbDropdownToggle href="javascript:void(0);" class="btn btn-light btn-sm border"
+                            data-bs-toggle="dropdown">
+                            2023
+                        </a>
+                        <ul ngbDropdownMenu class="dropdown-menu" role="menu">
+                            <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">2022</a>
+                            </li>
+                            <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">2021</a>
+                            </li>
+                            <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">2020</a>
+                            </li>
+                        </ul>
                     </div>
-                    <div class="card-body">
-                        <div class="timeline-label">
-                            <ul class="list-unstyled ms-2 project-activity-list">
-                                <li class="project-activity">
-                                    <p class="mb-1 text-gray-700 fs-13 d-inline-flex ms-3">
-                                        Group discussion today at 10:30 AM with Asperiores Group Solutions
-                                    </p>
-                                    <div>
-                                        <span class="badge bg-secondary-transparent ms-3">Attend</span>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <div class="row g-0">
+                    
+                    <div class="col-xl-4 col-xxl-12 ps-0">
+                        <div class="p-3">
+                            <div class="border rounded p-3 mb-4 position-relative overflow-hidden">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div class="d-flex align-items-center justify-content-between mb-4">
+                                        <div>
+                                            <h6 class="text-warning mb-3">Projects In Progress</h6>
+                                            <span class="fs-25 d-flex align-items-center">55.3% <span
+                                                    class="fs-12 text-warning op-7 ms-2">+0.59<i
+                                                        class="ti ti-arrow-big-up-line ms-1 d-inline-flex"></i></span></span>
+                                        </div>
                                     </div>
-                                </li>
-                                <li class="project-activity">
-                                    <p class="mb-1 text-gray-700 fs-13 d-inline-flex ms-3">Your application has accepted
-                                        in 3 Vacancy by the voluptatibus Industries</p>
-                                    <div>
-                                        <span class="badge bg-secondary-transparent ms-3">12h ago</span>
+                                    <div id="projects-ongoing" class="mt-1 w-100">
+                                        <apx-chart [series]="chartOptions5.series" [chart]="chartOptions5.chart"
+                                            [xaxis]="chartOptions5.xaxis" [colors]="chartOptions5.colors"
+                                            [stroke]="chartOptions5.stroke" [tooltip]="chartOptions5.tooltip"
+                                            [dataLabels]="chartOptions5.dataLabels" [grid]="chartOptions5.grid"
+                                            [yaxis]="chartOptions5.yaxis"></apx-chart>
                                     </div>
-                                </li>
-                                <li class="project-activity">
-                                    <p class="mb-1 text-gray-700 fs-13 d-inline-flex ms-3">Final round interview today
-                                        at 04:30 PM with Recusandae Institute</p>
+                                </div>
+                            </div>
+                            <div class="border rounded p-3 mb-4">
+                                <div class="d-flex align-items-center justify-content-between">
                                     <div>
-                                        <span class="badge bg-secondary-transparent ms-3">Attend</span>
+                                        <span class="d-block fs-16 mb-3">Completed Projects</span>
+                                        <h3 class="mb-3">28</h3>
+                                        <span class="d-block text-muted">Increased by <span
+                                                class="text-green ms-1">0.45%<i
+                                                    class="ti ti-arrow-narrow-up"></i></span></span>
                                     </div>
-                                </li>
-                                <li class="project-activity">
-                                    <p class="mb-1 text-gray-700 fs-13 d-inline-flex ms-3">Group discussion today at
-                                        09:30 AM with Asperiores Tech Group Solutions</p>
-                                    <div>
-                                        <span class="badge bg-secondary-transparent ms-3">Attend</span>
+                                    <div id="projects-done">
+                                        <apx-chart [series]="chartOptions6.series" [chart]="chartOptions6.chart"
+                                            [xaxis]="chartOptions6.xaxis" [colors]="chartOptions6.colors" [plotOptions]="chartOptions6.plotOptions"
+                                            [stroke]="chartOptions6.stroke" [labels]="chartOptions6.labels"
+                                           ></apx-chart>
                                     </div>
-                                </li>
-                                <li class="project-activity">
-                                    <p class="mb-1 text-gray-700 fs-13 d-inline-flex ms-3">Group discussion today at
-                                        09:30 AM with Asperiores Tech Group Solutions</p>
-                                    <div>
-                                        <span class="badge bg-secondary-transparent ms-3">Attend</span>
-                                    </div>
-                                </li>
-                            </ul>
+                                </div>
+                            </div>
+                            <div class="d-grid">
+                                <button type="button" class="btn btn-primary-ghost btn-wave btn-lg">View Total
+                                    Revenue</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div> 
+            </div>
+            
+        </div>
+    </div>
+    <div class="col-xl-12 col-xxl-5"> 
+        <div class="card custom-card">
+            <div class="card-header justify-content-between">
+                <div class="card-title">
+                    Projects Discussions
+                </div>
+                <button type="button" class="btn btn-sm btn-primary-light">View All<i
+                        class="ri-arrow-right-line ms-1 align-middle"></i></button>
+            </div>
+            <div class="card-body">
+                <div class="timeline-label">
+                    <ul class="list-unstyled ms-2 project-activity-list">
+                        <li class="project-activity">
+                            <p class="mb-1 text-gray-700 fs-13 d-inline-flex ms-3">
+                                Group discussion today at 10:30 AM with Asperiores Group Solutions
+                            </p>
+                            <div>
+                                <span class="badge bg-secondary-transparent ms-3">Attend</span>
+                            </div>
+                        </li>
+                        <li class="project-activity">
+                            <p class="mb-1 text-gray-700 fs-13 d-inline-flex ms-3">Your application has accepted
+                                in 3 Vacancy by the voluptatibus Industries</p>
+                            <div>
+                                <span class="badge bg-secondary-transparent ms-3">12h ago</span>
+                            </div>
+                        </li>
+                        <li class="project-activity">
+                            <p class="mb-1 text-gray-700 fs-13 d-inline-flex ms-3">Final round interview today
+                                at 04:30 PM with Recusandae Institute</p>
+                            <div>
+                                <span class="badge bg-secondary-transparent ms-3">Attend</span>
+                            </div>
+                        </li>
+                        <li class="project-activity">
+                            <p class="mb-1 text-gray-700 fs-13 d-inline-flex ms-3">Group discussion today at
+                                09:30 AM with Asperiores Tech Group Solutions</p>
+                            <div>
+                                <span class="badge bg-secondary-transparent ms-3">Attend</span>
+                            </div>
+                        </li>
+                        <li class="project-activity">
+                            <p class="mb-1 text-gray-700 fs-13 d-inline-flex ms-3">Group discussion today at
+                                09:30 AM with Asperiores Tech Group Solutions</p>
+                            <div>
+                                <span class="badge bg-secondary-transparent ms-3">Attend</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-<!--End::row-1 -->
-
-
-<!-- Start:: row-2 -->
-<div class="row">
-    <div class="mb-4 d-flex align-items-center justify-content-between">
-        <h6 class="mb-0">Top Projects :</h6>
-        <div>
-            <button type="button" class="btn btn-sm btn-primary-light btn-wave waves-effect waves-light">View
-                All</button>
-        </div>
-    </div>
-    <div class="col-xxl-3">
-        <div class="card custom-card">
-            <div class="card-header align-items-center">
-                <div class="me-2">
-                    <span class="avatar avatar-rounded p-1 bg-light">
-                        <img src="./assets/images/company-logos/1.png" alt="">
-                    </span>
-                </div>
-                <div class="flex-fill">
-                    <a href="javascript:void(0);" class="fs-14 d-block text-truncate project-list-title">Design &amp;
-                        Developing New Project</a>
-                    <span class="text-muted d-block fs-12">Total <strong class="text-default">18/22</strong> tasks
-                        completed</span>
-                </div>
-                <div ngbDropdown class="dropdown no-caret">
-                    <a ngbDropdownToggle aria-label="anchor" href="javascript:void(0);"
-                        class="btn btn-icon btn-sm btn-light" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fe fe-more-vertical"></i>
-                    </a>
-                    <ul ngbDropdownMenu class="dropdown-menu">
-                        <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);"><i
-                                    class="ri-eye-line align-middle me-1 d-inline-block"></i>View</a></li>
-                        <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);"><i
-                                    class="ri-edit-line align-middle me-1 d-inline-block"></i>Edit</a></li>
-                        <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);"><i
-                                    class="ri-delete-bin-line me-1 align-middle d-inline-block"></i>Delete</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="d-flex align-items-center justify-content-between mb-3">
-                    <div>
-                        <div class="mb-1">Team :</div>
-                        <div class="avatar-list-stacked">
-                            <span class="avatar avatar-sm avatar-rounded">
-                                <img src="./assets/images/faces/2.jpg" alt="img">
-                            </span>
-                            <span class="avatar avatar-sm avatar-rounded">
-                                <img src="./assets/images/faces/8.jpg" alt="img">
-                            </span>
-                            <span class="avatar avatar-sm avatar-rounded">
-                                <img src="./assets/images/faces/2.jpg" alt="img">
-                            </span>
-                            <span class="avatar avatar-sm avatar-rounded">
-                                <img src="./assets/images/faces/10.jpg" alt="img">
-                            </span>
-                            <a class="avatar avatar-sm bg-light avatar-rounded text-default" href="javascript:void(0);">
-                                +2
-                            </a>
-                        </div>
-                    </div>
-                    <div class="text-end">
-                        <div class="mb-1">Priority :</div>
-                        <span class="badge bg-success-transparent">Low</span>
-                    </div>
-                </div>
-                <div class="mb-1">Status :</div>
-                <div>
-                    <div></div>
-                    <div class="progress progress-xs progress-animate" role="progressbar" aria-valuenow="80"
-                        aria-valuemin="0" aria-valuemax="100">
-                        <div class="progress-bar bg-primary" style="width: 80%"></div>
-                    </div>
-                    <div class="mt-1"><span class="text-primary fw-medium">80%</span> Completed</div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xxl-3">
-        <div class="card custom-card">
-            <div class="card-header align-items-center">
-                <div class="me-2">
-                    <span class="avatar avatar-rounded p-1 bg-light">
-                        <img src="./assets/images/company-logos/2.png" alt="">
-                    </span>
-                </div>
-                <div class="flex-fill">
-                    <a href="javascript:void(0);" class="fs-14 d-block text-truncate project-list-title">Content
-                        Management System (CMS) Integration</a>
-                    <span class="text-muted d-block fs-12">Total <strong class="text-default">26/68</strong> tasks
-                        completed</span>
-                </div>
-                <div ngbDropdown class="dropdown no-caret">
-                    <a ngbDropdownToggle aria-label="anchor" href="javascript:void(0);"
-                        class="btn btn-icon btn-sm btn-light" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fe fe-more-vertical"></i>
-                    </a>
-                    <ul ngbDropdownMenu class="dropdown-menu">
-                        <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);"><i
-                                    class="ri-eye-line align-middle me-1 d-inline-block"></i>View</a></li>
-                        <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);"><i
-                                    class="ri-edit-line align-middle me-1 d-inline-block"></i>Edit</a></li>
-                        <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);"><i
-                                    class="ri-delete-bin-line me-1 align-middle d-inline-block"></i>Delete</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="d-flex align-items-center justify-content-between mb-3">
-                    <div>
-                        <div class="mb-1">Team :</div>
-                        <div class="avatar-list-stacked">
-                            <span class="avatar avatar-sm avatar-rounded">
-                                <img src="./assets/images/faces/12.jpg" alt="img">
-                            </span>
-                            <span class="avatar avatar-sm avatar-rounded">
-                                <img src="./assets/images/faces/9.jpg" alt="img">
-                            </span>
-                            <span class="avatar avatar-sm avatar-rounded">
-                                <img src="./assets/images/faces/11.jpg" alt="img">
-                            </span>
-                            <a class="avatar avatar-sm bg-light avatar-rounded text-default" href="javascript:void(0);">
-                                +4
-                            </a>
-                        </div>
-                    </div>
-                    <div class="text-end">
-                        <div class="mb-1">Priority :</div>
-                        <span class="badge bg-info-transparent">Medium</span>
-                    </div>
-                </div>
-                <div class="mb-1">Status :</div>
-                <div>
-                    <div></div>
-                    <div class="progress progress-xs progress-animate" role="progressbar" aria-valuenow="45"
-                        aria-valuemin="0" aria-valuemax="100">
-                        <div class="progress-bar bg-warning" style="width: 45%"></div>
-                    </div>
-                    <div class="mt-1"><span class="text-warning fw-medium">45%</span> Completed</div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xxl-3">
-        <div class="card custom-card">
-            <div class="card-header align-items-center">
-                <div class="me-2">
-                    <span class="avatar avatar-rounded p-1 bg-light">
-                        <img src="./assets/images/company-logos/3.png" alt="">
-                    </span>
-                </div>
-                <div class="flex-fill">
-                    <a href="javascript:void(0);" class="fs-14 d-block text-truncate project-list-title">Task Scheduler
-                        and Automation</a>
-                    <span class="text-muted d-block fs-12">Total <strong class="text-default">21/45</strong> tasks
-                        completed</span>
-                </div>
-                <div ngbDropdown class="dropdown no-caret">
-                    <a ngbDropdownToggle aria-label="anchor" href="javascript:void(0);"
-                        class="btn btn-icon btn-sm btn-light" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fe fe-more-vertical"></i>
-                    </a>
-                    <ul ngbDropdownMenu class="dropdown-menu">
-                        <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);"><i
-                                    class="ri-eye-line align-middle me-1 d-inline-block"></i>View</a></li>
-                        <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);"><i
-                                    class="ri-edit-line align-middle me-1 d-inline-block"></i>Edit</a></li>
-                        <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);"><i
-                                    class="ri-delete-bin-line me-1 align-middle d-inline-block"></i>Delete</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="d-flex align-items-center justify-content-between mb-3">
-                    <div>
-                        <div class="mb-1">Team :</div>
-                        <div class="avatar-list-stacked">
-                            <span class="avatar avatar-sm avatar-rounded">
-                                <img src="./assets/images/faces/5.jpg" alt="img">
-                            </span>
-                            <span class="avatar avatar-sm avatar-rounded">
-                                <img src="./assets/images/faces/6.jpg" alt="img">
-                            </span>
-                            <a class="avatar avatar-sm bg-light avatar-rounded text-default" href="javascript:void(0);">
-                                +1
-                            </a>
-                        </div>
-                    </div>
-                    <div class="text-end">
-                        <div class="mb-1">Priority :</div>
-                        <span class="badge bg-success-transparent">Low</span>
-                    </div>
-                </div>
-                <div class="mb-1">Status :</div>
-                <div>
-                    <div></div>
-                    <div class="progress progress-xs progress-animate" role="progressbar" aria-valuenow="66"
-                        aria-valuemin="0" aria-valuemax="100">
-                        <div class="progress-bar bg-info" style="width: 66%"></div>
-                    </div>
-                    <div class="mt-1"><span class="text-info fw-medium">66%</span> Completed</div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xxl-3">
-        <div class="card custom-card">
-            <div class="card-header align-items-center">
-                <div class="me-2">
-                    <span class="avatar avatar-rounded p-1 bg-light">
-                        <img src="./assets/images/company-logos/5.png" alt="">
-                    </span>
-                </div>
-                <div class="flex-fill">
-                    <a href="javascript:void(0);" class="fs-14 d-block text-truncate project-list-title">Advanced Search
-                        and Filtering</a>
-                    <span class="text-muted d-block fs-12">Total <strong class="text-default">45/54</strong> tasks
-                        completed</span>
-                </div>
-                <div ngbDropdown class="dropdown no-caret">
-                    <a ngbDropdownToggle aria-label="anchor" href="javascript:void(0);"
-                        class="btn btn-icon btn-sm btn-light" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fe fe-more-vertical"></i>
-                    </a>
-                    <ul ngbDropdownMenu class="dropdown-menu">
-                        <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);"><i
-                                    class="ri-eye-line align-middle me-1 d-inline-block"></i>View</a></li>
-                        <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);"><i
-                                    class="ri-edit-line align-middle me-1 d-inline-block"></i>Edit</a></li>
-                        <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);"><i
-                                    class="ri-delete-bin-line me-1 align-middle d-inline-block"></i>Delete</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="d-flex align-items-center justify-content-between mb-3">
-                    <div>
-                        <div class="mb-1">Team :</div>
-                        <div class="avatar-list-stacked">
-                            <span class="avatar avatar-sm avatar-rounded">
-                                <img src="./assets/images/faces/3.jpg" alt="img">
-                            </span>
-                            <span class="avatar avatar-sm avatar-rounded">
-                                <img src="./assets/images/faces/9.jpg" alt="img">
-                            </span>
-                            <span class="avatar avatar-sm avatar-rounded">
-                                <img src="./assets/images/faces/12.jpg" alt="img">
-                            </span>
-                            <span class="avatar avatar-sm avatar-rounded">
-                                <img src="./assets/images/faces/11.jpg" alt="img">
-                            </span>
-                            <a class="avatar avatar-sm bg-light avatar-rounded text-default" href="javascript:void(0);">
-                                +2
-                            </a>
-                        </div>
-                    </div>
-                    <div class="text-end">
-                        <div class="mb-1">Priority :</div>
-                        <span class="badge bg-danger-transparent">High</span>
-                    </div>
-                </div>
-                <div class="mb-1">Status :</div>
-                <div>
-                    <div></div>
-                    <div class="progress progress-xs progress-animate" role="progressbar" aria-valuenow="89"
-                        aria-valuemin="0" aria-valuemax="100">
-                        <div class="progress-bar bg-success" style="width: 89%"></div>
-                    </div>
-                    <div class="mt-1"><span class="text-success fw-medium">89%</span> Completed</div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> 
-<!-- End:: row-2 -->
 
 <!-- start:: row-3 -->
 <div class="row">
@@ -587,14 +308,13 @@
                     <!-- <a routerLink="apps/projects/create-project" class="btn btn-primary me-2" href="apps/projects/create-project"><i
                         class="ri-add-line me-1 fw-medium align-middle"></i>New Project</a> -->
                         <div>
-                            <a  class="btn btn-sm btn-secondary btn-wave" data-bs-toggle="modal" data-bs-target="#exampleModalLg"
-                            (click)="openLg(Content10)"><i class="ri-add-line align-middle me-1 fw-medium"></i>Create Project</a>
+                            <a  class="btn btn-sm btn-secondary btn-wave" ><i class="ri-add-line align-middle me-1 fw-medium"></i>Create Project</a>
                         </div>
                 </div>
             </div>
-            <!-- <div class="card-body p-0">
-                <div class="table-responsive">
-                    <table class="table text-nowrap">
+            <div class="card-body p-0">
+                <div class="table-responsive ">
+                    <table class="table text-nowrap ">
                         <thead>
                             <tr>
                                 
@@ -602,16 +322,16 @@
                                 <th scope="col">Project ID</th>
                                 <th scope="col">Project Name</th>
                                 <th scope="col">Client Name</th>
-                                <th scope="col">Business Category</th>
-                                <th scope="col">Project Address</th>
-                                <th scope="col">State</th>
+                                <!-- <th scope="col">Business Category</th> -->
+                                <!-- <th scope="col">Project Address</th> -->
+                                <!-- <th scope="col">State</th>
                                 <th scope="col">City</th>
-                                <th scope="col">Project Stage</th>
-                                <th scope="col">Project Estimation</th>
-                                <th scope="col">Project area</th>
-                                <th scope="col">Action</th>
-                                <th scope="col">Company Name</th>
-                                <th scope="col">Created By</th>
+                                <th scope="col">Project Stage</th> -->
+                                <th scope="col">Project Estimation Date</th>
+                                <!-- <th scope="col">Project area</th> -->
+                                <!-- <th scope="col">Action</th> -->
+                                <!-- <th scope="col">Company Name</th> -->
+                                <!-- <th scope="col">Created By</th> -->
                                 <th scope="col">Start Date</th>
                                 <th scope="col">End Date</th>
                             </tr>
@@ -622,19 +342,20 @@
                                 <td>VA001 </td>
                                 <td>
                                     Standalone (SaiKrishna)</td>
-                                <td>Sai Krishna</td>
-                                <td>IR Residential</td>
+                               <td data-bs-toggle="modal" data-bs-target="#exampleModalLg"
+                               (click)="openLg(Content10)"><span class="pe-auto">saikrishan</span></td>
+                                <!-- <td>IR Residential</td>
                                 <td>kphb telangana</td>
                                 <td>Telangana</td>
                                 <td>Hyderabad</td>
-                                <td><span class="badge bg-primary-transparent">Execution In Progress </span></td>
+                                <td><span class="badge bg-primary-transparent">Execution In Progress </span></td> -->
                                 <td>₹ 3,60,868</td>
-                                <td>1860</td>
+                                <!-- <td>1860</td>
                                 <td>
                                     hello
                                 </td>
                                 <td>Varmagroup</td>
-                                <td>CH TARUN, Varma Group</td>
+                                <td>CH TARUN, Varma Group</td> -->
                                 <td>13-11-2024</td>
                                 <td>13-12-2024</td>
                             </tr>
@@ -643,19 +364,20 @@
                                 <td>VA001 </td>
                                 <td>
                                     Standalone (SaiKrishna)</td>
-                                <td>Sai Krishna</td>
-                                <td>IR Residential</td>
+                                    <td data-bs-toggle="modal" data-bs-target="#exampleModalLg"
+                                    (click)="openLg(Content10)"><span class="pe-auto">saikrishan</span></td>
+                                <!-- <td>IR Residential</td>
                                 <td>kphb telangana</td>
                                 <td>Telangana</td>
                                 <td>Hyderabad</td>
-                                <td><span class="badge bg-primary-transparent">Execution In Progress </span></td>
+                                <td><span class="badge bg-primary-transparent">Execution In Progress </span></td> -->
                                 <td>₹ 3,60,868</td>
-                                <td>1860</td>
+                                <!-- <td>1860</td>
                                 <td>
                                     hiii
                                 </td>
                                 <td>Varmagroup</td>
-                                <td>CH TARUN, Varma Group</td>
+                                <td>CH TARUN, Varma Group</td> -->
                                 <td>13-11-2024</td>
                                 <td>13-12-2024</td>
                             </tr>
@@ -664,19 +386,20 @@
                                 <td>VA001 </td>
                                 <td>
                                     Standalone (SaiKrishna)</td>
-                                <td>Sai Krishna</td>
-                                <td>IR Residential</td>
+                                    <td data-bs-toggle="modal" data-bs-target="#exampleModalLg"
+                                    (click)="openLg(Content10)"><span class="pe-auto">saikrishan</span></td>
+                                <!-- <td>IR Residential</td>
                                 <td>kphb telangana</td>
                                 <td>Telangana</td>
                                 <td>Hyderabad</td>
-                                <td><span class="badge bg-primary-transparent">Execution In Progress </span></td>
+                                <td><span class="badge bg-primary-transparent">Execution In Progress </span></td> -->
                                 <td>₹ 3,60,868</td>
-                                <td>1860</td>
+                                <!-- <td>1860</td>
                                 <td>
                                     hello
                                 </td>
                                 <td>Varmagroup</td>
-                                <td>CH TARUN, Varma Group</td>
+                                <td>CH TARUN, Varma Group</td> -->
                                 <td>13-11-2024</td>
                                 <td>13-12-2024</td>
                             </tr>
@@ -710,10 +433,10 @@
                         </ul>
                     </div>
                 </div>
-            </div> -->
+            </div>
 
 
-            <div class="card-body p-0">
+            <!-- <div class="card-body p-0">
                 <div class="mat-elevation-z8">
                     <div class="table-responsive">
                         <table mat-table [dataSource]="dataSource">
@@ -789,7 +512,7 @@
                         aria-label="Select page of periodic elements">
                     </mat-paginator>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>
@@ -797,7 +520,7 @@
 <ng-template #Content10 id="addtask" let-modal>
     <div class="modal-content">
         <div class="modal-header">
-            <h6 class="modal-title" id="mail-ComposeLabel">Create Project</h6>
+            <h6 class="modal-title" id="mail-ComposeLabel">project details</h6>
             <button type="button" class="btn-close" data-bs-dismiss="modal"
             (click)="modal.close('Cross click')" aria-label="Close"></button>
         </div>
@@ -812,14 +535,6 @@
                       </div> -->
                       <div class="card-body">
                         <div class="row gy-3">
-                          <div class="col-xl-4">
-                            <label for="projectName" class="form-label">Project Name:</label>
-                            <input type="text" class="form-control" id="projectName" formControlName="projectName" placeholder="Enter Project Name">
-                          </div>
-                          <div class="col-xl-4">
-                            <label for="clientName" class="form-label">Client Name:</label>
-                            <input type="text" class="form-control" id="clientName" formControlName="clientName" placeholder="Enter Client Name">
-                          </div>
                           <div class="col-xl-4">
                             <label for="businessCategory" class="form-label">Business Category:</label>
                             <input type="text" class="form-control" id="businessCategory" formControlName="businessCategory" placeholder="Business Category">
@@ -857,22 +572,7 @@
                             <input type="text" class="form-control" id="companyName" formControlName="companyName" placeholder="Enter Company Name">
                           </div>
                           <div class="col-xl-4"></div>
-                          <div class="col-xl-4">
-                            <mat-form-field appearance="fill">
-                              <mat-label>Start Date</mat-label>
-                              <input matInput [matDatepicker]="startPicker" formControlName="projectStartDate" placeholder="Choose Start Date">
-                              <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
-                              <mat-datepicker #startPicker></mat-datepicker>
-                            </mat-form-field>
-                          </div>
-                          <div class="col-xl-4">
-                            <mat-form-field appearance="fill">
-                              <mat-label>End Date</mat-label>
-                              <input matInput [matDatepicker]="endPicker" formControlName="projectEndDate" placeholder="Choose End Date">
-                              <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
-                              <mat-datepicker #endPicker></mat-datepicker>
-                            </mat-form-field>
-                          </div>
+                          
                           
                           <!-- <div class="col-xl-12">
                             <label class="form-label">Attachments</label>
@@ -896,4 +596,5 @@
         </div>
     </div>
 </ng-template>
+
 <!-- End:: row-3 -->

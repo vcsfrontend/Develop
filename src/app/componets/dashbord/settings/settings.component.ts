@@ -70,7 +70,7 @@ export class SettingsComponent extends BaseComponent implements OnInit{
     password: ['', [Validators.required, this.passwordValidator]],
     confirmPassword: ['', Validators.required],
     tools : [[],Validators.required],
-    userflag: ['settings'], 
+    userFlag: ['settings'], 
     updatedBy: [localStorage.getItem('username')],
     companyCode: [''], 
     city: ['', Validators.required]
