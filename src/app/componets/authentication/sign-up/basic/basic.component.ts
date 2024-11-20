@@ -79,7 +79,7 @@ export class BasicComponent extends BaseComponent implements OnInit {
     password: ['', [Validators.required, this.passwordValidator]],
     tools : [[],Validators.required],
     confirmPassword: ['', Validators.required],
-    userflag: ['signup'],
+    userFlag: ['signup'],
     city: ['', Validators.required],
     updatedBy: ['']
     //"toolId": 0,
