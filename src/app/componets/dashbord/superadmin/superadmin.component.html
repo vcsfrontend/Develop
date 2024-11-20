@@ -629,7 +629,7 @@
         </div>
     </div>
     
-    <div class="col-lg-8 col-xxl-8">
+    <!-- <div class="col-lg-8 col-xxl-8">
         <div class="card custom-card overflow-hidden">
             <div class="card-header justify-content-between">
                 <div class="card-title">
@@ -654,6 +654,16 @@
                                 [dataLabels]="chartOptions4.dataLabels" [grid]="chartOptions4.grid"
                                 [yaxis]="chartOptions4.yaxis"></apx-chart>
                 </div>
+            </div>
+        </div>
+    </div> -->
+    <div class="col-xl-8">
+        <div class="card custom-card">
+            <div class="card-header">
+                <div class="card-title">Revenue Report</div>
+            </div>
+            <div class="card-body">
+                <div id="echart-pictorial" echarts [options]="options27" echarts class="echart-charts"></div>
             </div>
         </div>
     </div>
@@ -1376,4 +1386,15 @@
         </div>
       </div>
     </div>
-  </ng-template>
+</ng-template>
+
+<div class="col-xl-6">
+    <div class="card custom-card">
+        <div class="card-header">
+            <div class="card-title">Basic Gauge Chart</div>
+        </div>
+        <div class="card-body">
+            <div id="echart-gauge-basic" echarts [options]="options25" class="echart-charts"></div>
+        </div>
+    </div>
+</div>
