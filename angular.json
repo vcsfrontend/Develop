@@ -107,7 +107,7 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.scss",
               "node_modules/bootstrap-icons/font/bootstrap-icons.scss",
               "node_modules/@fortawesome/fontawesome-free/css/all.min.scss",
-              "src/styles.scss"
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [
               "./node_modules/swiper/swiper-bundle.min.js",
