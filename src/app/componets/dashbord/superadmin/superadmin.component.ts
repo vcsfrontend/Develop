@@ -85,8 +85,8 @@ curve:string
 })
 export class SuperadminComponent {
   displayedColumns: string[] = ['slNo', 'firstName', 'lastName', 'mobile', 'adonai', 'crm', 'action', 'view', 'edit' ];
-  displayAdonaiColumns: string[] = ['slNo', 'id', 'email', 'history'];
-  displayCrmColumns: string[] = ['slNo', 'id', 'email', 'history'];
+  displayAdonaiColumns: string[] = ['slNo', 'email', 'history'];
+  displayCrmColumns: string[] = ['slNo', 'email', 'history'];
   dataSource = new MatTableDataSource<any>(); 
   adonaiSource = new MatTableDataSource<any>(); 
   crmSource = new MatTableDataSource<any>();
@@ -488,7 +488,7 @@ chartOptions4:any = {
 };
 
 chartOptions5:any = {
-  series: [1654, 1234],
+  series: [],
   labels: ["Male", "Female"],
   chart: {
     height: 255,
@@ -881,6 +881,7 @@ chartOptions6:any= {
     this.switchService.superAdminDbData().subscribe({ next: (res:any) => {
       if(res){
         this.dbData = res;
+        this.chartOptions5.series = [res.individualCount, res.enterpriseCount];
       } else{
         this.toastr.error(res.message,'', {
           timeOut: 3000,
