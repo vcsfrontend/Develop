@@ -79,6 +79,9 @@ export class ProjectsComponent {
     'projectAddress', 'state', 'city', 'projectState', 'projectEstimation',
     'projectArea', 'projectStartDate', 'projectEndDate', 'action', 'designId', 'companyName'
   ];
+
+  
+
 //   {
 //     "id": 1,
 //     "projectId": "VCS001",
@@ -120,7 +123,7 @@ export class ProjectsComponent {
       // other FilePond options here
     };
   }
-
+ 
   ngOnInit(): void {
     this.getLst();
     // Initialize the form with the necessary controls and validators
@@ -646,5 +649,24 @@ export class ProjectsComponent {
     },
     labels: ['Followers'],
   };
+
+  ReadMore:boolean = true
+
+  //hiding info box
+  visible:boolean = false
+
+
+  //onclick toggling both
+  onclick()
+  {
+    this.ReadMore = !this.ReadMore; //not equal to condition
+    this.visible = !this.visible
+  }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  
 }
 
