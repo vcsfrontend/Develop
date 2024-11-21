@@ -51,7 +51,7 @@ export class SettingsComponent extends BaseComponent implements OnInit{
   confirmPasswordStrengthMessage: string = '';
   confirmPasswordStrengthColor: string = '';
   isPasswordValid: boolean = false; isPasswrd:boolean = false; isPassValid:boolean = false; 
-  isCnfmPwd:boolean = false;btnDisable:boolean = false; isBtnDsbl:boolean = false; isResend:boolean = true;
+  isCnfmPwd:boolean = false;btnDisable:boolean = false; isBtnDsbl:boolean = false; isResend:boolean = false;
   isEmailDisabled = false; isOtpDisabled = false; isCompany : string = 'col-xl-6';
   isShowUsers = false; pload:any[] = [];isOkBtn = false; showCity:boolean = true;
   @ViewChild('modalTemplate') modalTemplate!: TemplateRef<any>;  // Access the ng-template
@@ -282,6 +282,7 @@ export class SettingsComponent extends BaseComponent implements OnInit{
     const adonai = this.userForm.get('tools')?.value.includes('Adonai');
     let payload = this.userForm.getRawValue();
     payload.username = payload.firstName + ' ' + payload.lastName,
+    payload.type = 2,
     payload.crm = crm,
     payload.adonai = adonai,
     payload.companyCode = JSON.parse(this.userData).companyCode,
@@ -322,13 +323,10 @@ export class SettingsComponent extends BaseComponent implements OnInit{
     this.switchService.signupApi(this.pload).subscribe({ next: (res:any) => {
       if(res.status == true){
         this.closeModal(), 
-        this.toastr.success(res.message,'signup', {
-          timeOut: 3000, positionClass: 'toast-top-right' });
-        this.router.navigate(['auth/login'])
+        this.toastr.success(res.message);
         } else {
           this.btnDisable = false;
-          this.toastr.error(res.message,'signup', {
-            timeOut: 3000, positionClass: 'toast-top-right' });
+          this.toastr.error(res.message);
         }
       }
     })
