@@ -80,7 +80,6 @@ export class ProjectsComponent {
     'projectArea', 'projectStartDate', 'projectEndDate', 'action', 'designId', 'companyName'
   ];
 
-  
 
 //   {
 //     "id": 1,
@@ -649,6 +648,125 @@ export class ProjectsComponent {
     },
     labels: ['Followers'],
   };
+  chartOptions7:any= {
+    series: [
+      {
+        name: "Recieved Income",
+        type: "column",
+        data: [1.4, 2, 2.5, 1.5, 2.5, 2.8, 3.8, 4.6,5.6,6.6,7.8,9.7]
+      },
+      {
+        name: "Pending Income",
+        type: "column",
+        data: [1.1, 3, 3.1, 4, 4.1, 4.9, 6.5, 8.5,9.5,10,8.6,7.6]
+      },
+      {
+        name: "Revenue",
+        type: "line",
+        data: [20, 29, 37, 36, 44, 45, 50, 58,65,43,55,60]
+      }
+    ],
+    colors:['#b94eed','#44c2e9','#f6c364'],
+    chart: {
+      height: 350,
+      type: "line",
+      stacked: false
+    },
+    dataLabels: {
+      enabled: false
+    },
+    stroke: {
+      width: [1, 1, 4]
+    },
+    title: {
+      text: "XYZ - Stock Analysis (2009 - 2016)",
+      align: "left",
+      offsetX: 110
+    },
+    xaxis: {
+      // categories: [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016]
+      categories: ['Jan','Feb','March','April','May','June','July','Aug','Sep','Oct','Nov','Dec']
+    },
+    yaxis: [
+      {
+        axisTicks: {
+          show: true
+        },
+        axisBorder: {
+          show: true,
+          color: "#9673e4"
+        },
+        labels: {
+          style: {
+            color: "#9673e4"
+          }
+        },
+        title: {
+          text: "Income (thousand crores)",
+          style: {
+            color: "#9673e4"
+          }
+        },
+      
+      },
+      {
+        
+        opposite: true,
+        axisTicks: {
+          show: true
+        },
+        axisBorder: {
+          show: true,
+          color: "#44c2e9"
+        },
+        labels: {
+          style: {
+            color: "#44c2e9"
+          }
+        },
+        title: {
+          text: "Operating Cashflow (thousand crores)",
+          style: {
+            color: "#44c2e9"
+          }
+        }
+      },
+      {
+       
+        opposite: true,
+        axisTicks: {
+          show: true
+        },
+        axisBorder: {
+          show: true,
+          color: "#FEB019"
+        },
+        labels: {
+          style: {
+            color: "#FEB019"
+          }
+        },
+        title: {
+          text: "Revenue (thousand crores)",
+          style: {
+            color: "#FEB019"
+          }
+        }
+      }
+    ],
+    tooltip: {
+      fixed: {
+        enabled: true,
+        position: "topLeft", // topRight, topLeft, bottomRight, bottomLeft
+        offsetY: 30,
+        offsetX: 60
+      }
+    },
+    legend: {
+      horizontalAlign: "left",
+      offsetX: 40
+    }
+  };
 
   ReadMore:boolean = true
 
@@ -667,6 +785,22 @@ export class ProjectsComponent {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  public generateData(count: number, yrange: { max: number; min: number; }) {
+    var i = 0;
+    var series = [];
+    while (i < count) {
+      var x = "w" + (i + 1).toString();
+      var y =
+        Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min;
+
+      series.push({
+        x: x,
+        y: y
+      });
+      i++;
+    }
+    return series;
+  }
   
 }
 

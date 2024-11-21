@@ -14,9 +14,9 @@
         <!-- <button class="btn btn-primary-light btn-wave me-2">
             <i class="bx bx-crown align-middle"></i> Plan Upgrade
         </button> -->
-        <button (click)="onclick()" type="button" class="btn btn-primary-light btn-wave me-0">
+        <!-- <button (click)="onclick()" type="button" class="btn btn-primary-light btn-wave me-0">
             <i class="bi bi-arrow-right-circle align-middle"></i>&nbsp; {{ReadMore?"Read More":"Read Less"}}
-        </button>
+        </button> -->
         
     </div>
 </div>
@@ -116,7 +116,7 @@
                     </div>
                 </div>
             </div>
-            <ng-container *ngIf="visible">
+            <!-- <ng-container *ngIf="visible">
             <div class="col-xl-3">
                 <div class="card custom-card overflow-hidden">
                     <div class="card-body p-0">
@@ -140,7 +140,7 @@
                     </div>
                 </div>
             </div>
-            </ng-container>
+            </ng-container> -->
             <div class="col-xl-12">
                 <div class="card custom-card">
                     <div class="card-header justify-content-between">
@@ -167,12 +167,14 @@
                         <div class="row g-0">
                             <div class="col-xl-8 border-end border-inline-end-dashed">
                                 <div class="p-3">
-                                    <div id="projects-revenue">
-                                        <apx-chart [series]="chartOptions4.series" [chart]="chartOptions4.chart"
-                                            [xaxis]="chartOptions4.xaxis" [colors]="chartOptions4.colors"  [plotOptions]="chartOptions4.plotOptions"
-                                            [stroke]="chartOptions4.stroke" [tooltip]="chartOptions4.tooltip" [legend]="chartOptions4.legend"
-                                            [dataLabels]="chartOptions4.dataLabels" [grid]="chartOptions4.grid"
-                                            [yaxis]="chartOptions4.yaxis"></apx-chart>
+                                    <div class="card-body">
+                                        <div id="mixed-multiple-y">
+                                           
+                                            <apx-chart [series]="chartOptions7.series" [chart]="chartOptions7.chart"
+                                            [yaxis]="chartOptions7.yaxis" [xaxis]="chartOptions7.xaxis" [labels]="chartOptions7.labels"
+                                            [stroke]="chartOptions7.stroke" [markers]="chartOptions7.markers"
+                                            [fill]="chartOptions7.fill" [tooltip]="chartOptions7.tooltip" [colors]="chartOptions7.colors"></apx-chart>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -182,7 +184,7 @@
                                         <div class="d-flex align-items-center justify-content-between">
                                             <div class="d-flex align-items-center justify-content-between mb-4">
                                                 <div>
-                                                    <h6 class="text-warning mb-3">Projects In Progress</h6>
+                                                    <h6 class="text-warning mb-3">Total Revenue</h6>
                                                     <span class="fs-25 d-flex align-items-center">55.3% <span
                                                             class="fs-12 text-warning op-7 ms-2">+0.59<i
                                                                 class="ti ti-arrow-big-up-line ms-1 d-inline-flex"></i></span></span>
@@ -200,7 +202,7 @@
                                     <div class="border rounded p-3 mb-4">
                                         <div class="d-flex align-items-center justify-content-between">
                                             <div>
-                                                <span class="d-block fs-16 mb-3">Completed Projects</span>
+                                                <span class="d-block fs-16 mb-3">Pending income</span>
                                                 <h3 class="mb-3">28</h3>
                                                 <span class="d-block text-muted">Increased by <span
                                                         class="text-green ms-1">0.45%<i
@@ -218,7 +220,7 @@
                                         <div class="d-flex align-items-center justify-content-between">
                                             <div class="d-flex align-items-center justify-content-between mb-4">
                                                 <div>
-                                                    <h6 class="text-warning mb-3">Projects In Progress</h6>
+                                                    <h6 class="text-warning mb-3">Received income</h6>
                                                     <span class="fs-25 d-flex align-items-center">55.3% <span
                                                             class="fs-12 text-warning op-7 ms-2">+0.59<i
                                                                 class="ti ti-arrow-big-up-line ms-1 d-inline-flex"></i></span></span>
@@ -247,50 +249,6 @@
     </div>
     <div class="col-xxl-12">
         <div class="row">
-            <div class="col-xl-12">
-                <div class="card custom-card card-bg-primary all-clients-card">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center gap-2">
-                            <div>
-                                <span class="avatar avatar-rounded bg-light-transparent">
-                                    <i class="ri-group-2-line text-fixed-white fs-20"></i>
-                                </span>
-                            </div>
-                            <div class="fs-16 fw-medium flex-fill">Total Clients</div>
-                            <span class="d-block badge bg-success">234</span>
-                        </div>
-                        <hr class="op-1">
-                        <div class="avatar-list-stacked mb-4">
-                            <span class="avatar avatar-sm avatar-rounded">
-                                <img src="./assets/images/faces/2.jpg" alt="img">
-                            </span>
-                            <span class="avatar avatar-sm avatar-rounded">
-                                <img src="./assets/images/faces/8.jpg" alt="img">
-                            </span>
-                            <span class="avatar avatar-sm avatar-rounded">
-                                <img src="./assets/images/faces/2.jpg" alt="img">
-                            </span>
-                            <span class="avatar avatar-sm avatar-rounded">
-                                <img src="./assets/images/faces/10.jpg" alt="img">
-                            </span>
-                            <span class="avatar avatar-sm avatar-rounded">
-                                <img src="./assets/images/faces/4.jpg" alt="img">
-                            </span>
-                            <span class="avatar avatar-sm avatar-rounded">
-                                <img src="./assets/images/faces/13.jpg" alt="img">
-                            </span>
-                            <a class="avatar avatar-sm bg-primary avatar-rounded text-fixed-white"
-                                href="javascript:void(0);">
-                                +8
-                            </a>
-                        </div>
-                        <div class="d-flex align-items-center justify-content-between">
-                            <button type="button" class="btn btn-primary">View All</button>
-                            <button type="button" class="btn btn-danger">Add Client</button>
-                        </div>
-                    </div>
-                </div>
-            </div> 
             <div class="col-xl-12"> 
                 <div class="card custom-card">
                     <div class="card-header justify-content-between">
@@ -348,7 +306,21 @@
     </div>
 </div>
 <!--End::row-1 -->
-
+<div class="col-xl-12">
+    <div class="card custom-card">
+        <div class="card-header justify-content-between">
+            <div class="card-title">
+                Start NewDesign
+            </div>
+        </div>
+    
+        <div class="card-body">
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <button class="btn btn-primary btn-wave" type="button">NewDesign</button>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- start:: row-3 -->
 <div class="row">
     <div class="col-xl-12">
@@ -690,18 +662,6 @@
     </div>
 </ng-template>
 
-<div class="col-xl-6">
-    <div class="card custom-card">
-        <div class="card-header">
-            <div class="card-title">Basic Line Chart</div>
-        </div>
-        <div class="card-body">
-            <div id="chart" class="chart-container">
-                <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart" [xaxis]="chartOptions.xaxis"
-                    [dataLabels]="chartOptions.dataLabels" [grid]="chartOptions.grid" [stroke]="chartOptions.stroke"
-                    [title]="chartOptions.title" [colors]="chartOptions.colors"></apx-chart>
-            </div>
-        </div>
-    </div>
-</div>
+
+
 <!-- End:: row-3 -->
