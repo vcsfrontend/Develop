@@ -15,4 +15,25 @@
     color: #fff;
     font-weight: 500;
 }
+.pt-5 {
+    padding-block-start: 15rem !important;
+}
+.blinking-btn {
+    
+    color: green;
+    animation: blink 5s infinite;
+}
 
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
