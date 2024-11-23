@@ -801,6 +801,18 @@ export class ProjectsComponent {
     }
     return series;
   }
+
+  fileName: string | null = null;
+
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.fileName = input.files[0].name;
+    } else {
+      this.fileName = null; // Reset if no file selected
+    }
+  }
+
   
 }
 

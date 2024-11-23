@@ -324,8 +324,9 @@
                         <ng-template ngbNavContent>
                             <div class="p-3 border br-7 text-muted" id="pill-products" role="tabpanel">
                                 <div class="row">
-                                    <div class="col-xxl-4">Notes</div>
-                                    <div class="col-xxl-8 border-start">
+                                    <!-- <div class="col-xxl-4">Notes</div> -->
+                                    <div class="col-xxl-12 border-start">
+                                        <span>Notes</span> <br>
                                         Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
     
                                     </div>
@@ -339,10 +340,24 @@
                      aria-selected="false">Images</a>
                      <ng-template ngbNavContent>
                         <div class="p-3 border br-7 text-muted" id="pill-orders" role="tabpanel">
-                            Unbelievable healthy snack success stories. 12 facts about safe food handling
-                            tips that will impress your friends. Restaurant weeks by the numbers. Will
-                            mexican food ever rule the world? The 10 best thai restaurant youtube videos.
-                            How restaurant weeks can make you sick.
+                            <div class="card custom-card">
+                                <div class="card-header justify-content-between">
+                                    <div class="card-title">
+                                        
+                                    </div>
+                                    <!-- <button type="button" class="btn btn-sm btn-primary-light">upload Image
+                                            </button> -->
+                                    <div class="file-upload float-end">
+                                        <input type="file"  id="file-input" (change)="onFileSelected($event)"
+                                            accept="*/*" hidden>
+                                            <button type="file"  class="btn btn-sm btn-primary-light">upload Image
+                                            </button>
+                                    </div>
+                                </div>
+                                <div class="card-title pt-2">
+                                    <img src="./assets/images/ecommerce/jpg/19.jpeg" alt="" >
+                                </div>
+                            </div>
                         </div>
                     </ng-template>
                     </li>
@@ -351,25 +366,28 @@
                      aria-selected="false">Videos</a>
                      <ng-template ngbNavContent>
                         <div class="p-3 border br-7 text-muted" id="pill-orders" role="tabpanel">
-                            Unbelievable healthy snack success stories. 12 facts about safe food handling
-                            tips that will impress your friends. Restaurant weeks by the numbers. Will
-                            mexican food ever rule the world? The 10 best thai restaurant youtube videos.
-                            How restaurant weeks can make you sick.
+                            <div class="card custom-card">
+                                <div class="card-header justify-content-between">
+                                    <div class="card-title">
+                                        
+                                    </div>
+                                    <!-- <button type="button" class="btn btn-sm btn-primary-light">upload Image
+                                            </button> -->
+                                    <div class="file-upload float-end">
+                                        <input type="file"  id="file-input" (change)="onFileSelected($event)"
+                                            accept="*/*" hidden>
+                                            <button type="file"  class="btn btn-sm btn-primary-light">upload Video
+                                            </button>
+                                    </div>
+                                </div>
+                                <div class="card-title pt-2">
+                                    <img src="./assets/images/ecommerce/jpg/19.jpeg" alt="" >
+                                </div>
+                            </div>
                         </div>
                     </ng-template>
                     </li>
-                    <li [ngbNavItem]="4" class="nav-item">
-                        <a ngbNavLink class="nav-link" data-bs-toggle="tab" role="tab" aria-current="page"
-                     aria-selected="false">Orders</a>
-                     <ng-template ngbNavContent>
-                        <div class="p-3 border br-7 text-muted" id="pill-orders" role="tabpanel">
-                            Unbelievable healthy snack success stories. 12 facts about safe food handling
-                            tips that will impress your friends. Restaurant weeks by the numbers. Will
-                            mexican food ever rule the world? The 10 best thai restaurant youtube videos.
-                            How restaurant weeks can make you sick.
-                        </div>
-                    </ng-template>
-                    </li>
+                    
                     
                 </ul>
                 <div class="tab-content">
@@ -383,7 +401,7 @@
     </div>
 </div>
 <!--End::row-1 -->
-<div class="col-xl-12">
+<div class="col-xl-12 col-xxl-12 col-md-12">
         <div class="card custom-card " style="background-image: url('/assets/images/company-logos/adonai_logo.png');
         background-repeat: no-repeat; 
         background-position: center;
@@ -396,8 +414,8 @@
             </div>
         
             <div class="card-body">
-                <div class="d-grid gap-2 col-6 text-center mx-auto pt-5 blinking-btn ">
-                    <button class="btn main1  btn-primary-gradient btn-wave" type="button">NewDesign</button>
+                <div class="d-grid gap-2 col-6 text-center mx-auto pt-5">
+                    <button class="btn button  btn-primary-gradient btn-wave" type="button">NewDesign</button>
                 </div>
             </div>
         </div>
