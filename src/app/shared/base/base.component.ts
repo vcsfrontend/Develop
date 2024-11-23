@@ -8,7 +8,9 @@ import { Component } from '@angular/core';
   styles: ``
 })
 export class BaseComponent {
-
+  datePickerConfig = {
+    isAnimated: true, adaptivePosition: true, dateInputFormat: 'DD-MM-YYYY', showWeekNumbers: false 
+  };
   countryLst = [{"country":"Afghanistan","code":"93","iso":"AF"},
     {"country":"Albania","code":"355","iso":"AL"},
     {"country":"Algeria","code":"213","iso":"DZ"},

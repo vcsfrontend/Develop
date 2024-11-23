@@ -51,9 +51,9 @@ export class HeaderComponent implements OnInit {
     private router: Router, private activatedRoute: ActivatedRoute, private http: HttpClient
   ) {this.localStorageBackUp()
     this.userData = localStorage.getItem('userDetails'),
-    this.userName = JSON.parse(this.userData).username,
-    this.isCrm = JSON.parse(this.userData).crm,
-    this.isAdonai = JSON.parse(this.userData).adonai
+    this.userName = JSON.parse(this.userData)?.username,
+    this.isCrm = JSON.parse(this.userData)?.crm,
+    this.isAdonai = JSON.parse(this.userData)?.adonai
   }
 
   private offcanvasService = inject(NgbOffcanvas);

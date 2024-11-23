@@ -881,7 +881,33 @@ chartOptions6:any= {
     this.switchService.superAdminDbData().subscribe({ next: (res:any) => {
       if(res){
         this.dbData = res;
+        this.totalUsers = res.individualCount + res.enterpriseCount,
         this.chartOptions5.series = [res.individualCount, res.enterpriseCount];
+        this.options25 = {
+          tooltip: {
+            formatter: '{a} <br/>{b} : {c}%',
+          },
+          series: [
+            {
+              name: 'Pressure',
+              type: 'gauge',
+              progress: {
+                show: true,
+              },
+              detail: {
+                valueAnimation: true,
+                formatter: '{value}',
+              },
+              data: [
+                {
+                  value: this.totalUsers,
+                  name: 'SCORE',
+                },
+              ],
+            },
+          ],
+          color: ['#845adf'],
+        };
       } else{
         this.toastr.error(res.message,'', {
           timeOut: 3000,
@@ -1001,30 +1027,6 @@ chartOptions6:any= {
     ]
   };
 
-  options25: EChartsOption = {
-    tooltip: {
-      formatter: '{a} <br/>{b} : {c}%',
-    },
-    series: [
-      {
-        name: 'Pressure',
-        type: 'gauge',
-        progress: {
-          show: true,
-        },
-        detail: {
-          valueAnimation: true,
-          formatter: '{value}',
-        },
-        data: [
-          {
-            value: 50,
-            name: 'SCORE',
-          },
-        ],
-      },
-    ],
-    color: ['#845adf'],
-  };
+  options25: EChartsOption = { };
   
 }
