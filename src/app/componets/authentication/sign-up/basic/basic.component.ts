@@ -48,7 +48,7 @@ export class BasicComponent extends BaseComponent implements OnInit {
   adonai = false; btnDisable = false; todayDt = new Date(); isBtnDsbl = false;
   adoanAiRole :any; isEmailDisabled = false; isOtpDisabled = false; isCompany : string = 'col-xl-6';
   crmRole :any; isShowUsers = false; pload:any[] = [];isOkBtn = false; showCity: boolean = true;
-  toolsList = [Tools.Adonai,Tools.Crm];
+  toolsList = [Tools.Adonai];
   @ViewChild('modalTemplate') modalTemplate!: TemplateRef<any>;
   private modalRef: any; noUsers:any=''; users:any = '';
   passwordStrengthMessage: string = '';
