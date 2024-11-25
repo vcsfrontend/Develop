@@ -22,11 +22,11 @@ export const admin: Routes = [
       (m) => m.EcommerceComponent
     ),
 },
-{
-  path: 'crm',
-  loadComponent: () =>
-    import('./crm/crm.component').then((m) => m.CrmComponent),
-},
+// {
+//   path: 'crm',
+//   loadComponent: () =>
+//     import('./crm/crm.component').then((m) => m.CrmComponent),
+// },
 {
   path: 'adonai',
   loadComponent: () =>
