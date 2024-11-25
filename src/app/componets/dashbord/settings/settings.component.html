@@ -238,8 +238,8 @@
                                 <label for="signup-dob" class="form-label text-default"><strong>Date of birth</strong><span class="text-danger"> *</span></label>
                                 <div class="input-group">
                                     <div class="input-group-text text-muted bg-light pl-4 font-weight-bold bg-opacity-25 border border-dark"> <i class="ri-calendar-line"></i> </div>
-                                    <input class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" placeholder="Choose date" type="text" mwlFlatpickr
-                                    formControlName="dob" [maxDate]="todayDt">
+                                    <input class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" placeholder="Choose date" type="date" 
+                                    formControlName="dob" [(ngModel)]="todayDate" [max]="maxDate" [min]="minDate">
                                 </div>
                             </div>
                             <div class="col-xl-4">

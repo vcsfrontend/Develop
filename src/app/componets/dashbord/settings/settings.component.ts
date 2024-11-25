@@ -49,7 +49,7 @@ export class SettingsComponent extends BaseComponent implements OnInit{
   passwordStrengthMessage: string = '';
   passwordStrengthColor: string = ''; // Control message color
   confirmPasswordStrengthMessage: string = '';
-  confirmPasswordStrengthColor: string = '';
+  confirmPasswordStrengthColor: string = ''; todayDate: string = ''; maxDate: string = '';
   isPasswordValid: boolean = false; isPasswrd:boolean = false; isPassValid:boolean = false; 
   isCnfmPwd:boolean = false;btnDisable:boolean = false; isBtnDsbl:boolean = false; isResend:boolean = false;
   isEmailDisabled = false; isOtpDisabled = false; isCompany : string = 'col-xl-6';
@@ -95,6 +95,14 @@ export class SettingsComponent extends BaseComponent implements OnInit{
     this.userForm?.get('confirmPassword')?.valueChanges.subscribe((value) => {
       this.checkPasswordMatch(value);
     });
+
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const dd = String(today.getDate()).padStart(2, '0');
+    this.todayDate = `${yyyy}-${mm}-${dd}`;
+    this.maxDate = `${yyyy}-${mm}-${dd}`;
+    this.onMinDate();
   }
 
   ngAfterViewInit() {
