@@ -38,7 +38,7 @@ import * as prismCodeData from '../../../../shared/prismData/advancedUi/accordio
 export class BasicComponent extends BaseComponent implements OnInit {
   prismCode = prismCodeData;
   selectedCountry: string = 'India'; city = '';
-  selectedCountryCode: string = ''; phoneNumber = '';
+  selectedCountryCode: string = ''; phoneNumber = ''; 
   mobileNumber: string = ''; // Mobile number input
   isCollapsed = true;
   isCollapsed1 = true;
