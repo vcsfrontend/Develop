@@ -38,7 +38,7 @@ import * as prismCodeData from '../../../../shared/prismData/advancedUi/accordio
 export class BasicComponent extends BaseComponent implements OnInit {
   prismCode = prismCodeData;
   selectedCountry: string = 'India'; city = '';
-  selectedCountryCode: string = ''; phoneNumber = '';
+  selectedCountryCode: string = ''; phoneNumber = ''; 
   mobileNumber: string = ''; // Mobile number input
   isCollapsed = true;
   isCollapsed1 = true;
@@ -48,13 +48,13 @@ export class BasicComponent extends BaseComponent implements OnInit {
   adonai = false; btnDisable = false; todayDt = new Date(); isBtnDsbl = false;
   adoanAiRole :any; isEmailDisabled = false; isOtpDisabled = false; isCompany : string = 'col-xl-6';
   crmRole :any; isShowUsers = false; pload:any[] = [];isOkBtn = false; showCity: boolean = true;
-  toolsList = [Tools.Adonai,Tools.Crm];
+  toolsList = [Tools.Adonai];
   @ViewChild('modalTemplate') modalTemplate!: TemplateRef<any>;
   private modalRef: any; noUsers:any=''; users:any = '';
   passwordStrengthMessage: string = '';
   passwordStrengthColor: string = '';
   confirmPasswordStrengthMessage: string = '';
-  confirmPasswordStrengthColor: string = '';
+  confirmPasswordStrengthColor: string = ''; todayDate: string = ''; maxDate: string = '';
   isPasswordValid: boolean = false; isPasswrd:boolean = false; isPassValid:boolean = false; 
   isCnfmPwd:boolean = false; agree: boolean = false; isResend:boolean = false;
 
@@ -107,6 +107,13 @@ export class BasicComponent extends BaseComponent implements OnInit {
     //     this.showPasswordError();
     //   }
     // });
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const dd = String(today.getDate()).padStart(2, '0');
+    this.todayDate = `${yyyy}-${mm}-${dd}`;
+    this.maxDate = `${yyyy}-${mm}-${dd}`;
+    this.onMinDate();
   }
 
   ngOnDestroy(): void {

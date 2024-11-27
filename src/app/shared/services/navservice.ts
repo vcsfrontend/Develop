@@ -105,16 +105,16 @@ export class NavService implements OnDestroy {
       linkType : 'internal',
       path: '/dashboard/sales',
     },
-    {
-      title: 'CRM',
-      icon: 'bi-file-earmark',
-      dirchange: false,
-      type: 'link',
-      linkType : 'internal',
-      active: false,
-      // path : `https://crmexpert.vcs.plus/auth/access_account/${JSON.parse(this.userData).encodeEmail}`
-      path: '/dashboard/crm'
-    }, 
+    // {
+    //   title: 'CRM',
+    //   icon: 'bi-file-earmark',
+    //   dirchange: false,
+    //   type: 'link',
+    //   linkType : 'internal',
+    //   active: false,
+    //   // path : `https://crmexpert.vcs.plus/auth/access_account/${JSON.parse(this.userData).encodeEmail}`
+    //   path: '/dashboard/crm'
+    // }, 
     {
       title: 'Projects',
       dirchange: false,
@@ -163,15 +163,15 @@ export class NavService implements OnDestroy {
       selected: false,
       path: '/dashboard/customer',
     },
-    {
-      title: 'Settings',
-      icon: 'bi bi-gear',
-      dirchange: false,
-      type: 'link',
-      linkType : 'internal',
-      active: false,
-      path : "/dashboard/settings"
-    },
+    // {
+    //   title: 'Settings',
+    //   icon: 'bi bi-gear',
+    //   dirchange: false,
+    //   type: 'link',
+    //   linkType : 'internal',
+    //   active: false,
+    //   path : "/dashboard/settings"
+    // },
     {
       title: 'Design',
       icon: 'bi-file-earmark',

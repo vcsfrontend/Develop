@@ -85,8 +85,8 @@ curve:string
 })
 export class SuperadminComponent {
   displayedColumns: string[] = ['slNo', 'firstName', 'lastName', 'mobile', 'adonai', 'crm', 'action', 'view', 'edit' ];
-  displayAdonaiColumns: string[] = ['slNo', 'id', 'email', 'history'];
-  displayCrmColumns: string[] = ['slNo', 'id', 'email', 'history'];
+  displayAdonaiColumns: string[] = ['slNo', 'email', 'history'];
+  displayCrmColumns: string[] = ['slNo', 'email', 'history'];
   dataSource = new MatTableDataSource<any>(); 
   adonaiSource = new MatTableDataSource<any>(); 
   crmSource = new MatTableDataSource<any>();
@@ -488,7 +488,7 @@ chartOptions4:any = {
 };
 
 chartOptions5:any = {
-  series: [1654, 1234],
+  series: [],
   labels: ["Male", "Female"],
   chart: {
     height: 255,
@@ -881,6 +881,33 @@ chartOptions6:any= {
     this.switchService.superAdminDbData().subscribe({ next: (res:any) => {
       if(res){
         this.dbData = res;
+        this.totalUsers = res.individualCount + res.enterpriseCount,
+        this.chartOptions5.series = [res.individualCount, res.enterpriseCount];
+        this.options25 = {
+          tooltip: {
+            formatter: '{a} <br/>{b} : {c}%',
+          },
+          series: [
+            {
+              name: 'Pressure',
+              type: 'gauge',
+              progress: {
+                show: true,
+              },
+              detail: {
+                valueAnimation: true,
+                formatter: '{value}',
+              },
+              data: [
+                {
+                  value: this.totalUsers,
+                  name: 'SCORE',
+                },
+              ],
+            },
+          ],
+          color: ['#845adf'],
+        };
       } else{
         this.toastr.error(res.message,'', {
           timeOut: 3000,
@@ -1000,30 +1027,6 @@ chartOptions6:any= {
     ]
   };
 
-  options25: EChartsOption = {
-    tooltip: {
-      formatter: '{a} <br/>{b} : {c}%',
-    },
-    series: [
-      {
-        name: 'Pressure',
-        type: 'gauge',
-        progress: {
-          show: true,
-        },
-        detail: {
-          valueAnimation: true,
-          formatter: '{value}',
-        },
-        data: [
-          {
-            value: 50,
-            name: 'SCORE',
-          },
-        ],
-      },
-    ],
-    color: ['#845adf'],
-  };
+  options25: EChartsOption = { };
   
 }

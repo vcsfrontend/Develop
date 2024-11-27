@@ -24,6 +24,9 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from '../environments/environment';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+// import { routes } from './app.routes';
+
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(App_Route), AngularFireModule,
     AngularFireDatabaseModule,
@@ -31,9 +34,11 @@ export const appConfig: ApplicationConfig = {
     AngularFireAuthModule, provideAnimations(),importProvidersFrom(AppStateService,ColorPickerModule,
       AngularFireModule.initializeApp(environment.firebase), 
       ToastrModule.forRoot({ timeOut: 3000, positionClass: 'toast-top-right' }),
-      FullCalendarModule,FilePondModule,NgbNavModule,EditorModule,
+      FullCalendarModule,FilePondModule,NgbNavModule,EditorModule,BsDatepickerModule.forRoot(),
       NgbCollapseModule,NgxCleaveDirectiveModule,TableModule,NgxSliderModule,
       FlatpickrModule,MatTableModule,MatTableDataSource,NgApexchartsModule,
-      LeafletModule,ColorPickerModule,HttpClientModule,HttpClientJsonpModule)],
+      LeafletModule,ColorPickerModule,HttpClientModule,HttpClientJsonpModule,
+      // provideRouter(routes),
+    )],
    
   }

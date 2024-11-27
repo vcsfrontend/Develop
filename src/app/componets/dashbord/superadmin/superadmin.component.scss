@@ -9,4 +9,28 @@ tr {
     display: inline-block;
     margin-right: 10px;
   }
+  // Ensure the CDK overlay (dropdown container) is above the modal
+.cdk-overlay-container {
+    z-index: 1050 !important; // Set z-index higher than the modal
+  }
+  
+  // Ensure the modal stays below the dropdown
+  .modal {
+    z-index: 1000 !important; // Lower z-index for modal compared to overlay
+    overflow: visible !important; // Ensure dropdown is not clipped
+  }
+  
+  .modal-dialog {
+    overflow: visible !important; // Prevent clipping within the modal dialog
+  }
+  
+  // Optional: Custom class for overlay container to manage specific modal cases
+  .custom-overlay-container {
+    z-index: 1050 !important;
+  }
+  
+  // Ensure dropdown panels are properly displayed
+  .mat-select-panel {
+    z-index: 1051 !important; // Set slightly higher than the overlay container
+  }
   

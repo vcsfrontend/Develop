@@ -45,13 +45,13 @@ export class SettingsComponent extends BaseComponent implements OnInit{
   // userForm!: FormGroup;
    cnfmPaswrd: any = ''; paswrd:any = '';
   adoanAiRole :any; todayDt = new Date(); 
-  crmRole :any; toolsList = [Tools.Adonai,Tools.Crm];
+  crmRole :any; toolsList = [Tools.Adonai];
   passwordStrengthMessage: string = '';
   passwordStrengthColor: string = ''; // Control message color
   confirmPasswordStrengthMessage: string = '';
-  confirmPasswordStrengthColor: string = '';
+  confirmPasswordStrengthColor: string = ''; todayDate: string = ''; maxDate: string = '';
   isPasswordValid: boolean = false; isPasswrd:boolean = false; isPassValid:boolean = false; 
-  isCnfmPwd:boolean = false;btnDisable:boolean = false; isBtnDsbl:boolean = false; isResend:boolean = true;
+  isCnfmPwd:boolean = false;btnDisable:boolean = false; isBtnDsbl:boolean = false; isResend:boolean = false;
   isEmailDisabled = false; isOtpDisabled = false; isCompany : string = 'col-xl-6';
   isShowUsers = false; pload:any[] = [];isOkBtn = false; showCity:boolean = true;
   @ViewChild('modalTemplate') modalTemplate!: TemplateRef<any>;  // Access the ng-template
@@ -95,6 +95,14 @@ export class SettingsComponent extends BaseComponent implements OnInit{
     this.userForm?.get('confirmPassword')?.valueChanges.subscribe((value) => {
       this.checkPasswordMatch(value);
     });
+
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const dd = String(today.getDate()).padStart(2, '0');
+    this.todayDate = `${yyyy}-${mm}-${dd}`;
+    this.maxDate = `${yyyy}-${mm}-${dd}`;
+    this.onMinDate();
   }
 
   ngAfterViewInit() {
@@ -282,6 +290,7 @@ export class SettingsComponent extends BaseComponent implements OnInit{
     const adonai = this.userForm.get('tools')?.value.includes('Adonai');
     let payload = this.userForm.getRawValue();
     payload.username = payload.firstName + ' ' + payload.lastName,
+    payload.type = 2,
     payload.crm = crm,
     payload.adonai = adonai,
     payload.companyCode = JSON.parse(this.userData).companyCode,
@@ -322,13 +331,10 @@ export class SettingsComponent extends BaseComponent implements OnInit{
     this.switchService.signupApi(this.pload).subscribe({ next: (res:any) => {
       if(res.status == true){
         this.closeModal(), 
-        this.toastr.success(res.message,'signup', {
-          timeOut: 3000, positionClass: 'toast-top-right' });
-        this.router.navigate(['auth/login'])
+        this.toastr.success(res.message);
         } else {
           this.btnDisable = false;
-          this.toastr.error(res.message,'signup', {
-            timeOut: 3000, positionClass: 'toast-top-right' });
+          this.toastr.error(res.message);
         }
       }
     })
@@ -476,5 +482,8 @@ export class SettingsComponent extends BaseComponent implements OnInit{
       tools : [],
       })
   }
-
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 }

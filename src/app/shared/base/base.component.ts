@@ -8,7 +8,19 @@ import { Component } from '@angular/core';
   styles: ``
 })
 export class BaseComponent {
-
+  minDate: string = '';
+  datePickerConfig = {
+    isAnimated: true, adaptivePosition: true, dateInputFormat: 'DD-MM-YYYY', showWeekNumbers: false 
+  };
+  onMinDate(){
+    const today = new Date();
+    const hundredYearsAgo = new Date(today.getFullYear() - 100, today.getMonth(), today.getDate());
+    const yyyy = hundredYearsAgo.getFullYear();
+    const mm = String(hundredYearsAgo.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const dd = String(hundredYearsAgo.getDate()).padStart(2, '0');
+    this.minDate = `${yyyy}-${mm}-${dd}`;
+  }
+  
   countryLst = [{"country":"Afghanistan","code":"93","iso":"AF"},
     {"country":"Albania","code":"355","iso":"AL"},
     {"country":"Algeria","code":"213","iso":"DZ"},
