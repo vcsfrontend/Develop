@@ -41,19 +41,12 @@ export class SwitherService {
   // super admin Crm apis 
   onCrmView(email:any): Observable<any> { return this.http.get(`${this.apiUrl}auth/fetch_data_crm/${email}`); }
   onCrmUpdate(data:any): Observable<any> { return this.http.post(`${this.apiUrl}auth/update_subscription_crm`, data); }
-  // {
-  //   "email": "string",
-  //   "roleId": 0,
-  //   "crmActivityStatus": true,
-  //   "subDate": "string",
-  //   "subStartDate": "string",
-  //   "subEndDate": "string",
-  //   "updatedBy": "string",
-  //   "updatedDate": "string",
-  //   "remarks": "string"
-  // }'
+  
   crmHstry(email:any): Observable<any> { return this.http.get(`${this.apiUrl}auth/sub_scription_history/${email}`); }
   superAdminDbData(): Observable<any> { return this.http.get(`${this.apiUrl}auth/analytic_da_fe`); }
+  designersDbData(): Observable<any> { return this.http.get(`${this.adonaiURL}adonai/proj_anl_de_ikl`); }
+
+  // https://adonai-vcs-fmbqfgbudgendtfu.israelcentral-01.azurewebsites.net/adonai/proj_anl_de_ikl
 
   projectLst(data:any): Observable<any> { return this.http.get(`${this.adonaiURL}adonai/get_proj_details/${data}`); }
   

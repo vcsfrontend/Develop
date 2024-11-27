@@ -1,6 +1,6 @@
 <app-page-header title="Leads" title1="CRM" activeTitle="Leads" ></app-page-header>
 <!-- Start::row-1 -->
-<div class="row">
+<!-- <div class="row">
     <div class="col-xl-12">
         <div class="card custom-card">
             <div class="card-header d-flex align-items-center justify-content-between flex-wrap gap-3">
@@ -130,7 +130,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <!--End::row-1 -->
 <!-- Start:: Create Contact -->
 <div class="modal fade" id="create-contact" tabindex="-1" aria-hidden="true">
@@ -217,3 +217,40 @@
     </div>
 </div>
 <!-- End:: Create Contact -->
+<div class="card-body p-0">
+    <div class="mat-elevation-z8">
+        <!-- <mat-form-field class="mt-2 p-2">
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="applyFilter($event)" #input>
+        </mat-form-field> -->
+        <div class="table-responsive">
+            <table mat-table [dataSource]="dataSource">
+                <ng-container matColumnDef="slNo">
+                    <th mat-header-cell *matHeaderCellDef> S.No. </th>
+                    <td mat-cell *matCellDef="let element; let i = index"> {{getSNo(i)}} </td>
+                </ng-container>
+                <ng-container matColumnDef="firstName">
+                    <th mat-header-cell *matHeaderCellDef> First Name </th>
+                    <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+                </ng-container>
+                <ng-container matColumnDef="lastName">
+                    <th mat-header-cell *matHeaderCellDef> Last Name </th>
+                    <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+                </ng-container>
+                <ng-container matColumnDef="email">
+                    <th mat-header-cell *matHeaderCellDef> Email </th>
+                    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                </ng-container>
+                <ng-container matColumnDef="dateOfBirth">
+                    <th mat-header-cell *matHeaderCellDef> Date of Birth </th>
+                    <td mat-cell *matCellDef="let element"> {{element.dob}} </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+            aria-label="Select page of periodic elements">
+        </mat-paginator>
+    </div>
+</div>

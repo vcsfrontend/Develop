@@ -1,7 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { SharedModule } from '../../../../shared/common/sharedmodule';
-import { NgbDropdownModule ,NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdownModule ,NgbModal, NgbModalConfig, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { CommonModule, DatePipe } from '@angular/common';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { MaterialModuleModule } from '../../../../material-module/material-module.module';
+import { FirebaseService } from '../../../../shared/services/firebase.service';
 const DATA=[
   {
     img:"./assets/images/faces/4.jpg",
@@ -167,12 +180,21 @@ const DATA=[
 @Component({
   selector: 'app-leads',
   standalone: true,
-  imports: [SharedModule,NgbDropdownModule,NgSelectModule ],
+  imports: [RouterModule,NgbModule,FormsModule,ReactiveFormsModule, AngularFireModule,
+    AngularFireDatabaseModule, CommonModule,  MatFormFieldModule, MatSelectModule,
+    AngularFirestoreModule, ToastrModule, SharedModule, MaterialModuleModule,
+    NgbDropdownModule,NgSelectModule],
+  providers: [FirebaseService,{ provide: ToastrService, useClass: ToastrService }, DatePipe, NgbModalConfig,NgbModal],
+  
   templateUrl: './leads.component.html',
-  providers: [NgbModalConfig,NgbModal],
   styleUrl: './leads.component.scss'
 })
 export class LeadsComponent {
+  displayedColumns: string[] = ['slNo', 'firstName', 'lastName', 'email', 'dateOfBirth'];
+  dataSource = new MatTableDataSource<any>(); 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild('modalTemplate') modalTemplate!: TemplateRef<any>;  // Access the ng-template
+
   constructor(
 		config: NgbModalConfig,
 		private modalService: NgbModal,
@@ -202,5 +224,16 @@ handleFileInput(event: any): void {
     reader.readAsDataURL(file);
   }
 }
+ngAfterViewInit() {
+  this.dataSource.paginator = this.paginator;
+} 
+
+getSNo(index: number): number {
+  if (this.paginator && this.paginator.pageIndex !== undefined && this.paginator.pageSize !== undefined) {
+      return this.paginator.pageIndex * this.paginator.pageSize + index + 1;
+  }
+  return index + 1; 
+}
+
 
 }

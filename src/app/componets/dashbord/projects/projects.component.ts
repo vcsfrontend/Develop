@@ -79,6 +79,7 @@ export class ProjectsComponent {
     'projectAddress', 'state', 'city', 'projectState', 'projectEstimation',
     'projectArea', 'projectStartDate', 'projectEndDate', 'action', 'designId', 'companyName'
   ];
+  pjData : any;
 
 
 //   {
@@ -124,7 +125,9 @@ export class ProjectsComponent {
   }
  
   ngOnInit(): void {
-    this.getLst();
+    this.getLst(); this.getdesignData();
+    // console.log(this.pjData);
+    
     // Initialize the form with the necessary controls and validators
     this.createProjectForm = this.fb.group({
       projectName: ['', Validators.required],
@@ -183,8 +186,8 @@ export class ProjectsComponent {
   }
 
   getLst(){
-    console.log(JSON.parse(this.userDetails).companyName);
-    let cmpnyNm = JSON.parse(this.userDetails).companyName
+    console.log(JSON.parse(this.userDetails)?.companyName);
+    let cmpnyNm = JSON.parse(this.userDetails)?.companyName
     this.switchService.projectLst('sk%20interiors').subscribe({ next: (res:any) => {
       if(res){
         this.projectLst = res
@@ -811,6 +814,30 @@ export class ProjectsComponent {
     } else {
       this.fileName = null; // Reset if no file selected
     }
+  }
+
+  getdesignData(){
+    this.switchService.designersDbData().subscribe({ next: (res:any) =>{
+      this.pjData = res ;
+    }
+  })
+    // this.pjData = {
+    //   "totalProjects": 7,
+    //   "totalProjPercent": 42.857142857142854,
+    //   "completedProj": 3,
+    //   "completeProjPercent": 66.66666666666667,
+    //   "pendingProj": 4,
+    //   "pendingProjPecent": 25,
+    //   "overdueProj": 1,
+    //   "overdueProjPercrnt": 0,
+    //   "totalRevenue": 0,
+    //   "totalRevenuePecent": 0,
+    //   "pendingIncome": 0,
+    //   "pendingIncomePercent": 0,
+    //   "receivedIncome": 0,
+    //   "receivedIncomePercent": 0,
+    // }
+  
   }
 
   
