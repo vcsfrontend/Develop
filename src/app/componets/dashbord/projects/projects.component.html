@@ -32,10 +32,10 @@
                                 <span class="avatar avatar-rounded bg-success-transparent">
                                     <i class="ti ti-album fs-20"></i>
                                 </span>
-                                <span class="badge bg-danger-transparent">-2.73%</span>
+                                <span class="badge bg-danger-transparent">{{pjData.totalProjPercent | number:'1.2-2' }} %</span>
                             </div>
                             <div class="text-muted mb-2">Total Projects</div>
-                            <h4 class="mb-0">425</h4>
+                            <h4 class="mb-0">{{pjData.totalProjects}}</h4>
                         </div>
                         <div id="total-projects">
                             <apx-chart [series]="chartOptions2.series" [chart]="chartOptions2.chart"
@@ -55,10 +55,10 @@
                                 <span class="avatar avatar-rounded bg-primary-transparent">
                                     <i class="ti ti-file-check fs-20"></i>
                                 </span>
-                                <span class="badge bg-success-transparent">+7.20%</span>
+                                <span class="badge bg-success-transparent">{{pjData.completeProjPercent | number:'1.2-2' }} %</span>
                             </div>
                             <div class="text-muted mb-2">Completed Projects</div>
-                            <h4 class="mb-0">122</h4>
+                            <h4 class="mb-0">{{pjData.completedProj}}</h4>
                         </div>
                         <div id="completed-projects">
                             <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart"
@@ -78,10 +78,10 @@
                                 <span class="avatar avatar-rounded bg-danger-transparent">
                                     <i class="ti ti-chart-pie-2 fs-20"></i>
                                 </span>
-                                <span class="badge bg-success-transparent">+5.67%</span>
+                                <span class="badge bg-success-transparent">{{pjData.pendingProjPecent | number:'1.2-2' }} %</span>
                             </div>
                             <div class="text-muted mb-2">Pending Projects</div>
-                            <h4 class="mb-0">17</h4>
+                            <h4 class="mb-0">{{pjData.pendingProj}}</h4>
                         </div>
                         <div id="pending-projects">
                             <apx-chart [series]="chartOptions3.series" [chart]="chartOptions3.chart"
@@ -101,10 +101,10 @@
                                 <span class="avatar avatar-rounded bg-info-transparent">
                                     <i class="ti ti-briefcase fs-20"></i>
                                 </span>
-                                <span class="badge bg-success-transparent">+4.32%</span>
+                                <span class="badge bg-success-transparent">{{pjData.overdueProjPercrnt | number:'1.2-2' }} %</span>
                             </div>
                             <div class="text-muted mb-2">Overdue Projects</div>
-                            <h4 class="mb-0">28</h4>
+                            <h4 class="mb-0">{{pjData.overdueProj}}</h4>
                         </div>
                         <div id="overdue-projects">
                             <apx-chart [series]="chartOptions1.series" [chart]="chartOptions1.chart"
@@ -185,8 +185,8 @@
                                             <div class="d-flex align-items-center justify-content-between mb-4">
                                                 <div>
                                                     <h6 class="text-warning mb-3">Total Revenue</h6>
-                                                    <span class="fs-25 d-flex align-items-center">55.3% <span
-                                                            class="fs-12 text-warning op-7 ms-2">+0.59<i
+                                                    <span class="fs-25 d-flex align-items-center">{{pjData.totalRevenue}} <span
+                                                            class="fs-12 text-warning op-7 ms-2">{{pjData.totalRevenuePecent | number:'1.2-2' }}<i
                                                                 class="ti ti-arrow-big-up-line ms-1 d-inline-flex"></i></span></span>
                                                 </div>
                                             </div>
@@ -203,9 +203,9 @@
                                         <div class="d-flex align-items-center justify-content-between">
                                             <div>
                                                 <span class="d-block fs-16 mb-3">Pending income</span>
-                                                <h3 class="mb-3">28</h3>
+                                                <h3 class="mb-3">{{pjData.pendingIncome}}</h3>
                                                 <span class="d-block text-muted">Increased by <span
-                                                        class="text-green ms-1">0.45%<i
+                                                        class="text-green ms-1">{{pjData.pendingIncomePercent | number:'1.2-2' }}<i
                                                             class="ti ti-arrow-narrow-up"></i></span></span>
                                             </div>
                                             <div id="projects-done">
@@ -221,8 +221,8 @@
                                             <div class="d-flex align-items-center justify-content-between mb-4">
                                                 <div>
                                                     <h6 class="text-warning mb-3">Received income</h6>
-                                                    <span class="fs-25 d-flex align-items-center">55.3% <span
-                                                            class="fs-12 text-warning op-7 ms-2">+0.59<i
+                                                    <span class="fs-25 d-flex align-items-center">{{pjData.pendingIncome}} <span
+                                                            class="fs-12 text-warning op-7 ms-2">{{pjData.pendingIncomePercent | number:'1.2-2' }}<i
                                                                 class="ti ti-arrow-big-up-line ms-1 d-inline-flex"></i></span></span>
                                                 </div>
                                             </div>
