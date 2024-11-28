@@ -54,7 +54,7 @@ export class BasicComponent extends BaseComponent implements OnInit {
   passwordStrengthMessage: string = '';
   passwordStrengthColor: string = '';
   confirmPasswordStrengthMessage: string = '';
-  confirmPasswordStrengthColor: string = ''; todayDate: string = ''; maxDate: string = '';
+  confirmPasswordStrengthColor: string = '';
   isPasswordValid: boolean = false; isPasswrd:boolean = false; isPassValid:boolean = false; 
   isCnfmPwd:boolean = false; agree: boolean = false; isResend:boolean = false;
 
@@ -107,12 +107,7 @@ export class BasicComponent extends BaseComponent implements OnInit {
     //     this.showPasswordError();
     //   }
     // });
-    const today = new Date();
-    const yyyy = today.getFullYear();
-    const mm = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-based
-    const dd = String(today.getDate()).padStart(2, '0');
-    this.todayDate = `${yyyy}-${mm}-${dd}`;
-    this.maxDate = `${yyyy}-${mm}-${dd}`;
+    this.onTodayDt();
     this.onMinDate();
   }
 
