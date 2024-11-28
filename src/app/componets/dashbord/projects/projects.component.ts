@@ -80,10 +80,8 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
     'projectAddress', 'state', 'city', 'projectState', 'projectEstimation',
     'projectArea', 'projectStartDate', 'projectEndDate', 'action', 'designId', 'companyName'
   ];
-  pjData : any = {}; isSts:boolean =true;
+  pjData : any = {}; isSts:boolean = true; submitted: boolean = false; userData: any;
   
-
-
 //   {
 //     "id": 1,
 //     "projectId": "VCS001",
@@ -150,13 +148,39 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
     });
   }
 
+  get f() {
+    return this.createProjectForm.controls;
+  }
+
+  onClkDesign(){
+    this.userData = localStorage.getItem('userDetails');
+    this.switchService.onAdonai(JSON.parse(this.userData).email).subscribe({
+      next: (res:any) => {
+        if(res.status == false){
+          alert(res.message)
+          return;
+        } else {
+          window.open(res.newDesign, '_blank');
+          this.toastr.success(res.message);
+        }
+      }
+    })
+  }
+  
+
   onSubmit(): void {
-    if (this.createProjectForm.valid) {
+    this.submitted = true;
+    if (this.createProjectForm.invalid) {
+      this.toastr.error('Please fill mandatory fields');
+      // this.btnDisable = false;
+      return;
+    }
+    else if (this.createProjectForm.valid) {
       const projectData = this.createProjectForm.value;
       projectData.companyName = JSON.parse(this.userDetails)?.companyName,
       projectData.projectStartDate = this.dp.transform(projectData.projectStartDate, 'dd-MM-yyyy'),
       projectData.projectEndDate = this.dp.transform(projectData.projectEndDate, 'dd-MM-yyyy'),
-      this.http.post('https://adonai-vcs-fmbqfgbudgendtfu.israelcentral-01.azurewebsites.net/adonai/save_project_details', projectData).subscribe({
+      this.switchService.saveProject().subscribe({
         next: (response) => {
           console.log('Project created successfully', response);
           this.modalService.dismissAll(),
@@ -196,8 +220,7 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
   getLst(){
     // console.log(JSON.parse(this.userDetails)?.companyName);
     let cmpnyNm = JSON.parse(this.userDetails)?.companyName
-    // this.switchService.projectLst('sk%20interiors').subscribe({ next: (res:any) => {
-      this.switchService.projectLst(cmpnyNm).subscribe({ next: (res:any) => {
+    this.switchService.projectLst(cmpnyNm).subscribe({ next: (res:any) => {
       if(res){
         this.projectLst = res
         this.dataSource.data = res;
@@ -210,7 +233,7 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
 
   getdesignData(){
     this.switchService.designersDbData(JSON.parse(this.userDetails)?.companyName).subscribe({ next: (res:any) =>{
-    if(res.length > 0){    
+    if(res){    
       this.pjData = res;
     } else {
       this.toastr.error(res.message,'', {

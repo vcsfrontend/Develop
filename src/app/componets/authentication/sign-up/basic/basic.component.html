@@ -176,17 +176,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <div class="col-xl-6">
-                                    <label for="signup-mobile" class="form-label text-default"><strong>Phone Number</strong><span class="text-danger"> *</span></label>
-                                    <input type="text" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" id="signup-mobile"
-                                        placeholder="mobile" formControlName="phoneNumber" maxlength="10"
-                                        onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
-                                        event.charCode == 8)' (copy)="preventCopyPaste($event)" (cut)="preventCopyPaste($event)" (paste)="preventCopyPaste($event)" 
-                                        [ngClass]="{ 'is-invalid': submitted && f['phoneNumber'].errors }">
-                                    <div *ngIf="submitted && f['phoneNumber'].errors" class="invalid-feedback">
-                                        <div *ngIf="f['phoneNumber'].errors['required']">Phone Number is required</div>
-                                    </div>
-                                </div> -->
                                 <div class="col-xl-6">
                                     <label for="tool" class="form-label text-default"><strong>Tool ID</strong><span class="text-danger"> *</span></label><br>
                                     <mat-form-field class="form-select form-select-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark">
@@ -200,69 +189,9 @@
                                         </mat-error>
                                     </mat-form-field>
                                 </div>
-                                <!-- <div class="col-xl-6">
-                                    <label for="signup-country" class="form-label text-default"><strong>Mobile No</strong><span class="text-danger">*</span></label>
-                                    <div class="input-group">
-                                        <select class="form-select form-select-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" 
-                                            id="country" formControlName="country" [(ngModel)]="selectedCountry" (change)="onCountryChange($any($event.target).value)"
-                                            [ngClass]="{ 'is-invalid': submitted && f['country'].errors }">
-                                            <option value="" disabled selected>code</option>
-                                            <option value="{{c.country}}" *ngFor="let c of countryLst">
-                                                <span *ngIf="!(selectedCountry === c.country)">{{ c.country }} (+{{ c.code }})</span>
-                                                <span *ngIf="selectedCountry === c.country">+{{ c.code }}</span>
-                                            </option>
-                                        </select>
-                                        <div class="input-group-append">
-                                          <input type="text" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark"
-                                          formControlName="phoneNumber" maxlength="10"
-                                          onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
-                                          event.charCode == 8)' (copy)="preventCopyPaste($event)" (cut)="preventCopyPaste($event)" (paste)="preventCopyPaste($event)" 
-                                          [ngClass]="{ 'is-invalid': submitted && f['phoneNumber'].errors }">
-                                        </div>
-                                    </div>
-                                    <div *ngIf="submitted && f['phoneNumber'].errors" class="text-danger">
-                                        <div *ngIf="f['phoneNumber'].errors['required']">Phone Number is required</div>
-                                    </div>
-                                </div> -->
-
-                                
-                                <!-- <div class="col-xl-6">
-                                    <label for="signup-country" class="form-label text-default">
-                                        <strong>Mobile No</strong><span class="text-danger">*</span>
-                                    </label>
-                                    <div class="input-group">
-                                        <select class="form-select form-select-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" 
-                                            id="country" 
-                                            formControlName="country" 
-                                            [(ngModel)]="selectedCountry" 
-                                            (change)="onCountryChange($any($event.target).value)"
-                                            [ngClass]="{ 'is-invalid': submitted && f['country'].errors }">
-                                            
-                                            <option value="" disabled selected>code</option>
-                                            <option *ngFor="let c of countryLst" [value]="c.country">
-                                                <span *ngIf="selectedCountry !== c.country">{{ c.country }} (+{{ c.code }})</span>
-                                                <span *ngIf="selectedCountry === c.country">+{{ c.code }}</span>
-                                            </option>
-                                        </select>
-                                        <input type="text" 
-                                            class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark"
-                                            formControlName="phoneNumber" 
-                                            maxlength="10"
-                                            onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || event.charCode == 8)" 
-                                            (copy)="preventCopyPaste($event)" 
-                                            (cut)="preventCopyPaste($event)" 
-                                            (paste)="preventCopyPaste($event)" 
-                                            [ngClass]="{ 'is-invalid': submitted && f['phoneNumber'].errors }">
-                                    </div>
-                                
-                                    <div *ngIf="submitted && f['phoneNumber'].errors" class="invalid-feedback">
-                                        <div *ngIf="f['phoneNumber'].errors['required']">Phone Number is required</div>
-                                    </div>
-                                </div> -->
                                 <div class="col-xl-6">
                                     <label for="signup-phone" class="form-label text-default"><strong>Phone Number</strong><span class="text-danger"> *</span></label>
                                     <div class="input-group custom-input-group">
-                                        <!-- Country Code Select Dropdown -->
                                         <select class="form-select form-select-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" 
                                             id="country1" formControlName="country" [(ngModel)]="selectedCountry" 
                                             (change)="onCountryChange($any($event.target).value)"
@@ -320,15 +249,13 @@
                                 </div>
                             </div>
                             <div class="d-grid gap-2 col-8 mx-auto mt-4">
-                                <!-- <button class="h6 btn btn-lg bg-light p-2 font-weight-bold text-dark bg-opacity-25 border border-dark" 
-                                (click)="onSignup()" [disabled]="btnDisable">Create Account</button> -->
                                 <button class="btn btn-lg bg-light p-2 font-weight-bold text-dark bg-opacity-25 border border-dark" (click)="onSignup()"
                                 [disabled]="btnDisable">Create Account</button>
                             </div>
                         </form>
                         <div class="text-center">
                             <p class="h6 font-weight-bold mt-3 mb-0"><strong>Already have an account? </strong> <a
-                                    routerLink="/auth/login" class="text-primary"><strong> Sign In</strong></a></p>
+                                routerLink="/auth/login" class="text-primary"><strong> Sign In</strong></a></p>
                         </div>
                     </div>
                 </overlay-scrollbars>
@@ -336,28 +263,6 @@
         </div> 
     </div>
 </div>
-
-<!-- <ng-template #content let-modal>
-    <div class="modal-header justify-content-center align-items-center">
-        <h5 class="modal-title">OTP </h5>
-      </div>
-      <div class="modal-body">
-        <div class="col-xl-12">
-            <div class="otp-container">
-                <input *ngFor="let digit of otpArray; let i = index"
-                type="text" maxlength="1" (input)="onInputChange($event, i)"
-                (keydown)="onKeydown($event, i)" [(ngModel)]="otp[i]"
-                onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || event.charCode == 8)'
-                [ngModelOptions]="{standalone: true}" [attr.aria-label]="'Digit ' + (i + 1)"/>
-            </div>
-        </div> 
-      </div>
-      <div class="d-grid gap-2 col-3 mx-auto">
-        <div class="modal-footer ">
-            <button type="button" class="btn btn-primary btn-wave" (click)="onOtpCheck()">OK</button>
-          </div>
-      </div>
-</ng-template> -->
 
 <ng-template #modalTemplate>
     <div class="modal fade show d-block" style="background: rgba(0,0,0,0.5);" tabindex="-1">
@@ -1157,7 +1062,6 @@
                                             This website is operated by Adonai, 2nd floor, Kesava Towers, Hafeezpet Rd, K P H B Phase 9, Hafeezpet, Hyderabad, Telangana 500085.
                                             <br>
                                             All other feedback, comments, requests for technical support, and other communications relating to the Services should be directed to: info&#64;designadonai.com
-
                                         </div>
                                     </div>
                                 </div>
@@ -1169,9 +1073,3 @@
         </div>
     </div>
 </ng-template>
-
-
-
-
-
-

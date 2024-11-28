@@ -686,7 +686,7 @@
                         <div ngbDropdown class="dropdown">
                             <a  href="javascript:void(0);"
                                 class="btn btn-primary btn-sm btn-wave waves-effect waves-light" 
-                                aria-expanded="false">
+                                aria-expanded="false" (click)="onClkDesign()">
                                 New Design
                             </a>
                         <!-- <ul ngbDropdownMenu class="dropdown-menu" role="menu">
@@ -704,128 +704,6 @@
                         </div>
             
             </div>
-        
-            <!-- <div class="card-body p-0">
-                <div class="table-responsive">
-                    <table class="table text-nowrap">
-                        <thead>
-                            <tr>
-                                
-                                <th scope="col">SI.No</th>
-                                <th scope="col">Project ID</th>
-                                <th scope="col">Project Name</th>
-                                <th scope="col">Client Name</th>
-                                <th scope="col">Business Category</th>
-                                <th scope="col">Project Address</th>
-                                <th scope="col">State</th>
-                                <th scope="col">City</th>
-                                <th scope="col">Project Stage</th>
-                                <th scope="col">Project Estimation</th>
-                                <th scope="col">Project area</th>
-                                <th scope="col">Action</th>
-                                <th scope="col">Company Name</th>
-                                <th scope="col">Created By</th>
-                                <th scope="col">Start Date</th>
-                                <th scope="col">End Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1 . </td>
-                                <td>VA001 </td>
-                                <td>
-                                    Standalone (SaiKrishna)</td>
-                                <td>Sai Krishna</td>
-                                <td>IR Residential</td>
-                                <td>kphb telangana</td>
-                                <td>Telangana</td>
-                                <td>Hyderabad</td>
-                                <td><span class="badge bg-primary-transparent">Execution In Progress </span></td>
-                                <td>₹ 3,60,868</td>
-                                <td>1860</td>
-                                <td>
-                                    hello
-                                </td>
-                                <td>Varmagroup</td>
-                                <td>CH TARUN, Varma Group</td>
-                                <td>13-11-2024</td>
-                                <td>13-12-2024</td>
-                            </tr>
-                            <tr>
-                                <td>1 . </td>
-                                <td>VA001 </td>
-                                <td>
-                                    Standalone (SaiKrishna)</td>
-                                <td>Sai Krishna</td>
-                                <td>IR Residential</td>
-                                <td>kphb telangana</td>
-                                <td>Telangana</td>
-                                <td>Hyderabad</td>
-                                <td><span class="badge bg-primary-transparent">Execution In Progress </span></td>
-                                <td>₹ 3,60,868</td>
-                                <td>1860</td>
-                                <td>
-                                    hiii
-                                </td>
-                                <td>Varmagroup</td>
-                                <td>CH TARUN, Varma Group</td>
-                                <td>13-11-2024</td>
-                                <td>13-12-2024</td>
-                            </tr>
-                            <tr>
-                                <td>1 . </td>
-                                <td>VA001 </td>
-                                <td>
-                                    Standalone (SaiKrishna)</td>
-                                <td>Sai Krishna</td>
-                                <td>IR Residential</td>
-                                <td>kphb telangana</td>
-                                <td>Telangana</td>
-                                <td>Hyderabad</td>
-                                <td><span class="badge bg-primary-transparent">Execution In Progress </span></td>
-                                <td>₹ 3,60,868</td>
-                                <td>1860</td>
-                                <td>
-                                    hello
-                                </td>
-                                <td>Varmagroup</td>
-                                <td>CH TARUN, Varma Group</td>
-                                <td>13-11-2024</td>
-                                <td>13-12-2024</td>
-                            </tr>
-                            
-                            
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="card-footer border-top-0">
-                <div class="d-flex align-items-center flex-wrap overflow-auto">
-                    <div class="mb-2 mb-sm-0">
-                        Showing <b>1</b> to <b>5</b> of <b>200</b> entries <i
-                            class="bi bi-arrow-right ms-2 fw-medium"></i>
-                    </div>
-                    <div class="ms-auto">
-                        <ul class="pagination mb-0 overflow-auto">
-                            <li class="page-item disabled">
-                                <a class="page-link">Previous</a>
-                            </li>
-                            <li class="page-item active" aria-current="page"><a class="page-link" href="javascript:;"href="javascript:;">1</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="javascript:;">2</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="javascript:;">3</a></li>
-                            <li class="page-item"><a class="page-link" href="javascript:;">4</a></li>
-                            <li class="page-item"><a class="page-link" href="javascript:;">5</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="javascript:;">Next</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div> -->
-
-
             <div class="card-body p-0">
                 <div class="mat-elevation-z8">
                     <mat-form-field class="mt-2 p-2">
@@ -925,49 +803,88 @@
                     <div class="card custom-card">
                       <!-- <div class="card-header">
                         <div class="card-title">Create Project</div>
-                        
                       </div> -->
                       <div class="card-body">
                         <div class="row gy-3">
                           <div class="col-xl-4">
                             <label for="projectName" class="form-label">Project Name:</label>
-                            <input type="text" class="form-control" id="projectName" formControlName="projectName" placeholder="Enter Project Name">
+                            <input type="text" class="form-control" id="projectName" formControlName="projectName" placeholder="Enter Project Name"
+                                [ngClass]="{ 'is-invalid': submitted && f['projectName'].errors }" maxlength="50">
+                            <div *ngIf="submitted && f['projectName'].errors" class="invalid-feedback">
+                                <div *ngIf="f['projectName'].errors['required']">Project name is required</div>
+                            </div>
                           </div>
                           <div class="col-xl-4">
                             <label for="clientName" class="form-label">Client Name:</label>
-                            <input type="text" class="form-control" id="clientName" formControlName="clientName" placeholder="Enter Client Name">
+                            <input type="text" class="form-control" id="clientName" formControlName="clientName" placeholder="Enter Client Name"
+                                [ngClass]="{ 'is-invalid': submitted && f['clientName'].errors }" maxlength="50">
+                            <div *ngIf="submitted && f['clientName'].errors" class="invalid-feedback">
+                                <div *ngIf="f['clientName'].errors['required']">Client name is required</div>
+                            </div>
                           </div>
                           <div class="col-xl-4">
                             <label for="businessCategory" class="form-label">Business Category:</label>
-                            <input type="text" class="form-control" id="businessCategory" formControlName="businessCategory" placeholder="Business Category">
+                            <input type="text" class="form-control" id="businessCategory" formControlName="businessCategory" placeholder="Business Category"
+                            [ngClass]="{ 'is-invalid': submitted && f['businessCategory'].errors }" maxlength="50">
+                            <div *ngIf="submitted && f['businessCategory'].errors" class="invalid-feedback">
+                                <div *ngIf="f['businessCategory'].errors['required']">Business Category is required</div>
+                            </div>
                           </div>
                           <div class="col-xl-4">
                             <label for="projectAddress" class="form-label">Project Address:</label>
-                            <input type="text" class="form-control" id="projectAddress" formControlName="projectAddress" placeholder="Enter Project Address">
+                            <input type="text" class="form-control" id="projectAddress" formControlName="projectAddress" placeholder="Enter Project Address"
+                            [ngClass]="{ 'is-invalid': submitted && f['projectAddress'].errors }" maxlength="50">
+                            <div *ngIf="submitted && f['projectAddress'].errors" class="invalid-feedback">
+                                <div *ngIf="f['projectAddress'].errors['required']">Project Address is required</div>
+                            </div>
                           </div>
                           <div class="col-xl-4">
                             <label for="state" class="form-label">State:</label>
-                            <input type="text" class="form-control" id="state" formControlName="state" placeholder="Enter State">
+                            <input type="text" class="form-control" id="state" formControlName="state" placeholder="Enter State"
+                            [ngClass]="{ 'is-invalid': submitted && f['state'].errors }" maxlength="50">
+                            <div *ngIf="submitted && f['state'].errors" class="invalid-feedback">
+                                <div *ngIf="f['state'].errors['required']">State is required</div>
+                            </div>
                           </div>
                           <div class="col-xl-4">
                             <label for="city" class="form-label">City:</label>
-                            <input type="text" class="form-control" id="city" formControlName="city" placeholder="Enter City">
+                            <input type="text" class="form-control" id="city" formControlName="city" placeholder="Enter City"
+                            [ngClass]="{ 'is-invalid': submitted && f['city'].errors }" maxlength="50">
+                            <div *ngIf="submitted && f['city'].errors" class="invalid-feedback">
+                                <div *ngIf="f['city'].errors['required']">City is required</div>
+                            </div>
                           </div>
                           <div class="col-xl-4">
                             <label for="projectState" class="form-label">Project State:</label>
-                            <input type="text" class="form-control" id="projectState" formControlName="projectState" placeholder="Enter Project State">
+                            <input type="text" class="form-control" id="projectState" formControlName="projectState" placeholder="Enter Project State"
+                            [ngClass]="{ 'is-invalid': submitted && f['projectState'].errors }" maxlength="50">
+                            <div *ngIf="submitted && f['projectState'].errors" class="invalid-feedback">
+                                <div *ngIf="f['projectState'].errors['required']">Project State is required</div>
+                            </div>
                           </div>
                           <div class="col-xl-4">
                             <label for="projectEstimation" class="form-label">Project Estimation:</label>
-                            <input type="number" class="form-control" id="projectEstimation" formControlName="projectEstimation" placeholder="Enter Estimation">
+                            <input type="number" class="form-control" id="projectEstimation" formControlName="projectEstimation" placeholder="Enter Estimation"
+                            [ngClass]="{ 'is-invalid': submitted && f['projectEstimation'].errors }" maxlength="50">
+                            <div *ngIf="submitted && f['projectEstimation'].errors" class="invalid-feedback">
+                                <div *ngIf="f['projectEstimation'].errors['required']">Project Estimation is required</div>
+                            </div>
                           </div>
                           <div class="col-xl-4">
                             <label for="projectArea" class="form-label">Project Area:</label>
-                            <input type="number" class="form-control" id="projectArea" formControlName="projectArea" placeholder="Enter Project Area">
+                            <input type="number" class="form-control" id="projectArea" formControlName="projectArea" placeholder="Enter Project Area"
+                            [ngClass]="{ 'is-invalid': submitted && f['projectArea'].errors }" maxlength="50">
+                            <div *ngIf="submitted && f['projectArea'].errors" class="invalid-feedback">
+                                <div *ngIf="f['projectArea'].errors['required']">Project Area is required</div>
+                            </div>
                           </div>
                           <div class="col-xl-4">
                             <label for="action" class="form-label">Action:</label>
-                            <input type="text" class="form-control" id="action" formControlName="action" placeholder="Enter Action">
+                            <input type="text" class="form-control" id="action" formControlName="action" placeholder="Enter Action"
+                            [ngClass]="{ 'is-invalid': submitted && f['action'].errors }" maxlength="50">
+                            <div *ngIf="submitted && f['action'].errors" class="invalid-feedback">
+                                <div *ngIf="f['action'].errors['required']">Action is required</div>
+                            </div>
                           </div>
                           <!-- <div class="col-xl-4">
                             <label for="companyName" class="form-label">Company Name:</label>
@@ -982,11 +899,19 @@
                               <mat-datepicker #startPicker></mat-datepicker>
                             </mat-form-field> -->
                             <label for="startDate" class="form-label">Start Date:</label>
-                            <input type="date" class="form-control" id='startDate' formControlName='projectStartDate'>
+                            <input type="date" class="form-control" id='startDate' formControlName='projectStartDate'
+                            [ngClass]="{ 'is-invalid': submitted && f['projectStartDate'].errors }" maxlength="50">
+                            <div *ngIf="submitted && f['projectStartDate'].errors" class="invalid-feedback">
+                                <div *ngIf="f['projectStartDate'].errors['required']">Start Date is required</div>
+                            </div>
                           </div>
                           <div class="col-xl-4">
                             <label for="endDate" class="form-label">End Date:</label>
-                            <input type="date" class="form-control" id='endDate' formControlName='projectEndDate'>
+                            <input type="date" class="form-control" id='endDate' formControlName='projectEndDate'
+                            [ngClass]="{ 'is-invalid': submitted && f['projectEndDate'].errors }" maxlength="50">
+                            <div *ngIf="submitted && f['projectEndDate'].errors" class="invalid-feedback">
+                                <div *ngIf="f['projectEndDate'].errors['required']">End Date is required</div>
+                            </div>
                             <!-- <mat-form-field appearance="fill">
                               <mat-label>End Date</mat-label>
                               <input matInput [matDatepicker]="endPicker" formControlName="projectEndDate" placeholder="Choose End Date">
@@ -1018,7 +943,4 @@
         </div>
     </div>
 </ng-template>
-
 <!-- End:: row-3 -->
-
-
