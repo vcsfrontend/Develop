@@ -79,7 +79,8 @@ export class ProjectsComponent {
     'projectAddress', 'state', 'city', 'projectState', 'projectEstimation',
     'projectArea', 'projectStartDate', 'projectEndDate', 'action', 'designId', 'companyName'
   ];
-  pjData : any;
+  pjData : any = {}; isSts:boolean =true;
+  
 
 
 //   {
@@ -142,7 +143,7 @@ export class ProjectsComponent {
       projectStartDate: ['', Validators.required],
       projectEndDate: ['', Validators.required],
       action: ['', Validators.required],
-      companyName: ['', Validators.required],
+      companyName: [JSON.parse(this.userDetails)?.companyName],
       attachments: [null] // Adjust based on your attachment handling
     });
   }
@@ -150,6 +151,7 @@ export class ProjectsComponent {
   onSubmit(): void {
     if (this.createProjectForm.valid) {
       const projectData = this.createProjectForm.value;
+      projectData.companyName = JSON.parse(this.userDetails)?.companyName,
       this.http.post('https://adonai-vcs-fmbqfgbudgendtfu.israelcentral-01.azurewebsites.net/adonai/save_project_details', projectData).subscribe({
         next: (response) => {
           console.log('Project created successfully', response);
@@ -188,7 +190,8 @@ export class ProjectsComponent {
   getLst(){
     console.log(JSON.parse(this.userDetails)?.companyName);
     let cmpnyNm = JSON.parse(this.userDetails)?.companyName
-    this.switchService.projectLst('sk%20interiors').subscribe({ next: (res:any) => {
+    // this.switchService.projectLst('sk%20interiors').subscribe({ next: (res:any) => {
+      this.switchService.projectLst(cmpnyNm).subscribe({ next: (res:any) => {
       if(res){
         this.projectLst = res
         this.dataSource.data = res;
@@ -817,10 +820,25 @@ export class ProjectsComponent {
   }
 
   getdesignData(){
-    this.switchService.designersDbData().subscribe({ next: (res:any) =>{
-      this.pjData = res ;
+    this.switchService.designersDbData(JSON.parse(this.userDetails)?.companyName).subscribe({ next: (res:any) =>{
+    
+  if(res.length > 0){    
+    this.pjData = res;
+    this.toastr.success(res.message,'', {
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
+    })
+  } else {
+    this.toastr.error(res.message,'', {
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
+      });
     }
-  })
+  },
+  error: (error) => {
+    this.toastr.error(error.statusText);
+  },
+})
     // this.pjData = {
     //   "totalProjects": 7,
     //   "totalProjPercent": 42.857142857142854,
