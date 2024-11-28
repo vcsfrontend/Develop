@@ -273,15 +273,15 @@ export class NavService implements OnDestroy {
       selected: false,
       path: '/dashboard/designers',
     },
-    // {
-    //   title: 'my-Tasks',
-    //   dirchange: false,
-    //   type: 'link',
-    //   icon: 'bi-layout-text-window side-menu__icon',
-    //   active: false,
-    //   selected: false,
-    //   path: '/dashboard/mytask',
-    // },
+    {
+      title: 'my-Tasks',
+      dirchange: false,
+      type: 'link',
+      icon: 'bi-layout-text-window side-menu__icon',
+      active: false,
+      selected: false,
+      path: '/dashboard/mytask',
+    },
     // {
     //   title: 'Project-details',
     //   dirchange: false,
@@ -338,6 +338,7 @@ export class NavService implements OnDestroy {
     //   selected: false,
     //   path: '/pages/pricing',
     // },
+    
     // {
     //   title: 'Organisation Settings',
     //   dirchange: false,
@@ -402,15 +403,15 @@ export class NavService implements OnDestroy {
 //         selected: false,
 //         path: '/dashboard/Project-Details',
 //       },
-//       {
-//         title: 'my-Tasks',
-//         dirchange: false,
-//         type: 'link',
-//         icon: 'bi-layout-text-window side-menu__icon',
-//         active: false,
-//         selected: false,
-//         path: '/dashboard/mytask',
-//       },
+      // {
+      //   title: 'my-Tasks',
+      //   dirchange: false,
+      //   type: 'link',
+      //   icon: 'bi-layout-text-window side-menu__icon',
+      //   active: false,
+      //   selected: false,
+      //   path: '/dashboard/mytask',
+      // },
 //       {
 //         title: 'Order-Details',
 //         dirchange: false,
