@@ -8,10 +8,19 @@ import { Component } from '@angular/core';
   styles: ``
 })
 export class BaseComponent {
-  minDate: string = '';
+  minDate: string = ''; maxDate: string = ''; todayDate: string = '';
   datePickerConfig = {
     isAnimated: true, adaptivePosition: true, dateInputFormat: 'DD-MM-YYYY', showWeekNumbers: false 
   };
+  onTodayDt(){
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const dd = String(today.getDate()).padStart(2, '0');
+    this.todayDate = `${yyyy}-${mm}-${dd}`;
+    this.maxDate = `${yyyy}-${mm}-${dd}`;
+  }
+  
   onMinDate(){
     const today = new Date();
     const hundredYearsAgo = new Date(today.getFullYear() - 100, today.getMonth(), today.getDate());

@@ -38,6 +38,7 @@ import { OverlayscrollbarsModule } from 'overlayscrollbars-ngx';
 import { MaterialModuleModule } from '../../../material-module/material-module.module';
 import { ShowcodeCardComponent } from '../../../shared/common/includes/showcode-card/showcode-card.component';
 import { ShowCodeContentDirective } from '../../../shared/directives/show-code-content.directive';
+import { BaseComponent } from '../../../shared/base/base.component';
 export type ChartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
@@ -74,7 +75,7 @@ export type ChartOptions = {
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.scss',
 })
-export class ProjectsComponent {
+export class ProjectsComponent extends BaseComponent implements OnInit {
   displayedColumns: string[] = ['slNo', 'projectId', 'projectName', 'clientName', 'businessCategory',
     'projectAddress', 'state', 'city', 'projectState', 'projectEstimation',
     'projectArea', 'projectStartDate', 'projectEndDate', 'action', 'designId', 'companyName'
@@ -114,11 +115,12 @@ export class ProjectsComponent {
   createProjectForm!: FormGroup;
   pondOptions: FilePondOptions;
 
-  constructor(private fb: FormBuilder, private http: HttpClient,private modalService: NgbModal,
-    private toastr: ToastrService, public switchService: SwitherService,
+  constructor(private fb: FormBuilder, private http: HttpClient, private modalService: NgbModal,
+    private toastr: ToastrService, public switchService: SwitherService, private dp: DatePipe
   ) { //localStorage.getItem('userDetails.companyName')
     // Initialize FilePond options if needed
-    this.userDetails = localStorage.getItem('userDetails')
+    super();
+    this.userDetails = localStorage.getItem('userDetails');
     this.pondOptions = {
       allowMultiple: true,
       // other FilePond options here
@@ -128,7 +130,7 @@ export class ProjectsComponent {
   ngOnInit(): void {
     this.getLst(); this.getdesignData();
     // console.log(this.pjData);
-    
+    this.onMinDate(); this.onTodayDt();
     // Initialize the form with the necessary controls and validators
     this.createProjectForm = this.fb.group({
       projectName: ['', Validators.required],
@@ -152,9 +154,13 @@ export class ProjectsComponent {
     if (this.createProjectForm.valid) {
       const projectData = this.createProjectForm.value;
       projectData.companyName = JSON.parse(this.userDetails)?.companyName,
+      projectData.projectStartDate = this.dp.transform(projectData.projectStartDate, 'dd-MM-yyyy'),
+      projectData.projectEndDate = this.dp.transform(projectData.projectEndDate, 'dd-MM-yyyy'),
       this.http.post('https://adonai-vcs-fmbqfgbudgendtfu.israelcentral-01.azurewebsites.net/adonai/save_project_details', projectData).subscribe({
         next: (response) => {
           console.log('Project created successfully', response);
+          this.modalService.dismissAll(),
+          this.getLst();
         },
         error: (error) => {
           console.error('Error creating project', error);
@@ -188,7 +194,7 @@ export class ProjectsComponent {
   }
 
   getLst(){
-    console.log(JSON.parse(this.userDetails)?.companyName);
+    // console.log(JSON.parse(this.userDetails)?.companyName);
     let cmpnyNm = JSON.parse(this.userDetails)?.companyName
     // this.switchService.projectLst('sk%20interiors').subscribe({ next: (res:any) => {
       this.switchService.projectLst(cmpnyNm).subscribe({ next: (res:any) => {
@@ -200,6 +206,24 @@ export class ProjectsComponent {
         }
       }
     })
+  }
+
+  getdesignData(){
+    this.switchService.designersDbData(JSON.parse(this.userDetails)?.companyName).subscribe({ next: (res:any) =>{
+    if(res.length > 0){    
+      this.pjData = res;
+    } else {
+      this.toastr.error(res.message,'', {
+        timeOut: 3000,
+        positionClass: 'toast-top-right',
+        });
+      }
+    },
+    error: (error) => {
+      this.toastr.error(error.statusText);
+    },
+    })
+  
   }
 
   chartOptions: any = {
@@ -817,45 +841,6 @@ export class ProjectsComponent {
     } else {
       this.fileName = null; // Reset if no file selected
     }
-  }
-
-  getdesignData(){
-    this.switchService.designersDbData(JSON.parse(this.userDetails)?.companyName).subscribe({ next: (res:any) =>{
-    
-  if(res.length > 0){    
-    this.pjData = res;
-    this.toastr.success(res.message,'', {
-      timeOut: 3000,
-      positionClass: 'toast-top-right',
-    })
-  } else {
-    this.toastr.error(res.message,'', {
-      timeOut: 3000,
-      positionClass: 'toast-top-right',
-      });
-    }
-  },
-  error: (error) => {
-    this.toastr.error(error.statusText);
-  },
-})
-    // this.pjData = {
-    //   "totalProjects": 7,
-    //   "totalProjPercent": 42.857142857142854,
-    //   "completedProj": 3,
-    //   "completeProjPercent": 66.66666666666667,
-    //   "pendingProj": 4,
-    //   "pendingProjPecent": 25,
-    //   "overdueProj": 1,
-    //   "overdueProjPercrnt": 0,
-    //   "totalRevenue": 0,
-    //   "totalRevenuePecent": 0,
-    //   "pendingIncome": 0,
-    //   "pendingIncomePercent": 0,
-    //   "receivedIncome": 0,
-    //   "receivedIncomePercent": 0,
-    // }
-  
   }
 
   
