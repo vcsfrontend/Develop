@@ -110,6 +110,11 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
   openLg(content10:any) {
 		this.modalService.open(content10, { size: 'lg' },);
 	}
+  open(content11:any) {
+		this.modalService.open(content11, { size: 'lg' },);
+	}
+  content12:any;
+  
   createProjectForm!: FormGroup;
   pondOptions: FilePondOptions;
 
