@@ -83,7 +83,9 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
     'projectArea', 'projectStartDate', 'projectEndDate', 'action', 'designId', 'companyName'
   ];
   pjData : any = {}; isSts:boolean = true; submitted: boolean = false; userData: any;
-  
+  projectName: string = ''; clientName: string = ''; businessCategory: string = '';
+  projectAddress: string = ''; state: string = ''; city: string = ''; projectArea: string = ''; 
+  action: string = ''; designId: string = ''; companyName: string = '';
 //   {
 //     "id": 1,
 //     "projectId": "VCS001",
@@ -253,7 +255,13 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
       this.toastr.error(error.statusText);
     },
     })
-  
+  }
+
+  onProjectDetails(data:any){
+    console.log(data);
+    this.projectName = data.projectName; this.clientName = data.clientName; this.businessCategory = data.businessCategory;
+    this.projectAddress = data.projectAddress; this.projectArea = data.projectArea; this.state = data.state; 
+    this.city = data.city; this.action = data.action; this.designId = data.designId; this.companyName = data.companyName;
   }
 
   chartOptions: any = {
