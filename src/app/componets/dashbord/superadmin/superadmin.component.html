@@ -391,8 +391,9 @@
             </div>
             <div class="card-body">
                 <ul class="list-unstyled visitors-country">
-                    <li *ngFor="let item of dbData.adonaiData">
-                        <div class="d-flex align-items-center"> 
+                    <!-- <li *ngFor="let item of dbData.adonaiData"> -->
+                    <li *ngFor="let item of dbData.adonaiData.slice(0, showAdonaiFullDetails ? dbData.adonaiData.length : 4)">
+                        <div class="d-flex align-items-center">
                             <div class="flex-fill">
                                 <div class="d-flex align-items-center justify-content-between mb-2">
                                     <span class="d-block fs-14">{{item.city}}</span>
@@ -471,9 +472,13 @@
                     </li> -->
                 </ul>
             </div>
-            <div class="card-footer">
+            <div class="card-footer" *ngIf="dbData.adonaiData.length > 4">
                 <div class="text-center">
                     <!-- <a href="javascript:void(0);" class="text-secondary">Full Details <i class="ri-share-box-line align-middle"></i></a> -->
+                    <a href="javascript:void(0);" class="text-secondary" (click)="toggleAdonaiFullDetails()">
+                        {{ showAdonaiFullDetails ? 'Show Less' : 'Full Details' }} 
+                        <i class="ri-share-box-line align-middle"></i>
+                    </a>
                 </div>
             </div>
         </div>
@@ -482,7 +487,7 @@
         <div class="card custom-card overflow-hidden">
             <div class="card-header justify-content-between">
                 <div class="card-title">CRM Users By city</div>
-                <div ngbDropdown  class="dropdown no-caret">
+                <div ngbDropdown class="dropdown no-caret">
                     <!-- <a ngbDropdownToggle aria-label="anchor" href="javascript:void(0);" data-bs-toggle="dropdown">
                         <i class="ri-more-fill fs-18 text-muted"></i>
                     </a> -->
@@ -495,7 +500,8 @@
             </div>
             <div class="card-body">
                 <ul class="list-unstyled visitors-country">
-                    <li *ngFor="let item of dbData.crmData">
+                    <!-- <li *ngFor="let item of dbData.crmData"> -->
+                        <li *ngFor="let item of dbData.crmData.slice(0, showCrmFullDetails ? dbData.crmData.length : 4)">
                         <div class="d-flex align-items-center"> 
                             <div class="flex-fill">
                                 <div class="d-flex align-items-center justify-content-between mb-2">
@@ -575,13 +581,17 @@
                     </li> -->
                 </ul>
             </div>
-            <div class="card-footer">
+            <div class="card-footer" *ngIf="dbData.crmData.length > 4">
                 <div class="text-center">
                     <!-- <a href="javascript:void(0);" class="text-secondary">Full Details <i class="ri-share-box-line align-middle"></i></a> -->
+                    <a href="javascript:void(0);" class="text-secondary" (click)="toggleCrmFullDetails()">
+                        {{ showCrmFullDetails ? 'Show Less' : 'Full Details' }} 
+                        <i class="ri-share-box-line align-middle"></i>
+                    </a>
                 </div>
             </div>
         </div>
-    </div>
+    </div>    
     
     <div class="col-lg-4 col-md-12 col-xxl-4 ">
         <div class="card custom-card overflow-hidden">

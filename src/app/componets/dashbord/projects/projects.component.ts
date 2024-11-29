@@ -178,9 +178,9 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
     else if (this.createProjectForm.valid) {
       const projectData = this.createProjectForm.value;
       projectData.companyName = JSON.parse(this.userDetails)?.companyName,
-      projectData.projectStartDate = this.dp.transform(projectData.projectStartDate, 'dd-MM-yyyy'),
-      projectData.projectEndDate = this.dp.transform(projectData.projectEndDate, 'dd-MM-yyyy'),
-      this.switchService.saveProject().subscribe({
+      // projectData.projectStartDate = this.dp.transform(projectData.projectStartDate, 'dd-MM-yyyy'),
+      // projectData.projectEndDate = this.dp.transform(projectData.projectEndDate, 'dd-MM-yyyy'),
+      this.switchService.saveProject(projectData).subscribe({
         next: (response) => {
           console.log('Project created successfully', response);
           this.modalService.dismissAll(),
