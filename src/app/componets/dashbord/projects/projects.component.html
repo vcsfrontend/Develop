@@ -860,37 +860,50 @@
                       </div> -->
                       <div class="card-body">
                         <div class="row gy-3">
+                            <div class="col-xl-4">
+                                <label for="businessCategory" class="form-label">Project Name</label>
+                                <input type="text" class="form-control" id="businessCategory" formControlName="businessCategory" placeholder="">
+                            </div>
+                            <div class="col-xl-4">
+                                <label for="businessCategory" class="form-label">Client Name</label>
+                                <input type="text" class="form-control" id="businessCategory" formControlName="businessCategory" placeholder="">
+                            </div>
                           <div class="col-xl-4">
                             <label for="businessCategory" class="form-label">Business Category:</label>
-                            <input type="text" class="form-control" id="businessCategory" formControlName="businessCategory" placeholder="Business Category">
+                            <ng-select class="ti-form-select  !rounded-s-none" name="choices-multiple-remove-button"
+                                        placeholder="select"   id="choices-multiple-remove-button" [multiple]="true">
+                                          <ng-option value="Choice 1" selected>Commercial</ng-option>
+                                          <ng-option value="Choice 2">Residential</ng-option> 
+                                        </ng-select>
+                            <!-- <input type="text" class="form-control" id="businessCategory" formControlName="businessCategory" placeholder=""> -->
                           </div>
                           <div class="col-xl-4">
                             <label for="projectAddress" class="form-label">Project Address:</label>
-                            <input type="text" class="form-control" id="projectAddress" formControlName="projectAddress" placeholder="Enter Project Address">
+                            <input type="text" class="form-control" id="projectAddress" formControlName="projectAddress" placeholder="">
                           </div>
                           <div class="col-xl-4">
                             <label for="state" class="form-label">State:</label>
-                            <input type="text" class="form-control" id="state" formControlName="state" placeholder="Enter State">
+                            <input type="text" class="form-control" id="state" formControlName="state" placeholder="">
                           </div>
                           <div class="col-xl-4">
                             <label for="city" class="form-label">City:</label>
-                            <input type="text" class="form-control" id="city" formControlName="city" placeholder="Enter City">
-                          </div>
-                          <div class="col-xl-4">
-                            <label for="projectState" class="form-label">Project State:</label>
-                            <input type="text" class="form-control" id="projectState" formControlName="projectState" placeholder="Enter Project State">
+                            <input type="text" class="form-control" id="city" formControlName="city" placeholder="">
                           </div>     
                           <div class="col-xl-4">
                             <label for="projectArea" class="form-label">Project Area:</label>
-                            <input type="number" class="form-control" id="projectArea" formControlName="projectArea" placeholder="Enter Project Area">
+                            <input type="number" class="form-control" id="projectArea" formControlName="projectArea" placeholder="">
                           </div>
                           <div class="col-xl-4">
                             <label for="action" class="form-label">Action:</label>
-                            <input type="text" class="form-control" id="action" formControlName="action" placeholder="Enter Action">
+                            <input type="text" class="form-control" id="action" formControlName="action" placeholder="">
+                          </div>
+                          <div class="col-xl-4">
+                            <label for="action" class="form-label">Design Id</label>
+                            <input type="text" class="form-control" id="action" formControlName="action" placeholder="">
                           </div>
                           <div class="col-xl-4">
                             <label for="companyName" class="form-label">Company Name:</label>
-                            <input type="text" class="form-control" id="companyName" formControlName="companyName" placeholder="Enter Company Name">
+                            <input type="text" class="form-control" id="companyName" formControlName="companyName" placeholder="">
                           </div>
                           <div class="col-xl-4"></div>
                           

@@ -39,6 +39,8 @@ import { MaterialModuleModule } from '../../../material-module/material-module.m
 import { ShowcodeCardComponent } from '../../../shared/common/includes/showcode-card/showcode-card.component';
 import { ShowCodeContentDirective } from '../../../shared/directives/show-code-content.directive';
 import { BaseComponent } from '../../../shared/base/base.component';
+import { NgSelectModule } from '@ng-select/ng-select';
+
 export type ChartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
@@ -69,7 +71,7 @@ export type ChartOptions = {
       AngularFireDatabaseModule, CommonModule,  MatFormFieldModule, MatSelectModule, FlatpickrModule,
       AngularFirestoreModule, ToastrModule, SharedModule, ShowcodeCardComponent, MaterialModuleModule,
       OverlayscrollbarsModule, ShowCodeContentDirective, MatIconModule, NgApexchartsModule,
-      NgbDropdownModule,MatDatepickerModule,MatInputModule,MatNativeDateModule,],
+      NgbDropdownModule,MatDatepickerModule,MatInputModule,MatNativeDateModule,NgSelectModule,],
     providers: [FirebaseService,{ provide: ToastrService, useClass: ToastrService }, FlatpickrDefaults, DatePipe],
     
   templateUrl: './projects.component.html',
