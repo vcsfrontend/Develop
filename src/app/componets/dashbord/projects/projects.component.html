@@ -23,13 +23,13 @@
 <div class="col-xl-12 col-xxl-12 col-md-12">
     <div class="card custom-card " >
         <div class="row">
-            <div class="card-body col-xxl-8 text-center">
+            <div class="card-body col-xxl-8 col-xl-8 col-md-8 col-lg-8 text-center">
                 <div class="d-grid gap-2 col-9 ">
                     <img class="rounded mx-auto d-block demo" src="/assets/images/company-logos/adonai_logo.png" alt="" >
                 </div>
             </div>
-            <div class="col-xxl-4 col-6 border-start text-center mx-auto pt-4">
-                <button class="btn button  btn-primary btn-wave btn-w-lg font-weight-bold" type="button">NewDesign</button>
+            <div class="col-xxl-4 col-lg-4 col-md-4 col-xl-4 col-6  text-center mx-auto pt-4">
+                <button class="btn button  btn-primary btn-wave btn-w-lg  font-weight-bold" type="button">NewDesign</button>
 
             </div>
         </div>
@@ -324,96 +324,6 @@
             </div> 
         </div>
     </div> -->
-    <div class="col-xl-12">
-        <div class="card custom-card">
-            <div class="card-header">
-                <div class="card-title">
-                    Projects Discussions
-                </div>
-            </div>
-            <div class="card-body">
-                <ul ngbNav #nav21="ngbNav" [activeId]="1" class="nav nav-pills mb-3" role="tablist">
-                    <li [ngbNavItem]="1" class="nav-item">
-                        <a ngbNavLink class="nav-link" data-bs-toggle="tab" role="tab" aria-current="page"
-                        aria-selected="true">Notes</a>
-                        <ng-template ngbNavContent>
-                            <div class="p-3 border br-7 text-muted" id="pill-products" role="tabpanel">
-                                <div class="row">
-                                    <!-- <div class="col-xxl-4">Notes</div> -->
-                                    <div class="col-xxl-12 border-start">
-                                        <span>Notes</span> <br>
-                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-    
-                                    </div>
-                                  </div>
-                            </div>
-                        </ng-template>
-                    </li>
-                   
-                    <li [ngbNavItem]="2" class="nav-item">
-                        <a ngbNavLink class="nav-link" data-bs-toggle="tab" role="tab" aria-current="page"
-                     aria-selected="false">Images</a>
-                     <ng-template ngbNavContent>
-                        <div class="p-3 border br-7 text-muted" id="pill-orders" role="tabpanel">
-                            <div class="card custom-card">
-                                <div class="card-header justify-content-between">
-                                    <div class="card-title">
-                                        
-                                    </div>
-                                    <!-- <button type="button" class="btn btn-sm btn-primary-light">upload Image
-                                            </button> -->
-                                    <div class="file-upload float-end">
-                                        <input type="file"  id="file-input" (change)="onFileSelected($event)"
-                                            accept="*/*" hidden>
-                                            <button type="file"  class="btn btn-sm btn-primary-light">upload Image
-                                            </button>
-                                    </div>
-                                </div>
-                                <div class="card-title pt-2">
-                                    <img src="./assets/images/ecommerce/jpg/19.jpeg" alt="" >
-                                </div>
-                            </div>
-                        </div>
-                    </ng-template>
-                    </li>
-                    <li [ngbNavItem]="3" class="nav-item">
-                        <a ngbNavLink class="nav-link" data-bs-toggle="tab" role="tab" aria-current="page"
-                     aria-selected="false">Videos</a>
-                     <ng-template ngbNavContent>
-                        <div class="p-3 border br-7 text-muted" id="pill-orders" role="tabpanel">
-                            <div class="card custom-card">
-                                <div class="card-header justify-content-between">
-                                    <div class="card-title">
-                                        
-                                    </div>
-                                    <!-- <button type="button" class="btn btn-sm btn-primary-light">upload Image
-                                            </button> -->
-                                    <div class="file-upload float-end">
-                                        <input type="file"  id="file-input" (change)="onFileSelected($event)"
-                                            accept="*/*" hidden>
-                                            <button type="file"  class="btn btn-sm btn-primary-light">upload Video
-                                            </button>
-                                    </div>
-                                </div>
-                                <div class="card-title pt-2">
-                                    <img src="./assets/images/ecommerce/jpg/19.jpeg" alt="" >
-                                </div>
-                            </div>
-                        </div>
-                    </ng-template>
-                    </li>
-                    
-                    
-                </ul>
-                <div class="tab-content">
-                
-                   
-                  
-                    <div [ngbNavOutlet]="nav21" class="mt-2"></div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 <!--End::row-1 -->
 <!-- Start:: row-2 -->
@@ -498,17 +408,10 @@
                 </div>
             </div>
             <div class="d-flex justify-content-between align-items-center mb-3">
-                <button class="btn btn-primary btn-wave ms-2">
-                    <a routerLink="/dashboard/mytask" class="text-white" >
-                    <i class="bi bi-plus-circle align-middle"></i> add
-                </a>
-                </button>
-                
-                <button class="btn btn-secondary btn-wave me-2">
-                    <a routerLink="/pages/timeline" class="text-white">
-                    <i class="bi bi-calendar-date align-middle"></i> Time Line
-                    </a>
-                </button>
+                <a  class="btn btn-sm btn-primary btn-wave ms-3" 
+                routerLink="/dashboard/mytask"><i class="ri-add-line align-middle me-1 fw-medium"></i>Add</a>
+                <a  class="btn btn-sm btn-primary btn-wave me-3" 
+                routerLink="/pages/timeline"><i class="bi bi-calendar-date align-middle me-1 fw-medium"></i>Time Line</a>
             </div>
         </div>
     </div>
@@ -576,17 +479,10 @@
                 </div>
             </div>
             <div class="d-flex justify-content-between align-items-center mb-3">
-                <button class="btn btn-primary btn-wave ms-2">
-                    <a routerLink="/dashboard/mytask" class="text-white" >
-                    <i class="bi bi-plus-circle align-middle"></i> add
-                </a>
-                </button>
-                
-                <button class="btn btn-secondary btn-wave me-2">
-                    <a routerLink="/pages/timeline" class="text-white">
-                    <i class="bi bi-calendar-date align-middle"></i> Time Line
-                    </a>
-                </button>
+                <a  class="btn btn-sm btn-primary btn-wave ms-3" 
+                routerLink="/dashboard/mytask"><i class="ri-add-line align-middle me-1 fw-medium"></i>Add</a>
+                <a  class="btn btn-sm btn-primary btn-wave me-3" 
+                routerLink="/pages/timeline"><i class="bi bi-calendar-date align-middle me-1 fw-medium"></i>Time Line</a>
             </div>
         </div>
     </div>
@@ -657,17 +553,10 @@
                 </div>
             </div>
             <div class="d-flex justify-content-between align-items-center mb-3">
-                <button class="btn btn-primary btn-wave ms-2">
-                    <a routerLink="/dashboard/mytask" class="text-white" >
-                    <i class="bi bi-plus-circle align-middle"></i> add
-                </a>
-                </button>
-                
-                <button class="btn btn-secondary btn-wave me-2">
-                    <a routerLink="/pages/timeline" class="text-white">
-                    <i class="bi bi-calendar-date align-middle"></i> Time Line
-                    </a>
-                </button>
+                <a  class="btn btn-sm btn-primary btn-wave ms-3" 
+                routerLink="/dashboard/mytask"><i class="ri-add-line align-middle me-1 fw-medium"></i>Add</a>
+                <a  class="btn btn-sm btn-primary btn-wave me-3" 
+                routerLink="/pages/timeline"><i class="bi bi-calendar-date align-middle me-1 fw-medium"></i>Time Line</a>
             </div>
         </div>    
     </div>
