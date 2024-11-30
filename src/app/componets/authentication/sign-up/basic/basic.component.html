@@ -52,7 +52,7 @@
                                     <label for="signup-companyName" class="form-label text-default">
                                         <strong>Company Name</strong> <span class="text-danger"> *</span></label>
                                     <input type="text" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" id="signup-companyName"
-                                        placeholder="Company name" formControlName="companyName"
+                                        placeholder="Enter Your Company name" formControlName="companyName"
                                         [ngClass]="{ 'is-invalid': submitted && f['companyName'].errors }"
                                         appShowCodeContent maxlength="50">
                                     <div *ngIf="submitted && f['companyName'].errors" class="invalid-feedback">
@@ -75,7 +75,7 @@
                                 <div class="col-xl-6">
                                     <label for="signup-firstname" class="form-label text-default"><strong>First Name</strong><span class="text-danger"> *</span></label>
                                     <input type="text" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" id="signup-firstname"
-                                        placeholder="First name" formControlName="firstName" appShowCodeContent
+                                        placeholder="Enter your First name" formControlName="firstName" appShowCodeContent
                                         onkeypress='return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && 
                                         event.charCode <= 122) || event.charCode == 8 || event.charCode == 32)'
                                         [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }" maxlength="50">
@@ -86,7 +86,7 @@
                                 <div class="col-xl-6">
                                     <label for="signup-lastname" class="form-label text-default"><strong>Last Name</strong><span class="text-danger"> *</span></label>
                                     <input type="text" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" id="signup-lastname"
-                                        placeholder="Last name" formControlName="lastName" appShowCodeContent
+                                        placeholder="Enter your Last name" formControlName="lastName" appShowCodeContent
                                         onkeypress='return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && 
                                         event.charCode <= 122) || event.charCode == 8 ||event.charCode == 32)'
                                         [ngClass]="{ 'is-invalid': submitted && f['lastName'].errors }" maxlength="50">
@@ -119,7 +119,7 @@
                                 <div class="col-xl-6">
                                     <label for="signup-email" class="form-label text-default"><strong>Email</strong><span class="text-danger"> *</span></label>
                                     <input type="text" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark " id="signup-email" 
-                                        placeholder="email" onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
+                                        placeholder="Enter your email" onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || 
                                         (event.charCode >= 64 && event.charCode <= 90) || (event.charCode >= 97 && 
                                         event.charCode <= 122) || event.charCode == 8 || event.charCode == 46 || event.charCode == 95)'
                                         formControlName="email" appShowCodeContent [(ngModel)] = 'mailId'
@@ -134,7 +134,7 @@
                                         class="form-label text-default"><strong>Password</strong><span class="text-danger"> *</span></label>
                                     <div class="position-relative">
                                         <input type="password" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark" id="signup-password"
-                                            placeholder="password" [type]="showPassword ? 'text' : 'password'" autocomplete
+                                            placeholder="Enter your password" [type]="showPassword ? 'text' : 'password'" autocomplete
                                             formControlName="password" appShowCodeContent [(ngModel)]="paswrd"
                                             onkeypress='return ((event.charCode >= 33 && event.charCode <= 127) || event.charCode == 8)' 
                                             (copy)="preventCopyPaste($event)" (cut)="preventCopyPaste($event)" (paste)="preventCopyPaste($event)"
@@ -159,7 +159,7 @@
                                     <label for="signup-confirmpassword" class="form-label text-default"><strong>Confirm Password</strong><span class="text-danger"> *</span></label>
                                     <div class="position-relative">
                                         <input type="password" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark"
-                                            id="signup-confirmpassword" placeholder="confirm password" formControlName="confirmPassword"
+                                            id="signup-confirmpassword" placeholder="confirm your password" formControlName="confirmPassword"
                                             [type]="showPassword1 ? 'text' : 'password'" autocomplete maxlength="16"
                                             (copy)="preventCopyPaste($event)" (cut)="preventCopyPaste($event)" (paste)="preventCopyPaste($event)"
                                             onkeypress='return ((event.charCode >= 33 && event.charCode <= 127) || event.charCode == 8)' 
@@ -204,7 +204,7 @@
                                         </select>
                                         <input type="text" 
                                             class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark"
-                                            formControlName="phoneNumber" maxlength="10"
+                                            formControlName="phoneNumber" placeholder="Enter your mobile number" maxlength="10"
                                             onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || event.charCode == 8)" 
                                             (copy)="preventCopyPaste($event)" (cut)="preventCopyPaste($event)" (paste)="preventCopyPaste($event)" 
                                             [ngClass]="{ 'is-invalid': submitted && f['phoneNumber'].errors }">

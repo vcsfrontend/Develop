@@ -10,8 +10,8 @@
                             <div>
                                 <ul ngbNav #nav="ngbNav" [activeId]="1" class="nav nav-tabs nav-tabs-header mb-0 d-sm-flex d-block" role="tablist">
                                     <li [ngbNavItem]="1" class="nav-item m-1">
-                                        <a ngbNavLink class="nav-link" data-bs-toggle="tab" role="tab" aria-current="page"
-                                            aria-selected="true">Notes</a>
+                                        <!-- <a ngbNavLink class="nav-link" data-bs-toggle="tab" role="tab" aria-current="page"
+                                            aria-selected="true"></a> -->
                                             <ng-template ngbNavContent>
                                                 <div class=" p-0" id="all-tasks" role="tabpanel">
                                                     <div class="row" id="tasks-container">
@@ -20,7 +20,7 @@
                                                                 <div class="card-body">
                                                                     <div class="justify-content-between flex-wrap gap-2">
                                                                         <div class="row">
-                                                                            <div class="col-xxl-10 col-xl-10 col-lg-10 col-md-12 col-sm-12">
+                                                                            <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                                                                 <div class="card custom-card contactus-form overflow-hidden">
                                                                                     <div class="card-header">
                                                                                         <div class="card-title">
@@ -44,6 +44,17 @@
                                                                                                 </div>
                                                                                             </div>
                                                                                         </form>
+                                                                                        <div class="card-title d-flex pt-2">
+                                                                                            <div class="col-xxl-9">
+                                                                                                <img src="./assets/images/ecommerce/jpg/19.jpeg" alt="" class="p-4" >
+                                                                                            </div>
+                                                                                            <div class="file-upload col-xxl-3 p-5">
+                                                                                                <file-pond #myPond [options]="pondOptions" class="multiple-filepond" [files]="pondFiles"
+                                                                                                (oninit)="pondHandleInit()" (onaddfile)="pondHandleAddFile($event)"
+                                                                                                (onactivatefile)="pondHandleActivateFile($event)">
+                                                                                                </file-pond>
+                                                                                            </div> 
+                                                                                        </div>
                                                                                     </div>
                                                                                     <div class="card-footer d-flex gap-2">
                                                                                         <div class="text-center">
@@ -55,7 +66,7 @@
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="col-xxl-1 col-lg-1 col-md-1 col-xl-1 pt-4">
+                                                                            <!-- <div class="col-xxl-1 col-lg-1 col-md-1 col-xl-1 pt-4">
                                                                                 <div class="btn-list">
                                                                                     <button
                                                                                         class="btn btn-sm btn-icon btn-wave btn-primary-light rounded-circle"><i
@@ -65,7 +76,7 @@
                                                                                         class="ri-delete-bin-line"></i></button> 
                                                                                 </div>
                                                                                 
-                                                                            </div>  
+                                                                            </div>   -->
                                                                         </div>
                                                                         
                                                                     </div>
@@ -76,7 +87,7 @@
                                                 </div>
                                             </ng-template>
                                     </li>
-                                    <li [ngbNavItem]="2" class="nav-item m-1">
+                                    <!-- <li [ngbNavItem]="2" class="nav-item m-1">
                                         <a ngbNavLink class="nav-link" data-bs-toggle="tab" role="tab" aria-current="page"
                                             aria-selected="true">Images</a>
                                             <ng-template ngbNavContent>
@@ -87,9 +98,7 @@
                                                                 <div class="card-header justify-content-between">
                                                                     <div class="card-title">
                                                                         Images
-                                                                    </div>
-                                                                    <!-- <button type="button" class="btn btn-sm btn-primary-light">upload Image
-                                                                            </button> -->
+                                                                    </div>   
                                                                 </div>
                                                                 <div class="card-title d-flex pt-2">
                                                                     <div class="col-xxl-8">
@@ -139,9 +148,7 @@
                                                                 <div class="card-header justify-content-between">
                                                                     <div class="card-title">
                                                                         Videos
-                                                                    </div>
-                                                                    <!-- <button type="button" class="btn btn-sm btn-primary-light">upload Image
-                                                                            </button> -->
+                                                                    </div>  
                                                                 </div>
                                                                 <div class="card-title d-flex pt-2">
                                                                     <div class="col-xxl-8">
@@ -179,7 +186,7 @@
                                                     </div>
                                                 </div>
                                             </ng-template>
-                                    </li> 
+                                    </li>  -->
                                 </ul>
                             </div>
                             <div>
@@ -226,5 +233,4 @@
     </div>
 </div>
 <!--End::row-1 -->
-<a routerLink="/pages/timeline"><i class="ri-arrow-right-line align-middle me-1 fw-medium"></i>View all</a>
-                                
+<a href="/pages/timeline/" routerLink="/pages/timeline/">ttttt</a>
