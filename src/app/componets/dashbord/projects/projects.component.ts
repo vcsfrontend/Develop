@@ -136,9 +136,7 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
  
   ngOnInit(): void {
     this.getLst(); this.getdesignData();
-    // console.log(this.pjData);
     this.onMinDate(); this.onTodayDt();
-    // Initialize the form with the necessary controls and validators
     this.createProjectForm = this.fb.group({
       projectName: ['', Validators.required],
       clientName: ['', Validators.required],
@@ -151,7 +149,7 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
       projectArea: ['', [Validators.required, Validators.min(0)]], // Assuming area should be a positive number
       projectStartDate: ['', Validators.required],
       projectEndDate: ['', Validators.required],
-      action: ['', Validators.required],
+      action: [''],
       companyName: [JSON.parse(this.userDetails)?.companyName],
       attachments: [null] // Adjust based on your attachment handling
     });
@@ -193,7 +191,7 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
         next: (response) => {
           console.log('Project created successfully', response);
           this.modalService.dismissAll(),
-          this.getLst();
+          this.getLst(); this.getdesignData();
         },
         error: (error) => {
           console.error('Error creating project', error);
@@ -225,6 +223,11 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
     }
     return index + 1; // Default return if paginator is not yet defined
   }
+  addDateDifference() {
+    this.projectLst = this.projectLst.map((e:any) => ({
+      ...e, dateDifference: this.calculateDateDifference(e.projectEndDate)
+    }));
+  }
 
   getLst(){
     // console.log(JSON.parse(this.userDetails)?.companyName);
@@ -233,6 +236,10 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
       if(res){
         this.projectLst = res
         this.dataSource.data = res;
+        this.addDateDifference();
+        // this.projectLst = this.projectLst.filter((e:any) => e.dateDifference >= 0);
+        this.projectLst.sort((a:any, b:any) => a.dateDifference - b.dateDifference);
+        console.log(this.projectLst);
         } else {
           this.toastr.error(res.message);
         }

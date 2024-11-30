@@ -12,6 +12,7 @@ export class BaseComponent {
   datePickerConfig = {
     isAnimated: true, adaptivePosition: true, dateInputFormat: 'DD-MM-YYYY', showWeekNumbers: false 
   };
+
   onTodayDt(){
     const today = new Date();
     const yyyy = today.getFullYear();
@@ -30,6 +31,15 @@ export class BaseComponent {
     this.minDate = `${yyyy}-${mm}-${dd}`;
   }
   
+  calculateDateDifference(projectEndDate: string): number {
+    const currentDate = new Date();
+    const endDate = new Date(projectEndDate);
+    // Calculate the difference in time (milliseconds)
+    const timeDifference = endDate.getTime() - currentDate.getTime();
+    // Convert time difference to days
+    const dayDifference = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
+    return dayDifference;
+  }
   countryLst = [{"country":"Afghanistan","code":"93","iso":"AF"},
     {"country":"Albania","code":"355","iso":"AL"},
     {"country":"Algeria","code":"213","iso":"DZ"},

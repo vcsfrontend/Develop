@@ -361,19 +361,16 @@
             </div>
         </div>
     </div>
-    <div class="col-xxl-4 col-lg-4 col-md-4 col-xl-4">
+    <div class="col-xxl-4 col-lg-4 col-md-4 col-xl-4" *ngFor="let project of projectLst">
         <div class="card custom-card">
             <div class="card-header d-flex align-items-center justify-content-between">
                 <div class="me-2  align-items-center">
                     <span class="avatar avatar-rounded p-1 bg-light">
                         <img src="./assets/images/brand-logos/profile1.jpg" alt="">
                     </span>
-
                 </div>
-
                 <div class="flex-fill">
-                    <a href="javascript:void(0);" class="fs-14 d-block text-truncate project-list-title">Design &amp;
-                        Developing New Project</a>
+                    <a href="javascript:void(0);" class="fs-14 d-block text-truncate project-list-title">{{project.projectName}}</a>
                     <span class="text-muted d-block fs-12">Total <strong class="text-default">18/22</strong> tasks
                         completed</span>
                 </div>
@@ -416,7 +413,9 @@
                     </div>
                     <div class="text-end">
                         <div class="mb-1">Priority :</div>
-                        <span class="badge bg-success-transparent">5 days to go</span>
+                        <!-- <span class="badge bg-success-transparent">{{project.dateDifference}} days to go</span> -->
+                        <span class="badge" [ngClass]="{'bg-danger-transparent text-danger': project.dateDifference < 0,
+                            'bg-success-transparent': project.dateDifference >= 0}">{{project.dateDifference}} days to go</span>
                     </div>
                 </div>
                 <div class="mb-1">Status :</div>
@@ -437,7 +436,7 @@
             </div>
         </div>
     </div>
-    <div class="col-xxl-4 col-lg-4 col-md-4 col-xl-4">
+    <!-- <div class="col-xxl-4 col-lg-4 col-md-4 col-xl-4">
         <div class="card custom-card">
             <div class="card-header align-items-center d-flex justify-content-between">
                 <div class="me-2">
@@ -581,7 +580,7 @@
                         class="bi bi-calendar-date align-middle me-1 fw-medium"></i>Project Cycle</a>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>
 <!-- End:: row-2 -->
 <!-- start:: row-3 -->
@@ -681,7 +680,8 @@
                             </ng-container>
                             <ng-container matColumnDef="projectEndDate">
                                 <th mat-header-cell *matHeaderCellDef>Project End Date</th>
-                                <td mat-cell *matCellDef="let element"> {{element.projectEndDate}} </td>
+                                <td mat-cell *matCellDef="let element"> {{element.projectEndDate}}
+                                     - ({{calculateDateDifference(element.projectEndDate)}}) </td>
                             </ng-container>
                             <ng-container matColumnDef="designId">
                                 <th mat-header-cell *matHeaderCellDef>Design Id</th>
@@ -745,11 +745,16 @@
                                     </div>
                                     <div class="col-xl-4">
                                         <label for="businessCategory" class="form-label">Business Category:</label>
-                                        <select class="form-select" aria-label="Default select example"  [(ngModel)]='businessCategory'>
-                                            <option value="0">select type</option>
-                                            <option value="1">Commercial</option>
-                                            <option value="2">Residential</option>  
+                                        <select class="form-select" aria-label="Default select example" formControlName='businessCategory'
+                                            [ngClass]="{ 'is-invalid': submitted && f['businessCategory'].errors }">
+                                            <option value="" disabled selected>select type</option>
+                                            <option value="Commercial">Commercial</option>
+                                            <option value="Residential">Residential</option>  
                                         </select>   
+                                        <div *ngIf="submitted && f['businessCategory'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['businessCategory'].errors['required']">Business Category is
+                                                required</div>
+                                        </div>
                                         <!-- <input type="text" class="form-control" id="businessCategory"
                                             formControlName="businessCategory" placeholder="Business Category"
                                             [ngClass]="{ 'is-invalid': submitted && f['businessCategory'].errors }"
@@ -792,8 +797,8 @@
                                         <label for="projectState" class="form-label">Project Stage:</label>
                                         <input type="text" class="form-control" id="projectState"
                                             formControlName="projectState" placeholder="Enter Project State"
-                                            [ngClass]="{ 'is-invalid': submitted && f['projectState'].errors }"
-                                            maxlength="50">
+                                            [ngClass]="{ 'is-invalid': submitted && f['projectState'].errors }" maxlength="50"
+                                            onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || event.charCode == 8)">
                                         <div *ngIf="submitted && f['projectState'].errors" class="invalid-feedback">
                                             <div *ngIf="f['projectState'].errors['required']">Project State is required
                                             </div>
@@ -801,11 +806,10 @@
                                     </div>
                                     <div class="col-xl-4">
                                         <label for="projectEstimation" class="form-label">Project Estimation:</label>
-                                        <input type="tel" class="form-control" id="projectEstimation"
+                                        <input type="tel" class="form-control" id="projectEstimation" maxlength="10" 
                                             formControlName="projectEstimation" placeholder="Enter Estimation"
                                             [ngClass]="{ 'is-invalid': submitted && f['projectEstimation'].errors }"
-                                            maxlength="10">
-                                        <div *ngIf="submitted && f['projectEstimation'].errors"
+                                            onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || event.charCode == 8)">                                        <div *ngIf="submitted && f['projectEstimation'].errors"
                                             class="invalid-feedback">
                                             <div *ngIf="f['projectEstimation'].errors['required']">Project Estimation is
                                                 required</div>
@@ -822,7 +826,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-xl-4">
+                                    <!-- <div class="col-xl-4">
                                         <label for="action" class="form-label">Action:</label>
                                         <input type="text" class="form-control" id="action" formControlName="action"
                                             placeholder="Enter Action"
@@ -831,7 +835,7 @@
                                         <div *ngIf="submitted && f['action'].errors" class="invalid-feedback">
                                             <div *ngIf="f['action'].errors['required']">Action is required</div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <!-- <div class="col-xl-4">
                             <label for="companyName" class="form-label">Company Name:</label>
                             <input type="text" class="form-control" id="companyName" formControlName="companyName" placeholder="Enter Company Name">
