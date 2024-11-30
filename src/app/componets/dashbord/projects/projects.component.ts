@@ -78,10 +78,13 @@ export type ChartOptions = {
   styleUrl: './projects.component.scss',
 })
 export class ProjectsComponent extends BaseComponent implements OnInit {
-  displayedColumns: string[] = ['slNo', 'projectId', 'projectName', 'clientName', 'businessCategory',
-    'projectAddress', 'state', 'city', 'projectState', 'projectEstimation',
-    'projectArea', 'projectStartDate', 'projectEndDate', 'action', 'designId', 'companyName'
+  displayedColumns: string[] = ['slNo', 'projectId', 'clientName', 'projectState', 'projectEstimation',
+    'projectArea', 'projectStartDate', 'projectEndDate', 
   ];
+  // displayedColumns: string[] = ['slNo', 'projectId', 'projectName', 'clientName', 'businessCategory',
+  //   'projectAddress', 'state', 'city', 'projectState', 'projectEstimation',
+  //   'projectArea', 'projectStartDate', 'projectEndDate', 'action', 'designId', 'companyName'
+  // ];
   pjData : any = {}; isSts:boolean = true; submitted: boolean = false; userData: any;
   projectName: string = ''; clientName: string = ''; businessCategory: string = '';
   projectAddress: string = ''; state: string = ''; city: string = ''; projectArea: string = ''; 
