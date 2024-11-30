@@ -35,8 +35,8 @@
                                                                                                     <input type="text" class="form-control" id="contact-address-firstname" placeholder="Enter Your Heading">
                                                                                                 </div>
                                                                                                 <div class="col-xl-6">
-                                                                                                    <label for="contact-address-lastname" class="form-label">Client Name :</label>
-                                                                                                    <input type="text" class="form-control" id="contact-address-lastname" placeholder="Enter Client Name">
+                                                                                                    <label for="contact-address-lastname" class="form-label">Heading 2</label>
+                                                                                                    <input type="text" class="form-control" id="contact-address-lastname" placeholder="Enter Client Name"> 
                                                                                                 </div>
                                                                                                 <div class="col-xl-12">
                                                                                                     <label for="contact-address-address" class="form-label">Description :</label>
@@ -45,15 +45,21 @@
                                                                                             </div>
                                                                                         </form>
                                                                                         <div class="card-title d-flex pt-2">
-                                                                                            <div class="col-xxl-9">
+                                                                                            <div class="col-xxl-9 col-lg-9 col-xl-9 col-md-9">
                                                                                                 <img src="./assets/images/ecommerce/jpg/19.jpeg" alt="" class="p-4" >
                                                                                             </div>
-                                                                                            <div class="file-upload col-xxl-3 p-5">
+                                                                                            <div class="file-upload col-xxl-3 col-lg-3 col-xl-3 col-md-3 p-5">
                                                                                                 <file-pond #myPond [options]="pondOptions" class="multiple-filepond" [files]="pondFiles"
                                                                                                 (oninit)="pondHandleInit()" (onaddfile)="pondHandleAddFile($event)"
                                                                                                 (onactivatefile)="pondHandleActivateFile($event)">
                                                                                                 </file-pond>
                                                                                             </div> 
+                                                                                        </div>
+                                                                                        <div class="col-xxl-9 col-lg-9 col-xl-9 col-md-9">
+                                                                                            <!-- <video src="/assets/video/school_of_fish.mp4" class="sample p-4"></video> -->
+                                                                                            <video width="320" height="240" controls>
+                                                                                                <source src="/assets/video/school_of_fish.mp4" type="video/mp4">
+                                                                                            </video>                                                                                              
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="card-footer d-flex gap-2">
@@ -205,18 +211,15 @@
                                                 All</a></li>
                                     </ul>
                                 </div> -->
-                                <a  class="btn btn-sm btn-primary btn-wave me-3" 
-                                routerLink="/pages/timeline"><i class="ri-arrow-right-line align-middle me-1 fw-medium"></i>View all</a>
+                                <a  class="btn btn-sm btn-primary btn-wave me-3" href="/pages/timeline" 
+                                routerLink="/pages/timeline">View all<i class="ri-arrow-right-line align-middle me-1 fw-medium"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="tab-content task-tabs-container">
-                
                 <div [ngbNavOutlet]="nav" class="mt-2"></div>
-                
-                
             </div>
         </div>
         <ul class="pagination justify-content-end">
@@ -233,4 +236,5 @@
     </div>
 </div>
 <!--End::row-1 -->
-<a href="/pages/timeline/" routerLink="/pages/timeline/">ttttt</a>
+
+
