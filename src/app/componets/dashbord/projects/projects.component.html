@@ -745,14 +745,19 @@
                                     </div>
                                     <div class="col-xl-4">
                                         <label for="businessCategory" class="form-label">Business Category:</label>
-                                        <input type="text" class="form-control" id="businessCategory"
+                                        <select class="form-select" aria-label="Default select example"  [(ngModel)]='businessCategory'>
+                                            <option value="0">select type</option>
+                                            <option value="1">Commercial</option>
+                                            <option value="2">Residential</option>  
+                                        </select>   
+                                        <!-- <input type="text" class="form-control" id="businessCategory"
                                             formControlName="businessCategory" placeholder="Business Category"
                                             [ngClass]="{ 'is-invalid': submitted && f['businessCategory'].errors }"
                                             maxlength="50">
                                         <div *ngIf="submitted && f['businessCategory'].errors" class="invalid-feedback">
                                             <div *ngIf="f['businessCategory'].errors['required']">Business Category is
                                                 required</div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div class="col-xl-4">
                                         <label for="projectAddress" class="form-label">Project Address:</label>
@@ -784,7 +789,7 @@
                                         </div>
                                     </div>
                                     <div class="col-xl-4">
-                                        <label for="projectState" class="form-label">Project State:</label>
+                                        <label for="projectState" class="form-label">Project Stage:</label>
                                         <input type="text" class="form-control" id="projectState"
                                             formControlName="projectState" placeholder="Enter Project State"
                                             [ngClass]="{ 'is-invalid': submitted && f['projectState'].errors }"
@@ -796,10 +801,10 @@
                                     </div>
                                     <div class="col-xl-4">
                                         <label for="projectEstimation" class="form-label">Project Estimation:</label>
-                                        <input type="number" class="form-control" id="projectEstimation"
+                                        <input type="tel" class="form-control" id="projectEstimation"
                                             formControlName="projectEstimation" placeholder="Enter Estimation"
                                             [ngClass]="{ 'is-invalid': submitted && f['projectEstimation'].errors }"
-                                            maxlength="50">
+                                            maxlength="10">
                                         <div *ngIf="submitted && f['projectEstimation'].errors"
                                             class="invalid-feedback">
                                             <div *ngIf="f['projectEstimation'].errors['required']">Project Estimation is
@@ -807,11 +812,11 @@
                                         </div>
                                     </div>
                                     <div class="col-xl-4">
-                                        <label for="projectArea" class="form-label">Project Area:</label>
-                                        <input type="number" class="form-control" id="projectArea"
+                                        <label for="projectArea" class="form-label">Project Area (SFT):</label>
+                                        <input type="tel" class="form-control" id="projectArea"
                                             formControlName="projectArea" placeholder="Enter Project Area"
                                             [ngClass]="{ 'is-invalid': submitted && f['projectArea'].errors }"
-                                            maxlength="50">
+                                            maxlength="6">
                                         <div *ngIf="submitted && f['projectArea'].errors" class="invalid-feedback">
                                             <div *ngIf="f['projectArea'].errors['required']">Project Area is required
                                             </div>
@@ -906,7 +911,6 @@
                     <div class="card custom-card">
                         <!-- <div class="card-header">
                     <div class="card-title">Create Project</div>
-                    
                     </div> -->
                         <div class="card-body">
                             <div class="row gy-3">
@@ -920,11 +924,17 @@
                                 </div>
                                 <div class="col-xl-4">
                                     <label for="businessCategory" class="form-label">Business Category:</label>
-                                    <ng-select class="ti-form-select !rounded-s-none" [(ngModel)]='businessCategory'
+                                    <!-- <ng-select class="ti-form-select !rounded-s-none" [(ngModel)]='businessCategory'
                                         name="choices-multiple-remove-button" id="businessCategory" [multiple]="true">
                                         <ng-option value="Choice 1" selected>Commercial</ng-option>
                                         <ng-option value="Choice 2">Residential</ng-option>
-                                    </ng-select>
+                                    </ng-select> -->
+                                    <select class="form-select" aria-label="Default select example"  [(ngModel)]='businessCategory'>
+                                        <option value="0">select type</option>
+                                        <option value="1">Commercial</option>
+                                        <option value="2">Residential</option>  
+                                    </select>
+                                    
                                     <!-- <input type="text" class="form-control" id="businessCategory" formControlName="businessCategory" placeholder=""> -->
                                 </div>
                                 <div class="col-xl-4">
