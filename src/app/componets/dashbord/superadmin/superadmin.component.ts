@@ -953,9 +953,21 @@ chartOptions6:any= {
     //     { "count": 15, "city": "Bangalore" },
     //     { "city": "Chennai", "count": 11 },
     //     { "city": "Delhi", "count": 4 },
-    //     { "city": "Hyderabad", "count": 3 }
+    //     { "city": "Hyderabad", "count": 3 },
+    //     { "city": "Mumbai", "count": 5 },
+    //     { "city": "Bangalore", "count": 2 },
+    //     { "city": "Kolkata", "count": 8 }
     //   ]
     // }
+  }
+  showCrmFullDetails:boolean = false;
+  showAdonaiFullDetails:boolean = false;
+  toggleCrmFullDetails(): void {
+    this.showCrmFullDetails = !this.showCrmFullDetails;
+  }
+
+  toggleAdonaiFullDetails(): void {
+    this.showAdonaiFullDetails = !this.showAdonaiFullDetails;
   }
 
   options27:any = {

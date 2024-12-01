@@ -17,7 +17,30 @@
         <!-- <button (click)="onclick()" type="button" class="btn btn-primary-light btn-wave me-0">
             <i class="bi bi-arrow-right-circle align-middle"></i>&nbsp; {{ReadMore?"Read More":"Read Less"}}
         </button> -->
-        
+
+    </div>
+</div>
+<div class="col-xl-12 col-xxl-12 col-md-12">
+    <div class="card custom-card ">
+        <div class="card-header justify-content-between">
+
+            <marquee behavior="scroll" direction="left" class="fs-18 font-weight-bold" style="color: #006699;">
+                Click to Explore Endless Designs
+            </marquee>
+        </div>
+        <div class="row">
+            <div class="card-body col-xxl-8 col-xl-8 col-md-8 col-lg-8 text-center">
+                <div class="d-grid gap-2 col-9 text-center">
+                    <img class="rounded mx-auto d-block demo" src="/assets/images/company-logos/adonai_logo.png" alt="">
+                </div>
+            </div>
+            <div class="col-xxl-4 col-lg-4 col-md-4 col-xl-4 col-6  text-center mx-auto pt-4">
+                <button class="btn button   btn-wave btn-w-lg  font-weight-bold"
+                    style="background-color: #006699; color: white;" aria-expanded="false" (click)="onClkDesign()"
+                    type="button">Click to Explore Endless Designs </button>
+
+            </div>
+        </div>
     </div>
 </div>
 <!-- Start::row-1 -->
@@ -32,17 +55,18 @@
                                 <span class="avatar avatar-rounded bg-success-transparent">
                                     <i class="ti ti-album fs-20"></i>
                                 </span>
-                                <span class="badge bg-danger-transparent">{{pjData.totalProjPercent | number:'1.2-2' }} %</span>
+                                <span class="badge bg-danger-transparent">{{pjData.totalProjPercent | number:'1.2-2' }}
+                                    %</span>
                             </div>
                             <div class="text-muted mb-2">Total Projects</div>
                             <h4 class="mb-0">{{pjData.totalProjects}}</h4>
                         </div>
                         <div id="total-projects">
                             <apx-chart [series]="chartOptions2.series" [chart]="chartOptions2.chart"
-                                [xaxis]="chartOptions2.xaxis" [colors]="chartOptions2.colors" [fill]="chartOptions2.fill"
-                                [stroke]="chartOptions2.stroke" [tooltip]="chartOptions2.tooltip"
-                                [dataLabels]="chartOptions2.dataLabels" [grid]="chartOptions2.grid"
-                                [yaxis]="chartOptions2.yaxis"></apx-chart>
+                                [xaxis]="chartOptions2.xaxis" [colors]="chartOptions2.colors"
+                                [fill]="chartOptions2.fill" [stroke]="chartOptions2.stroke"
+                                [tooltip]="chartOptions2.tooltip" [dataLabels]="chartOptions2.dataLabels"
+                                [grid]="chartOptions2.grid" [yaxis]="chartOptions2.yaxis"></apx-chart>
                         </div>
                     </div>
                 </div>
@@ -55,7 +79,8 @@
                                 <span class="avatar avatar-rounded bg-primary-transparent">
                                     <i class="ti ti-file-check fs-20"></i>
                                 </span>
-                                <span class="badge bg-success-transparent">{{pjData.completeProjPercent | number:'1.2-2' }} %</span>
+                                <span class="badge bg-success-transparent">{{pjData.completeProjPercent | number:'1.2-2'
+                                    }} %</span>
                             </div>
                             <div class="text-muted mb-2">Completed Projects</div>
                             <h4 class="mb-0">{{pjData.completedProj}}</h4>
@@ -69,7 +94,7 @@
                         </div>
                     </div>
                 </div>
-            </div> 
+            </div>
             <div class="col-xl-3">
                 <div class="card custom-card overflow-hidden">
                     <div class="card-body p-0">
@@ -78,17 +103,18 @@
                                 <span class="avatar avatar-rounded bg-danger-transparent">
                                     <i class="ti ti-chart-pie-2 fs-20"></i>
                                 </span>
-                                <span class="badge bg-success-transparent">{{pjData.pendingProjPecent | number:'1.2-2' }} %</span>
+                                <span class="badge bg-success-transparent">{{pjData.pendingProjPecent | number:'1.2-2'
+                                    }} %</span>
                             </div>
                             <div class="text-muted mb-2">Pending Projects</div>
                             <h4 class="mb-0">{{pjData.pendingProj}}</h4>
                         </div>
                         <div id="pending-projects">
                             <apx-chart [series]="chartOptions3.series" [chart]="chartOptions3.chart"
-                                [xaxis]="chartOptions3.xaxis" [colors]="chartOptions3.colors" [fill]="chartOptions3.fill"
-                                [stroke]="chartOptions3.stroke" [tooltip]="chartOptions3.tooltip"
-                                [dataLabels]="chartOptions3.dataLabels" [grid]="chartOptions3.grid"
-                                [yaxis]="chartOptions3.yaxis"></apx-chart>
+                                [xaxis]="chartOptions3.xaxis" [colors]="chartOptions3.colors"
+                                [fill]="chartOptions3.fill" [stroke]="chartOptions3.stroke"
+                                [tooltip]="chartOptions3.tooltip" [dataLabels]="chartOptions3.dataLabels"
+                                [grid]="chartOptions3.grid" [yaxis]="chartOptions3.yaxis"></apx-chart>
                         </div>
                     </div>
                 </div>
@@ -101,17 +127,18 @@
                                 <span class="avatar avatar-rounded bg-info-transparent">
                                     <i class="ti ti-briefcase fs-20"></i>
                                 </span>
-                                <span class="badge bg-success-transparent">{{pjData.overdueProjPercrnt | number:'1.2-2' }} %</span>
+                                <span class="badge bg-success-transparent">{{pjData.overdueProjPercrnt | number:'1.2-2'
+                                    }} %</span>
                             </div>
                             <div class="text-muted mb-2">Overdue Projects</div>
                             <h4 class="mb-0">{{pjData.overdueProj}}</h4>
                         </div>
                         <div id="overdue-projects">
                             <apx-chart [series]="chartOptions1.series" [chart]="chartOptions1.chart"
-                                [xaxis]="chartOptions1.xaxis" [colors]="chartOptions1.colors" [fill]="chartOptions1.fill"
-                                [stroke]="chartOptions1.stroke" [tooltip]="chartOptions1.tooltip"
-                                [dataLabels]="chartOptions1.dataLabels" [grid]="chartOptions1.grid"
-                                [yaxis]="chartOptions1.yaxis"></apx-chart>
+                                [xaxis]="chartOptions1.xaxis" [colors]="chartOptions1.colors"
+                                [fill]="chartOptions1.fill" [stroke]="chartOptions1.stroke"
+                                [tooltip]="chartOptions1.tooltip" [dataLabels]="chartOptions1.dataLabels"
+                                [grid]="chartOptions1.grid" [yaxis]="chartOptions1.yaxis"></apx-chart>
                         </div>
                     </div>
                 </div>
@@ -150,16 +177,16 @@
                             <div ngbDropdown class="dropdown">
                                 <a ngbDropdownToggle href="javascript:void(0);" class="btn btn-light btn-sm border"
                                     data-bs-toggle="dropdown">
-                                    2023
+                                    2024
                                 </a>
-                                <ul ngbDropdownMenu class="dropdown-menu" role="menu">
-                                    <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">2022</a>
+                                <!-- <ul ngbDropdownMenu class="dropdown-menu" role="menu">
+                                    <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">2024</a>
                                     </li>
                                     <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">2021</a>
                                     </li>
                                     <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">2020</a>
                                     </li>
-                                </ul>
+                                </ul> -->
                             </div>
                         </div>
                     </div>
@@ -169,11 +196,13 @@
                                 <div class="p-3">
                                     <div class="card-body">
                                         <div id="mixed-multiple-y">
-                                           
+
                                             <apx-chart [series]="chartOptions7.series" [chart]="chartOptions7.chart"
-                                            [yaxis]="chartOptions7.yaxis" [xaxis]="chartOptions7.xaxis" [labels]="chartOptions7.labels"
-                                            [stroke]="chartOptions7.stroke" [markers]="chartOptions7.markers"
-                                            [fill]="chartOptions7.fill" [tooltip]="chartOptions7.tooltip" [colors]="chartOptions7.colors"></apx-chart>
+                                                [yaxis]="chartOptions7.yaxis" [xaxis]="chartOptions7.xaxis"
+                                                [labels]="chartOptions7.labels" [stroke]="chartOptions7.stroke"
+                                                [markers]="chartOptions7.markers" [fill]="chartOptions7.fill"
+                                                [tooltip]="chartOptions7.tooltip"
+                                                [colors]="chartOptions7.colors"></apx-chart>
                                         </div>
                                     </div>
                                 </div>
@@ -185,8 +214,11 @@
                                             <div class="d-flex align-items-center justify-content-between mb-4">
                                                 <div>
                                                     <h6 class="text-warning mb-3">Total Revenue</h6>
-                                                    <span class="fs-25 d-flex align-items-center">{{pjData.totalRevenue}} <span
-                                                            class="fs-12 text-warning op-7 ms-2">{{pjData.totalRevenuePecent | number:'1.2-2' }}<i
+                                                    <span
+                                                        class="fs-25 d-flex align-items-center">{{pjData.totalRevenue}}
+                                                        <span
+                                                            class="fs-12 text-warning op-7 ms-2">{{pjData.totalRevenuePecent
+                                                            | number:'1.2-2' }}<i
                                                                 class="ti ti-arrow-big-up-line ms-1 d-inline-flex"></i></span></span>
                                                 </div>
                                             </div>
@@ -205,14 +237,16 @@
                                                 <span class="d-block fs-16 mb-3">Pending income</span>
                                                 <h3 class="mb-3">{{pjData.pendingIncome}}</h3>
                                                 <span class="d-block text-muted">Increased by <span
-                                                        class="text-green ms-1">{{pjData.pendingIncomePercent | number:'1.2-2' }}<i
+                                                        class="text-green ms-1">{{pjData.pendingIncomePercent |
+                                                        number:'1.2-2' }}<i
                                                             class="ti ti-arrow-narrow-up"></i></span></span>
                                             </div>
                                             <div id="projects-done">
                                                 <apx-chart [series]="chartOptions6.series" [chart]="chartOptions6.chart"
-                                                    [xaxis]="chartOptions6.xaxis" [colors]="chartOptions6.colors" [plotOptions]="chartOptions6.plotOptions"
-                                                    [stroke]="chartOptions6.stroke" [labels]="chartOptions6.labels"
-                                                   ></apx-chart>
+                                                    [xaxis]="chartOptions6.xaxis" [colors]="chartOptions6.colors"
+                                                    [plotOptions]="chartOptions6.plotOptions"
+                                                    [stroke]="chartOptions6.stroke"
+                                                    [labels]="chartOptions6.labels"></apx-chart>
                                             </div>
                                         </div>
                                     </div>
@@ -221,8 +255,11 @@
                                             <div class="d-flex align-items-center justify-content-between mb-4">
                                                 <div>
                                                     <h6 class="text-warning mb-3">Received income</h6>
-                                                    <span class="fs-25 d-flex align-items-center">{{pjData.pendingIncome}} <span
-                                                            class="fs-12 text-warning op-7 ms-2">{{pjData.pendingIncomePercent | number:'1.2-2' }}<i
+                                                    <span
+                                                        class="fs-25 d-flex align-items-center">{{pjData.pendingIncome}}
+                                                        <span
+                                                            class="fs-12 text-warning op-7 ms-2">{{pjData.pendingIncomePercent
+                                                            | number:'1.2-2' }}<i
                                                                 class="ti ti-arrow-big-up-line ms-1 d-inline-flex"></i></span></span>
                                                 </div>
                                             </div>
@@ -244,7 +281,7 @@
                         </div>
                     </div>
                 </div>
-            </div> 
+            </div>
         </div>
     </div>
     <!-- <div class="col-xxl-12">
@@ -309,118 +346,244 @@
             </div> 
         </div>
     </div> -->
+</div>
+<!--End::row-1 -->
+<!-- Start:: row-2 -->
+<div class="row">
     <div class="col-xl-12">
         <div class="card custom-card">
-            <div class="card-header">
-                <div class="card-title">
-                    Projects Discussions
-                </div>
-            </div>
-            <div class="card-body">
-                <ul ngbNav #nav21="ngbNav" [activeId]="1" class="nav nav-pills mb-3" role="tablist">
-                    <li [ngbNavItem]="1" class="nav-item">
-                        <a ngbNavLink class="nav-link" data-bs-toggle="tab" role="tab" aria-current="page"
-                        aria-selected="true">Notes</a>
-                        <ng-template ngbNavContent>
-                            <div class="p-3 border br-7 text-muted" id="pill-products" role="tabpanel">
-                                <div class="row">
-                                    <!-- <div class="col-xxl-4">Notes</div> -->
-                                    <div class="col-xxl-12 border-start">
-                                        <span>Notes</span> <br>
-                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-    
-                                    </div>
-                                  </div>
-                            </div>
-                        </ng-template>
-                    </li>
-                   
-                    <li [ngbNavItem]="2" class="nav-item">
-                        <a ngbNavLink class="nav-link" data-bs-toggle="tab" role="tab" aria-current="page"
-                     aria-selected="false">Images</a>
-                     <ng-template ngbNavContent>
-                        <div class="p-3 border br-7 text-muted" id="pill-orders" role="tabpanel">
-                            <div class="card custom-card">
-                                <div class="card-header justify-content-between">
-                                    <div class="card-title">
-                                        
-                                    </div>
-                                    <!-- <button type="button" class="btn btn-sm btn-primary-light">upload Image
-                                            </button> -->
-                                    <div class="file-upload float-end">
-                                        <input type="file"  id="file-input" (change)="onFileSelected($event)"
-                                            accept="*/*" hidden>
-                                            <button type="file"  class="btn btn-sm btn-primary-light">upload Image
-                                            </button>
-                                    </div>
-                                </div>
-                                <div class="card-title pt-2">
-                                    <img src="./assets/images/ecommerce/jpg/19.jpeg" alt="" >
-                                </div>
-                            </div>
-                        </div>
-                    </ng-template>
-                    </li>
-                    <li [ngbNavItem]="3" class="nav-item">
-                        <a ngbNavLink class="nav-link" data-bs-toggle="tab" role="tab" aria-current="page"
-                     aria-selected="false">Videos</a>
-                     <ng-template ngbNavContent>
-                        <div class="p-3 border br-7 text-muted" id="pill-orders" role="tabpanel">
-                            <div class="card custom-card">
-                                <div class="card-header justify-content-between">
-                                    <div class="card-title">
-                                        
-                                    </div>
-                                    <!-- <button type="button" class="btn btn-sm btn-primary-light">upload Image
-                                            </button> -->
-                                    <div class="file-upload float-end">
-                                        <input type="file"  id="file-input" (change)="onFileSelected($event)"
-                                            accept="*/*" hidden>
-                                            <button type="file"  class="btn btn-sm btn-primary-light">upload Video
-                                            </button>
-                                    </div>
-                                </div>
-                                <div class="card-title pt-2">
-                                    <img src="./assets/images/ecommerce/jpg/19.jpeg" alt="" >
-                                </div>
-                            </div>
-                        </div>
-                    </ng-template>
-                    </li>
-                    
-                    
-                </ul>
-                <div class="tab-content">
-                
-                   
-                  
-                    <div [ngbNavOutlet]="nav21" class="mt-2"></div>
-                </div>
+            <div class="card-header justify-content-between">
+                <div class="card-title">top Projects</div>
+                <!-- <div>
+                    <button type="button" class="btn btn-sm btn-primary-light btn-wave waves-effect waves-light">View
+                        All</button>
+                </div> -->
             </div>
         </div>
     </div>
-</div>
-<!--End::row-1 -->
-<div class="col-xl-12 col-xxl-12 col-md-12">
-        <div class="card custom-card " style="background-image: url('/assets/images/company-logos/adonai_logo.png');
-        background-repeat: no-repeat; 
-        background-position: center;
-        height: 50vh;">
-            <div class="card-header justify-content-between">
-                <div class="card-title">
-                    Start NewDesign
+    <div class="col-xxl-4 col-lg-4 col-md-4 col-xl-4" *ngFor="let project of projectLst">
+        <div class="card custom-card">
+            <div class="card-header d-flex align-items-center justify-content-between">
+                <div class="me-2  align-items-center">
+                    <span class="avatar avatar-rounded p-1 bg-light">
+                        <img src="./assets/images/brand-logos/profile1.jpg" alt="">
+                    </span>
                 </div>
-                
+                <div class="flex-fill">
+                    <a href="javascript:void(0);" class="fs-14 d-block text-truncate project-list-title">Project: {{project.projectName}}</a>
+                    <span class="text-muted d-block fs-12">Client: {{project.clientName}}</span>
+                        <!-- <span class="text-muted d-block fs-12">Total <strong class="text-default">18/22</strong> tasks
+                            completed</span> -->
+                </div>
+                <div ngbDropdown class="dropdown no-caret">
+                    <a ngbDropdownToggle aria-label="anchor" href="javascript:void(0);"
+                        class="btn btn-icon btn-sm btn-light" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fe fe-more-vertical"></i>
+                    </a>
+                    <ul ngbDropdownMenu class="dropdown-menu">
+                        <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);"><i
+                                    class="ri-eye-line align-middle me-1 d-inline-block"></i>View</a></li>
+                        <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);"><i
+                                    class="ri-edit-line align-middle me-1 d-inline-block"></i>Edit</a></li>
+                        <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);"><i
+                                    class="ri-delete-bin-line me-1 align-middle d-inline-block"></i>Delete</a></li>
+                    </ul>
+                </div>
             </div>
-        
             <div class="card-body">
-                <div class="d-grid gap-2 col-6 text-center mx-auto pt-5">
-                    <button class="btn button  btn-primary-gradient btn-wave" type="button">NewDesign</button>
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <div>
+                        <div class="mb-1">Team :</div>
+                        <div class="avatar-list-stacked">
+                            <span class="avatar avatar-sm avatar-rounded">
+                                <img src="./assets/images/faces/2.jpg" alt="img">
+                            </span>
+                            <span class="avatar avatar-sm avatar-rounded">
+                                <img src="./assets/images/faces/8.jpg" alt="img">
+                            </span>
+                            <span class="avatar avatar-sm avatar-rounded">
+                                <img src="./assets/images/faces/2.jpg" alt="img">
+                            </span>
+                            <span class="avatar avatar-sm avatar-rounded">
+                                <img src="./assets/images/faces/10.jpg" alt="img">
+                            </span>
+                            <a class="avatar avatar-sm bg-light avatar-rounded text-default" href="javascript:void(0);">
+                                +2
+                            </a>
+                        </div>
+                    </div>
+                    <div class="text-end">
+                        <div class="mb-1">Priority :</div>
+                        <!-- <span class="badge bg-success-transparent">{{project.dateDifference}} days to go</span> -->
+                        <span class="badge" [ngClass]="{'bg-danger-transparent text-danger': project.dateDifference < 0,
+                            'bg-success-transparent': project.dateDifference >= 0}">{{project.dateDifference}} days to go</span>
+                    </div>
                 </div>
+                <div class="mb-1">Status : {{project.projectState}}</div>
+                <div>
+                    <div></div>
+                    <div class="progress progress-xs progress-animate" role="progressbar" aria-valuenow="80"
+                        aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar bg-primary" style="width: 80%"></div>
+                    </div>
+                    <div class="mt-1"><span class="text-primary fw-medium">80%</span> Completed</div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <a class="btn btn-sm btn-primary btn-wave ms-3" routerLink="/dashboard/mytask"><i
+                        class="ri-add-line align-middle me-1 fw-medium"></i>Add</a>
+                <a class="btn btn-sm btn-primary btn-wave me-3" routerLink="/pages/timeline"><i
+                        class="bi bi-calendar-date align-middle me-1 fw-medium"></i>Project Cycle</a>
             </div>
         </div>
-    
+    </div>
+    <!-- <div class="col-xxl-4 col-lg-4 col-md-4 col-xl-4">
+        <div class="card custom-card">
+            <div class="card-header align-items-center d-flex justify-content-between">
+                <div class="me-2">
+                    <span class="avatar avatar-rounded p-1 bg-light">
+                        <img src="./assets/images/brand-logos/profile1.jpg" alt="">
+                    </span>
+                </div>
+                <div class="flex-fill">
+                    <a href="javascript:void(0);" class="fs-14 d-block text-truncate project-list-title">Content
+                        Management System (CMS) Integration</a>
+                    <span class="text-muted d-block fs-12">Total <strong class="text-default">26/68</strong> tasks
+                        completed</span>
+                </div>
+                <div ngbDropdown class="dropdown no-caret">
+                    <a ngbDropdownToggle aria-label="anchor" href="javascript:void(0);"
+                        class="btn btn-icon btn-sm btn-light" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fe fe-more-vertical"></i>
+                    </a>
+                    <ul ngbDropdownMenu class="dropdown-menu">
+                        <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);"><i
+                                    class="ri-eye-line align-middle me-1 d-inline-block"></i>View</a></li>
+                        <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);"><i
+                                    class="ri-edit-line align-middle me-1 d-inline-block"></i>Edit</a></li>
+                        <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);"><i
+                                    class="ri-delete-bin-line me-1 align-middle d-inline-block"></i>Delete</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <div>
+                        <div class="mb-1">Team :</div>
+                        <div class="avatar-list-stacked">
+                            <span class="avatar avatar-sm avatar-rounded">
+                                <img src="./assets/images/faces/12.jpg" alt="img">
+                            </span>
+                            <span class="avatar avatar-sm avatar-rounded">
+                                <img src="./assets/images/faces/9.jpg" alt="img">
+                            </span>
+                            <span class="avatar avatar-sm avatar-rounded">
+                                <img src="./assets/images/faces/11.jpg" alt="img">
+                            </span>
+                            <a class="avatar avatar-sm bg-light avatar-rounded text-default" href="javascript:void(0);">
+                                +4
+                            </a>
+                        </div>
+                    </div>
+                    <div class="text-end">
+                        <div class="mb-1">Priority :</div>
+                        <span class="badge bg-info-transparent">7 days to go </span>
+                    </div>
+                </div>
+                <div class="mb-1">Status :</div>
+                <div>
+                    <div></div>
+                    <div class="progress progress-xs progress-animate" role="progressbar" aria-valuenow="45"
+                        aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar bg-warning" style="width: 45%"></div>
+                    </div>
+                    <div class="mt-1"><span class="text-warning fw-medium">45%</span> Completed</div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <a class="btn btn-sm btn-primary btn-wave ms-3" routerLink="/dashboard/mytask"><i
+                        class="ri-add-line align-middle me-1 fw-medium"></i>Add</a>
+                <a class="btn btn-sm btn-primary btn-wave me-3" routerLink="/pages/timeline"><i
+                        class="bi bi-calendar-date align-middle me-1 fw-medium"></i>Project Cycle</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-xxl-4 col-lg-4 col-md-4 col-xl-4">
+        <div class="card custom-card">
+            <div class="card-header align-items-center d-flex justify-content-between">
+                <div class="me-2">
+                    <span class="avatar avatar-rounded p-1 bg-light">
+                        <img src="./assets/images/brand-logos/profile1.jpg" alt="">
+                    </span>
+                </div>
+                <div class="flex-fill">
+                    <a href="javascript:void(0);" class="fs-14 d-block text-truncate project-list-title">Advanced Search
+                        and Filtering</a>
+                    <span class="text-muted d-block fs-12">Total <strong class="text-default">45/54</strong> tasks
+                        completed</span>
+                </div>
+                <div ngbDropdown class="dropdown no-caret">
+                    <a ngbDropdownToggle aria-label="anchor" href="javascript:void(0);"
+                        class="btn btn-icon btn-sm btn-light" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fe fe-more-vertical"></i>
+                    </a>
+                    <ul ngbDropdownMenu class="dropdown-menu">
+                        <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);"><i
+                                    class="ri-eye-line align-middle me-1 d-inline-block"></i>View</a></li>
+                        <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);"><i
+                                    class="ri-edit-line align-middle me-1 d-inline-block"></i>Edit</a></li>
+                        <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);"><i
+                                    class="ri-delete-bin-line me-1 align-middle d-inline-block"></i>Delete</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <div>
+                        <div class="mb-1">Team :</div>
+                        <div class="avatar-list-stacked">
+                            <span class="avatar avatar-sm avatar-rounded">
+                                <img src="./assets/images/faces/3.jpg" alt="img">
+                            </span>
+                            <span class="avatar avatar-sm avatar-rounded">
+                                <img src="./assets/images/faces/9.jpg" alt="img">
+                            </span>
+                            <span class="avatar avatar-sm avatar-rounded">
+                                <img src="./assets/images/faces/12.jpg" alt="img">
+                            </span>
+                            <span class="avatar avatar-sm avatar-rounded">
+                                <img src="./assets/images/faces/11.jpg" alt="img">
+                            </span>
+                            <a class="avatar avatar-sm bg-light avatar-rounded text-default" href="javascript:void(0);">
+                                +2
+                            </a>
+                        </div>
+                    </div>
+                    <div class="text-end">
+                        <div class="mb-1">Priority :</div>
+                        <span class="badge bg-danger-transparent">10 days to go</span>
+                    </div>
+                </div>
+                <div class="mb-1">Status :</div>
+                <div>
+                    <div></div>
+                    <div class="progress progress-xs progress-animate" role="progressbar" aria-valuenow="89"
+                        aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar bg-success" style="width: 89%"></div>
+                    </div>
+                    <div class="mt-1"><span class="text-success fw-medium">89%</span> Completed</div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <a class="btn btn-sm btn-primary btn-wave ms-3" routerLink="/dashboard/mytask"><i
+                        class="ri-add-line align-middle me-1 fw-medium"></i>Add</a>
+                <a class="btn btn-sm btn-primary btn-wave me-3" routerLink="/pages/timeline"><i
+                        class="bi bi-calendar-date align-middle me-1 fw-medium"></i>Project Cycle</a>
+            </div>
+        </div>
+    </div> -->
 </div>
+<!-- End:: row-2 -->
 <!-- start:: row-3 -->
 <div class="row">
     <div class="col-xl-12">
@@ -429,151 +592,29 @@
                 <div class="card-title">
                     My Projects
                 </div>
-            
+
                 <div class="d-flex flex-wrap gap-3">
-                        <div ngbDropdown class="dropdown">
-                            <a  href="javascript:void(0);"
-                                class="btn btn-primary btn-sm btn-wave waves-effect waves-light" 
-                                aria-expanded="false">
-                                New Design
-                            </a>
+                    <div ngbDropdown class="dropdown">
+                        <a href="javascript:void(0);" class="btn btn-primary btn-sm btn-wave waves-effect waves-light"
+                            aria-expanded="false" (click)="onClkDesign()">
+                            New Design
+                        </a>
                         <!-- <ul ngbDropdownMenu class="dropdown-menu" role="menu">
                             <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">New</a></li>
                             <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">Popular</a></li>
                             <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">Relevant</a></li>
                         </ul> -->
-                        </div>
-                            <!-- <a routerLink="apps/projects/create-project" class="btn btn-primary me-2" href="apps/projects/create-project"><i
+                    </div>
+                    <!-- <a routerLink="apps/projects/create-project" class="btn btn-primary me-2" href="apps/projects/create-project"><i
                         class="ri-add-line me-1 fw-medium align-middle"></i>New Project</a> -->
-                        <div>
-                            <a  class="btn btn-sm btn-secondary btn-wave" data-bs-toggle="modal" data-bs-target="#exampleModalLg"
-                            (click)="openLg(Content10)"><i class="ri-add-line align-middle me-1 fw-medium"></i>Create Project</a>
-                        </div>
-                        </div>
-            
-            </div>
-        
-            <!-- <div class="card-body p-0">
-                <div class="table-responsive">
-                    <table class="table text-nowrap">
-                        <thead>
-                            <tr>
-                                
-                                <th scope="col">SI.No</th>
-                                <th scope="col">Project ID</th>
-                                <th scope="col">Project Name</th>
-                                <th scope="col">Client Name</th>
-                                <th scope="col">Business Category</th>
-                                <th scope="col">Project Address</th>
-                                <th scope="col">State</th>
-                                <th scope="col">City</th>
-                                <th scope="col">Project Stage</th>
-                                <th scope="col">Project Estimation</th>
-                                <th scope="col">Project area</th>
-                                <th scope="col">Action</th>
-                                <th scope="col">Company Name</th>
-                                <th scope="col">Created By</th>
-                                <th scope="col">Start Date</th>
-                                <th scope="col">End Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1 . </td>
-                                <td>VA001 </td>
-                                <td>
-                                    Standalone (SaiKrishna)</td>
-                                <td>Sai Krishna</td>
-                                <td>IR Residential</td>
-                                <td>kphb telangana</td>
-                                <td>Telangana</td>
-                                <td>Hyderabad</td>
-                                <td><span class="badge bg-primary-transparent">Execution In Progress </span></td>
-                                <td>₹ 3,60,868</td>
-                                <td>1860</td>
-                                <td>
-                                    hello
-                                </td>
-                                <td>Varmagroup</td>
-                                <td>CH TARUN, Varma Group</td>
-                                <td>13-11-2024</td>
-                                <td>13-12-2024</td>
-                            </tr>
-                            <tr>
-                                <td>1 . </td>
-                                <td>VA001 </td>
-                                <td>
-                                    Standalone (SaiKrishna)</td>
-                                <td>Sai Krishna</td>
-                                <td>IR Residential</td>
-                                <td>kphb telangana</td>
-                                <td>Telangana</td>
-                                <td>Hyderabad</td>
-                                <td><span class="badge bg-primary-transparent">Execution In Progress </span></td>
-                                <td>₹ 3,60,868</td>
-                                <td>1860</td>
-                                <td>
-                                    hiii
-                                </td>
-                                <td>Varmagroup</td>
-                                <td>CH TARUN, Varma Group</td>
-                                <td>13-11-2024</td>
-                                <td>13-12-2024</td>
-                            </tr>
-                            <tr>
-                                <td>1 . </td>
-                                <td>VA001 </td>
-                                <td>
-                                    Standalone (SaiKrishna)</td>
-                                <td>Sai Krishna</td>
-                                <td>IR Residential</td>
-                                <td>kphb telangana</td>
-                                <td>Telangana</td>
-                                <td>Hyderabad</td>
-                                <td><span class="badge bg-primary-transparent">Execution In Progress </span></td>
-                                <td>₹ 3,60,868</td>
-                                <td>1860</td>
-                                <td>
-                                    hello
-                                </td>
-                                <td>Varmagroup</td>
-                                <td>CH TARUN, Varma Group</td>
-                                <td>13-11-2024</td>
-                                <td>13-12-2024</td>
-                            </tr>
-                            
-                            
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="card-footer border-top-0">
-                <div class="d-flex align-items-center flex-wrap overflow-auto">
-                    <div class="mb-2 mb-sm-0">
-                        Showing <b>1</b> to <b>5</b> of <b>200</b> entries <i
-                            class="bi bi-arrow-right ms-2 fw-medium"></i>
-                    </div>
-                    <div class="ms-auto">
-                        <ul class="pagination mb-0 overflow-auto">
-                            <li class="page-item disabled">
-                                <a class="page-link">Previous</a>
-                            </li>
-                            <li class="page-item active" aria-current="page"><a class="page-link" href="javascript:;"href="javascript:;">1</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="javascript:;">2</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="javascript:;">3</a></li>
-                            <li class="page-item"><a class="page-link" href="javascript:;">4</a></li>
-                            <li class="page-item"><a class="page-link" href="javascript:;">5</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="javascript:;">Next</a>
-                            </li>
-                        </ul>
+                    <div>
+                        <a class="btn btn-sm btn-secondary btn-wave" data-bs-toggle="modal"
+                            data-bs-target="#exampleModalLg" (click)="openLg(Content10)"><i
+                                class="ri-add-line align-middle me-1 fw-medium"></i>Create Project</a>
                     </div>
                 </div>
-            </div> -->
 
-
+            </div>
             <div class="card-body p-0">
                 <div class="mat-elevation-z8">
                     <mat-form-field class="mt-2 p-2">
@@ -588,7 +629,9 @@
                             </ng-container>
                             <ng-container matColumnDef="projectId">
                                 <th mat-header-cell *matHeaderCellDef> Project Id </th>
-                                <td mat-cell *matCellDef="let element"> {{element.projectId}} </td>
+                                <td mat-cell *matCellDef="let element" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModalLg"
+                                    (click)="openLg(Content11);onProjectDetails(element)"> {{element.projectId}} </td>
                             </ng-container>
                             <ng-container matColumnDef="projectName">
                                 <th mat-header-cell *matHeaderCellDef> Project Name </th>
@@ -615,12 +658,14 @@
                                 <td mat-cell *matCellDef="let element"> {{element.city}} </td>
                             </ng-container>
                             <ng-container matColumnDef="projectState">
-                                <th mat-header-cell *matHeaderCellDef>Project State</th>
+                                <th mat-header-cell *matHeaderCellDef>Project Stage</th>
                                 <td mat-cell *matCellDef="let element"> {{element.projectState}} </td>
                             </ng-container>
                             <ng-container matColumnDef="projectEstimation">
                                 <th mat-header-cell *matHeaderCellDef>Project Estimation</th>
-                                <td mat-cell *matCellDef="let element"> {{element.projectEstimation}} </td>
+                                <td mat-cell *matCellDef="let element" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModalLg" (click)="open(Content12)">
+                                    {{element.projectEstimation}} </td>
                             </ng-container>
                             <ng-container matColumnDef="projectArea">
                                 <th mat-header-cell *matHeaderCellDef>Project Area</th>
@@ -632,11 +677,12 @@
                             </ng-container>
                             <ng-container matColumnDef="projectStartDate">
                                 <th mat-header-cell *matHeaderCellDef>Project Start Date</th>
-                                <td mat-cell *matCellDef="let element"> {{element.projectStartDate}} </td>
+                                <td mat-cell *matCellDef="let element"> {{element.projectStartDate | date:'dd-MM-yyyy'}} </td>
                             </ng-container>
                             <ng-container matColumnDef="projectEndDate">
                                 <th mat-header-cell *matHeaderCellDef>Project End Date</th>
-                                <td mat-cell *matCellDef="let element"> {{element.projectEndDate}} </td>
+                                <td mat-cell *matCellDef="let element"> {{element.projectEndDate | date:'dd-MM-yyyy'}}
+                                     - ({{calculateDateDifference(element.projectEndDate)}}) </td>
                             </ng-container>
                             <ng-container matColumnDef="designId">
                                 <th mat-header-cell *matHeaderCellDef>Design Id</th>
@@ -663,107 +709,357 @@
     <div class="modal-content">
         <div class="modal-header">
             <h6 class="modal-title" id="mail-ComposeLabel">Create Project</h6>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"
-            (click)="modal.close('Cross click')" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="modal.close('Cross click')"
+                aria-label="Close"></button>
         </div>
         <div class="modal-body px-4">
             <form [formGroup]="createProjectForm" (ngSubmit)="onSubmit()">
                 <div class="row">
-                  <div class="col-xl-12">
-                    <div class="card custom-card">
-                      <!-- <div class="card-header">
+                    <div class="col-xl-12">
+                        <div class="card custom-card">
+                            <!-- <div class="card-header">
                         <div class="card-title">Create Project</div>
-                        
                       </div> -->
-                      <div class="card-body">
-                        <div class="row gy-3">
-                          <div class="col-xl-4">
-                            <label for="projectName" class="form-label">Project Name:</label>
-                            <input type="text" class="form-control" id="projectName" formControlName="projectName" placeholder="Enter Project Name">
-                          </div>
-                          <div class="col-xl-4">
-                            <label for="clientName" class="form-label">Client Name:</label>
-                            <input type="text" class="form-control" id="clientName" formControlName="clientName" placeholder="Enter Client Name">
-                          </div>
-                          <div class="col-xl-4">
-                            <label for="businessCategory" class="form-label">Business Category:</label>
-                            <input type="text" class="form-control" id="businessCategory" formControlName="businessCategory" placeholder="Business Category">
-                          </div>
-                          <div class="col-xl-4">
-                            <label for="projectAddress" class="form-label">Project Address:</label>
-                            <input type="text" class="form-control" id="projectAddress" formControlName="projectAddress" placeholder="Enter Project Address">
-                          </div>
-                          <div class="col-xl-4">
-                            <label for="state" class="form-label">State:</label>
-                            <input type="text" class="form-control" id="state" formControlName="state" placeholder="Enter State">
-                          </div>
-                          <div class="col-xl-4">
-                            <label for="city" class="form-label">City:</label>
-                            <input type="text" class="form-control" id="city" formControlName="city" placeholder="Enter City">
-                          </div>
-                          <div class="col-xl-4">
-                            <label for="projectState" class="form-label">Project State:</label>
-                            <input type="text" class="form-control" id="projectState" formControlName="projectState" placeholder="Enter Project State">
-                          </div>
-                          <div class="col-xl-4">
-                            <label for="projectEstimation" class="form-label">Project Estimation:</label>
-                            <input type="number" class="form-control" id="projectEstimation" formControlName="projectEstimation" placeholder="Enter Estimation">
-                          </div>
-                          <div class="col-xl-4">
-                            <label for="projectArea" class="form-label">Project Area:</label>
-                            <input type="number" class="form-control" id="projectArea" formControlName="projectArea" placeholder="Enter Project Area">
-                          </div>
-                          <div class="col-xl-4">
-                            <label for="action" class="form-label">Action:</label>
-                            <input type="text" class="form-control" id="action" formControlName="action" placeholder="Enter Action">
-                          </div>
-                          <div class="col-xl-4">
+                            <div class="card-body">
+                                <div class="row gy-3">
+                                    <div class="col-xl-4">
+                                        <label for="projectName" class="form-label">Project Name:</label>
+                                        <input type="text" class="form-control" id="projectName"
+                                            formControlName="projectName" placeholder="Enter Project Name"
+                                            [ngClass]="{ 'is-invalid': submitted && f['projectName'].errors }"
+                                            maxlength="50">
+                                        <div *ngIf="submitted && f['projectName'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['projectName'].errors['required']">Project name is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4">
+                                        <label for="clientName" class="form-label">Client Name:</label>
+                                        <input type="text" class="form-control" id="clientName"
+                                            formControlName="clientName" placeholder="Enter Client Name"
+                                            [ngClass]="{ 'is-invalid': submitted && f['clientName'].errors }"
+                                            maxlength="50">
+                                        <div *ngIf="submitted && f['clientName'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['clientName'].errors['required']">Client name is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4">
+                                        <label for="businessCategory" class="form-label">Business Category:</label>
+                                        <select class="form-select" aria-label="Default select example" formControlName='businessCategory'
+                                            [ngClass]="{ 'is-invalid': submitted && f['businessCategory'].errors }">
+                                            <option value="" disabled selected>select type</option>
+                                            <option value="Commercial">Commercial</option>
+                                            <option value="Residential">Residential</option>  
+                                        </select>   
+                                        <div *ngIf="submitted && f['businessCategory'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['businessCategory'].errors['required']">Business Category is
+                                                required</div>
+                                        </div>
+                                        <!-- <input type="text" class="form-control" id="businessCategory"
+                                            formControlName="businessCategory" placeholder="Business Category"
+                                            [ngClass]="{ 'is-invalid': submitted && f['businessCategory'].errors }"
+                                            maxlength="50">
+                                        <div *ngIf="submitted && f['businessCategory'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['businessCategory'].errors['required']">Business Category is
+                                                required</div>
+                                        </div> -->
+                                    </div>
+                                    <div class="col-xl-4">
+                                        <label for="projectAddress" class="form-label">Project Address:</label>
+                                        <input type="text" class="form-control" id="projectAddress"
+                                            formControlName="projectAddress" placeholder="Enter Project Address"
+                                            [ngClass]="{ 'is-invalid': submitted && f['projectAddress'].errors }"
+                                            maxlength="50">
+                                        <div *ngIf="submitted && f['projectAddress'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['projectAddress'].errors['required']">Project Address is
+                                                required</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4">
+                                        <label for="state" class="form-label">State:</label>
+                                        <input type="text" class="form-control" id="state" formControlName="state"
+                                            placeholder="Enter State"
+                                            [ngClass]="{ 'is-invalid': submitted && f['state'].errors }" maxlength="50">
+                                        <div *ngIf="submitted && f['state'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['state'].errors['required']">State is required</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4">
+                                        <label for="city" class="form-label">City:</label>
+                                        <input type="text" class="form-control" id="city" formControlName="city"
+                                            placeholder="Enter City"
+                                            [ngClass]="{ 'is-invalid': submitted && f['city'].errors }" maxlength="50">
+                                        <div *ngIf="submitted && f['city'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['city'].errors['required']">City is required</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4">
+                                        <label for="projectState" class="form-label">Project Stage:</label>
+                                        <input type="text" class="form-control" id="projectState"
+                                            formControlName="projectState" placeholder="Enter Project State"
+                                            [ngClass]="{ 'is-invalid': submitted && f['projectState'].errors }" maxlength="50"
+                                            onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || event.charCode == 8)">
+                                        <div *ngIf="submitted && f['projectState'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['projectState'].errors['required']">Project State is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4">
+                                        <label for="projectEstimation" class="form-label">Project Estimation:</label>
+                                        <input type="tel" class="form-control" id="projectEstimation" maxlength="10" 
+                                            formControlName="projectEstimation" placeholder="Enter Estimation"
+                                            [ngClass]="{ 'is-invalid': submitted && f['projectEstimation'].errors }"
+                                            onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || event.charCode == 8)">                                        <div *ngIf="submitted && f['projectEstimation'].errors"
+                                            class="invalid-feedback">
+                                            <div *ngIf="f['projectEstimation'].errors['required']">Project Estimation is
+                                                required</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4">
+                                        <label for="projectArea" class="form-label">Project Area (SFT):</label>
+                                        <input type="tel" class="form-control" id="projectArea"
+                                            formControlName="projectArea" placeholder="Enter Project Area"
+                                            [ngClass]="{ 'is-invalid': submitted && f['projectArea'].errors }"
+                                            maxlength="6">
+                                        <div *ngIf="submitted && f['projectArea'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['projectArea'].errors['required']">Project Area is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-xl-4">
+                                        <label for="action" class="form-label">Action:</label>
+                                        <input type="text" class="form-control" id="action" formControlName="action"
+                                            placeholder="Enter Action"
+                                            [ngClass]="{ 'is-invalid': submitted && f['action'].errors }"
+                                            maxlength="50">
+                                        <div *ngIf="submitted && f['action'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['action'].errors['required']">Action is required</div>
+                                        </div>
+                                    </div> -->
+                                    <!-- <div class="col-xl-4">
                             <label for="companyName" class="form-label">Company Name:</label>
                             <input type="text" class="form-control" id="companyName" formControlName="companyName" placeholder="Enter Company Name">
-                          </div>
-                          <div class="col-xl-4"></div>
-                          <div class="col-xl-4">
-                            <mat-form-field appearance="fill">
+                          </div> -->
+                                    <!-- <div class="col-xl-4"></div> -->
+                                    <div class="col-xl-4">
+                                        <!-- <mat-form-field appearance="fill">
                               <mat-label>Start Date</mat-label>
                               <input matInput [matDatepicker]="startPicker" formControlName="projectStartDate" placeholder="Choose Start Date">
                               <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
                               <mat-datepicker #startPicker></mat-datepicker>
-                            </mat-form-field>
-                          </div>
-                          <div class="col-xl-4">
-                            <mat-form-field appearance="fill">
+                            </mat-form-field> -->
+                                        <label for="startDate" class="form-label">Start Date:</label>
+                                        <input type="date" class="form-control" id='startDate'
+                                            formControlName='projectStartDate'
+                                            [ngClass]="{ 'is-invalid': submitted && f['projectStartDate'].errors }"
+                                            maxlength="50">
+                                        <div *ngIf="submitted && f['projectStartDate'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['projectStartDate'].errors['required']">Start Date is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4">
+                                        <label for="endDate" class="form-label">End Date:</label>
+                                        <input type="date" class="form-control" id='endDate'
+                                            formControlName='projectEndDate'
+                                            [ngClass]="{ 'is-invalid': submitted && f['projectEndDate'].errors }"
+                                            maxlength="50">
+                                        <div *ngIf="submitted && f['projectEndDate'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['projectEndDate'].errors['required']">End Date is required
+                                            </div>
+                                        </div>
+                                        <!-- <mat-form-field appearance="fill">
                               <mat-label>End Date</mat-label>
                               <input matInput [matDatepicker]="endPicker" formControlName="projectEndDate" placeholder="Choose End Date">
                               <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
                               <mat-datepicker #endPicker></mat-datepicker>
-                            </mat-form-field>
-                          </div>
-                          
-                          <!-- <div class="col-xl-12">
+                            </mat-form-field> -->
+                                    </div>
+
+                                    <!-- <div class="col-xl-12">
                             <label class="form-label">Attachments</label>
                             <file-pond #myPond [options]="pondOptions" formControlName="attachments"></file-pond>
                           </div> -->
-                        </div>
-                      </div>
-                      <!-- <div class="card-footer">
+                                </div>
+                            </div>
+                            <!-- <div class="card-footer">
                         <button class="btn btn-primary-light btn-wave ms-auto float-end" type="submit">Create Project</button>
                       </div> -->
+                        </div>
                     </div>
-                  </div>
                 </div>
-              </form>
+            </form>
         </div>
         <div class="modal-footer">
-            <button class="btn btn-primary-light btn-wave ms-auto float-end" type="submit">Create Project</button>
+            <button class="btn btn-primary-light btn-wave ms-auto float-end" type="submit" (click)="onSubmit()">Create
+                Project</button>
 
-            <button type="button" class="btn btn-light" data-bs-dismiss="modal"  (click)="modal.close('Cross click')">Cancel</button>
+            <button type="button" class="btn btn-light" data-bs-dismiss="modal"
+                (click)="modal.close('Cross click')">Cancel</button>
             <!-- <button type="button" class="btn btn-primary">Create</button> -->
         </div>
     </div>
 </ng-template>
-
-
-
-
-
 <!-- End:: row-3 -->
+<!-- Start Row-4 -->
+<ng-template #Content11 id="addtask" let-modal>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h6 class="modal-title" id="mail-ComposeLabel">project details</h6>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="modal.close('Cross click')"
+                aria-label="Close"></button>
+        </div>
+        <div class="modal-body px-4">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="card custom-card">
+                        <!-- <div class="card-header">
+                    <div class="card-title">Create Project</div>
+                    </div> -->
+                        <div class="card-body">
+                            <div class="row gy-3">
+                                <div class="col-xl-4">
+                                    <label for="projectName" class="form-label">Project Name</label>
+                                    <input type="text" class="form-control" id="projectName" [(ngModel)]="projectName">
+                                </div>
+                                <div class="col-xl-4">
+                                    <label for="clientName" class="form-label">Client Name</label>
+                                    <input type="text" class="form-control" id="clientName" [(ngModel)]="clientName">
+                                </div>
+                                <div class="col-xl-4">
+                                    <label for="businessCategory" class="form-label">Business Category:</label>
+                                    <!-- <ng-select class="ti-form-select !rounded-s-none" [(ngModel)]='businessCategory'
+                                        name="choices-multiple-remove-button" id="businessCategory" [multiple]="true">
+                                        <ng-option value="Choice 1" selected>Commercial</ng-option>
+                                        <ng-option value="Choice 2">Residential</ng-option>
+                                    </ng-select> -->
+                                    <select class="form-select" aria-label="Default select example"  [(ngModel)]='businessCategory'>
+                                        <option value="0">select type</option>
+                                        <option value="1">Commercial</option>
+                                        <option value="2">Residential</option>  
+                                    </select>
+                                    
+                                    <!-- <input type="text" class="form-control" id="businessCategory" formControlName="businessCategory" placeholder=""> -->
+                                </div>
+                                <div class="col-xl-4">
+                                    <label for="projectAddress" class="form-label">Project Address:</label>
+                                    <input type="text" class="form-control" id="projectAddress" [(ngModel)]="projectAddress">
+                                </div>
+                                <div class="col-xl-4">
+                                    <label for="state" class="form-label">State:</label>
+                                    <input type="text" class="form-control" id="state" [(ngModel)]="state">
+                                </div>
+                                <div class="col-xl-4">
+                                    <label for="city" class="form-label">City:</label>
+                                    <input type="text" class="form-control" id="city" [(ngModel)]="city">
+                                </div>
+                                <div class="col-xl-4">
+                                    <label for="projectArea" class="form-label">Project Area:</label>
+                                    <input type="number" class="form-control" id="projectArea" [(ngModel)]="projectArea">
+                                </div>
+                                <div class="col-xl-4">
+                                    <label for="action" class="form-label">Action:</label>
+                                    <input type="text" class="form-control" id="action" [(ngModel)]="action">
+                                </div>
+                                <div class="col-xl-4">
+                                    <label for="designId" class="form-label">Design Id</label>
+                                    <input type="text" class="form-control" id="designId" [(ngModel)]="designId">
+                                </div>
+                                <div class="col-xl-4">
+                                    <label for="companyName" class="form-label">Company Name:</label>
+                                    <input type="text" class="form-control" id="companyName" [(ngModel)]="companyName">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-light" data-bs-dismiss="modal"
+                (click)="modal.close('Cross click')">Cancel</button>
+        </div>
+    </div>
+</ng-template>
+<!-- End row-4 -->
+<!-- Start Row 5 -->
+<ng-template #Content12 id="addtask" let-modal>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h6 class="modal-title" id="mail-ComposeLabel">Project Estimation</h6>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="modal.close('Cross click')"
+                aria-label="Close"></button>
+        </div>
+        <div class="modal-body px-4">
+            <form [formGroup]="createProjectForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="card custom-card">
+                            <!-- <div class="card-header">
+                        <div class="card-title">Create Project</div>
+                      </div> -->
+                            <div class="card-body">
+                                <div class="row gy-3">
+                                    <div class="col-xl-4">
+                                        <label for="projectName" class="form-label">Project Name:</label>
+                                        <input type="text" class="form-control" id="projectName"
+                                            formControlName="projectName" placeholder="Enter Project Name"
+                                            [ngClass]="{ 'is-invalid': submitted && f['projectName'].errors }"
+                                            maxlength="50">
+                                        <div *ngIf="submitted && f['projectName'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['projectName'].errors['required']">Project name is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4">
+                                        <label for="clientName" class="form-label">Client Name:</label>
+                                        <input type="text" class="form-control" id="clientName"
+                                            formControlName="clientName" placeholder="Enter Client Name"
+                                            [ngClass]="{ 'is-invalid': submitted && f['clientName'].errors }"
+                                            maxlength="50">
+                                        <div *ngIf="submitted && f['clientName'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['clientName'].errors['required']">Client name is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4">
+                                        <label for="businessCategory" class="form-label">Business Category:</label>
+                                        <input type="text" class="form-control" id="businessCategory"
+                                            formControlName="businessCategory" placeholder="Business Category"
+                                            [ngClass]="{ 'is-invalid': submitted && f['businessCategory'].errors }"
+                                            maxlength="50">
+                                        <div *ngIf="submitted && f['businessCategory'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['businessCategory'].errors['required']">Business Category is
+                                                required</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4">
+                                        <label for="projectAddress" class="form-label">Project Address:</label>
+                                        <input type="text" class="form-control" id="projectAddress"
+                                            formControlName="projectAddress" placeholder="Enter Project Address"
+                                            [ngClass]="{ 'is-invalid': submitted && f['projectAddress'].errors }"
+                                            maxlength="50">
+                                        <div *ngIf="submitted && f['projectAddress'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['projectAddress'].errors['required']">Project Address is
+                                                required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary-light btn-wave ms-auto float-end" type="submit" (click)="onSubmit()">Create
+                Project</button>
+
+            <button type="button" class="btn btn-light" data-bs-dismiss="modal"
+                (click)="modal.close('Cross click')">Cancel</button>
+            <!-- <button type="button" class="btn btn-primary">Create</button> -->
+        </div>
+    </div>
+</ng-template>
+<!-- End Row 5 -->

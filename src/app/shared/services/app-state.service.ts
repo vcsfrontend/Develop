@@ -27,7 +27,7 @@ export class AppStateService {
     direction: 'ltr',               // ltr, rtl
     navigationStyles: 'vertical',   // vertical, horizontal
     menuStyles: '',                 // menu-click, menu-hover, icon-click, icon-hover
-    layoutStyles: 'default',   // double-menu, detached, icon-overlay, icontext-menu, closed-menu, default-menu
+    layoutStyles: 'overlay',   // double-menu, detached, icon-overlay, icontext-menu, closed-menu, default-menu
     pageStyles: 'regular',          // regular, classic, modern
     widthStyles: 'fullwidth',       // fullwidth, boxed
     menuPosition: 'fixed',          // fixed, scrollable
