@@ -33,7 +33,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { OverlayscrollbarsModule } from 'overlayscrollbars-ngx';
 import { MaterialModuleModule } from '../../../material-module/material-module.module';
 import { ShowcodeCardComponent } from '../../../shared/common/includes/showcode-card/showcode-card.component';
@@ -111,6 +111,7 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   modal: any;
   projectLst: any; userDetails:any;
+  
   // open(content1:any) {
 	// 	this.modalService.open(content1,{ centered: true });
 	// }
@@ -126,7 +127,8 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
   pondOptions: FilePondOptions;
 
   constructor(private fb: FormBuilder, private http: HttpClient, private modalService: NgbModal,
-    private toastr: ToastrService, public switchService: SwitherService, private dp: DatePipe
+    private toastr: ToastrService, public switchService: SwitherService, private dp: DatePipe,
+    private router: Router
   ) { //localStorage.getItem('userDetails.companyName')
     // Initialize FilePond options if needed
     super();
@@ -154,7 +156,9 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
       projectEndDate: ['', Validators.required],
       action: [''],
       companyName: [JSON.parse(this.userDetails)?.companyName],
-      attachments: [null] // Adjust based on your attachment handling
+      attachments: [null], // Adjust based on your attachment handling
+      email: [JSON.parse(this.userDetails)?.email],
+      type: [JSON.parse(this.userDetails)?.type]
     });
   }
 
@@ -164,7 +168,7 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
 
   onClkDesign(){
     this.userData = localStorage.getItem('userDetails');
-    this.switchService.onAdonai(JSON.parse(this.userData).email).subscribe({
+    this.switchService.onAdonai(JSON.parse(this.userData)?.email).subscribe({
       next: (res:any) => {
         if(res.status == false){
           alert(res.message)
@@ -234,8 +238,12 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
 
   getLst(){
     // console.log(JSON.parse(this.userDetails)?.companyName);
-    let cmpnyNm = JSON.parse(this.userDetails)?.companyName
-    this.switchService.projectLst(cmpnyNm).subscribe({ next: (res:any) => {
+    let payload = {
+      "email": JSON.parse(this.userDetails)?.email,
+      "type": JSON.parse(this.userDetails)?.type,
+      "companyname": JSON.parse(this.userDetails)?.companyName
+    }
+    this.switchService.projectLst(payload).subscribe({ next: (res:any) => {
       if(res){
         this.projectLst = res
         this.dataSource.data = res;
@@ -251,7 +259,12 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
   }
 
   getdesignData(){
-    this.switchService.designersDbData(JSON.parse(this.userDetails)?.companyName).subscribe({ next: (res:any) =>{
+    let payload = {
+      "email": JSON.parse(this.userDetails)?.email,
+      "type": JSON.parse(this.userDetails)?.type,
+      "companyname": JSON.parse(this.userDetails)?.companyName
+    }
+    this.switchService.designersDbData(payload).subscribe({ next: (res:any) =>{
     if(res){    
       this.pjData = res;
     } else {
@@ -276,7 +289,7 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
 
   onProjectAdd(data:any){
     console.log(data);
-    
+    this.router.navigate(['/dashboard/mytask'], {queryParams: {projectId : data.projectId}});
   }
 
   chartOptions: any = {
