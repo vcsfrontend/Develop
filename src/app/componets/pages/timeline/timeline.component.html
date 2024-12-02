@@ -1,6 +1,114 @@
 <app-page-header title="Timeline" title1="Pages" activeTitle="Timeline" ></app-page-header>
 <div class="timeline mb-5">
+    <!-- <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="timeline-container">
+              <div *ngIf="projectCycleData.length > 0; else noData">
+                <div *ngFor="let item of projectCycleData; let i = index" [ngClass]="{'timeline-right': i % 2 === 0, 'timeline-left': i % 2 !== 0}">
+                  <div class="row">
+                    <div class="col-md-6" *ngIf="i % 2 !== 0">
+                      <p class="timeline-date">{{ item.updatedDate }}</p>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="timeline-box d-flex gap-3 align-items-start">
+                        <div class="lh-1">
+                          <span class="avatar avatar-rounded">
+                            <img [src]="item.image" alt="">
+                          </span>
+                        </div>
+                        <div class="timeline-text">
+                          <h6 class="fw-medium mb-1">{{ item.heading }}</h6>
+                          <p class="mb-0 text-muted">{{ item.description }}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6" *ngIf="i % 2 === 0">
+                      <p class="timeline-date">{{ item.updatedDate }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <ng-template #noData>
+                <p>No timeline data available.</p>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      
+
     <div class="container">
+        <div *ngFor="let item of projectCycleData; let i = index">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="timeline-container">
+                        <div class="timeline-end">
+                            <span class="avatar avatar-lg bg-primary-transparent backdrop-blur text-center">
+                                <span class="fs-13">{{item.updatedDate | date: 'yyyy'}}</span>
+                            </span>
+                        </div>
+                        <div class="timeline-continue">
+                            <div class="row timeline-right">
+                                <div class="col-md-6">
+                                    <p class="timeline-date">
+                                        {{item.updatedDate | date: 'dd-MM-yyyy'}}
+                                    </p>
+                                    <!-- <span class="timeline-time fs-12 text-muted fw-medium d-block">
+                                        12:37PM
+                                    </span> -->
+                                </div>
+                                <div class="col-md-6" data-bs-target="#exampleModalLg" (click)="VerticallyScrol(content1)">
+                                    <div class="timeline-box d-flex gap-3 align-items-start">
+                                        <div class="lh-1">
+                                            <span class="avatar avatar-rounded">
+                                                <img src="./assets/images/faces/11.jpg" alt="">
+                                            </span>
+                                        </div>
+                                        <div class="timeline-text">
+                                            <h6 class="fw-medium mb-1" data-bs-toggle="modal">{{item.heading}}</h6>
+                                            <p class="mb-0 text-muted">{{item.description}}</p>
+                                                <!-- <span class="badge bg-primary-transparent fw-medium mx-1">files</span>and
+                                                <span class="badge bg-primary-transparent fw-medium mx-1">folders</span>were included -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <ng-template #content1 id="addtask" let-modal>
+                <div class="modal-content custom-modal">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="mail-ComposeLabel">Project Description</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="modal.close('Cross click')"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="p-3">
+                        <p>{{item.description}}</p>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal"
+                            (click)="modal.close('Cross click')">Cancel</button>
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+    <!-- <div class="container">
+        <div *ngFor="let item of projectCycleData; let i = index"></div>
         <div class="row">
             <div class="col-lg-12">
                 <div class="timeline-container">
@@ -175,24 +283,10 @@
                 </div>
             </div>
         </div>
-    </div>
-    <ng-template #content1 id="addtask" let-modal>
-        <div class="modal-content custom-modal">
-            <div class="modal-header">
-                <h6 class="modal-title" id="mail-ComposeLabel">Project Estimation</h6>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="modal.close('Cross click')"
-                    aria-label="Close"></button>
-            </div>
-            <div class="p-3">
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorum voluptas ea rem eos aliquam necessitatibus magnam nostrum velit culpa odio maxime officia ab, doloremque, quasi facilis earum rerum. Repellendus, incidunt.</p>
-            </div>
-            
-            <div class="modal-footer">
-                <button class="btn btn-primary-light btn-wave ms-auto float-end">Create Project</button>
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal"
-                    (click)="modal.close('Cross click')">Cancel</button>
-            </div>
-        </div>
-    </ng-template>
+    </div> -->
+    
+    
+    
+    
     
 </div>

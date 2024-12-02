@@ -180,7 +180,6 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
       }
     })
   }
-  
 
   onSubmit(): void {
     this.submitted = true;
@@ -290,6 +289,10 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
   onProjectAdd(data:any){
     console.log(data);
     this.router.navigate(['/dashboard/mytask'], {queryParams: {projectId : data.projectId}});
+  }
+
+  onProjectCycle(id:any){
+    this.router.navigate(['/pages/timeline'], {queryParams: {projectId : id.projectId}});
   }
 
   chartOptions: any = {

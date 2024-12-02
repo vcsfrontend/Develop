@@ -44,8 +44,7 @@ export class MyTasksComponent {
     private switchService: SwitherService) {
     this.route.queryParams.subscribe(params => {
       this.proId = params['projectId'];
-      // this.name = params['name'];
-      console.log('prodetails - ',this.proId);
+      // console.log('prodetails - ',this.proId);
     });
     this.userData = localStorage.getItem('userDetails');
   }
@@ -67,7 +66,7 @@ export class MyTasksComponent {
         this.proStatus = res?.projStatus
         console.log('proData -', this.proData);
       } else {
-        this.toastr.error(res.message);
+        this.toastr.success(res.message);
         }
       },
       error: (error) => {
@@ -86,9 +85,8 @@ export class MyTasksComponent {
       "description": this.description,
       "updatedBy": JSON.parse(this.userData).username,
     }
-    
     this.switchService.onAddTaskDtls(payload).subscribe({ next: (res:any) =>{
-    if(res.status == true){    
+    if(res.status == true){
       this.toastr.error(res.message);
       return;
       } else {

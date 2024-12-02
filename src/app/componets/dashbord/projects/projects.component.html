@@ -431,10 +431,11 @@
             </div>
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <a class="btn btn-sm btn-primary btn-wave ms-3" (click)="onProjectAdd(project)"><i
-                        class="ri-add-line align-middle me-1 fw-medium"></i>Add</a>
+                    class="ri-add-line align-middle me-1 fw-medium"></i>Add</a>
                         <!-- routerLink="/dashboard/mytask" -->
-                <a class="btn btn-sm btn-primary btn-wave me-3" routerLink="/pages/timeline"><i
-                        class="bi bi-calendar-date align-middle me-1 fw-medium"></i>Project Cycle</a>
+                <a class="btn btn-sm btn-primary btn-wave me-3" (click)="onProjectCycle(project)"><i
+                    class="bi bi-calendar-date align-middle me-1 fw-medium"></i>Project Cycle</a>
+                        <!-- routerLink="/pages/timeline" -->
             </div>
         </div>
     </div>
@@ -940,9 +941,9 @@
                                         <ng-option value="Choice 2">Residential</ng-option>
                                     </ng-select> -->
                                     <select class="form-select" aria-label="Default select example"  [(ngModel)]='businessCategory'>
-                                        <option value="0">select type</option>
-                                        <option value="1">Commercial</option>
-                                        <option value="2">Residential</option>  
+                                        <option value="">select type</option>
+                                        <option value="Commercial">Commercial</option>
+                                        <option value="Residential">Residential</option>  
                                     </select>
                                     
                                     <!-- <input type="text" class="form-control" id="businessCategory" formControlName="businessCategory" placeholder=""> -->
