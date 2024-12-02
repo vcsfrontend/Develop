@@ -39,6 +39,7 @@ export class MyTasksComponent {
   ];
 
   modal: any; proId:any; proData:any; userData:any; description: string = ''; heading: string = '';
+  proStatus: string = '';
   constructor(private modalService: NgbModal, private route:ActivatedRoute, private toastr: ToastrService,
     private switchService: SwitherService) {
     this.route.queryParams.subscribe(params => {
@@ -56,15 +57,15 @@ export class MyTasksComponent {
       dateFormat: 'H:i',
     };
     flatpickr('#addignedDate', this.flatpickrOptions);
-    this.getProjectDetails()
+    this.getProjectDetails();
   }
 
   getProjectDetails(){
     this.switchService.onProjectDtls(this.proId).subscribe({ next: (res:any) =>{
       if(res){    
         this.proData = res;
+        this.proStatus = res?.projStatus
         console.log('proData -', this.proData);
-        
       } else {
         this.toastr.error(res.message);
         }
@@ -86,10 +87,10 @@ export class MyTasksComponent {
       "updatedBy": JSON.parse(this.userData).username,
     }
     
-    this.switchService.onTaskDtls(this.proId, payload).subscribe({ next: (res:any) =>{
-    if(res){    
-      this.proData = res;
-      console.log('proData -', this.proData);
+    this.switchService.onAddTaskDtls(payload).subscribe({ next: (res:any) =>{
+    if(res.status == true){    
+      this.toastr.error(res.message);
+      return;
       } else {
         this.toastr.error(res.message);
         }

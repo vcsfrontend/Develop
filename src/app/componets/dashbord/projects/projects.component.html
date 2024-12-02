@@ -610,7 +610,7 @@
                         class="ri-add-line me-1 fw-medium align-middle"></i>New Project</a> -->
                     <div>
                         <a class="btn btn-sm btn-secondary btn-wave" data-bs-toggle="modal"
-                            data-bs-target="#exampleModalLg" (click)="openLg(Content10)"><i
+                            data-bs-target="#exampleModalLg" (click)="openLg(Content10);submitted=false"><i
                                 class="ri-add-line align-middle me-1 fw-medium"></i>Create Project</a>
                     </div>
                 </div>
@@ -634,15 +634,19 @@
                                     data-bs-target="#exampleModalLg"
                                     (click)="openLg(Content11);onProjectDetails(element)"> {{element.projectId}} </td>
                             </ng-container>
-                            <ng-container matColumnDef="projectName">
+                            <!-- <ng-container matColumnDef="projectName">
                                 <th mat-header-cell *matHeaderCellDef> Project Name </th>
                                 <td mat-cell *matCellDef="let element"> {{element.projectName}} </td>
-                            </ng-container>
+                            </ng-container> -->
                             <ng-container matColumnDef="clientName">
                                 <th mat-header-cell *matHeaderCellDef> Client Name </th>
                                 <td mat-cell *matCellDef="let element"> {{element.clientName}} </td>
                             </ng-container>
-                            <ng-container matColumnDef="businessCategory">
+                            <ng-container matColumnDef="projStatus">
+                                <th mat-header-cell *matHeaderCellDef>Project Status</th>
+                                <td mat-cell *matCellDef="let element"> {{element.projStatus}} </td>
+                            </ng-container>
+                            <!-- <ng-container matColumnDef="businessCategory">
                                 <th mat-header-cell *matHeaderCellDef> Business Category</th>
                                 <td mat-cell *matCellDef="let element"> {{element.businessCategory}} </td>
                             </ng-container>
@@ -661,7 +665,7 @@
                             <ng-container matColumnDef="projectState">
                                 <th mat-header-cell *matHeaderCellDef>Project Stage</th>
                                 <td mat-cell *matCellDef="let element"> {{element.projectState}} </td>
-                            </ng-container>
+                            </ng-container> -->
                             <ng-container matColumnDef="projectEstimation">
                                 <th mat-header-cell *matHeaderCellDef>Project Estimation</th>
                                 <td mat-cell *matCellDef="let element" data-bs-toggle="modal"
@@ -672,10 +676,10 @@
                                 <th mat-header-cell *matHeaderCellDef>Project Area</th>
                                 <td mat-cell *matCellDef="let element"> {{element.projectArea}} </td>
                             </ng-container>
-                            <ng-container matColumnDef="action">
+                            <!-- <ng-container matColumnDef="action">
                                 <th mat-header-cell *matHeaderCellDef>Action</th>
                                 <td mat-cell *matCellDef="let element"> {{element.action}} </td>
-                            </ng-container>
+                            </ng-container> -->
                             <ng-container matColumnDef="projectStartDate">
                                 <th mat-header-cell *matHeaderCellDef>Project Start Date</th>
                                 <td mat-cell *matCellDef="let element"> {{element.projectStartDate | date:'dd-MM-yyyy'}} </td>
@@ -683,16 +687,16 @@
                             <ng-container matColumnDef="projectEndDate">
                                 <th mat-header-cell *matHeaderCellDef>Project End Date</th>
                                 <td mat-cell *matCellDef="let element"> {{element.projectEndDate | date:'dd-MM-yyyy'}}
-                                     - ({{calculateDateDifference(element.projectEndDate)}}) </td>
+                                      ({{calculateDateDifference(element.projectEndDate)}}) </td>
                             </ng-container>
-                            <ng-container matColumnDef="designId">
+                            <!-- <ng-container matColumnDef="designId">
                                 <th mat-header-cell *matHeaderCellDef>Design Id</th>
                                 <td mat-cell *matCellDef="let element"> {{element.designId}} </td>
                             </ng-container>
                             <ng-container matColumnDef="companyName">
                                 <th mat-header-cell *matHeaderCellDef>Company Name</th>
                                 <td mat-cell *matCellDef="let element"> {{element.companyName}} </td>
-                            </ng-container>
+                            </ng-container> -->
                             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                         </table>
