@@ -19,7 +19,7 @@
                                     12:37PM
                                 </span>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6" data-bs-target="#exampleModalLg" (click)="VerticallyScrol(content1)">
                                 <div class="timeline-box d-flex gap-3 align-items-start">
                                     <div class="lh-1">
                                         <span class="avatar avatar-rounded">
@@ -27,7 +27,7 @@
                                         </span>
                                     </div>
                                     <div class="timeline-text">
-                                        <h6 class="fw-medium mb-1">Christopher</h6>
+                                        <h6 class="fw-medium mb-1" data-bs-toggle="modal">Christopher</h6>
                                         <p class="mb-0 text-muted">Project assigned by the manager all<span class="badge bg-primary-transparent fw-medium mx-1">files</span>and<span class="badge bg-primary-transparent fw-medium mx-1">folders</span>were included</p>
                                     </div>
                                 </div>
@@ -176,4 +176,23 @@
             </div>
         </div>
     </div>
+    <ng-template #content1 id="addtask" let-modal>
+        <div class="modal-content custom-modal">
+            <div class="modal-header">
+                <h6 class="modal-title" id="mail-ComposeLabel">Project Estimation</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="modal.close('Cross click')"
+                    aria-label="Close"></button>
+            </div>
+            <div class="p-3">
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorum voluptas ea rem eos aliquam necessitatibus magnam nostrum velit culpa odio maxime officia ab, doloremque, quasi facilis earum rerum. Repellendus, incidunt.</p>
+            </div>
+            
+            <div class="modal-footer">
+                <button class="btn btn-primary-light btn-wave ms-auto float-end">Create Project</button>
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal"
+                    (click)="modal.close('Cross click')">Cancel</button>
+            </div>
+        </div>
+    </ng-template>
+    
 </div>

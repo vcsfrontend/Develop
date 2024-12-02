@@ -1,0 +1,24 @@
+.timeline .timeline-box {
+    display: inline-block;
+    position: relative;
+    padding: 20px;
+    margin: 15px;
+    border-radius: 6px;
+    border: 1px solid var(--default-border);
+    max-width: 400px;
+    background: var(--custom-white);
+    cursor: pointer;
+}
+// .custom-modal {
+//     position: fixed;
+//     top: 60%;
+//     right: 0;
+//     transform: translateY(-50%);
+//     width: 700px; /* Set the width of the modal */
+//     z-index: 1050; /* Ensure it stays above other elements */
+//     border: 1px solid #ddd;
+//     border-radius: 5px;
+//     background: #fff;
+//     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+//     padding: 20px;
+// }

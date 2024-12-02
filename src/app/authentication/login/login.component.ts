@@ -142,7 +142,7 @@ login() {
           this.navSvc.isCRMApplicable$.next(res.crm);
           this.navSvc.adonaiRole$.next(res.adonaiRole);
           this.navSvc.crmRole$.next(res.crmRole)
-        this.router.navigate(['/dashboard/sales']);
+        this.router.navigate(['/dashboard/projects']);
       }
     else{
       this.toastr.error(res.message,'VCS', {
