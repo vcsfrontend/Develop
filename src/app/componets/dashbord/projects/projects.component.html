@@ -430,8 +430,9 @@
                 </div>
             </div>
             <div class="d-flex justify-content-between align-items-center mb-3">
-                <a class="btn btn-sm btn-primary btn-wave ms-3" routerLink="/dashboard/mytask"><i
+                <a class="btn btn-sm btn-primary btn-wave ms-3" (click)="onProjectAdd(project)"><i
                         class="ri-add-line align-middle me-1 fw-medium"></i>Add</a>
+                        <!-- routerLink="/dashboard/mytask" -->
                 <a class="btn btn-sm btn-primary btn-wave me-3" routerLink="/pages/timeline"><i
                         class="bi bi-calendar-date align-middle me-1 fw-medium"></i>Project Cycle</a>
             </div>
@@ -794,7 +795,7 @@
                                             <div *ngIf="f['city'].errors['required']">City is required</div>
                                         </div>
                                     </div>
-                                    <div class="col-xl-4">
+                                    <!-- <div class="col-xl-4">
                                         <label for="projectState" class="form-label">Project Stage:</label>
                                         <input type="text" class="form-control" id="projectState"
                                             formControlName="projectState" placeholder="Enter Project State"
@@ -804,7 +805,7 @@
                                             <div *ngIf="f['projectState'].errors['required']">Project State is required
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="col-xl-4">
                                         <label for="projectEstimation" class="form-label">Project Estimation:</label>
                                         <input type="tel" class="form-control" id="projectEstimation" maxlength="10" 

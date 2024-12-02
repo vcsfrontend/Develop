@@ -147,7 +147,7 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
       projectAddress: ['', Validators.required],
       state: ['', Validators.required],
       city: ['', Validators.required],
-      projectState: ['', Validators.required],
+      projectState: [''],
       projectEstimation: ['', [Validators.required, Validators.min(0)]], // Assuming estimation should be a positive number
       projectArea: ['', [Validators.required, Validators.min(0)]], // Assuming area should be a positive number
       projectStartDate: ['', Validators.required],
@@ -272,6 +272,11 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
     this.projectName = data.projectName; this.clientName = data.clientName; this.businessCategory = data.businessCategory;
     this.projectAddress = data.projectAddress; this.projectArea = data.projectArea; this.state = data.state; 
     this.city = data.city; this.action = data.action; this.designId = data.designId; this.companyName = data.companyName;
+  }
+
+  onProjectAdd(data:any){
+    console.log(data);
+    
   }
 
   chartOptions: any = {
