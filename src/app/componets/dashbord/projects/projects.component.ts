@@ -40,6 +40,7 @@ import { ShowcodeCardComponent } from '../../../shared/common/includes/showcode-
 import { ShowCodeContentDirective } from '../../../shared/directives/show-code-content.directive';
 import { BaseComponent } from '../../../shared/base/base.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { FormControl, FormArray,  } from '@angular/forms'  
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -121,11 +122,13 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
   open(content11:any) {
 		this.modalService.open(content11, { size: 'lg' },);
 	}
-  content12:any;
+  VerticallyScrol(content12:any) {
+		this.modalService.open(content12, {  scrollable: true,centered: true,size: 'lg' });
+	}
   
   createProjectForm!: FormGroup;
   pondOptions: FilePondOptions;
-
+  productForm: FormGroup;
   constructor(private fb: FormBuilder, private http: HttpClient, private modalService: NgbModal,
     private toastr: ToastrService, public switchService: SwitherService, private dp: DatePipe,
     private router: Router
@@ -137,6 +140,11 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
       allowMultiple: true,
       // other FilePond options here
     };
+      
+    this.productForm = this.fb.group({  
+      name: '',  
+      quantities: this.fb.array([]) ,  
+    });  
   }
  
   ngOnInit(): void {
@@ -910,7 +918,26 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
       this.fileName = null; // Reset if no file selected
     }
   }
-
+  quantities() : FormArray {  
+    return this.productForm.get("quantities") as FormArray  
+  }  
+     
+  newQuantity(): FormGroup {  
+    return this.fb.group({  
+      qty: '',  
+      price: '',  
+    })  
+  }  
+     
+  addQuantity() {  
+    this.quantities().push(this.newQuantity());  
+  }  
+     
+  removeQuantity(i:number) {  
+    this.quantities().removeAt(i);  
+  }  
+     
+  
   
 }
 
