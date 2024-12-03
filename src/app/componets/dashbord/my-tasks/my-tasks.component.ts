@@ -10,11 +10,12 @@ import * as FilePond from 'filepond';
 import { ActivatedRoute } from '@angular/router';
 import { SwitherService } from '../../../shared/services/swither.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router, RouterModule } from '@angular/router';
 @Component({
   selector: 'app-my-tasks',
   standalone: true,
   imports: [SharedModule, NgSelectModule, NgbModule,
-    NgbNavModule,NgbDropdownModule,FlatpickrModule,FormsModule,ReactiveFormsModule,FilePondModule],
+    NgbNavModule,NgbDropdownModule,FlatpickrModule,FormsModule,ReactiveFormsModule,FilePondModule,RouterModule ,],
   providers: [NgbModalConfig, NgbModal,FlatpickrDefaults],
   templateUrl: './my-tasks.component.html',
   styleUrl: './my-tasks.component.scss'

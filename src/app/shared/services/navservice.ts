@@ -125,15 +125,15 @@ export class NavService implements OnDestroy {
       selected: false,
       path: '/dashboard/projects',
     },
-    {
-      title: 'Adonai',
-      icon: 'bi bi-rulers',
-      dirchange: false,
-      type: 'link',
-      linkType : 'internal',
-      active: false,
-      path: '/dashboard/adonai'
-    },
+    // {
+    //   title: 'Adonai',
+    //   icon: 'bi bi-rulers',
+    //   dirchange: false,
+    //   type: 'link',
+    //   linkType : 'internal',
+    //   active: false,
+    //   path: '/dashboard/adonai'
+    // },
     // {
     //   title: 'To-Do-List',
     //   dirchange: false,
