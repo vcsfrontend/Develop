@@ -287,7 +287,6 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
   }
 
   onProjectAdd(data:any){
-    console.log(data);
     this.router.navigate(['/dashboard/mytask'], {queryParams: {projectId : data.projectId}});
   }
 

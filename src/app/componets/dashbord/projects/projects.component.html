@@ -633,7 +633,7 @@
                                 <th mat-header-cell *matHeaderCellDef> Project Id </th>
                                 <td mat-cell *matCellDef="let element" data-bs-toggle="modal"
                                     data-bs-target="#exampleModalLg"
-                                    (click)="openLg(Content11);onProjectDetails(element)"> {{element.projectId}} </td>
+                                    (click)="openLg(Content11);onProjectDetails(element)"> {{element.projectId | slice:0:7}} </td>
                             </ng-container>
                             <!-- <ng-container matColumnDef="projectName">
                                 <th mat-header-cell *matHeaderCellDef> Project Name </th>

@@ -42,7 +42,7 @@ export class MyTasksComponent {
   modal: any; proId:any; proData:any; userData:any; description: string = ''; heading: string = '';
   proStatus: string = '';
   constructor(private modalService: NgbModal, private route:ActivatedRoute, private toastr: ToastrService,
-    private switchService: SwitherService) {
+    private switchService: SwitherService, private router:Router) {
     this.route.queryParams.subscribe(params => {
       this.proId = params['projectId'];
       // console.log('prodetails - ',this.proId);
@@ -67,7 +67,7 @@ export class MyTasksComponent {
         this.proStatus = res?.projStatus
         console.log('proData -', this.proData);
       } else {
-        this.toastr.success(res.message);
+        this.toastr.error(res.message);
         }
       },
       error: (error) => {
@@ -88,7 +88,8 @@ export class MyTasksComponent {
     }
     this.switchService.onAddTaskDtls(payload).subscribe({ next: (res:any) =>{
     if(res.status == true){
-      this.toastr.error(res.message);
+      this.toastr.success(res.message);
+      this.router.navigate(['/dashboard/projects']);
       return;
       } else {
         this.toastr.error(res.message);

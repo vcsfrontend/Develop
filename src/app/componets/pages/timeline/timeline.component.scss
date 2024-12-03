@@ -9,6 +9,16 @@
     background: var(--custom-white);
     cursor: pointer;
 }
+
+.timeline-right .timeline-box {
+    justify-content: flex-end;
+}
+  
+.timeline-left .timeline-box {
+    justify-content: flex-end;
+    text-align: right;
+}
+  
 // .custom-modal {
 //     position: fixed;
 //     top: 60%;
