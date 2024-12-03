@@ -1,21 +1,21 @@
-<video class="video-background ratio ratio-4x3" src="./assets/video/school_of_fish.mp4" autoplay loop muted></video>
+<!-- <video class="video-background ratio ratio-4x3" src="./assets/video/school_of_fish.mp4" autoplay loop muted></video> -->
 <div class="container">
     <div class="row justify-content-center align-items-center authentication authentication-basic h-100">
         <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-6 col-sm-8 col-12">
-            <div class="card custom-card my-4 bg-light p-2 text-white bg-opacity-75">
+            <div class="card custom-card my-4 ">
                 <div class="card-body p-5">
                     <ul ngbNav #nav="ngbNav" [(activeId)]="active"
                         class="nav-tabs  justify-content-center border-bottom-0 mb-2 mt-0 ">
                         <li ngbNavItem="Angular">
                             <ng-template ngbNavContent>
                                 <p class="h5 mb-2 text-center"><strong>Sign In</strong></p>
-                                <form class="bg-light p-2 text-white bg-opacity-25" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                                <form class="p-2" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                                     <div class="row gy-3">
                                         <div class="col-xl-12">
                                             <label for="signin-username" class="form-label text-default"><strong>Email</strong></label>
                                             <!-- <div class="input-group">
                                                 <div class="input-group-text text-muted bg-light pl-4 font-weight-bold bg-opacity-25 border border-dark "> <i class="ri-user-line"></i> </div> -->
-                                            <input type="text" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark " id="signin-username"
+                                            <input type="text" class="form-control form-control-lg" id="signin-username"
                                                 autocomplete formControlName="email" [(ngModel)]="email" required
                                                 placeholder="Enter Your Email">
                                             <!-- </div> -->
@@ -27,7 +27,7 @@
                                             <div class="position-relative">
                                                 <!-- <div class="input-group">
                                                     <div class="input-group-text text-muted bg-light pl-4 font-weight-bold bg-opacity-25 border border-dark"> <i class="ri-lock-line"></i> </div> -->
-                                                <input type="password" class="form-control form-control-lg bg-light p-2 font-weight-bold bg-opacity-25 border border-dark "
+                                                <input type="password" class="form-control form-control-lg "
                                                     id="signin-password" placeholder="Enter Your Password"
                                                     [type]="showPassword ? 'text' : 'password'" autocomplete
                                                     onkeypress='return ((event.charCode >= 33 && event.charCode <= 127) || event.charCode == 8)'
