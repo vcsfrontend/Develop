@@ -14,18 +14,23 @@
     
 </div>
 <div class="timeline mb-5">
+
+
+
+
+
+
+    
     <div *ngFor="let item of projectCycleData; let i = index">
         <div class="row">
           <div class="col-lg-12">
             <div class="timeline-container">
-              <!-- Display year only when it changes -->
               <div class="timeline-end" *ngIf="i === 0 || (item.updatedDate | date: 'd MMM') !== (projectCycleData[i - 1]?.updatedDate | date: 'd MMM')">
                 <span class="avatar avatar-lg bg-primary-transparent backdrop-blur text-center">
                   <span class="fs-13">{{ item.updatedDate | date: 'd MMM' }}</span>
                 </span>
               </div>
               <div class="timeline-continue">
-                <!-- Alternate between timeline-right and timeline-left -->
                 <div class="row" [ngClass]="{'timeline-left': i % 2 === 0, 'timeline-right': i % 2 !== 0}">
                   <div class="col-md-6" *ngIf="i % 2 !== 0">
                     <p class="timeline-date">

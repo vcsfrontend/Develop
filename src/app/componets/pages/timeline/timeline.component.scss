@@ -1,23 +1,88 @@
-.timeline .timeline-box {
-    display: inline-block;
-    position: relative;
-    padding: 20px;
-    margin: 15px;
-    border-radius: 6px;
-    border: 1px solid var(--default-border);
-    max-width: 400px;
-    background: var(--custom-white);
-    cursor: pointer;
-}
+// .timeline .timeline-box {
+//     display: inline-block;
+//     position: relative;
+//     padding: 20px;
+//     margin: 15px;
+//     border-radius: 6px;
+//     border: 1px solid var(--default-border);
+//     max-width: 400px;
+//     background: var(--custom-white);
+//     cursor: pointer;
+// }
 
-.timeline-right .timeline-box {
-    justify-content: flex-end;
-}
+// .timeline-right .timeline-box {
+//     justify-content: flex-end;
+// }
   
-.timeline-left .timeline-box {
-    justify-content: flex-end;
+// .timeline-left .timeline-box {
+//     justify-content: flex-end;
+//     text-align: right;
+// }
+.timeline-container {
+    position: relative;
+    // padding: 20px 0;
+  }
+  
+  .timeline-end {
+    text-align: center;
+    // margin-bottom: 20px;
+  }
+  
+  .timeline-continue {
+    position: relative;
+  }
+  
+  .timeline-box {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    max-width: 500px; /* Limit the width to keep it close to the timeline */
+  }
+  
+  .timeline-left .timeline-box {
+    margin-right: auto;
+    margin-left: 0; /* Align it near the left side */
+  }
+  
+  .timeline-right .timeline-box {
+    margin-left: auto;
+    margin-right: 0; /* Align it near the right side */
+  }
+  
+  .timeline-date-time {
+    text-align: left;
+  }
+  
+  .timeline-left .timeline-date-time {
     text-align: right;
-}
+  }
+  
+  .avatar-rounded img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+  
+  .row.d-flex {
+    align-items: flex-start;
+  }
+  
+  .timeline-date {
+    font-size: 14px;
+    color: #6c757d;
+    margin-bottom: 5px;
+  }
+  
+  .timeline-time {
+    font-size: 12px;
+    color: #adb5bd;
+  }
+  
+  .fs-13 {
+    font-size: 13px;
+  }
+  
   
 // .custom-modal {
 //     position: fixed;
