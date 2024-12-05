@@ -46,5 +46,17 @@ export class TimelineComponent {
       },
       })
   }
-    
+  shareContent() {
+    // Extract the content you want to share
+    const popupContent = document.getElementById('popup-content')?.textContent || 'Default content';
+
+    // Encode the content
+    const encodedMessage = encodeURIComponent(popupContent);
+
+    // Construct the WhatsApp URL
+    const whatsappUrl = `https://wa.me/?text=${encodedMessage}`;
+
+    // Open the URL
+    window.open(whatsappUrl, '_blank');
+  } 
 }

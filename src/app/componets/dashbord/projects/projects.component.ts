@@ -123,7 +123,7 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
 		this.modalService.open(content11, { size: 'lg' },);
 	}
   VerticallyScrol(content12:any) {
-		this.modalService.open(content12, {  scrollable: true,centered: true,size: 'lg' });
+		this.modalService.open(content12, {  scrollable: true,centered: true,size: 'xl' });
 	}
   
   createProjectForm!: FormGroup;
@@ -166,7 +166,8 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
       companyName: [JSON.parse(this.userDetails)?.companyName],
       attachments: [null], // Adjust based on your attachment handling
       email: [JSON.parse(this.userDetails)?.email],
-      type: [JSON.parse(this.userDetails)?.type]
+      type: [JSON.parse(this.userDetails)?.type],
+      username: [JSON.parse(this.userDetails)?.username]
     });
   }
 
@@ -935,9 +936,6 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
      
   removeQuantity(i:number) {  
     this.quantities().removeAt(i);  
-  }  
-     
-  
-  
+  }
 }
 

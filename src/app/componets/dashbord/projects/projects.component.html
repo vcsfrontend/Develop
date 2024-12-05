@@ -10,17 +10,8 @@
             </nav>
         </div>
     </div>
-    <div class="btn-list">
-        <!-- <button class="btn btn-primary-light btn-wave me-2">
-            <i class="bx bx-crown align-middle"></i> Plan Upgrade
-        </button> -->
-        <!-- <button (click)="onclick()" type="button" class="btn btn-primary-light btn-wave me-0">
-            <i class="bi bi-arrow-right-circle align-middle"></i>&nbsp; {{ReadMore?"Read More":"Read Less"}}
-        </button> -->
-
-    </div>
 </div>
-<div class="col-xl-12 col-xxl-12 col-md-12">
+<div class="col-xl-12 col-xxl-12 col-md-12 col-lg-12 col-sm-12">
     <div class="card custom-card ">
         <div class="card-header justify-content-between">
 
@@ -29,12 +20,12 @@
             </marquee>
         </div>
         <div class="row">
-            <div class="card-body col-xxl-8 col-xl-8 col-md-8 col-lg-8 text-center">
-                <div class="d-grid gap-2 col-9 text-center">
+            <div class="card-body col-xxl-12 col-xl-12 col-md-12 col-lg-12 col-sm-12 text-center">
+                <div class="d-grid gap-2 text-center">
                     <img class="rounded mx-auto d-block demo" src="/assets/images/company-logos/adonai_logo.png" alt="">
                 </div>
             </div>
-            <div class="col-xxl-4 col-lg-4 col-md-4 col-xl-4 col-6  text-center mx-auto pt-4">
+            <div class="col-xxl-4 col-lg-4 col-md-4 col-xl-4 col-6  text-center mx-auto">
                 <button class="btn button   btn-wave btn-w-lg  font-weight-bold"
                     style="background-color: #006699; color: white;" aria-expanded="false" (click)="onClkDesign()"
                     type="button">Click to Explore Endless Designs </button>
@@ -363,13 +354,16 @@
                                      formControlName="country" >
                                     <!-- <option value="" disabled selected>select</option> -->
                                     <option> 
-                                        <span>Pj Name</span>
+                                        <span>Project Name</span>
                                     </option>
                                     <option> 
-                                        <span>Pj code</span>
+                                        <span>Project code</span>
+                                    </option>
+                                    <option> 
+                                        <span>All</span>
                                     </option>
                                 </select>
-                                <input type="text" class="form-control" placeholder="Search Task Here"
+                                <input type="text" class="form-control" placeholder="Search Here"
                                 aria-describedby="button-addon2">
                                 <button class="btn btn-ghost-light border" type="button" id="button-addon2"><i
                                     class="ri-search-line text-muted"></i></button>
@@ -436,7 +430,16 @@
                             'bg-success-transparent': project.dateDifference >= 0}">{{project.dateDifference}} days to go</span>
                     </div>
                 </div>
-                <div class="mb-1">Status : {{project.projectState}}</div>
+                <div class="mb-1">Project Status : {{project.projectState}}</div>
+                <div class="mb-3">
+                    <div></div>
+                    <div class="progress progress-xs progress-animate" role="progressbar" aria-valuenow="80"
+                        aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar bg-primary" style="width: 80%"></div>
+                    </div>
+                    <div class="mt-1"><span class="text-primary fw-medium">80%</span> Completed</div>
+                </div>
+                <div class="mb-1">Payment Status : {{project.projectState}}</div>
                 <div>
                     <div></div>
                     <div class="progress progress-xs progress-animate" role="progressbar" aria-valuenow="80"
@@ -1015,41 +1018,120 @@
                 aria-label="Close"></button>
         </div>
         <div class="modal-body px-4">
-            <form [formGroup]="createProjectForm" (ngSubmit)="onSubmit()">
+            <form [formGroup]="createProjectForm" (ngSubmit)="onSubmit()" class="border-0">
                 <div class="row">
-                    <div class="col-xl-12">
+                    <div class="col-xxl-12">
                         <div class="card custom-card">
                             <div class="card-body">
                                 <div class="row gy-3">
                                     <div class="container"> 
                                         <form [formGroup]="productForm" (ngSubmit)="onSubmit()"> 
-                                            <div class="d-flex justify-content-between gap-3 pb-3">
-                                                <div class="col-xxl-6 ">  
-                                                    <label for="name">Project Name:</label>  
-                                                    <input type="text" id="name" name="name" formControlName="name" class="form-control">  
+                                            <div class="d-flex justify-content-between gap-2 pb-3">
+                                                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 ">  
+                                                    <label for="name">Stage Of Payment:</label>  
+                                                    <input type="text" id="name" name="name" placeholder="Start" formControlName="name" class="form-control" >  
                                                 </div>
-                                                <div class="col-xxl-4 ">
-                                                    <label for="">Cost</label> 
+                                                <div class="col-xxl-1 col-xl-1 col-lg-1 col-md-1 col-sm-1 ">
+                                                    <label for="">Percentage</label> 
                                                     <input type="text" formControlName="price" class="form-control">   
                                                 </div>
-                                                <div class="col-xxl-2 pt-3"> 
-                                                    <button type="button" (click)="addQuantity()" class="btn btn-primary">Add More <i
-                                                        class="ri-add-line align-middle me-1 fw-medium"></i></button> 
+                                                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 ">
+                                                    <label for="">Received Amount</label> 
+                                                    <input type="text" formControlName="price" class="form-control">   
+                                                </div>
+                                                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 ">
+                                                    <label for="">Pending Amount</label> 
+                                                    <input type="text" formControlName="price" class="form-control">   
+                                                </div>
+                                                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 ">
+                                                    <label for="">Updated Time</label> 
+                                                    <input type="text" formControlName="price" class="form-control">   
+                                                </div>
+                                                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 ">
+                                                    <label for="">Updated by</label> 
+                                                    <input type="text" formControlName="price" class="form-control">   
+                                                </div> 
+                                                <div class="col-xxl-1 col-xl-1 col-lg-1 col-md-1 col-sm-1  p-4"> 
+                                                    <i (click)="addQuantity()" class="ri-add-circle-fill"></i>
+                                                    <!-- <button type="button" (click)="addQuantity()" class="btn btn-primary">Add<i
+                                                        class="ri-add-line align-middle me-1 fw-medium"></i></button>  -->
                                                 </div>
                                             </div>
-                                            <div *ngFor="let quantity of quantities().controls; let i=index" [formGroupName]="i" class="d-flex gap-3 pb-3">
-                                                <div class="col-xxl-6">
-
+                                            <div *ngFor="let quantity of quantities().controls; let i=index" [formGroupName]="i" class="d-flex gap-2 pb-3">
+                                                <div class="col-xxl-2 ">  
+                                                    <label for="name">Stage Of Payment:</label>  
+                                                    <input type="text" id="name" name="name" formControlName="name" class="form-control" >  
                                                 </div>
-                                                <div class="col-xxl-4 ">
-                                                    <!-- <label for="">Cost</label> -->
-                                                    <input type="text" formControlName="price" class="form-control">
+                                                <div class="col-xxl-1 col-xl-1 col-lg-1 col-md-1 col-sm-1 ">
+                                                    <label for="">Percentage</label> 
+                                                    <input type="text" formControlName="price" class="form-control">   
                                                 </div>
-                                                <div class="col-xxl-2 ">
+                                                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 ">
+                                                    <label for="">Received Amount</label> 
+                                                    <input type="text" formControlName="price" class="form-control">   
+                                                </div>
+                                                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 ">
+                                                    <label for="">Pending Amount</label> 
+                                                    <input type="text" formControlName="price" class="form-control">   
+                                                </div>
+                                                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 ">
+                                                    <label for="">Updated Time</label> 
+                                                    <input type="text" formControlName="price" class="form-control">   
+                                                </div>
+                                                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 ">
+                                                    <label for="">Updated by</label> 
+                                                    <input type="text" formControlName="price" class="form-control">   
+                                                </div> 
+                                                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 p-4">
+                                                    <i (click)="removeQuantity(i)" class="bi bi-dash-circle-fill"></i>
+                                                </div>
+                                                <!-- <div class="col-xxl-2 pt-3">
                                                     <button (click)="removeQuantity(i)" class="btn btn-danger">Remove</button>
+                                                </div> -->
+                                            </div>
+                                            <div class="d-flex justify-content-between gap-2 pb-3">
+                                                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 ">  
+                                                    <label for="name">Stage Of Payment:</label>  
+                                                    <input type="text" id="name" name="name" placeholder="End" formControlName="name" class="form-control" >  
+                                                </div>
+                                                <div class="col-xxl-1 col-xl-1 col-lg-1 col-md-1 col-sm-1 ">
+                                                    <label for="">Percentage</label> 
+                                                    <input type="text" formControlName="price" class="form-control">   
+                                                </div>
+                                                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 ">
+                                                    <label for="">Received Amount</label> 
+                                                    <input type="text" formControlName="price" class="form-control">   
+                                                </div>
+                                                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 ">
+                                                    <label for="">Pending Amount</label> 
+                                                    <input type="text" formControlName="price" class="form-control">   
+                                                </div>
+                                                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 ">
+                                                    <label for="">Updated Time</label> 
+                                                    <input type="text" formControlName="price" class="form-control">   
+                                                </div>
+                                                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 ">
+                                                    <label for="">Updated by</label> 
+                                                    <input type="text" formControlName="price" class="form-control">   
+                                                </div> 
+                                                
+                                            </div>
+                                            <div class="d-flex pb-3">
+                                                <div class="col-auto p-2">  
+                                                    <label for="name">Total amount Received:</label>    
+                                                </div>
+                                                <div class="col-auto">    
+                                                    <input type="text" id="name" name="name" formControlName="name" class="form-control" >  
                                                 </div>
                                             </div>
-                                            
+                                            <div class="d-flex pb-3">
+                                                <div class="col-auto p-2">  
+                                                    <label for="name">Total Pending amount:</label>    
+                                                </div>
+                                                <div class="col-auto">    
+                                                    <input type="text" id="name" name="name" formControlName="name" class="form-control" >  
+                                                </div>
+                                            </div>    
                                         </form> 
                                     </div>
                                 </div>
@@ -1068,146 +1150,4 @@
     </div>
 </ng-template>
 <!-- End Row 5 -->
-<form [formGroup]="createProjectForm">
-    <div class="row">
-        <div class="col-xl-12 p-4">
-            <div class="card custom-card">
-                <div class="card-body">
-                    <div class="row gy-3">
-                        <div class="container"> 
-                            <form [formGroup]="productForm"> 
-                                <div class="d-flex justify-content-between gap-3 pb-3">
-                                    <div class="col-xxl-6 ">  
-                                        <label for="name">Design status</label>  
-                                        <input type="text" id="name" name="name" placeholder="start" formControlName="name" class="form-control">  
-                                    </div>
-                                    <div class="col-xxl-4 ">
-                                        <label for="">Percentage</label> 
-                                        <input type="text" placeholder="10%" formControlName="price" class="form-control">   
-                                    </div>
-                                    <div class="col-xxl-2 pt-3"> 
-                                        <button type="button" (click)="addQuantity()" class="btn btn-primary">Add More <i
-                                            class="ri-add-line align-middle me-1 fw-medium"></i></button> 
-                                    </div>
-                                </div>
-                                <div *ngFor="let quantity of quantities().controls; let i=index" [formGroupName]="i" class="d-flex gap-3 pb-3">
-                                    <div class="col-xxl-6">
-                                        <label for="name">Design status</label>  
-                                        <input type="text" id="name" name="name" placeholder="start" formControlName="name" class="form-control">
-                                    </div>
-                                    <div class="col-xxl-4 ">
-                                        <label for="">Percentage</label>
-                                        <input type="text" placeholder="10%" formControlName="price" class="form-control">
-                                    </div>
-                                    <div class="col-xxl-2 pt-3 ">
-                                        <button (click)="removeQuantity(i)" class="btn btn-danger">Remove</button>
-                                    </div>
-                                </div>
-                                <div class="d-flex gap-3 pb-3">
-                                    <div class="col-xxl-6">  
-                                        <label for="name">Design status</label>  
-                                        <input type="text" id="name" name="name" placeholder="Recce" formControlName="name" class="form-control">  
-                                    </div>
-                                    <div class="col-xxl-4 ">
-                                        <label for="">Percentage</label> 
-                                        <input type="text" placeholder="10%" formControlName="price" class="form-control">   
-                                    </div>
-                                    <div class="col-xxl-2 p-4"> 
-                                        <a aria-label="anchor" href="javascript:void(0);"
-                                        class="btn btn-icon btn-sm btn-info" ><i class="ri-edit-line"></i></a>
-                                    </div>
-                                </div>
-                                <div class="d-flex gap-3 pb-3">
-                                    <div class="col-xxl-6">  
-                                        <label for="name">Design status</label>  
-                                        <input type="text" id="name" name="name" placeholder="Design" formControlName="name" class="form-control">  
-                                    </div>
-                                    <div class="col-xxl-4 ">
-                                        <label for="">Percentage</label> 
-                                        <input type="text" placeholder="10%" formControlName="price" class="form-control">   
-                                    </div>
-                                    <div class="col-xxl-2 p-4"> 
-                                        <a aria-label="anchor" href="javascript:void(0);"
-                                        class="btn btn-icon btn-sm btn-info" ><i class="ri-edit-line"></i></a>
-                                    </div>
-                                </div>
-                                <div class="d-flex gap-3 pb-3">
-                                    <div class="col-xxl-6">  
-                                        <label for="name">Design status</label>  
-                                        <input type="text" id="name" name="name" placeholder="BOQ" formControlName="name" class="form-control">  
-                                    </div>
-                                    <div class="col-xxl-4 ">
-                                        <label for="">Percentage</label> 
-                                        <input type="text" placeholder="10%" formControlName="price" class="form-control">   
-                                    </div>
-                                    <div class="col-xxl-2 p-4"> 
-                                        <a aria-label="anchor" href="javascript:void(0);"
-                                        class="btn btn-icon btn-sm btn-info" ><i class="ri-edit-line"></i></a>
-                                    </div>
-                                </div>
-                                <div class="d-flex gap-3 pb-3">
-                                    <div class="col-xxl-6">  
-                                        <label for="name">Design status</label>  
-                                        <input type="text" id="name" name="name" placeholder="order" formControlName="name" class="form-control">  
-                                    </div>
-                                    <div class="col-xxl-4 ">
-                                        <label for="">Percentage</label> 
-                                        <input type="text" placeholder="10%" formControlName="price" class="form-control">   
-                                    </div>
-                                    <div class="col-xxl-2 p-4"> 
-                                        <a aria-label="anchor" href="javascript:void(0);"
-                                        class="btn btn-icon btn-sm btn-info" ><i class="ri-edit-line"></i></a>
-                                    </div>
-                                </div>
-                                <div class="d-flex gap-3 pb-3">
-                                    <div class="col-xxl-6">  
-                                        <label for="name">Design status</label>  
-                                        <input type="text" id="name" name="name" placeholder="Work Progress" formControlName="name" class="form-control">  
-                                    </div>
-                                    <div class="col-xxl-4 ">
-                                        <label for="">Percentage</label> 
-                                        <input type="text" placeholder="10%" formControlName="price" class="form-control">   
-                                    </div>  
-                                    <div class="col-xxl-2 p-4"> 
-                                        <a aria-label="anchor" href="javascript:void(0);"
-                                        class="btn btn-icon btn-sm btn-info" ><i class="ri-edit-line"></i></a>
-                                    </div>
-                                </div>
-                                <div class="d-flex gap-3 pb-3">
-                                    <div class="col-xxl-6">  
-                                        <label for="name">Design status</label>  
-                                        <input type="text" id="name" name="name" placeholder="Snag" formControlName="name" class="form-control">  
-                                    </div>
-                                    <div class="col-xxl-4 ">
-                                        <label for="">Percentage</label> 
-                                        <input type="text" placeholder="10%" formControlName="price" class="form-control">   
-                                    </div>
-                                    <div class="col-xxl-2 p-4"> 
-                                        <a aria-label="anchor" href="javascript:void(0);"
-                                        class="btn btn-icon btn-sm btn-info" ><i class="ri-edit-line"></i></a>
-                                    </div>
-                                    
-                                </div>
-                                <div class="d-flex gap-3 pb-3">
-                                    <div class="col-xxl-6">  
-                                        <label for="name">Design status</label>  
-                                        <input type="text" id="name" name="name" placeholder="Finance" formControlName="name" class="form-control">  
-                                    </div>
-                                    <div class="col-xxl-4 ">
-                                        <label for="">Percentage</label> 
-                                        <input type="text" placeholder="10%" formControlName="price" class="form-control">   
-                                    </div>
-                                    <div class="col-xxl-2 p-4"> 
-                                        <a aria-label="anchor" href="javascript:void(0);"
-                                        class="btn btn-icon btn-sm btn-info" ><i class="ri-edit-line"></i></a>
-                                    </div>
-                                    
-                                </div>
-                            </form> 
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</form>
+ 
