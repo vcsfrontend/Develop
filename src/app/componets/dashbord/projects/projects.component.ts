@@ -89,7 +89,8 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
   pjData : any = {}; isSts:boolean = true; submitted: boolean = false; userData: any;
   projectName: string = ''; clientName: string = ''; businessCategory: string = '';
   projectAddress: string = ''; state: string = ''; city: string = ''; projectArea: string = ''; 
-  action: string = ''; designId: string = ''; companyName: string = '';
+  action: string = ''; designId: string = ''; companyName: string = ''; matcardLst:any; addFilter: string = '1';
+  projName: string = ''; projId: string = '';
 //   {
 //     "id": 1,
 //     "projectId": "VCS001",
@@ -111,7 +112,7 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
   dataSource = new MatTableDataSource<any>(); 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   modal: any;
-  projectLst: any; userDetails:any;
+  projectLst: any; userDetails:any; dateDiff: string = '';
   
   // open(content1:any) {
 	// 	this.modalService.open(content1,{ centered: true });
@@ -148,8 +149,8 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
   }
  
   ngOnInit(): void {
-    this.getLst(); this.getdesignData();
-    this.onMinDate(); this.onTodayDt();
+    this.getLst(); this.getdesignData(); this.getMatCardLst();
+    this.onMinDate(); this.onTodayDt(); this.onClkDesign('i')
     this.createProjectForm = this.fb.group({
       projectName: ['', Validators.required],
       clientName: ['', Validators.required],
@@ -167,7 +168,8 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
       attachments: [null], // Adjust based on your attachment handling
       email: [JSON.parse(this.userDetails)?.email],
       type: [JSON.parse(this.userDetails)?.type],
-      username: [JSON.parse(this.userDetails)?.username]
+      username: [JSON.parse(this.userDetails)?.username], 
+      companyCode: [JSON.parse(this.userDetails)?.companyCode],
     });
   }
 
@@ -175,7 +177,7 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
     return this.createProjectForm.controls;
   }
 
-  onClkDesign(){
+  onClkDesign(key:string = ''){
     this.userData = localStorage.getItem('userDetails');
     this.switchService.onAdonai(JSON.parse(this.userData)?.email).subscribe({
       next: (res:any) => {
@@ -183,8 +185,12 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
           alert(res.message)
           return;
         } else {
-          window.open(res.newDesign, '_blank');
-          this.toastr.success(res.message);
+          if(key == 'i'){
+            this.dateDiff = res.datediff;
+          }else{
+            window.open(res.newDesign, '_blank');
+            this.toastr.success(res.message);
+          }
         }
       }
     })
@@ -200,16 +206,20 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
     else if (this.createProjectForm.valid) {
       const projectData = this.createProjectForm.value;
       projectData.companyName = JSON.parse(this.userDetails)?.companyName,
+      projectData.email = JSON.parse(this.userDetails)?.email,
+      projectData.type = JSON.parse(this.userDetails)?.type,
+      projectData.username = JSON.parse(this.userDetails)?.username, 
+      projectData.companyCode = JSON.parse(this.userDetails)?.companyCode,
       // projectData.projectStartDate = this.dp.transform(projectData.projectStartDate, 'dd-MM-yyyy'),
       // projectData.projectEndDate = this.dp.transform(projectData.projectEndDate, 'dd-MM-yyyy'),
       this.switchService.saveProject(projectData).subscribe({
         next: (response) => {
-          console.log('Project created successfully', response);
+          this.toastr.success(response.message);
           this.modalService.dismissAll(),
           this.getLst(); this.getdesignData();
         },
         error: (error) => {
-          console.error('Error creating project', error);
+          this.toastr.error('Error creating project', error);
         },
         complete: () => {
           console.log('Project creation process completed.');
@@ -249,21 +259,58 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
     let payload = {
       "email": JSON.parse(this.userDetails)?.email,
       "type": JSON.parse(this.userDetails)?.type,
-      "companyname": JSON.parse(this.userDetails)?.companyName
+      "companyname": JSON.parse(this.userDetails)?.companyName,
+      companycode: JSON.parse(this.userDetails)?.companycode,
+      projectId: '',
+      projectname: '',
+      filter: 'All',
     }
     this.switchService.projectLst(payload).subscribe({ next: (res:any) => {
       if(res){
         this.projectLst = res
         this.dataSource.data = res;
-        this.addDateDifference();
         // this.projectLst = this.projectLst.filter((e:any) => e.dateDifference >= 0);
-        this.projectLst.sort((a:any, b:any) => a.dateDifference - b.dateDifference);
-        console.log(this.projectLst);
+        // this.projectLst.sort((a:any, b:any) => a.dateDifference - b.dateDifference);
         } else {
           this.toastr.error(res.message);
         }
       }
     })
+  }
+  onFilterChange(id:any){
+    if(id=='2'){ this.projName = '' } else if (id=='3'){ this.projId = ''}else {this.projName = '', this.projId = ''}
+  }
+
+  getMatCardLst(){
+    if(this.addFilter=='2' && this.projId == ''){
+      this.toastr.warning('Please enter Project Id');
+    }
+    else if(this.addFilter=='3' && this.projName== ''){
+      this.toastr.warning('Please enter Project Name');
+    } else {
+      let payload = {
+        email: JSON.parse(this.userDetails)?.email,
+        type: JSON.parse(this.userDetails)?.type,
+        companyname: JSON.parse(this.userDetails)?.companyName,
+        companycode: JSON.parse(this.userDetails)?.companycode,
+        projectId: this.addFilter == '2'? this.projId : '',
+        projectname: this.addFilter == '3'? this.projName : '',
+        filter: this.addFilter == '1'? 'All' : (this.addFilter == '2'? 'projectid' : 'projectname'),
+      }
+
+      this.switchService.projectLst(payload).subscribe({ next: (res:any) => {
+        if(res){
+          this.matcardLst = res
+          this.addDateDifference();
+          this.matcardLst.sort((a:any, b:any) => a.priorityDays - b.priorityDays);
+          // console.log(this.matcardLst);
+          } else {
+            this.toastr.error(res.message);
+          }
+        }
+      })
+        
+    }
   }
 
   getdesignData(){

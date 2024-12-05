@@ -16,7 +16,7 @@
         <div class="card-header justify-content-between">
 
             <marquee behavior="scroll" direction="left" class="fs-18 font-weight-bold" style="color: #006699;">
-               <strong> Enjoy Your 15 Days Free Trail </strong>
+               <strong> Enjoy Your {{dateDiff}} Days Free Trail </strong>
             </marquee>
         </div>
         <div class="row">
@@ -345,34 +345,29 @@
         <div class="card custom-card">
             <div class="card-header justify-content-between">
                 <div class="card-title">top Projects</div>
-                <div>
                     <!-- <button type="button" class="btn btn-sm btn-primary-light btn-wave waves-effect waves-light">View
                         All</button> -->
                             <!-- <label for="signup-phone" class="form-label text-default"><strong>Phone Number</strong><span class="text-danger"> *</span></label> -->
-                            <div class="input-group custom-input-group">
-                                <select class="form-select form-select-lg " 
-                                     formControlName="country" >
-                                    <!-- <option value="" disabled selected>select</option> -->
-                                    <option> 
-                                        <span>Project Name</span>
-                                    </option>
-                                    <option> 
-                                        <span>Project code</span>
-                                    </option>
-                                    <option> 
-                                        <span>All</span>
-                                    </option>
-                                </select>
-                                <input type="text" class="form-control" placeholder="Search Here"
-                                aria-describedby="button-addon2">
-                                <button class="btn btn-ghost-light border" type="button" id="button-addon2"><i
-                                    class="ri-search-line text-muted"></i></button>
-                            </div>
+                <div class="col-md-6">
+                <div class="input-group custom-input-group">
+                    <select class="form-select" [(ngModel)]="addFilter" 
+                        (change)="onFilterChange($any($event.target).value)">
+                        <option value="1">All</option>
+                        <option value="2">Project Id</option>
+                        <option value="3">Project Name</option>
+                    </select>
+                    <input type="text" class="form-control" *ngIf="addFilter=='2'"
+                        [(ngModel)]="projId" placeholder="enter project Id">
+                    <input type="text" class="form-control" *ngIf="addFilter=='3'"
+                        [(ngModel)]="projName" placeholder="enter project Name">
+                    <button class="btn btn-ghost-light border" type="button" id="button-addon2" (click)="getMatCardLst()"><i
+                        class="ri-search-line text-muted"></i></button>
                 </div>
+            </div>
             </div>
         </div>
     </div>
-    <div class="col-xxl-3 col-lg-3 col-md-3 col-xl-3" *ngFor="let project of projectLst">
+    <div class="col-xxl-3 col-lg-3 col-md-3 col-xl-3" *ngFor="let project of matcardLst">
         <div class="card custom-card">
             <div class="card-header d-flex align-items-center justify-content-between">
                 <div class="me-2  align-items-center">
@@ -426,8 +421,8 @@
                     <div class="text-end">
                         <div class="mb-1">Priority :</div>
                         <!-- <span class="badge bg-success-transparent">{{project.dateDifference}} days to go</span> -->
-                        <span class="badge" [ngClass]="{'bg-danger-transparent text-danger': project.dateDifference < 0,
-                            'bg-success-transparent': project.dateDifference >= 0}">{{project.dateDifference}} days to go</span>
+                        <span class="badge" [ngClass]="{'bg-danger-transparent text-danger': project.priorityDays < 0,
+                            'bg-success-transparent': project.priorityDays >= 0}">{{project.priorityDays}} days to go</span>
                     </div>
                 </div>
                 <div class="mb-1">Project Status : {{project.projectState}}</div>
@@ -618,7 +613,7 @@
                 <div class="d-flex flex-wrap gap-3">
                     <div ngbDropdown class="dropdown">
                         <a href="javascript:void(0);" class="btn btn-primary btn-sm btn-wave waves-effect waves-light"
-                            aria-expanded="false" (click)="onClkDesign()">
+                            aria-expanded="false" (click)="onClkDesign('n')">
                             New Design
                         </a>
                         <!-- <ul ngbDropdownMenu class="dropdown-menu" role="menu">
