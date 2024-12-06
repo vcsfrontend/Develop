@@ -90,7 +90,7 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
   projectName: string = ''; clientName: string = ''; businessCategory: string = '';
   projectAddress: string = ''; state: string = ''; city: string = ''; projectArea: string = ''; 
   action: string = ''; designId: string = ''; companyName: string = ''; matcardLst:any; addFilter: string = '1';
-  projName: string = ''; projId: string = '';
+  projName: string = ''; projId: string = ''; paymentStages: any; lstData: any;
 //   {
 //     "id": 1,
 //     "projectId": "VCS001",
@@ -150,7 +150,8 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
  
   ngOnInit(): void {
     this.getLst(); this.getdesignData(); this.getMatCardLst();
-    this.onMinDate(); this.onTodayDt(); this.onClkDesign('i')
+    this.onMinDate(); this.onTodayDt(); this.onClkDesign('i');
+    // this.fetchPaymentStages();
     this.createProjectForm = this.fb.group({
       projectName: ['', Validators.required],
       clientName: ['', Validators.required],
@@ -348,6 +349,81 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
 
   onProjectCycle(id:any){
     this.router.navigate(['/pages/timeline'], {queryParams: {projectId : id.projectId}});
+  }
+
+  fetchPaymentStages(data:any) {
+    //   this.http.get('https://api.example.com/payment-stages').subscribe((data: any) => {
+    //     this.paymentStages = data.map((item: any) => ({ ...item, isNew: false }));
+    //   });
+    this.lstData = data
+    console.log('lst-', data);
+    this.switchService.getProjEstimation(data.projectId).subscribe({ next: (res:any) =>{
+    if(res){
+      this.paymentStages = res.map((item: any) => ({ ...item, isNew: false }));
+      console.log('ps -',this.paymentStages);
+    } else {
+      this.toastr.error(res.message);
+      }
+    },
+    error: (error) => {
+      this.toastr.error(error.statusText);
+    },
+    })
+  }
+
+  addRow() {
+    this.paymentStages.push({ 
+      projectId: this.lstData?.projectId,
+      projectEstimation: this.lstData?.projectEstimation,
+      totalAmount: '',
+      totalPending: '',
+      paymentStage: '',
+      percantage: '',
+      receivedAmount: '',
+      pendingAmount: '',
+      updatedBy: JSON.parse(this.userData)?.username,
+      updatedTime: new Date(),
+      isNew: true 
+    });
+  }
+
+  savePaymentDetails(){
+    // let payload = [
+    //   {
+    //     "projectId": "string",
+    //     "paymentStage": "string",
+    //     "percantage": "string",
+    //     "receivedAmount": "string",
+    //     "pendingAmount": "string",
+    //     "updatedTime": "string",
+    //     "updatedBy": "string",
+    //     "projectEstimation": "string",
+    //     "totalAmount": "string",
+    //     "totalPending": "string"
+    //   }]
+      let pload = this.paymentStages.map((e:any) => ({
+        id: e.id || 0,
+        projectId: e.projectId || "",
+        paymentStage: e.paymentStage || "",
+        percantage: e.percantage || "",
+        receivedAmount: e.receivedAmount || "",
+        pendingAmount: e.pendingAmount || "",
+        updatedTime: e.updatedTime || "",
+        updatedBy: e.updatedBy || "",
+        projectEstimation: e.projectEstimation || "",
+        totalAmount: e.totalAmount || "",
+        totalPending: e.totalPending || ""
+      }));
+      
+    this.switchService.saveProjEstimation(pload).subscribe({
+      next: (response) => {
+        this.toastr.success(response.message);
+        this.modalService.dismissAll();
+      },
+      error: (error) => {
+        this.toastr.error('Error save payment details', error);
+      },
+    });
   }
 
   chartOptions: any = {

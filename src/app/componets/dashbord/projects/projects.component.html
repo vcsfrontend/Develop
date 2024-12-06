@@ -685,7 +685,7 @@
                             <ng-container matColumnDef="projectEstimation">
                                 <th mat-header-cell *matHeaderCellDef>Project Estimation</th>
                                 <td mat-cell *matCellDef="let element" data-bs-toggle="modal"
-                                data-bs-target="#exampleModalLg" (click)="VerticallyScrol(Content12)" >
+                                data-bs-target="#exampleModalLg" (click)="VerticallyScrol(Content12); fetchPaymentStages(element)" >
                                     {{element.projectEstimation}} </td>
                             </ng-container>
                             <ng-container matColumnDef="projectArea">
@@ -831,10 +831,9 @@
                                         <input type="tel" class="form-control" id="projectEstimation" maxlength="10" 
                                             formControlName="projectEstimation" placeholder="Enter Estimation"
                                             [ngClass]="{ 'is-invalid': submitted && f['projectEstimation'].errors }"
-                                            onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || event.charCode == 8)">                                        <div *ngIf="submitted && f['projectEstimation'].errors"
-                                            class="invalid-feedback">
-                                            <div *ngIf="f['projectEstimation'].errors['required']">Project Estimation is
-                                                required</div>
+                                            onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || event.charCode == 8)">
+                                        <div *ngIf="submitted && f['projectEstimation'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['projectEstimation'].errors['required']">Project Estimation is required</div>
                                         </div>
                                     </div>
                                     <div class="col-xl-4">
@@ -844,8 +843,7 @@
                                             [ngClass]="{ 'is-invalid': submitted && f['projectArea'].errors }"
                                             maxlength="6">
                                         <div *ngIf="submitted && f['projectArea'].errors" class="invalid-feedback">
-                                            <div *ngIf="f['projectArea'].errors['required']">Project Area is required
-                                            </div>
+                                            <div *ngIf="f['projectArea'].errors['required']">Project Area is required</div>
                                         </div>
                                     </div>
                                     <!-- <div class="col-xl-4">
@@ -1013,134 +1011,65 @@
                 aria-label="Close"></button>
         </div>
         <div class="modal-body px-4">
-            <form [formGroup]="createProjectForm" (ngSubmit)="onSubmit()" class="border-0">
-                <div class="row">
-                    <div class="col-xxl-12">
-                        <div class="card custom-card">
-                            <div class="card-body">
-                                <div class="row gy-3">
-                                    <div class="container"> 
-                                        <form> 
-                                            <div class="d-flex justify-content-between gap-2 pb-3">
-                                                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 ">  
-                                                    <label for="name">Stage Of Payment:</label>  
-                                                    <input type="text" id="name" name="name" placeholder="Start" class="form-control">  
-                                                </div>
-                                                <div class="col-xxl-1 col-xl-1 col-lg-1 col-md-1 col-sm-1 ">
-                                                    <label for="">Percentage</label> 
-                                                    <input type="text" class="form-control">   
-                                                </div>
-                                                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 ">
-                                                    <label for="">Received Amount</label> 
-                                                    <input type="text" class="form-control">
-                                                </div>
-                                                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 ">
-                                                    <label for="">Pending Amount</label> 
-                                                    <input type="text" class="form-control">
-                                                </div>
-                                                <!-- <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 ">
-                                                    <label for="">Updated Time</label> 
-                                                    <input type="text" formControlName="price" class="form-control">   
-                                                </div>
-                                                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 ">
-                                                    <label for="">Updated by</label> 
-                                                    <input type="text" formControlName="price" class="form-control">   
-                                                </div>  -->
-                                                <div class="col-xxl-1 col-xl-1 col-lg-1 col-md-1 col-sm-1  p-4"> 
-                                                    <i (click)="addQuantity()" class="ri-add-circle-fill"></i>
-                                                    <!-- <button type="button" (click)="addQuantity()" class="btn btn-primary">Add<i
-                                                        class="ri-add-line align-middle me-1 fw-medium"></i></button>  -->
-                                                </div>
-                                            </div>
-                                            <div *ngFor="let quantity of quantities().controls; let i=index" [formGroupName]="i" class="d-flex gap-2 pb-3">
-                                                <div class="col-xxl-2 ">  
-                                                    <label for="name">Stage Of Payment:</label>  
-                                                    <input type="text" id="name" name="name" class="form-control">  
-                                                </div>
-                                                <div class="col-xxl-1 col-xl-1 col-lg-1 col-md-1 col-sm-1">
-                                                    <label for="">Percentage</label> 
-                                                    <input type="text" class="form-control">   
-                                                </div>
-                                                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2">
-                                                    <label for="">Received Amount</label> 
-                                                    <input type="text" class="form-control">   
-                                                </div>
-                                                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2">
-                                                    <label for="">Pending Amount</label> 
-                                                    <input type="text" class="form-control">   
-                                                </div>
-                                                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2">
-                                                    <label for="">Updated Time</label> 
-                                                    <input type="text" class="form-control">   
-                                                </div>
-                                                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 ">
-                                                    <label for="">Updated by</label> 
-                                                    <input type="text" class="form-control">   
-                                                </div> 
-                                                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 p-4">
-                                                    <i (click)="removeQuantity(i)" class="bi bi-dash-circle-fill"></i>
-                                                </div>
-                                                <!-- <div class="col-xxl-2 pt-3">
-                                                    <button (click)="removeQuantity(i)" class="btn btn-danger">Remove</button>
-                                                </div> -->
-                                            </div>
-                                            <!-- <div class="d-flex justify-content-between gap-2 pb-3">
-                                                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 ">  
-                                                    <label for="name">Stage Of Payment:</label>  
-                                                    <input type="text" id="name" name="name" placeholder="End" class="form-control" >  
-                                                </div>
-                                                <div class="col-xxl-1 col-xl-1 col-lg-1 col-md-1 col-sm-1 ">
-                                                    <label for="">Percentage</label> 
-                                                    <input type="text" class="form-control">   
-                                                </div>
-                                                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 ">
-                                                    <label for="">Received Amount</label> 
-                                                    <input type="text" class="form-control">   
-                                                </div>
-                                                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 ">
-                                                    <label for="">Pending Amount</label> 
-                                                    <input type="text" class="form-control">   
-                                                </div>
-                                                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 ">
-                                                    <label for="">Updated Time</label> 
-                                                    <input type="text" class="form-control">   
-                                                </div>
-                                                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 ">
-                                                    <label for="">Updated by</label> 
-                                                    <input type="text" class="form-control">   
-                                                </div> 
-                                                
-                                            </div> -->
-                                            <div class="d-flex pb-3">
-                                                <div class="col-auto p-2">  
-                                                    <label for="name">Total amount Received:</label>    
-                                                </div>
-                                                <div class="col-auto">    
-                                                    <input type="text" id="name" name="name" formControlName="name" class="form-control" >  
-                                                </div>
-                                            </div>
-                                            <div class="d-flex pb-3">
-                                                <div class="col-auto p-2">  
-                                                    <label for="name">Total Pending amount:</label>    
-                                                </div>
-                                                <div class="col-auto">    
-                                                    <input type="text" id="name" name="name" formControlName="name" class="form-control" >  
-                                                </div>
-                                            </div>    
-                                        </form> 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Stage of Payment</th>
+                    <th>Percentage</th>
+                    <th>Received Amount</th>
+                    <th>Pending Amount</th>
+                    <th>Updated By</th>
+                    <th>Updated Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let payment of paymentStages">
+                    <td  style="width:15%">
+                      <input type="text" class="form-control form-control-sm" [(ngModel)]="payment.paymentStage" 
+                        placeholder="Enter Stage" [disabled]="!payment.isNew">
+                    </td>
+                    <td style="width:10%">
+                      <input type="text" class="form-control form-control-sm" [(ngModel)]="payment.percantage" placeholder="Enter Percentage"
+                        [disabled]="!payment.isNew">
+                    </td>
+                    <td  style="width:15%">
+                      <input type="text" class="form-control form-control-sm" [(ngModel)]="payment.receivedAmount" placeholder="Enter Received Amount"
+                        [disabled]="!payment.isNew">
+                    </td>
+                    <td  style="width:15%">
+                      <input type="text" class="form-control form-control-sm" [(ngModel)]="payment.pendingAmount" placeholder="Enter Pending Amount"
+                        [disabled]="!payment.isNew">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control form-control-sm" [(ngModel)]="payment.updatedBy" [disabled]="true">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control form-control-sm" [disabled]="true" 
+                        [value]="payment.updatedTime ? (payment.updatedTime | date:'dd-MM-yyyy') : ''">
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            <button class="btn btn-success" (click)="addRow()">Add Row</button>
+            <div class="row">
+                <div class="col-auto p-2">  
+                    <label for="name">Total amount Received:</label>    
                 </div>
-            </form>
+                <div class="col-auto">    
+                    <input type="text" id="name" name="name" class="form-control" >  
+                </div>
+                <div class="col-auto p-2">  
+                    <label for="name">Total Pending amount:</label>    
+                </div>
+                <div class="col-auto">    
+                    <input type="text" id="name" name="name" class="form-control">  
+                </div>
+            </div>
         </div>
         <div class="modal-footer">
-            <button type="submit" class="btn btn-success">Submit</button>
+            <button type="submit" class="btn btn-success" (click)="savePaymentDetails()">Submit</button>
             <button type="button" class="btn btn-light" data-bs-dismiss="modal"
                 (click)="modal.close('Cross click')">Cancel</button>
-            
         </div>
     </div>
 </ng-template>
