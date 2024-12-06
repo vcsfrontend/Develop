@@ -351,6 +351,12 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
     this.router.navigate(['/pages/timeline'], {queryParams: {projectId : id.projectId}});
   }
 
+  lastPendingAmount:any; totalReceivedAmount:any
+  calculateTotalReceivedAmount(): void {
+    this.totalReceivedAmount = this.paymentStages.reduce((sum:any, stage:any) => {
+      return sum + parseFloat(stage.receivedAmount);
+    }, 0);
+  }
   fetchPaymentStages(data:any) {
     //   this.http.get('https://api.example.com/payment-stages').subscribe((data: any) => {
     //     this.paymentStages = data.map((item: any) => ({ ...item, isNew: false }));
@@ -361,6 +367,10 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
     if(res){
       this.paymentStages = res.map((item: any) => ({ ...item, isNew: false }));
       console.log('ps -',this.paymentStages);
+
+    const lastElement = this.paymentStages[this.paymentStages.length - 1];
+    this.lastPendingAmount = lastElement ? lastElement.pendingAmount : data.projectEstimation;
+    this.calculateTotalReceivedAmount();
     } else {
       this.toastr.error(res.message);
       }

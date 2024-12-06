@@ -1056,13 +1056,13 @@
                     <label for="name">Total amount Received:</label>    
                 </div>
                 <div class="col-auto">    
-                    <input type="text" id="name" name="name" class="form-control" >  
+                    <input type="text" id="name" name="name" class="form-control" [(ngModel)]="totalReceivedAmount">  
                 </div>
                 <div class="col-auto p-2">  
                     <label for="name">Total Pending amount:</label>    
                 </div>
                 <div class="col-auto">    
-                    <input type="text" id="name" name="name" class="form-control">  
+                    <input type="text" class="form-control" [(ngModel)]="lastPendingAmount">  
                 </div>
             </div>
         </div>
