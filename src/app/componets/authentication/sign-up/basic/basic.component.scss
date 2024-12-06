@@ -1,8 +1,8 @@
-.authentication .desktop-logo, .authentication .desktop-dark {
-    height: 6.5rem;
-    line-height: 1.5rem;
-    margin-top: -50px;
-}
+// .authentication .desktop-logo, .authentication .desktop-dark {
+//     height: 6.5rem;
+//     line-height: 1.5rem;
+//     margin-top: -50px;
+// }
 
 // .card.custom-card {
 //     border-radius: 0.85rem;
@@ -38,20 +38,20 @@
   margin-bottom: 10px;
 }
 
-input {
-  // width: 100%;
-  padding: 10px;
-  border: 2px solid #ccc;
-  outline: none;
-}
+// input {
+//   // width: 100%;
+//   padding: 10px;
+//   border: 2px solid #ccc;
+//   outline: none;
+// }
 
-input.valid {
-  border-color: #28a745; /* Green for valid */
-}
+// input.valid {
+//   border-color: #28a745; /* Green for valid */
+// }
 
-input.invalid {
-  border-color: #dc3545; /* Red for invalid */
-}
+// input.invalid {
+//   border-color: #dc3545; /* Red for invalid */
+// }
   
 .checkmark {
   position: absolute;
@@ -73,13 +73,13 @@ input.invalid {
   font-size: 14px;
 }  
 
-mat-select {
-  background-color: #e5f8fb;    
-}
+// mat-select {
+//   background-color: #e5f8fb;    
+// }
 
-::ng-deep .mat-primary.mdc-menu-surface {
-  background-color: #e5f8fb !important;
-}
+// ::ng-deep .mat-primary.mdc-menu-surface {
+//   background-color: #e5f8fb !important;
+// }
 .accordion-body{
   padding: 0.75rem 1rem;
   font-size: 0.8125rem;
@@ -130,3 +130,11 @@ width: 80%; /* Adjust the width for the mobile input field */
 .form-select{
   padding: 0.375rem 0.25rem 0.375rem 0.5rem;
 }
+
+.check-box {
+  cursor: pointer;
+
+}
+// .dob {
+//   cursor: pointer;
+// }

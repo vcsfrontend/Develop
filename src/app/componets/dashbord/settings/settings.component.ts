@@ -75,13 +75,17 @@ export class SettingsComponent extends BaseComponent implements OnInit{
     companyCode: [''], 
     city: ['', Validators.required]
   })
-  
+  productForm: FormGroup;
   constructor(public fb: FormBuilder, public switchService: SwitherService, 
     private toastr: ToastrService,private router: Router, private dp: DatePipe,
     private modalService: NgbModal,  private viewContainerRef: ViewContainerRef ){
       super();
       this.userData = localStorage.getItem('userDetails');
       this.formInit();
+      this.productForm = this.fb.group({  
+        name: '',  
+        quantities: this.fb.array([]) ,  
+      });  
   }
 
   ngOnInit(){
@@ -481,4 +485,24 @@ export class SettingsComponent extends BaseComponent implements OnInit{
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+  quantities() : FormArray {  
+    return this.productForm.get("quantities") as FormArray  
+  }  
+     
+  newQuantity(): FormGroup {  
+    return this.fb.group({  
+      qty: '',  
+      price: '',  
+    })  
+  }  
+     
+  addQuantity() {  
+    this.quantities().push(this.newQuantity());  
+  }  
+     
+  removeQuantity(i:number) {  
+    this.quantities().removeAt(i);  
+  }  
+     
+  
 }

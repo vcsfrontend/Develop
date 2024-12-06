@@ -1,6 +1,173 @@
-<app-page-header title="Timeline" title1="Pages" activeTitle="Timeline" ></app-page-header>
+<!-- <app-page-header title="Timeline" title1="Pages" activeTitle="Timeline" ></app-page-header> -->
+<div class="my-4 page-header-breadcrumb d-flex align-items-center justify-content-between flex-wrap gap-2">
+    <div>
+        <h1 class="page-title fw-medium fs-18 mb-2">Project Cycle</h1>
+        <div class="">
+            <nav>
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Dashboard</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Project Cycle</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    
+</div>
 <div class="timeline mb-5">
-    <div class="container">
+
+
+
+
+
+
+    
+    <div *ngFor="let item of projectCycleData; let i = index">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="timeline-container">
+              <div class="timeline-end" *ngIf="i === 0 || (item.updatedDate | date: 'd MMM') !== (projectCycleData[i - 1]?.updatedDate | date: 'd MMM')">
+                <span class="avatar avatar-lg bg-primary-transparent backdrop-blur text-center">
+                  <span class="fs-13">{{ item.updatedDate | date: 'd MMM' }}</span>
+                </span>
+              </div>
+              <div class="timeline-continue">
+                <div class="row" [ngClass]="{'timeline-left': i % 2 === 0, 'timeline-right': i % 2 !== 0}">
+                  <div class="col-md-6" *ngIf="i % 2 !== 0">
+                    <p class="timeline-date">
+                      {{ item.updatedDate | date: 'dd-MM-yyyy' }}
+                    </p>
+                    <span class="timeline-time fs-12 text-muted fw-medium d-block">
+                      {{ item.updatedDateIST | date: 'hh:mm a' }}
+                    </span>
+                  </div>
+                  <div class="col-md-6" data-bs-target="#exampleModalLg" (click)="VerticallyScrol(content1)">
+                    <div class="timeline-box d-flex gap-3 align-items-start">
+                      <div class="lh-1">
+                        <span class="avatar avatar-rounded">
+                          <img src="./assets/images/faces/11.jpg" alt="">
+                        </span>
+                      </div>
+                      <div class="timeline-text">
+                        <h6 class="fw-medium mb-1">{{ item.heading }}</h6>
+                        <p class="mb-0 text-muted">{{ item.description | slice:0:50 }}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6" *ngIf="i % 2 === 0">
+                    <p class="timeline-date">
+                      {{ item.updatedDate | date: 'dd-MM-yyyy' }}
+                    </p>
+                    <span class="timeline-time fs-12 text-muted fw-medium d-block text-start">
+                      {{ item.updatedDateIST | date: 'hh:mm a' }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ng-template #content1 id="addtask" let-modal>
+            <div class="modal-content custom-modal">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="mail-ComposeLabel">Project Description</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="modal.close('Cross click')"
+                        aria-label="Close"></button>
+                </div>
+                <div class="p-3" id="popup-content">
+                    <p>{{item.description}}</p>
+                </div>
+                
+                <div class="modal-footer">
+                    <img src="/assets/images/brand-logos/whatsapp.jpg" alt="" (click)="shareContent()" class="whatsapp">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal"
+                        (click)="modal.close('Cross click')">Cancel</button>
+                </div>
+            </div>
+        </ng-template>
+        </div>
+      </div>
+      
+      
+
+    <!-- <div class="container">
+        <div *ngFor="let item of projectCycleData; let i = index">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="timeline-container">
+                        <div class="timeline-end" *ngIf="i === 0 || (item.updatedDate | date: 'yyyy') !== (projectCycleData[i - 1]?.updatedDate | date: 'yyyy')">
+                            <span class="avatar avatar-lg bg-primary-transparent backdrop-blur text-center">
+                                <span class="fs-13">{{item.updatedDate | date: 'yyyy'}}</span>
+                            </span>
+                        </div>
+                        <div class="timeline-continue">
+                            <div class="row timeline-right">
+                                <div class="col-md-6">
+                                    <p class="timeline-date">
+                                        {{item.updatedDate | date: 'dd-MM-yyyy'}}
+                                    </p>
+                                    <span class="timeline-time fs-12 text-muted fw-medium d-block">
+                                        {{item.updatedDate | date: 'hh:mm a'}}
+                                    </span>
+                                </div>
+                                <div class="col-md-6" data-bs-target="#exampleModalLg" (click)="VerticallyScrol(content1)">
+                                    <div class="timeline-box d-flex gap-3 align-items-start">
+                                        <div class="lh-1">
+                                            <span class="avatar avatar-rounded">
+                                                <img src="./assets/images/faces/11.jpg" alt="">
+                                            </span>
+                                        </div>
+                                        <div class="timeline-text">
+                                            <h6 class="fw-medium mb-1" data-bs-toggle="modal">{{item.heading}}</h6>
+                                            <p class="mb-0 text-muted">{{item.description}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <ng-template #content1 id="addtask" let-modal>
+                <div class="modal-content custom-modal">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="mail-ComposeLabel">Project Description</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="modal.close('Cross click')"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="p-3">
+                        <p>{{item.description}}</p>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal"
+                            (click)="modal.close('Cross click')">Cancel</button>
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+    </div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- <div class="container">
+        <div *ngFor="let item of projectCycleData; let i = index"></div>
         <div class="row">
             <div class="col-lg-12">
                 <div class="timeline-container">
@@ -19,7 +186,7 @@
                                     12:37PM
                                 </span>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6" data-bs-target="#exampleModalLg" (click)="VerticallyScrol(content1)">
                                 <div class="timeline-box d-flex gap-3 align-items-start">
                                     <div class="lh-1">
                                         <span class="avatar avatar-rounded">
@@ -27,7 +194,7 @@
                                         </span>
                                     </div>
                                     <div class="timeline-text">
-                                        <h6 class="fw-medium mb-1">Christopher</h6>
+                                        <h6 class="fw-medium mb-1" data-bs-toggle="modal">Christopher</h6>
                                         <p class="mb-0 text-muted">Project assigned by the manager all<span class="badge bg-primary-transparent fw-medium mx-1">files</span>and<span class="badge bg-primary-transparent fw-medium mx-1">folders</span>were included</p>
                                     </div>
                                 </div>
@@ -175,5 +342,10 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
+    
+    
+    
+    
+    
 </div>

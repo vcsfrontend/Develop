@@ -10,31 +10,22 @@
             </nav>
         </div>
     </div>
-    <div class="btn-list">
-        <!-- <button class="btn btn-primary-light btn-wave me-2">
-            <i class="bx bx-crown align-middle"></i> Plan Upgrade
-        </button> -->
-        <!-- <button (click)="onclick()" type="button" class="btn btn-primary-light btn-wave me-0">
-            <i class="bi bi-arrow-right-circle align-middle"></i>&nbsp; {{ReadMore?"Read More":"Read Less"}}
-        </button> -->
-
-    </div>
 </div>
-<div class="col-xl-12 col-xxl-12 col-md-12">
+<div class="col-xl-12 col-xxl-12 col-md-12 col-lg-12 col-sm-12">
     <div class="card custom-card ">
         <div class="card-header justify-content-between">
-
             <marquee behavior="scroll" direction="left" class="fs-18 font-weight-bold" style="color: #006699;">
-                Click to Explore Endless Designs
+                <p *ngIf="dateDiff=='0'"><strong> Upgrade Your Plan</strong></p>
+                <p *ngIf="dateDiff!='0'"><strong> Enjoy Your {{dateDiff}} Days Free Trail </strong></p>
             </marquee>
         </div>
         <div class="row">
-            <div class="card-body col-xxl-8 col-xl-8 col-md-8 col-lg-8 text-center">
-                <div class="d-grid gap-2 col-9 text-center">
+            <div class="card-body col-xxl-12 col-xl-12 col-md-12 col-lg-12 col-sm-12 text-center">
+                <div class="d-grid gap-2 text-center">
                     <img class="rounded mx-auto d-block demo" src="/assets/images/company-logos/adonai_logo.png" alt="">
                 </div>
             </div>
-            <div class="col-xxl-4 col-lg-4 col-md-4 col-xl-4 col-6  text-center mx-auto pt-4">
+            <div class="col-xxl-4 col-lg-4 col-md-4 col-xl-4 col-6  text-center mx-auto">
                 <button class="btn button   btn-wave btn-w-lg  font-weight-bold"
                     style="background-color: #006699; color: white;" aria-expanded="false" (click)="onClkDesign()"
                     type="button">Click to Explore Endless Designs </button>
@@ -241,13 +232,13 @@
                                                         number:'1.2-2' }}<i
                                                             class="ti ti-arrow-narrow-up"></i></span></span>
                                             </div>
-                                            <div id="projects-done">
+                                            <!-- <div id="projects-done">
                                                 <apx-chart [series]="chartOptions6.series" [chart]="chartOptions6.chart"
                                                     [xaxis]="chartOptions6.xaxis" [colors]="chartOptions6.colors"
                                                     [plotOptions]="chartOptions6.plotOptions"
                                                     [stroke]="chartOptions6.stroke"
                                                     [labels]="chartOptions6.labels"></apx-chart>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                     <div class="border rounded p-3 mb-4 position-relative overflow-hidden">
@@ -272,10 +263,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- <div class="d-grid">
-                                        <button type="button" class="btn btn-primary-ghost btn-wave btn-lg">View Total
-                                            Revenue</button>
-                                    </div> -->
+                                    <div class="d-grid">
+                                        <!-- <button type="button" class="btn btn-primary-ghost btn-wave btn-lg">View Total
+                                            Revenue</button> -->
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -354,14 +345,30 @@
         <div class="card custom-card">
             <div class="card-header justify-content-between">
                 <div class="card-title">top Projects</div>
-                <!-- <div>
-                    <button type="button" class="btn btn-sm btn-primary-light btn-wave waves-effect waves-light">View
-                        All</button>
-                </div> -->
+                    <!-- <button type="button" class="btn btn-sm btn-primary-light btn-wave waves-effect waves-light">View
+                        All</button> -->
+                            <!-- <label for="signup-phone" class="form-label text-default"><strong>Phone Number</strong><span class="text-danger"> *</span></label> -->
+                <div class="col-md-6">
+                <div class="input-group custom-input-group">
+                    <select class="form-select" [(ngModel)]="addFilter" 
+                        (change)="onFilterChange($any($event.target).value)">
+                        <option value="1">All</option>
+                        <option value="2">Project Id</option>
+                        <option value="3">Project Name</option>
+                    </select>
+                    <input type="text" class="form-control" *ngIf="addFilter=='1'" [disabled]="true">
+                    <input type="text" class="form-control" *ngIf="addFilter=='2'"
+                        [(ngModel)]="projId" placeholder="enter project Id">
+                    <input type="text" class="form-control" *ngIf="addFilter=='3'"
+                        [(ngModel)]="projName" placeholder="enter project Name">
+                    <button class="btn btn-ghost-light border" type="button" id="button-addon2" (click)="getMatCardLst()"><i
+                        class="ri-search-line text-muted"></i></button>
+                </div>
+            </div>
             </div>
         </div>
     </div>
-    <div class="col-xxl-4 col-lg-4 col-md-4 col-xl-4" *ngFor="let project of projectLst">
+    <div class="col-xxl-3 col-lg-3 col-md-3 col-xl-3" *ngFor="let project of matcardLst">
         <div class="card custom-card">
             <div class="card-header d-flex align-items-center justify-content-between">
                 <div class="me-2  align-items-center">
@@ -370,12 +377,12 @@
                     </span>
                 </div>
                 <div class="flex-fill">
-                    <a href="javascript:void(0);" class="fs-14 d-block text-truncate project-list-title">Project: {{project.projectName}}</a>
-                    <span class="text-muted d-block fs-12">Client: {{project.clientName}}</span>
+                    <a href="javascript:void(0);" class="fs-14 d-block text-truncate project-list-title">Project: {{project.projectName | slice:0:12}}</a>
+                    <span class="text-muted d-block fs-12">Client: {{project.clientName | slice:0:12}}</span>
                         <!-- <span class="text-muted d-block fs-12">Total <strong class="text-default">18/22</strong> tasks
                             completed</span> -->
                 </div>
-                <div ngbDropdown class="dropdown no-caret">
+                <!-- <div ngbDropdown class="dropdown no-caret">
                     <a ngbDropdownToggle aria-label="anchor" href="javascript:void(0);"
                         class="btn btn-icon btn-sm btn-light" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fe fe-more-vertical"></i>
@@ -388,7 +395,7 @@
                         <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);"><i
                                     class="ri-delete-bin-line me-1 align-middle d-inline-block"></i>Delete</a></li>
                     </ul>
-                </div>
+                </div> -->
             </div>
             <div class="card-body">
                 <div class="d-flex align-items-center justify-content-between mb-3">
@@ -415,11 +422,20 @@
                     <div class="text-end">
                         <div class="mb-1">Priority :</div>
                         <!-- <span class="badge bg-success-transparent">{{project.dateDifference}} days to go</span> -->
-                        <span class="badge" [ngClass]="{'bg-danger-transparent text-danger': project.dateDifference < 0,
-                            'bg-success-transparent': project.dateDifference >= 0}">{{project.dateDifference}} days to go</span>
+                        <span class="badge" [ngClass]="{'bg-danger-transparent text-danger': project.priorityDays < 0,
+                            'bg-success-transparent': project.priorityDays >= 0}">{{project.priorityDays}} days to go</span>
                     </div>
                 </div>
-                <div class="mb-1">Status : {{project.projectState}}</div>
+                <div class="mb-1">Project Status : {{project.projectState}}</div>
+                <div class="mb-3">
+                    <div></div>
+                    <div class="progress progress-xs progress-animate" role="progressbar" aria-valuenow="80"
+                        aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar bg-primary" style="width: 80%"></div>
+                    </div>
+                    <div class="mt-1"><span class="text-primary fw-medium">80%</span> Completed</div>
+                </div>
+                <div class="mb-1">Payment Status : {{project.projectState}}</div>
                 <div>
                     <div></div>
                     <div class="progress progress-xs progress-animate" role="progressbar" aria-valuenow="80"
@@ -430,10 +446,12 @@
                 </div>
             </div>
             <div class="d-flex justify-content-between align-items-center mb-3">
-                <a class="btn btn-sm btn-primary btn-wave ms-3" routerLink="/dashboard/mytask"><i
-                        class="ri-add-line align-middle me-1 fw-medium"></i>Add</a>
-                <a class="btn btn-sm btn-primary btn-wave me-3" routerLink="/pages/timeline"><i
-                        class="bi bi-calendar-date align-middle me-1 fw-medium"></i>Project Cycle</a>
+                <a class="btn btn-sm btn-primary btn-wave ms-3" (click)="onProjectAdd(project)"><i
+                    class="ri-add-line align-middle me-1 fw-medium"></i>Add</a>
+                        <!-- routerLink="/dashboard/mytask" -->
+                <a class="btn btn-sm btn-primary btn-wave me-3" (click)="onProjectCycle(project)"><i
+                    class="bi bi-calendar-date align-middle me-1 fw-medium"></i>Project Cycle</a>
+                        <!-- routerLink="/pages/timeline" -->
             </div>
         </div>
     </div>
@@ -595,10 +613,10 @@
 
                 <div class="d-flex flex-wrap gap-3">
                     <div ngbDropdown class="dropdown">
-                        <a href="javascript:void(0);" class="btn btn-primary btn-sm btn-wave waves-effect waves-light"
-                            aria-expanded="false" (click)="onClkDesign()">
+                        <button href="javascript:void(0);" class="btn btn-primary btn-sm btn-wave waves-effect waves-light"
+                            aria-expanded="false" (click)="onClkDesign('n')" [attr.disabled]="dateDiff == '0'">
                             New Design
-                        </a>
+                        </button>
                         <!-- <ul ngbDropdownMenu class="dropdown-menu" role="menu">
                             <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">New</a></li>
                             <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">Popular</a></li>
@@ -609,7 +627,7 @@
                         class="ri-add-line me-1 fw-medium align-middle"></i>New Project</a> -->
                     <div>
                         <a class="btn btn-sm btn-secondary btn-wave" data-bs-toggle="modal"
-                            data-bs-target="#exampleModalLg" (click)="openLg(Content10)"><i
+                            data-bs-target="#exampleModalLg" (click)="openLg(Content10);submitted=false"><i
                                 class="ri-add-line align-middle me-1 fw-medium"></i>Create Project</a>
                     </div>
                 </div>
@@ -631,17 +649,21 @@
                                 <th mat-header-cell *matHeaderCellDef> Project Id </th>
                                 <td mat-cell *matCellDef="let element" data-bs-toggle="modal"
                                     data-bs-target="#exampleModalLg"
-                                    (click)="openLg(Content11);onProjectDetails(element)"> {{element.projectId}} </td>
+                                    (click)="openLg(Content11);onProjectDetails(element)"> {{element.projectId | slice:0:7}} </td>
                             </ng-container>
-                            <ng-container matColumnDef="projectName">
+                            <!-- <ng-container matColumnDef="projectName">
                                 <th mat-header-cell *matHeaderCellDef> Project Name </th>
                                 <td mat-cell *matCellDef="let element"> {{element.projectName}} </td>
-                            </ng-container>
+                            </ng-container> -->
                             <ng-container matColumnDef="clientName">
                                 <th mat-header-cell *matHeaderCellDef> Client Name </th>
                                 <td mat-cell *matCellDef="let element"> {{element.clientName}} </td>
                             </ng-container>
-                            <ng-container matColumnDef="businessCategory">
+                            <ng-container matColumnDef="projStatus">
+                                <th mat-header-cell *matHeaderCellDef>Project Status</th>
+                                <td mat-cell *matCellDef="let element"> {{element.projStatus}} </td>
+                            </ng-container>
+                            <!-- <ng-container matColumnDef="businessCategory">
                                 <th mat-header-cell *matHeaderCellDef> Business Category</th>
                                 <td mat-cell *matCellDef="let element"> {{element.businessCategory}} </td>
                             </ng-container>
@@ -660,21 +682,21 @@
                             <ng-container matColumnDef="projectState">
                                 <th mat-header-cell *matHeaderCellDef>Project Stage</th>
                                 <td mat-cell *matCellDef="let element"> {{element.projectState}} </td>
-                            </ng-container>
+                            </ng-container> -->
                             <ng-container matColumnDef="projectEstimation">
                                 <th mat-header-cell *matHeaderCellDef>Project Estimation</th>
                                 <td mat-cell *matCellDef="let element" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModalLg" (click)="open(Content12)">
+                                data-bs-target="#exampleModalLg" (click)="VerticallyScrol(Content12); fetchPaymentStages(element)" >
                                     {{element.projectEstimation}} </td>
                             </ng-container>
                             <ng-container matColumnDef="projectArea">
                                 <th mat-header-cell *matHeaderCellDef>Project Area</th>
                                 <td mat-cell *matCellDef="let element"> {{element.projectArea}} </td>
                             </ng-container>
-                            <ng-container matColumnDef="action">
+                            <!-- <ng-container matColumnDef="action">
                                 <th mat-header-cell *matHeaderCellDef>Action</th>
                                 <td mat-cell *matCellDef="let element"> {{element.action}} </td>
-                            </ng-container>
+                            </ng-container> -->
                             <ng-container matColumnDef="projectStartDate">
                                 <th mat-header-cell *matHeaderCellDef>Project Start Date</th>
                                 <td mat-cell *matCellDef="let element"> {{element.projectStartDate | date:'dd-MM-yyyy'}} </td>
@@ -682,16 +704,16 @@
                             <ng-container matColumnDef="projectEndDate">
                                 <th mat-header-cell *matHeaderCellDef>Project End Date</th>
                                 <td mat-cell *matCellDef="let element"> {{element.projectEndDate | date:'dd-MM-yyyy'}}
-                                     - ({{calculateDateDifference(element.projectEndDate)}}) </td>
+                                      ({{calculateDateDifference(element.projectEndDate)}}) </td>
                             </ng-container>
-                            <ng-container matColumnDef="designId">
+                            <!-- <ng-container matColumnDef="designId">
                                 <th mat-header-cell *matHeaderCellDef>Design Id</th>
                                 <td mat-cell *matCellDef="let element"> {{element.designId}} </td>
                             </ng-container>
                             <ng-container matColumnDef="companyName">
                                 <th mat-header-cell *matHeaderCellDef>Company Name</th>
                                 <td mat-cell *matCellDef="let element"> {{element.companyName}} </td>
-                            </ng-container>
+                            </ng-container> -->
                             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                         </table>
@@ -794,7 +816,7 @@
                                             <div *ngIf="f['city'].errors['required']">City is required</div>
                                         </div>
                                     </div>
-                                    <div class="col-xl-4">
+                                    <!-- <div class="col-xl-4">
                                         <label for="projectState" class="form-label">Project Stage:</label>
                                         <input type="text" class="form-control" id="projectState"
                                             formControlName="projectState" placeholder="Enter Project State"
@@ -804,16 +826,15 @@
                                             <div *ngIf="f['projectState'].errors['required']">Project State is required
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="col-xl-4">
                                         <label for="projectEstimation" class="form-label">Project Estimation:</label>
                                         <input type="tel" class="form-control" id="projectEstimation" maxlength="10" 
                                             formControlName="projectEstimation" placeholder="Enter Estimation"
                                             [ngClass]="{ 'is-invalid': submitted && f['projectEstimation'].errors }"
-                                            onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || event.charCode == 8)">                                        <div *ngIf="submitted && f['projectEstimation'].errors"
-                                            class="invalid-feedback">
-                                            <div *ngIf="f['projectEstimation'].errors['required']">Project Estimation is
-                                                required</div>
+                                            onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || event.charCode == 8)">
+                                        <div *ngIf="submitted && f['projectEstimation'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['projectEstimation'].errors['required']">Project Estimation is required</div>
                                         </div>
                                     </div>
                                     <div class="col-xl-4">
@@ -823,8 +844,7 @@
                                             [ngClass]="{ 'is-invalid': submitted && f['projectArea'].errors }"
                                             maxlength="6">
                                         <div *ngIf="submitted && f['projectArea'].errors" class="invalid-feedback">
-                                            <div *ngIf="f['projectArea'].errors['required']">Project Area is required
-                                            </div>
+                                            <div *ngIf="f['projectArea'].errors['required']">Project Area is required</div>
                                         </div>
                                     </div>
                                     <!-- <div class="col-xl-4">
@@ -921,11 +941,11 @@
                             <div class="row gy-3">
                                 <div class="col-xl-4">
                                     <label for="projectName" class="form-label">Project Name</label>
-                                    <input type="text" class="form-control" id="projectName" [(ngModel)]="projectName">
+                                    <input type="text" class="form-control" id="projectName" [(ngModel)]="projectName" [disabled]="true">
                                 </div>
                                 <div class="col-xl-4">
                                     <label for="clientName" class="form-label">Client Name</label>
-                                    <input type="text" class="form-control" id="clientName" [(ngModel)]="clientName">
+                                    <input type="text" class="form-control" id="clientName" [(ngModel)]="clientName" [disabled]="true">
                                 </div>
                                 <div class="col-xl-4">
                                     <label for="businessCategory" class="form-label">Business Category:</label>
@@ -934,41 +954,41 @@
                                         <ng-option value="Choice 1" selected>Commercial</ng-option>
                                         <ng-option value="Choice 2">Residential</ng-option>
                                     </ng-select> -->
-                                    <select class="form-select" aria-label="Default select example"  [(ngModel)]='businessCategory'>
-                                        <option value="0">select type</option>
-                                        <option value="1">Commercial</option>
-                                        <option value="2">Residential</option>  
+                                    <select class="form-select" aria-label="Default select example"  [(ngModel)]='businessCategory' [disabled]="true">
+                                        <option value="">select type</option>
+                                        <option value="Commercial">Commercial</option>
+                                        <option value="Residential">Residential</option>  
                                     </select>
                                     
                                     <!-- <input type="text" class="form-control" id="businessCategory" formControlName="businessCategory" placeholder=""> -->
                                 </div>
                                 <div class="col-xl-4">
                                     <label for="projectAddress" class="form-label">Project Address:</label>
-                                    <input type="text" class="form-control" id="projectAddress" [(ngModel)]="projectAddress">
+                                    <input type="text" class="form-control" id="projectAddress" [(ngModel)]="projectAddress" [disabled]="true">
                                 </div>
                                 <div class="col-xl-4">
                                     <label for="state" class="form-label">State:</label>
-                                    <input type="text" class="form-control" id="state" [(ngModel)]="state">
+                                    <input type="text" class="form-control" id="state" [(ngModel)]="state" [disabled]="true">
                                 </div>
                                 <div class="col-xl-4">
                                     <label for="city" class="form-label">City:</label>
-                                    <input type="text" class="form-control" id="city" [(ngModel)]="city">
+                                    <input type="text" class="form-control" id="city" [(ngModel)]="city" [disabled]="true">
                                 </div>
                                 <div class="col-xl-4">
                                     <label for="projectArea" class="form-label">Project Area:</label>
-                                    <input type="number" class="form-control" id="projectArea" [(ngModel)]="projectArea">
+                                    <input type="number" class="form-control" id="projectArea" [(ngModel)]="projectArea" [disabled]="true">
                                 </div>
                                 <div class="col-xl-4">
                                     <label for="action" class="form-label">Action:</label>
-                                    <input type="text" class="form-control" id="action" [(ngModel)]="action">
+                                    <input type="text" class="form-control" id="action" [(ngModel)]="action" [disabled]="true">
                                 </div>
                                 <div class="col-xl-4">
                                     <label for="designId" class="form-label">Design Id</label>
-                                    <input type="text" class="form-control" id="designId" [(ngModel)]="designId">
+                                    <input type="text" class="form-control" id="designId" [(ngModel)]="designId" [disabled]="true">
                                 </div>
                                 <div class="col-xl-4">
                                     <label for="companyName" class="form-label">Company Name:</label>
-                                    <input type="text" class="form-control" id="companyName" [(ngModel)]="companyName">
+                                    <input type="text" class="form-control" id="companyName" [(ngModel)]="companyName" [disabled]="true">
                                 </div>
                             </div>
                         </div>
@@ -992,74 +1012,67 @@
                 aria-label="Close"></button>
         </div>
         <div class="modal-body px-4">
-            <form [formGroup]="createProjectForm" (ngSubmit)="onSubmit()">
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="card custom-card">
-                            <!-- <div class="card-header">
-                        <div class="card-title">Create Project</div>
-                      </div> -->
-                            <div class="card-body">
-                                <div class="row gy-3">
-                                    <div class="col-xl-4">
-                                        <label for="projectName" class="form-label">Project Name:</label>
-                                        <input type="text" class="form-control" id="projectName"
-                                            formControlName="projectName" placeholder="Enter Project Name"
-                                            [ngClass]="{ 'is-invalid': submitted && f['projectName'].errors }"
-                                            maxlength="50">
-                                        <div *ngIf="submitted && f['projectName'].errors" class="invalid-feedback">
-                                            <div *ngIf="f['projectName'].errors['required']">Project name is required
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-4">
-                                        <label for="clientName" class="form-label">Client Name:</label>
-                                        <input type="text" class="form-control" id="clientName"
-                                            formControlName="clientName" placeholder="Enter Client Name"
-                                            [ngClass]="{ 'is-invalid': submitted && f['clientName'].errors }"
-                                            maxlength="50">
-                                        <div *ngIf="submitted && f['clientName'].errors" class="invalid-feedback">
-                                            <div *ngIf="f['clientName'].errors['required']">Client name is required
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-4">
-                                        <label for="businessCategory" class="form-label">Business Category:</label>
-                                        <input type="text" class="form-control" id="businessCategory"
-                                            formControlName="businessCategory" placeholder="Business Category"
-                                            [ngClass]="{ 'is-invalid': submitted && f['businessCategory'].errors }"
-                                            maxlength="50">
-                                        <div *ngIf="submitted && f['businessCategory'].errors" class="invalid-feedback">
-                                            <div *ngIf="f['businessCategory'].errors['required']">Business Category is
-                                                required</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-4">
-                                        <label for="projectAddress" class="form-label">Project Address:</label>
-                                        <input type="text" class="form-control" id="projectAddress"
-                                            formControlName="projectAddress" placeholder="Enter Project Address"
-                                            [ngClass]="{ 'is-invalid': submitted && f['projectAddress'].errors }"
-                                            maxlength="50">
-                                        <div *ngIf="submitted && f['projectAddress'].errors" class="invalid-feedback">
-                                            <div *ngIf="f['projectAddress'].errors['required']">Project Address is
-                                                required</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Stage of Payment</th>
+                    <th>Percentage</th>
+                    <th>Received Amount</th>
+                    <th>Pending Amount</th>
+                    <th>Updated By</th>
+                    <th>Updated Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let payment of paymentStages">
+                    <td  style="width:15%">
+                      <input type="text" class="form-control form-control-sm" [(ngModel)]="payment.paymentStage" 
+                        placeholder="Enter Stage" [disabled]="!payment.isNew">
+                    </td>
+                    <td style="width:10%">
+                      <input type="text" class="form-control form-control-sm" [(ngModel)]="payment.percantage" placeholder="Enter Percentage"
+                        [disabled]="!payment.isNew">
+                    </td>
+                    <td  style="width:15%">
+                      <input type="text" class="form-control form-control-sm" [(ngModel)]="payment.receivedAmount" placeholder="Enter Received Amount"
+                        [disabled]="!payment.isNew">
+                    </td>
+                    <td  style="width:15%">
+                      <input type="text" class="form-control form-control-sm" [(ngModel)]="payment.pendingAmount" placeholder="Enter Pending Amount"
+                        [disabled]="!payment.isNew">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control form-control-sm" [(ngModel)]="payment.updatedBy" [disabled]="true">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control form-control-sm" [disabled]="true" 
+                        [value]="payment.updatedTime ? (payment.updatedTime | date:'dd-MM-yyyy') : ''">
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            <button class="btn btn-success" (click)="addRow()">Add Row</button>
+            <div class="row">
+                <div class="col-auto p-2">  
+                    <label for="name">Total amount Received:</label>    
                 </div>
-            </form>
+                <div class="col-auto">    
+                    <input type="text" id="name" name="name" class="form-control" [(ngModel)]="totalReceivedAmount">  
+                </div>
+                <div class="col-auto p-2">  
+                    <label for="name">Total Pending amount:</label>    
+                </div>
+                <div class="col-auto">    
+                    <input type="text" class="form-control" [(ngModel)]="lastPendingAmount">  
+                </div>
+            </div>
         </div>
         <div class="modal-footer">
-            <button class="btn btn-primary-light btn-wave ms-auto float-end" type="submit" (click)="onSubmit()">Create
-                Project</button>
-
+            <button type="submit" class="btn btn-success" (click)="savePaymentDetails()">Submit</button>
             <button type="button" class="btn btn-light" data-bs-dismiss="modal"
                 (click)="modal.close('Cross click')">Cancel</button>
-            <!-- <button type="button" class="btn btn-primary">Create</button> -->
         </div>
     </div>
 </ng-template>
 <!-- End Row 5 -->
+ 

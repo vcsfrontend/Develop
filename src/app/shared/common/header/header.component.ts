@@ -393,7 +393,7 @@ export class HeaderComponent implements OnInit {
         location.reload();
         },
         error: (error) => {
-          this.toastr.error('Adonai Logout failed', error);
+          // this.toastr.error('Adonai Logout failed', error);
         },
       })
     }

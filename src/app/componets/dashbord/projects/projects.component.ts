@@ -33,13 +33,14 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { OverlayscrollbarsModule } from 'overlayscrollbars-ngx';
 import { MaterialModuleModule } from '../../../material-module/material-module.module';
 import { ShowcodeCardComponent } from '../../../shared/common/includes/showcode-card/showcode-card.component';
 import { ShowCodeContentDirective } from '../../../shared/directives/show-code-content.directive';
 import { BaseComponent } from '../../../shared/base/base.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { FormControl, FormArray,  } from '@angular/forms'  
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -78,7 +79,7 @@ export type ChartOptions = {
   styleUrl: './projects.component.scss',
 })
 export class ProjectsComponent extends BaseComponent implements OnInit {
-  displayedColumns: string[] = ['slNo', 'projectId', 'clientName', 'projectState', 'projectEstimation',
+  displayedColumns: string[] = ['slNo', 'projectId', 'clientName', 'projStatus', 'projectEstimation',
     'projectArea', 'projectStartDate', 'projectEndDate', 
   ];
   // displayedColumns: string[] = ['slNo', 'projectId', 'projectName', 'clientName', 'businessCategory',
@@ -88,7 +89,8 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
   pjData : any = {}; isSts:boolean = true; submitted: boolean = false; userData: any;
   projectName: string = ''; clientName: string = ''; businessCategory: string = '';
   projectAddress: string = ''; state: string = ''; city: string = ''; projectArea: string = ''; 
-  action: string = ''; designId: string = ''; companyName: string = '';
+  action: string = ''; designId: string = ''; companyName: string = ''; matcardLst:any; addFilter: string = '1';
+  projName: string = ''; projId: string = ''; paymentStages: any; lstData: any;
 //   {
 //     "id": 1,
 //     "projectId": "VCS001",
@@ -110,7 +112,8 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
   dataSource = new MatTableDataSource<any>(); 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   modal: any;
-  projectLst: any; userDetails:any;
+  projectLst: any; userDetails:any; dateDiff: string = '';
+  
   // open(content1:any) {
 	// 	this.modalService.open(content1,{ centered: true });
 	// }
@@ -120,13 +123,16 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
   open(content11:any) {
 		this.modalService.open(content11, { size: 'lg' },);
 	}
-  content12:any;
+  VerticallyScrol(content12:any) {
+		this.modalService.open(content12, {  scrollable: true,centered: true,size: 'xl' });
+	}
   
   createProjectForm!: FormGroup;
   pondOptions: FilePondOptions;
-
+  productForm: FormGroup;
   constructor(private fb: FormBuilder, private http: HttpClient, private modalService: NgbModal,
-    private toastr: ToastrService, public switchService: SwitherService, private dp: DatePipe
+    private toastr: ToastrService, public switchService: SwitherService, private dp: DatePipe,
+    private router: Router
   ) { //localStorage.getItem('userDetails.companyName')
     // Initialize FilePond options if needed
     super();
@@ -135,11 +141,17 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
       allowMultiple: true,
       // other FilePond options here
     };
+      
+    this.productForm = this.fb.group({  
+      name: '',  
+      quantities: this.fb.array([]) ,  
+    });  
   }
  
   ngOnInit(): void {
-    this.getLst(); this.getdesignData();
-    this.onMinDate(); this.onTodayDt();
+    this.getLst(); this.getdesignData(); this.getMatCardLst();
+    this.onMinDate(); this.onTodayDt(); this.onClkDesign('i');
+    // this.fetchPaymentStages();
     this.createProjectForm = this.fb.group({
       projectName: ['', Validators.required],
       clientName: ['', Validators.required],
@@ -147,14 +159,18 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
       projectAddress: ['', Validators.required],
       state: ['', Validators.required],
       city: ['', Validators.required],
-      projectState: ['', Validators.required],
+      projectState: [''],
       projectEstimation: ['', [Validators.required, Validators.min(0)]], // Assuming estimation should be a positive number
       projectArea: ['', [Validators.required, Validators.min(0)]], // Assuming area should be a positive number
       projectStartDate: ['', Validators.required],
       projectEndDate: ['', Validators.required],
       action: [''],
       companyName: [JSON.parse(this.userDetails)?.companyName],
-      attachments: [null] // Adjust based on your attachment handling
+      attachments: [null], // Adjust based on your attachment handling
+      email: [JSON.parse(this.userDetails)?.email],
+      type: [JSON.parse(this.userDetails)?.type],
+      username: [JSON.parse(this.userDetails)?.username], 
+      companyCode: [JSON.parse(this.userDetails)?.companyCode],
     });
   }
 
@@ -162,21 +178,24 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
     return this.createProjectForm.controls;
   }
 
-  onClkDesign(){
+  onClkDesign(key:string = ''){
     this.userData = localStorage.getItem('userDetails');
-    this.switchService.onAdonai(JSON.parse(this.userData).email).subscribe({
+    this.switchService.onAdonai(JSON.parse(this.userData)?.email).subscribe({
       next: (res:any) => {
         if(res.status == false){
           alert(res.message)
           return;
         } else {
-          window.open(res.newDesign, '_blank');
-          this.toastr.success(res.message);
+          if(key == 'i'){
+            this.dateDiff = res.datediff;
+          }else{
+            window.open(res.newDesign, '_blank');
+            this.toastr.success(res.message);
+          }
         }
       }
     })
   }
-  
 
   onSubmit(): void {
     this.submitted = true;
@@ -188,16 +207,20 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
     else if (this.createProjectForm.valid) {
       const projectData = this.createProjectForm.value;
       projectData.companyName = JSON.parse(this.userDetails)?.companyName,
+      projectData.email = JSON.parse(this.userDetails)?.email,
+      projectData.type = JSON.parse(this.userDetails)?.type,
+      projectData.username = JSON.parse(this.userDetails)?.username, 
+      projectData.companyCode = JSON.parse(this.userDetails)?.companyCode,
       // projectData.projectStartDate = this.dp.transform(projectData.projectStartDate, 'dd-MM-yyyy'),
       // projectData.projectEndDate = this.dp.transform(projectData.projectEndDate, 'dd-MM-yyyy'),
       this.switchService.saveProject(projectData).subscribe({
         next: (response) => {
-          console.log('Project created successfully', response);
+          this.toastr.success(response.message);
           this.modalService.dismissAll(),
           this.getLst(); this.getdesignData();
         },
         error: (error) => {
-          console.error('Error creating project', error);
+          this.toastr.error('Error creating project', error);
         },
         complete: () => {
           console.log('Project creation process completed.');
@@ -234,24 +257,70 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
 
   getLst(){
     // console.log(JSON.parse(this.userDetails)?.companyName);
-    let cmpnyNm = JSON.parse(this.userDetails)?.companyName
-    this.switchService.projectLst(cmpnyNm).subscribe({ next: (res:any) => {
+    let payload = {
+      "email": JSON.parse(this.userDetails)?.email,
+      "type": JSON.parse(this.userDetails)?.type,
+      "companyname": JSON.parse(this.userDetails)?.companyName,
+      companycode: JSON.parse(this.userDetails)?.companycode,
+      projectId: '',
+      projectname: '',
+      filter: 'All',
+    }
+    this.switchService.projectLst(payload).subscribe({ next: (res:any) => {
       if(res){
         this.projectLst = res
         this.dataSource.data = res;
-        this.addDateDifference();
         // this.projectLst = this.projectLst.filter((e:any) => e.dateDifference >= 0);
-        this.projectLst.sort((a:any, b:any) => a.dateDifference - b.dateDifference);
-        console.log(this.projectLst);
+        // this.projectLst.sort((a:any, b:any) => a.dateDifference - b.dateDifference);
         } else {
           this.toastr.error(res.message);
         }
       }
     })
   }
+  onFilterChange(id:any){
+    if(id=='2'){ this.projName = '' } else if (id=='3'){ this.projId = ''}else {this.projName = '', this.projId = ''}
+  }
+
+  getMatCardLst(){
+    if(this.addFilter=='2' && this.projId == ''){
+      this.toastr.warning('Please enter Project Id');
+    }
+    else if(this.addFilter=='3' && this.projName== ''){
+      this.toastr.warning('Please enter Project Name');
+    } else {
+      let payload = {
+        email: JSON.parse(this.userDetails)?.email,
+        type: JSON.parse(this.userDetails)?.type,
+        companyname: JSON.parse(this.userDetails)?.companyName,
+        companycode: JSON.parse(this.userDetails)?.companycode,
+        projectId: this.addFilter == '2'? this.projId : '',
+        projectname: this.addFilter == '3'? this.projName : '',
+        filter: this.addFilter == '1'? 'All' : (this.addFilter == '2'? 'projectid' : 'projectname'),
+      }
+
+      this.switchService.projectLst(payload).subscribe({ next: (res:any) => {
+        if(res){
+          this.matcardLst = res
+          // this.addDateDifference();
+          this.matcardLst.sort((a:any, b:any) => a.priorityDays - b.priorityDays);
+          // console.log(this.matcardLst);
+          } else {
+            this.toastr.error(res.message);
+          }
+        }
+      })
+        
+    }
+  }
 
   getdesignData(){
-    this.switchService.designersDbData(JSON.parse(this.userDetails)?.companyName).subscribe({ next: (res:any) =>{
+    let payload = {
+      "email": JSON.parse(this.userDetails)?.email,
+      "type": JSON.parse(this.userDetails)?.type,
+      "companyname": JSON.parse(this.userDetails)?.companyName
+    }
+    this.switchService.designersDbData(payload).subscribe({ next: (res:any) =>{
     if(res){    
       this.pjData = res;
     } else {
@@ -272,6 +341,99 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
     this.projectName = data.projectName; this.clientName = data.clientName; this.businessCategory = data.businessCategory;
     this.projectAddress = data.projectAddress; this.projectArea = data.projectArea; this.state = data.state; 
     this.city = data.city; this.action = data.action; this.designId = data.designId; this.companyName = data.companyName;
+  }
+
+  onProjectAdd(data:any){
+    this.router.navigate(['/dashboard/mytask'], {queryParams: {projectId : data.projectId}});
+  }
+
+  onProjectCycle(id:any){
+    this.router.navigate(['/pages/timeline'], {queryParams: {projectId : id.projectId}});
+  }
+
+  lastPendingAmount:any; totalReceivedAmount:any
+  calculateTotalReceivedAmount(): void {
+    this.totalReceivedAmount = this.paymentStages.reduce((sum:any, stage:any) => {
+      return sum + parseFloat(stage.receivedAmount);
+    }, 0);
+  }
+  fetchPaymentStages(data:any) {
+    //   this.http.get('https://api.example.com/payment-stages').subscribe((data: any) => {
+    //     this.paymentStages = data.map((item: any) => ({ ...item, isNew: false }));
+    //   });
+    this.lstData = data
+    console.log('lst-', data);
+    this.switchService.getProjEstimation(data.projectId).subscribe({ next: (res:any) =>{
+    if(res){
+      this.paymentStages = res.map((item: any) => ({ ...item, isNew: false }));
+      console.log('ps -',this.paymentStages);
+
+    const lastElement = this.paymentStages[this.paymentStages.length - 1];
+    this.lastPendingAmount = lastElement ? lastElement.pendingAmount : data.projectEstimation;
+    this.calculateTotalReceivedAmount();
+    } else {
+      this.toastr.error(res.message);
+      }
+    },
+    error: (error) => {
+      this.toastr.error(error.statusText);
+    },
+    })
+  }
+
+  addRow() {
+    this.paymentStages.push({ 
+      projectId: this.lstData?.projectId,
+      projectEstimation: this.lstData?.projectEstimation,
+      totalAmount: '',
+      totalPending: '',
+      paymentStage: '',
+      percantage: '',
+      receivedAmount: '',
+      pendingAmount: '',
+      updatedBy: JSON.parse(this.userData)?.username,
+      updatedTime: new Date(),
+      isNew: true 
+    });
+  }
+
+  savePaymentDetails(){
+    // let payload = [
+    //   {
+    //     "projectId": "string",
+    //     "paymentStage": "string",
+    //     "percantage": "string",
+    //     "receivedAmount": "string",
+    //     "pendingAmount": "string",
+    //     "updatedTime": "string",
+    //     "updatedBy": "string",
+    //     "projectEstimation": "string",
+    //     "totalAmount": "string",
+    //     "totalPending": "string"
+    //   }]
+      let pload = this.paymentStages.map((e:any) => ({
+        id: e.id || 0,
+        projectId: e.projectId || "",
+        paymentStage: e.paymentStage || "",
+        percantage: e.percantage || "",
+        receivedAmount: e.receivedAmount || "",
+        pendingAmount: e.pendingAmount || "",
+        updatedTime: e.updatedTime || "",
+        updatedBy: e.updatedBy || "",
+        projectEstimation: e.projectEstimation || "",
+        totalAmount: e.totalAmount || "",
+        totalPending: e.totalPending || ""
+      }));
+      
+    this.switchService.saveProjEstimation(pload).subscribe({
+      next: (response) => {
+        this.toastr.success(response.message);
+        this.modalService.dismissAll();
+      },
+      error: (error) => {
+        this.toastr.error('Error save payment details', error);
+      },
+    });
   }
 
   chartOptions: any = {
@@ -890,7 +1052,23 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
       this.fileName = null; // Reset if no file selected
     }
   }
-
-  
+  quantities() : FormArray {  
+    return this.productForm.get("quantities") as FormArray  
+  }  
+     
+  newQuantity(): FormGroup {  
+    return this.fb.group({  
+      qty: '',  
+      price: '',  
+    })  
+  }  
+     
+  addQuantity() {  
+    this.quantities().push(this.newQuantity());  
+  }  
+     
+  removeQuantity(i:number) {  
+    this.quantities().removeAt(i);  
+  }
 }
 
