@@ -220,10 +220,11 @@
                                         id="city" formControlName="city" [(ngModel)]="city"
                                         [ngClass]="{ 'is-invalid': submitted && f['city'].errors }">
                                         <option value="" disabled selected>Select</option>
-                                        <option value="Bangalore">Bangalore</option>
+                                        <option *ngFor="let c of cityList" [value]="c.city">{{c.city}}
+                                        <!-- <option value="Bangalore">Bangalore</option>
                                         <option value="Chennai">Chennai</option>
                                         <option value="Delhi">Delhi</option>
-                                        <option value="Hyderabad">Hyderabad</option>
+                                        <option value="Hyderabad">Hyderabad</option> -->
                                     </select>
                                     <div *ngIf="submitted && f['city'].errors" class="invalid-feedback">
                                         <div *ngIf="f['city'].errors['required']">City is required</div>
