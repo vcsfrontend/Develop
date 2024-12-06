@@ -11,11 +11,12 @@
         </div>
     </div>
 </div>
-<div class="col-xl-12 col-xxl-12 col-md-12 col-lg-12 col-sm-12" *ngIf="dateDiff != '0'">
+<div class="col-xl-12 col-xxl-12 col-md-12 col-lg-12 col-sm-12">
     <div class="card custom-card ">
         <div class="card-header justify-content-between">
             <marquee behavior="scroll" direction="left" class="fs-18 font-weight-bold" style="color: #006699;">
-               <strong> Enjoy Your {{dateDiff}} Days Free Trail </strong>
+                <p *ngIf="dateDiff=='0'"><strong> Upgrade Your Plan</strong></p>
+                <p *ngIf="dateDiff!='0'"><strong> Enjoy Your {{dateDiff}} Days Free Trail </strong></p>
             </marquee>
         </div>
         <div class="row">
