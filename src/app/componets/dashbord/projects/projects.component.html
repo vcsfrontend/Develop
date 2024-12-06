@@ -11,10 +11,9 @@
         </div>
     </div>
 </div>
-<div class="col-xl-12 col-xxl-12 col-md-12 col-lg-12 col-sm-12">
+<div class="col-xl-12 col-xxl-12 col-md-12 col-lg-12 col-sm-12" *ngIf="dateDiff != '0'">
     <div class="card custom-card ">
         <div class="card-header justify-content-between">
-
             <marquee behavior="scroll" direction="left" class="fs-18 font-weight-bold" style="color: #006699;">
                <strong> Enjoy Your {{dateDiff}} Days Free Trail </strong>
             </marquee>
@@ -356,6 +355,7 @@
                         <option value="2">Project Id</option>
                         <option value="3">Project Name</option>
                     </select>
+                    <input type="text" class="form-control" *ngIf="addFilter=='1'" [disabled]="true">
                     <input type="text" class="form-control" *ngIf="addFilter=='2'"
                         [(ngModel)]="projId" placeholder="enter project Id">
                     <input type="text" class="form-control" *ngIf="addFilter=='3'"
@@ -612,10 +612,10 @@
 
                 <div class="d-flex flex-wrap gap-3">
                     <div ngbDropdown class="dropdown">
-                        <a href="javascript:void(0);" class="btn btn-primary btn-sm btn-wave waves-effect waves-light"
-                            aria-expanded="false" (click)="onClkDesign('n')">
+                        <button href="javascript:void(0);" class="btn btn-primary btn-sm btn-wave waves-effect waves-light"
+                            aria-expanded="false" (click)="onClkDesign('n')" [attr.disabled]="dateDiff == '0'">
                             New Design
-                        </a>
+                        </button>
                         <!-- <ul ngbDropdownMenu class="dropdown-menu" role="menu">
                             <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">New</a></li>
                             <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">Popular</a></li>
@@ -1020,32 +1020,32 @@
                             <div class="card-body">
                                 <div class="row gy-3">
                                     <div class="container"> 
-                                        <form [formGroup]="productForm" (ngSubmit)="onSubmit()"> 
+                                        <form> 
                                             <div class="d-flex justify-content-between gap-2 pb-3">
                                                 <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 ">  
                                                     <label for="name">Stage Of Payment:</label>  
-                                                    <input type="text" id="name" name="name" placeholder="Start" formControlName="name" class="form-control" >  
+                                                    <input type="text" id="name" name="name" placeholder="Start" class="form-control">  
                                                 </div>
                                                 <div class="col-xxl-1 col-xl-1 col-lg-1 col-md-1 col-sm-1 ">
                                                     <label for="">Percentage</label> 
-                                                    <input type="text" formControlName="price" class="form-control">   
+                                                    <input type="text" class="form-control">   
                                                 </div>
                                                 <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 ">
                                                     <label for="">Received Amount</label> 
-                                                    <input type="text" formControlName="price" class="form-control">   
+                                                    <input type="text" class="form-control">
                                                 </div>
                                                 <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 ">
                                                     <label for="">Pending Amount</label> 
-                                                    <input type="text" formControlName="price" class="form-control">   
+                                                    <input type="text" class="form-control">
                                                 </div>
-                                                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 ">
+                                                <!-- <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 ">
                                                     <label for="">Updated Time</label> 
                                                     <input type="text" formControlName="price" class="form-control">   
                                                 </div>
                                                 <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 ">
                                                     <label for="">Updated by</label> 
                                                     <input type="text" formControlName="price" class="form-control">   
-                                                </div> 
+                                                </div>  -->
                                                 <div class="col-xxl-1 col-xl-1 col-lg-1 col-md-1 col-sm-1  p-4"> 
                                                     <i (click)="addQuantity()" class="ri-add-circle-fill"></i>
                                                     <!-- <button type="button" (click)="addQuantity()" class="btn btn-primary">Add<i
@@ -1055,27 +1055,27 @@
                                             <div *ngFor="let quantity of quantities().controls; let i=index" [formGroupName]="i" class="d-flex gap-2 pb-3">
                                                 <div class="col-xxl-2 ">  
                                                     <label for="name">Stage Of Payment:</label>  
-                                                    <input type="text" id="name" name="name" formControlName="name" class="form-control" >  
+                                                    <input type="text" id="name" name="name" class="form-control">  
                                                 </div>
-                                                <div class="col-xxl-1 col-xl-1 col-lg-1 col-md-1 col-sm-1 ">
+                                                <div class="col-xxl-1 col-xl-1 col-lg-1 col-md-1 col-sm-1">
                                                     <label for="">Percentage</label> 
-                                                    <input type="text" formControlName="price" class="form-control">   
+                                                    <input type="text" class="form-control">   
                                                 </div>
-                                                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 ">
+                                                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2">
                                                     <label for="">Received Amount</label> 
-                                                    <input type="text" formControlName="price" class="form-control">   
+                                                    <input type="text" class="form-control">   
                                                 </div>
-                                                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 ">
+                                                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2">
                                                     <label for="">Pending Amount</label> 
-                                                    <input type="text" formControlName="price" class="form-control">   
+                                                    <input type="text" class="form-control">   
                                                 </div>
-                                                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 ">
+                                                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2">
                                                     <label for="">Updated Time</label> 
-                                                    <input type="text" formControlName="price" class="form-control">   
+                                                    <input type="text" class="form-control">   
                                                 </div>
                                                 <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 ">
                                                     <label for="">Updated by</label> 
-                                                    <input type="text" formControlName="price" class="form-control">   
+                                                    <input type="text" class="form-control">   
                                                 </div> 
                                                 <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 p-4">
                                                     <i (click)="removeQuantity(i)" class="bi bi-dash-circle-fill"></i>
@@ -1084,33 +1084,33 @@
                                                     <button (click)="removeQuantity(i)" class="btn btn-danger">Remove</button>
                                                 </div> -->
                                             </div>
-                                            <div class="d-flex justify-content-between gap-2 pb-3">
+                                            <!-- <div class="d-flex justify-content-between gap-2 pb-3">
                                                 <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 ">  
                                                     <label for="name">Stage Of Payment:</label>  
-                                                    <input type="text" id="name" name="name" placeholder="End" formControlName="name" class="form-control" >  
+                                                    <input type="text" id="name" name="name" placeholder="End" class="form-control" >  
                                                 </div>
                                                 <div class="col-xxl-1 col-xl-1 col-lg-1 col-md-1 col-sm-1 ">
                                                     <label for="">Percentage</label> 
-                                                    <input type="text" formControlName="price" class="form-control">   
+                                                    <input type="text" class="form-control">   
                                                 </div>
                                                 <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 ">
                                                     <label for="">Received Amount</label> 
-                                                    <input type="text" formControlName="price" class="form-control">   
+                                                    <input type="text" class="form-control">   
                                                 </div>
                                                 <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 ">
                                                     <label for="">Pending Amount</label> 
-                                                    <input type="text" formControlName="price" class="form-control">   
+                                                    <input type="text" class="form-control">   
                                                 </div>
                                                 <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 ">
                                                     <label for="">Updated Time</label> 
-                                                    <input type="text" formControlName="price" class="form-control">   
+                                                    <input type="text" class="form-control">   
                                                 </div>
                                                 <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 ">
                                                     <label for="">Updated by</label> 
-                                                    <input type="text" formControlName="price" class="form-control">   
+                                                    <input type="text" class="form-control">   
                                                 </div> 
                                                 
-                                            </div>
+                                            </div> -->
                                             <div class="d-flex pb-3">
                                                 <div class="col-auto p-2">  
                                                     <label for="name">Total amount Received:</label>    

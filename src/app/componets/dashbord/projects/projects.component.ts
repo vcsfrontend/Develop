@@ -301,7 +301,7 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
       this.switchService.projectLst(payload).subscribe({ next: (res:any) => {
         if(res){
           this.matcardLst = res
-          this.addDateDifference();
+          // this.addDateDifference();
           this.matcardLst.sort((a:any, b:any) => a.priorityDays - b.priorityDays);
           // console.log(this.matcardLst);
           } else {
