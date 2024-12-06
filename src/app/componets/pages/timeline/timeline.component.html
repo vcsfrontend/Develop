@@ -37,7 +37,7 @@
                       {{ item.updatedDate | date: 'dd-MM-yyyy' }}
                     </p>
                     <span class="timeline-time fs-12 text-muted fw-medium d-block">
-                      {{ item.updatedDate | date: 'hh:mm a' }}
+                      {{ item.updatedDateIST | date: 'hh:mm a' }}
                     </span>
                   </div>
                   <div class="col-md-6" data-bs-target="#exampleModalLg" (click)="VerticallyScrol(content1)">
@@ -58,7 +58,7 @@
                       {{ item.updatedDate | date: 'dd-MM-yyyy' }}
                     </p>
                     <span class="timeline-time fs-12 text-muted fw-medium d-block text-start">
-                      {{ item.updatedDate | date: 'hh:mm a' }}
+                      {{ item.updatedDateIST | date: 'hh:mm a' }}
                     </span>
                   </div>
                 </div>

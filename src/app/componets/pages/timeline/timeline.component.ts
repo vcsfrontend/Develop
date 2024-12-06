@@ -4,25 +4,25 @@ import { NgbDropdownModule,NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstra
 import { ActivatedRoute } from '@angular/router';
 import { SwitherService } from '../../../shared/services/swither.service';
 import { ToastrService } from 'ngx-toastr';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-timeline',
   standalone: true,
   imports: [SharedModule, CommonModule],
+  providers: [{ provide: ToastrService, useClass: ToastrService }, DatePipe],
   templateUrl: './timeline.component.html',
   styleUrl: './timeline.component.scss'
 })
 export class TimelineComponent {
-  modal: any; proId: string = ''; projectCycleData: any;
+  modal: any; proId: string = ''; projectCycleData: any; utcDate:any; istDate:string = '';
   VerticallyScrol(content1:any) {
 		this.modalService.open(content1, {  scrollable: true,centered: true,size: 'lg' });
 	}
   constructor( private modalService: NgbModal, private route:ActivatedRoute, 
-    private switchService: SwitherService, private toastr: ToastrService){
+    private switchService: SwitherService, private toastr: ToastrService, private dp: DatePipe){
     this.route.queryParams.subscribe(params => {
       this.proId = params['projectId'];
-      console.log('prodetails - ',this.proId);
     });
   }
 
@@ -32,11 +32,19 @@ export class TimelineComponent {
     }
   }
 
+  convertToIST(utcDateString: string): Date {
+    const utcDate = new Date(utcDateString);
+    const istOffset = 5.5 * 60 * 60 * 1000; // IST offset in milliseconds (5 hours 30 minutes)
+    return new Date(utcDate.getTime() + istOffset);
+  }
+
   getProjectDetails(){
     this.switchService.getTaskDtls(this.proId).subscribe({ next: (res:any) =>{
       if(res){    
-        this.projectCycleData = res;
-        console.log('response -', res);
+        // this.projectCycleData = res;
+        this.projectCycleData = res?.map((e:any) => ({
+          ...e, updatedDateIST: this.convertToIST(e.updatedDate)
+        }));
       } else {
         this.toastr.error(res.message);
         }
