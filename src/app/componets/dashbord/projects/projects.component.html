@@ -15,8 +15,8 @@
     <div class="card custom-card ">
         <div class="card-header justify-content-between">
             <marquee behavior="scroll" direction="left" class="fs-18 font-weight-bold" style="color: #006699;">
-                <p *ngIf="dateDiff=='0'"><strong> Upgrade Your Plan</strong></p>
-                <p *ngIf="dateDiff!='0'"><strong> Enjoy Your {{dateDiff}} Days Free Trail </strong></p>
+                <p *ngIf="dateDiff=='0'" ><strong> Upgrade Your Plan</strong></p>
+                <p *ngIf="dateDiff!='0'" ><strong> Enjoy Your {{dateDiff}} Days Free Trail </strong></p>
             </marquee>
         </div>
         <div class="row">
@@ -26,9 +26,9 @@
                 </div>
             </div>
             <div class="col-xxl-4 col-lg-4 col-md-4 col-xl-4 col-6  text-center mx-auto">
-                <button class="btn button   btn-wave btn-w-lg  font-weight-bold"
-                    style="background-color: #006699; color: white;" aria-expanded="false" (click)="onClkDesign()"
-                    type="button">Click to Explore Endless Designs </button>
+                <button class="btn button   btn-wave btn-w-lg  font-weight-bold" 
+                    style="background-color: #006699; color: white;"  aria-expanded="false" (click)="onClkDesign()"
+                    type="button" [attr.disabled]="dateDiff == '0'">Click to Explore Endless Designs </button>
 
             </div>
         </div>
@@ -348,7 +348,7 @@
                     <!-- <button type="button" class="btn btn-sm btn-primary-light btn-wave waves-effect waves-light">View
                         All</button> -->
                             <!-- <label for="signup-phone" class="form-label text-default"><strong>Phone Number</strong><span class="text-danger"> *</span></label> -->
-                <div class="col-md-6">
+                <div class="col-md-4 col-xl-4 col-xxl-4 col-lg-4">
                 <div class="input-group custom-input-group">
                     <select class="form-select" [(ngModel)]="addFilter" 
                         (change)="onFilterChange($any($event.target).value)">
