@@ -90,7 +90,8 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
   projectName: string = ''; clientName: string = ''; businessCategory: string = '';
   projectAddress: string = ''; state: string = ''; city: string = ''; projectArea: string = ''; 
   action: string = ''; designId: string = ''; companyName: string = ''; matcardLst:any; addFilter: string = '1';
-  projName: string = ''; projId: string = ''; paymentStages: any; lstData: any;
+  projName: string = ''; projId: string = ''; paymentStages: any; lstData: any; active="Angular"; btnDisable = false; 
+  estamount : any; 
 //   {
 //     "id": 1,
 //     "projectId": "VCS001",
@@ -199,6 +200,7 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
 
   onSubmit(): void {
     this.submitted = true;
+    this.btnDisable = true;
     if (this.createProjectForm.invalid) {
       this.toastr.error('Please fill mandatory fields');
       // this.btnDisable = false;
@@ -206,11 +208,13 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
     }
     else if (this.createProjectForm.valid) {
       const projectData = this.createProjectForm.value;
+      this.btnDisable = true;
       projectData.companyName = JSON.parse(this.userDetails)?.companyName,
       projectData.email = JSON.parse(this.userDetails)?.email,
       projectData.type = JSON.parse(this.userDetails)?.type,
       projectData.username = JSON.parse(this.userDetails)?.username, 
       projectData.companyCode = JSON.parse(this.userDetails)?.companyCode,
+
       // projectData.projectStartDate = this.dp.transform(projectData.projectStartDate, 'dd-MM-yyyy'),
       // projectData.projectEndDate = this.dp.transform(projectData.projectEndDate, 'dd-MM-yyyy'),
       this.switchService.saveProject(projectData).subscribe({
@@ -221,6 +225,7 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
         },
         error: (error) => {
           this.toastr.error('Error creating project', error);
+          this.btnDisable = false;
         },
         complete: () => {
           console.log('Project creation process completed.');
@@ -361,6 +366,7 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
     //   this.http.get('https://api.example.com/payment-stages').subscribe((data: any) => {
     //     this.paymentStages = data.map((item: any) => ({ ...item, isNew: false }));
     //   });
+    this.estamount = data.projectEstimation ;
     this.lstData = data
     console.log('lst-', data);
     this.switchService.getProjEstimation(data.projectId).subscribe({ next: (res:any) =>{
@@ -395,6 +401,11 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
       updatedTime: new Date(),
       isNew: true 
     });
+  }
+  convertToIST(utcDateString: string): Date {
+    const utcDate = new Date(utcDateString);
+    const istOffset = 5.5 * 60 * 60 * 1000; // IST offset in milliseconds (5 hours 30 minutes)
+    return new Date(utcDate.getTime() + istOffset);
   }
 
   savePaymentDetails(){

@@ -51,14 +51,14 @@
                                 </div> -->
                             </div>
                             <div class="d-grid mt-4" *ngIf="!isEmail">
-                                <button  class="btn btn-lg " 
+                                <button  class="btn btn-lg border-dark p-2" 
                                 (click)="onOtpCheck()">Submit</button>
                             </div>
                         </div>
                         <div class="col-xl-12" *ngIf="!submt">
                             <label for="reset-newpassword" class="form-label text-default"><strong>New Password</strong></label>
                             <div class="position-relative">
-                                <input type="password" class="form-control form-control-lg bg-light p-2 " id="reset-newpassword" placeholder="new password" 
+                                <input type="password" class="form-control form-control-lg p-2 " id="reset-newpassword" placeholder="new password" 
                                 [type]="showPassword1 ? 'text' : 'password'" autocomplete [(ngModel)]="newPassword"
                                 (copy)="preventCopyPaste($event)" (cut)="preventCopyPaste($event)" (paste)="preventCopyPaste($event)" 
                                 formControlName="password" appShowCodeContent maxlength="16"
@@ -81,7 +81,7 @@
                         <div class="col-xl-12 mb-2" *ngIf="!submt">
                             <label for="reset-confirmpassword" class="form-label text-default"><strong>Confirm Password</strong></label>
                             <div class="position-relative">
-                                <input type="password" class="form-control form-control-lg bg-light p-2 " id="reset-confirmpassword" placeholder="confirm password"
+                                <input type="password" class="form-control form-control-lg p-2 " id="reset-confirmpassword" placeholder="confirm password"
                                 [type]="showPassword2 ? 'text' : 'password'" autocomplete [(ngModel)]="confirmPassword" 
                                 (copy)="preventCopyPaste($event)" (cut)="preventCopyPaste($event)" (paste)="preventCopyPaste($event)"
                                 [ngModelOptions]="{standalone: true}" appShowCodeContent maxlength="16">
@@ -91,7 +91,7 @@
                         </div>
                     </div>
                     <div class="d-grid mt-4" *ngIf = "!submt">
-                        <a  class="btn btn-lg bg-light p-2 " (click)="onResetpPassword()"><strong>Reset Password</strong></a>
+                        <a  class="btn btn-lg border-dark p-2 " (click)="onResetpPassword()"><strong>Reset Password</strong></a>
                     </div>
                 </form>
                     <div class="text-center">
