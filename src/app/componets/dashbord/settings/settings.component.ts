@@ -504,5 +504,5 @@ export class SettingsComponent extends BaseComponent implements OnInit{
     this.quantities().removeAt(i);  
   }  
      
-  
+  selectedOption: string = '';
 }
