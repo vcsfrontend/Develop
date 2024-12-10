@@ -1017,6 +1017,7 @@
                   <tr>
                     <th>Stage of Payment</th>
                     <th>Percentage</th>
+                    <th>Amount to be Recieved</th>
                     <th>Received Amount</th>
                     <th>Pending Amount</th>
                     <th>Updated By</th>
@@ -1024,22 +1025,26 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let payment of paymentStages">
+                  <tr *ngFor="let payment of paymentStages; let i=index">
                     <td  style="width:15%">
                       <input type="text" class="form-control form-control-sm" [(ngModel)]="payment.paymentStage" 
-                        placeholder="Enter Stage" [disabled]="!payment.isNew">
+                        placeholder="Enter Stage" [disabled]="!payment.isNew" (ngModelChange)="validateField(i, 'paymentStage')">
                     </td>
                     <td style="width:10%">
                       <input type="text" class="form-control form-control-sm" [(ngModel)]="payment.percantage" placeholder="Enter Percentage"
-                        [disabled]="!payment.isNew">
+                        [disabled]="!payment.paymentStage || !payment.isNew" (ngModelChange)="calculateAmountToBeReceived(payment); validateField(i, 'percantage')">
                     </td>
                     <td  style="width:15%">
+                        <input type="text" class="form-control form-control-sm" [(ngModel)]="payment.amountToBeRecieved" placeholder="Enter Amount"
+                          [disabled]="true">
+                    </td>
+                    <td style="width:15%">
                       <input type="text" class="form-control form-control-sm" [(ngModel)]="payment.receivedAmount" placeholder="Enter Received Amount"
-                        [disabled]="!payment.isNew">
+                        [disabled]="!payment.amountToBeRecieved || !payment.percantage || !payment.paymentStage || !payment.isNew" (ngModelChange)="calculatePendingAmount(payment)">
                     </td>
                     <td  style="width:15%">
                       <input type="text" class="form-control form-control-sm" [(ngModel)]="payment.pendingAmount" placeholder="Enter Pending Amount"
-                        [disabled]="!payment.isNew">
+                        [disabled]="true" (ngModelChange)="validateField(i, 'pendingAmount')">
                     </td>
                     <td>
                         <input type="text" class="form-control form-control-sm" [(ngModel)]="payment.updatedBy" [disabled]="true">
@@ -1051,31 +1056,15 @@
                   </tr>
                 </tbody>
               </table>
-            <button class="btn btn-success" (click)="addRow()">Add Row</button>
-            <!-- <div class="row">
-                <div class="col-lg-2 p-2">  
-                    <label for="name">Project Estimation</label>    
-                </div>
-                <div class="col-lg-2 p-2">    
-                    <input type="text" id="name" name="name" class="form-control" [(ngModel)]="estamount">  
-                </div>
-                <div class="col-lg-2 p-2">  
-                    <label for="name">Total amount Received:</label>    
-                </div>
-                <div class="col-lg-2 p-2">    
-                    <input type="text" id="name" name="name" class="form-control" [(ngModel)]="totalReceivedAmount">  
-                </div>
-                <div class="col-lg-2 p-2">  
-                    <label for="name">Total Pending amount:</label>    
-                </div>
-                <div class="col-lg-2 p-2">    
-                    <input type="text" class="form-control" [(ngModel)]="lastPendingAmount">  
-                </div>
-            </div> -->
+            <button class="btn btn-success" (click)="addRow()" [disabled]='isPercentageLimitReached()'>Add Row</button>
             <div class="row gy-4 justify-content-center">
                 <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
                     <p class="mb-2 text-muted">Project Estimation</p>
                     <input type="text" class="form-control" id="input" [(ngModel)]="estamount" [disabled]="true">
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
+                    <p class="mb-2 text-muted">Total Amount to be Received</p>
+                    <input type="text" class="form-control" id="input" [(ngModel)]="ttlAmtToBeRcvd" [disabled]="true">
                 </div>
                 <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
                     <p class="mb-2 text-muted">Total amount Received</p>
