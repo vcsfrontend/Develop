@@ -91,7 +91,7 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
   projectAddress: string = ''; state: string = ''; city: string = ''; projectArea: string = ''; 
   action: string = ''; designId: string = ''; companyName: string = ''; matcardLst:any; addFilter: string = '1';
   projName: string = ''; projId: string = ''; paymentStages: any; lstData: any; active="Angular"; btnDisable = false; 
-  estamount : any; 
+  estamount : any; hasAddedRow: boolean = false;
 //   {
 //     "id": 1,
 //     "projectId": "VCS001",
@@ -379,6 +379,7 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
     this.switchService.getProjEstimation(data.projectId).subscribe({ next: (res:any) =>{
     if(res){
       this.paymentStages = res.map((item: any) => ({ ...item, isNew: false }));
+      this.paymentStages.forEach((e:any) => {e.updatedTime = this.convertToIST(e.updatedTime);});
       console.log('ps -',this.paymentStages);
 
     // const lastElement = this.paymentStages[this.paymentStages.length - 1];
@@ -400,22 +401,32 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
     if (incompleteRow) {
       this.toastr.warning('Please fill all the fields before adding a new row.', 'Validation Error');
       return;
-    }
+    } else {
 
-    this.paymentStages.push({ 
-      projectId: this.lstData?.projectId,
-      projectEstimation: this.lstData?.projectEstimation,
-      totalAmount: '',
-      totalPending: '',
-      paymentStage: '',
-      percantage: '',
-      receivedAmount: '',
-      pendingAmount: '',
-      amountToBeRecieved: '',
-      updatedBy: JSON.parse(this.userData)?.username,
-      updatedTime: new Date(),
-      isNew: true 
-    });
+    // const totalPercentage = this.paymentStages.reduce((sum:any, payment:any) => {
+    //   return sum + (payment.percantage ? parseFloat(payment.percantage) : 0);
+    // }, 0);
+  
+    // if (totalPercentage > 100) {
+    //   this.toastr.error('Total percentage cannot exceed 100. Please correct the values.', 'Validation Error');
+    //   return;
+    // }
+      this.hasAddedRow = true;
+      this.paymentStages.push({ 
+        projectId: this.lstData?.projectId,
+        projectEstimation: this.lstData?.projectEstimation,
+        totalAmount: '',
+        totalPending: '',
+        paymentStage: '',
+        percantage: '',
+        receivedAmount: '',
+        pendingAmount: '',
+        amountToBeRecieved: '',
+        updatedBy: JSON.parse(this.userData)?.username,
+        updatedTime: '',
+        isNew: true 
+      });
+    }
   }
 
   convertToIST(utcDateString: string): Date {
@@ -429,6 +440,22 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
       payment.amountToBeRecieved = (this.estamount * parseFloat(payment.percantage) / 100).toFixed(0);
     } else {
       payment.amountToBeRecieved = '0';
+    }
+  }
+
+  onPercentageChange(payment: any): void {
+    // Calculate the total percentage excluding the current row
+    const totalPercentageExcludingCurrent = this.paymentStages.reduce((sum:any, p:any) => {
+      return sum + (p === payment || !p.percantage ? 0 : parseFloat(p.percantage));
+    }, 0);
+  
+    // Check if the new total exceeds 100
+    const newTotalPercentage = totalPercentageExcludingCurrent + (payment.percantage ? parseFloat(payment.percantage) : 0);
+  
+    if (newTotalPercentage > 100) {
+      // Show error message and reset the value
+      this.toastr.error('Total percentage cannot exceed 100. Please enter a valid value.', 'Validation Error');
+      payment.percantage = ''; payment.amountToBeRecieved = '';
     }
   }
 
@@ -494,6 +521,15 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
   }
 
   savePaymentDetails(){
+    const incompleteRow = this.paymentStages.find((e:any) => !e.paymentStage || !e.percantage || !e.receivedAmount);
+    if (!this.hasAddedRow) {
+      this.toastr.error('Please add a new row before submitting the form.', 'Error');
+      return;
+    }
+    else if (incompleteRow) {
+      this.toastr.warning('Please fill all the fields before adding a new row.', 'Validation Error');
+      return;
+    }else {
       let payload = this.paymentStages.map((e:any) => ({
         id: e.id || 0,
         projectId: e.projectId || "",
@@ -502,22 +538,23 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
         percantage: e.percantage || "",
         receivedAmount: e.receivedAmount || "",
         pendingAmount: e.pendingAmount || "",
-        updatedTime: '',
+        updatedTime: e.updatedTime || "",
         updatedBy: e.updatedBy || "",
         projectEstimation: e.projectEstimation || "",
         totalAmount: e.totalAmount || "",
         totalPending: e.totalPending || ""
       }));
-      
-    this.switchService.saveProjEstimation(payload).subscribe({
-      next: (response) => {
-        this.toastr.success(response.message);
-        this.modalService.dismissAll();
-      },
-      error: (error) => {
-        this.toastr.error('Error save payment details', error);
-      },
-    });
+        
+      this.switchService.saveProjEstimation(payload).subscribe({
+        next: (response) => {
+          this.toastr.success(response.message);
+          this.modalService.dismissAll();
+        },
+        error: (error) => {
+          this.toastr.error('Error save payment details', error);
+        },
+      });
+    }
   }
 
   chartOptions: any = {

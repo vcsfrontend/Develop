@@ -1032,15 +1032,18 @@
                     </td>
                     <td style="width:10%">
                       <input type="text" class="form-control form-control-sm" [(ngModel)]="payment.percantage" placeholder="Enter Percentage"
-                        [disabled]="!payment.paymentStage || !payment.isNew" (ngModelChange)="calculateAmountToBeReceived(payment); validateField(i, 'percantage')">
+                        (ngModelChange)="calculateAmountToBeReceived(payment);validateField(i, 'percantage');onPercentageChange(payment)" 
+                        onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || event.charCode == 8)"
+                        [disabled]="!payment.paymentStage || !payment.isNew">
                     </td>
-                    <td  style="width:15%">
+                    <td style="width:15%">
                         <input type="text" class="form-control form-control-sm" [(ngModel)]="payment.amountToBeRecieved" placeholder="Enter Amount"
                           [disabled]="true">
                     </td>
                     <td style="width:15%">
                       <input type="text" class="form-control form-control-sm" [(ngModel)]="payment.receivedAmount" placeholder="Enter Received Amount"
-                        [disabled]="!payment.amountToBeRecieved || !payment.percantage || !payment.paymentStage || !payment.isNew" (ngModelChange)="calculatePendingAmount(payment)">
+                        [disabled]="!payment.amountToBeRecieved || !payment.percantage || !payment.paymentStage || !payment.isNew" 
+                        (ngModelChange)="calculatePendingAmount(payment)" onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || event.charCode == 8)">
                     </td>
                     <td  style="width:15%">
                       <input type="text" class="form-control form-control-sm" [(ngModel)]="payment.pendingAmount" placeholder="Enter Pending Amount"
