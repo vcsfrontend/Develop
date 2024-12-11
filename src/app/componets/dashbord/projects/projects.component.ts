@@ -117,7 +117,6 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
   
   @HostListener('document:keydown.enter', ['$event'])
   handleEnterKey(event: KeyboardEvent): void {
-    // this.onLogin();
     this.getMatCardLst();
   }
   // open(content1:any) {
@@ -182,6 +181,18 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
 
   get f() {
     return this.createProjectForm.controls;
+  }
+
+  minEndDate: string = '';
+  onStartDateChange(event: Event): void {
+    const startDate = (event.target as HTMLInputElement).value;
+    this.minEndDate = startDate; // Set the minimum end date
+    const endDate = this.createProjectForm.get('projectStartDate')?.value;
+
+    // Reset the end date if it is earlier than the new start date
+    if (endDate && endDate < startDate) {
+      this.createProjectForm.get('projectEndDate')?.setValue('');
+    }
   }
 
   onClkDesign(key:string = ''){
