@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import {
   ChartComponent,
   ApexAxisChartSeries,
@@ -115,6 +115,11 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
   modal: any; ttlAmtToBeRcvd: any;
   projectLst: any; userDetails:any; dateDiff: string = '';
   
+  @HostListener('document:keydown.enter', ['$event'])
+  handleEnterKey(event: KeyboardEvent): void {
+    // this.onLogin();
+    this.getMatCardLst();
+  }
   // open(content1:any) {
 	// 	this.modalService.open(content1,{ centered: true });
 	// }

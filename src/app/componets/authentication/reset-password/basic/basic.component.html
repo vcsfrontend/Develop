@@ -49,6 +49,10 @@
                                     <button class="btn btn-outline-dark btn-wave" type="button" id="inputGroup"
                                     (click)="onOtpCheck()">Verify</button>
                                 </div> -->
+                                <div class="col-xl-12 justify-content-center text-center text-dark p-3">
+                                    <span>Don't get otp ? &nbsp; &nbsp;
+                                    <a href="javascript:void(0)" class="text-primary" (click)="onMailCheck()">resend </a></span>
+                                </div>
                             </div>
                             <div class="d-grid mt-4" *ngIf="!isEmail">
                                 <button  class="btn btn-lg border-dark p-2" 

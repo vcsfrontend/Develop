@@ -5,7 +5,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { FormBuilder, FormGroup, FormArray, Validators, FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModule, NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { ShowcodeCardComponent } from '../../../shared/common/includes/showcode-card/showcode-card.component';
 import { SharedModule } from '../../../shared/common/sharedmodule';
@@ -78,6 +78,7 @@ export class SettingsComponent extends BaseComponent implements OnInit{
   productForm: FormGroup;
   constructor(public fb: FormBuilder, public switchService: SwitherService, 
     private toastr: ToastrService,private router: Router, private dp: DatePipe,
+    private offcanvasService: NgbOffcanvas,
     private modalService: NgbModal,  private viewContainerRef: ViewContainerRef ){
       super();
       this.userData = localStorage.getItem('userDetails');
@@ -502,7 +503,11 @@ export class SettingsComponent extends BaseComponent implements OnInit{
      
   removeQuantity(i:number) {  
     this.quantities().removeAt(i);  
-  }  
+  } 
+  openRight(content: any) {
+    this.offcanvasService.open(content, { position: 'end' });
+  } 
      
   selectedOption: string = '';
+  
 }
