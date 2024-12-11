@@ -450,19 +450,16 @@
                 <div class="card-title">
                     <h6>Choose a Category for Your Project Stages</h6>
                 </div>
+                <!-- <div class="d-flex flex-wrap">
+                    <select class="form-select form-control form-control-lg" [(ngModel)]="selectedOption">
+                      <option value="" disabled>Select</option>
+                      <option value="Static">Static</option>
+                      <option value="Dynamic">Dynamic</option>
+                    </select>
+                </div> -->
                 <div class="d-flex float-end">
                     <button class="btn btn-primary" type="button" (click)="openRight(content)" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Click</button>
                 </div>
-                
-                <div class="d-flex flex-wrap gap-2">
-                    <select class="form-select form-control form-control-lg" [(ngModel)]="selectedOption">
-                        <option value="" disabled selected>Select</option>
-                        <option value="Static">Static</option>
-                        <option value="Dynamic">Dynamic</option>
-                    </select>
-                </div>
-                
-                
             </div>
             
         </div>
@@ -470,7 +467,7 @@
 </div>
 <!-- End::row-4 -->
 
-<div class="row" *ngIf="selectedOption === 'Dynamic'">
+<!-- <div class="row" *ngIf="selectedOption === 'Dynamic'">
     <div class="col-xl-12">
         <div class="card custom-card">
             <div class="card-header justify-content-between">
@@ -521,10 +518,10 @@
             
         </div>
     </div>
-</div>
+</div> -->
 
 <!-- Start::row-4 -->
-<div class="row"  *ngIf="selectedOption === 'Static'">
+<div class="row">
     <div class="col-xl-8">
         <div class="card custom-card">
             <div class="card-header justify-content-between">
@@ -688,8 +685,57 @@
                           
                             <input type="text" class="form-control form-control-lg" id="input" placeholder="enter custom Percentage"  >
                         </div>
-
-                        
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                           
+                            <input type="text" class="form-control form-control-lg" id="input" placeholder="enter custom selection name" value="FURNITURE DETAILS" [disabled]="true"  >
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                          
+                            <input type="text" class="form-control form-control-lg" id="input" placeholder="enter custom Percentage"  >
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                           
+                            <input type="text" class="form-control form-control-lg" id="input" placeholder="enter custom selection name" value="REALISTIC 3D RENDERS" [disabled]="true"  >
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                          
+                            <input type="text" class="form-control form-control-lg" id="input" placeholder="enter custom Percentage"  >
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                           
+                            <input type="text" class="form-control form-control-lg" id="input" placeholder="enter custom selection name" value="MATERIAL LIST" [disabled]="true"  >
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                          
+                            <input type="text" class="form-control form-control-lg" id="input" placeholder="enter custom Percentage"  >
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                           
+                            <input type="text" class="form-control form-control-lg" id="input" placeholder="enter custom selection name" value="SECTION WALL ELEVATIONS" [disabled]="true"  >
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                          
+                            <input type="text" class="form-control form-control-lg" id="input" placeholder="enter custom Percentage"  >
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                           
+                            <input type="text" class="form-control form-control-lg" id="input" placeholder="enter custom selection name" value="RCP - REFLECTED CEILING PLAN" [disabled]="true"  >
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                          
+                            <input type="text" class="form-control form-control-lg" id="input" placeholder="enter custom Percentage"  >
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                           
+                            <input type="text" class="form-control form-control-lg" id="input" placeholder="enter custom selection name" value="BOQ-BILLOF QUANTITY ESTIMATE" [disabled]="true"  >
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                          
+                            <input type="text" class="form-control form-control-lg" id="input" placeholder="enter custom Percentage"  >
+                        </div>
+                        <div class="d-flex float-end">
+                            <button class="btn btn-primary" type="button">Submit</button>
+                        </div>
                         
                         <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 pt-2">
                            
@@ -707,9 +753,9 @@
 <!-- End::row-4 -->
 
 <ng-template #content let-offcanvas>
-    <div class="offcanvas-header border-bottom border-block-end-dashed">
+    <div class="offcanvas-header border-bottom border-block-end-dashed justify-content-between">
         <h5 class="offcanvas-title" id="offcanvasExampleLabel"><strong>Design Status</strong></h5>
-        <button type="button" (click)="addQuantity()" class="btn btn-primary">Add More <i
+        <button type="button" (click)="addQuantity()" class="btn btn-primary float-end">Add More <i
             class="ri-add-line align-middle me-1 fw-medium"></i></button> 
         <button (click)="offcanvas.dismiss('Cross click')" type="button" class="btn-close" data-bs-dismiss="offcanvas"
             aria-label="Close"></button>
@@ -834,6 +880,7 @@
                                             <a aria-label="anchor" href="javascript:void(0);" class="btn btn-sm btn-icon btn-wave btn btn-danger " (click)="removeQuantity(i)"><i class="ri-delete-bin-line"></i></a>
                                             
                                     </div>
+                                    
                                 </div>
                             </form>  
                         </div>
