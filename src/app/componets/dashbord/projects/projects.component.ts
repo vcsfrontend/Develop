@@ -92,6 +92,18 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
   action: string = ''; designId: string = ''; companyName: string = ''; matcardLst:any; addFilter: string = '1';
   projName: string = ''; projId: string = ''; paymentStages: any; lstData: any; active="Angular"; btnDisable = false; 
   estamount : any; hasAddedRow: boolean = false;
+  displayedCards:any;
+  showMore = false;
+
+
+  updateDisplayedCards(): void {
+    this.displayedCards = this.showMore ? this.matcardLst : this.matcardLst?.slice(0, 4);
+  }
+
+  toggleShowMore(): void {
+    this.showMore = !this.showMore;
+    this.updateDisplayedCards();
+  }
 //   {
 //     "id": 1,
 //     "projectId": "VCS001",
@@ -325,6 +337,7 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
           this.matcardLst = res
           // this.addDateDifference();
           this.matcardLst.sort((a:any, b:any) => a.priorityDays - b.priorityDays);
+          this.updateDisplayedCards();
           // console.log(this.matcardLst);
           } else {
             this.toastr.error(res.message);
