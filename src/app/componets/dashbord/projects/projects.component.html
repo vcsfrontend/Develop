@@ -15,8 +15,8 @@
     <div class="card custom-card ">
         <div class="card-header justify-content-between">
             <marquee behavior="scroll" direction="left" class="fs-18 font-weight-bold" style="color: #006699;">
-                <p *ngIf="dateDiff=='0'"><strong> Upgrade Your Plan</strong></p>
-                <p *ngIf="dateDiff!='0'"><strong> Enjoy Your {{dateDiff}} Days Free Trail </strong></p>
+                <p *ngIf="dateDiff=='0'" ><strong> Upgrade Your Plan</strong></p>
+                <p *ngIf="dateDiff!='0'" ><strong> Enjoy Your {{dateDiff}} Days Free Trail </strong></p>
             </marquee>
         </div>
         <div class="row">
@@ -26,15 +26,14 @@
                 </div>
             </div>
             <div class="col-xxl-4 col-lg-4 col-md-4 col-xl-4 col-6  text-center mx-auto">
-                <button class="btn button   btn-wave btn-w-lg  font-weight-bold"
-                    style="background-color: #006699; color: white;" aria-expanded="false" (click)="onClkDesign()"
-                    type="button">Click to Explore Endless Designs </button>
+                <button class="btn button   btn-wave btn-w-lg  font-weight-bold" 
+                    style="background-color: #006699; color: white;"  aria-expanded="false" (click)="onClkDesign()"
+                    type="button" [attr.disabled]="dateDiff == '0'">Click to Explore Endless Designs </button>
 
             </div>
         </div>
     </div>
 </div>
-<!-- Start::row-1 -->
 <div class="row">
     <div class="col-xxl-12">
         <div class="row">
@@ -134,31 +133,6 @@
                     </div>
                 </div>
             </div>
-            <!-- <ng-container *ngIf="visible">
-            <div class="col-xl-3">
-                <div class="card custom-card overflow-hidden">
-                    <div class="card-body p-0">
-                        <div class="p-3 pb-0">
-                            <div class="mb-3 d-flex align-items-start justify-content-between">
-                                <span class="avatar avatar-rounded bg-info-transparent">
-                                    <i class="ti ti-briefcase fs-20"></i>
-                                </span>
-                                <span class="badge bg-success-transparent">+4.32%</span>
-                            </div>
-                            <div class="text-muted mb-2">Projects Revenue</div>
-                            <h4 class="mb-0">28</h4>
-                        </div>
-                        <div id="overdue-projects">
-                            <apx-chart [series]="chartOptions1.series" [chart]="chartOptions1.chart"
-                                [xaxis]="chartOptions1.xaxis" [colors]="chartOptions1.colors" [fill]="chartOptions1.fill"
-                                [stroke]="chartOptions1.stroke" [tooltip]="chartOptions1.tooltip"
-                                [dataLabels]="chartOptions1.dataLabels" [grid]="chartOptions1.grid"
-                                [yaxis]="chartOptions1.yaxis"></apx-chart>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </ng-container> -->
             <div class="col-xl-12">
                 <div class="card custom-card">
                     <div class="card-header justify-content-between">
@@ -170,14 +144,6 @@
                                     data-bs-toggle="dropdown">
                                     2024
                                 </a>
-                                <!-- <ul ngbDropdownMenu class="dropdown-menu" role="menu">
-                                    <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">2024</a>
-                                    </li>
-                                    <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">2021</a>
-                                    </li>
-                                    <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">2020</a>
-                                    </li>
-                                </ul> -->
                             </div>
                         </div>
                     </div>
@@ -232,13 +198,6 @@
                                                         number:'1.2-2' }}<i
                                                             class="ti ti-arrow-narrow-up"></i></span></span>
                                             </div>
-                                            <!-- <div id="projects-done">
-                                                <apx-chart [series]="chartOptions6.series" [chart]="chartOptions6.chart"
-                                                    [xaxis]="chartOptions6.xaxis" [colors]="chartOptions6.colors"
-                                                    [plotOptions]="chartOptions6.plotOptions"
-                                                    [stroke]="chartOptions6.stroke"
-                                                    [labels]="chartOptions6.labels"></apx-chart>
-                                            </div> -->
                                         </div>
                                     </div>
                                     <div class="border rounded p-3 mb-4 position-relative overflow-hidden">
@@ -264,8 +223,6 @@
                                         </div>
                                     </div>
                                     <div class="d-grid">
-                                        <!-- <button type="button" class="btn btn-primary-ghost btn-wave btn-lg">View Total
-                                            Revenue</button> -->
                                     </div>
                                 </div>
                             </div>
@@ -275,336 +232,140 @@
             </div>
         </div>
     </div>
-    <!-- <div class="col-xxl-12">
-        <div class="row">
-            <div class="col-xl-12"> 
-                <div class="card custom-card">
-                    <div class="card-header justify-content-between">
-                        <div class="card-title">
-                            Projects Discussions
-                        </div>
-                        <button type="button" class="btn btn-sm btn-primary-light">View All<i
-                                class="ri-arrow-right-line ms-1 align-middle"></i></button>
-                    </div>
-                    <div class="card-body">
-                        <div class="card-header justify-content-between">
-                            <div class="card-title">
-                                Projects Discussions
-                            </div>
-                        </div>
-                        <div class="timeline-label">
-                            <ul class="list-unstyled ms-2 project-activity-list">
-                                <li class="project-activity">
-                                    <p class="mb-1 text-gray-700 fs-13 d-inline-flex ms-3">
-                                        Group discussion today at 10:30 AM with Asperiores Group Solutions
-                                    </p>
-                                    <div>
-                                        <span class="badge bg-secondary-transparent ms-3">Attend</span>
-                                    </div>
-                                </li>
-                                <li class="project-activity">
-                                    <p class="mb-1 text-gray-700 fs-13 d-inline-flex ms-3">Your application has accepted
-                                        in 3 Vacancy by the voluptatibus Industries</p>
-                                    <div>
-                                        <span class="badge bg-secondary-transparent ms-3">12h ago</span>
-                                    </div>
-                                </li>
-                                <li class="project-activity">
-                                    <p class="mb-1 text-gray-700 fs-13 d-inline-flex ms-3">Final round interview today
-                                        at 04:30 PM with Recusandae Institute</p>
-                                    <div>
-                                        <span class="badge bg-secondary-transparent ms-3">Attend</span>
-                                    </div>
-                                </li>
-                                <li class="project-activity">
-                                    <p class="mb-1 text-gray-700 fs-13 d-inline-flex ms-3">Group discussion today at
-                                        09:30 AM with Asperiores Tech Group Solutions</p>
-                                    <div>
-                                        <span class="badge bg-secondary-transparent ms-3">Attend</span>
-                                    </div>
-                                </li>
-                                <li class="project-activity">
-                                    <p class="mb-1 text-gray-700 fs-13 d-inline-flex ms-3">Group discussion today at
-                                        09:30 AM with Asperiores Tech Group Solutions</p>
-                                    <div>
-                                        <span class="badge bg-secondary-transparent ms-3">Attend</span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div> 
-        </div>
-    </div> -->
 </div>
-<!--End::row-1 -->
-<!-- Start:: row-2 -->
 <div class="row">
     <div class="col-xl-12">
         <div class="card custom-card">
             <div class="card-header justify-content-between">
-                <div class="card-title">top Projects</div>
+                <div class="card-title col-md-6 col-xl-6 col-xxl-6 col-lg-6">top Projects</div>
                     <!-- <button type="button" class="btn btn-sm btn-primary-light btn-wave waves-effect waves-light">View
                         All</button> -->
                             <!-- <label for="signup-phone" class="form-label text-default"><strong>Phone Number</strong><span class="text-danger"> *</span></label> -->
-                <div class="col-md-6">
-                <div class="input-group custom-input-group">
-                    <select class="form-select" [(ngModel)]="addFilter" 
-                        (change)="onFilterChange($any($event.target).value)">
-                        <option value="1">All</option>
-                        <option value="2">Project Id</option>
-                        <option value="3">Project Name</option>
-                    </select>
-                    <input type="text" class="form-control" *ngIf="addFilter=='1'" [disabled]="true">
-                    <input type="text" class="form-control" *ngIf="addFilter=='2'"
-                        [(ngModel)]="projId" placeholder="enter project Id">
-                    <input type="text" class="form-control" *ngIf="addFilter=='3'"
-                        [(ngModel)]="projName" placeholder="enter project Name">
-                    <button class="btn btn-ghost-light border" type="button" id="button-addon2" (click)="getMatCardLst()"><i
-                        class="ri-search-line text-muted"></i></button>
+                <div class="col-md-4 col-xl-4 col-xxl-4 col-lg-4 d-flex">
+                    <div class="input-group custom-input-group">
+                        <select class="form-select" [(ngModel)]="addFilter" 
+                            (change)="onFilterChange($any($event.target).value)">
+                            <option value="1">All</option>
+                            <option value="2">Project Id</option>
+                            <option value="3">Project Name</option>
+                        </select>
+                        <input type="text" class="form-control" *ngIf="addFilter=='1'" [disabled]="true">
+                        <input type="text" class="form-control" *ngIf="addFilter=='2'"
+                            [(ngModel)]="projId" placeholder="enter project Id">
+                        <input type="text" class="form-control" *ngIf="addFilter=='3'"
+                            [(ngModel)]="projName" placeholder="enter project Name">
+                        <button class="btn btn-ghost-light border" type="button" id="button-addon2" (click)="getMatCardLst()"><i
+                            class="ri-search-line text-muted"></i></button>
+                    </div>
+                    
                 </div>
-            </div>
+                <div class="text-center">
+                    <button class="btn btn-primary" (click)="toggleShowMore()">
+                        {{ showMore ? 'Show Less' : 'Show More' }}
+                    </button>
             </div>
         </div>
     </div>
-    <div class="col-xxl-3 col-lg-3 col-md-3 col-xl-3" *ngFor="let project of matcardLst">
-        <div class="card custom-card">
-            <div class="card-header d-flex align-items-center justify-content-between">
-                <div class="me-2  align-items-center">
-                    <span class="avatar avatar-rounded p-1 bg-light">
-                        <img src="./assets/images/brand-logos/profile1.jpg" alt="">
-                    </span>
-                </div>
-                <div class="flex-fill">
-                    <a href="javascript:void(0);" class="fs-14 d-block text-truncate project-list-title">Project: {{project.projectName | slice:0:12}}</a>
-                    <span class="text-muted d-block fs-12">Client: {{project.clientName | slice:0:12}}</span>
-                        <!-- <span class="text-muted d-block fs-12">Total <strong class="text-default">18/22</strong> tasks
-                            completed</span> -->
-                </div>
-                <!-- <div ngbDropdown class="dropdown no-caret">
-                    <a ngbDropdownToggle aria-label="anchor" href="javascript:void(0);"
-                        class="btn btn-icon btn-sm btn-light" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fe fe-more-vertical"></i>
-                    </a>
-                    <ul ngbDropdownMenu class="dropdown-menu">
-                        <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);"><i
-                                    class="ri-eye-line align-middle me-1 d-inline-block"></i>View</a></li>
-                        <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);"><i
-                                    class="ri-edit-line align-middle me-1 d-inline-block"></i>Edit</a></li>
-                        <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);"><i
-                                    class="ri-delete-bin-line me-1 align-middle d-inline-block"></i>Delete</a></li>
-                    </ul>
-                </div> -->
-            </div>
-            <div class="card-body">
-                <div class="d-flex align-items-center justify-content-between mb-3">
-                    <div>
-                        <div class="mb-1">Team :</div>
-                        <div class="avatar-list-stacked">
-                            <span class="avatar avatar-sm avatar-rounded">
-                                <img src="./assets/images/faces/2.jpg" alt="img">
+    <div class="col-xxl-12" [ngStyle]="{ 'max-height': showMore ? 'auto' : '330px', 'overflow-y': showMore ? 'visible' : 'auto' }">
+        <div class="row">
+            <div class="col-xxl-3 col-lg-3 col-md-3 col-xl-3" *ngFor="let project of matcardLst">
+                <div class="card custom-card">
+                    <div class="card-header d-flex align-items-center justify-content-between">
+                        <div class="me-2  align-items-center">
+                            <span class="avatar avatar-rounded p-1 bg-light">
+                                <img src="./assets/images/brand-logos/profile1.jpg" alt="">
                             </span>
-                            <span class="avatar avatar-sm avatar-rounded">
-                                <img src="./assets/images/faces/8.jpg" alt="img">
-                            </span>
-                            <span class="avatar avatar-sm avatar-rounded">
-                                <img src="./assets/images/faces/2.jpg" alt="img">
-                            </span>
-                            <span class="avatar avatar-sm avatar-rounded">
-                                <img src="./assets/images/faces/10.jpg" alt="img">
-                            </span>
-                            <a class="avatar avatar-sm bg-light avatar-rounded text-default" href="javascript:void(0);">
-                                +2
+                        </div>
+                        <div class="flex-fill">
+                            <a href="javascript:void(0);" class="fs-14 d-block text-truncate project-list-title">Project: {{project.projectName | slice:0:12}}</a>
+                            <span class="text-muted d-block fs-12">Client: {{project.clientName | slice:0:12}}</span>
+                                <!-- <span class="text-muted d-block fs-12">Total <strong class="text-default">18/22</strong> tasks
+                                    completed</span> -->
+                        </div>
+                        <!-- <div ngbDropdown class="dropdown no-caret">
+                            <a ngbDropdownToggle aria-label="anchor" href="javascript:void(0);"
+                                class="btn btn-icon btn-sm btn-light" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fe fe-more-vertical"></i>
                             </a>
+                            <ul ngbDropdownMenu class="dropdown-menu">
+                                <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);"><i
+                                            class="ri-eye-line align-middle me-1 d-inline-block"></i>View</a></li>
+                                <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);"><i
+                                            class="ri-edit-line align-middle me-1 d-inline-block"></i>Edit</a></li>
+                                <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);"><i
+                                            class="ri-delete-bin-line me-1 align-middle d-inline-block"></i>Delete</a></li>
+                            </ul>
+                        </div> -->
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <!-- <div>
+                                <div class="mb-1">Team :</div>
+                                <div class="avatar-list-stacked">
+                                    <span class="avatar avatar-sm avatar-rounded">
+                                        <img src="./assets/images/faces/2.jpg" alt="img">
+                                    </span>
+                                    <span class="avatar avatar-sm avatar-rounded">
+                                        <img src="./assets/images/faces/8.jpg" alt="img">
+                                    </span>
+                                    <span class="avatar avatar-sm avatar-rounded">
+                                        <img src="./assets/images/faces/2.jpg" alt="img">
+                                    </span>
+                                    <span class="avatar avatar-sm avatar-rounded">
+                                        <img src="./assets/images/faces/10.jpg" alt="img">
+                                    </span>
+                                    <a class="avatar avatar-sm bg-light avatar-rounded text-default" href="javascript:void(0);">
+                                        +2
+                                    </a>
+                                </div>
+                            </div> -->
+                            <div class="text-end">
+                                <!-- <div class="mb-1">Priority :</div> -->
+                                <!-- <span class="badge bg-success-transparent">{{project.dateDifference}} days to go</span> -->
+                                <span class="badge" [ngClass]="{'bg-danger-transparent text-danger': project.priorityDays < 0,
+                                    'bg-success-transparent': project.priorityDays >= 0}">Priority : {{project.priorityDays}} days to go</span>
+                            </div>
+                        </div>
+                        <div class="mb-1">Project Status : {{project.projectState}}</div>
+                        <div class="mb-3">
+                            <div></div>
+                            <div class="progress progress-xs progress-animate" role="progressbar" aria-valuenow="80"
+                                aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar bg-primary" style="width: 80%"></div>
+                            </div>
+                            <div class="mt-1"><span class="text-primary fw-medium">{{project.percantage}}</span> Completed</div>
+                        </div>
+                        <div class="mb-1">Payment Status : {{project.paymentStage}}</div>
+                        <div>
+                            <div></div>
+                            <div class="progress progress-xs progress-animate" role="progressbar" aria-valuenow="80"
+                                aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar bg-primary" style="width: 80%"></div>
+                            </div>
+                            <div class="mt-1"><span class="text-primary fw-medium">80%</span> Completed</div>
                         </div>
                     </div>
-                    <div class="text-end">
-                        <div class="mb-1">Priority :</div>
-                        <!-- <span class="badge bg-success-transparent">{{project.dateDifference}} days to go</span> -->
-                        <span class="badge" [ngClass]="{'bg-danger-transparent text-danger': project.priorityDays < 0,
-                            'bg-success-transparent': project.priorityDays >= 0}">{{project.priorityDays}} days to go</span>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <a class="btn btn-sm btn-primary btn-wave ms-3" (click)="onProjectAdd(project)"><i
+                            class="ri-add-line align-middle me-1 fw-medium"></i>Add</a>
+                                <!-- routerLink="/dashboard/mytask" -->
+                        <a class="btn btn-sm btn-primary btn-wave me-3" (click)="onProjectCycle(project)"><i
+                            class="bi bi-calendar-date align-middle me-1 fw-medium"></i>Project Cycle</a>
+                                <!-- routerLink="/pages/timeline" -->
                     </div>
                 </div>
-                <div class="mb-1">Project Status : {{project.projectState}}</div>
-                <div class="mb-3">
-                    <div></div>
-                    <div class="progress progress-xs progress-animate" role="progressbar" aria-valuenow="80"
-                        aria-valuemin="0" aria-valuemax="100">
-                        <div class="progress-bar bg-primary" style="width: 80%"></div>
-                    </div>
-                    <div class="mt-1"><span class="text-primary fw-medium">80%</span> Completed</div>
-                </div>
-                <div class="mb-1">Payment Status : {{project.projectState}}</div>
-                <div>
-                    <div></div>
-                    <div class="progress progress-xs progress-animate" role="progressbar" aria-valuenow="80"
-                        aria-valuemin="0" aria-valuemax="100">
-                        <div class="progress-bar bg-primary" style="width: 80%"></div>
-                    </div>
-                    <div class="mt-1"><span class="text-primary fw-medium">80%</span> Completed</div>
-                </div>
-            </div>
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <a class="btn btn-sm btn-primary btn-wave ms-3" (click)="onProjectAdd(project)"><i
-                    class="ri-add-line align-middle me-1 fw-medium"></i>Add</a>
-                        <!-- routerLink="/dashboard/mytask" -->
-                <a class="btn btn-sm btn-primary btn-wave me-3" (click)="onProjectCycle(project)"><i
-                    class="bi bi-calendar-date align-middle me-1 fw-medium"></i>Project Cycle</a>
-                        <!-- routerLink="/pages/timeline" -->
             </div>
         </div>
     </div>
-    <!-- <div class="col-xxl-4 col-lg-4 col-md-4 col-xl-4">
-        <div class="card custom-card">
-            <div class="card-header align-items-center d-flex justify-content-between">
-                <div class="me-2">
-                    <span class="avatar avatar-rounded p-1 bg-light">
-                        <img src="./assets/images/brand-logos/profile1.jpg" alt="">
-                    </span>
-                </div>
-                <div class="flex-fill">
-                    <a href="javascript:void(0);" class="fs-14 d-block text-truncate project-list-title">Content
-                        Management System (CMS) Integration</a>
-                    <span class="text-muted d-block fs-12">Total <strong class="text-default">26/68</strong> tasks
-                        completed</span>
-                </div>
-                <div ngbDropdown class="dropdown no-caret">
-                    <a ngbDropdownToggle aria-label="anchor" href="javascript:void(0);"
-                        class="btn btn-icon btn-sm btn-light" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fe fe-more-vertical"></i>
-                    </a>
-                    <ul ngbDropdownMenu class="dropdown-menu">
-                        <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);"><i
-                                    class="ri-eye-line align-middle me-1 d-inline-block"></i>View</a></li>
-                        <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);"><i
-                                    class="ri-edit-line align-middle me-1 d-inline-block"></i>Edit</a></li>
-                        <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);"><i
-                                    class="ri-delete-bin-line me-1 align-middle d-inline-block"></i>Delete</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="d-flex align-items-center justify-content-between mb-3">
-                    <div>
-                        <div class="mb-1">Team :</div>
-                        <div class="avatar-list-stacked">
-                            <span class="avatar avatar-sm avatar-rounded">
-                                <img src="./assets/images/faces/12.jpg" alt="img">
-                            </span>
-                            <span class="avatar avatar-sm avatar-rounded">
-                                <img src="./assets/images/faces/9.jpg" alt="img">
-                            </span>
-                            <span class="avatar avatar-sm avatar-rounded">
-                                <img src="./assets/images/faces/11.jpg" alt="img">
-                            </span>
-                            <a class="avatar avatar-sm bg-light avatar-rounded text-default" href="javascript:void(0);">
-                                +4
-                            </a>
-                        </div>
-                    </div>
-                    <div class="text-end">
-                        <div class="mb-1">Priority :</div>
-                        <span class="badge bg-info-transparent">7 days to go </span>
-                    </div>
-                </div>
-                <div class="mb-1">Status :</div>
-                <div>
-                    <div></div>
-                    <div class="progress progress-xs progress-animate" role="progressbar" aria-valuenow="45"
-                        aria-valuemin="0" aria-valuemax="100">
-                        <div class="progress-bar bg-warning" style="width: 45%"></div>
-                    </div>
-                    <div class="mt-1"><span class="text-warning fw-medium">45%</span> Completed</div>
-                </div>
-            </div>
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <a class="btn btn-sm btn-primary btn-wave ms-3" routerLink="/dashboard/mytask"><i
-                        class="ri-add-line align-middle me-1 fw-medium"></i>Add</a>
-                <a class="btn btn-sm btn-primary btn-wave me-3" routerLink="/pages/timeline"><i
-                        class="bi bi-calendar-date align-middle me-1 fw-medium"></i>Project Cycle</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-xxl-4 col-lg-4 col-md-4 col-xl-4">
-        <div class="card custom-card">
-            <div class="card-header align-items-center d-flex justify-content-between">
-                <div class="me-2">
-                    <span class="avatar avatar-rounded p-1 bg-light">
-                        <img src="./assets/images/brand-logos/profile1.jpg" alt="">
-                    </span>
-                </div>
-                <div class="flex-fill">
-                    <a href="javascript:void(0);" class="fs-14 d-block text-truncate project-list-title">Advanced Search
-                        and Filtering</a>
-                    <span class="text-muted d-block fs-12">Total <strong class="text-default">45/54</strong> tasks
-                        completed</span>
-                </div>
-                <div ngbDropdown class="dropdown no-caret">
-                    <a ngbDropdownToggle aria-label="anchor" href="javascript:void(0);"
-                        class="btn btn-icon btn-sm btn-light" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fe fe-more-vertical"></i>
-                    </a>
-                    <ul ngbDropdownMenu class="dropdown-menu">
-                        <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);"><i
-                                    class="ri-eye-line align-middle me-1 d-inline-block"></i>View</a></li>
-                        <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);"><i
-                                    class="ri-edit-line align-middle me-1 d-inline-block"></i>Edit</a></li>
-                        <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);"><i
-                                    class="ri-delete-bin-line me-1 align-middle d-inline-block"></i>Delete</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="d-flex align-items-center justify-content-between mb-3">
-                    <div>
-                        <div class="mb-1">Team :</div>
-                        <div class="avatar-list-stacked">
-                            <span class="avatar avatar-sm avatar-rounded">
-                                <img src="./assets/images/faces/3.jpg" alt="img">
-                            </span>
-                            <span class="avatar avatar-sm avatar-rounded">
-                                <img src="./assets/images/faces/9.jpg" alt="img">
-                            </span>
-                            <span class="avatar avatar-sm avatar-rounded">
-                                <img src="./assets/images/faces/12.jpg" alt="img">
-                            </span>
-                            <span class="avatar avatar-sm avatar-rounded">
-                                <img src="./assets/images/faces/11.jpg" alt="img">
-                            </span>
-                            <a class="avatar avatar-sm bg-light avatar-rounded text-default" href="javascript:void(0);">
-                                +2
-                            </a>
-                        </div>
-                    </div>
-                    <div class="text-end">
-                        <div class="mb-1">Priority :</div>
-                        <span class="badge bg-danger-transparent">10 days to go</span>
-                    </div>
-                </div>
-                <div class="mb-1">Status :</div>
-                <div>
-                    <div></div>
-                    <div class="progress progress-xs progress-animate" role="progressbar" aria-valuenow="89"
-                        aria-valuemin="0" aria-valuemax="100">
-                        <div class="progress-bar bg-success" style="width: 89%"></div>
-                    </div>
-                    <div class="mt-1"><span class="text-success fw-medium">89%</span> Completed</div>
-                </div>
-            </div>
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <a class="btn btn-sm btn-primary btn-wave ms-3" routerLink="/dashboard/mytask"><i
-                        class="ri-add-line align-middle me-1 fw-medium"></i>Add</a>
-                <a class="btn btn-sm btn-primary btn-wave me-3" routerLink="/pages/timeline"><i
-                        class="bi bi-calendar-date align-middle me-1 fw-medium"></i>Project Cycle</a>
-            </div>
-        </div>
-    </div> -->
 </div>
-<!-- End:: row-2 -->
-<!-- start:: row-3 -->
+
+<!-- <div class="text-center mt-3">
+    <button class="btn btn-primary" (click)="toggleShowMore()">
+      {{ showMore ? 'Show Less' : 'Show More' }}
+    </button> -->
+
 <div class="row">
-    <div class="col-xl-12">
+    <div class="col-xl-12 mt-2">
         <div class="card custom-card">
             <div class="card-header justify-content-between">
                 <div class="card-title">
@@ -617,14 +378,7 @@
                             aria-expanded="false" (click)="onClkDesign('n')" [attr.disabled]="dateDiff == '0'">
                             New Design
                         </button>
-                        <!-- <ul ngbDropdownMenu class="dropdown-menu" role="menu">
-                            <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">New</a></li>
-                            <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">Popular</a></li>
-                            <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">Relevant</a></li>
-                        </ul> -->
                     </div>
-                    <!-- <a routerLink="apps/projects/create-project" class="btn btn-primary me-2" href="apps/projects/create-project"><i
-                        class="ri-add-line me-1 fw-medium align-middle"></i>New Project</a> -->
                     <div>
                         <a class="btn btn-sm btn-secondary btn-wave" data-bs-toggle="modal"
                             data-bs-target="#exampleModalLg" (click)="openLg(Content10);submitted=false"><i
@@ -739,9 +493,6 @@
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="card custom-card">
-                            <!-- <div class="card-header">
-                        <div class="card-title">Create Project</div>
-                      </div> -->
                             <div class="card-body">
                                 <div class="row gy-3">
                                     <div class="col-xl-4">
@@ -873,7 +624,7 @@
                                         <input type="date" class="form-control" id='startDate'
                                             formControlName='projectStartDate'
                                             [ngClass]="{ 'is-invalid': submitted && f['projectStartDate'].errors }"
-                                            maxlength="50">
+                                            (change)="onStartDateChange($event)">
                                         <div *ngIf="submitted && f['projectStartDate'].errors" class="invalid-feedback">
                                             <div *ngIf="f['projectStartDate'].errors['required']">Start Date is required
                                             </div>
@@ -884,7 +635,7 @@
                                         <input type="date" class="form-control" id='endDate'
                                             formControlName='projectEndDate'
                                             [ngClass]="{ 'is-invalid': submitted && f['projectEndDate'].errors }"
-                                            maxlength="50">
+                                            [min]="minEndDate">
                                         <div *ngIf="submitted && f['projectEndDate'].errors" class="invalid-feedback">
                                             <div *ngIf="f['projectEndDate'].errors['required']">End Date is required
                                             </div>
@@ -895,25 +646,17 @@
                               <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
                               <mat-datepicker #endPicker></mat-datepicker>
                             </mat-form-field> -->
-                                    </div>
-
-                                    <!-- <div class="col-xl-12">
-                            <label class="form-label">Attachments</label>
-                            <file-pond #myPond [options]="pondOptions" formControlName="attachments"></file-pond>
-                          </div> -->
+                                    </div>  
                                 </div>
                             </div>
-                            <!-- <div class="card-footer">
-                        <button class="btn btn-primary-light btn-wave ms-auto float-end" type="submit">Create Project</button>
-                      </div> -->
                         </div>
                     </div>
                 </div>
             </form>
         </div>
         <div class="modal-footer">
-            <button class="btn btn-primary-light btn-wave ms-auto float-end" type="submit" (click)="onSubmit()">Create
-                Project</button>
+            <button class="btn btn-primary-light btn-wave ms-auto float-end" type="submit" (click)="onSubmit()" [disabled]="btnDisable">
+                Create Project</button>
 
             <button type="button" class="btn btn-light" data-bs-dismiss="modal"
                 (click)="modal.close('Cross click')">Cancel</button>
@@ -1017,6 +760,7 @@
                   <tr>
                     <th>Stage of Payment</th>
                     <th>Percentage</th>
+                    <th>Amount to be Recieved</th>
                     <th>Received Amount</th>
                     <th>Pending Amount</th>
                     <th>Updated By</th>
@@ -1024,46 +768,57 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let payment of paymentStages">
+                  <tr *ngFor="let payment of paymentStages; let i=index">
                     <td  style="width:15%">
                       <input type="text" class="form-control form-control-sm" [(ngModel)]="payment.paymentStage" 
-                        placeholder="Enter Stage" [disabled]="!payment.isNew">
+                        placeholder="Enter Stage" [disabled]="!payment.isNew" (ngModelChange)="validateField(i, 'paymentStage')">
                     </td>
-                    <td style="width:10%">
+                    <td style="width:5%">
                       <input type="text" class="form-control form-control-sm" [(ngModel)]="payment.percantage" placeholder="Enter Percentage"
-                        [disabled]="!payment.isNew">
+                        (ngModelChange)="calculateAmountToBeReceived(payment);validateField(i, 'percantage');onPercentageChange(payment)" 
+                        onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || event.charCode == 8)"
+                        [disabled]="!payment.paymentStage || !payment.isNew">
                     </td>
-                    <td  style="width:15%">
+                    <td style="width:12%">
+                        <input type="text" class="form-control form-control-sm" [(ngModel)]="payment.amountToBeRecieved" placeholder="Enter Amount"
+                          [disabled]="true">
+                    </td>
+                    <td style="width:12%">
                       <input type="text" class="form-control form-control-sm" [(ngModel)]="payment.receivedAmount" placeholder="Enter Received Amount"
-                        [disabled]="!payment.isNew">
+                        [disabled]="!payment.amountToBeRecieved || !payment.percantage || !payment.paymentStage || !payment.isNew" 
+                        (ngModelChange)="calculatePendingAmount(payment)" onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || event.charCode == 8)">
                     </td>
-                    <td  style="width:15%">
+                    <td  style="width:12%">
                       <input type="text" class="form-control form-control-sm" [(ngModel)]="payment.pendingAmount" placeholder="Enter Pending Amount"
-                        [disabled]="!payment.isNew">
+                        [disabled]="true" (ngModelChange)="validateField(i, 'pendingAmount')">
                     </td>
                     <td>
                         <input type="text" class="form-control form-control-sm" [(ngModel)]="payment.updatedBy" [disabled]="true">
                     </td>
                     <td>
                         <input type="text" class="form-control form-control-sm" [disabled]="true" 
-                        [value]="payment.updatedTime ? (payment.updatedTime | date:'dd-MM-yyyy') : ''">
+                        [value]="payment.updatedTime ? (payment.updatedTime | date:'dd-MM-yyyy hh:mm a') : ''">
                     </td>
                   </tr>
                 </tbody>
               </table>
-            <button class="btn btn-success" (click)="addRow()">Add Row</button>
-            <div class="row">
-                <div class="col-auto p-2">  
-                    <label for="name">Total amount Received:</label>    
+            <button class="btn btn-success mt-2" (click)="addRow()" [disabled]='isPercentageLimitReached()'>Add Row</button>
+            <div class="row gy-4 mt-2 justify-content-center">
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
+                    <p class="mb-2 text-dark">Project Estimation</p>
+                    <input type="text" class="form-control" id="input" [(ngModel)]="estamount" [disabled]="true">
                 </div>
-                <div class="col-auto">    
-                    <input type="text" id="name" name="name" class="form-control" [(ngModel)]="totalReceivedAmount">  
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
+                    <p class="mb-2 text-dark">Total Amount to be Received</p>
+                    <input type="text" class="form-control" id="input" [(ngModel)]="ttlAmtToBeRcvd" [disabled]="true">
                 </div>
-                <div class="col-auto p-2">  
-                    <label for="name">Total Pending amount:</label>    
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
+                    <p class="mb-2 text-dark">Total amount Received</p>
+                    <input type="text" class="form-control" id="input" [(ngModel)]="totalReceivedAmount" [disabled]="true">
                 </div>
-                <div class="col-auto">    
-                    <input type="text" class="form-control" [(ngModel)]="lastPendingAmount">  
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
+                    <p class="mb-2 text-dark">Total Pending amount</p>
+                    <input type="text" class="form-control" id="input" [(ngModel)]="lastPendingAmount" [disabled]="true">
                 </div>
             </div>
         </div>
@@ -1075,4 +830,4 @@
     </div>
 </ng-template>
 <!-- End Row 5 -->
- 
+  

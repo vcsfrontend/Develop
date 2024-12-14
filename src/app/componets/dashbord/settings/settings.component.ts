@@ -5,7 +5,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { FormBuilder, FormGroup, FormArray, Validators, FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModule, NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { ShowcodeCardComponent } from '../../../shared/common/includes/showcode-card/showcode-card.component';
 import { SharedModule } from '../../../shared/common/sharedmodule';
@@ -55,7 +55,7 @@ export class SettingsComponent extends BaseComponent implements OnInit{
   isEmailDisabled = false; isOtpDisabled = false; isCompany : string = 'col-xl-6';
   isShowUsers = false; pload:any[] = [];isOkBtn = false; showCity:boolean = true;
   @ViewChild('modalTemplate') modalTemplate!: TemplateRef<any>;  // Access the ng-template
-  private modalRef: any; noUsers:any=''; users:any = ''; city:any = ''; selectedCountry:any = 'India';
+  private modalRef: any; noUsers:any=''; users:any = ''; city:any = ''; selectedCountry:any = 'India'; stageLst:any;
   userForm: FormGroup = this.fb.group({
     type : [2],
     firstName: ['', Validators.required],
@@ -76,8 +76,56 @@ export class SettingsComponent extends BaseComponent implements OnInit{
     city: ['', Validators.required]
   })
   productForm: FormGroup;
+  newItem: string = '';
+  items: { label: string; checked: boolean }[] = [];
+
+  addMoreVisible: boolean = false; // Flag to toggle visibility
+
+  toggleAddMore() {
+    this.addMoreVisible = !this.addMoreVisible; // Toggle visibility
+  }
+
+  addItem() {
+    const itemExists = this.planDetails.some(
+      (plan) => plan.name.toLowerCase() === this.newItem.trim().toLowerCase()
+    );
+    if (this.newItem.trim() && !itemExists) {
+      this.planDetails.push({
+        name: this.newItem.trim(),
+        checked: false,
+        isDefault: false,
+      });
+      this.newItem = '';
+    } else if (itemExists) {
+      alert('This item already exists!');
+    }
+  }
+  
+  deleteItem(index: number) {
+    this.planDetails.splice(index, 1);
+  }
+
+  saveData:any;
+  
+
+  planDetails = [
+    { name: 'WALL AND DEMOLITION PLAN', checked: false, isDefault: true },
+    { name: 'PROPOSED FURNITURE PLAN', checked: false, isDefault: true },
+    { name: 'FLOORING PLAN', checked: false, isDefault: true },
+    { name: 'ELECTRICAL PLAN', checked: false, isDefault: true },
+    { name: 'MOODBOARD AND RENDERS', checked: false, isDefault: true },
+    { name: 'SWITCH BOARD ELEVATIONS + LEGEND', checked: false, isDefault: true },
+    { name: 'FURNITURE DETAILS', checked: false, isDefault: true },
+    { name: 'REALISTIC 3D RENDERS', checked: false, isDefault: true },
+    { name: 'MATERIAL LIST', checked: false, isDefault: true },
+    { name: 'SECTION WALL ELEVATIONS', checked: false, isDefault: true },
+    { name: 'RCP - REFLECTED CEILING PLAN', checked: false, isDefault: true },
+    { name: 'BOQ-BILL OF QUANTITY ESTIMATE', checked: false, isDefault: true },
+  ];
+  
   constructor(public fb: FormBuilder, public switchService: SwitherService, 
     private toastr: ToastrService,private router: Router, private dp: DatePipe,
+    private offcanvasService: NgbOffcanvas,
     private modalService: NgbModal,  private viewContainerRef: ViewContainerRef ){
       super();
       this.userData = localStorage.getItem('userDetails');
@@ -87,9 +135,94 @@ export class SettingsComponent extends BaseComponent implements OnInit{
         quantities: this.fb.array([]) ,  
       });  
   }
+  
+  onCheckboxChange() {
+    const selectedPlans = this.planDetails.filter((plan) => plan.checked);
+    
+    // Update f1 to f30 fields dynamically based on selected items
+    selectedPlans.forEach((plan, index) => {
+      if (index < 30) {
+        this.saveData[`f${index + 1}`] = plan.name;
+      }
+    });
+    for (let i = selectedPlans.length; i < 30; i++) {
+      this.saveData[`f${i + 1}`] = '';
+    }
+  }
 
   ngOnInit(){
-    this.formInit(); this.getUsers();
+    this.formInit(); this.getUsers(); this.getAllStages();
+    this.saveData = {
+      id: 0,
+      companyName: JSON.parse(this.userData).companyName,
+      companyCode: JSON.parse(this.userData).companyCode,
+      email: JSON.parse(this.userData).email,
+      f1: "",
+      f1Percent: 0,
+      f2: "",
+      f2Percent: 0,
+      f3: "",
+      f3Percent: 0,
+      f4: "",
+      f4Percent: 0,
+      f5: "",
+      f5Percent: 0,
+      f6: "",
+      f6Percent: 0,
+      f7: "",
+      f7Percent: 0,
+      f8: "",
+      f8Percent: 0,
+      f9: "",
+      f9Percent: 0,
+      f10: "",
+      f10Percent: 0,
+      f11: "",
+      f11Percent: 0,
+      f12: "",
+      f12Percent: 0,
+      f13: "",
+      f13Percent: 0,
+      f14: "",
+      f14Percent: 0,
+      f15: "",
+      f15Percent: 0,
+      f16: "",
+      f16Percent: 0,
+      f17: "",
+      f17Percent: 0,
+      f18: "",
+      f18Percent: 0,
+      f19: "",
+      f19Percent: 0,
+      f20: "",
+      f20Percent: 0,
+      f21: "",
+      f21Percent: 0,
+      f22: "",
+      f22Percent: 0,
+      f23: "",
+      f23Percent: 0,
+      f24: "",
+      f24Percent: 0,
+      f25: "",
+      f25Percent: 0,
+      f26: "",
+      f26Percent: 0,
+      f27: "",
+      f27Percent: 0,
+      f28: "",
+      f28Percent: 0,
+      f29: "",
+      f29Percent: 0,
+      f30: "",
+      f30Percent: 0,
+      updatedBy: JSON.parse(this.userData).username,
+      updatedTime: "",
+      stageActivity: "YES",
+      type: JSON.parse(this.userData).type
+    };
+    
     // setTimeout(() => {
       
     // }, 500);
@@ -101,7 +234,22 @@ export class SettingsComponent extends BaseComponent implements OnInit{
     });
 
     this.onTodayDt();
-    this.onMinDate();
+    this.onMinDate(); 
+  }
+  dynamicFields: { value: string; percent: number }[] = [];
+  initializeDynamicFields() {
+    // Loop through f1 to f30 and add only those with non-empty values to dynamicFields
+    for (let i = 1; i <= 30; i++) {
+      const fieldName = `f${i}`;
+      const percentName = `f${i}Percent`;
+
+      if (this.stageLst[fieldName]) {
+        this.dynamicFields.push({
+          value: this.stageLst[fieldName],
+          percent: this.stageLst[percentName],
+        });
+      }
+    }
   }
 
   ngAfterViewInit() {
@@ -144,7 +292,91 @@ export class SettingsComponent extends BaseComponent implements OnInit{
     }
     return index + 1; // Default return if paginator is not yet defined
   }
-  
+
+  saveInitialStage(){
+    this.switchService.stageSave(this.saveData).subscribe({ next: (res:any) => {
+    if(res){
+      this.toastr.success('Stages saved successfully');
+      this.offcanvasService.dismiss();
+      } else{
+        this.toastr.error(res.message)
+      }
+    },
+    error: (error) => {
+      this.toastr.error(error.statusText);
+      },
+    })
+  }
+
+  getAllStages(){
+    let payload = {
+      "email": JSON.parse(this.userData).email,
+      "companyname": JSON.parse(this.userData).companyName,
+      "companycode": JSON.parse(this.userData).companyCode,
+      "type": JSON.parse(this.userData).type
+    }
+    this.switchService.getStages(payload).subscribe({ next: (res:any) => {
+    if(res){
+      this.stageLst = res;
+      this.initializeDynamicFields();
+      } else{
+        this.toastr.error(res.message)
+      }
+    },
+    error: (error) => {
+      this.toastr.error(error.statusText);
+    },
+    })
+  }
+
+  saveLastStages() {
+    // Update payload based on dynamicFields
+    this.dynamicFields.forEach((field, index) => {
+      this.stageLst[`f${index + 1}`] = field.value;
+      this.stageLst[`f${index + 1}Percent`] = field.percent;
+    });
+
+    // Clear remaining unused fields in the payload
+    for (let i = this.dynamicFields.length + 1; i <= 30; i++) {
+      this.stageLst[`f${i}`] = '';
+      this.stageLst[`f${i}Percent`] = 0;
+    }
+
+    console.log('Updated Payload:', this.stageLst);
+
+    this.switchService.stageSave(this.stageLst).subscribe({ next: (res:any) => {
+      if(res){
+        this.toastr.success('Stages saved successfully');
+        // this.getAllStages();
+        } else{
+          this.toastr.error(res.message)
+        }
+      },
+      error: (error) => {
+        this.toastr.error(error.statusText);
+      },
+    })
+  }
+
+  onDeleteStages(){
+    let payload = {
+      "email": JSON.parse(this.userData).email,
+      "companyname": JSON.parse(this.userData).companyName,
+      "companycode": JSON.parse(this.userData).companyCode,
+      "type": JSON.parse(this.userData).type    
+    }
+    this.switchService.deleteStage(payload).subscribe({ next: (res:any) => {
+    if(res){
+      this.toastr.success('stage removed successfully')
+      } else{
+        this.toastr.error(res.message)
+      }
+    },
+    error: (error) => {
+      this.toastr.error(error.statusText);
+    },
+    })
+  }
   
   getUsers(){
     // this.switchService.getAllUsers().subscribe({ next: (res:any) => {
@@ -161,7 +393,7 @@ export class SettingsComponent extends BaseComponent implements OnInit{
         }
       },
       error: (error) => {
-        this.toastr.error(error);
+        this.toastr.error(error.statusText);
       },
     })
   }
@@ -502,7 +734,11 @@ export class SettingsComponent extends BaseComponent implements OnInit{
      
   removeQuantity(i:number) {  
     this.quantities().removeAt(i);  
-  }  
+  } 
+  openRight(content: any) {
+    this.offcanvasService.open(content, { position: 'end' });
+  } 
      
+  selectedOption: string = '';
   
 }

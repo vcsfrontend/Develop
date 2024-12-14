@@ -155,7 +155,10 @@ export class BasicComponent extends BaseComponent implements OnInit {
             this.toastr.error(res.message,'', {
               timeOut: 3000, positionClass: 'toast-top-right' });
           }
-        }
+        },
+        error: (error) => {
+          this.toastr.error(error.statusText);
+        },
       })
     }
   }

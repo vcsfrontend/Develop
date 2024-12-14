@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import {
   ChartComponent,
   ApexAxisChartSeries,
@@ -90,7 +90,20 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
   projectName: string = ''; clientName: string = ''; businessCategory: string = '';
   projectAddress: string = ''; state: string = ''; city: string = ''; projectArea: string = ''; 
   action: string = ''; designId: string = ''; companyName: string = ''; matcardLst:any; addFilter: string = '1';
-  projName: string = ''; projId: string = ''; paymentStages: any; lstData: any;
+  projName: string = ''; projId: string = ''; paymentStages: any; lstData: any; active="Angular"; btnDisable = false; 
+  estamount : any; hasAddedRow: boolean = false;
+  displayedCards:any;
+  showMore = false;
+
+
+  updateDisplayedCards(): void {
+    this.displayedCards = this.showMore ? this.matcardLst : this.matcardLst?.slice(0, 4);
+  }
+
+  toggleShowMore(): void {
+    this.showMore = !this.showMore;
+    this.updateDisplayedCards();
+  }
 //   {
 //     "id": 1,
 //     "projectId": "VCS001",
@@ -111,9 +124,13 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
 // }
   dataSource = new MatTableDataSource<any>(); 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  modal: any;
+  modal: any; ttlAmtToBeRcvd: any;
   projectLst: any; userDetails:any; dateDiff: string = '';
   
+  @HostListener('document:keydown.enter', ['$event'])
+  handleEnterKey(event: KeyboardEvent): void {
+    this.getMatCardLst();
+  }
   // open(content1:any) {
 	// 	this.modalService.open(content1,{ centered: true });
 	// }
@@ -178,6 +195,18 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
     return this.createProjectForm.controls;
   }
 
+  minEndDate: string = '';
+  onStartDateChange(event: Event): void {
+    const startDate = (event.target as HTMLInputElement).value;
+    this.minEndDate = startDate; // Set the minimum end date
+    const endDate = this.createProjectForm.get('projectStartDate')?.value;
+
+    // Reset the end date if it is earlier than the new start date
+    if (endDate && endDate < startDate) {
+      this.createProjectForm.get('projectEndDate')?.setValue('');
+    }
+  }
+
   onClkDesign(key:string = ''){
     this.userData = localStorage.getItem('userDetails');
     this.switchService.onAdonai(JSON.parse(this.userData)?.email).subscribe({
@@ -199,6 +228,7 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
 
   onSubmit(): void {
     this.submitted = true;
+    this.btnDisable = true;
     if (this.createProjectForm.invalid) {
       this.toastr.error('Please fill mandatory fields');
       // this.btnDisable = false;
@@ -206,11 +236,13 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
     }
     else if (this.createProjectForm.valid) {
       const projectData = this.createProjectForm.value;
+      this.btnDisable = true;
       projectData.companyName = JSON.parse(this.userDetails)?.companyName,
       projectData.email = JSON.parse(this.userDetails)?.email,
       projectData.type = JSON.parse(this.userDetails)?.type,
       projectData.username = JSON.parse(this.userDetails)?.username, 
       projectData.companyCode = JSON.parse(this.userDetails)?.companyCode,
+
       // projectData.projectStartDate = this.dp.transform(projectData.projectStartDate, 'dd-MM-yyyy'),
       // projectData.projectEndDate = this.dp.transform(projectData.projectEndDate, 'dd-MM-yyyy'),
       this.switchService.saveProject(projectData).subscribe({
@@ -221,6 +253,7 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
         },
         error: (error) => {
           this.toastr.error('Error creating project', error);
+          this.btnDisable = false;
         },
         complete: () => {
           console.log('Project creation process completed.');
@@ -304,6 +337,7 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
           this.matcardLst = res
           // this.addDateDifference();
           this.matcardLst.sort((a:any, b:any) => a.priorityDays - b.priorityDays);
+          this.updateDisplayedCards();
           // console.log(this.matcardLst);
           } else {
             this.toastr.error(res.message);
@@ -356,20 +390,29 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
     this.totalReceivedAmount = this.paymentStages.reduce((sum:any, stage:any) => {
       return sum + parseFloat(stage.receivedAmount);
     }, 0);
+    this.ttlAmtToBeRcvd = this.paymentStages.reduce((sum:any, stage:any) => {
+      return sum + parseFloat(stage.amountToBeRecieved);
+    }, 0);
+    this.lastPendingAmount = this.paymentStages.reduce((sum:any, stage:any) => {
+      return sum + parseFloat(stage.pendingAmount);
+    }, 0);
   }
+
   fetchPaymentStages(data:any) {
     //   this.http.get('https://api.example.com/payment-stages').subscribe((data: any) => {
     //     this.paymentStages = data.map((item: any) => ({ ...item, isNew: false }));
     //   });
+    this.estamount = data.projectEstimation ;
     this.lstData = data
     console.log('lst-', data);
     this.switchService.getProjEstimation(data.projectId).subscribe({ next: (res:any) =>{
     if(res){
       this.paymentStages = res.map((item: any) => ({ ...item, isNew: false }));
+      this.paymentStages.forEach((e:any) => {e.updatedTime = this.convertToIST(e.updatedTime);});
       console.log('ps -',this.paymentStages);
 
-    const lastElement = this.paymentStages[this.paymentStages.length - 1];
-    this.lastPendingAmount = lastElement ? lastElement.pendingAmount : data.projectEstimation;
+    // const lastElement = this.paymentStages[this.paymentStages.length - 1];
+    // this.lastPendingAmount = lastElement ? lastElement.pendingAmount : data.projectEstimation;
     this.calculateTotalReceivedAmount();
     } else {
       this.toastr.error(res.message);
@@ -382,39 +425,145 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
   }
 
   addRow() {
-    this.paymentStages.push({ 
-      projectId: this.lstData?.projectId,
-      projectEstimation: this.lstData?.projectEstimation,
-      totalAmount: '',
-      totalPending: '',
-      paymentStage: '',
-      percantage: '',
-      receivedAmount: '',
-      pendingAmount: '',
-      updatedBy: JSON.parse(this.userData)?.username,
-      updatedTime: new Date(),
-      isNew: true 
-    });
+    const incompleteRow = this.paymentStages.find((e:any) => !e.paymentStage || !e.percantage || !e.receivedAmount);
+  
+    if (incompleteRow) {
+      this.toastr.warning('Please fill all the fields before adding a new row.', 'Validation Error');
+      return;
+    } else {
+
+    // const totalPercentage = this.paymentStages.reduce((sum:any, payment:any) => {
+    //   return sum + (payment.percantage ? parseFloat(payment.percantage) : 0);
+    // }, 0);
+  
+    // if (totalPercentage > 100) {
+    //   this.toastr.error('Total percentage cannot exceed 100. Please correct the values.', 'Validation Error');
+    //   return;
+    // }
+      this.hasAddedRow = true;
+      this.paymentStages.push({ 
+        projectId: this.lstData?.projectId,
+        projectEstimation: this.lstData?.projectEstimation,
+        totalAmount: '',
+        totalPending: '',
+        paymentStage: '',
+        percantage: '',
+        receivedAmount: '',
+        pendingAmount: '',
+        amountToBeRecieved: '',
+        updatedBy: JSON.parse(this.userData)?.username,
+        updatedTime: '',
+        isNew: true 
+      });
+    }
+  }
+
+  convertToIST(utcDateString: string): Date {
+    const utcDate = new Date(utcDateString);
+    const istOffset = 5.5 * 60 * 60 * 1000; // IST offset in milliseconds (5 hours 30 minutes)
+    return new Date(utcDate.getTime() + istOffset);
+  }
+
+  calculateAmountToBeReceived(payment: any): void {
+    if (this.estamount && payment.percantage) {
+      payment.amountToBeRecieved = (this.estamount * parseFloat(payment.percantage) / 100).toFixed(0);
+    } else {
+      payment.amountToBeRecieved = '0';
+    }
+  }
+
+  onPercentageChange(payment: any): void {
+    // Calculate the total percentage excluding the current row
+    const totalPercentageExcludingCurrent = this.paymentStages.reduce((sum:any, p:any) => {
+      return sum + (p === payment || !p.percantage ? 0 : parseFloat(p.percantage));
+    }, 0);
+  
+    // Check if the new total exceeds 100
+    const newTotalPercentage = totalPercentageExcludingCurrent + (payment.percantage ? parseFloat(payment.percantage) : 0);
+  
+    if (newTotalPercentage > 100) {
+      // Show error message and reset the value
+      this.toastr.error('Total percentage cannot exceed 100. Please enter a valid value.', 'Validation Error');
+      payment.percantage = ''; payment.amountToBeRecieved = '';
+    }
+  }
+
+  calculatePendingAmount(payment: any): void {
+    if (payment.amountToBeRecieved && payment.receivedAmount) {
+      payment.pendingAmount = (
+        parseFloat(payment.amountToBeRecieved) - parseFloat(payment.receivedAmount)).toFixed(0);
+    } else {
+      payment.pendingAmount = payment.amountToBeRecieved || '0';
+    }
+  }
+
+  isPercentageLimitReached(): boolean {
+    const totalPercentage = this.paymentStages?.reduce((sum: number, payment: any) => {
+      return sum + (parseFloat(payment.percantage) || 0);
+    }, 0);
+    return totalPercentage >= 100;
+  }
+
+  validateField(index: number, field: string): void {
+    const payment = this.paymentStages[index];
+    if( payment.paymentStage == ''){ payment.percantage = '', payment.amountToBeRecieved = ''; payment.receivedAmount = ''; payment.pendingAmount = '' };
+    if( payment.percantage == ''){payment.amountToBeRecieved = ''; payment.receivedAmount = ''; payment.pendingAmount = '' };
+
+    switch (field) {
+      case 'paymentStage':
+        if (!payment.paymentStage || payment.paymentStage.trim() === '') {
+          this.toastr.warning('Please enter the Stage of Payment.', 'Validation Error');
+          payment.percantage = ''; payment.amountToBeRecieved = ''; payment.receivedAmount = ''; payment.pendingAmount = '';
+        }
+        break;
+
+      case 'percantage':
+        if (!payment.paymentStage || payment.paymentStage.trim() === '') {
+          this.toastr.warning('Please fill the Stage of Payment before entering the Percentage.', 'Validation Error');
+          payment.percantage = ''; 
+        }
+        break;
+
+      case 'amountToBeRecieved':
+        if (!payment.percantage) {
+          this.toastr.warning('Please fill the Percentage before entering the Amount to be Received.', 'Validation Error');
+          payment.amountToBeRecieved = '';
+        }
+        break;
+
+      case 'receivedAmount':
+        if (!payment.amountToBeRecieved) {
+          this.toastr.warning('Please fill the Amount to be Received before entering the Received Amount.', 'Validation Error');
+          payment.receivedAmount = '';
+        }
+        break;
+
+      case 'pendingAmount':
+        if (!payment.receivedAmount) {
+          this.toastr.warning('Please fill the Received Amount before entering the Pending Amount.', 'Validation Error');
+          payment.pendingAmount = '';
+        }
+        break;
+      default:
+        break;
+    }
   }
 
   savePaymentDetails(){
-    // let payload = [
-    //   {
-    //     "projectId": "string",
-    //     "paymentStage": "string",
-    //     "percantage": "string",
-    //     "receivedAmount": "string",
-    //     "pendingAmount": "string",
-    //     "updatedTime": "string",
-    //     "updatedBy": "string",
-    //     "projectEstimation": "string",
-    //     "totalAmount": "string",
-    //     "totalPending": "string"
-    //   }]
-      let pload = this.paymentStages.map((e:any) => ({
+    const incompleteRow = this.paymentStages.find((e:any) => !e.paymentStage || !e.percantage || !e.receivedAmount);
+    if (!this.hasAddedRow) {
+      this.toastr.error('Please add a new row before submitting the form.', 'Error');
+      return;
+    }
+    else if (incompleteRow) {
+      this.toastr.warning('Please fill all the fields before adding a new row.', 'Validation Error');
+      return;
+    }else {
+      let payload = this.paymentStages.map((e:any) => ({
         id: e.id || 0,
         projectId: e.projectId || "",
         paymentStage: e.paymentStage || "",
+        amountToBeRecieved: e.amountToBeRecieved || "",
         percantage: e.percantage || "",
         receivedAmount: e.receivedAmount || "",
         pendingAmount: e.pendingAmount || "",
@@ -424,16 +573,17 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
         totalAmount: e.totalAmount || "",
         totalPending: e.totalPending || ""
       }));
-      
-    this.switchService.saveProjEstimation(pload).subscribe({
-      next: (response) => {
-        this.toastr.success(response.message);
-        this.modalService.dismissAll();
-      },
-      error: (error) => {
-        this.toastr.error('Error save payment details', error);
-      },
-    });
+        
+      this.switchService.saveProjEstimation(payload).subscribe({
+        next: (response) => {
+          this.toastr.success(response.message);
+          this.modalService.dismissAll();
+        },
+        error: (error) => {
+          this.toastr.error('Error save payment details', error);
+        },
+      });
+    }
   }
 
   chartOptions: any = {
