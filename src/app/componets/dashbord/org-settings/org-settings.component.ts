@@ -81,19 +81,19 @@ export class OrgSettingsComponent {
     
     getUsers(){
       // this.switchService.getAllUsers().subscribe({ next: (res:any) => {
-        this.switchService.cmpnyUsers(JSON.parse(this.userData).companyName).subscribe({ next: (res:any) => {
-        if(res){
-          this.userLst = res
-          // this.dataSource = new MatTableDataSource<any>(res);
-          this.dataSource.data = res;
-          } else{
-            this.toastr.error(res.message,'signup', {
-              timeOut: 3000,
-              positionClass: 'toast-top-right',
-            });
-          }
-        }
-      })
+      //   this.switchService.cmpnyUsers(JSON.parse(this.userData).companyName).subscribe({ next: (res:any) => {
+      //   if(res){
+      //     this.userLst = res
+      //     // this.dataSource = new MatTableDataSource<any>(res);
+      //     this.dataSource.data = res;
+      //     } else{
+      //       this.toastr.error(res.message,'signup', {
+      //         timeOut: 3000,
+      //         positionClass: 'toast-top-right',
+      //       });
+      //     }
+      //   }
+      // })
     }
 
     onSubmit(){

@@ -26,7 +26,8 @@ export class SwitherService {
   }
 
   signupApi(data: any): Observable<any> { return this.http.post(`${this.apiUrl}auth/save_vcs_users`, data); }
-  cmpnyUsers(data: any): Observable<any> { return this.http.get(`${this.apiUrl}auth/getUserDetails/${data}`); }
+  cmpnyUsers(companyname: any, companyCode :any): Observable<any> 
+  { return this.http.get(`${this.apiUrl}auth/getUserDetails/${companyname}/${companyCode}`); }
   onForgotPassword(data:any): Observable<any> { return this.http.post(`${this.apiUrl}auth/password_reset`, data); }
   onAdonai(data:any): Observable<any> { return this.http.post(`${this.adonaiURL}adonai/sso_login_user/${data}`,''); }
   getAllUsers(): Observable<any> { return this.http.get(`${this.apiUrl}auth/get_all_vcs_users`); }

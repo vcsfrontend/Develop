@@ -380,7 +380,9 @@ export class SettingsComponent extends BaseComponent implements OnInit{
   
   getUsers(){
     // this.switchService.getAllUsers().subscribe({ next: (res:any) => {
-      this.switchService.cmpnyUsers(JSON.parse(this.userData).companyName).subscribe({ next: (res:any) => {
+      let cn = JSON.parse(this.userData).companyName;
+      let cc = JSON.parse(this.userData).companyCode ;
+      this.switchService.cmpnyUsers(cn, cc).subscribe({ next: (res:any) => {
       if(res){
         this.userLst = res
         // this.dataSource = new MatTableDataSource<any>(res);
@@ -526,7 +528,8 @@ export class SettingsComponent extends BaseComponent implements OnInit{
     payload.adonai = adonai,
     payload.companyCode = JSON.parse(this.userData).companyCode,
     payload.phoneNumber = +payload.phoneNumber, delete payload.tools, delete payload.confirmPassword,
-    payload.dob = this.dp.transform(payload.dob, 'dd-MM-yyyy')
+    payload.dob = this.dp.transform(payload.dob, 'dd-MM-yyyy'),
+    payload.companyName = JSON.parse(this.userData).companyName,
     this.pload = payload
     if (this.userForm.invalid) {
       this.toastr.error('Please fill mandatory fields');
