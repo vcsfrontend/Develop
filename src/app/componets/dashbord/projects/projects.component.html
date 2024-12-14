@@ -299,7 +299,7 @@
                     </div>
                     <div class="card-body">
                         <div class="d-flex align-items-center justify-content-between mb-3">
-                            <div>
+                            <!-- <div>
                                 <div class="mb-1">Team :</div>
                                 <div class="avatar-list-stacked">
                                     <span class="avatar avatar-sm avatar-rounded">
@@ -318,12 +318,12 @@
                                         +2
                                     </a>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="text-end">
-                                <div class="mb-1">Priority :</div>
+                                <!-- <div class="mb-1">Priority :</div> -->
                                 <!-- <span class="badge bg-success-transparent">{{project.dateDifference}} days to go</span> -->
                                 <span class="badge" [ngClass]="{'bg-danger-transparent text-danger': project.priorityDays < 0,
-                                    'bg-success-transparent': project.priorityDays >= 0}">{{project.priorityDays}} days to go</span>
+                                    'bg-success-transparent': project.priorityDays >= 0}">Priority : {{project.priorityDays}} days to go</span>
                             </div>
                         </div>
                         <div class="mb-1">Project Status : {{project.projectState}}</div>
