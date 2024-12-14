@@ -94,6 +94,7 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
   estamount : any; hasAddedRow: boolean = false;
   displayedCards:any;
   showMore = false;
+  
 
 
   updateDisplayedCards(): void {
@@ -125,7 +126,7 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
   dataSource = new MatTableDataSource<any>(); 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   modal: any; ttlAmtToBeRcvd: any;
-  projectLst: any; userDetails:any; dateDiff: string = '';
+  projectLst: any; userDetails:any; dateDiff: string = ''; roleid:any;  actstatus: any;
   
   @HostListener('document:keydown.enter', ['$event'])
   handleEnterKey(event: KeyboardEvent): void {
@@ -217,6 +218,9 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
         } else {
           if(key == 'i'){
             this.dateDiff = res.datediff;
+            this.roleid = res.roleId;
+            this.actstatus = res.activityStatus;
+
           }else{
             window.open(res.newDesign, '_blank');
             this.toastr.success(res.message);

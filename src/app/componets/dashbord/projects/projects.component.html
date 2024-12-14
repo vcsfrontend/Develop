@@ -13,10 +13,18 @@
 </div>
 <div class="col-xl-12 col-xxl-12 col-md-12 col-lg-12 col-sm-12">
     <div class="card custom-card ">
-        <div class="card-header justify-content-between">
+        <div class="card-header justify-content-between " *ngIf="roleid!='12'">
             <marquee behavior="scroll" direction="left" class="fs-18 font-weight-bold" style="color: #006699;">
+                <!-- <p *ngIf="dateDiff=='12'" ><strong> Welcome to adonai, Explore Endless Designs </strong></p> -->
                 <p *ngIf="dateDiff=='0'" ><strong> Upgrade Your Plan</strong></p>
                 <p *ngIf="dateDiff!='0'" ><strong> Enjoy Your {{dateDiff}} Days Free Trail </strong></p>
+            </marquee>
+        </div>
+        <div class="card-header justify-content-between " *ngIf="roleid=='12'">
+            <marquee behavior="scroll" direction="left" class="fs-18 font-weight-bold" style="color: #006699;">
+                <p ><strong> Welcome to adonai, Explore Endless Designs </strong></p>
+                <!-- <p *ngIf="dateDiff=='0'" ><strong> Upgrade Your Plan</strong></p>
+                <p *ngIf="dateDiff!='0'" ><strong> Enjoy Your {{dateDiff}} Days Free Trail </strong></p> -->
             </marquee>
         </div>
         <div class="row">
@@ -28,7 +36,7 @@
             <div class="col-xxl-4 col-lg-4 col-md-4 col-xl-4 col-6  text-center mx-auto">
                 <button class="btn button   btn-wave btn-w-lg  font-weight-bold" 
                     style="background-color: #006699; color: white;"  aria-expanded="false" (click)="onClkDesign()"
-                    type="button" [attr.disabled]="dateDiff == '0'">Click to Explore Endless Designs </button>
+                    type="button" [disabled]="(roleid == 7 && dateDiff == '0' ) || (roleid == 12 && actstatus == false) ">Click to Explore Endless Designs </button>
 
             </div>
         </div>
@@ -375,7 +383,8 @@
                 <div class="d-flex flex-wrap gap-3">
                     <div ngbDropdown class="dropdown">
                         <button href="javascript:void(0);" class="btn btn-primary btn-sm btn-wave waves-effect waves-light"
-                            aria-expanded="false" (click)="onClkDesign('n')" [attr.disabled]="dateDiff == '0'">
+                            aria-expanded="false" (click)="onClkDesign()"
+                            type="button" [disabled]="(roleid == 7 && dateDiff == '0' ) || (roleid == 12 && actstatus == false) ">
                             New Design
                         </button>
                     </div>
