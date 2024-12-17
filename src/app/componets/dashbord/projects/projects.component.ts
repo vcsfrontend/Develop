@@ -105,24 +105,7 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
     this.showMore = !this.showMore;
     this.updateDisplayedCards();
   }
-//   {
-//     "id": 1,
-//     "projectId": "VCS001",
-//     "projectName": "sk interiors",
-//     "clientName": "sk inter",
-//     "businessCategory": "mobile",
-//     "projectAddress": "d no 19 ghantasala",
-//     "state": "ap",
-//     "city": "vijayawada",
-//     "projectState": "design",
-//     "projectEstimation": "12356",
-//     "projectArea": "1256",
-//     "projectStartDate": "2024-11-03T18:30:00.000Z",
-//     "projectEndDate": "2024-11-11T18:30:00.000Z",
-//     "action": "hello",
-//     "designId": null,
-//     "companyName": "sk interiors"
-// }
+
   dataSource = new MatTableDataSource<any>(); 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   modal: any; ttlAmtToBeRcvd: any;
@@ -132,9 +115,7 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
   handleEnterKey(event: KeyboardEvent): void {
     this.getMatCardLst();
   }
-  // open(content1:any) {
-	// 	this.modalService.open(content1,{ centered: true });
-	// }
+  
   openLg(content10:any) {
 		this.modalService.open(content10, { size: 'lg' },);
 	}
@@ -295,10 +276,10 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
   getLst(){
     // console.log(JSON.parse(this.userDetails)?.companyName);
     let payload = {
-      "email": JSON.parse(this.userDetails)?.email,
-      "type": JSON.parse(this.userDetails)?.type,
-      "companyname": JSON.parse(this.userDetails)?.companyName,
-      companycode: JSON.parse(this.userDetails)?.companycode,
+      email: JSON.parse(this.userDetails)?.email,
+      type: JSON.parse(this.userDetails)?.type,
+      companyname: JSON.parse(this.userDetails)?.companyName,
+      companycode: JSON.parse(this.userDetails)?.companyCode,
       projectId: '',
       projectname: '',
       filter: 'All',
@@ -330,7 +311,7 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
         email: JSON.parse(this.userDetails)?.email,
         type: JSON.parse(this.userDetails)?.type,
         companyname: JSON.parse(this.userDetails)?.companyName,
-        companycode: JSON.parse(this.userDetails)?.companycode,
+        companycode: JSON.parse(this.userDetails)?.companyCode,
         projectId: this.addFilter == '2'? this.projId : '',
         projectname: this.addFilter == '3'? this.projName : '',
         filter: this.addFilter == '1'? 'All' : (this.addFilter == '2'? 'projectid' : 'projectname'),
