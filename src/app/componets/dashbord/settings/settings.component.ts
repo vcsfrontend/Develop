@@ -744,6 +744,9 @@ export class SettingsComponent extends BaseComponent implements OnInit{
   openRight(content: any) {
     this.offcanvasService.open(content, { position: 'end' });
   } 
+  openRights(content: any) {
+    this.offcanvasService.open(content, { position: 'end' });
+  } 
      
   selectedOption: string = '';
   
