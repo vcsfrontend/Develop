@@ -475,7 +475,7 @@
 </ng-template>
 
 <!-- Start::row-4 -->
-<div class="row">
+<div class="row"><!-- *ngIf="dynamicFields.length == 0" -->
     <div class="col-xl-12">
         <div class="card custom-card">
             <div class="card-header justify-content-between">
@@ -554,7 +554,7 @@
 </div> -->
 
 <!-- Start::row-4 -->
-<div class="row">
+<div class="row" *ngIf="showStages">
     <div class="col-xl-8">
         <div class="card custom-card">
             <div class="card-header justify-content-between">
@@ -570,14 +570,15 @@
                 <div *ngFor="let field of dynamicFields; let i = index" class="row mb-3 align-items-center">
                     <div class="col-sm-8">
                       <input type="text" class="form-control"  [ngModel]="field.value" [ngModelOptions]="{standalone: true}"
-                        [readonly]="true" placeholder="No Value">
+                        [readonly]="true">
                     </div>
                     <div class="col-sm-2">
                       <input type="text"  class="form-control" [(ngModel)]="field.percent" [ngModelOptions]="{standalone: true}"
                         placeholder="Percent">
                     </div>
                 </div>
-                <button type="button" class="btn btn-primary" (click)="saveLastStages()">Save</button>
+                <button type="button" class="btn btn-primary" (click)="saveLastStages()">Save</button>&nbsp;
+                <button type="button" class="btn btn-danger" (click)="onDeleteStages()">Delete</button>
             </div>
         </div>
     </div>
