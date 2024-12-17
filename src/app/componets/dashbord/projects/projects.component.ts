@@ -337,7 +337,8 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
     let payload = {
       "email": JSON.parse(this.userDetails)?.email,
       "type": JSON.parse(this.userDetails)?.type,
-      "companyname": JSON.parse(this.userDetails)?.companyName
+      "companyname": JSON.parse(this.userDetails)?.companyName,
+      "companycode": JSON.parse(this.userDetails)?.companyCode
     }
     this.switchService.designersDbData(payload).subscribe({ next: (res:any) =>{
     if(res){    
