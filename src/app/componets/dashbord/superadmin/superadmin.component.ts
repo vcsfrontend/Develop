@@ -693,9 +693,9 @@ chartOptions6:any= {
         // this.isAdonai = res.email; 
         this.adonaiActivitySts = res.subData.activityStatus,
         // this.isSts = res.subData.activityStatus,
-        this.adonaiSubStartDate = this.convertDate(res.subData.subStartDate), 
-        this.adonaiSubEndDate = this.convertDate(res.subData.subEndDate)
-        this.adonaiSubDate = this.dp.transform(res.subData.subscriptionDate, 'yyyy-MM-dd'), 
+        this.adonaiSubStartDate = res.subData.subStartDate ? this.convertDate(res.subData.subStartDate) : '', 
+        this.adonaiSubEndDate = res.subData.subEndDate ? this.convertDate(res.subData.subEndDate) : ''
+        this.adonaiSubDate = res.subData.subscriptionDate ? this.dp.transform(res.subData.subscriptionDate, 'yyyy-MM-dd'): '', 
         this.adonaiRemarks = res.subData.remarks;
         this.adonaiAppUid = res.appuid;
         this.adonaiUsername = res.username;
@@ -709,7 +709,7 @@ chartOptions6:any= {
   }
 
   convertDate(date:any) {
-    const [month, day, year] = date.split('-');
+    const [day, month, year] = date.split('-');
     const formattedDate = `${year}-${month}-${day}`;
     return formattedDate; // Output: 2024-12-15
   }
@@ -721,14 +721,14 @@ chartOptions6:any= {
       if(res){
         this.crmData = res,
         this.crmEmail = data.email; 
-        this.crmRoleId = res.crmDataResponse.roleId; 
-        this.crmStatus = res.crmDataResponse.crmActivityStatus; 
-        this.crmSubStartDate = res.crmDataResponse.subStartDate; 
-        this.crmSubEndDate = res.crmDataResponse.subEndDate; 
-        this.crmSubDate = res.crmDataResponse.subDate; 
-        this.crmRemarks = res.crmDataResponse.remarks; 
-        this.crmUsername = res.username; 
-        this.crmCity = res.city; 
+        this.crmRoleId = res?.crmDataResponse?.roleId; 
+        this.crmStatus = res?.crmDataResponse?.crmActivityStatus; 
+        this.crmSubStartDate = res?.crmDataResponse?.subStartDate; 
+        this.crmSubEndDate = res?.crmDataResponse?.subEndDate; 
+        this.crmSubDate = res?.crmDataResponse?.subDate; 
+        this.crmRemarks = res?.crmDataResponse?.remarks; 
+        this.crmUsername = res?.username; 
+        this.crmCity = res?.city; 
     // "crmDataResponse": {
     //     "roleId": 0,
     //     "crmActivityStatus": true,
