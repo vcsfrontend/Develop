@@ -95,8 +95,6 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
   displayedCards:any;
   showMore = false;
   
-
-
   updateDisplayedCards(): void {
     this.displayedCards = this.showMore ? this.matcardLst : this.matcardLst?.slice(0, 4);
   }
@@ -110,6 +108,7 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   modal: any; ttlAmtToBeRcvd: any;
   projectLst: any; userDetails:any; dateDiff: string = ''; roleid:any;  actstatus: any;
+  stageLst: any;
   
   @HostListener('document:keydown.enter', ['$event'])
   handleEnterKey(event: KeyboardEvent): void {
@@ -170,7 +169,9 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
       type: [JSON.parse(this.userDetails)?.type],
       username: [JSON.parse(this.userDetails)?.username], 
       companyCode: [JSON.parse(this.userDetails)?.companyCode],
+      projStatus: ['']
     });
+    this.getAllStages();
   }
 
   get f() {
@@ -187,6 +188,43 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
     if (endDate && endDate < startDate) {
       this.createProjectForm.get('projectEndDate')?.setValue('');
     }
+  }
+
+  dynamicFields: { value: string; percent: number; fieldNm: string; }[] = [];
+  initializeDynamicFields() {
+    // Loop through f1 to f30 and add only those with non-empty values to dynamicFields
+    for (let i = 1; i <= 30; i++) {
+      const fieldName = `f${i}`;
+      const percentName = `f${i}Percent`;
+      if (this.stageLst[fieldName]) {
+        this.dynamicFields.push({
+          value: this.stageLst[fieldName],
+          percent: this.stageLst[percentName],
+          fieldNm: fieldName
+        });
+      }
+    }
+  }
+
+  getAllStages(){
+    let payload = {
+      "email": JSON.parse(this.userData).email,
+      "companyname": JSON.parse(this.userData).companyName,
+      "companycode": JSON.parse(this.userData).companyCode,
+      "type": JSON.parse(this.userData).type
+    }
+    this.switchService.getStages(payload).subscribe({ next: (res:any) => {
+    if(res){
+      this.stageLst = res;
+      this.initializeDynamicFields();
+      } else{
+        this.toastr.error(res.message)
+      }
+    },
+    error: (error) => {
+      this.toastr.error(error.statusText);
+    },
+    })
   }
 
   onClkDesign(key:string = ''){
@@ -227,7 +265,7 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
       projectData.type = JSON.parse(this.userDetails)?.type,
       projectData.username = JSON.parse(this.userDetails)?.username, 
       projectData.companyCode = JSON.parse(this.userDetails)?.companyCode,
-
+      projectData.projStatus = this.dynamicFields[0].value
       // projectData.projectStartDate = this.dp.transform(projectData.projectStartDate, 'dd-MM-yyyy'),
       // projectData.projectEndDate = this.dp.transform(projectData.projectEndDate, 'dd-MM-yyyy'),
       this.switchService.saveProject(projectData).subscribe({
