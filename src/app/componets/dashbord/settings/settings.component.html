@@ -301,7 +301,6 @@
         </div>
     </div>
 </ng-template>
-
 <div class="row">
     <div class="col-xl-6">
         <div class="card custom-card">
@@ -553,16 +552,9 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
-                                <th scope="row" class="ps-4"><input class="form-check-input" type="checkbox"
-                                        id="checkboxNoLabel13" value="" aria-label="..." checked=""></th>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <span class="avatar avatar-sm me-2 avatar-rounded">
-                                            <img src="./assets/images/faces/15.jpg" alt="img">
-                                        </span>Andrew Garfield
-                                    </div>
-                                </td>
+                            <tr *ngFor="let field of dynamicFields; let i = index">
+                                <td>{{i+1}}</td>
+                                <td>{{field.value}}</td>
                                 <td>Development</td>
                                 <td>andrewgarfield&#64;gmail.com</td>
                                 <td>
@@ -583,7 +575,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
+                            <!-- <tr>
                                 <th scope="row" class="ps-4"><input class="form-check-input" type="checkbox"
                                         id="checkboxNoLabel4" value="" aria-label="..."></th>
                                 <td>
@@ -672,7 +664,7 @@
                                                 class="ri-delete-bin-line"></i></a>
                                     </div>
                                 </td>
-                            </tr>
+                            </tr> -->
                         </tbody>
                     </table>
                 </div>
