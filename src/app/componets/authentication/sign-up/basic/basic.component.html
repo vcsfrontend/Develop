@@ -241,9 +241,10 @@
                                         <div *ngIf="f['country'].errors['required']">Country is required</div>
                                     </div>
                                 </div> -->
-                                <!-- <div class="col-xl-6">
-                                    <label for=" " class="form-label text-default"><strong>Where did you find us?</strong><span class="text-danger">*</span></label>
-                                    <select class="form-select form-control form-control-lg " >
+                                <div class="col-xl-6">
+                                    <label class="form-label text-default"><strong>Where did you find us?</strong><span class="text-danger">*</span></label>
+                                    <select class="form-select form-control form-control-lg" formControlName="reference"
+                                        [ngClass]="{ 'is-invalid': submitted && f['reference'].errors }" (change)="onReferenceChange($event)">
                                         <option value="" disabled selected>Select</option>
                                         <option value="Instagram">Instagram</option>
                                         <option value="Facebook">Facebook</option>
@@ -255,8 +256,15 @@
                                         <option value="website">website</option>
                                         <option value="Other">Other</option>
                                     </select>
-                                    <input type="text" class="form-control mt-3">
-                                </div> -->
+                                    <div *ngIf="submitted && f['reference'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['reference'].errors['required']">Reference is required</div>
+                                    </div>
+                                    <input type="text" class="form-control mt-3" [(ngModel)]="ref" 
+                                        [ngModelOptions]="{standalone: true}" *ngIf="isOtherOrReferral">
+                                    <div *ngIf="submitted && isOtherOrReferral" class="text-danger">
+                                        <div *ngIf="!ref">This field is required</div>
+                                    </div>
+                                </div>
                                 <div class="col-xl-12">
                                     <input type="checkbox" class="check-box" [(ngModel)]="agree" [ngModelOptions]="{standalone:true}">&nbsp;
                                     <label class="form-label text-default"><b>By continuing, I agree to VCS's</b></label>&nbsp;

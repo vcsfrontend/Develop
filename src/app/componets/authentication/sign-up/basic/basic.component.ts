@@ -56,7 +56,8 @@ export class BasicComponent extends BaseComponent implements OnInit {
   confirmPasswordStrengthMessage: string = '';
   confirmPasswordStrengthColor: string = '';
   isPasswordValid: boolean = false; isPasswrd:boolean = false; isPassValid:boolean = false; 
-  isCnfmPwd:boolean = false; agree: boolean = false; isResend:boolean = false;
+  isCnfmPwd:boolean = false; agree: boolean = false; isResend:boolean = false; ref: string = '';
+  isOtherOrReferral: boolean = false;
 
   icons = [
     { value: 'Individual', icon: 'home', name: 'Home' },
@@ -81,7 +82,8 @@ export class BasicComponent extends BaseComponent implements OnInit {
     confirmPassword: ['', Validators.required],
     userFlag: ['signup'],
     city: ['', Validators.required],
-    updatedBy: ['']
+    updatedBy: [''],
+    reference: ['']
     //"toolId": 0,
     //"roleId": 0,
   })
@@ -241,6 +243,10 @@ export class BasicComponent extends BaseComponent implements OnInit {
     //   timeOut: 3000, positionClass: 'toast-top-right' });
   }
 
+  onReferenceChange(event:any){
+    this.isOtherOrReferral = event.target.value === 'Other' || event.target.value === 'Referral';
+  }
+
   onSignup(){
     this.submitted = true; this.isPasswrd = true; this.isPassValid = false;
     const crm = this.signupFrm.get('tools')?.value.includes('CRM');
@@ -252,8 +258,11 @@ export class BasicComponent extends BaseComponent implements OnInit {
     payload.crm = crm,
     payload.adonai = adonai,
     payload.phoneNumber = +payload.phoneNumber, delete payload.tools, delete payload.confirmPassword,
-    payload.dob = this.dp.transform(payload.dob, 'dd-MM-yyyy')
+    payload.dob = this.dp.transform(payload.dob, 'dd-MM-yyyy'),
+    payload.reference = (payload.reference == 'Referral' ? this.ref: (payload.reference == 'Other' ? this.ref : payload.reference))
     this.pload = payload
+    console.log(payload);
+    console.log( 's-',this.submitted, this.isOtherOrReferral, !this.ref);
     if (this.signupFrm.invalid) {
       this.toastr.error('Please fill mandatory fields');
       this.btnDisable = false;
@@ -268,6 +277,9 @@ export class BasicComponent extends BaseComponent implements OnInit {
     }
     else if (this.agree == false) {
       this.toastr.error('Please agree to the terms and conditions!', 'Error');
+    }
+    else if (this.isOtherOrReferral && !this.ref){
+      this.toastr.error('Please fill mandatory fields');
     }
     else{
       this.btnDisable = true;
@@ -340,6 +352,7 @@ export class BasicComponent extends BaseComponent implements OnInit {
         },
         error: (error) => {
           this.toastr.error(error.statusText);
+          this.btnDisable = false;
         },
       })
     }
