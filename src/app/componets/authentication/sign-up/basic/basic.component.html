@@ -220,7 +220,7 @@
                                         id="city" formControlName="city" [(ngModel)]="city"
                                         [ngClass]="{ 'is-invalid': submitted && f['city'].errors }">
                                         <option value="" disabled selected>Select</option>
-                                        <option *ngFor="let c of cityList" [value]="c.city">{{c.city}}
+                                        <option *ngFor="let c of cityList" [value]="c.city">{{c.city}} </option>
                                         <!-- <option value="Bangalore">Bangalore</option>
                                         <option value="Chennai">Chennai</option>
                                         <option value="Delhi">Delhi</option>
@@ -257,10 +257,12 @@
                                         <option value="Other">Other</option>
                                     </select>
                                     <div *ngIf="submitted && f['reference'].errors" class="invalid-feedback">
-                                        <div *ngIf="f['reference'].errors['required']">Reference is required</div>
+                                        <div *ngIf="f['reference'].errors['required']">This field is required</div>
                                     </div>
                                     <input type="text" class="form-control mt-3" [(ngModel)]="ref" 
-                                        [ngModelOptions]="{standalone: true}" *ngIf="isOtherOrReferral">
+                                        [ngModelOptions]="{standalone: true}" *ngIf="isOtherOrReferral"
+                                        onkeypress='return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && 
+                                        event.charCode <= 122) || event.charCode == 8 ||event.charCode == 32)'>
                                     <div *ngIf="submitted && isOtherOrReferral" class="text-danger">
                                         <div *ngIf="!ref">This field is required</div>
                                     </div>

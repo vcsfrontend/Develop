@@ -83,7 +83,7 @@ export class BasicComponent extends BaseComponent implements OnInit {
     userFlag: ['signup'],
     city: ['', Validators.required],
     updatedBy: [''],
-    reference: ['']
+    reference: ['', Validators.required]
     //"toolId": 0,
     //"roleId": 0,
   })
