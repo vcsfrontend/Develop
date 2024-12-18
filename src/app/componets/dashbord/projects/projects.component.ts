@@ -335,7 +335,9 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
     })
   }
   onFilterChange(id:any){
-    if(id=='2'){ this.projName = '' } else if (id=='3'){ this.projId = ''}else {this.projName = '', this.projId = ''}
+    // if(id=='2'){ this.projName = ''} else if (id=='3'){ this.projId = ''} else {this.projName = '', this.projId = '', this.getMatCardLst()}
+    id === '2' ? this.projName = '' : id === '3' ? this.projId = '' :
+    (this.projName = '', this.projId = '', this.getMatCardLst());
   }
 
   getMatCardLst(){
@@ -360,7 +362,7 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
           this.matcardLst = res
           // this.addDateDifference();
           this.matcardLst.sort((a:any, b:any) => a.priorityDays - b.priorityDays);
-          this.updateDisplayedCards();
+          this.toggleShowMore();
           // console.log(this.matcardLst);
           } else {
             this.toastr.error(res.message);

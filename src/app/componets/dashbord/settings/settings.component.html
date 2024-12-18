@@ -347,8 +347,9 @@
                         [readonly]="true">
                     </div>
                     <div class="col-sm-2">
-                    <input type="text"  class="form-control" [(ngModel)]="field.percent" [ngModelOptions]="{standalone: true}"
-                        placeholder="Percent">
+                        <input type="text"  class="form-control" [(ngModel)]="field.percent" [ngModelOptions]="{standalone: true}"
+                          onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || event.charCode == 8)"
+                          maxlength="3" placeholder="Percent">
                     </div>
                 </div>
                 <button type="button" class="btn btn-primary btn-sm btn-wave waves-effect waves-light" (click)="saveLastStages()">Save</button>&nbsp;
