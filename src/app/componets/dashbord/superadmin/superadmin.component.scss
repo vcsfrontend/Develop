@@ -35,7 +35,7 @@ tr {
   }
 
 .visitors-country {
-  max-height: 200px; /* This will control how many items are shown before scrolling */
+  max-height: 220px; /* This will control how many items are shown before scrolling */
   overflow-y: auto;  /* Enables vertical scrolling when the content exceeds max-height */
   padding-right: 10px; /* Prevents content from being hidden by the scrollbar */
   margin-right: 5px; /* Optional: Adds a little space on the right for the scrollbar */

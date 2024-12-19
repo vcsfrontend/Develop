@@ -4,10 +4,15 @@
     border: 0px solid var(--default-border);
 }
 
-@media (max-width: 991.98px) {
-    .app-header .horizontal-logo .header-logo img {
-        height: 5.5rem;
-        line-height: 1.5rem;
-        margin-top: -30px;
-    }
+// @media (max-width: 991.98px) {
+//     .app-header .horizontal-logo .header-logo img {
+//         height: 5.5rem;
+//         line-height: 1.5rem;
+//         margin-top: -30px;
+//     }
+// }
+
+.main-header-container .main-header-dropdown .dropdown-item:last-child {
+    border-block-end: 0;
+    cursor: pointer;
 }

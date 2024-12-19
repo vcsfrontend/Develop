@@ -95,8 +95,6 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
   displayedCards:any;
   showMore = false;
   
-
-
   updateDisplayedCards(): void {
     this.displayedCards = this.showMore ? this.matcardLst : this.matcardLst?.slice(0, 4);
   }
@@ -105,36 +103,18 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
     this.showMore = !this.showMore;
     this.updateDisplayedCards();
   }
-//   {
-//     "id": 1,
-//     "projectId": "VCS001",
-//     "projectName": "sk interiors",
-//     "clientName": "sk inter",
-//     "businessCategory": "mobile",
-//     "projectAddress": "d no 19 ghantasala",
-//     "state": "ap",
-//     "city": "vijayawada",
-//     "projectState": "design",
-//     "projectEstimation": "12356",
-//     "projectArea": "1256",
-//     "projectStartDate": "2024-11-03T18:30:00.000Z",
-//     "projectEndDate": "2024-11-11T18:30:00.000Z",
-//     "action": "hello",
-//     "designId": null,
-//     "companyName": "sk interiors"
-// }
+
   dataSource = new MatTableDataSource<any>(); 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   modal: any; ttlAmtToBeRcvd: any;
   projectLst: any; userDetails:any; dateDiff: string = ''; roleid:any;  actstatus: any;
+  stageLst: any;
   
   @HostListener('document:keydown.enter', ['$event'])
   handleEnterKey(event: KeyboardEvent): void {
     this.getMatCardLst();
   }
-  // open(content1:any) {
-	// 	this.modalService.open(content1,{ centered: true });
-	// }
+  
   openLg(content10:any) {
 		this.modalService.open(content10, { size: 'lg' },);
 	}
@@ -189,7 +169,10 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
       type: [JSON.parse(this.userDetails)?.type],
       username: [JSON.parse(this.userDetails)?.username], 
       companyCode: [JSON.parse(this.userDetails)?.companyCode],
+      projStatus: [''],
+      percentage: ['']
     });
+    this.getAllStages();
   }
 
   get f() {
@@ -206,6 +189,43 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
     if (endDate && endDate < startDate) {
       this.createProjectForm.get('projectEndDate')?.setValue('');
     }
+  }
+
+  dynamicFields: { value: string; percent: number; fieldNm: string; }[] = [];
+  initializeDynamicFields() {
+    // Loop through f1 to f30 and add only those with non-empty values to dynamicFields
+    for (let i = 1; i <= 30; i++) {
+      const fieldName = `f${i}`;
+      const percentName = `f${i}Percent`;
+      if (this.stageLst[fieldName]) {
+        this.dynamicFields.push({
+          value: this.stageLst[fieldName],
+          percent: this.stageLst[percentName],
+          fieldNm: fieldName
+        });
+      }      
+    }
+  }
+
+  getAllStages(){
+    let payload = {
+      "email": JSON.parse(this.userData).email,
+      "companyname": JSON.parse(this.userData).companyName,
+      "companycode": JSON.parse(this.userData).companyCode,
+      "type": JSON.parse(this.userData).type
+    }
+    this.switchService.getStages(payload).subscribe({ next: (res:any) => {
+    if(res){
+      this.stageLst = res;
+      this.initializeDynamicFields();
+      } else{
+        this.toastr.error(res.message)
+      }
+    },
+    error: (error) => {
+      this.toastr.error(error.statusText);
+    },
+    })
   }
 
   onClkDesign(key:string = ''){
@@ -246,7 +266,8 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
       projectData.type = JSON.parse(this.userDetails)?.type,
       projectData.username = JSON.parse(this.userDetails)?.username, 
       projectData.companyCode = JSON.parse(this.userDetails)?.companyCode,
-
+      projectData.projStatus = this.dynamicFields[0].value,
+      projectData.percentage = this.dynamicFields[0].percent,
       // projectData.projectStartDate = this.dp.transform(projectData.projectStartDate, 'dd-MM-yyyy'),
       // projectData.projectEndDate = this.dp.transform(projectData.projectEndDate, 'dd-MM-yyyy'),
       this.switchService.saveProject(projectData).subscribe({
@@ -295,18 +316,18 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
   getLst(){
     // console.log(JSON.parse(this.userDetails)?.companyName);
     let payload = {
-      "email": JSON.parse(this.userDetails)?.email,
-      "type": JSON.parse(this.userDetails)?.type,
-      "companyname": JSON.parse(this.userDetails)?.companyName,
-      companycode: JSON.parse(this.userDetails)?.companycode,
+      email: JSON.parse(this.userDetails)?.email,
+      type: JSON.parse(this.userDetails)?.type,
+      companyname: JSON.parse(this.userDetails)?.companyName,
+      companycode: JSON.parse(this.userDetails)?.companyCode,
       projectId: '',
       projectname: '',
       filter: 'All',
     }
     this.switchService.projectLst(payload).subscribe({ next: (res:any) => {
       if(res){
-        this.projectLst = res
-        this.dataSource.data = res;
+        this.projectLst = res.projList;
+        this.dataSource.data = res.projList;
         // this.projectLst = this.projectLst.filter((e:any) => e.dateDifference >= 0);
         // this.projectLst.sort((a:any, b:any) => a.dateDifference - b.dateDifference);
         } else {
@@ -316,7 +337,9 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
     })
   }
   onFilterChange(id:any){
-    if(id=='2'){ this.projName = '' } else if (id=='3'){ this.projId = ''}else {this.projName = '', this.projId = ''}
+    // if(id=='2'){ this.projName = ''} else if (id=='3'){ this.projId = ''} else {this.projName = '', this.projId = '', this.getMatCardLst()}
+    id === '2' ? this.projName = '' : id === '3' ? this.projId = '' :
+    (this.projName = '', this.projId = '', this.getMatCardLst());
   }
 
   getMatCardLst(){
@@ -330,25 +353,35 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
         email: JSON.parse(this.userDetails)?.email,
         type: JSON.parse(this.userDetails)?.type,
         companyname: JSON.parse(this.userDetails)?.companyName,
-        companycode: JSON.parse(this.userDetails)?.companycode,
+        companycode: JSON.parse(this.userDetails)?.companyCode,
         projectId: this.addFilter == '2'? this.projId : '',
         projectname: this.addFilter == '3'? this.projName : '',
         filter: this.addFilter == '1'? 'All' : (this.addFilter == '2'? 'projectid' : 'projectname'),
       }
 
       this.switchService.projectLst(payload).subscribe({ next: (res:any) => {
-        if(res){
-          this.matcardLst = res
+      if(res){
+        const projList = res.projList;
+        const projectLastList = res.paymentLastList;
+        projList?.forEach((project:any) => {
+          const matchedProject = projectLastList.find((lastProject:any) => lastProject.projectId === project.projectId);
+          if (matchedProject) {
+            project.paymentPercent = matchedProject.paymentPercent;
+            project.paymentStage = matchedProject.paymentStage  // Add projPercent to the project
+          } else {
+            project.paymentPercent = 0;  // If no match, set projPercent to 0 (or handle accordingly)
+          }
+      });
+        console.log('listpro-', projList);
+          this.matcardLst = projList;
           // this.addDateDifference();
           this.matcardLst.sort((a:any, b:any) => a.priorityDays - b.priorityDays);
-          this.updateDisplayedCards();
-          // console.log(this.matcardLst);
+          this.toggleShowMore();
           } else {
             this.toastr.error(res.message);
           }
         }
       })
-        
     }
   }
 
@@ -356,7 +389,8 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
     let payload = {
       "email": JSON.parse(this.userDetails)?.email,
       "type": JSON.parse(this.userDetails)?.type,
-      "companyname": JSON.parse(this.userDetails)?.companyName
+      "companyname": JSON.parse(this.userDetails)?.companyName,
+      "companycode": JSON.parse(this.userDetails)?.companyCode
     }
     this.switchService.designersDbData(payload).subscribe({ next: (res:any) =>{
     if(res){    

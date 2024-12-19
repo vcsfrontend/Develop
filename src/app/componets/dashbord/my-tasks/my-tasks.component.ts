@@ -11,10 +11,11 @@ import { ActivatedRoute } from '@angular/router';
 import { SwitherService } from '../../../shared/services/swither.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-my-tasks',
   standalone: true,
-  imports: [SharedModule, NgSelectModule, NgbModule,
+  imports: [SharedModule, NgSelectModule, NgbModule, CommonModule,
     NgbNavModule,NgbDropdownModule,FlatpickrModule,FormsModule,ReactiveFormsModule,FilePondModule,RouterModule ,],
   providers: [NgbModalConfig, NgbModal,FlatpickrDefaults],
   templateUrl: './my-tasks.component.html',
@@ -40,7 +41,7 @@ export class MyTasksComponent {
   ];
 
   modal: any; proId:any; proData:any; userData:any; description: string = ''; heading: string = '';
-  proStatus: string = '';
+  proStatus: string = ''; stageLst: any;
   constructor(private modalService: NgbModal, private route:ActivatedRoute, private toastr: ToastrService,
     private switchService: SwitherService, private router:Router) {
     this.route.queryParams.subscribe(params => {
@@ -57,7 +58,44 @@ export class MyTasksComponent {
       dateFormat: 'H:i',
     };
     flatpickr('#addignedDate', this.flatpickrOptions);
-    this.getProjectDetails();
+    this.getProjectDetails(); this.getAllStages();
+  }
+
+  dynamicFields: { value: string; percent: number; fieldNm: string; }[] = [];
+  initializeDynamicFields() {
+    // Loop through f1 to f30 and add only those with non-empty values to dynamicFields
+    for (let i = 1; i <= 30; i++) {
+      const fieldName = `f${i}`;
+      const percentName = `f${i}Percent`;
+      if (this.stageLst[fieldName]) {
+        this.dynamicFields.push({
+          value: this.stageLst[fieldName],
+          percent: this.stageLst[percentName],
+          fieldNm: fieldName
+        });
+      }
+    }
+  }
+
+  getAllStages(){
+    let payload = {
+      "email": JSON.parse(this.userData).email,
+      "companyname": JSON.parse(this.userData).companyName,
+      "companycode": JSON.parse(this.userData).companyCode,
+      "type": JSON.parse(this.userData).type
+    }
+    this.switchService.getStages(payload).subscribe({ next: (res:any) => {
+    if(res){
+      this.stageLst = res;
+      this.initializeDynamicFields();
+      } else{
+        this.toastr.error(res.message)
+      }
+    },
+    error: (error) => {
+      this.toastr.error(error.statusText);
+    },
+    })
   }
 
   getProjectDetails(){
@@ -82,7 +120,7 @@ export class MyTasksComponent {
       "projectId": this.proData.projectId,
       "heading": this.heading,
       // "clientname": "string",
-      "projectStatus": this.proData.projStatus,
+      "projectStatus": this.proStatus,
       "description": this.description,
       "updatedBy": JSON.parse(this.userData).username,
     }

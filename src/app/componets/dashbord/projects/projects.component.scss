@@ -23,9 +23,15 @@
 //   width: 90%;
 // }
 .demo{
-    height: 30vh;
-    width: 40%;
+  height: 30vh;
+  width: 40%;
+  @media (max-width: 768px) {
+    height: 16vh;
+    width: 80%;
   }
+}
+
+
 .btn.btn-w-lg {
   min-width: 9.375rem;
   margin-top: -20px;

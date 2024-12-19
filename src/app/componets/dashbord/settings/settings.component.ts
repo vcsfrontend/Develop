@@ -55,7 +55,8 @@ export class SettingsComponent extends BaseComponent implements OnInit{
   isEmailDisabled = false; isOtpDisabled = false; isCompany : string = 'col-xl-6';
   isShowUsers = false; pload:any[] = [];isOkBtn = false; showCity:boolean = true;
   @ViewChild('modalTemplate') modalTemplate!: TemplateRef<any>;  // Access the ng-template
-  private modalRef: any; noUsers:any=''; users:any = ''; city:any = ''; selectedCountry:any = 'India'; stageLst:any;
+  private modalRef: any; noUsers:any=''; users:any = ''; city:any = ''; selectedCountry:any = 'India'; 
+  stageLst:any; showStages: boolean = false;
   userForm: FormGroup = this.fb.group({
     type : [2],
     firstName: ['', Validators.required],
@@ -298,6 +299,7 @@ export class SettingsComponent extends BaseComponent implements OnInit{
     if(res){
       this.toastr.success('Stages saved successfully');
       this.offcanvasService.dismiss();
+      this.getAllStages();
       } else{
         this.toastr.error(res.message)
       }
@@ -319,6 +321,7 @@ export class SettingsComponent extends BaseComponent implements OnInit{
     if(res){
       this.stageLst = res;
       this.initializeDynamicFields();
+      this.dynamicFields.length !=0 ? this.showStages = true : this.isShowUsers = false;
       } else{
         this.toastr.error(res.message)
       }
@@ -341,9 +344,6 @@ export class SettingsComponent extends BaseComponent implements OnInit{
       this.stageLst[`f${i}`] = '';
       this.stageLst[`f${i}Percent`] = 0;
     }
-
-    console.log('Updated Payload:', this.stageLst);
-
     this.switchService.stageSave(this.stageLst).subscribe({ next: (res:any) => {
       if(res){
         this.toastr.success('Stages saved successfully');
@@ -363,11 +363,14 @@ export class SettingsComponent extends BaseComponent implements OnInit{
       "email": JSON.parse(this.userData).email,
       "companyname": JSON.parse(this.userData).companyName,
       "companycode": JSON.parse(this.userData).companyCode,
-      "type": JSON.parse(this.userData).type    
+      "type": JSON.parse(this.userData).type
     }
     this.switchService.deleteStage(payload).subscribe({ next: (res:any) => {
-    if(res){
+    if(res.status == true){
       this.toastr.success('stage removed successfully')
+      // this.stageLst = [];
+      // this.getAllStages();
+      this.showStages = false;
       } else{
         this.toastr.error(res.message)
       }
@@ -739,6 +742,9 @@ export class SettingsComponent extends BaseComponent implements OnInit{
     this.quantities().removeAt(i);  
   } 
   openRight(content: any) {
+    this.offcanvasService.open(content, { position: 'end' });
+  } 
+  openRights(content: any) {
     this.offcanvasService.open(content, { position: 'end' });
   } 
      
