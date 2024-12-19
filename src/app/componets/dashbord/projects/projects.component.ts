@@ -169,7 +169,8 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
       type: [JSON.parse(this.userDetails)?.type],
       username: [JSON.parse(this.userDetails)?.username], 
       companyCode: [JSON.parse(this.userDetails)?.companyCode],
-      projStatus: ['']
+      projStatus: [''],
+      percentage: ['']
     });
     this.getAllStages();
   }
@@ -202,7 +203,7 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
           percent: this.stageLst[percentName],
           fieldNm: fieldName
         });
-      }
+      }      
     }
   }
 
@@ -265,7 +266,8 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
       projectData.type = JSON.parse(this.userDetails)?.type,
       projectData.username = JSON.parse(this.userDetails)?.username, 
       projectData.companyCode = JSON.parse(this.userDetails)?.companyCode,
-      projectData.projStatus = this.dynamicFields[0].value
+      projectData.projStatus = this.dynamicFields[0].value,
+      projectData.percentage = this.dynamicFields[0].percent,
       // projectData.projectStartDate = this.dp.transform(projectData.projectStartDate, 'dd-MM-yyyy'),
       // projectData.projectEndDate = this.dp.transform(projectData.projectEndDate, 'dd-MM-yyyy'),
       this.switchService.saveProject(projectData).subscribe({
@@ -324,8 +326,8 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
     }
     this.switchService.projectLst(payload).subscribe({ next: (res:any) => {
       if(res){
-        this.projectLst = res
-        this.dataSource.data = res;
+        this.projectLst = res.projList;
+        this.dataSource.data = res.projList;
         // this.projectLst = this.projectLst.filter((e:any) => e.dateDifference >= 0);
         // this.projectLst.sort((a:any, b:any) => a.dateDifference - b.dateDifference);
         } else {
@@ -358,18 +360,28 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
       }
 
       this.switchService.projectLst(payload).subscribe({ next: (res:any) => {
-        if(res){
-          this.matcardLst = res
+      if(res){
+        const projList = res.projList;
+        const projectLastList = res.paymentLastList;
+        projList?.forEach((project:any) => {
+          const matchedProject = projectLastList.find((lastProject:any) => lastProject.projectId === project.projectId);
+          if (matchedProject) {
+            project.paymentPercent = matchedProject.paymentPercent;
+            project.paymentStage = matchedProject.paymentStage  // Add projPercent to the project
+          } else {
+            project.paymentPercent = 0;  // If no match, set projPercent to 0 (or handle accordingly)
+          }
+      });
+        console.log('listpro-', projList);
+          this.matcardLst = projList;
           // this.addDateDifference();
           this.matcardLst.sort((a:any, b:any) => a.priorityDays - b.priorityDays);
           this.toggleShowMore();
-          // console.log(this.matcardLst);
           } else {
             this.toastr.error(res.message);
           }
         }
       })
-        
     }
   }
 

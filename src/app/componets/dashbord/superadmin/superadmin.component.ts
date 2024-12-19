@@ -752,7 +752,7 @@ chartOptions6:any= {
     })
   }
 
-  updateAdonai(){
+  updateAdonai(modal:any){
     // this.submitted = true; 
     let payload = {
       "email": this.adonaiEmail,
@@ -775,7 +775,8 @@ chartOptions6:any= {
     console.log('pl-',payload);
       this.switchService.onAdonaiUpdate(payload).subscribe({ next: (res:any) => {
         if(res.status == true){
-          this.toastr.success(res.message)
+          this.toastr.success(res.message);
+          modal.close();
           } else {
             // this.btnDisable = false;
             this.toastr.error(res.message);
