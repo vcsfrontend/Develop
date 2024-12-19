@@ -1,17 +1,6 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
-import {
-  ChartComponent,
-  ApexAxisChartSeries,
-  ApexChart,
-  ApexXAxis,
-  ApexDataLabels,
-  ApexStroke,
-  ApexYAxis,
-  ApexTitleSubtitle,
-  ApexLegend,
-  ApexResponsive,
-  NgApexchartsModule,
-} from 'ng-apexcharts';
+import { ChartComponent, ApexAxisChartSeries, ApexChart, ApexXAxis, ApexDataLabels, ApexStroke,
+  ApexYAxis, ApexTitleSubtitle, ApexLegend, ApexResponsive, NgApexchartsModule } from 'ng-apexcharts';
 import { SharedModule } from '../../../shared/common/sharedmodule';
 import { FormBuilder, FormGroup, Validators,ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http'; // Import HttpClient for making HTTP requests
@@ -91,9 +80,12 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
   projectAddress: string = ''; state: string = ''; city: string = ''; projectArea: string = ''; 
   action: string = ''; designId: string = ''; companyName: string = ''; matcardLst:any; addFilter: string = '1';
   projName: string = ''; projId: string = ''; paymentStages: any; lstData: any; active="Angular"; btnDisable = false; 
-  estamount : any; hasAddedRow: boolean = false;
-  displayedCards:any;
-  showMore = false;
+  estamount : any; hasAddedRow: boolean = false; displayedCards: any; showMore = false;
+  dataSource = new MatTableDataSource<any>(); 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  modal: any; ttlAmtToBeRcvd: any; projectLst: any; userDetails:any; dateDiff: string = ''; 
+  roleid:any;  actstatus: any; stageLst: any; createProjectForm!: FormGroup;
+  pondOptions: FilePondOptions; 
   
   updateDisplayedCards(): void {
     this.displayedCards = this.showMore ? this.matcardLst : this.matcardLst?.slice(0, 4);
@@ -104,19 +96,19 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
     this.updateDisplayedCards();
   }
 
-  dataSource = new MatTableDataSource<any>(); 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  modal: any; ttlAmtToBeRcvd: any;
-  projectLst: any; userDetails:any; dateDiff: string = ''; roleid:any;  actstatus: any;
-  stageLst: any;
-  
   @HostListener('document:keydown.enter', ['$event'])
   handleEnterKey(event: KeyboardEvent): void {
     this.getMatCardLst();
   }
   
   openLg(content10:any) {
-		this.modalService.open(content10, { size: 'lg' },);
+    if(this.stageLst?.f1 == '' || this.stageLst?.f1 == null ){
+      alert('Please add stages before creating a project')
+    }else if(this.stageLst?.f1Percent == 0){
+      alert('Please add stages percentage before creating a project')
+    }else{
+      this.modalService.open(content10, { size: 'lg' },);
+    }
 	}
   open(content11:any) {
 		this.modalService.open(content11, { size: 'lg' },);
@@ -125,13 +117,10 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
 		this.modalService.open(content12, {  scrollable: true,centered: true,size: 'xl' });
 	}
   
-  createProjectForm!: FormGroup;
-  pondOptions: FilePondOptions;
-  productForm: FormGroup;
   constructor(private fb: FormBuilder, private http: HttpClient, private modalService: NgbModal,
     private toastr: ToastrService, public switchService: SwitherService, private dp: DatePipe,
     private router: Router
-  ) { //localStorage.getItem('userDetails.companyName')
+  ) {
     // Initialize FilePond options if needed
     super();
     this.userDetails = localStorage.getItem('userDetails');
@@ -139,16 +128,12 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
       allowMultiple: true,
       // other FilePond options here
     };
-      
-    this.productForm = this.fb.group({  
-      name: '',  
-      quantities: this.fb.array([]) ,  
-    });  
   }
  
   ngOnInit(): void {
     this.getLst(); this.getdesignData(); this.getMatCardLst();
     this.onMinDate(); this.onTodayDt(); this.onClkDesign('i');
+    this.getAllStages();
     // this.fetchPaymentStages();
     this.createProjectForm = this.fb.group({
       projectName: ['', Validators.required],
@@ -172,7 +157,6 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
       projStatus: [''],
       percentage: ['']
     });
-    this.getAllStages();
   }
 
   get f() {
@@ -184,7 +168,6 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
     const startDate = (event.target as HTMLInputElement).value;
     this.minEndDate = startDate; // Set the minimum end date
     const endDate = this.createProjectForm.get('projectStartDate')?.value;
-
     // Reset the end date if it is earlier than the new start date
     if (endDate && endDate < startDate) {
       this.createProjectForm.get('projectEndDate')?.setValue('');
@@ -218,7 +201,7 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
     if(res){
       this.stageLst = res;
       this.initializeDynamicFields();
-      } else{
+      } else {
         this.toastr.error(res.message)
       }
     },
@@ -240,7 +223,6 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
             this.dateDiff = res.datediff;
             this.roleid = res.roleId;
             this.actstatus = res.activityStatus;
-
           }else{
             window.open(res.newDesign, '_blank');
             this.toastr.success(res.message);
@@ -314,7 +296,6 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
   }
 
   getLst(){
-    // console.log(JSON.parse(this.userDetails)?.companyName);
     let payload = {
       email: JSON.parse(this.userDetails)?.email,
       type: JSON.parse(this.userDetails)?.type,
@@ -361,10 +342,10 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
 
       this.switchService.projectLst(payload).subscribe({ next: (res:any) => {
       if(res){
-        const projList = res.projList;
-        const projectLastList = res.paymentLastList;
-        projList?.forEach((project:any) => {
-          const matchedProject = projectLastList.find((lastProject:any) => lastProject.projectId === project.projectId);
+        const projLst = res.projList;
+        const paymentLastLst = res.paymentLastList;
+        projLst?.forEach((project:any) => {
+          const matchedProject = paymentLastLst.find((lastProject:any) => lastProject.projectId === project.projectId);
           if (matchedProject) {
             project.paymentPercent = matchedProject.paymentPercent;
             project.paymentStage = matchedProject.paymentStage  // Add projPercent to the project
@@ -372,10 +353,9 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
             project.paymentPercent = 0;  // If no match, set projPercent to 0 (or handle accordingly)
           }
       });
-        console.log('listpro-', projList);
-          this.matcardLst = projList;
+          this.matcardLst = projLst;
           // this.addDateDifference();
-          this.matcardLst.sort((a:any, b:any) => a.priorityDays - b.priorityDays);
+          this.matcardLst?.sort((a:any, b:any) => a.priorityDays - b.priorityDays);
           this.toggleShowMore();
           } else {
             this.toastr.error(res.message);
@@ -409,7 +389,6 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
   }
 
   onProjectDetails(data:any){
-    console.log(data);
     this.projectName = data.projectName; this.clientName = data.clientName; this.businessCategory = data.businessCategory;
     this.projectAddress = data.projectAddress; this.projectArea = data.projectArea; this.state = data.state; 
     this.city = data.city; this.action = data.action; this.designId = data.designId; this.companyName = data.companyName;
@@ -442,13 +421,10 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
     //   });
     this.estamount = data.projectEstimation ;
     this.lstData = data
-    console.log('lst-', data);
     this.switchService.getProjEstimation(data.projectId).subscribe({ next: (res:any) =>{
     if(res){
       this.paymentStages = res.map((item: any) => ({ ...item, isNew: false }));
       this.paymentStages.forEach((e:any) => {e.updatedTime = this.convertToIST(e.updatedTime);});
-      console.log('ps -',this.paymentStages);
-
     // const lastElement = this.paymentStages[this.paymentStages.length - 1];
     // this.lastPendingAmount = lastElement ? lastElement.pendingAmount : data.projectEstimation;
     this.calculateTotalReceivedAmount();
@@ -1240,23 +1216,5 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
       this.fileName = null; // Reset if no file selected
     }
   }
-  quantities() : FormArray {  
-    return this.productForm.get("quantities") as FormArray  
-  }  
-     
-  newQuantity(): FormGroup {  
-    return this.fb.group({  
-      qty: '',  
-      price: '',  
-    })  
-  }  
-     
-  addQuantity() {  
-    this.quantities().push(this.newQuantity());  
-  }  
-     
-  removeQuantity(i:number) {  
-    this.quantities().removeAt(i);  
-  }
-}
 
+}
