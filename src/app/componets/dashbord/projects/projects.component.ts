@@ -83,7 +83,7 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
   estamount : any; hasAddedRow: boolean = false; displayedCards: any; showMore = false;
   dataSource = new MatTableDataSource<any>(); 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  modal: any; ttlAmtToBeRcvd: any; projectLst: any; userDetails:any; dateDiff: string = ''; 
+  modal: any; ttlAmtToBeRcvd: any; projectLst: any; userDetails:any; dateDiff: any; 
   roleid:any;  actstatus: any; stageLst: any; createProjectForm!: FormGroup;
   pondOptions: FilePondOptions; 
   
