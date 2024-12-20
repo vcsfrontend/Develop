@@ -27,7 +27,11 @@
   width: 40%;
   @media (max-width: 768px) {
     height: 16vh;
-    width: 80%;
+    width: 50%;
+  }
+  @media (max-width: 576px) {
+    height: 16vh;
+    width: 60%;
   }
 }
 
@@ -54,7 +58,6 @@
   .custom-inpsut-group .form-select,
   .custom-input-group .form-control {
     width: 100%;
-    margin-bottom: 10px;
   }
   
   .custom-input-group {
