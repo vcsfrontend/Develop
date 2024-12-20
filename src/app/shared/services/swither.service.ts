@@ -40,7 +40,10 @@ export class SwitherService {
   getStages(data:any): Observable<any> { return this.http.post(`${this.adonaiURL}adonai/get_design_stages`, data); }
   deleteStage(data:any): Observable<any> { return this.http.post(`${this.adonaiURL}adonai/delete_design_stages`, data); }
 
-  
+  pmntStageSave(data:any): Observable<any> { return this.http.post(`${this.adonaiURL}adonai/save_payment_stages`, data); }
+  getPmntStages(data:any): Observable<any> { return this.http.post(`${this.adonaiURL}adonai/get_payment_stages`, data); }
+  deletePmntStage(data:any): Observable<any> { return this.http.post(`${this.adonaiURL}adonai/delete_payment_stages`, data); }
+
   // super admin Adonai apis 
   onAdonaiView(email:any): Observable<any> { return this.http.get(`${this.adonaiURL}adonai/fetch_data_adonai/${email}`); }
   onAdonaiUpdate(data:any): Observable<any> { return this.http.post(`${this.adonaiURL}adonai/update_subscription`, data); }
