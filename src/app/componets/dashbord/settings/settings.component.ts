@@ -58,7 +58,7 @@ export class SettingsComponent extends BaseComponent implements OnInit{
   private modalRef: any; noUsers:any=''; users:any = ''; city:any = ''; selectedCountry:any = 'India'; 
   stageLst: any; showStages: boolean = false; pmntStageLst: any; showPmntStages: boolean = false;
   isStage: boolean = false; isPmntStage: boolean = false; userType: any; projectLst: any;
-  isStageDel: boolean = false; isPmntStageDel: boolean = false;
+  isStageDel: boolean = false; isPmntStageDel: boolean = false; projPmntLst:any;
   userForm: FormGroup = this.fb.group({
     type : [2],
     firstName: ['', Validators.required],
@@ -308,7 +308,9 @@ export class SettingsComponent extends BaseComponent implements OnInit{
     this.switchService.projectLst(payload).subscribe({ next: (res:any) => {
       if(res){
         this.projectLst = res.projList;
-        res.length > 0 ? this.isStageDel = true : this.isStageDel = false
+        this.projPmntLst = res.paymentLastList;
+        this.projectLst.length > 0 ? this.isStageDel = true : this.isStageDel = false;
+        this.projPmntLst.length > 0 ? this.isPmntStageDel = true : this.isPmntStageDel = false;
       } else {
           this.toastr.error(res.message);
         }

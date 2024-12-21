@@ -390,7 +390,7 @@
                 </div>
                 <button type="button" class="btn btn-primary btn-sm btn-wave waves-effect waves-light" (click)="savePmntLastStages()">Save</button>&nbsp;
                 <button type="button" class="btn btn-danger btn-sm" (click)="onDeletePmntStages()"
-                >Delete</button>
+                [disabled]="isPmntStageDel">Delete</button>
             </div>
         </div>
     </div>

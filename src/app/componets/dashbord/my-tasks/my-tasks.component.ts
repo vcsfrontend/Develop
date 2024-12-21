@@ -61,6 +61,14 @@ export class MyTasksComponent {
     this.getProjectDetails(); this.getAllStages();
   }
 
+  isDisabled(option: any): boolean {
+    const selectedStatus = this.dynamicFields.find(field => field.value === this.proStatus);
+    if (selectedStatus) {
+        return option.percent === selectedStatus.percent;
+    }
+    return false;
+  }
+
   dynamicFields: { value: string; percent: number; fieldNm: string; }[] = [];
   initializeDynamicFields() {
     // Loop through f1 to f30 and add only those with non-empty values to dynamicFields
@@ -100,18 +108,17 @@ export class MyTasksComponent {
 
   getProjectDetails(){
     this.switchService.onProjectDtls(this.proId).subscribe({ next: (res:any) =>{
-      if(res){    
-        this.proData = res;
-        this.proStatus = res?.projStatus
-        console.log('proData -', this.proData);
-      } else {
-        this.toastr.error(res.message);
-        }
-      },
-      error: (error) => {
-        this.toastr.error(error.statusText);
-      },
-      })
+    if(res){    
+      this.proData = res;
+      this.proStatus = res?.projStatus
+    } else {
+      this.toastr.error(res.message);
+      }
+    },
+    error: (error) => {
+      this.toastr.error(error.statusText);
+    },
+    })
   }
 
   onSubmitTaskDetails(){
