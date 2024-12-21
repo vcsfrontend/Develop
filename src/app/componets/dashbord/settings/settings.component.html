@@ -11,12 +11,26 @@
         </div>
     </div>
 </div>
-<div class="card custom-card card-size">
+<!-- <div class="card custom-card card-size">
     <div class="card-header justify-content-between">
         <div class="card-title">
             <h6>Signup Form</h6>
         </div>
         <div class="d-flex float-end">
+            <div class="float-end">
+                <button type="button" class="btn btn-primary text-center"
+                    >profile
+                </button>
+            </div>
+        </div>
+    </div>
+</div> -->
+<div class="card custom-card card-size">
+    <div class="card-header justify-content-between">
+        <div class="card-title">
+            <h6>Signup Form</h6>
+        </div>
+        <div class="d-flex float-end" *ngIf="userType==2">
             <div class="float-end" *ngIf="!isAddEdt">
                 <button type="button" class="btn btn-primary text-center"
                     (click)="isAddEdt=!isAddEdt;aeTyp='a';onRst()">Add Team
@@ -25,7 +39,7 @@
         </div>
     </div>
     
-    <div class="card-body p-2">
+    <div class="card-body p-2" *ngIf="userType==2">
         <div class="row">
             <div *ngIf="!isAddEdt">
                 <div class="card-body p-0">

@@ -625,7 +625,6 @@
         <div class="modal-footer">
             <button class="btn btn-primary-light btn-wave ms-auto float-end" type="submit" (click)="onSubmit()" [disabled]="btnDisable">
                 Create Project</button>
-
             <button type="button" class="btn btn-light" data-bs-dismiss="modal"
                 (click)="modal.close('Cross click')">Cancel</button>
             <!-- <button type="button" class="btn btn-primary">Create</button> -->
@@ -738,8 +737,13 @@
                 <tbody>
                   <tr *ngFor="let payment of paymentStages; let i=index">
                     <td  style="width:15%">
-                      <input type="text" class="form-control form-control-sm" [(ngModel)]="payment.paymentStage" 
-                        placeholder="Enter Stage" [disabled]="!payment.isNew" (ngModelChange)="validateField(i, 'paymentStage')">
+                      <!-- <input type="text" class="form-control form-control-sm" [(ngModel)]="payment.paymentStage" 
+                        placeholder="Enter Stage" [disabled]="!payment.isNew" (ngModelChange)="validateField(i, 'paymentStage')"> -->
+                        <select class="form-select form-select-sm" [(ngModel)]="payment.paymentStage" 
+                            [disabled]="!payment.isNew" (ngModelChange)="validateField(i, 'paymentStage')">
+                            <option value="" disabled selected>Select</option>
+                            <option *ngFor="let c of dynamicPmntFields" [value]="c.value">{{c.value}}</option>
+                        </select>
                     </td>
                     <td style="width:5%">
                       <input type="text" class="form-control form-control-sm" [(ngModel)]="payment.percantage" placeholder="Enter Percentage"

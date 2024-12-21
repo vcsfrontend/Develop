@@ -115,9 +115,9 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
 	}
   VerticallyScrol(content12:any) {
     if(this.pmntStageLst?.f1 == '' || this.pmntStageLst?.f1 == null ){
-      alert('Please add payment stages before creating a project')
+      alert('Please add payment stages before adding project Estimation')
     }else if(this.pmntStageLst?.f1Percent == 0){
-      alert('Please add payment stages percentage before creating a project')
+      alert('Please add payment stages percentage before adding project Estimation')
     }else {
       this.modalService.open(content12, {  scrollable: true,centered: true,size: 'xl' });
     }
@@ -330,7 +330,7 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
     }
     return index + 1; // Default return if paginator is not yet defined
   }
-  
+
   addDateDifference() {
     this.projectLst = this.projectLst.map((e:any) => ({
       ...e, dateDifference: this.calculateDateDifference(e.projectEndDate)

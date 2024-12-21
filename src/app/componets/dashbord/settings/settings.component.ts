@@ -57,7 +57,7 @@ export class SettingsComponent extends BaseComponent implements OnInit{
   @ViewChild('modalTemplate') modalTemplate!: TemplateRef<any>;  // Access the ng-template
   private modalRef: any; noUsers:any=''; users:any = ''; city:any = ''; selectedCountry:any = 'India'; 
   stageLst: any; showStages: boolean = false; pmntStageLst: any; showPmntStages: boolean = false;
-  isStage: boolean = false; isPmntStage: boolean = false;
+  isStage: boolean = false; isPmntStage: boolean = false; userType: any;
   userForm: FormGroup = this.fb.group({
     type : [2],
     firstName: ['', Validators.required],
@@ -162,6 +162,7 @@ export class SettingsComponent extends BaseComponent implements OnInit{
     private modalService: NgbModal,  private viewContainerRef: ViewContainerRef ){
       super();
       this.userData = localStorage.getItem('userDetails');
+      this.userType = JSON.parse(this.userData).type;
       this.formInit();
       this.productForm = this.fb.group({  
         name: '',  
@@ -563,25 +564,27 @@ export class SettingsComponent extends BaseComponent implements OnInit{
   }
 
   getUsers(){
-    // this.switchService.getAllUsers().subscribe({ next: (res:any) => {
-      let cn = JSON.parse(this.userData).companyName;
-      let cc = JSON.parse(this.userData).companyCode ;
-      this.switchService.cmpnyUsers(cn, cc).subscribe({ next: (res:any) => {
-      if(res){
-        this.userLst = res
-        // this.dataSource = new MatTableDataSource<any>(res);
-        this.dataSource.data = res;
-        } else{
-          this.toastr.error(res.message,'signup', {
-            timeOut: 3000,
-            positionClass: 'toast-top-right',
-          });
-        }
-      },
-      error: (error) => {
-        this.toastr.error(error.statusText);
-      },
-    })
+    if(JSON.parse(this.userData).type == 2){
+      // this.switchService.getAllUsers().subscribe({ next: (res:any) => {
+        let cn = JSON.parse(this.userData).companyName;
+        let cc = JSON.parse(this.userData).companyCode ;
+        this.switchService.cmpnyUsers(cn, cc).subscribe({ next: (res:any) => {
+        if(res){
+          this.userLst = res
+          // this.dataSource = new MatTableDataSource<any>(res);
+          this.dataSource.data = res;
+          } else{
+            this.toastr.error(res.message,'signup', {
+              timeOut: 3000,
+              positionClass: 'toast-top-right',
+            });
+          }
+        },
+        error: (error) => {
+          this.toastr.error(error.statusText);
+        },
+      })
+    }
   }
 
   passwordValidator(control: any) {
