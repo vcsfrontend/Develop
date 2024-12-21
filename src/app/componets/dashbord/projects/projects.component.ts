@@ -275,7 +275,6 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
 
   onSubmit(): void {
     this.submitted = true;
-    this.btnDisable = true;
     if (this.createProjectForm.invalid) {
       this.toastr.error('Please fill mandatory fields');
       // this.btnDisable = false;
@@ -520,13 +519,34 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
     return new Date(utcDate.getTime() + istOffset);
   }
 
+  isValueSelected(value: string, currentIndex: number): boolean {
+    return this.paymentStages.some((payment:any, index:any) => payment.paymentStage === value && index !== currentIndex);
+  }
+  
+  updatePercent(payment:any){
+    const selectedStage = this.dynamicPmntFields.find(item => item.value === payment.paymentStage);
+    if (selectedStage) {
+      payment.percantage = +selectedStage.percent;
+      this.calculateAmountToBeReceived(payment);
+    } else {
+      payment.percantage = '';
+    }
+  }
+
   calculateAmountToBeReceived(payment: any): void {
     if (this.estamount && payment.percantage) {
-      payment.amountToBeRecieved = (this.estamount * parseFloat(payment.percantage) / 100).toFixed(0);
+      payment.amountToBeRecieved = (+this.estamount * parseFloat(payment.percantage) / 100).toFixed(0);
     } else {
       payment.amountToBeRecieved = '0';
     }
   }
+  // calculateAmountToBeReceived(payment: any): void {
+  //   if (this.estamount && payment.percantage) {
+  //     payment.amountToBeRecieved = (+this.estamount * parseFloat(payment.percantage) / 100).toFixed(0);
+  //   } else {
+  //     payment.amountToBeRecieved = '0';
+  //   }
+  // }
 
   onPercentageChange(payment: any): void {
     // Calculate the total percentage excluding the current row

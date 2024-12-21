@@ -342,7 +342,6 @@
                         [disabled]="isPmntStage">Add Stages</button>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
@@ -366,7 +365,8 @@
                     </div>
                 </div>
                 <button type="button" class="btn btn-primary btn-sm btn-wave waves-effect waves-light" (click)="saveLastStages()">Save</button>&nbsp;
-                <button type="button" class="btn btn-danger btn-sm" (click)="onDeleteStages()">Delete</button>
+                <button type="button" class="btn btn-danger btn-sm" (click)="onDeleteStages()"
+                [disabled]="isStageDel">Delete</button>
             </div>
         </div>
     </div>
@@ -389,7 +389,8 @@
                     </div>
                 </div>
                 <button type="button" class="btn btn-primary btn-sm btn-wave waves-effect waves-light" (click)="savePmntLastStages()">Save</button>&nbsp;
-                <button type="button" class="btn btn-danger btn-sm" (click)="onDeletePmntStages()">Delete</button>
+                <button type="button" class="btn btn-danger btn-sm" (click)="onDeletePmntStages()"
+                >Delete</button>
             </div>
         </div>
     </div>

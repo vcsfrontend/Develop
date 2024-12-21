@@ -57,7 +57,8 @@ export class SettingsComponent extends BaseComponent implements OnInit{
   @ViewChild('modalTemplate') modalTemplate!: TemplateRef<any>;  // Access the ng-template
   private modalRef: any; noUsers:any=''; users:any = ''; city:any = ''; selectedCountry:any = 'India'; 
   stageLst: any; showStages: boolean = false; pmntStageLst: any; showPmntStages: boolean = false;
-  isStage: boolean = false; isPmntStage: boolean = false; userType: any;
+  isStage: boolean = false; isPmntStage: boolean = false; userType: any; projectLst: any;
+  isStageDel: boolean = false; isPmntStageDel: boolean = false;
   userForm: FormGroup = this.fb.group({
     type : [2],
     firstName: ['', Validators.required],
@@ -293,6 +294,26 @@ export class SettingsComponent extends BaseComponent implements OnInit{
 
     this.onTodayDt();
     this.onMinDate(); 
+    this.getProjectLst();
+  }
+
+  getProjectLst(){
+    let payload = {
+      email: JSON.parse(this.userData)?.email,
+      type: JSON.parse(this.userData)?.type,
+      companyname: JSON.parse(this.userData)?.companyName,
+      companycode: JSON.parse(this.userData)?.companyCode,
+      projectId: '', projectname: '', filter: 'All',
+    }
+    this.switchService.projectLst(payload).subscribe({ next: (res:any) => {
+      if(res){
+        this.projectLst = res.projList;
+        res.length > 0 ? this.isStageDel = true : this.isStageDel = false
+      } else {
+          this.toastr.error(res.message);
+        }
+      }
+    })
   }
   dynamicFields: { value: string; percent: number }[] = [];
   initializeDynamicFields() {
