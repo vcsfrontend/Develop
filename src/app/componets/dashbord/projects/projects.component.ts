@@ -173,7 +173,7 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
   onStartDateChange(event: Event): void {
     const startDate = (event.target as HTMLInputElement).value;
     this.minEndDate = startDate; // Set the minimum end date
-    const endDate = this.createProjectForm.get('projectStartDate')?.value;
+    const endDate = this.createProjectForm.get('projectEndDate')?.value;
     // Reset the end date if it is earlier than the new start date
     if (endDate && endDate < startDate) {
       this.createProjectForm.get('projectEndDate')?.setValue('');
@@ -393,7 +393,7 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
           } else {
             project.paymentPercent = 0;  // If no match, set projPercent to 0 (or handle accordingly)
           }
-      });
+        });
           this.matcardLst = projLst;
           // this.addDateDifference();
           this.matcardLst?.sort((a:any, b:any) => a.priorityDays - b.priorityDays);

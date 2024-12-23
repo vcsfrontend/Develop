@@ -430,35 +430,23 @@ export class SettingsComponent extends BaseComponent implements OnInit{
     })
   }
 
-  validatePercent(index: number) {
-    const currentField = this.dynamicFields[index];
-    const prevField = this.dynamicFields[index - 1];
-    // Ensure percent doesn't exceed 100
-    if (currentField.percent > 100) {
-      currentField.percent = 100;
-      alert('Percent cannot exceed 100.');
-    }
-    // Ensure current percent is less than next percent
-    if (prevField && +currentField.percent <= +prevField.percent) {
-      currentField.percent = 0;
-      alert('Current field percent must be greater than the previous field percent.');
-    }
-  }
-
   saveLastStages() {
-    // for (let i = 1; i < this.dynamicFields.length; i++) {
-    //   if (this.dynamicFields[i].percent <= this.dynamicFields[i - 1].percent) {
-    //     alert(`Field ${i + 1} percent must be greater than Field ${i} percent.`);
-    //     return;
-    //   }
-    // }
-    // Update payload based on dynamicFields
+    let totalPercent = 0;
+
+  // Check for zero or empty percent values
+  for (const field of this.dynamicFields) {
+    const percent = +field.percent; // Convert string to number safely
+    if (percent === 0) {
+      this.toastr.error('Percent values cannot be zero or empty.', 'Validation Error');
+      return;
+    }
+    totalPercent += percent;
+  }
+  if (totalPercent === 100) {
     this.dynamicFields.forEach((field, index) => {
       this.stageLst[`f${index + 1}`] = field.value;
       this.stageLst[`f${index + 1}Percent`] = field.percent;
     });
-
-    // Clear remaining unused fields in the payload
     for (let i = this.dynamicFields.length + 1; i <= 30; i++) {
       this.stageLst[`f${i}`] = '';
       this.stageLst[`f${i}Percent`] = 0;
@@ -475,6 +463,11 @@ export class SettingsComponent extends BaseComponent implements OnInit{
         this.toastr.error(error.statusText);
       },
     })
+    } else if (totalPercent < 100) {
+      this.toastr.error('Total percent is less than 100. Please adjust the values.', 'Validation Error');
+    } else {
+      this.toastr.error('Total percent exceeds 100. Please adjust the values.', 'Validation Error');
+    }
   }
 
   onDeleteStages(){
@@ -537,14 +530,23 @@ export class SettingsComponent extends BaseComponent implements OnInit{
     },
     })
   }
-  
+
   savePmntLastStages() {
-    // Update payload based on dynamicFields
-    this.dynamicPmntFields.forEach((field, index) => {
+    let totalPercent = 0;
+    for (const field of this.dynamicPmntFields) {
+      const percent = +field.percent; 
+      if (percent === 0) {
+        this.toastr.error('Percent values cannot be zero or empty.', 'Validation Error');
+        return;
+      }
+      totalPercent += percent;
+    }
+    // Check if total equals 100
+    if (totalPercent === 100) {
+      this.dynamicPmntFields.forEach((field, index) => {
       this.pmntStageLst[`f${index + 1}`] = field.value;
       this.pmntStageLst[`f${index + 1}Percent`] = field.percent;
     });
-    // Clear remaining unused fields in the payload
     for (let i = this.dynamicPmntFields.length + 1; i <= 30; i++) {
       this.pmntStageLst[`f${i}`] = '';
       this.pmntStageLst[`f${i}Percent`] = 0;
@@ -561,6 +563,11 @@ export class SettingsComponent extends BaseComponent implements OnInit{
         this.toastr.error(error.statusText);
       },
     })
+    } else if (totalPercent < 100) {
+      this.toastr.error('Total percent is less than 100. Please adjust the values.', 'Validation Error');
+    } else {
+      this.toastr.error('Total percent exceeds 100. Please adjust the values.', 'Validation Error');
+    }
   }
 
   onDeletePmntStages(){

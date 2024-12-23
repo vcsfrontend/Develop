@@ -1,15 +1,11 @@
 <div class="my-4 page-header-breadcrumb d-flex align-items-center justify-content-between flex-wrap gap-2">
-    <div>
-        <h1 class="page-title fw-medium fs-18 mb-2">Settings</h1>
-        <div class="">
-            <nav>
-                <ol class="breadcrumb mb-0">
-                    <li class="breadcrumb-item"><a href="javascript:void(0);">dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">settings</li>
-                </ol>
-            </nav>
-        </div>
-    </div>
+    <h1 class="page-title fw-medium fs-18 mb-2">Settings</h1>
+    <nav>
+        <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a href="javascript:void(0);">dashboard</a></li>
+            <li class="breadcrumb-item active" aria-current="page">settings</li>
+        </ol>
+    </nav>
 </div>
 <!-- <div class="card custom-card card-size">
     <div class="card-header justify-content-between">
@@ -38,7 +34,6 @@
             </div>
         </div>
     </div>
-    
     <div class="card-body p-2" *ngIf="userType==2">
         <div class="row">
             <div *ngIf="!isAddEdt">
@@ -361,12 +356,13 @@
                     <div class="col-sm-2">
                         <input type="text"  class="form-control" [(ngModel)]="field.percent" [ngModelOptions]="{standalone: true}"
                           onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || event.charCode == 8)"
-                          maxlength="3" placeholder="Percent">
+                          maxlength="3" placeholder="Percent" [disabled]="isStageDel">
                     </div>
                 </div>
-                <button type="button" class="btn btn-primary btn-sm btn-wave waves-effect waves-light" (click)="saveLastStages()">Save</button>&nbsp;
+                <button type="button" class="btn btn-primary btn-sm btn-wave waves-effect waves-light" (click)="saveLastStages()"
+                    [disabled]="isStageDel">Save</button>&nbsp;
                 <button type="button" class="btn btn-danger btn-sm" (click)="onDeleteStages()"
-                [disabled]="isStageDel">Delete</button>
+                    [disabled]="isStageDel">Delete</button>
             </div>
         </div>
     </div>
@@ -385,12 +381,13 @@
                     <div class="col-sm-2">
                         <input type="text" class="form-control" [(ngModel)]="field.percent" [ngModelOptions]="{standalone: true}"
                           onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || event.charCode == 8)"
-                          maxlength="3" placeholder="Percent">
+                          maxlength="3" placeholder="Percent" [disabled]="isPmntStageDel">
                     </div>
                 </div>
-                <button type="button" class="btn btn-primary btn-sm btn-wave waves-effect waves-light" (click)="savePmntLastStages()">Save</button>&nbsp;
+                <button type="button" class="btn btn-primary btn-sm btn-wave waves-effect waves-light" 
+                    (click)="savePmntLastStages()" [disabled]="isPmntStageDel">Save</button>&nbsp;
                 <button type="button" class="btn btn-danger btn-sm" (click)="onDeletePmntStages()"
-                [disabled]="isPmntStageDel">Delete</button>
+                    [disabled]="isPmntStageDel">Delete</button>
             </div>
         </div>
     </div>

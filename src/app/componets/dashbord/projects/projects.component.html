@@ -284,7 +284,8 @@
                             </span>
                         </div>
                         <div class="flex-fill">
-                            <a href="javascript:void(0);" class="fs-14 d-block text-truncate project-list-title">Project: {{project.projectName | slice:0:12}}</a>
+                            <a href="javascript:void(0);" class="fs-14 d-block text-truncate project-list-title">
+                                Project: {{project.projectName | slice:0:12}}</a>
                             <span class="text-muted d-block fs-12">Client: {{project.clientName | slice:0:12}}</span>
                                 <!-- <span class="text-muted d-block fs-12">Total <strong class="text-default">18/22</strong> tasks
                                     completed</span> -->
@@ -301,9 +302,9 @@
                         <div class="mb-3">
                             <div class="progress progress-xs progress-animate" role="progressbar" aria-valuenow="80"
                                 aria-valuemin="0" aria-valuemax="100">
-                                <div class="progress-bar bg-primary" [style.width.%]="project.percantage"></div>
+                                <div class="progress-bar bg-primary" [style.width.%]="project.percentage"></div>
                             </div>
-                            <div class="mt-1"><span class="text-primary fw-medium">{{project.percantage}}</span> Completed</div>
+                            <div class="mt-1"><span class="text-primary fw-medium">{{project.percentage}}%</span> Completed</div>
                         </div>
                         <div class="mb-1">Payment Status : {{project.paymentStage}}</div>
                         <div class="progress progress-xs progress-animate" role="progressbar" aria-valuenow="80"
@@ -566,28 +567,13 @@
                                             <div *ngIf="f['projectArea'].errors['required']">Project Area is required</div>
                                         </div>
                                     </div>
-                                    <!-- <div class="col-xl-4">
-                                        <label for="action" class="form-label">Action:</label>
-                                        <input type="text" class="form-control" id="action" formControlName="action"
-                                            placeholder="Enter Action"
-                                            [ngClass]="{ 'is-invalid': submitted && f['action'].errors }"
-                                            maxlength="50">
-                                        <div *ngIf="submitted && f['action'].errors" class="invalid-feedback">
-                                            <div *ngIf="f['action'].errors['required']">Action is required</div>
-                                        </div>
-                                    </div> -->
-                                    <!-- <div class="col-xl-4">
-                            <label for="companyName" class="form-label">Company Name:</label>
-                            <input type="text" class="form-control" id="companyName" formControlName="companyName" placeholder="Enter Company Name">
-                          </div> -->
-                                    <!-- <div class="col-xl-4"></div> -->
+                                    <!-- <mat-form-field appearance="fill">
+                                    <mat-label>Start Date</mat-label>
+                                    <input matInput [matDatepicker]="startPicker" formControlName="projectStartDate" placeholder="Choose Start Date">
+                                    <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+                                    <mat-datepicker #startPicker></mat-datepicker>
+                                    </mat-form-field> -->
                                     <div class="col-xl-4">
-                                        <!-- <mat-form-field appearance="fill">
-                              <mat-label>Start Date</mat-label>
-                              <input matInput [matDatepicker]="startPicker" formControlName="projectStartDate" placeholder="Choose Start Date">
-                              <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
-                              <mat-datepicker #startPicker></mat-datepicker>
-                            </mat-form-field> -->
                                         <label for="startDate" class="form-label">Start Date:</label>
                                         <input type="date" class="form-control" id='startDate'
                                             formControlName='projectStartDate'
@@ -608,13 +594,13 @@
                                             <div *ngIf="f['projectEndDate'].errors['required']">End Date is required
                                             </div>
                                         </div>
-                                        <!-- <mat-form-field appearance="fill">
-                              <mat-label>End Date</mat-label>
-                              <input matInput [matDatepicker]="endPicker" formControlName="projectEndDate" placeholder="Choose End Date">
-                              <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
-                              <mat-datepicker #endPicker></mat-datepicker>
-                            </mat-form-field> -->
                                     </div>  
+                                <!-- <mat-form-field appearance="fill">
+                                <mat-label>End Date</mat-label>
+                                <input matInput [matDatepicker]="endPicker" formControlName="projectEndDate" placeholder="Choose End Date">
+                                <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+                                <mat-datepicker #endPicker></mat-datepicker>
+                                </mat-form-field> -->
                                 </div>
                             </div>
                         </div>
