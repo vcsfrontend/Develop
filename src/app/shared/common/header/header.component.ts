@@ -389,8 +389,8 @@ export class HeaderComponent implements OnInit {
   onLogout(){
     // window.location.href = 'https://crmexpert.vcs.plus/auth/logout';
     if(this.isAdonai){
-      this.http.post('https://adonai.vcs.plus/api/account/auth/token/logout', {}).subscribe({ next: (res:any) => {
-        location.reload();
+      this.http.post('https://adonai.vcs.plus/api/account/oauth/token/logout', {}).subscribe({ next: (res:any) => {
+        location.reload();//adonai.vcs.plus/api/account/oauth/token/logout
         },
         error: (error) => {
           // this.toastr.error('Adonai Logout failed', error);
