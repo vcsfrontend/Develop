@@ -122,28 +122,36 @@ export class MyTasksComponent {
   }
 
   onSubmitTaskDetails(){
-    let payload = {
-      "id": 0,
-      "projectId": this.proData.projectId,
-      "heading": this.heading,
-      // "clientname": "string",
-      "projectStatus": this.proStatus,
-      "description": this.description,
-      "updatedBy": JSON.parse(this.userData).username,
+    if(this.heading == '' && this.description == ''){
+      this.toastr.warning('please enter heading and description');
+    } else if(this.heading == ''){
+      this.toastr.warning('please enter heading');
+    } else if(this.description == ''){
+      this.toastr.warning('please enter description');
+    } else {
+      let payload = {
+        "id": 0,
+        "projectId": this.proData.projectId,
+        "heading": this.heading,
+        // "clientname": "string",
+        "projectStatus": this.proStatus,
+        "description": this.description,
+        "updatedBy": JSON.parse(this.userData).username,
+      }
+      this.switchService.onAddTaskDtls(payload).subscribe({ next: (res:any) =>{
+      if(res.status == true){
+        this.toastr.success(res.message);
+        this.router.navigate(['/dashboard/projects']);
+        return;
+        } else {
+          this.toastr.error(res.message);
+          }
+        },
+        error: (error) => {
+          this.toastr.error(error.statusText);
+        },
+      })
     }
-    this.switchService.onAddTaskDtls(payload).subscribe({ next: (res:any) =>{
-    if(res.status == true){
-      this.toastr.success(res.message);
-      this.router.navigate(['/dashboard/projects']);
-      return;
-      } else {
-        this.toastr.error(res.message);
-        }
-      },
-      error: (error) => {
-        this.toastr.error(error.statusText);
-      },
-    })
   }
 
   open(content:any) {

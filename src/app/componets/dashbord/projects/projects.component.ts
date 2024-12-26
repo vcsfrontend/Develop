@@ -107,6 +107,7 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
     }else if(this.stageLst?.f1Percent == 0){
       alert('Please add stages percentage before creating a project')
     }else {
+      this.resetForm();
       this.modalService.open(content10, { size: 'lg' },);
     }
 	}
@@ -317,6 +318,7 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
   // Optional: You can create a method to reset the form
   resetForm(): void {
     this.createProjectForm.reset();
+    this.createProjectForm.get('businessCategory')?.setValue('');
   }
 
   ngAfterViewInit() {
