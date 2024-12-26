@@ -16,6 +16,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { SharedModule } from '../sharedmodule';
+import { SwitherService } from '../../services/swither.service';
 interface Item {
   id: number;
   name: string;
@@ -47,7 +48,7 @@ export class HeaderComponent implements OnInit {
     private elementRef: ElementRef,
     public renderer: Renderer2,
     public modalService:NgbModal,
-    private toastr: ToastrService,
+    private toastr: ToastrService, private switchService: SwitherService,
     private router: Router, private activatedRoute: ActivatedRoute, private http: HttpClient
   ) {this.localStorageBackUp()
     this.userData = localStorage.getItem('userDetails'),
@@ -389,7 +390,8 @@ export class HeaderComponent implements OnInit {
   onLogout(){
     // window.location.href = 'https://crmexpert.vcs.plus/auth/logout';
     if(this.isAdonai){
-      this.http.post('https://adonai.vcs.plus/api/account/oauth/token/logout', {}, { withCredentials: true }).subscribe({ next: (res:any) => {
+      // this.http.post('https://adonai.vcs.plus/api/account/oauth/token/logout', {}, { withCredentials: true }).subscribe({ next: (res:any) => {
+      this.switchService.logout().subscribe({ next: (res:any) => {
         location.reload();//adonai.vcs.plus/api/account/oauth/token/logout
         },
         error: (error) => {
