@@ -56,7 +56,9 @@ export class SettingsComponent extends BaseComponent implements OnInit{
   isShowUsers = false; pload:any[] = [];isOkBtn = false; showCity:boolean = true;
   @ViewChild('modalTemplate') modalTemplate!: TemplateRef<any>;  // Access the ng-template
   private modalRef: any; noUsers:any=''; users:any = ''; city:any = ''; selectedCountry:any = 'India'; 
-  stageLst:any; showStages: boolean = false;
+  stageLst: any; showStages: boolean = false; pmntStageLst: any; showPmntStages: boolean = false;
+  isStage: boolean = false; isPmntStage: boolean = false; userType: any; projectLst: any;
+  isStageDel: boolean = false; isPmntStageDel: boolean = false; projPmntLst:any;
   userForm: FormGroup = this.fb.group({
     type : [2],
     firstName: ['', Validators.required],
@@ -77,13 +79,17 @@ export class SettingsComponent extends BaseComponent implements OnInit{
     city: ['', Validators.required]
   })
   productForm: FormGroup;
-  newItem: string = '';
+  newItem: string = ''; newPmntItem: string = '';
   items: { label: string; checked: boolean }[] = [];
 
   addMoreVisible: boolean = false; // Flag to toggle visibility
-
+  addMorePmntVisible: boolean = false; 
   toggleAddMore() {
     this.addMoreVisible = !this.addMoreVisible; // Toggle visibility
+  }
+
+  togglePmntAddMore() {
+    this.addMorePmntVisible = !this.addMorePmntVisible; // Toggle visibility
   }
 
   addItem() {
@@ -101,14 +107,33 @@ export class SettingsComponent extends BaseComponent implements OnInit{
       alert('This item already exists!');
     }
   }
-  
+
   deleteItem(index: number) {
     this.planDetails.splice(index, 1);
   }
 
-  saveData:any;
-  
+  addPmntItem() {
+    const itemExists = this.paymentDetails.some(
+      (plan) => plan.name.toLowerCase() === this.newPmntItem.trim().toLowerCase()
+    );
+    if (this.newPmntItem.trim() && !itemExists) {
+      this.paymentDetails.push({
+        name: this.newPmntItem.trim(),
+        checked: false,
+        isDefault: false,
+      });
+      this.newPmntItem = '';
+    } else if (itemExists) {
+      alert('This item already exists!');
+    }
+  }
 
+  deletePmntItem(index: number) {
+    this.paymentDetails.splice(index, 1);
+  }
+
+  saveData:any; savePmntData: any;
+  
   planDetails = [
     { name: 'WALL AND DEMOLITION PLAN', checked: false, isDefault: true },
     { name: 'PROPOSED FURNITURE PLAN', checked: false, isDefault: true },
@@ -123,6 +148,14 @@ export class SettingsComponent extends BaseComponent implements OnInit{
     { name: 'RCP - REFLECTED CEILING PLAN', checked: false, isDefault: true },
     { name: 'BOQ-BILL OF QUANTITY ESTIMATE', checked: false, isDefault: true },
   ];
+
+  paymentDetails = [
+    { name: 'Advance', checked: false, isDefault: true },
+    { name: 'Design', checked: false, isDefault: true },
+    { name: 'Material Dump', checked: false, isDefault: true },
+    { name: 'Snags', checked: false, isDefault: true },
+    { name: 'Project Handover', checked: false, isDefault: true }
+  ]
   
   constructor(public fb: FormBuilder, public switchService: SwitherService, 
     private toastr: ToastrService,private router: Router, private dp: DatePipe,
@@ -130,6 +163,7 @@ export class SettingsComponent extends BaseComponent implements OnInit{
     private modalService: NgbModal,  private viewContainerRef: ViewContainerRef ){
       super();
       this.userData = localStorage.getItem('userDetails');
+      this.userType = JSON.parse(this.userData).type;
       this.formInit();
       this.productForm = this.fb.group({  
         name: '',  
@@ -139,7 +173,6 @@ export class SettingsComponent extends BaseComponent implements OnInit{
   
   onCheckboxChange() {
     const selectedPlans = this.planDetails.filter((plan) => plan.checked);
-    
     // Update f1 to f30 fields dynamically based on selected items
     selectedPlans.forEach((plan, index) => {
       if (index < 30) {
@@ -151,73 +184,98 @@ export class SettingsComponent extends BaseComponent implements OnInit{
     }
   }
 
+  onPmntCheckboxChange() {
+    const selectedPlans = this.paymentDetails.filter((plan) => plan.checked);
+    
+    // Update f1 to f30 fields dynamically based on selected items
+    selectedPlans.forEach((plan, index) => {
+      if (index < 30) {
+        this.savePmntData[`f${index + 1}`] = plan.name;
+      }
+    });
+    for (let i = selectedPlans.length; i < 30; i++) {
+      this.savePmntData[`f${i + 1}`] = '';
+    }
+  }
+
   ngOnInit(){
-    this.formInit(); this.getUsers(); this.getAllStages();
+    this.formInit(); this.getUsers(); this.getAllStages(); this.getAllPmntStages();
     this.saveData = {
       id: 0,
       companyName: JSON.parse(this.userData).companyName,
       companyCode: JSON.parse(this.userData).companyCode,
       email: JSON.parse(this.userData).email,
-      f1: "",
-      f1Percent: 0,
-      f2: "",
-      f2Percent: 0,
-      f3: "",
-      f3Percent: 0,
-      f4: "",
-      f4Percent: 0,
-      f5: "",
-      f5Percent: 0,
-      f6: "",
-      f6Percent: 0,
-      f7: "",
-      f7Percent: 0,
-      f8: "",
-      f8Percent: 0,
-      f9: "",
-      f9Percent: 0,
-      f10: "",
-      f10Percent: 0,
-      f11: "",
-      f11Percent: 0,
-      f12: "",
-      f12Percent: 0,
-      f13: "",
-      f13Percent: 0,
-      f14: "",
-      f14Percent: 0,
-      f15: "",
-      f15Percent: 0,
-      f16: "",
-      f16Percent: 0,
-      f17: "",
-      f17Percent: 0,
-      f18: "",
-      f18Percent: 0,
-      f19: "",
-      f19Percent: 0,
-      f20: "",
-      f20Percent: 0,
-      f21: "",
-      f21Percent: 0,
-      f22: "",
-      f22Percent: 0,
-      f23: "",
-      f23Percent: 0,
-      f24: "",
-      f24Percent: 0,
-      f25: "",
-      f25Percent: 0,
-      f26: "",
-      f26Percent: 0,
-      f27: "",
-      f27Percent: 0,
-      f28: "",
-      f28Percent: 0,
-      f29: "",
-      f29Percent: 0,
-      f30: "",
-      f30Percent: 0,
+      f1: "", f1Percent: 0,
+      f2: "", f2Percent: 0,
+      f3: "", f3Percent: 0,
+      f4: "", f4Percent: 0,
+      f5: "", f5Percent: 0,
+      f6: "", f6Percent: 0,
+      f7: "", f7Percent: 0,
+      f8: "", f8Percent: 0,
+      f9: "", f9Percent: 0,
+      f10: "", f10Percent: 0,
+      f11: "", f11Percent: 0,
+      f12: "", f12Percent: 0,
+      f13: "", f13Percent: 0,
+      f14: "", f14Percent: 0,
+      f15: "", f15Percent: 0,
+      f16: "", f16Percent: 0,
+      f17: "", f17Percent: 0,
+      f18: "", f18Percent: 0,
+      f19: "", f19Percent: 0,
+      f20: "", f20Percent: 0,
+      f21: "", f21Percent: 0,
+      f22: "", f22Percent: 0,
+      f23: "", f23Percent: 0,
+      f24: "", f24Percent: 0,
+      f25: "", f25Percent: 0,
+      f26: "", f26Percent: 0,
+      f27: "", f27Percent: 0,
+      f28: "", f28Percent: 0,
+      f29: "", f29Percent: 0,
+      f30: "", f30Percent: 0,
+      updatedBy: JSON.parse(this.userData).username,
+      updatedTime: "",
+      stageActivity: "YES",
+      type: JSON.parse(this.userData).type
+    };
+
+    this.savePmntData = {
+      id: 0,
+      companyName: JSON.parse(this.userData).companyName,
+      companyCode: JSON.parse(this.userData).companyCode,
+      email: JSON.parse(this.userData).email,
+      f1: "", f1Percent: 0,
+      f2: "", f2Percent: 0,
+      f3: "", f3Percent: 0,
+      f4: "", f4Percent: 0,
+      f5: "", f5Percent: 0,
+      f6: "", f6Percent: 0,
+      f7: "", f7Percent: 0,
+      f8: "", f8Percent: 0,
+      f9: "", f9Percent: 0,
+      f10: "", f10Percent: 0,
+      f11: "", f11Percent: 0,
+      f12: "", f12Percent: 0,
+      f13: "", f13Percent: 0,
+      f14: "", f14Percent: 0,
+      f15: "", f15Percent: 0,
+      f16: "", f16Percent: 0,
+      f17: "", f17Percent: 0,
+      f18: "", f18Percent: 0,
+      f19: "", f19Percent: 0,
+      f20: "", f20Percent: 0,
+      f21: "", f21Percent: 0,
+      f22: "", f22Percent: 0,
+      f23: "", f23Percent: 0,
+      f24: "", f24Percent: 0,
+      f25: "", f25Percent: 0,
+      f26: "", f26Percent: 0,
+      f27: "", f27Percent: 0,
+      f28: "", f28Percent: 0,
+      f29: "", f29Percent: 0,
+      f30: "", f30Percent: 0,
       updatedBy: JSON.parse(this.userData).username,
       updatedTime: "",
       stageActivity: "YES",
@@ -236,9 +294,32 @@ export class SettingsComponent extends BaseComponent implements OnInit{
 
     this.onTodayDt();
     this.onMinDate(); 
+    this.getProjectLst();
+  }
+
+  getProjectLst(){
+    let payload = {
+      email: JSON.parse(this.userData)?.email,
+      type: JSON.parse(this.userData)?.type,
+      companyname: JSON.parse(this.userData)?.companyName,
+      companycode: JSON.parse(this.userData)?.companyCode,
+      projectId: '', projectname: '', filter: 'All',
+    }
+    this.switchService.projectLst(payload).subscribe({ next: (res:any) => {
+      if(res){
+        this.projectLst = res.projList;
+        this.projPmntLst = res.paymentLastList;
+        this.projectLst.length > 0 ? this.isStageDel = true : this.isStageDel = false;
+        this.projPmntLst.length > 0 ? this.isPmntStageDel = true : this.isPmntStageDel = false;
+      } else {
+          this.toastr.error(res.message);
+        }
+      }
+    })
   }
   dynamicFields: { value: string; percent: number }[] = [];
   initializeDynamicFields() {
+    this.dynamicFields = [];
     // Loop through f1 to f30 and add only those with non-empty values to dynamicFields
     for (let i = 1; i <= 30; i++) {
       const fieldName = `f${i}`;
@@ -251,11 +332,28 @@ export class SettingsComponent extends BaseComponent implements OnInit{
         });
       }
     }
+    this.dynamicFields.length != 0 ? this.isStage = true : false;
+  }
+
+  dynamicPmntFields: { value: string; percent: number }[] = [];
+  initializeDynamicPmntFields() {
+    this.dynamicPmntFields = [];
+    for (let i = 1; i <= 30; i++) {
+      const fieldName = `f${i}`;
+      const percentName = `f${i}Percent`;
+      if (this.pmntStageLst[fieldName]) {
+        this.dynamicPmntFields.push({
+          value: this.pmntStageLst[fieldName],
+          percent: this.pmntStageLst[percentName],
+        });
+      }
+    }
+    this.dynamicPmntFields.length != 0 ? this.isPmntStage = true : false;
   }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
-  }    
+  }
 
   get f() {
     return this.userForm.controls;
@@ -321,7 +419,7 @@ export class SettingsComponent extends BaseComponent implements OnInit{
     if(res){
       this.stageLst = res;
       this.initializeDynamicFields();
-      this.dynamicFields.length !=0 ? this.showStages = true : this.isShowUsers = false;
+      this.dynamicFields.length !=0 ? this.showStages = true : this.showStages = false;
       } else{
         this.toastr.error(res.message)
       }
@@ -333,13 +431,22 @@ export class SettingsComponent extends BaseComponent implements OnInit{
   }
 
   saveLastStages() {
-    // Update payload based on dynamicFields
+    let totalPercent = 0;
+
+  // Check for zero or empty percent values
+  for (const field of this.dynamicFields) {
+    const percent = +field.percent; // Convert string to number safely
+    if (percent === 0) {
+      this.toastr.error('Percent values cannot be zero or empty.', 'Validation Error');
+      return;
+    }
+    totalPercent += percent;
+  }
+  if (totalPercent === 100) {
     this.dynamicFields.forEach((field, index) => {
       this.stageLst[`f${index + 1}`] = field.value;
       this.stageLst[`f${index + 1}Percent`] = field.percent;
     });
-
-    // Clear remaining unused fields in the payload
     for (let i = this.dynamicFields.length + 1; i <= 30; i++) {
       this.stageLst[`f${i}`] = '';
       this.stageLst[`f${i}Percent`] = 0;
@@ -356,6 +463,11 @@ export class SettingsComponent extends BaseComponent implements OnInit{
         this.toastr.error(error.statusText);
       },
     })
+    } else if (totalPercent < 100) {
+      this.toastr.error('Total percent is less than 100. Please adjust the values.', 'Validation Error');
+    } else {
+      this.toastr.error('Total percent exceeds 100. Please adjust the values.', 'Validation Error');
+    }
   }
 
   onDeleteStages(){
@@ -370,7 +482,7 @@ export class SettingsComponent extends BaseComponent implements OnInit{
       this.toastr.success('stage removed successfully')
       // this.stageLst = [];
       // this.getAllStages();
-      this.showStages = false;
+      this.showStages = false, this.isStage = false;
       } else{
         this.toastr.error(res.message)
       }
@@ -380,27 +492,129 @@ export class SettingsComponent extends BaseComponent implements OnInit{
     },
     })
   }
-  
-  getUsers(){
-    // this.switchService.getAllUsers().subscribe({ next: (res:any) => {
-      let cn = JSON.parse(this.userData).companyName;
-      let cc = JSON.parse(this.userData).companyCode ;
-      this.switchService.cmpnyUsers(cn, cc).subscribe({ next: (res:any) => {
+
+  savePmntInitialStage(){
+    this.switchService.pmntStageSave(this.savePmntData).subscribe({ next: (res:any) => {
+    if(res){
+      this.toastr.success('Stages saved successfully');
+      this.offcanvasService.dismiss();
+      this.getAllPmntStages();
+      } else{
+        this.toastr.error(res.message)
+      }
+    },
+    error: (error) => {
+      this.toastr.error(error.statusText);
+      },
+    })
+  }
+
+  getAllPmntStages(){
+    let payload = {
+      "email": JSON.parse(this.userData).email,
+      "companyname": JSON.parse(this.userData).companyName,
+      "companycode": JSON.parse(this.userData).companyCode,
+      "type": JSON.parse(this.userData).type
+    }
+    this.switchService.getPmntStages(payload).subscribe({ next: (res:any) => {
+    if(res){
+      this.pmntStageLst = res;
+      this.initializeDynamicPmntFields();
+      this.dynamicPmntFields.length !=0 ? this.showPmntStages = true : this.showPmntStages = false;
+      } else{
+        this.toastr.error(res.message)
+      }
+    },
+    error: (error) => {
+      this.toastr.error(error.statusText);
+    },
+    })
+  }
+
+  savePmntLastStages() {
+    let totalPercent = 0;
+    for (const field of this.dynamicPmntFields) {
+      const percent = +field.percent; 
+      if (percent === 0) {
+        this.toastr.error('Percent values cannot be zero or empty.', 'Validation Error');
+        return;
+      }
+      totalPercent += percent;
+    }
+    // Check if total equals 100
+    if (totalPercent === 100) {
+      this.dynamicPmntFields.forEach((field, index) => {
+      this.pmntStageLst[`f${index + 1}`] = field.value;
+      this.pmntStageLst[`f${index + 1}Percent`] = field.percent;
+    });
+    for (let i = this.dynamicPmntFields.length + 1; i <= 30; i++) {
+      this.pmntStageLst[`f${i}`] = '';
+      this.pmntStageLst[`f${i}Percent`] = 0;
+    }
+    this.switchService.pmntStageSave(this.pmntStageLst).subscribe({ next: (res:any) => {
       if(res){
-        this.userLst = res
-        // this.dataSource = new MatTableDataSource<any>(res);
-        this.dataSource.data = res;
+        this.toastr.success('Stages saved successfully');
+        // this.getAllStages();
         } else{
-          this.toastr.error(res.message,'signup', {
-            timeOut: 3000,
-            positionClass: 'toast-top-right',
-          });
+          this.toastr.error(res.message)
         }
       },
       error: (error) => {
         this.toastr.error(error.statusText);
       },
     })
+    } else if (totalPercent < 100) {
+      this.toastr.error('Total percent is less than 100. Please adjust the values.', 'Validation Error');
+    } else {
+      this.toastr.error('Total percent exceeds 100. Please adjust the values.', 'Validation Error');
+    }
+  }
+
+  onDeletePmntStages(){
+    let payload = {
+      "email": JSON.parse(this.userData).email,
+      "companyname": JSON.parse(this.userData).companyName,
+      "companycode": JSON.parse(this.userData).companyCode,
+      "type": JSON.parse(this.userData).type
+    }
+    this.switchService.deletePmntStage(payload).subscribe({ next: (res:any) => {
+    if(res.status == true){
+      this.toastr.success('Stages removed successfully')
+      // this.stageLst = [];
+      // this.getAllStages();
+      this.showPmntStages = false, this.isPmntStage = false;
+      } else{
+        this.toastr.error(res.message)
+      }
+    },
+    error: (error) => {
+      this.toastr.error(error.statusText);
+    },
+    })
+  }
+
+  getUsers(){
+    if(JSON.parse(this.userData).type == 2){
+      // this.switchService.getAllUsers().subscribe({ next: (res:any) => {
+        let cn = JSON.parse(this.userData).companyName;
+        let cc = JSON.parse(this.userData).companyCode ;
+        this.switchService.cmpnyUsers(cn, cc).subscribe({ next: (res:any) => {
+        if(res){
+          this.userLst = res
+          // this.dataSource = new MatTableDataSource<any>(res);
+          this.dataSource.data = res;
+          } else{
+            this.toastr.error(res.message,'signup', {
+              timeOut: 3000,
+              positionClass: 'toast-top-right',
+            });
+          }
+        },
+        error: (error) => {
+          this.toastr.error(error.statusText);
+        },
+      })
+    }
   }
 
   passwordValidator(control: any) {
@@ -603,7 +817,6 @@ export class SettingsComponent extends BaseComponent implements OnInit{
 
   onClickButton() {
       this.openModal();  // Open the modal on successful response
-        
   }
 
   openModal() {
@@ -739,11 +952,22 @@ export class SettingsComponent extends BaseComponent implements OnInit{
   }  
      
   removeQuantity(i:number) {  
-    this.quantities().removeAt(i);  
+    this.quantities().removeAt(i);
   } 
   openRight(content: any) {
+    this.resetForm();
     this.offcanvasService.open(content, { position: 'end' });
   } 
+
+  // Resets the input and unselects the checkboxes
+  resetForm() {
+    this.newItem = ''; // Reset the input field
+    this.addMoreVisible = false; // Hide the 'Add More' section
+    this.planDetails.forEach(plan => {
+      plan.checked = false; // Unselect all checkboxes
+    });
+  }
+  
   openRights(content: any) {
     this.offcanvasService.open(content, { position: 'end' });
   } 

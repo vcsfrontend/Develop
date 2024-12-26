@@ -61,6 +61,14 @@ export class MyTasksComponent {
     this.getProjectDetails(); this.getAllStages();
   }
 
+  isDisabled(option: any): boolean {
+    const selectedStatus = this.dynamicFields.find(field => field.value === this.proStatus);
+    if (selectedStatus) {
+        return option.percent === selectedStatus.percent;
+    }
+    return false;
+  }
+
   dynamicFields: { value: string; percent: number; fieldNm: string; }[] = [];
   initializeDynamicFields() {
     // Loop through f1 to f30 and add only those with non-empty values to dynamicFields
@@ -100,43 +108,50 @@ export class MyTasksComponent {
 
   getProjectDetails(){
     this.switchService.onProjectDtls(this.proId).subscribe({ next: (res:any) =>{
-      if(res){    
-        this.proData = res;
-        this.proStatus = res?.projStatus
-        console.log('proData -', this.proData);
-      } else {
-        this.toastr.error(res.message);
-        }
-      },
-      error: (error) => {
-        this.toastr.error(error.statusText);
-      },
-      })
+    if(res){    
+      this.proData = res;
+      this.proStatus = res?.projStatus
+    } else {
+      this.toastr.error(res.message);
+      }
+    },
+    error: (error) => {
+      this.toastr.error(error.statusText);
+    },
+    })
   }
 
   onSubmitTaskDetails(){
-    let payload = {
-      "id": 0,
-      "projectId": this.proData.projectId,
-      "heading": this.heading,
-      // "clientname": "string",
-      "projectStatus": this.proStatus,
-      "description": this.description,
-      "updatedBy": JSON.parse(this.userData).username,
+    if(this.heading == '' && this.description == ''){
+      this.toastr.warning('please enter heading and description');
+    } else if(this.heading == ''){
+      this.toastr.warning('please enter heading');
+    } else if(this.description == ''){
+      this.toastr.warning('please enter description');
+    } else {
+      let payload = {
+        "id": 0,
+        "projectId": this.proData.projectId,
+        "heading": this.heading,
+        // "clientname": "string",
+        "projectStatus": this.proStatus,
+        "description": this.description,
+        "updatedBy": JSON.parse(this.userData).username,
+      }
+      this.switchService.onAddTaskDtls(payload).subscribe({ next: (res:any) =>{
+      if(res.status == true){
+        this.toastr.success(res.message);
+        this.router.navigate(['/dashboard/projects']);
+        return;
+        } else {
+          this.toastr.error(res.message);
+          }
+        },
+        error: (error) => {
+          this.toastr.error(error.statusText);
+        },
+      })
     }
-    this.switchService.onAddTaskDtls(payload).subscribe({ next: (res:any) =>{
-    if(res.status == true){
-      this.toastr.success(res.message);
-      this.router.navigate(['/dashboard/projects']);
-      return;
-      } else {
-        this.toastr.error(res.message);
-        }
-      },
-      error: (error) => {
-        this.toastr.error(error.statusText);
-      },
-    })
   }
 
   open(content:any) {

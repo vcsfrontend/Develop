@@ -49,7 +49,7 @@
                                                                             <form>
                                                                                 <div class="row">
                                                                                     <div class="col-xl-6">
-                                                                                        <label for="contact-address-firstname" class="form-label">Enter Your Heading :</label>
+                                                                                        <label for="contact-address-firstname" class="form-label">Heading </label>
                                                                                         <input type="text" class="form-control" id="contact-address-firstname" placeholder="Enter Your Heading"
                                                                                         [(ngModel)]="heading" [ngModelOptions]="{standalone: true}">
                                                                                     </div>
@@ -60,11 +60,12 @@
                                                                                         <select class="form-select form-select-lg" [(ngModel)]="proStatus" 
                                                                                             [ngModelOptions]="{standalone: true}">
                                                                                             <option value="" disabled selected>Select</option>
-                                                                                            <option *ngFor="let c of dynamicFields" [value]="c.value">{{c.value}}</option>
+                                                                                            <option *ngFor="let c of dynamicFields" [value]="c.value"
+                                                                                            [disabled]="isDisabled(c)">{{c.value}}</option>
                                                                                         </select>
                                                                                     </div>
                                                                                     <div class="col-xl-12">
-                                                                                        <label for="contact-address-address" class="form-label">Description :</label>
+                                                                                        <label for="contact-address-address" class="form-label">Description </label>
                                                                                         <textarea class="form-control" id="contact-address-address" rows="2"
                                                                                         [(ngModel)]="description" [ngModelOptions]="{standalone: true}"></textarea>
                                                                                     </div>

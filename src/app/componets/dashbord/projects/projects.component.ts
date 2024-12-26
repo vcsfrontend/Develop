@@ -84,7 +84,7 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
   dataSource = new MatTableDataSource<any>(); 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   modal: any; ttlAmtToBeRcvd: any; projectLst: any; userDetails:any; dateDiff: any; 
-  roleid:any;  actstatus: any; stageLst: any; createProjectForm!: FormGroup;
+  roleid:any;  actstatus: any; stageLst: any; pmntStageLst: any; createProjectForm!: FormGroup;
   pondOptions: FilePondOptions; 
   
   updateDisplayedCards(): void {
@@ -106,7 +106,8 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
       alert('Please add stages before creating a project')
     }else if(this.stageLst?.f1Percent == 0){
       alert('Please add stages percentage before creating a project')
-    }else{
+    }else {
+      this.resetForm();
       this.modalService.open(content10, { size: 'lg' },);
     }
 	}
@@ -114,7 +115,13 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
 		this.modalService.open(content11, { size: 'lg' },);
 	}
   VerticallyScrol(content12:any) {
-		this.modalService.open(content12, {  scrollable: true,centered: true,size: 'xl' });
+    if(this.pmntStageLst?.f1 == '' || this.pmntStageLst?.f1 == null ){
+      alert('Please add payment stages before adding project Estimation')
+    }else if(this.pmntStageLst?.f1Percent == 0){
+      alert('Please add payment stages percentage before adding project Estimation')
+    }else {
+      this.modalService.open(content12, {  scrollable: true,centered: true,size: 'xl' });
+    }
 	}
   
   constructor(private fb: FormBuilder, private http: HttpClient, private modalService: NgbModal,
@@ -133,7 +140,7 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     this.getLst(); this.getdesignData(); this.getMatCardLst();
     this.onMinDate(); this.onTodayDt(); this.onClkDesign('i');
-    this.getAllStages();
+    this.getAllStages(); this.getAllPmntStages();
     // this.fetchPaymentStages();
     this.createProjectForm = this.fb.group({
       projectName: ['', Validators.required],
@@ -167,7 +174,7 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
   onStartDateChange(event: Event): void {
     const startDate = (event.target as HTMLInputElement).value;
     this.minEndDate = startDate; // Set the minimum end date
-    const endDate = this.createProjectForm.get('projectStartDate')?.value;
+    const endDate = this.createProjectForm.get('projectEndDate')?.value;
     // Reset the end date if it is earlier than the new start date
     if (endDate && endDate < startDate) {
       this.createProjectForm.get('projectEndDate')?.setValue('');
@@ -211,6 +218,41 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
     })
   }
 
+  dynamicPmntFields: { value: string; percent: number }[] = [];
+  initializeDynamicPmntFields() {
+    for (let i = 1; i <= 30; i++) {
+      const fieldName = `f${i}`;
+      const percentName = `f${i}Percent`;
+      if (this.pmntStageLst[fieldName]) {
+        this.dynamicPmntFields.push({
+          value: this.pmntStageLst[fieldName],
+          percent: this.pmntStageLst[percentName],
+        });
+      }
+    }
+  }
+
+  getAllPmntStages(){
+    let payload = {
+      "email": JSON.parse(this.userData).email,
+      "companyname": JSON.parse(this.userData).companyName,
+      "companycode": JSON.parse(this.userData).companyCode,
+      "type": JSON.parse(this.userData).type
+    }
+    this.switchService.getPmntStages(payload).subscribe({ next: (res:any) => {
+    if(res){
+      this.pmntStageLst = res;
+      this.initializeDynamicPmntFields();
+      } else{
+        this.toastr.error(res.message)
+      }
+    },
+    error: (error) => {
+      this.toastr.error(error.statusText);
+    },
+    })
+  }
+
   onClkDesign(key:string = ''){
     this.userData = localStorage.getItem('userDetails');
     this.switchService.onAdonai(JSON.parse(this.userData)?.email).subscribe({
@@ -234,7 +276,6 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
 
   onSubmit(): void {
     this.submitted = true;
-    this.btnDisable = true;
     if (this.createProjectForm.invalid) {
       this.toastr.error('Please fill mandatory fields');
       // this.btnDisable = false;
@@ -255,8 +296,8 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
       this.switchService.saveProject(projectData).subscribe({
         next: (response) => {
           this.toastr.success(response.message);
-          this.modalService.dismissAll(),
-          this.getLst(); this.getdesignData();
+          this.getLst(); this.getdesignData(); this.getMatCardLst();
+          this.modalService.dismissAll();
         },
         error: (error) => {
           this.toastr.error('Error creating project', error);
@@ -277,11 +318,12 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
   // Optional: You can create a method to reset the form
   resetForm(): void {
     this.createProjectForm.reset();
+    this.createProjectForm.get('businessCategory')?.setValue('');
   }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
-  }  
+  }
 
   getSNo(index: number): number {
     if (this.paginator && this.paginator.pageIndex !== undefined && this.paginator.pageSize !== undefined) {
@@ -289,6 +331,7 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
     }
     return index + 1; // Default return if paginator is not yet defined
   }
+
   addDateDifference() {
     this.projectLst = this.projectLst.map((e:any) => ({
       ...e, dateDifference: this.calculateDateDifference(e.projectEndDate)
@@ -352,7 +395,7 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
           } else {
             project.paymentPercent = 0;  // If no match, set projPercent to 0 (or handle accordingly)
           }
-      });
+        });
           this.matcardLst = projLst;
           // this.addDateDifference();
           this.matcardLst?.sort((a:any, b:any) => a.priorityDays - b.priorityDays);
@@ -478,13 +521,34 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
     return new Date(utcDate.getTime() + istOffset);
   }
 
+  isValueSelected(value: string, currentIndex: number): boolean {
+    return this.paymentStages.some((payment:any, index:any) => payment.paymentStage === value && index !== currentIndex);
+  }
+  
+  updatePercent(payment:any){
+    const selectedStage = this.dynamicPmntFields.find(item => item.value === payment.paymentStage);
+    if (selectedStage) {
+      payment.percantage = +selectedStage.percent;
+      this.calculateAmountToBeReceived(payment);
+    } else {
+      payment.percantage = '';
+    }
+  }
+
   calculateAmountToBeReceived(payment: any): void {
     if (this.estamount && payment.percantage) {
-      payment.amountToBeRecieved = (this.estamount * parseFloat(payment.percantage) / 100).toFixed(0);
+      payment.amountToBeRecieved = (+this.estamount * parseFloat(payment.percantage) / 100).toFixed(0);
     } else {
       payment.amountToBeRecieved = '0';
     }
   }
+  // calculateAmountToBeReceived(payment: any): void {
+  //   if (this.estamount && payment.percantage) {
+  //     payment.amountToBeRecieved = (+this.estamount * parseFloat(payment.percantage) / 100).toFixed(0);
+  //   } else {
+  //     payment.amountToBeRecieved = '0';
+  //   }
+  // }
 
   onPercentageChange(payment: any): void {
     // Calculate the total percentage excluding the current row
