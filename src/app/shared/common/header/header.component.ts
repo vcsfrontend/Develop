@@ -389,7 +389,7 @@ export class HeaderComponent implements OnInit {
   onLogout(){
     // window.location.href = 'https://crmexpert.vcs.plus/auth/logout';
     if(this.isAdonai){
-      this.http.post('https://adonai.vcs.plus/api/account/oauth/token/logout', {}).subscribe({ next: (res:any) => {
+      this.http.post('https://adonai.vcs.plus/api/account/oauth/token/logout', {}, { withCredentials: true }).subscribe({ next: (res:any) => {
         location.reload();//adonai.vcs.plus/api/account/oauth/token/logout
         },
         error: (error) => {
@@ -397,7 +397,7 @@ export class HeaderComponent implements OnInit {
         },
       })
     }
-    this.router.navigate(['/auth/login']);
+    // this.router.navigate(['/auth/login']);
     localStorage.clear();
   }
 
