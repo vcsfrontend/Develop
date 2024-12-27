@@ -5,11 +5,12 @@ import { ActivatedRoute } from '@angular/router';
 import { SwitherService } from '../../../shared/services/swither.service';
 import { ToastrService } from 'ngx-toastr';
 import { CommonModule, DatePipe } from '@angular/common';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-timeline',
   standalone: true,
-  imports: [SharedModule, CommonModule],
+  imports: [SharedModule, CommonModule, RouterModule ],
   providers: [{ provide: ToastrService, useClass: ToastrService }, DatePipe],
   templateUrl: './timeline.component.html',
   styleUrl: './timeline.component.scss'
