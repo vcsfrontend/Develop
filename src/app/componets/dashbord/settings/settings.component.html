@@ -22,11 +22,11 @@
     </div>
 </div> -->
 <div class="card custom-card card-size">
-    <div class="card-header justify-content-between">
+    <div class="card-header justify-content-between" *ngIf="userType==2">
         <div class="card-title">
             <h6>Signup Form</h6>
         </div>
-        <div class="d-flex float-end" *ngIf="userType==2">
+        <div class="d-flex float-end">
             <div class="float-end" *ngIf="!isAddEdt">
                 <button type="button" class="btn btn-primary text-center"
                     (click)="isAddEdt=!isAddEdt;aeTyp='a';onRst()">Add Team
@@ -295,7 +295,7 @@
                                 [ngModelOptions]="{standalone: true}" [attr.aria-label]="'Digit ' + (i + 1)" />
                         </div>
                     </div>
-                    <div class="col-xl-12 justify-content-center text-center text-dark">
+                    <div class="col-xl-12 justify-content-center text-center text-dark pb-3">
                         <span>Don't get otp ? &nbsp; &nbsp;
                             <a href="javascript:void(0)" class="text-primary"
                                 (click)="onMailCheck();isResend=true">resend </a></span>

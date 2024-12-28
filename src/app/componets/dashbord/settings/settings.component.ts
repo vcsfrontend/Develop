@@ -781,7 +781,9 @@ export class SettingsComponent extends BaseComponent implements OnInit{
   onSignupApi(){
     this.switchService.signupApi(this.pload).subscribe({ next: (res:any) => {
       if(res.status == true){
-        this.closeModal(), 
+        this.closeModal();
+        this.isAddEdt = !this.isAddEdt;
+        this.getUsers();
         this.toastr.success(res.message);
         } else {
           this.btnDisable = false;
