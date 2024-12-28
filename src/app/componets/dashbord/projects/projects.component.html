@@ -300,7 +300,7 @@
                                 aria-valuemin="0" aria-valuemax="100">
                                 <div class="progress-bar bg-primary" [style.width.%]="project.percentage"></div>
                             </div>
-                            <div class="mt-1"><span class="text-primary fw-medium">{{project.percentage}} 20%</span> Completed</div>
+                            <div class="mt-1"><span class="text-primary fw-medium">{{project.percentage || 20}} %</span> Completed</div>
                         </div>
                         <div class="mb-1">Payment Status : {{project.paymentStage}}</div>
                         <div class="progress progress-xs progress-animate" role="progressbar" aria-valuenow="80"

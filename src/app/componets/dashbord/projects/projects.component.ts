@@ -299,9 +299,10 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
       // projectData.projectEndDate = this.dp.transform(projectData.projectEndDate, 'dd-MM-yyyy'),
       this.switchService.saveProject(projectData).subscribe({
         next: (response) => {
-          this.toastr.success(response.message);
+          const parts = response.message.split('<>');
+          this.toastr.success(parts[0]);
           this.getLst(); this.getdesignData(); this.getMatCardLst();
-          this.modalService.dismissAll(); this.onSubmitTaskDetails(response)
+          this.modalService.dismissAll(); this.onSubmitTaskDetails(parts[1])
         },
         error: (error) => {
           this.toastr.error('Error creating project', error);
@@ -319,10 +320,10 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
     }
   }
 
-  onSubmitTaskDetails(res:any){
+  onSubmitTaskDetails(id:any){
     let payload = {
       "id": 0,
-      "projectId": res.projectId,
+      "projectId": id,
       "heading": 'Project created',
       "projectStatus": this.dynamicFields[0].value,
       "description": 'Project start stage',

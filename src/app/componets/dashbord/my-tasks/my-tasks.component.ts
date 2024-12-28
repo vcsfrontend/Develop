@@ -64,12 +64,22 @@ export class MyTasksComponent {
   isDisabled(option: any): boolean {
     const selectedStatus = this.dynamicFields.find(field => field.value === this.proStatus);
     if (selectedStatus) {
-        return option.percent === selectedStatus.percent;
+      return option.percent === selectedStatus.percent;
     }
     return false;
   }
 
-  dynamicFields: { value: string; percent: number; fieldNm: string; }[] = [];
+  updateDisabledFields() {
+    let disable = true;
+    this.dynamicFields = this.dynamicFields.map(field => {
+      if (field.value === this.proStatus) {
+        disable = false;
+      }
+      return { ...field, disabled: disable };
+    });
+  }
+
+  dynamicFields: { value: string; percent: number; fieldNm: string; disabled?: boolean }[] = [];
   initializeDynamicFields() {
     // Loop through f1 to f30 and add only those with non-empty values to dynamicFields
     for (let i = 1; i <= 30; i++) {
@@ -83,6 +93,7 @@ export class MyTasksComponent {
         });
       }
     }
+    this.updateDisabledFields()
   }
 
   getAllStages(){
@@ -110,7 +121,7 @@ export class MyTasksComponent {
     this.switchService.onProjectDtls(this.proId).subscribe({ next: (res:any) =>{
     if(res){    
       this.proData = res;
-      this.proStatus = res?.projStatus
+      this.proStatus = res?.projStatus;
     } else {
       this.toastr.error(res.message);
       }

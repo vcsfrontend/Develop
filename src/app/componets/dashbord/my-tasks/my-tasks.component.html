@@ -60,8 +60,9 @@
                                                                                         <select class="form-select form-select-lg" [(ngModel)]="proStatus" 
                                                                                             [ngModelOptions]="{standalone: true}">
                                                                                             <option value="" disabled selected>Select</option>
-                                                                                            <option *ngFor="let c of dynamicFields" [value]="c.value"
-                                                                                            [disabled]="isDisabled(c)">{{c.value}}</option>
+                                                                                            <option *ngFor="let c of dynamicFields" [value]="c.value" [disabled]="c.disabled"
+                                                                                            >{{c.value}}</option>
+                                                                                            <!-- [disabled]="isDisabled(c)" -->
                                                                                         </select>
                                                                                     </div>
                                                                                     <div class="col-xl-12">
