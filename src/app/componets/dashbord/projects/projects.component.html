@@ -732,7 +732,7 @@
                       <input type="text" class="form-control form-control-sm" [(ngModel)]="payment.percantage" placeholder="Enter Percentage"
                         (ngModelChange)="validateField(i, 'percantage');onPercentageChange(payment)" 
                         onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || event.charCode == 8)"
-                        [disabled]="!payment.paymentStage || !payment.isNew">
+                        [disabled]="true">
                     </td>
                     <td style="width:12%">
                         <input type="text" class="form-control form-control-sm" [(ngModel)]="payment.amountToBeRecieved" placeholder="Enter Amount"
