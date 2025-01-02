@@ -88,7 +88,7 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
   pondOptions: FilePondOptions; lastField:any;
   
   updateDisplayedCards(): void {
-    this.displayedCards = this.showMore ? this.matcardLst : this.matcardLst?.slice(0, 4);
+    this.displayedCards = this.showMore ?  this.matcardLst?.slice(0, 4) : this.matcardLst;
   }
 
   toggleShowMore(): void {
