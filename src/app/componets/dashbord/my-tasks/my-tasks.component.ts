@@ -93,7 +93,9 @@ export class MyTasksComponent {
         });
       }
     }
-    this.updateDisabledFields()
+    this.updateDisabledFields();
+    this.onStageChange(this.proData.projStatus);
+
   }
 
   getAllStages(){
@@ -131,6 +133,11 @@ export class MyTasksComponent {
     },
     })
   }
+  selectedPercent:any;
+  onStageChange(data:any){
+    const selectedPlan = this.dynamicFields.find((item:any) => item.value === data);
+    this.selectedPercent = selectedPlan ? selectedPlan.percent : null;
+  }
 
   onSubmitTaskDetails(){
     if(this.heading == '' && this.description == ''){
@@ -141,13 +148,14 @@ export class MyTasksComponent {
       this.toastr.warning('please enter description');
     } else {
       let payload = {
-        "id": 0,
+        "id": this.proData.id,
         "projectId": this.proData.projectId,
         "heading": this.heading,
         // "clientname": "string",
         "projectStatus": this.proStatus,
         "description": this.description,
         "updatedBy": JSON.parse(this.userData).username,
+        "percentage": this.selectedPercent
       }
       this.switchService.onAddTaskDtls(payload).subscribe({ next: (res:any) =>{
       if(res.status == true){

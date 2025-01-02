@@ -58,7 +58,7 @@
                                                                                         <!-- <input type="text" class="form-control" id="contact-address-lastname" 
                                                                                         [(ngModel)]="proStatus" [ngModelOptions]="{standalone: true}" [disabled]="true"> -->
                                                                                         <select class="form-select form-select-lg" [(ngModel)]="proStatus" 
-                                                                                            [ngModelOptions]="{standalone: true}">
+                                                                                            [ngModelOptions]="{standalone: true}" (change)="onStageChange($any($event.target).value)">
                                                                                             <option value="" disabled selected>Select</option>
                                                                                             <option *ngFor="let c of dynamicFields" [value]="c.value" [disabled]="c.disabled"
                                                                                             >{{c.value}}</option>

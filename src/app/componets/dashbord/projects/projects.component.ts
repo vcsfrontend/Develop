@@ -322,12 +322,13 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
 
   onSubmitTaskDetails(id:any){
     let payload = {
-      "id": 0,
+      // "id": 0,
       "projectId": id,
       "heading": 'Project created',
       "projectStatus": this.dynamicFields[0].value,
       "description": 'Project start stage',
-      "updatedBy": JSON.parse(this.userData).username,
+      updatedBy: JSON.parse(this.userData).username,
+      percentage : this.dynamicFields[0].percent,
     }
     this.switchService.onAddTaskDtls(payload).subscribe({ next: (res:any) =>{
     if(res.status == true){
@@ -415,6 +416,7 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
       if(res){
         const projLst = res.projList;
         const paymentLastLst = res.paymentLastList;
+        const proLastLst = res.projectLastList;
         projLst?.forEach((project:any) => {
           const matchedProject = paymentLastLst.find((lastProject:any) => lastProject.projectId === project.projectId);
           if (matchedProject) {
@@ -422,6 +424,15 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
             project.paymentStage = matchedProject.paymentStage  // Add projPercent to the project
           } else {
             project.paymentPercent = 0;  // If no match, set projPercent to 0 (or handle accordingly)
+          }
+        });
+        projLst?.forEach((e:any) => {
+          const matchedProjectstg = proLastLst.find((lastStg:any) => lastStg.projectId === e.projectId);
+          if (matchedProjectstg) {
+            e.projectPercent = matchedProjectstg.projectPercent;
+            e.projectStage = matchedProjectstg.projectStage  // Add projPercent to the project
+          } else {
+            e.projectPercent = 0;  // If no match, set projPercent to 0 (or handle accordingly)
           }
         });
           this.matcardLst = projLst;
@@ -666,6 +677,9 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
       this.toastr.warning('Please fill all the fields before adding a new row.', 'Validation Error');
       return;
     }else {
+      // let totalPendingSum = this.paymentStages.reduce((sum: number, e: any) => {
+      //   return sum + (+e.pendingAmount || 0); 
+      // }, 0);
       let payload = this.paymentStages.map((e:any) => ({
         id: e.id || 0,
         projectId: e.projectId || "",
@@ -678,9 +692,8 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
         updatedBy: e.updatedBy || "",
         projectEstimation: e.projectEstimation || "",
         totalAmount: e.totalAmount || "",
-        totalPending: e.totalPending || ""
+        totalPending: '' //totalPendingSum
       }));
-        
       this.switchService.saveProjEstimation(payload).subscribe({
         next: (response) => {
           this.toastr.success(response.message);
