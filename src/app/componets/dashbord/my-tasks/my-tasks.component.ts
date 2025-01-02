@@ -12,6 +12,7 @@ import { SwitherService } from '../../../shared/services/swither.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { timeout } from 'rxjs';
 @Component({
   selector: 'app-my-tasks',
   standalone: true,
@@ -58,7 +59,7 @@ export class MyTasksComponent {
       dateFormat: 'H:i',
     };
     flatpickr('#addignedDate', this.flatpickrOptions);
-    this.getProjectDetails(); this.getAllStages();
+    this.getProjectDetails()
   }
 
   isDisabled(option: any): boolean {
@@ -77,6 +78,11 @@ export class MyTasksComponent {
       }
       return { ...field, disabled: disable };
     });
+    setTimeout(() => {
+      this.onStageChange(this.proData.projStatus);
+    }, 500);
+    console.log(this.dynamicFields);
+    
   }
 
   dynamicFields: { value: string; percent: number; fieldNm: string; disabled?: boolean }[] = [];
@@ -94,8 +100,6 @@ export class MyTasksComponent {
       }
     }
     this.updateDisabledFields();
-    this.onStageChange(this.proData.projStatus);
-
   }
 
   getAllStages(){
@@ -124,6 +128,7 @@ export class MyTasksComponent {
     if(res){    
       this.proData = res;
       this.proStatus = res?.projStatus;
+      this.getAllStages();
     } else {
       this.toastr.error(res.message);
       }
