@@ -247,10 +247,7 @@
                                     id="city" formControlName="city" [(ngModel)]="city"
                                     [ngClass]="{ 'is-invalid': submitted && f['city'].errors }">
                                     <option value="" disabled selected>Select</option>
-                                    <option value="Bangalore">Bangalore</option>
-                                    <option value="Chennai">Chennai</option>
-                                    <option value="Delhi">Delhi</option>
-                                    <option value="Hyderabad">Hyderabad</option>
+                                    <option *ngFor="let c of cityList" [value]="c.city">{{c.city}} </option>
                                 </select>
                                 <div *ngIf="submitted && f['city'].errors" class="invalid-feedback">
                                     <div *ngIf="f['city'].errors['required']">City is required</div>
@@ -502,14 +499,14 @@
 </ng-template>
 
 
-<div class="row">
+<!-- <div class="row">
     <div class="col-xl-12">
         <div class="card custom-card">
             <div class="card-header justify-content-between">
                 <div class="card-title">
                     Static Fileds
                 </div>
-                <!-- <div class="d-flex flex-wrap gap-2">
+                <div class="d-flex flex-wrap gap-2">
                     <div ngbDropdown class="dropdown">
                         <a ngbDropdownToggle href="javascript:void(0);"
                             class="btn btn-primary btn-sm btn-wave waves-effect waves-light" data-bs-toggle="dropdown"
@@ -522,7 +519,7 @@
                             <li><a ngbDropdownItem class="dropdown-item" href="javascript:void(0);">Relevant</a></li>
                         </ul>
                     </div>
-                </div> -->
+                </div>
             </div>
             <div class="card-body p-0">
                 <div class="table-responsive">
@@ -593,7 +590,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            <!-- <tr>
+                            <tr>
                                 <th scope="row" class="ps-4"><input class="form-check-input" type="checkbox"
                                         id="checkboxNoLabel4" value="" aria-label="..."></th>
                                 <td>
@@ -682,7 +679,7 @@
                                                 class="ri-delete-bin-line"></i></a>
                                     </div>
                                 </td>
-                            </tr> -->
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -714,4 +711,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
