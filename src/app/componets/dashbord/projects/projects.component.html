@@ -1,26 +1,22 @@
 <div class="my-4 page-header-breadcrumb d-flex align-items-center justify-content-between flex-wrap gap-2">
-    <div>
-        <h1 class="page-title fw-medium fs-18 mb-2">Projects</h1>
-        <div class="">
-            <nav>
-                <ol class="breadcrumb mb-0">
-                    <li class="breadcrumb-item"><a href="javascript:void(0);">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Projects</li>
-                </ol>
-            </nav>
-        </div>
-    </div>
+    <h1 class="page-title fw-medium fs-18 mb-2">Projects</h1>
+    <nav>
+        <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a href="javascript:void(0);">Dashboard</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Projects</li>
+        </ol>
+    </nav>
 </div>
 <div class="col-xl-12 col-xxl-12 col-md-12 col-lg-12 col-sm-12">
     <div class="card custom-card ">
-        <div class="card-header justify-content-between " *ngIf="roleid==7">
+        <div class="card-header justify-content-between" *ngIf="roleid==7">
             <marquee behavior="scroll" direction="left" class="fs-18 font-weight-bold" style="color: #006699;">
                 <!-- <p *ngIf="dateDiff=='12'" ><strong> Welcome to adonai, Explore Endless Designs </strong></p> -->
-                <p *ngIf="dateDiff==0" ><strong> Upgrade Your Plan</strong></p>
-                <p *ngIf="dateDiff!=0" ><strong> Enjoy Your {{dateDiff}} Days Free Trail </strong></p>
+                <p *ngIf="dateDiff==0"><strong> Upgrade Your Plan</strong></p>
+                <p *ngIf="dateDiff!=0"><strong> Enjoy Your {{dateDiff}} Days Free Trail </strong></p>
             </marquee>
         </div>
-        <div class="card-header justify-content-between " *ngIf="roleid!=7">
+        <div class="card-header justify-content-between" *ngIf="roleid!=7">
             <marquee behavior="scroll" direction="left" class="fs-18 font-weight-bold" style="color: #006699;">
                 <p ><strong> Welcome to adonai, Explore Endless Designs </strong></p>
                 <!-- <p *ngIf="dateDiff=='0'" ><strong> Upgrade Your Plan</strong></p>
@@ -30,14 +26,14 @@
         <div class="row">
             <div class="card-body col-xxl-12 col-xl-12 col-md-12 col-lg-12 col-sm-12 text-center">
                 <div class="d-grid gap-2 text-center">
-                    <img class="rounded mx-auto d-block demo " src="/assets/images/company-logos/adonai_logo.png" alt="">
+                    <img class="rounded mx-auto d-block demo" src="/assets/images/company-logos/adonai_logo.png" alt="">
                 </div>
             </div>
             <div class="col-xxl-4 col-lg-4 col-md-4 col-xl-4 text-center mx-auto">
-                <button class="btn button   btn-wave btn-w-lg  font-weight-bold" 
+                <button class="btn button btn-wave btn-w-lg font-weight-bold" 
                     style="background-color: #006699; color: white;"  aria-expanded="false" (click)="onClkDesign()"
-                    type="button" [disabled]="(roleid == 7 && dateDiff == '0' ) || (roleid == 12 && actstatus == false) ">Click to Explore Endless Designs </button>
-
+                    type="button" [disabled]="(roleid == 7 && dateDiff == '0') || (roleid == 12 && actstatus == false)">
+                    Click to Explore Endless Designs </button>
             </div>
         </div>
     </div>
@@ -275,7 +271,7 @@
     </div>
     <div class="col-xxl-12" [ngStyle]="{ 'max-height': showMore ? 'auto' : '330px', 'overflow-y': showMore ? 'visible' : 'auto' }">
         <div class="row">
-            <div class="col-xxl-3 col-lg-3 col-md-3 col-xl-3 col-sm-6" *ngFor="let project of matcardLst">
+            <div class="col-xxl-3 col-lg-3 col-md-3 col-xl-3 col-sm-6" *ngFor="let project of displayedCards">
                 <div class="card custom-card">
                     <div class="card-header d-flex align-items-center justify-content-between">
                         <div class="me-2  align-items-center">
@@ -302,9 +298,9 @@
                         <div class="mb-3">
                             <div class="progress progress-xs progress-animate" role="progressbar" aria-valuenow="80"
                                 aria-valuemin="0" aria-valuemax="100">
-                                <div class="progress-bar bg-primary" [style.width.%]="project.percentage"></div>
+                                <div class="progress-bar bg-primary" [style.width.%]="project.projectPercent"></div>
                             </div>
-                            <div class="mt-1"><span class="text-primary fw-medium">{{project.percentage}}%</span> Completed</div>
+                            <div class="mt-1"><span class="text-primary fw-medium">{{project.projectPercent}} %</span> Completed</div>
                         </div>
                         <div class="mb-1">Payment Status : {{project.paymentStage}}</div>
                         <div class="progress progress-xs progress-animate" role="progressbar" aria-valuenow="80"
@@ -736,7 +732,7 @@
                       <input type="text" class="form-control form-control-sm" [(ngModel)]="payment.percantage" placeholder="Enter Percentage"
                         (ngModelChange)="validateField(i, 'percantage');onPercentageChange(payment)" 
                         onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || event.charCode == 8)"
-                        [disabled]="!payment.paymentStage || !payment.isNew">
+                        [disabled]="true">
                     </td>
                     <td style="width:12%">
                         <input type="text" class="form-control form-control-sm" [(ngModel)]="payment.amountToBeRecieved" placeholder="Enter Amount"

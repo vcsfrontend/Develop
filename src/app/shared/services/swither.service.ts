@@ -1,5 +1,5 @@
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
@@ -25,6 +25,15 @@ export class SwitherService {
     return this.http.post<any>(url, data);
   }
 
+  private logoutUrl = 'https://adonai.vcs.plus/api/account/oauth/token/logout';
+  
+  logout(): Observable<any> {
+    return this.http.post(this.logoutUrl, {}, { 
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
   signupApi(data: any): Observable<any> { return this.http.post(`${this.apiUrl}auth/save_vcs_users`, data); }
   cmpnyUsers(companyname: any, companyCode :any): Observable<any> 
   { return this.http.get(`${this.apiUrl}auth/getUserDetails/${companyname}/${companyCode}`); }

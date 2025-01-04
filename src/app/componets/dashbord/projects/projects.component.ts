@@ -85,10 +85,10 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   modal: any; ttlAmtToBeRcvd: any; projectLst: any; userDetails:any; dateDiff: any; 
   roleid:any;  actstatus: any; stageLst: any; pmntStageLst: any; createProjectForm!: FormGroup;
-  pondOptions: FilePondOptions; 
+  pondOptions: FilePondOptions; lastField:any;
   
   updateDisplayedCards(): void {
-    this.displayedCards = this.showMore ? this.matcardLst : this.matcardLst?.slice(0, 4);
+    this.displayedCards = this.showMore ?  this.matcardLst?.slice(0, 4) : this.matcardLst;
   }
 
   toggleShowMore(): void {
@@ -138,9 +138,10 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
   }
  
   ngOnInit(): void {
-    this.getLst(); this.getdesignData(); this.getMatCardLst();
+    this.getLst(); this.getMatCardLst();
     this.onMinDate(); this.onTodayDt(); this.onClkDesign('i');
     this.getAllStages(); this.getAllPmntStages();
+    //this.getdesignData();
     // this.fetchPaymentStages();
     this.createProjectForm = this.fb.group({
       projectName: ['', Validators.required],
@@ -195,6 +196,9 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
         });
       }      
     }
+    this.lastField = this.dynamicFields[this.dynamicFields.length - 1].value;
+    console.log('Last Field:', this.lastField);
+    this.getdesignData()
   }
 
   getAllStages(){
@@ -287,7 +291,7 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
       projectData.companyName = JSON.parse(this.userDetails)?.companyName,
       projectData.email = JSON.parse(this.userDetails)?.email,
       projectData.type = JSON.parse(this.userDetails)?.type,
-      projectData.username = JSON.parse(this.userDetails)?.username, 
+      projectData.username = JSON.parse(this.userDetails)?.username,
       projectData.companyCode = JSON.parse(this.userDetails)?.companyCode,
       projectData.projStatus = this.dynamicFields[0].value,
       projectData.percentage = this.dynamicFields[0].percent,
@@ -295,9 +299,10 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
       // projectData.projectEndDate = this.dp.transform(projectData.projectEndDate, 'dd-MM-yyyy'),
       this.switchService.saveProject(projectData).subscribe({
         next: (response) => {
-          this.toastr.success(response.message);
+          const parts = response.message.split('<>');
+          this.toastr.success(parts[0]);
           this.getLst(); this.getdesignData(); this.getMatCardLst();
-          this.modalService.dismissAll();
+          this.modalService.dismissAll(); this.onSubmitTaskDetails(parts[1])
         },
         error: (error) => {
           this.toastr.error('Error creating project', error);
@@ -313,6 +318,30 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
       this.createProjectForm.markAllAsTouched();
       console.log('Form is invalid');
     }
+  }
+
+  onSubmitTaskDetails(id:any){
+    let payload = {
+      // "id": 0,
+      "projectId": id,
+      "heading": 'Project created',
+      "projectStatus": this.dynamicFields[0].value,
+      "description": 'Project start stage',
+      updatedBy: JSON.parse(this.userData).username,
+      percentage : this.dynamicFields[0].percent,
+    }
+    this.switchService.onAddTaskDtls(payload).subscribe({ next: (res:any) =>{
+    if(res.status == true){
+      this.toastr.success(res.message);
+      return;
+      } else {
+        this.toastr.error(res.message);
+        }
+      },
+      error: (error) => {
+        this.toastr.error(error.statusText);
+      },
+    })
   }
 
   // Optional: You can create a method to reset the form
@@ -387,6 +416,7 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
       if(res){
         const projLst = res.projList;
         const paymentLastLst = res.paymentLastList;
+        const proLastLst = res.projectLastList;
         projLst?.forEach((project:any) => {
           const matchedProject = paymentLastLst.find((lastProject:any) => lastProject.projectId === project.projectId);
           if (matchedProject) {
@@ -394,6 +424,15 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
             project.paymentStage = matchedProject.paymentStage  // Add projPercent to the project
           } else {
             project.paymentPercent = 0;  // If no match, set projPercent to 0 (or handle accordingly)
+          }
+        });
+        projLst?.forEach((e:any) => {
+          const matchedProjectstg = proLastLst.find((lastStg:any) => lastStg.projectId === e.projectId);
+          if (matchedProjectstg) {
+            e.projectPercent = matchedProjectstg.projectPercent;
+            e.projectStage = matchedProjectstg.projectStage  // Add projPercent to the project
+          } else {
+            e.projectPercent = 0;  // If no match, set projPercent to 0 (or handle accordingly)
           }
         });
           this.matcardLst = projLst;
@@ -413,7 +452,8 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
       "email": JSON.parse(this.userDetails)?.email,
       "type": JSON.parse(this.userDetails)?.type,
       "companyname": JSON.parse(this.userDetails)?.companyName,
-      "companycode": JSON.parse(this.userDetails)?.companyCode
+      "companycode": JSON.parse(this.userDetails)?.companyCode,
+      lastStage: this.lastField
     }
     this.switchService.designersDbData(payload).subscribe({ next: (res:any) =>{
     if(res){    
@@ -637,6 +677,9 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
       this.toastr.warning('Please fill all the fields before adding a new row.', 'Validation Error');
       return;
     }else {
+      // let totalPendingSum = this.paymentStages.reduce((sum: number, e: any) => {
+      //   return sum + (+e.pendingAmount || 0); 
+      // }, 0);
       let payload = this.paymentStages.map((e:any) => ({
         id: e.id || 0,
         projectId: e.projectId || "",
@@ -649,9 +692,8 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
         updatedBy: e.updatedBy || "",
         projectEstimation: e.projectEstimation || "",
         totalAmount: e.totalAmount || "",
-        totalPending: e.totalPending || ""
+        totalPending: '' //totalPendingSum
       }));
-        
       this.switchService.saveProjEstimation(payload).subscribe({
         next: (response) => {
           this.toastr.success(response.message);

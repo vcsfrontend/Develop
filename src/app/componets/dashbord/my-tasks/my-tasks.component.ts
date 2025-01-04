@@ -12,6 +12,7 @@ import { SwitherService } from '../../../shared/services/swither.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { timeout } from 'rxjs';
 @Component({
   selector: 'app-my-tasks',
   standalone: true,
@@ -58,18 +59,33 @@ export class MyTasksComponent {
       dateFormat: 'H:i',
     };
     flatpickr('#addignedDate', this.flatpickrOptions);
-    this.getProjectDetails(); this.getAllStages();
+    this.getProjectDetails()
   }
 
   isDisabled(option: any): boolean {
     const selectedStatus = this.dynamicFields.find(field => field.value === this.proStatus);
     if (selectedStatus) {
-        return option.percent === selectedStatus.percent;
+      return option.percent === selectedStatus.percent;
     }
     return false;
   }
 
-  dynamicFields: { value: string; percent: number; fieldNm: string; }[] = [];
+  updateDisabledFields() {
+    let disable = true;
+    this.dynamicFields = this.dynamicFields.map(field => {
+      if (field.value === this.proStatus) {
+        disable = false;
+      }
+      return { ...field, disabled: disable };
+    });
+    setTimeout(() => {
+      this.onStageChange(this.proData.projStatus);
+    }, 500);
+    console.log(this.dynamicFields);
+    
+  }
+
+  dynamicFields: { value: string; percent: number; fieldNm: string; disabled?: boolean }[] = [];
   initializeDynamicFields() {
     // Loop through f1 to f30 and add only those with non-empty values to dynamicFields
     for (let i = 1; i <= 30; i++) {
@@ -83,6 +99,7 @@ export class MyTasksComponent {
         });
       }
     }
+    this.updateDisabledFields();
   }
 
   getAllStages(){
@@ -110,7 +127,8 @@ export class MyTasksComponent {
     this.switchService.onProjectDtls(this.proId).subscribe({ next: (res:any) =>{
     if(res){    
       this.proData = res;
-      this.proStatus = res?.projStatus
+      this.proStatus = res?.projStatus;
+      this.getAllStages();
     } else {
       this.toastr.error(res.message);
       }
@@ -119,6 +137,11 @@ export class MyTasksComponent {
       this.toastr.error(error.statusText);
     },
     })
+  }
+  selectedPercent:any;
+  onStageChange(data:any){
+    const selectedPlan = this.dynamicFields.find((item:any) => item.value === data);
+    this.selectedPercent = selectedPlan ? selectedPlan.percent : null;
   }
 
   onSubmitTaskDetails(){
@@ -130,13 +153,14 @@ export class MyTasksComponent {
       this.toastr.warning('please enter description');
     } else {
       let payload = {
-        "id": 0,
+        "id": this.proData.id,
         "projectId": this.proData.projectId,
         "heading": this.heading,
         // "clientname": "string",
         "projectStatus": this.proStatus,
         "description": this.description,
         "updatedBy": JSON.parse(this.userData).username,
+        "percentage": this.selectedPercent
       }
       this.switchService.onAddTaskDtls(payload).subscribe({ next: (res:any) =>{
       if(res.status == true){
